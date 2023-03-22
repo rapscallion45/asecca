@@ -21,7 +21,7 @@ const BackgroundStyle = styled('div')({
 
 const BackgroundOverlay = styled('div')({
   position: 'absolute',
-  zIndex: 0,
+  zIndex: 1,
   minHeight: '100vh',
   minWidth: '100%',
   overflow: 'hidden',
@@ -42,10 +42,10 @@ const RootStyle = styled('section')({
 /* ========================= */
 const ConfigureCostsTestPage: NextPage = () => (
   <main id="configure-costs">
-    <BackgroundStyle>
+    <BackgroundStyle id="background">
       <BackgroundOverlay />
     </BackgroundStyle>
-    <RootStyle id="splash">
+    <RootStyle id="page-content">
       <Container maxWidth="lg">
         <AdminTestPanel />
         <Box mt={10}>
