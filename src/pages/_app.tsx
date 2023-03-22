@@ -22,6 +22,7 @@ interface AseccaAppProps extends AppProps {
 }
 
 /* Asecca SPA entry point */
+/* ====================== */
 const AseccaApp: React.FunctionComponent<AseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
