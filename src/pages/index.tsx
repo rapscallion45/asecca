@@ -4,14 +4,37 @@ import { styled } from '@mui/material/styles';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 
-const RootStyle = styled('section')({
+const BackgroundStyle = styled('div')({
   display: 'flex',
+  position: 'absolute',
+  zIndex: 0,
   minHeight: '100vh',
+  minWidth: '100%',
   overflow: 'hidden',
-  background: 'url(/static/background.jpg)',
+  background:
+    'linear-gradient(0deg, rgba(86,96,156, 0.7), rgba(86,96,156, 0.7)), url(/static/background.webp)',
   backgroundSize: 'cover',
   backgroundPositionX: 'center',
   backgroundPositionY: 'center',
+  padding: '50px',
+});
+
+const BackgroundOverlay = styled('div')({
+  position: 'absolute',
+  zIndex: 0,
+  minHeight: '100vh',
+  minWidth: '100%',
+  overflow: 'hidden',
+  padding: '50px',
+  opacity: '0.25',
+});
+
+const RootStyle = styled('section')({
+  display: 'flex',
+  position: 'absolute',
+  minHeight: '100vh',
+  minWidth: '100%',
+  overflow: 'hidden',
   padding: '50px',
 });
 
@@ -19,6 +42,9 @@ const RootStyle = styled('section')({
 /* ========================= */
 const ConfigureCostsTestPage: NextPage = () => (
   <main id="configure-costs">
+    <BackgroundStyle>
+      <BackgroundOverlay />
+    </BackgroundStyle>
     <RootStyle id="splash">
       <Container maxWidth="lg">
         <AdminTestPanel />
