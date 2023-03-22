@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
+import DataTable from '@/components/DataTable/DataTable';
 
 const RootStyle = styled('section')({
   display: 'flex',
@@ -21,6 +22,9 @@ const ConfigureCostsTestPage: NextPage = () => (
     <RootStyle id="splash">
       <Container maxWidth="lg">
         <AdminTestPanel />
+        <Box mt={10}>
+          <DataTable />
+        </Box>
       </Container>
     </RootStyle>
   </main>
