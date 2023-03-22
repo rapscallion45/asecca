@@ -33,9 +33,10 @@ function createData(
   global: number,
   customer: number,
   project: number,
-  collection: number
+  collection: number,
+  prevailing: number
 ) {
-  return { product, global, customer, project, collection };
+  return { product, global, customer, project, collection, prevailing };
 }
 
 const columns: Array<string> = [
@@ -44,14 +45,15 @@ const columns: Array<string> = [
   'Customer',
   'Project',
   'Collection',
+  'Prevailing',
 ];
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 4.0),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.3),
+  createData('Eclair', 262, 16.0, 24, 6.0, 6.0),
+  createData('Cupcake', 305, 3.7, 67, 4.3, 4.3),
+  createData('Gingerbread', 356, 16.0, 49, 3.9, 3.9),
 ];
 
 const DataTable: FC = () => (
@@ -76,6 +78,7 @@ const DataTable: FC = () => (
             <StyledTableCell align="center">{row.customer}</StyledTableCell>
             <StyledTableCell align="center">{row.project}</StyledTableCell>
             <StyledTableCell align="center">{row.collection}</StyledTableCell>
+            <StyledTableCell align="center">{row.prevailing}</StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>
