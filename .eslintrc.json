@@ -1,3 +1,31 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "globals": {
+    /* Next.js assumes React is global */
+    "React": "writable"
+  },
+  "rules": {
+    /* Next.js does not require us to import React in all components */
+    "react/react-in-jsx-scope": "off",
+    /* Not required as we are not using Prop Types with TypeScript */
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    /* Ignore React function definition requirement */
+    "react/function-component-definition": "off",
+    /* Allow prop spreading */
+    "react/jsx-props-no-spreading": "off"
+  }
 }
