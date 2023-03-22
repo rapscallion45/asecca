@@ -6,7 +6,7 @@ import DataTable from '@/components/DataTable/DataTable';
 
 const BackgroundStyle = styled('div')({
   display: 'flex',
-  position: 'absolute',
+  position: 'fixed',
   zIndex: 0,
   minHeight: '100vh',
   minWidth: '100%',
@@ -22,10 +22,8 @@ const BackgroundStyle = styled('div')({
 const BackgroundOverlay = styled('div')({
   position: 'absolute',
   zIndex: 1,
-  minHeight: '100vh',
+  minHeight: '100%',
   minWidth: '100%',
-  overflow: 'hidden',
-  padding: '50px',
   opacity: '0.25',
 });
 
