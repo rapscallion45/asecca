@@ -30,7 +30,9 @@ const AdminTestPanel: FC = () => {
           Admin Test Panel
         </Typography>
         <FormControl sx={{ minWidth: 200, mt: 3 }}>
-          <InputLabel id="demo-simple-select-label">Permission</InputLabel>
+          <InputLabel id="user-permission-level-select-label">
+            Permission
+          </InputLabel>
           <Select
             labelId="user-permission-level-select-label"
             id="user-permission-level-select"
