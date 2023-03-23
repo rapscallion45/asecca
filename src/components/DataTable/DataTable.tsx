@@ -98,13 +98,13 @@ const DataTable: FC<DataTableProps> = (props) => {
                           )}
                           {/* if this is col is editable, render input cell */}
                           {column.label === editColName && (
-                            <Box
-                              key={`${row.name}-${column.key}`}
-                              sx={{ textAlign: 'center' }}
+                            <StyledTableCell
+                              key={`${row.name}-${column.key}-edit`}
+                              sx={{ textAlign: 'center', p: 0 }}
                             >
                               <FormControl sx={{ m: 1 }} variant="standard">
                                 <Input
-                                  id="standard-adornment-amount"
+                                  id={`${row.name}-${column.key}-input`}
                                   startAdornment={
                                     <InputAdornment position="start">
                                       £
@@ -116,7 +116,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                                   ).toFixed(2)}
                                 />
                               </FormControl>
-                            </Box>
+                            </StyledTableCell>
                           )}
                         </>
                       ))}
