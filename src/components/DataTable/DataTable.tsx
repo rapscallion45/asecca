@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { FC, useState, Fragment } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -74,6 +74,15 @@ interface EditableCellProps {
 /* ==================================== */
 const EditableCell: FC<EditableCellProps> = (props) => {
   const { row, column } = props;
+  const [value, setValue] = useState<string>(
+    parseInt(row[column.key], 10).toFixed(2)
+  );
+
+  const handleValueChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setValue(event.target.value);
+  };
 
   return (
     <StyledTableCell sx={{ textAlign: 'center', p: 0 }}>
@@ -81,7 +90,9 @@ const EditableCell: FC<EditableCellProps> = (props) => {
         <Input
           id={`${row.name}-${column.key}-input`}
           startAdornment={<InputAdornment position="start">£</InputAdornment>}
-          defaultValue={parseInt(row[column.key], 10).toFixed(2)}
+          onChange={handleValueChange}
+          value={value}
+          required
         />
       </FormControl>
     </StyledTableCell>
