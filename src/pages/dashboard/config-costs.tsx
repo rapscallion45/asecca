@@ -35,7 +35,7 @@ const createData: any = (
 
 const rows = [
   createData('Device Processing', 9.0, 2, 3, 4, 9.0),
-  createData('Device Processing', 25.0, null, null, 50, 18),
+  createData('Royal Mail Drop-off', 25.0, null, null, 50, 18),
 ];
 
 /* Configure Costs Test Page */

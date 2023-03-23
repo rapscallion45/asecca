@@ -42,13 +42,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 interface NonEditableCellProps {
   column: any;
   row: any;
-  editCol: any;
+  editValue: string;
 }
 
 /* Non Editable Table Cell helper component */
 /* ======================================== */
 const NonEditableCell: FC<NonEditableCellProps> = (props) => {
-  const { row, column, editCol } = props;
+  const { row, column, editValue } = props;
 
   return (
     <StyledTableCell align="center">
@@ -64,7 +64,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
           {/* the 'Prevailing' column is always equal to the
           editable col (permission level) */}
           {column.label === 'Prevailing'
-            ? `£${parseInt(row[editCol?.key], 10).toFixed(2)}` || '--'
+            ? `£${parseInt(editValue, 10).toFixed(2)}` || '--'
             : row[column.key]}
         </>
       )}
@@ -75,21 +75,16 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
 interface EditableCellProps {
   column: any;
   row: any;
+  editValue: string;
+  handleEditValueChange: (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 
 /* Editable Table Cell helper component */
 /* ==================================== */
 const EditableCell: FC<EditableCellProps> = (props) => {
-  const { row, column } = props;
-  const [value, setValue] = useState<string>(
-    parseInt(row[column.key], 10).toFixed(2)
-  );
-
-  const handleValueChange = (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setValue(event.target.value);
-  };
+  const { row, column, editValue, handleEditValueChange } = props;
 
   return (
     <StyledTableCell sx={{ textAlign: 'center', p: 0 }}>
@@ -97,12 +92,61 @@ const EditableCell: FC<EditableCellProps> = (props) => {
         <Input
           id={`${row.name}-${column.key}-input`}
           startAdornment={<InputAdornment position="start">£</InputAdornment>}
-          onChange={handleValueChange}
-          value={value}
+          onChange={handleEditValueChange}
+          value={editValue}
           required
         />
       </FormControl>
     </StyledTableCell>
+  );
+};
+
+interface DataTableRowProps {
+  columns: any;
+  row: any;
+  editCol: any;
+}
+
+/* Data Table Row helper component */
+/* =============================== */
+const DataTableRow: FC<DataTableRowProps> = (props) => {
+  const { row, columns, editCol } = props;
+  const [editValue, setEditValue] = useState<string>(
+    parseInt(row[editCol?.key], 10).toFixed(2)
+  );
+
+  const handleValueChange = (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setEditValue(event.target.value);
+  };
+
+  return (
+    <StyledTableRow>
+      {/* map passed column data for current row */}
+      {columns.map((column: any) => (
+        <Fragment key={`${row.name}-${column.key}`}>
+          {/* render a normal cell if not editable */}
+          {column.label !== editCol.label && (
+            <NonEditableCell
+              row={row}
+              column={column}
+              /* we need the edit value for 'Prevailing' */
+              editValue={editValue}
+            />
+          )}
+          {/* if this is col is editable, render input cell */}
+          {column.label === editCol.label && (
+            <EditableCell
+              row={row}
+              column={column}
+              editValue={editValue}
+              handleEditValueChange={handleValueChange}
+            />
+          )}
+        </Fragment>
+      ))}
+    </StyledTableRow>
   );
 };
 
@@ -148,28 +192,16 @@ const DataTable: FC<DataTableProps> = (props) => {
                 <>
                   {/* map passed rows */}
                   {rows.map((row: any) => (
-                    <StyledTableRow key={row.name}>
-                      {/* map passed column data for current row */}
-                      {columns.map((column: any) => (
-                        <Fragment key={`${row.name}-${column.key}`}>
-                          {/* render a normal cell if not editable */}
-                          {column.label !== editColName && (
-                            <NonEditableCell
-                              row={row}
-                              column={column}
-                              /* we need the edit col to get 'Prevailing' value */
-                              editCol={columns.find(
-                                (col: any) => editColName === col.label
-                              )}
-                            />
-                          )}
-                          {/* if this is col is editable, render input cell */}
-                          {column.label === editColName && (
-                            <EditableCell row={row} column={column} />
-                          )}
-                        </Fragment>
-                      ))}
-                    </StyledTableRow>
+                    <Fragment key={row.name}>
+                      <DataTableRow
+                        row={row}
+                        columns={columns}
+                        /* we need the edit col to get 'Prevailing' value */
+                        editCol={columns.find(
+                          (col: any) => editColName === col.label
+                        )}
+                      />
+                    </Fragment>
                   ))}
                 </>
               )}
