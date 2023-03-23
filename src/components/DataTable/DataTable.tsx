@@ -53,7 +53,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
   return (
     <StyledTableCell align="center">
       {/* all values are currency apart from name */}
-      {column.label !== 'Product' && column.label !== 'Prevailing' ? (
+      {column.key !== 'name' && column.label !== 'Prevailing' ? (
         <div>
           {row[column.key] != null
             ? `£${parseInt(row[column.key], 10).toFixed(2)}`
