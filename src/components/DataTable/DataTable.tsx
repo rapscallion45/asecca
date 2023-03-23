@@ -76,7 +76,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                           key={`${row.name}-${column.key}`}
                           align="center"
                         >
-                          {row[column.key]}
+                          {row[column.key] || '--'}
                         </StyledTableCell>
                       ))}
                     </StyledTableRow>

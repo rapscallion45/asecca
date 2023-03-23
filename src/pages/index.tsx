@@ -15,10 +15,10 @@ const columns: Array<any> = [
 
 const createData: any = (
   name: string,
-  global_charge: number,
-  customer_charge: number,
-  project_charge: number,
-  collection_charge: number,
+  global_charge: number | null,
+  customer_charge: number | null,
+  project_charge: number | null,
+  collection_charge: number | null,
   effective_charge: number
 ) => ({
   name,
@@ -29,13 +29,7 @@ const createData: any = (
   effective_charge,
 });
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 3.9),
-];
+const rows = [createData('Device Processing', 9.0, null, null, null, 9.0)];
 
 /* Configure Costs Test Page */
 /* ========================= */
