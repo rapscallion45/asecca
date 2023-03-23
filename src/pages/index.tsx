@@ -10,7 +10,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => (
   <Container maxWidth="lg">
     <AdminTestPanel />
     <Box mt={10}>
-      <DataTable />
+      <DataTable name="config costs" />
     </Box>
   </Container>
 );

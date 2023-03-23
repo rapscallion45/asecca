@@ -28,25 +28,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  product: string,
-  global: number,
-  customer: number,
-  project: number,
-  collection: number,
-  prevailing: number
-) {
-  return { product, global, customer, project, collection, prevailing };
-}
-
-const columns: Array<string> = [
-  'Product',
-  'Global',
-  'Customer',
-  'Project',
-  'Collection',
-  'Prevailing',
+const columns: Array<any> = [
+  { label: 'Product', key: 'name' },
+  { label: 'Global', key: 'global_charge' },
+  { label: 'Customer', key: 'customer_charge' },
+  { label: 'Project', key: 'project_charge' },
+  { label: 'Collection', key: 'collection_charge' },
+  { label: 'Prevailing', key: 'effective_charge' },
 ];
+
+const createData: any = (
+  name: string,
+  global_charge: number,
+  customer_charge: number,
+  project_charge: number,
+  collection_charge: number,
+  effective_charge: number
+) => ({
+  name,
+  global_charge,
+  customer_charge,
+  project_charge,
+  collection_charge,
+  effective_charge,
+});
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 4.0),
@@ -56,36 +61,44 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9, 3.9),
 ];
 
+interface DataTableProps {
+  name: string;
+}
+
 /* Data Table */
 /* ========== */
-const DataTable: FC = () => (
-  <TableContainer component={Paper}>
-    <Table aria-label="customized table">
-      <TableHead>
-        <TableRow>
-          {columns.map((column) => (
-            <StyledTableCell key={column} align="center">
-              {column}
-            </StyledTableCell>
+const DataTable: FC<DataTableProps> = (props) => {
+  const { name } = props;
+
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label={`${name} table`}>
+        <TableHead>
+          <TableRow>
+            {columns.map((column: any) => (
+              <StyledTableCell key={column.key} align="center">
+                {column.label}
+              </StyledTableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row: any) => (
+            <StyledTableRow key={row.name}>
+              {columns.map((column: any) => (
+                <StyledTableCell
+                  key={`${row.name}-${column.key}`}
+                  align="center"
+                >
+                  {row[column.key]}
+                </StyledTableCell>
+              ))}
+            </StyledTableRow>
           ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <StyledTableRow key={row.product}>
-            <StyledTableCell component="th" scope="row" align="center">
-              {row.product}
-            </StyledTableCell>
-            <StyledTableCell align="center">{row.global}</StyledTableCell>
-            <StyledTableCell align="center">{row.customer}</StyledTableCell>
-            <StyledTableCell align="center">{row.project}</StyledTableCell>
-            <StyledTableCell align="center">{row.collection}</StyledTableCell>
-            <StyledTableCell align="center">{row.prevailing}</StyledTableCell>
-          </StyledTableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
 
 export default DataTable;
