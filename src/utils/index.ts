@@ -1,2 +1,2 @@
 export { default as createEmotionCache } from './createEmotionCache';
-export { default as useStore } from './store';
+export { default as getConfigCostsColFilterList } from './getConfigCostsColFilter';

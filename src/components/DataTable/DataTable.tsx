@@ -64,7 +64,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
           {/* the 'Prevailing' column is always equal to the
           editable col (permission level) */}
           {column.label === 'Prevailing'
-            ? `£${parseInt(row[editCol.key], 10).toFixed(2)}` || '--'
+            ? `£${parseInt(row[editCol?.key], 10).toFixed(2)}` || '--'
             : row[column.key]}
         </>
       )}
