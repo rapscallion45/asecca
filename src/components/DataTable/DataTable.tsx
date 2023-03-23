@@ -1,4 +1,4 @@
-import { FC, useState, Fragment } from 'react';
+import { FC, useState, Fragment, ChangeEvent } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -86,7 +86,7 @@ const EditableCell: FC<EditableCellProps> = (props) => {
   );
 
   const handleValueChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setValue(event.target.value);
   };

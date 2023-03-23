@@ -26,6 +26,8 @@
     /* Ignore React function definition requirement */
     "react/function-component-definition": "off",
     /* Allow prop spreading */
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    /* Allow param reassign for redux reducer functions */
+    "no-param-reassign": "off"
   }
 }

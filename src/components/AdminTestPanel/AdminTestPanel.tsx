@@ -1,27 +1,49 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
+import { AppState } from '@/redux/store';
 
-/* use decimal number system for parsing integers */
-const RADIX_DECIMAL = 10;
+const permissions = [
+  {
+    value: 'Global',
+    label: 'Global',
+  },
+  {
+    value: 'Customer',
+    label: 'Customer',
+  },
+  {
+    value: 'Project',
+    label: 'Project',
+  },
+  {
+    value: 'Collection',
+    label: 'Collection',
+  },
+];
 
 /* Admin Test Panel */
 /* ================ */
 const AdminTestPanel: FC = () => {
-  /* user permission level state simulation used by other app elements */
-  const [userPermissionLevel, setUserPermissionLevel] = useState<number>(3);
+  const dispatch = useDispatch();
+
+  /* get user permission level held in redux state */
+  const { permission: userPermission } = useSelector(
+    (state: AppState) => state.userPermission
+  );
 
   /* change user permission level state when dropdown changed */
-  const handlePermissionChange = (event: SelectChangeEvent) => {
-    setUserPermissionLevel(
-      parseInt(event.target.value, RADIX_DECIMAL) as number
-    );
-  };
+  const handlePermissionChange = () =>
+    // event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    {
+      // dispatch(setPermissionLevel({ level: event.target.value }));
+      dispatch(setPermissionLevel({ level: 'Collection' }));
+    };
 
   return (
     <Card sx={{ minWidth: 275, minHeight: 200 }}>
@@ -29,23 +51,25 @@ const AdminTestPanel: FC = () => {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Admin Test Panel
         </Typography>
-        <FormControl sx={{ minWidth: 200, mt: 3 }}>
-          <InputLabel id="user-permission-level-select-label">
-            Permission Level
-          </InputLabel>
-          <Select
-            labelId="user-permission-level-select-label"
+        <Box mt={4}>
+          <TextField
             id="user-permission-level-select"
-            value={userPermissionLevel.toString()}
-            label="User Permission Level"
+            select
+            label="User Permission"
+            value={userPermission.level}
             onChange={handlePermissionChange}
+            SelectProps={{
+              native: true,
+            }}
+            sx={{ minWidth: 170 }}
           >
-            <MenuItem value={0}>Global</MenuItem>
-            <MenuItem value={1}>Customer</MenuItem>
-            <MenuItem value={2}>Project</MenuItem>
-            <MenuItem value={3}>Collection</MenuItem>
-          </Select>
-        </FormControl>
+            {permissions.map((permission) => (
+              <option key={permission.value} value={permission.value}>
+                {permission.label}
+              </option>
+            ))}
+          </TextField>
+        </Box>
         <Typography sx={{ my: 1.5 }} color="text.secondary">
           Selection of simulated user permission level
         </Typography>
