@@ -42,24 +42,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 interface NonEditableCellProps {
   column: any;
   row: any;
+  editCol: any;
 }
 
 /* Non Editable Table Cell helper component */
 /* ======================================== */
 const NonEditableCell: FC<NonEditableCellProps> = (props) => {
-  const { row, column } = props;
+  const { row, column, editCol } = props;
 
   return (
     <StyledTableCell align="center">
       {/* all values are currency apart from name */}
-      {column.label !== 'Product' ? (
+      {column.label !== 'Product' && column.label !== 'Prevailing' ? (
         <div>
           {row[column.key] != null
             ? `£${parseInt(row[column.key], 10).toFixed(2)}`
             : '--'}
         </div>
       ) : (
-        row[column.key]
+        <>
+          {/* the 'Prevailing' column is always equal to the
+          editable col (permission level) */}
+          {column.label === 'Prevailing'
+            ? `£${parseInt(row[editCol.key], 10).toFixed(2)}` || '--'
+            : row[column.key]}
+        </>
       )}
     </StyledTableCell>
   );
@@ -147,7 +154,14 @@ const DataTable: FC<DataTableProps> = (props) => {
                         <Fragment key={`${row.name}-${column.key}`}>
                           {/* render a normal cell if not editable */}
                           {column.label !== editColName && (
-                            <NonEditableCell row={row} column={column} />
+                            <NonEditableCell
+                              row={row}
+                              column={column}
+                              /* we need the edit col to get 'Prevailing' value */
+                              editCol={columns.find(
+                                (col: any) => editColName === col.label
+                              )}
+                            />
                           )}
                           {/* if this is col is editable, render input cell */}
                           {column.label === editColName && (

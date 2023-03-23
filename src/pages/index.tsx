@@ -29,7 +29,7 @@ const createData: any = (
   effective_charge,
 });
 
-const rows = [createData('Device Processing', 9.0, null, null, null, 9.0)];
+const rows = [createData('Device Processing', 9.0, 2, 3, 4, 9.0)];
 
 /* Configure Costs Test Page */
 /* ========================= */
