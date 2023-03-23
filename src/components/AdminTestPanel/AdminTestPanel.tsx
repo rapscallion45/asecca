@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ChangeEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -38,12 +38,12 @@ const AdminTestPanel: FC = () => {
   );
 
   /* change user permission level state when dropdown changed */
-  const handlePermissionChange = () =>
-    // event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    {
-      // dispatch(setPermissionLevel({ level: event.target.value }));
-      dispatch(setPermissionLevel({ level: 'Collection' }));
-    };
+  const handlePermissionChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    // @ts-ignore
+    dispatch(setPermissionLevel({ level: event.target.value }));
+  };
 
   return (
     <Card sx={{ minWidth: 275, minHeight: 200 }}>
