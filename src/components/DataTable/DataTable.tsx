@@ -58,7 +58,7 @@ const rows = [
 
 const DataTable: FC = () => (
   <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    <Table aria-label="customized table">
       <TableHead>
         <TableRow>
           {columns.map((column) => (
