@@ -91,7 +91,9 @@ const DataTable: FC<DataTableProps> = (props) => {
                               key={`${row.name}-${column.key}`}
                               align="center"
                             >
-                              {row[column.key] || '--'}
+                              {row[column.key] != null
+                                ? `£${parseInt(row[column.key], 10).toFixed(2)}`
+                                : '--'}
                             </StyledTableCell>
                           )}
                           {/* if this is col is editable, render input cell */}
@@ -108,7 +110,10 @@ const DataTable: FC<DataTableProps> = (props) => {
                                       £
                                     </InputAdornment>
                                   }
-                                  defaultValue={row[column.key]}
+                                  defaultValue={parseInt(
+                                    row[column.key],
+                                    10
+                                  ).toFixed(2)}
                                 />
                               </FormControl>
                             </Box>
