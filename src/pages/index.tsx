@@ -30,8 +30,19 @@ const Home: NextPageWithLayout = () => (
         component={Link}
         href="/dashboard/config-costs"
         fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
+        variant="outlined"
+        sx={{
+          mt: 3,
+          mb: 2,
+          color: 'white',
+          borderColor: 'white',
+          borderRadius: 0,
+          p: 2,
+          '&:hover': {
+            backgroundColor: 'rgba(26,142,243, 0.4)',
+            borderColor: 'rgba(26,142,243, 0.4)',
+          },
+        }}
       >
         Log In
       </Button>
