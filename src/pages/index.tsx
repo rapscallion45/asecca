@@ -1,76 +1,45 @@
-import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
-import { useSelector } from 'react-redux';
-import { Box, Container } from '@mui/material';
-import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
-import DataTable from '@/components/DataTable/DataTable';
-import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { AppState } from '@/redux/store';
-import { getConfigCostsColFilterList } from '@/utils';
+import Link from 'next/link';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import HomeLayout from '@/layouts/home/HomeLayout';
 
-const columns: Array<any> = [
-  { label: 'Product', key: 'name' },
-  { label: 'Global', key: 'global_charge' },
-  { label: 'Customer', key: 'customer_charge' },
-  { label: 'Project', key: 'project_charge' },
-  { label: 'Collection', key: 'collection_charge' },
-  { label: 'Prevailing', key: 'effective_charge' },
-];
+/* Placeholder Home Page */
+/* ===================== */
+const Home: NextPageWithLayout = () => (
+  <Container maxWidth="xs">
+    <Box
+      sx={{
+        marginTop: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Avatar sx={{ m: 3, bgcolor: 'primary.main', p: 4 }}>
+        <LockOutlinedIcon fontSize="large" />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Log in
+      </Typography>
+      <Button
+        component={Link}
+        href="/dashboard/config-costs"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
+        Log In
+      </Button>
+    </Box>
+  </Container>
+);
 
-const createData: any = (
-  name: string,
-  global_charge: number | null,
-  customer_charge: number | null,
-  project_charge: number | null,
-  collection_charge: number | null,
-  effective_charge: number
-) => ({
-  name,
-  global_charge,
-  customer_charge,
-  project_charge,
-  collection_charge,
-  effective_charge,
-});
+/* home layout used for Home page */
+Home.Layout = HomeLayout;
 
-const rows = [createData('Device Processing', 9.0, 2, 3, 4, 9.0)];
-
-/* Configure Costs Test Page */
-/* ========================= */
-const ConfigureCostsTestPage: NextPageWithLayout = () => {
-  /* get user permission level held in redux state */
-  const { permission } = useSelector((state: AppState) => state.userPermission);
-  const [colFilterList, setColFilterList] = useState<Array<string>>(
-    getConfigCostsColFilterList(permission.level)
-  );
-
-  /* whenever the user permission global state is updated, filter cols */
-  useEffect(() => {
-    setColFilterList(getConfigCostsColFilterList(permission.level));
-  }, [permission]);
-
-  return (
-    <Container maxWidth="lg">
-      <AdminTestPanel />
-      <Box mt={10}>
-        <DataTable
-          name="config costs"
-          /* table editable cell(s) defined based on permission level */
-          editColName={permission.level}
-          /* filter table columns by permission level */
-          columns={columns.filter(
-            (col: any) => !colFilterList.includes(col.label)
-          )}
-          rows={rows}
-          isLoading={false}
-          isError={false}
-        />
-      </Box>
-    </Container>
-  );
-};
-
-/* dashboard layout used for Configure Costs page */
-ConfigureCostsTestPage.Layout = DashboardLayout;
-
-export default ConfigureCostsTestPage;
+export default Home;

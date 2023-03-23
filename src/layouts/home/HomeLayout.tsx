@@ -38,7 +38,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   return (
     <main>
       <BackgroundStyle id="background" />
-      <NavBar showLogin />
+      <NavBar />
       <RootStyle id="page-content">{children}</RootStyle>
     </main>
   );
