@@ -39,6 +39,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+interface EditableCellProps {
+  column: any;
+  row: any;
+}
+
+const EditableCell: FC<EditableCellProps> = (props) => {
+  const { row, column } = props;
+
+  return (
+    <StyledTableCell
+      key={`${row.name}-${column.key}-edit`}
+      sx={{ textAlign: 'center', p: 0 }}
+    >
+      <FormControl sx={{ m: 1 }} variant="standard">
+        <Input
+          id={`${row.name}-${column.key}-input`}
+          startAdornment={<InputAdornment position="start">£</InputAdornment>}
+          defaultValue={parseInt(row[column.key], 10).toFixed(2)}
+        />
+      </FormControl>
+    </StyledTableCell>
+  );
+};
+
 interface DataTableProps {
   name: string;
   editColName: string;
@@ -107,25 +131,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                           )}
                           {/* if this is col is editable, render input cell */}
                           {column.label === editColName && (
-                            <StyledTableCell
-                              key={`${row.name}-${column.key}-edit`}
-                              sx={{ textAlign: 'center', p: 0 }}
-                            >
-                              <FormControl sx={{ m: 1 }} variant="standard">
-                                <Input
-                                  id={`${row.name}-${column.key}-input`}
-                                  startAdornment={
-                                    <InputAdornment position="start">
-                                      £
-                                    </InputAdornment>
-                                  }
-                                  defaultValue={parseInt(
-                                    row[column.key],
-                                    10
-                                  ).toFixed(2)}
-                                />
-                              </FormControl>
-                            </StyledTableCell>
+                            <EditableCell row={row} column={column} />
                           )}
                         </>
                       ))}
