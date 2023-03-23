@@ -16,10 +16,12 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 
 /* table cell stylings */
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  /* table head colors */
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
   },
+  /* adjust font size */
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
@@ -27,6 +29,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  /* alternate row background colors */
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
@@ -64,7 +67,7 @@ const DataTable: FC<DataTableProps> = (props) => {
         <Table aria-label={`${name} table`}>
           <TableHead>
             <TableRow>
-              {/* map passed columns */}
+              {/* map passed columns to table headers row */}
               {columns.map((column: any) => (
                 <StyledTableCell key={column.key} align="center">
                   {column.label}
@@ -82,6 +85,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                       {/* map passed column data for current row */}
                       {columns.map((column: any) => (
                         <>
+                          {/* render a normal cell if not editable */}
                           {column.label !== editColName && (
                             <StyledTableCell
                               key={`${row.name}-${column.key}`}
@@ -90,6 +94,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                               {row[column.key] || '--'}
                             </StyledTableCell>
                           )}
+                          {/* if this is col is editable, render input cell */}
                           {column.label === editColName && (
                             <Box
                               key={`${row.name}-${column.key}`}
