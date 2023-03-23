@@ -56,6 +56,8 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9, 3.9),
 ];
 
+/* Data Table */
+/* ========== */
 const DataTable: FC = () => (
   <TableContainer component={Paper}>
     <Table aria-label="customized table">

@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
+import NavBar from '@/components/NavBar/NavBar';
 
 /* background image styling */
 const BackgroundStyle = styled('div')({
@@ -22,7 +23,7 @@ const RootStyle = styled('section')({
   minHeight: '100vh',
   minWidth: '100%',
   overflow: 'hidden',
-  paddingTop: '24px',
+  paddingTop: '100px',
 });
 
 interface DashboardLayoutProps {
@@ -37,6 +38,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   return (
     <main>
       <BackgroundStyle id="background" />
+      <NavBar />
       <RootStyle id="page-content">{children}</RootStyle>
     </main>
   );
