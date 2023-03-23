@@ -59,7 +59,9 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
           {/* the 'Prevailing' column is always equal to the
             editable col (permission level) */}
           {column.label === 'Prevailing'
-            ? `£${parseInt(editValue, 10).toFixed(2)}` || '--'
+            ? `£${parseInt(editValue !== '' ? editValue : '0', 10).toFixed(
+                2
+              )}` || '--'
             : row[column.key]}
         </>
       )}
@@ -107,7 +109,7 @@ interface DataTableRowProps {
 const DataTableRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
   const [editValue, setEditValue] = useState<string>(
-    parseInt(row[editCol?.key], 10).toFixed(2)
+    parseInt(row[editCol?.key] !== null ? row[editCol?.key] : 0, 10).toFixed(2)
   );
 
   const handleValueChange = (
