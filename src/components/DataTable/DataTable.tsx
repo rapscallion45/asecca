@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -50,7 +50,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
   const { row, column } = props;
 
   return (
-    <StyledTableCell key={`${row.name}-${column.key}`} align="center">
+    <StyledTableCell align="center">
       {/* all values are currency apart from name */}
       {column.label !== 'Product' ? (
         <div>
@@ -76,10 +76,7 @@ const EditableCell: FC<EditableCellProps> = (props) => {
   const { row, column } = props;
 
   return (
-    <StyledTableCell
-      key={`${row.name}-${column.key}-edit`}
-      sx={{ textAlign: 'center', p: 0 }}
-    >
+    <StyledTableCell sx={{ textAlign: 'center', p: 0 }}>
       <FormControl sx={{ m: 1 }} variant="standard">
         <Input
           id={`${row.name}-${column.key}-input`}
@@ -136,7 +133,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                     <StyledTableRow key={row.name}>
                       {/* map passed column data for current row */}
                       {columns.map((column: any) => (
-                        <>
+                        <Fragment key={`${row.name}-${column.key}`}>
                           {/* render a normal cell if not editable */}
                           {column.label !== editColName && (
                             <NonEditableCell row={row} column={column} />
@@ -145,7 +142,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                           {column.label === editColName && (
                             <EditableCell row={row} column={column} />
                           )}
-                        </>
+                        </Fragment>
                       ))}
                     </StyledTableRow>
                   ))}
