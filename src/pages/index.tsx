@@ -23,8 +23,8 @@ const Home: NextPageWithLayout = () => (
       <Avatar sx={{ m: 3, bgcolor: 'primary.main', p: 4 }}>
         <LockOutlinedIcon fontSize="large" />
       </Avatar>
-      <Typography component="h1" variant="h5">
-        Log in
+      <Typography component="h1" variant="h5" color="common.white">
+        Log In
       </Typography>
       <Button
         component={Link}
