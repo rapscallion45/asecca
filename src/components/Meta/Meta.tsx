@@ -2,6 +2,8 @@ import { FC } from 'react';
 import Head from 'next/head';
 import { useTheme } from '@mui/material';
 
+/* App Meta - App Name, Description, SEO, favicon, etc */
+/* =================================================== */
 const Meta: FC = () => {
   const theme = useTheme();
 
