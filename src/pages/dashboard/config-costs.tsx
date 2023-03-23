@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
 import { useSelector } from 'react-redux';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
@@ -55,20 +55,23 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
-      <Box mt={10}>
-        <DataTable
-          name="config costs"
-          /* table editable cell(s) defined based on permission level */
-          editColName={permission.level}
-          /* filter table columns by permission level */
-          columns={columns.filter(
-            (col: any) => !colFilterList.includes(col.label)
-          )}
-          rows={rows}
-          isLoading={false}
-          isError={false}
-        />
+      <Box my={5} sx={{ maxWidth: 400 }}>
+        <Typography variant="h5" color="common.white">
+          Costing Configuration - Lloyds Bank - Collection 151652313256
+        </Typography>
       </Box>
+      <DataTable
+        name="config costs"
+        /* table editable cell(s) defined based on permission level */
+        editColName={permission.level}
+        /* filter table columns by permission level */
+        columns={columns.filter(
+          (col: any) => !colFilterList.includes(col.label)
+        )}
+        rows={rows}
+        isLoading={false}
+        isError={false}
+      />
     </Container>
   );
 };
