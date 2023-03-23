@@ -91,9 +91,18 @@ const DataTable: FC<DataTableProps> = (props) => {
                               key={`${row.name}-${column.key}`}
                               align="center"
                             >
-                              {row[column.key] != null
-                                ? `£${parseInt(row[column.key], 10).toFixed(2)}`
-                                : '--'}
+                              {/* all values are currency apart from name */}
+                              {column.label !== 'Product' ? (
+                                <div>
+                                  {row[column.key] != null
+                                    ? `£${parseInt(row[column.key], 10).toFixed(
+                                        2
+                                      )}`
+                                    : '--'}
+                                </div>
+                              ) : (
+                                row[column.key]
+                              )}
                             </StyledTableCell>
                           )}
                           {/* if this is col is editable, render input cell */}
