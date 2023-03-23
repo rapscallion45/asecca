@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NextLayoutComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
@@ -10,6 +11,7 @@ import '@fontsource/roboto/700.css';
 
 import { createEmotionCache } from '@/utils';
 import lightThemeOptions from '@/styles/theme/lightThemeOptions';
+import DefaultLayout from '@/layouts/default/DefaultLayout';
 
 /* initialise client MUI styles cache */
 const clientSideEmotionCache = createEmotionCache();
@@ -18,6 +20,7 @@ const clientSideEmotionCache = createEmotionCache();
 const lightTheme = createTheme(lightThemeOptions);
 
 interface AseccaAppProps extends AppProps {
+  Component: NextLayoutComponentType;
   emotionCache?: EmotionCache;
 }
 
@@ -26,11 +29,16 @@ interface AseccaAppProps extends AppProps {
 const AseccaApp: React.FunctionComponent<AseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  /* the page layout is defined in each page's definition, else default */
+  const PageLayout = Component.Layout || DefaultLayout;
+
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <PageLayout>
+          <Component {...pageProps} />
+        </PageLayout>
       </ThemeProvider>
     </CacheProvider>
   );
