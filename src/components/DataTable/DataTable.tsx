@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
+import { Input, InputAdornment, FormControl } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import ClientOnly from '../ClientOnly/ClientOnly';
 
@@ -37,6 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 interface DataTableProps {
   name: string;
+  editColName: string;
   columns: any;
   rows: any;
   isLoading?: boolean;
@@ -46,7 +48,14 @@ interface DataTableProps {
 /* Data Table */
 /* ========== */
 const DataTable: FC<DataTableProps> = (props) => {
-  const { name, columns, rows, isLoading = false, isError = false } = props;
+  const {
+    name,
+    editColName,
+    columns,
+    rows,
+    isLoading = false,
+    isError = false,
+  } = props;
 
   /* ClientOnly used to not allow tables to SSR */
   return (
@@ -72,12 +81,34 @@ const DataTable: FC<DataTableProps> = (props) => {
                     <StyledTableRow key={row.name}>
                       {/* map passed column data for current row */}
                       {columns.map((column: any) => (
-                        <StyledTableCell
-                          key={`${row.name}-${column.key}`}
-                          align="center"
-                        >
-                          {row[column.key] || '--'}
-                        </StyledTableCell>
+                        <>
+                          {column.label !== editColName && (
+                            <StyledTableCell
+                              key={`${row.name}-${column.key}`}
+                              align="center"
+                            >
+                              {row[column.key] || '--'}
+                            </StyledTableCell>
+                          )}
+                          {column.label === editColName && (
+                            <Box
+                              key={`${row.name}-${column.key}`}
+                              sx={{ textAlign: 'center' }}
+                            >
+                              <FormControl sx={{ m: 1 }} variant="standard">
+                                <Input
+                                  id="standard-adornment-amount"
+                                  startAdornment={
+                                    <InputAdornment position="start">
+                                      £
+                                    </InputAdornment>
+                                  }
+                                  defaultValue={row[column.key]}
+                                />
+                              </FormControl>
+                            </Box>
+                          )}
+                        </>
                       ))}
                     </StyledTableRow>
                   ))}

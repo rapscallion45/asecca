@@ -39,6 +39,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => (
     <Box mt={10}>
       <DataTable
         name="config costs"
+        editColName="Global"
         columns={columns}
         rows={rows}
         isLoading={false}
