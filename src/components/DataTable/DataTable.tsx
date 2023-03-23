@@ -39,11 +39,39 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+interface NonEditableCellProps {
+  column: any;
+  row: any;
+}
+
+/* Non Editable Table Cell helper component */
+/* ======================================== */
+const NonEditableCell: FC<NonEditableCellProps> = (props) => {
+  const { row, column } = props;
+
+  return (
+    <StyledTableCell key={`${row.name}-${column.key}`} align="center">
+      {/* all values are currency apart from name */}
+      {column.label !== 'Product' ? (
+        <div>
+          {row[column.key] != null
+            ? `£${parseInt(row[column.key], 10).toFixed(2)}`
+            : '--'}
+        </div>
+      ) : (
+        row[column.key]
+      )}
+    </StyledTableCell>
+  );
+};
+
 interface EditableCellProps {
   column: any;
   row: any;
 }
 
+/* Editable Table Cell helper component */
+/* ==================================== */
 const EditableCell: FC<EditableCellProps> = (props) => {
   const { row, column } = props;
 
@@ -111,23 +139,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                         <>
                           {/* render a normal cell if not editable */}
                           {column.label !== editColName && (
-                            <StyledTableCell
-                              key={`${row.name}-${column.key}`}
-                              align="center"
-                            >
-                              {/* all values are currency apart from name */}
-                              {column.label !== 'Product' ? (
-                                <div>
-                                  {row[column.key] != null
-                                    ? `£${parseInt(row[column.key], 10).toFixed(
-                                        2
-                                      )}`
-                                    : '--'}
-                                </div>
-                              ) : (
-                                row[column.key]
-                              )}
-                            </StyledTableCell>
+                            <NonEditableCell row={row} column={column} />
                           )}
                           {/* if this is col is editable, render input cell */}
                           {column.label === editColName && (
