@@ -4,7 +4,7 @@ import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Error';
-import { DataTableColumn } from '@/components/types';
+import { DataTableColumn } from '@/components/DataTable/types';
 
 interface DataTableErrorRowProps {
   columns: Array<DataTableColumn>;

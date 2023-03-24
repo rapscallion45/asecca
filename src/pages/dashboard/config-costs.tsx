@@ -10,7 +10,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { getConfigCostsColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
-import { DataTableColumn } from '@/components/types';
+import { DataTableColumn } from '@/components/DataTable/types';
 
 /* costs config data table column defintions */
 const columns: Array<DataTableColumn> = [

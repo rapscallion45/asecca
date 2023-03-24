@@ -4,7 +4,7 @@ import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { DataTableColumn } from '@/components/types';
+import { DataTableColumn } from '@/components/DataTable/types';
 
 interface DataTableLoadingRowProps {
   columns: Array<DataTableColumn>;

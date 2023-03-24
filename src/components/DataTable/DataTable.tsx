@@ -9,7 +9,7 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 import DataTableErrorRow from './DataTableErrorRow/DataTableErrorRow';
 import DataTableLoadingRow from './DataTableLoadingRow/DataTableLoadingRow';
 import DataTableHeader from './DataTableHeader/DataTableHeader';
-import { DataTableColumn } from '../types';
+import { DataTableColumn } from './types';
 
 interface DataTableProps {
   name: string;
