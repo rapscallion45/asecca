@@ -28,7 +28,7 @@ const DataTableHeader: FC<DataTableHeaderProps> = (props) => {
     <TableRow>
       {/* map passed columns to table headers row */}
       {columns.map((column: DataTableColumn) => (
-        <StyledTableHeadCell key={column.key} align="center">
+        <StyledTableHeadCell key={column.key} align="left">
           {column.label}
         </StyledTableHeadCell>
       ))}
