@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import queryString from 'query-string';
 import { Box, Container, Typography } from '@mui/material';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { AppState } from '@/redux/store';
 import { getConfigCostsColFilterList } from '@/utils';
+import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 
 const columns: Array<any> = [
   { label: 'Product', key: 'name' },
@@ -46,6 +48,29 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   const [colFilterList, setColFilterList] = useState<Array<string>>(
     getConfigCostsColFilterList(permission.level)
   );
+  const dispatch = useDispatch();
+
+  /* get page query params on first load */
+  useEffect(() => {
+    /* check for customer, project or collection data query */
+    const { customer, project, collection } = queryString.parse(
+      window.location.search
+    );
+
+    /* test for which permission level query this is and set state accordingly */
+    if (customer !== undefined && customer !== null && customer !== '') {
+      console.log(project);
+      dispatch(setPermissionLevel({ level: 'Customer' }));
+    }
+    if (project !== undefined && project !== null && project !== '') {
+      console.log(project);
+      dispatch(setPermissionLevel({ level: 'Project' }));
+    }
+    if (collection !== undefined && collection !== null && collection !== '') {
+      console.log(collection);
+      dispatch(setPermissionLevel({ level: 'Collection' }));
+    }
+  }, []);
 
   /* whenever the user permission global state is updated, filter cols */
   useEffect(() => {
