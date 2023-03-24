@@ -19,7 +19,7 @@ export type CostsConfigData = {
 };
 
 /*
- ** Costs Config return dat payload type definition
+ ** Costs Config return data payload type definition
  */
 export type CostsConfigDataPayload = {
   costs: Array<CostsConfigData>;
