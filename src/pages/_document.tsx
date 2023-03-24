@@ -2,6 +2,7 @@ import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import { createEmotionCache } from '@/utils';
+import Meta from '@/components/Meta/Meta';
 
 /* boilerplate code from Material UI */
 /* https://github.com/mui/material-ui/blob/master/examples/material-next-ts/pages/_document.tsx */
@@ -11,11 +12,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/* Import Roboto Google font */}
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
+          <Meta />
         </Head>
         <body>
           <Main />
