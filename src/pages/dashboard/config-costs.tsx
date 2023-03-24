@@ -79,7 +79,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
       dispatch(setPermissionLevel({ level: 'Collection' }));
       setDataId(collection);
     }
-  }, []);
+  }, [dispatch]);
 
   /* whenever the user permission global state is updated, filter cols */
   useEffect(() => {

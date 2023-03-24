@@ -20,6 +20,8 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.contrastText,
+    fontSize: 16,
+    fontWeight: 400,
   },
 }));
 
