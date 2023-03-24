@@ -136,6 +136,12 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
   };
 
   const handleEditCellClickAway = () => {
+    /* check if user has cleared cell */
+    if (editValue === '' || editValue === '--') {
+      setEditValue('--');
+      return;
+    }
+
     /* check if user input is number, if so, format correctly */
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
