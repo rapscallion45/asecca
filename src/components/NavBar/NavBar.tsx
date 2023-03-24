@@ -34,17 +34,8 @@ const NavBar: FC<NavBarProps> = (props) => {
             <Button
               component={Link}
               href="/"
-              variant="outlined"
-              sx={{
-                color: 'white',
-                borderColor: 'white',
-                borderRadius: 0,
-                p: 2,
-                '&:hover': {
-                  backgroundColor: 'rgba(26,142,243, 0.4)',
-                  borderColor: 'rgba(26,142,243, 0.4)',
-                },
-              }}
+              variant="contained"
+              color="secondary"
             >
               Logout
             </Button>

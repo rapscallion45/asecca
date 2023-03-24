@@ -20,7 +20,7 @@ const Home: NextPageWithLayout = () => (
         alignItems: 'center',
       }}
     >
-      <Avatar sx={{ m: 3, bgcolor: 'primary.main', p: 4 }}>
+      <Avatar sx={{ m: 3, bgcolor: 'secondary.main', p: 4 }}>
         <LockOutlinedIcon fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5" color="common.white">
@@ -30,19 +30,9 @@ const Home: NextPageWithLayout = () => (
         component={Link}
         href="/dashboard/config-costs"
         fullWidth
-        variant="outlined"
-        sx={{
-          mt: 3,
-          mb: 2,
-          color: 'white',
-          borderColor: 'white',
-          borderRadius: 0,
-          p: 2,
-          '&:hover': {
-            backgroundColor: 'rgba(26,142,243, 0.4)',
-            borderColor: 'rgba(26,142,243, 0.4)',
-          },
-        }}
+        variant="contained"
+        color="secondary"
+        sx={{ mt: 4, mb: 2 }}
       >
         Log In
       </Button>

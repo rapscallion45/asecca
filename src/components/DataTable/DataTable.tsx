@@ -18,12 +18,8 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   /* table head colors */
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  /* adjust font size */
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
   },
 }));
 
