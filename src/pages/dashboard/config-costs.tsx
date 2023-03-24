@@ -43,12 +43,18 @@ const rows = [
 /* Configure Costs Test Page */
 /* ========================= */
 const ConfigureCostsTestPage: NextPageWithLayout = () => {
+  const dispatch = useDispatch();
+
   /* get user permission level held in redux state */
   const { permission } = useSelector((state: AppState) => state.userPermission);
+
+  /* filter the data table columns for current permission level */
   const [colFilterList, setColFilterList] = useState<Array<string>>(
     getConfigCostsColFilterList(permission.level)
   );
-  const dispatch = useDispatch();
+
+  /* copy of query param held in local page state */
+  const [dataId, setDataId] = useState<string | (string | null)[]>('');
 
   /* get page query params on first load */
   useEffect(() => {
@@ -59,16 +65,19 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
 
     /* test for which permission level query this is and set state accordingly */
     if (customer !== undefined && customer !== null && customer !== '') {
-      console.log(project);
+      /* set Customer permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Customer' }));
+      setDataId(customer);
     }
     if (project !== undefined && project !== null && project !== '') {
-      console.log(project);
+      /* set Project permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Project' }));
+      setDataId(project);
     }
     if (collection !== undefined && collection !== null && collection !== '') {
-      console.log(collection);
+      /* set Collection permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Collection' }));
+      setDataId(collection);
     }
   }, []);
 
@@ -82,7 +91,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
       <AdminTestPanel />
       <Box my={5} sx={{ maxWidth: 400 }}>
         <Typography variant="h5" color="common.white">
-          Costing Configuration - Lloyds Bank - Collection 151652313256
+          Costing Configuration - Lloyds Bank - {permission.level} {dataId}
         </Typography>
       </Box>
       <DataTable
