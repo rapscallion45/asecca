@@ -10,9 +10,10 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
-import ErrorIcon from '@mui/icons-material/Error';
 import DataTableRow from './DataTableRow/DataTableRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
+import DataTableErrorRow from './DataTableErrorRow/DataTableErrorRow';
+import { DataTableColumn } from '../types';
 
 /* table head cell stylings */
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
@@ -28,7 +29,7 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
 interface DataTableProps {
   name: string;
   editColName: string;
-  columns: any;
+  columns: Array<DataTableColumn>;
   rows: any;
   isLoading?: boolean;
   isError?: boolean;
@@ -54,7 +55,7 @@ const DataTable: FC<DataTableProps> = (props) => {
           <TableHead>
             <TableRow>
               {/* map passed columns to table headers row */}
-              {columns.map((column: any) => (
+              {columns.map((column: DataTableColumn) => (
                 <StyledTableHeadCell key={column.key} align="center">
                   {column.label}
                 </StyledTableHeadCell>
@@ -66,14 +67,14 @@ const DataTable: FC<DataTableProps> = (props) => {
               {!isLoading && !isError && (
                 <>
                   {/* map passed rows */}
-                  {rows.map((row: any) => (
+                  {rows?.map((row: any) => (
                     <Fragment key={row.name}>
                       <DataTableRow
                         row={row}
                         columns={columns}
                         /* we need the edit col to get 'Prevailing' value */
                         editCol={columns.find(
-                          (col: any) => editColName === col.label
+                          (col: DataTableColumn) => editColName === col.label
                         )}
                       />
                     </Fragment>
@@ -81,30 +82,27 @@ const DataTable: FC<DataTableProps> = (props) => {
                 </>
               )}
               {!isLoading && isError && (
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  py={7}
-                  alignItems="center"
-                >
-                  <ErrorIcon color="error" fontSize="large" />
-                  <Typography variant="h6" mt={2}>
-                    Error loading the requested data
-                  </Typography>
-                </Box>
+                <DataTableErrorRow
+                  columns={columns}
+                  message="Error loading the requested data"
+                />
               )}
               {isLoading && (
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  py={7}
-                  alignItems="center"
-                >
-                  <CircularProgress />
-                  <Typography variant="h6" mt={2}>
-                    Loading...
-                  </Typography>
-                </Box>
+                <TableRow>
+                  <TableCell colSpan={columns.length}>
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      py={7}
+                      alignItems="center"
+                    >
+                      <CircularProgress size={30} />
+                      <Typography variant="body1" mt={2}>
+                        Loading...
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                </TableRow>
               )}
             </>
           </TableBody>
