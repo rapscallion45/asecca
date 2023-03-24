@@ -89,7 +89,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
-      <Box my={5} sx={{ maxWidth: 400 }}>
+      <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4" color="common.white">
           Costing Configuration - Lloyds Bank - {permission.level} {dataId}
         </Typography>
