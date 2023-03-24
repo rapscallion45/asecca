@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState, AppDispatch } from '@/redux/store';
+import queryString from 'query-string';
 import { Box, Container, Typography } from '@mui/material';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { AppState } from '@/redux/store';
 import { getConfigCostsColFilterList } from '@/utils';
+import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
+import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
+import { DataTableColumn } from '@/components/types';
 
-const columns: Array<any> = [
+/* costs config data table column defintions */
+const columns: Array<DataTableColumn> = [
   { label: 'Product', key: 'name' },
   { label: 'Global', key: 'global_charge' },
   { label: 'Customer', key: 'customer_charge' },
@@ -17,60 +22,89 @@ const columns: Array<any> = [
   { label: 'Prevailing', key: 'effective_charge' },
 ];
 
-const createData: any = (
-  name: string,
-  global_charge: number | null,
-  customer_charge: number | null,
-  project_charge: number | null,
-  collection_charge: number | null,
-  effective_charge: number
-) => ({
-  name,
-  global_charge,
-  customer_charge,
-  project_charge,
-  collection_charge,
-  effective_charge,
-});
-
-const rows = [
-  createData('Device Processing', 9.0, 2, 3, 4, 9.0),
-  createData('Royal Mail Drop-off', 25.0, null, null, 50, 18),
-];
-
 /* Configure Costs Test Page */
 /* ========================= */
 const ConfigureCostsTestPage: NextPageWithLayout = () => {
+  /* shorthand helper for dispatching redux actions */
+  const dispatch = useDispatch<AppDispatch>();
+
+  /* get costs config data held in redux state */
+  const { data, loading, error } = useSelector(
+    (state: AppState) => state.costsConfig
+  );
+
   /* get user permission level held in redux state */
   const { permission } = useSelector((state: AppState) => state.userPermission);
+
+  /* filter the data table columns for current permission level */
   const [colFilterList, setColFilterList] = useState<Array<string>>(
     getConfigCostsColFilterList(permission.level)
   );
 
-  /* whenever the user permission global state is updated, filter cols */
+  /* copy of page query param held in local page state */
+  const [query, setQuery] = useState<string | (string | null)[]>('');
+
+  /* get page query params from URL on first load */
+  useEffect(() => {
+    /* check for customer, project or collection data query */
+    const { customer, project, collection } = queryString.parse(
+      window.location.search
+    );
+
+    /* test for which type of query this is and set state accordingly */
+    if (customer !== undefined && customer !== null && customer !== '') {
+      /* set Customer permission level and data ID to be fetched from API */
+      dispatch(setPermissionLevel({ level: 'Customer' }));
+      setQuery(customer);
+    }
+    if (project !== undefined && project !== null && project !== '') {
+      /* set Project permission level and data ID to be fetched from API */
+      dispatch(setPermissionLevel({ level: 'Project' }));
+      setQuery(project);
+    }
+    if (collection !== undefined && collection !== null && collection !== '') {
+      /* set Collection permission level and data ID to be fetched from API */
+      dispatch(setPermissionLevel({ level: 'Collection' }));
+      setQuery(collection);
+    }
+  }, [dispatch]);
+
+  /* whenever the page query is updated, fetch new data from API */
+  useEffect(() => {
+    if (query) {
+      dispatch(
+        fetchCostsConfigBySourceId({
+          source: permission.level as string,
+          dataId: query,
+        })
+      );
+    }
+  }, [query, dispatch]);
+
+  /* whenever the user permission global state is updated, re-filter cols */
   useEffect(() => {
     setColFilterList(getConfigCostsColFilterList(permission.level));
-  }, [permission]);
+  }, [permission.level]);
 
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
-      <Box my={5} sx={{ maxWidth: 400 }}>
-        <Typography variant="h5" color="common.white">
-          Costing Configuration - Lloyds Bank - Collection 151652313256
+      <Box my={5} sx={{ maxWidth: 500 }}>
+        <Typography variant="h4" color="common.white">
+          Costing Configuration - Lloyds Bank - {permission.level} {query}
         </Typography>
       </Box>
       <DataTable
         name="config costs"
-        /* table editable cell(s) defined based on permission level */
+        /* table editable cell(s) defined by user permission level */
         editColName={permission.level}
-        /* filter table columns by permission level */
+        /* filter table columns by current permission level */
         columns={columns.filter(
           (col: any) => !colFilterList.includes(col.label)
         )}
-        rows={rows}
-        isLoading={false}
-        isError={false}
+        rows={data?.costs}
+        isLoading={loading}
+        isError={Boolean(error)}
       />
     </Container>
   );

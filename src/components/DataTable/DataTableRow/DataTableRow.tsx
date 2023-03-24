@@ -45,8 +45,16 @@ interface NonEditableCellProps {
 const NonEditableCell: FC<NonEditableCellProps> = (props) => {
   const { row, column, editValue } = props;
 
-  return (
-    <StyledTableCell align="center">
+  return column.label === 'Prevailing' ? (
+    <StyledTableCell align="left" sx={{ fontWeight: 'bold' }}>
+      <>
+        {/* the 'Prevailing' column is always equal to the
+            editable col (permission level) */}
+        {`£${parseInt(editValue !== '' ? editValue : '0', 10).toFixed(2)}`}
+      </>
+    </StyledTableCell>
+  ) : (
+    <StyledTableCell align="left">
       {/* all values are currency apart from name */}
       {column.key !== 'name' && column.label !== 'Prevailing' ? (
         <div>
@@ -57,7 +65,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
       ) : (
         <>
           {/* the 'Prevailing' column is always equal to the
-            editable col (permission level) */}
+          editable col (permission level) */}
           {column.label === 'Prevailing'
             ? `£${parseInt(editValue !== '' ? editValue : '0', 10).toFixed(
                 2
@@ -84,7 +92,7 @@ const EditableCell: FC<EditableCellProps> = (props) => {
   const { row, column, editValue, handleEditValueChange } = props;
 
   return (
-    <StyledTableCell sx={{ textAlign: 'center', p: 0 }}>
+    <StyledTableCell sx={{ p: 0 }}>
       <FormControl sx={{ m: 1 }} variant="standard">
         <Input
           id={`${row.name}-${column.key}-input`}

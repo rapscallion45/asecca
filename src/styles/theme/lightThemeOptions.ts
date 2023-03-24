@@ -1,4 +1,5 @@
 import { ThemeOptions, alpha } from '@mui/material/styles';
+import typography from './typography';
 
 /* ASECCA SPA light theme style definitions */
 
@@ -98,6 +99,7 @@ const lightThemeOptions: ThemeOptions = {
       disabledOpacity: 0.48,
     },
   },
+  typography,
 };
 
 export default lightThemeOptions;

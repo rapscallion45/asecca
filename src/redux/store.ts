@@ -1,11 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Action } from '@reduxjs/toolkit';
+import { ThunkAction } from 'redux-thunk';
 import logger from 'redux-logger';
 import userPermissionReducer from './slices/userPermissionSlice';
+import costsConfigReducer from './slices/costsConfigSlice';
 
 /* configure the redux store to manage the user permission level of the app */
 const store = configureStore({
   reducer: {
     userPermission: userPermissionReducer,
+    costsConfig: costsConfigReducer,
   },
   // @ts-ignore
   middleware:
@@ -17,5 +20,7 @@ const store = configureStore({
 export type AppDispatch = typeof store.dispatch;
 
 export type AppState = ReturnType<typeof store.getState>;
+
+export type AppThunk = ThunkAction<void, AppState, unknown, Action<string>>;
 
 export default store;

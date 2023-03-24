@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Head from 'next/head';
 import { useTheme } from '@mui/material';
 
 /* App Meta - App Name, Description, SEO, favicon, etc */
@@ -8,7 +7,7 @@ const Meta: FC = () => {
   const theme = useTheme();
 
   return (
-    <Head>
+    <>
       <title>{process.env.APP_NAME}</title>
       <meta name="description" content={process.env.APP_DESCRIPTION} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +47,7 @@ const Meta: FC = () => {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-    </Head>
+    </>
   );
 };
 

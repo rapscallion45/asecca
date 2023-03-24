@@ -1,36 +1,20 @@
 import { FC, Fragment } from 'react';
-import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
-import ErrorIcon from '@mui/icons-material/Error';
 import DataTableRow from './DataTableRow/DataTableRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
-
-/* table head cell stylings */
-const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
-  /* table head colors */
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  /* adjust font size */
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+import DataTableErrorRow from './DataTableErrorRow/DataTableErrorRow';
+import DataTableLoadingRow from './DataTableLoadingRow/DataTableLoadingRow';
+import DataTableHeader from './DataTableHeader/DataTableHeader';
+import { DataTableColumn } from '../types';
 
 interface DataTableProps {
   name: string;
   editColName: string;
-  columns: any;
+  columns: Array<DataTableColumn>;
   rows: any;
   isLoading?: boolean;
   isError?: boolean;
@@ -54,28 +38,21 @@ const DataTable: FC<DataTableProps> = (props) => {
       <TableContainer component={Paper}>
         <Table aria-label={`${name} table`}>
           <TableHead>
-            <TableRow>
-              {/* map passed columns to table headers row */}
-              {columns.map((column: any) => (
-                <StyledTableHeadCell key={column.key} align="center">
-                  {column.label}
-                </StyledTableHeadCell>
-              ))}
-            </TableRow>
+            <DataTableHeader columns={columns} />
           </TableHead>
           <TableBody>
             <>
               {!isLoading && !isError && (
                 <>
                   {/* map passed rows */}
-                  {rows.map((row: any) => (
+                  {rows?.map((row: any) => (
                     <Fragment key={row.name}>
                       <DataTableRow
                         row={row}
                         columns={columns}
                         /* we need the edit col to get 'Prevailing' value */
                         editCol={columns.find(
-                          (col: any) => editColName === col.label
+                          (col: DataTableColumn) => editColName === col.label
                         )}
                       />
                     </Fragment>
@@ -83,30 +60,13 @@ const DataTable: FC<DataTableProps> = (props) => {
                 </>
               )}
               {!isLoading && isError && (
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  py={7}
-                  alignItems="center"
-                >
-                  <ErrorIcon color="error" fontSize="large" />
-                  <Typography variant="h6" mt={2}>
-                    Error loading the requested data
-                  </Typography>
-                </Box>
+                <DataTableErrorRow
+                  columns={columns}
+                  message="Error loading the requested data"
+                />
               )}
               {isLoading && (
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  py={7}
-                  alignItems="center"
-                >
-                  <CircularProgress />
-                  <Typography variant="h6" mt={2}>
-                    Loading...
-                  </Typography>
-                </Box>
+                <DataTableLoadingRow columns={columns} message="Loading..." />
               )}
             </>
           </TableBody>
