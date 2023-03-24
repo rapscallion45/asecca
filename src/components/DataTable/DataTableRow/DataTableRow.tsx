@@ -7,6 +7,7 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { tableCellClasses } from '@mui/material/TableCell';
 
 /* table cell stylings */
@@ -84,23 +85,31 @@ interface EditableCellProps {
   handleEditValueChange: (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
+  handleClickAway: () => void;
 }
 
 /* Editable Table Cell helper component */
 /* ==================================== */
 const EditableCell: FC<EditableCellProps> = (props) => {
-  const { row, column, editValue, handleEditValueChange } = props;
+  const { row, column, editValue, handleEditValueChange, handleClickAway } =
+    props;
 
   return (
     <StyledTableCell sx={{ p: 0 }}>
       <FormControl sx={{ m: 1 }} variant="standard">
-        <Input
-          id={`${row.name}-${column.key}-input`}
-          startAdornment={<InputAdornment position="start">£</InputAdornment>}
-          onChange={handleEditValueChange}
-          value={editValue}
-          required
-        />
+        <ClickAwayListener
+          mouseEvent="onMouseDown"
+          touchEvent="onTouchStart"
+          onClickAway={handleClickAway}
+        >
+          <Input
+            id={`${row.name}-${column.key}-input`}
+            startAdornment={<InputAdornment position="start">£</InputAdornment>}
+            onChange={handleEditValueChange}
+            value={editValue}
+            required
+          />
+        </ClickAwayListener>
       </FormControl>
     </StyledTableCell>
   );
@@ -117,13 +126,28 @@ interface DataTableRowProps {
 const DataTableRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
   const [editValue, setEditValue] = useState<string>(
-    parseInt(row[editCol?.key] !== null ? row[editCol?.key] : 0, 10).toFixed(2)
+    parseFloat(row[editCol?.key] !== null ? row[editCol?.key] : 0).toFixed(2)
   );
 
   const handleValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setEditValue(event.target.value);
+  };
+
+  const handleEditCellClickAway = () => {
+    /* check if user input is number, if so, format correctly */
+    if (/^(\d+.)*(\d+)$/.test(editValue)) {
+      setEditValue(parseFloat(editValue).toFixed(2));
+    } else {
+      /* user entered non-number, ignore input */
+      setEditValue(
+        parseInt(
+          row[editCol?.key] !== null ? row[editCol?.key] : 0,
+          10
+        ).toFixed(2)
+      );
+    }
   };
 
   return (
@@ -147,6 +171,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
               column={column}
               editValue={editValue}
               handleEditValueChange={handleValueChange}
+              handleClickAway={handleEditCellClickAway}
             />
           )}
         </Fragment>
