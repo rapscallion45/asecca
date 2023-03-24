@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppState, AppDispatch } from '@/redux/store';
 import queryString from 'query-string';
 import { Box, Container, Typography } from '@mui/material';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { AppState } from '@/redux/store';
 import { getConfigCostsColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
+import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
 
 const columns: Array<any> = [
   { label: 'Product', key: 'name' },
@@ -43,7 +44,7 @@ const rows = [
 /* Configure Costs Test Page */
 /* ========================= */
 const ConfigureCostsTestPage: NextPageWithLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   /* get user permission level held in redux state */
   const { permission } = useSelector((state: AppState) => state.userPermission);
@@ -80,6 +81,18 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
       setDataId(collection);
     }
   }, [dispatch]);
+
+  /* whenever the dataId is updated, fetch new data from API */
+  useEffect(() => {
+    if (dataId) {
+      dispatch(
+        fetchCostsConfigBySourceId({
+          source: permission.level as string,
+          dataId,
+        })
+      );
+    }
+  }, [dataId, dispatch]);
 
   /* whenever the user permission global state is updated, filter cols */
   useEffect(() => {
