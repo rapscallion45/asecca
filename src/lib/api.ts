@@ -1,4 +1,5 @@
 import base64 from 'base-64';
+import queryString from 'query-string';
 
 /* configuration params for staging DB */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
@@ -20,16 +21,12 @@ export default async function getCostsConfig(
     }),
   };
 
-  console.log(query);
+  /* construct query param string from passed query object */
+  const queryParamString = queryString.stringify(query);
 
-  // return fetch(
-  //   `${STAGING_DB_REST_API_URL}/api/costs_config?${encodeURIComponent(
-  //     JSON.stringify(query)
-  //   )}`,
-  //   requestOptions
-  // );
+  /* fecth the costs config */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/api/costs_config?collection=66135000015737072`,
+    `${STAGING_DB_REST_API_URL}/api/costs_config?${queryParamString}`,
     requestOptions
   );
 }
