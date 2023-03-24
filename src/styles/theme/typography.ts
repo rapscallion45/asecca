@@ -90,9 +90,9 @@ const typography = {
     letterSpacing: 1.1,
   },
   button: {
-    fontWeight: 700,
+    fontWeight: 400,
     lineHeight: 24 / 14,
-    fontSize: pxToRem(14),
+    fontSize: pxToRem(16),
   },
 };
 
