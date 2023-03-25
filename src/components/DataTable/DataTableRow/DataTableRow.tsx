@@ -38,7 +38,13 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
       editValue !== parseFloat(row[editCol?.key]).toFixed(2)
     ) {
       setIsEdited(true);
-    } else if (editValue !== '--') {
+    } else if (
+      row[editCol?.key] === null &&
+      editValue !== '--' &&
+      editValue !== ''
+    ) {
+      setIsEdited(true);
+    } else {
       setIsEdited(false);
     }
   }, [editValue]);
@@ -72,9 +78,18 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
 
   const handleEditCellOnClick = () => {
     /* check if cell is currently null or indicating null */
-    if (editValue === '--')
+    if (editValue === '--' && !isEdited)
       /* clear cell if null, ready for new input */
       setEditValue('');
+  };
+
+  const handleResetCell = () => {
+    /* user has decided to clear their edits, restore cell to orig value */
+    setEditValue(
+      row[editCol?.key] !== null
+        ? parseFloat(row[editCol?.key]).toFixed(2)
+        : '--'
+    );
   };
 
   return (
@@ -91,6 +106,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
           handleEditValueChange={handleCurrencyValueChange}
           handleClickAway={handleEditCellClickAway}
           handleEditCellOnClick={handleEditCellOnClick}
+          handleResetCell={handleResetCell}
         />
       ))}
     </StyledTableRow>
