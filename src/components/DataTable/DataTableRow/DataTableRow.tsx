@@ -51,11 +51,14 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
       <>
         {/*
          ** the 'Prevailing' column is always equal to the
-         ** editable col (permission level), unless editable is null.
-         ** if null, Prevailing is equal to the "effective_charge"
+         ** editable col (permission level), unless editable is null or NaN.
+         ** if null or NaN, Prevailing is equal to the "effective_charge"
          */}
         {`£${
-          editValue !== null && editValue !== '--' && editValue !== ''
+          editValue !== null &&
+          editValue !== '--' &&
+          editValue !== '' &&
+          /^(\d+.)*(\d+)$/.test(editValue)
             ? parseFloat(editValue).toFixed(2)
             : parseFloat(row.effective_charge).toFixed(2)
         }`}
