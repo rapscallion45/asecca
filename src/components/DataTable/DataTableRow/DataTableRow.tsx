@@ -49,29 +49,32 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
   return column.label === 'Prevailing' ? (
     <StyledTableCell align="left" sx={{ fontWeight: 'bold' }}>
       <>
-        {/* the 'Prevailing' column is always equal to the
-            editable col (permission level) */}
-        {`£${parseInt(editValue !== '' ? editValue : '0', 10).toFixed(2)}`}
+        {/*
+         ** the 'Prevailing' column is always equal to the
+         ** editable col (permission level), unless editable is null.
+         ** if null, Prevailing is equal to the "effective_charge"
+         */}
+        {`£${
+          editValue !== null && editValue !== '--' && editValue !== ''
+            ? parseFloat(editValue).toFixed(2)
+            : parseFloat(row.effective_charge).toFixed(2)
+        }`}
       </>
     </StyledTableCell>
   ) : (
     <StyledTableCell align="left">
       {/* all values are currency apart from name */}
-      {column.key !== 'name' && column.label !== 'Prevailing' ? (
-        <div>
+      {column.key !== 'name' ? (
+        <>
+          {/* render currency amount, or null symbol */}
           {row[column.key] != null
-            ? `£${parseInt(row[column.key], 10).toFixed(2)}`
+            ? `£${parseFloat(row[column.key]).toFixed(2)}`
             : '--'}
-        </div>
+        </>
       ) : (
         <>
-          {/* the 'Prevailing' column is always equal to the
-          editable col (permission level) */}
-          {column.label === 'Prevailing'
-            ? `£${parseInt(editValue !== '' ? editValue : '0', 10).toFixed(
-                2
-              )}` || '--'
-            : row[column.key]}
+          {/* name column, simply render string */}
+          row[column.key]
         </>
       )}
     </StyledTableCell>
