@@ -6,7 +6,9 @@ import {
   FormControl,
   TableRow,
   TableCell,
+  IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { tableCellClasses } from '@mui/material/TableCell';
 
@@ -111,6 +113,20 @@ const EditableCell: FC<EditableCellProps> = (props) => {
           <Input
             id={`${row.name}-${column.key}-input`}
             startAdornment={<InputAdornment position="start">£</InputAdornment>}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  // onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  disabled={editValue === '--'}
+                >
+                  {editValue !== '--' ? (
+                    <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
+                  ) : null}
+                </IconButton>
+              </InputAdornment>
+            }
             onChange={handleEditValueChange}
             value={editValue}
             required
