@@ -26,9 +26,13 @@ interface DataTableRowProps {
 /* ======================== */
 const DataTableRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
+
+  /* initialise the edit value state to original column value */
   const [editValue, setEditValue] = useState<string>(
     row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
   );
+
+  /* flag in state for whether the edit column has been changed by user */
   const [isEdited, setIsEdited] = useState<boolean>(false);
 
   /* whenever the edit val changes, check if it is different from the original */
@@ -49,6 +53,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     }
   }, [editValue, row, editCol?.key]);
 
+  /* callback for handling user input to the edit cell */
   const handleCurrencyValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
