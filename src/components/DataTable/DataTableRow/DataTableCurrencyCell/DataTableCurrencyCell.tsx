@@ -27,6 +27,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 interface DataTableCurrencyCellProps {
   canEdit: boolean;
+  isEdited: boolean;
   column: DataTableColumn;
   row: any;
   editValue: string;
@@ -42,6 +43,7 @@ interface DataTableCurrencyCellProps {
 const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
   const {
     canEdit,
+    isEdited,
     row,
     column,
     editValue,
@@ -67,9 +69,9 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
                   aria-label="clear user entry"
                   // onClick={handleClickShowPassword}
                   // onMouseDown={handleMouseDownPassword}
-                  disabled={editValue === '--' || editValue === ''}
+                  disabled={!isEdited}
                 >
-                  {editValue !== '--' && editValue !== '' ? (
+                  {isEdited ? (
                     <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
                   ) : null}
                 </IconButton>

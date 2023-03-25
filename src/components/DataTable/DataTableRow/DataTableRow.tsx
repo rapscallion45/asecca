@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { DataTableColumn } from '../types';
@@ -29,6 +29,19 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
   const [editValue, setEditValue] = useState<string>(
     row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
   );
+  const [isEdited, setIsEdited] = useState<boolean>(false);
+
+  /* whenever the edit val changes, check if it is different from the original */
+  useEffect(() => {
+    if (
+      row[editCol?.key] !== null &&
+      editValue !== parseFloat(row[editCol?.key]).toFixed(2)
+    ) {
+      setIsEdited(true);
+    } else if (editValue !== '--') {
+      setIsEdited(false);
+    }
+  }, [editValue]);
 
   const handleCurrencyValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -71,6 +84,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
         <DataTableCurrencyCell
           key={`${row.name}-${column.key}`}
           canEdit={column.label === editCol?.label}
+          isEdited={isEdited}
           row={row}
           column={column}
           editValue={editValue}
