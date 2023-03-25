@@ -1,4 +1,4 @@
-import { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Input,
@@ -134,4 +134,4 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
   );
 };
 
-export default DataTableCurrencyCell;
+export default memo(DataTableCurrencyCell);

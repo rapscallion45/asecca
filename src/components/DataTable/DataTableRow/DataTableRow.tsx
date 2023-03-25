@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ChangeEvent } from 'react';
+import { FC, useState, useEffect, ChangeEvent, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { DataTableColumn } from '../types';
@@ -54,13 +54,14 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
   }, [editValue, row, editCol?.key]);
 
   /* callback for handling user input to the edit cell */
-  const handleCurrencyValueChange = (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setEditValue(event.target.value);
-  };
+  const handleCurrencyValueChange = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      setEditValue(event.target.value);
+    },
+    []
+  );
 
-  const handleEditCellReformat = () => {
+  const handleEditCellReformat = useCallback(() => {
     /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
@@ -79,23 +80,23 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
           : '--'
       );
     }
-  };
+  }, [row, editCol?.key, editValue]);
 
-  const handleEditCellOnClick = () => {
+  const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
     if (editValue === '--' && !isEdited)
       /* clear cell if null, ready for new input */
       setEditValue('');
-  };
+  }, [editValue, isEdited]);
 
-  const handleResetCell = () => {
+  const handleResetCell = useCallback(() => {
     /* user has decided to clear their edits, restore cell to orig value */
     setEditValue(
       row[editCol?.key] !== null
         ? parseFloat(row[editCol?.key]).toFixed(2)
         : '--'
     );
-  };
+  }, [row, editCol?.key]);
 
   return (
     <StyledTableRow>
