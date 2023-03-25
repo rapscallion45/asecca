@@ -1,29 +1,8 @@
-import { FC, useState, Fragment, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
 import { styled } from '@mui/material/styles';
-import {
-  Input,
-  InputAdornment,
-  FormControl,
-  TableRow,
-  TableCell,
-  IconButton,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { tableCellClasses } from '@mui/material/TableCell';
-
-/* table cell stylings */
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  /* table head colors */
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  /* adjust font size */
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+import TableRow from '@mui/material/TableRow';
+import { DataTableColumn } from '../types';
+import DataTableCurrencyCell from './DataTableCurrencyCell/DataTableCurrencyCell';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -37,114 +16,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-interface NonEditableCellProps {
-  column: any;
-  row: any;
-  editValue: string;
-}
-
-/* Non Editable Table Cell helper component */
-/* ======================================== */
-const NonEditableCell: FC<NonEditableCellProps> = (props) => {
-  const { row, column, editValue } = props;
-
-  return column.label === 'Prevailing' ? (
-    <StyledTableCell align="left" sx={{ fontWeight: 'bold' }}>
-      <>
-        {/*
-         ** the 'Prevailing' column is always equal to the
-         ** editable col (permission level), unless editable is null or NaN.
-         ** if null or NaN, Prevailing is equal to the "effective_charge"
-         */}
-        {`£${
-          editValue !== null &&
-          editValue !== '--' &&
-          editValue !== '' &&
-          /^(\d+.)*(\d+)$/.test(editValue)
-            ? parseFloat(editValue).toFixed(2)
-            : parseFloat(row.effective_charge).toFixed(2)
-        }`}
-      </>
-    </StyledTableCell>
-  ) : (
-    <StyledTableCell align="left">
-      {/* all values are currency apart from name */}
-      {column.key !== 'name' ? (
-        <>
-          {/* render currency amount, or null symbol */}
-          {row[column.key] != null
-            ? `£${parseFloat(row[column.key]).toFixed(2)}`
-            : '--'}
-        </>
-      ) : (
-        <>
-          {/* name column, simply render string */}
-          {row[column.key]}
-        </>
-      )}
-    </StyledTableCell>
-  );
-};
-
-interface EditableCellProps {
-  column: any;
-  row: any;
-  editValue: string;
-  handleEditValueChange: (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => void;
-  handleClickAway: () => void;
-}
-
-/* Editable Table Cell helper component */
-/* ==================================== */
-const EditableCell: FC<EditableCellProps> = (props) => {
-  const { row, column, editValue, handleEditValueChange, handleClickAway } =
-    props;
-
-  return (
-    <StyledTableCell sx={{ p: 0 }}>
-      <FormControl sx={{ m: 1 }} variant="standard">
-        <ClickAwayListener
-          mouseEvent="onMouseDown"
-          touchEvent="onTouchStart"
-          onClickAway={handleClickAway}
-        >
-          <Input
-            id={`${row.name}-${column.key}-input`}
-            startAdornment={<InputAdornment position="start">£</InputAdornment>}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  // onClick={handleClickShowPassword}
-                  // onMouseDown={handleMouseDownPassword}
-                  disabled={editValue === '--'}
-                >
-                  {editValue !== '--' ? (
-                    <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
-                  ) : null}
-                </IconButton>
-              </InputAdornment>
-            }
-            onChange={handleEditValueChange}
-            value={editValue}
-            required
-          />
-        </ClickAwayListener>
-      </FormControl>
-    </StyledTableCell>
-  );
-};
-
 interface DataTableRowProps {
-  columns: any;
+  columns: Array<DataTableColumn>;
   row: any;
   editCol: any;
 }
 
-/* Data Table Row helper component */
-/* =============================== */
+/* Data Table Row component */
+/* ======================== */
 const DataTableRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
   const [editValue, setEditValue] = useState<string>(
@@ -181,27 +60,15 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     <StyledTableRow>
       {/* map passed column data for current row */}
       {columns.map((column: any) => (
-        <Fragment key={`${row.name}-${column.key}`}>
-          {/* render a normal cell if not editable */}
-          {column.label !== editCol?.label && (
-            <NonEditableCell
-              row={row}
-              column={column}
-              /* we need the edit value for 'Prevailing' */
-              editValue={editValue}
-            />
-          )}
-          {/* if this is col is editable, render input cell */}
-          {column.label === editCol?.label && (
-            <EditableCell
-              row={row}
-              column={column}
-              editValue={editValue}
-              handleEditValueChange={handleValueChange}
-              handleClickAway={handleEditCellClickAway}
-            />
-          )}
-        </Fragment>
+        <DataTableCurrencyCell
+          key={`${row.name}-${column.key}`}
+          canEdit={column.label === editCol?.label}
+          row={row}
+          column={column}
+          editValue={editValue}
+          handleEditValueChange={handleValueChange}
+          handleClickAway={handleEditCellClickAway}
+        />
       ))}
     </StyledTableRow>
   );
