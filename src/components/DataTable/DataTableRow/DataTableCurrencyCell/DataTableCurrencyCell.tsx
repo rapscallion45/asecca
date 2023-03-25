@@ -34,6 +34,7 @@ interface DataTableCurrencyCellProps {
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
   handleClickAway: () => void;
+  handleEditCellOnClick: () => void;
 }
 
 /* Data Table Currency Cell helper component */
@@ -46,6 +47,7 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
     editValue,
     handleEditValueChange,
     handleClickAway,
+    handleEditCellOnClick,
   } = props;
 
   return canEdit ? (
@@ -62,18 +64,19 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="clear user entry"
                   // onClick={handleClickShowPassword}
                   // onMouseDown={handleMouseDownPassword}
-                  disabled={editValue === '--'}
+                  disabled={editValue === '--' || editValue === ''}
                 >
-                  {editValue !== '--' ? (
+                  {editValue !== '--' && editValue !== '' ? (
                     <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
                   ) : null}
                 </IconButton>
               </InputAdornment>
             }
             onChange={handleEditValueChange}
+            onClick={handleEditCellOnClick}
             value={editValue}
             required
           />

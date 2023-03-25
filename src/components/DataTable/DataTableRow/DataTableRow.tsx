@@ -30,15 +30,16 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
   );
 
-  const handleValueChange = (
+  const handleCurrencyValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setEditValue(event.target.value);
   };
 
   const handleEditCellClickAway = () => {
-    /* check if user has cleared cell */
+    /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
+      /* leave cell as null input indication */
       setEditValue('--');
       return;
     }
@@ -56,6 +57,13 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     }
   };
 
+  const handleEditCellOnClick = () => {
+    /* check if cell is currently null or indicating null */
+    if (editValue === '--')
+      /* clear cell if null, ready for new input */
+      setEditValue('');
+  };
+
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
@@ -66,8 +74,9 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
           row={row}
           column={column}
           editValue={editValue}
-          handleEditValueChange={handleValueChange}
+          handleEditValueChange={handleCurrencyValueChange}
           handleClickAway={handleEditCellClickAway}
+          handleEditCellOnClick={handleEditCellOnClick}
         />
       ))}
     </StyledTableRow>
