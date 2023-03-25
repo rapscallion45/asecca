@@ -79,7 +79,7 @@ const NonEditableCell: FC<NonEditableCellProps> = (props) => {
       ) : (
         <>
           {/* name column, simply render string */}
-          row[column.key]
+          {row[column.key]}
         </>
       )}
     </StyledTableCell>
