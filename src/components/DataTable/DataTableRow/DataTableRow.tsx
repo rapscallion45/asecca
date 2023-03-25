@@ -126,7 +126,7 @@ interface DataTableRowProps {
 const DataTableRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
   const [editValue, setEditValue] = useState<string>(
-    parseFloat(row[editCol?.key] !== null ? row[editCol?.key] : 0).toFixed(2)
+    row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
   );
 
   const handleValueChange = (
@@ -148,10 +148,9 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     } else {
       /* user entered non-number, ignore input */
       setEditValue(
-        parseInt(
-          row[editCol?.key] !== null ? row[editCol?.key] : 0,
-          10
-        ).toFixed(2)
+        row[editCol?.key] !== null
+          ? parseFloat(row[editCol?.key]).toFixed(2)
+          : '--'
       );
     }
   };
