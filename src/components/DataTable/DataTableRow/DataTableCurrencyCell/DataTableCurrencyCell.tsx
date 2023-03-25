@@ -34,7 +34,7 @@ interface DataTableCurrencyCellProps {
   handleEditValueChange: (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  handleClickAway: () => void;
+  handleEditValueReformat: () => void;
   handleEditCellOnClick: () => void;
   handleResetCell: () => void;
 }
@@ -49,10 +49,15 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
     column,
     editValue,
     handleEditValueChange,
-    handleClickAway,
+    handleEditValueReformat,
     handleEditCellOnClick,
     handleResetCell,
   } = props;
+
+  const onKeyDown = (event: any) => {
+    /* listen for enter key hits */
+    if (event.keyCode === 13) handleEditValueReformat();
+  };
 
   return canEdit ? (
     <StyledTableCell sx={{ p: 0 }}>
@@ -60,7 +65,7 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
         <ClickAwayListener
           mouseEvent="onMouseDown"
           touchEvent="onTouchStart"
-          onClickAway={handleClickAway}
+          onClickAway={handleEditValueReformat}
         >
           <Input
             id={`${row.name}-${column.key}-input`}
@@ -81,6 +86,7 @@ const DataTableCurrencyCell: FC<DataTableCurrencyCellProps> = (props) => {
             }
             onChange={handleEditValueChange}
             onClick={handleEditCellOnClick}
+            onKeyDown={onKeyDown}
             value={editValue}
             required
           />

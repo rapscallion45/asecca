@@ -47,7 +47,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     } else {
       setIsEdited(false);
     }
-  }, [editValue]);
+  }, [editValue, row, editCol?.key]);
 
   const handleCurrencyValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -55,7 +55,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     setEditValue(event.target.value);
   };
 
-  const handleEditCellClickAway = () => {
+  const handleEditCellReformat = () => {
     /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
@@ -104,7 +104,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
           column={column}
           editValue={editValue}
           handleEditValueChange={handleCurrencyValueChange}
-          handleClickAway={handleEditCellClickAway}
+          handleEditValueReformat={handleEditCellReformat}
           handleEditCellOnClick={handleEditCellOnClick}
           handleResetCell={handleResetCell}
         />
