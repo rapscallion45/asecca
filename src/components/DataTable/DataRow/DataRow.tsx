@@ -99,22 +99,39 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
     );
   }, [row, editCol?.key]);
 
+  const getColumnCellValue = useCallback(
+    (column: DataTableColumn) => {
+      /*
+       ** the 'Prevailing' column is always equal to the
+       ** editable col (permission level), unless editable col is null or NaN.
+       ** if null or NaN, Prevailing is equal to the "effective_charge"
+       */
+      if (column.label === 'Prevailing' && isEdited) return editValue;
+      if (column.label === 'Prevailing' && !isEdited)
+        return row.effective_charge;
+
+      /* return the edited value if edit cell, else original value */
+      return column.label === editCol?.label ? editValue : row[column.key];
+    },
+    [row, isEdited, editCol?.label, editValue]
+  );
+
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
-      {columns.map((column: any) =>
+      {columns.map((column: DataTableColumn) =>
         column.key !== 'name' ? (
           <CurrencyCell
             key={`${row.name}-${column.key}`}
+            inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
             isEdited={isEdited}
-            row={row}
-            column={column}
-            editValue={editValue}
+            value={getColumnCellValue(column)}
             handleEditValueChange={handleCurrencyValueChange}
             handleEditValueReformat={handleEditCellReformat}
             handleEditCellOnClick={handleEditCellOnClick}
             handleResetCell={handleResetCell}
+            sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
           <Cell value={row[column.key]} />

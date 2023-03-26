@@ -10,7 +10,6 @@ import {
 import { tableCellClasses } from '@mui/material/TableCell';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { DataTableColumn } from '../../types';
 
 /* table cell stylings */
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -26,37 +25,43 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 interface CurrencyCellProps {
+  inputId: string;
   canEdit: boolean;
   isEdited: boolean;
-  column: DataTableColumn;
-  row: any;
-  editValue: string;
-  handleEditValueChange: (
+  value: string;
+  handleEditValueChange?: (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  handleEditValueReformat: () => void;
-  handleEditCellOnClick: () => void;
-  handleResetCell: () => void;
+  handleEditValueReformat?: () => void;
+  handleEditCellOnClick?: () => void;
+  handleResetCell?: () => void;
+  sx: any;
 }
 
 /* Data Table Currency Cell helper component */
 /* ========================================= */
 const CurrencyCell: FC<CurrencyCellProps> = (props) => {
   const {
+    inputId,
     canEdit,
     isEdited,
-    row,
-    column,
-    editValue,
+    value,
     handleEditValueChange,
     handleEditValueReformat,
     handleEditCellOnClick,
     handleResetCell,
+    sx,
   } = props;
 
   const onKeyDown = (event: any) => {
     /* listen for enter key hits */
-    if (event.keyCode === 13) handleEditValueReformat();
+    if (event.keyCode === 13 && handleEditValueReformat)
+      handleEditValueReformat();
+  };
+
+  const handleClickAway = () => {
+    /* listen for click away from cell */
+    if (handleEditValueReformat) handleEditValueReformat();
   };
 
   return canEdit ? (
@@ -65,17 +70,16 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
         <ClickAwayListener
           mouseEvent="onMouseDown"
           touchEvent="onTouchStart"
-          onClickAway={handleEditValueReformat}
+          onClickAway={handleClickAway}
         >
           <Input
-            id={`${row.name}-${column.key}-input`}
+            id={inputId}
             startAdornment={<InputAdornment position="start">£</InputAdornment>}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="clear user entry"
                   onClick={handleResetCell}
-                  // onMouseDown={handleMouseDownPassword}
                   disabled={!isEdited}
                 >
                   {isEdited ? (
@@ -87,40 +91,16 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
             onChange={handleEditValueChange}
             onClick={handleEditCellOnClick}
             onKeyDown={onKeyDown}
-            value={editValue}
+            value={value}
             required
           />
         </ClickAwayListener>
       </FormControl>
     </StyledTableCell>
   ) : (
-    <>
-      {column.label === 'Prevailing' && (
-        <StyledTableCell align="left" sx={{ fontWeight: 'bold' }}>
-          {/*
-           ** the 'Prevailing' column is always equal to the
-           ** editable col (permission level), unless editable is null or NaN.
-           ** if null or NaN, Prevailing is equal to the "effective_charge"
-           */}
-          {`£${
-            editValue !== null &&
-            editValue !== '--' &&
-            editValue !== '' &&
-            /^(\d+.)*(\d+)$/.test(editValue)
-              ? parseFloat(editValue).toFixed(2)
-              : parseFloat(row.effective_charge).toFixed(2)
-          }`}
-        </StyledTableCell>
-      )}
-      {column.label !== 'Prevailing' && (
-        <StyledTableCell align="left">
-          {/* render currency amount, or null symbol */}
-          {row[column.key] != null
-            ? `£${parseFloat(row[column.key]).toFixed(2)}`
-            : '--'}
-        </StyledTableCell>
-      )}
-    </>
+    <StyledTableCell align="left" sx={sx}>
+      {`${value !== null ? `£${value}` : '--'}`}
+    </StyledTableCell>
   );
 };
 
