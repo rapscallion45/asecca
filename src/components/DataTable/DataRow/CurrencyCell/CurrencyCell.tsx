@@ -99,7 +99,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
     </StyledTableCell>
   ) : (
     <StyledTableCell align="left" sx={sx}>
-      {`${value !== null ? `£${value}` : '--'}`}
+      {`${value !== null && value !== undefined ? `£${value}` : '--'}`}
     </StyledTableCell>
   );
 };
