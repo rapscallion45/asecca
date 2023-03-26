@@ -7,9 +7,9 @@ import {
   TableCell,
   IconButton,
 } from '@mui/material';
+import { tableCellClasses } from '@mui/material/TableCell';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { tableCellClasses } from '@mui/material/TableCell';
 import { DataTableColumn } from '../../types';
 
 /* table cell stylings */
@@ -114,20 +114,10 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
       )}
       {column.label !== 'Prevailing' && (
         <StyledTableCell align="left">
-          {/* all values are currency apart from name */}
-          {column.key !== 'name' ? (
-            <>
-              {/* render currency amount, or null symbol */}
-              {row[column.key] != null
-                ? `£${parseFloat(row[column.key]).toFixed(2)}`
-                : '--'}
-            </>
-          ) : (
-            <>
-              {/* name column, simply render string */}
-              {row[column.key]}
-            </>
-          )}
+          {/* render currency amount, or null symbol */}
+          {row[column.key] != null
+            ? `£${parseFloat(row[column.key]).toFixed(2)}`
+            : '--'}
         </StyledTableCell>
       )}
     </>
