@@ -16,13 +16,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-interface DataTableCellProps {
+interface CellProps {
   value: string;
 }
 
 /* Data Table Cell helper component */
 /* ================================ */
-const DataTableCell: FC<DataTableCellProps> = (props) => {
+const Cell: FC<CellProps> = (props) => {
   const { value } = props;
 
   return (
@@ -33,4 +33,4 @@ const DataTableCell: FC<DataTableCellProps> = (props) => {
   );
 };
 
-export default memo(DataTableCell);
+export default memo(Cell);
