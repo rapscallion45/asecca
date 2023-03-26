@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { DataTableColumn } from '../types';
 import DataTableCurrencyCell from './DataTableCurrencyCell/DataTableCurrencyCell';
+import DataTableCell from './DataTableCell/DataTableCell';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -101,20 +102,24 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
-      {columns.map((column: any) => (
-        <DataTableCurrencyCell
-          key={`${row.name}-${column.key}`}
-          canEdit={column.label === editCol?.label}
-          isEdited={isEdited}
-          row={row}
-          column={column}
-          editValue={editValue}
-          handleEditValueChange={handleCurrencyValueChange}
-          handleEditValueReformat={handleEditCellReformat}
-          handleEditCellOnClick={handleEditCellOnClick}
-          handleResetCell={handleResetCell}
-        />
-      ))}
+      {columns.map((column: any) =>
+        column.key !== 'name' ? (
+          <DataTableCurrencyCell
+            key={`${row.name}-${column.key}`}
+            canEdit={column.label === editCol?.label}
+            isEdited={isEdited}
+            row={row}
+            column={column}
+            editValue={editValue}
+            handleEditValueChange={handleCurrencyValueChange}
+            handleEditValueReformat={handleEditCellReformat}
+            handleEditCellOnClick={handleEditCellOnClick}
+            handleResetCell={handleResetCell}
+          />
+        ) : (
+          <DataTableCell value={row[column.key]} />
+        )
+      )}
     </StyledTableRow>
   );
 };
