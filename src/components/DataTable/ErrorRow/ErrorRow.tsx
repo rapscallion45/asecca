@@ -6,14 +6,14 @@ import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Error';
 import { DataTableColumn } from '@/components/DataTable/types';
 
-interface DataTableErrorRowProps {
+interface ErrorRowProps {
   columns: Array<DataTableColumn>;
   message: string;
 }
 
 /* Data Table Error Row helper */
 /* =========================== */
-const DataTableErrorRow: FC<DataTableErrorRowProps> = (props) => {
+const ErrorRow: FC<ErrorRowProps> = (props) => {
   const { columns, message } = props;
 
   return (
@@ -30,4 +30,4 @@ const DataTableErrorRow: FC<DataTableErrorRowProps> = (props) => {
   );
 };
 
-export default DataTableErrorRow;
+export default ErrorRow;

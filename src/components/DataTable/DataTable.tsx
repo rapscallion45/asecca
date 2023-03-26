@@ -4,11 +4,11 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-import DataTableRow from './DataTableRow/DataTableRow';
+import DataRow from './DataRow/DataRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
-import DataTableErrorRow from './DataTableErrorRow/DataTableErrorRow';
-import DataTableLoadingRow from './DataTableLoadingRow/DataTableLoadingRow';
-import DataTableHeader from './DataTableHeader/DataTableHeader';
+import DataTableErrorRow from './ErrorRow/ErrorRow';
+import DataTableLoadingRow from './LoadingRow/LoadingRow';
+import DataTableHeader from './HeaderRow/HeaderRow';
 import { DataTableColumn } from './types';
 
 interface DataTableProps {
@@ -47,7 +47,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                   {/* map passed rows */}
                   {rows?.map((row: any) => (
                     <Fragment key={row.name}>
-                      <DataTableRow
+                      <DataRow
                         row={row}
                         columns={columns}
                         /* we need the edit col to get 'Prevailing' value */

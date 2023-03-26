@@ -6,14 +6,14 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { DataTableColumn } from '@/components/DataTable/types';
 
-interface DataTableLoadingRowProps {
+interface LoadingRowProps {
   columns: Array<DataTableColumn>;
   message: string;
 }
 
 /* Data Table Loading Row helper */
 /* ============================= */
-const DataTableLoadingRow: FC<DataTableLoadingRowProps> = (props) => {
+const LoadingRow: FC<LoadingRowProps> = (props) => {
   const { columns, message } = props;
 
   return (
@@ -30,4 +30,4 @@ const DataTableLoadingRow: FC<DataTableLoadingRowProps> = (props) => {
   );
 };
 
-export default DataTableLoadingRow;
+export default LoadingRow;

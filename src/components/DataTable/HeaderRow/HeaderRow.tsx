@@ -15,13 +15,13 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-interface DataTableHeaderProps {
+interface HeaderRowProps {
   columns: Array<DataTableColumn>;
 }
 
 /* Data Table Header helper */
 /* ======================== */
-const DataTableHeader: FC<DataTableHeaderProps> = (props) => {
+const HeaderRow: FC<HeaderRowProps> = (props) => {
   const { columns } = props;
 
   return (
@@ -36,4 +36,4 @@ const DataTableHeader: FC<DataTableHeaderProps> = (props) => {
   );
 };
 
-export default DataTableHeader;
+export default HeaderRow;

@@ -2,8 +2,8 @@ import { FC, useState, useEffect, ChangeEvent, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { DataTableColumn } from '../types';
-import DataTableCurrencyCell from './DataTableCurrencyCell/DataTableCurrencyCell';
-import DataTableCell from './DataTableCell/DataTableCell';
+import CurrencyCell from './CurrencyCell/CurrencyCell';
+import Cell from './Cell/Cell';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -104,7 +104,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
       {/* map passed column data for current row */}
       {columns.map((column: any) =>
         column.key !== 'name' ? (
-          <DataTableCurrencyCell
+          <CurrencyCell
             key={`${row.name}-${column.key}`}
             canEdit={column.label === editCol?.label}
             isEdited={isEdited}
@@ -117,7 +117,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
             handleResetCell={handleResetCell}
           />
         ) : (
-          <DataTableCell value={row[column.key]} />
+          <Cell value={row[column.key]} />
         )
       )}
     </StyledTableRow>
