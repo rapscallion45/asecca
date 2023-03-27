@@ -44,6 +44,15 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     setIsEdited(editValue !== '--');
   }, [editValue]);
 
+  /* whenever the row data changes, reset the edit value back to the original */
+  useEffect(() => {
+    setEditValue(
+      row[editCol?.key] !== null
+        ? parseFloat(row[editCol?.key]).toFixed(2)
+        : '--'
+    );
+  }, [row, editCol?.key]);
+
   /* callback for handling user input to the edit cell */
   const handleCurrencyValueChange = useCallback((value: string) => {
     setEditValue(value);
@@ -90,7 +99,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     /* user has decided to enter null value */
     setEditValue('--');
     dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 }));
-  }, [editCol.key, dispatch]);
+  }, [editCol?.key, dispatch]);
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {

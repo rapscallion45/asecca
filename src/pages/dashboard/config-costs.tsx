@@ -115,8 +115,24 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
         isLoading={loading}
         isError={Boolean(error)}
       />
-      <Box>
-        <Button color="secondary" variant="outlined" onClick={handleCancel}>
+      <Box
+        sx={{
+          marginTop: 10,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Button color="secondary" variant="contained" onClick={handleCancel}>
+          Save
+        </Button>
+        <Button
+          color="secondary"
+          variant="outlined"
+          onClick={handleCancel}
+          sx={{ backgroundColor: 'common.white', ml: 2 }}
+        >
           Cancel
         </Button>
       </Box>
