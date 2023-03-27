@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { editConfigCosts } from '@/redux/slices/costsConfigSlice';
+import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
@@ -64,7 +64,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
-      dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
+      dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
       return;
     }
 
@@ -72,7 +72,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
       dispatch(
-        editConfigCosts({ value: editValue, colKey: editCol.key, rowIdx })
+        editCostsConfig({ value: editValue, colKey: editCol.key, rowIdx })
       );
     } else {
       /* user entered non-number, ignore input */
@@ -81,7 +81,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
           ? parseFloat(row[editCol?.key]).toFixed(2)
           : '--'
       );
-      dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
+      dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
     }
   }, [row, editCol?.key, editValue, rowIdx, dispatch]);
 
@@ -95,7 +95,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   const handleClearCell = useCallback(() => {
     /* user has decided to enter null value */
     setEditValue('--');
-    dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
+    dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
   }, [editCol?.key, rowIdx, dispatch]);
 
   const getColumnCellValue = useCallback(

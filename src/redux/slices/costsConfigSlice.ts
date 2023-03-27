@@ -33,7 +33,7 @@ const costsConfigSlice = createSlice({
   name: 'costsConfig',
   initialState,
   reducers: {
-    editConfigCosts: (
+    editCostsConfig: (
       state,
       action: PayloadAction<CostsConfigEditCostsPayload>
     ) => {
@@ -45,7 +45,7 @@ const costsConfigSlice = createSlice({
           ? parseFloat(action.payload.value)
           : null;
     },
-    resetConfigCosts: (state) => {
+    resetCostsConfig: (state) => {
       /* reset the data by simply copying the shadow to working copy */
       state.data = state.dataShadow;
     },
@@ -75,6 +75,6 @@ const costsConfigSlice = createSlice({
   },
 });
 
-export const { editConfigCosts, resetConfigCosts } = costsConfigSlice.actions;
+export const { editCostsConfig, resetCostsConfig } = costsConfigSlice.actions;
 
 export default costsConfigSlice.reducer;

@@ -11,7 +11,7 @@ import { getConfigCostsColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
-  resetConfigCosts,
+  resetCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
 import { DataTableColumn } from '@/components/DataTable/types';
 
@@ -90,9 +90,12 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
     setColFilterList(getConfigCostsColFilterList(permission.level));
   }, [permission.level]);
 
+  /* handle the saving of the table data */
+  const handleSave = () => {};
+
   /* handle the resetting of the table data */
   const handleCancel = () => {
-    dispatch(resetConfigCosts());
+    dispatch(resetCostsConfig());
   };
 
   return (
@@ -124,7 +127,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
           justifyContent: 'center',
         }}
       >
-        <Button color="secondary" variant="contained" onClick={handleCancel}>
+        <Button color="secondary" variant="contained" onClick={handleSave}>
           Save
         </Button>
         <Button
