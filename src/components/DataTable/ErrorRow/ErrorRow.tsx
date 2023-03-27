@@ -3,24 +3,24 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
-import { DataTableColumn } from '@/components/types';
+import ErrorIcon from '@mui/icons-material/Error';
+import { DataTableColumn } from '@/components/DataTable/types';
 
-interface DataTableLoadingRowProps {
+interface ErrorRowProps {
   columns: Array<DataTableColumn>;
   message: string;
 }
 
-/* Data Table Loading Row helper */
-/* ============================= */
-const DataTableLoadingRow: FC<DataTableLoadingRowProps> = (props) => {
+/* Data Table Error Row helper */
+/* =========================== */
+const ErrorRow: FC<ErrorRowProps> = (props) => {
   const { columns, message } = props;
 
   return (
     <TableRow>
       <TableCell colSpan={columns.length}>
         <Box display="flex" flexDirection="column" py={7} alignItems="center">
-          <CircularProgress size={30} />
+          <ErrorIcon color="error" fontSize="medium" />
           <Typography variant="body1" mt={2}>
             {message}
           </Typography>
@@ -30,4 +30,4 @@ const DataTableLoadingRow: FC<DataTableLoadingRowProps> = (props) => {
   );
 };
 
-export default DataTableLoadingRow;
+export default ErrorRow;
