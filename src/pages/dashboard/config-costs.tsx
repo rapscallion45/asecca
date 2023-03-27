@@ -3,13 +3,16 @@ import type { NextPageWithLayout } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import queryString from 'query-string';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { getConfigCostsColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
-import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
+import {
+  fetchBySourceId as fetchCostsConfigBySourceId,
+  resetConfigCosts,
+} from '@/redux/slices/costsConfigSlice';
 import { DataTableColumn } from '@/components/DataTable/types';
 
 /* costs config data table column defintions */
@@ -87,6 +90,11 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
     setColFilterList(getConfigCostsColFilterList(permission.level));
   }, [permission.level]);
 
+  /* handle the resetting of the table data */
+  const handleCancel = () => {
+    dispatch(resetConfigCosts());
+  };
+
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
@@ -107,6 +115,11 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
         isLoading={loading}
         isError={Boolean(error)}
       />
+      <Box>
+        <Button color="secondary" variant="outlined" onClick={handleCancel}>
+          Cancel
+        </Button>
+      </Box>
     </Container>
   );
 };

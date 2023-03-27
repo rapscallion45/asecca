@@ -55,7 +55,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
       /* leave cell as null input indication */
       setEditValue('--');
       dispatch(
-        editConfigCosts({ value: null, colName: editCol.label, rowIdx: 1 })
+        editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 })
       );
       return;
     }
@@ -64,7 +64,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
       dispatch(
-        editConfigCosts({ value: editValue, colName: editCol.label, rowIdx: 1 })
+        editConfigCosts({ value: editValue, colKey: editCol.key, rowIdx: 1 })
       );
     } else {
       /* user entered non-number, ignore input */
@@ -74,10 +74,10 @@ const DataRow: FC<DataTableRowProps> = (props) => {
           : '--'
       );
       dispatch(
-        editConfigCosts({ value: null, colName: editCol.label, rowIdx: 1 })
+        editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 })
       );
     }
-  }, [row, editCol?.label, editCol?.key, editValue, dispatch]);
+  }, [row, editCol?.key, editValue, dispatch]);
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
@@ -89,7 +89,8 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   const handleClearCell = useCallback(() => {
     /* user has decided to enter null value */
     setEditValue('--');
-  }, []);
+    dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 }));
+  }, [editCol.key, dispatch]);
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {
@@ -126,7 +127,14 @@ const DataRow: FC<DataTableRowProps> = (props) => {
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
-          <Cell value={row[column.key]} />
+          <Cell
+            key={`${row.name}-${column.key}`}
+            value={row[column.key]}
+            sx={{
+              fontSize:
+                column.key !== 'application' ? 'inherit' : '12px !important',
+            }}
+          />
         )
       )}
     </StyledTableRow>

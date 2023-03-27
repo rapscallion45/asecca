@@ -18,15 +18,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 interface CellProps {
   value: string;
+  sx: any;
 }
 
 /* Data Table Cell helper component */
 /* ================================ */
 const Cell: FC<CellProps> = (props) => {
-  const { value } = props;
+  const { value, sx } = props;
 
   return (
-    <StyledTableCell align="left">
+    <StyledTableCell align="left" sx={sx}>
       {/* render passed value */}
       {value}
     </StyledTableCell>

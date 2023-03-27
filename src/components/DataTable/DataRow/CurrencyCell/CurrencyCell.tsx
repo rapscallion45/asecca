@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, memo } from 'react';
+import { FC, useState, ChangeEvent, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Input,
@@ -50,6 +50,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
     handleClearCell,
     sx,
   } = props;
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleValueChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -63,9 +64,16 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
       handleEditValueReformat();
   };
 
+  const handleClick = () => {
+    /* listens for clicks on cell */
+    if (!clicked && handleEditCellOnClick) handleEditCellOnClick();
+    setClicked(true);
+  };
+
   const handleClickAway = () => {
     /* listen for click away from cell */
-    if (handleEditValueReformat) handleEditValueReformat();
+    if (clicked && handleEditValueReformat) handleEditValueReformat();
+    setClicked(false);
   };
 
   return canEdit ? (
@@ -93,7 +101,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
               </InputAdornment>
             }
             onChange={handleValueChange}
-            onClick={handleEditCellOnClick}
+            onClick={handleClick}
             onKeyDown={onKeyDown}
             value={value}
             required

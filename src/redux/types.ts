@@ -10,7 +10,7 @@ export type UserPermissionLevelState = {
 };
 
 export type CostsConfigEditCostsPayload = {
-  colName: string;
+  colKey: string;
   rowIdx: number;
   value: string | null;
 };

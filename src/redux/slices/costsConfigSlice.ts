@@ -16,6 +16,7 @@ export const fetchBySourceId = createAsyncThunk(
 interface InitialCostsConfigState {
   loading: boolean;
   data: CostsConfigDataPayload | null;
+  dataShadow: CostsConfigDataPayload | null;
   error: string | null;
 }
 
@@ -23,6 +24,7 @@ interface InitialCostsConfigState {
 const initialState: InitialCostsConfigState = {
   loading: false,
   data: null,
+  dataShadow: null,
   error: null,
 };
 
@@ -35,18 +37,24 @@ const costsConfigSlice = createSlice({
       state,
       action: PayloadAction<CostsConfigEditCostsPayload>
     ) => {
+      /* ensure we have some costs, if so, find and update passed cost */
       if (state.data?.costs?.length)
         // @ts-ignore
-        state.data.costs[action.payload.rowIdx][action.payload.colName] = action
+        state.data.costs[action.payload.rowIdx][action.payload.colKey] = action
           .payload.value
           ? parseFloat(action.payload.value)
           : null;
+    },
+    resetConfigCosts: (state) => {
+      /* reset the data by simply copying the shadow to working copy */
+      state.data = state.dataShadow;
     },
   },
   extraReducers: {
     [fetchBySourceId.pending.type]: (state) => {
       state.loading = true;
       state.data = null;
+      state.dataShadow = null;
       state.error = null;
     },
     [fetchBySourceId.fulfilled.type]: (
@@ -55,16 +63,18 @@ const costsConfigSlice = createSlice({
     ) => {
       state.loading = false;
       state.data = action.payload;
+      state.dataShadow = action.payload;
       state.error = null;
     },
     [fetchBySourceId.rejected.type]: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.data = null;
+      state.dataShadow = null;
       state.error = action.payload;
     },
   },
 });
 
-export const { editConfigCosts } = costsConfigSlice.actions;
+export const { editConfigCosts, resetConfigCosts } = costsConfigSlice.actions;
 
 export default costsConfigSlice.reducer;
