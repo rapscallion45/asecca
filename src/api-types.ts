@@ -11,7 +11,7 @@ export type CostsConfigData = {
   collection_charge?: number | null;
   cost_source: 'Global' | 'Customer' | 'Project' | 'Collection';
   customer_charge?: number | null;
-  effective_charge: number;
+  effective_charge: number | null;
   global_charge?: number | null;
   line_type: 'Typical' | 'Custom';
   name: string;

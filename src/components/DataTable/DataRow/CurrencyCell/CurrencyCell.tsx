@@ -29,12 +29,10 @@ interface CurrencyCellProps {
   canEdit: boolean;
   isEdited: boolean;
   value: string;
-  handleEditValueChange?: (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => void;
+  handleEditValueChange?: (value: string) => void;
   handleEditValueReformat?: () => void;
   handleEditCellOnClick?: () => void;
-  handleResetCell?: () => void;
+  handleClearCell?: () => void;
   sx: any;
 }
 
@@ -49,9 +47,15 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
     handleEditValueChange,
     handleEditValueReformat,
     handleEditCellOnClick,
-    handleResetCell,
+    handleClearCell,
     sx,
   } = props;
+
+  const handleValueChange = (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    if (handleEditValueChange) handleEditValueChange(event.target.value);
+  };
 
   const onKeyDown = (event: any) => {
     /* listen for enter key hits */
@@ -79,7 +83,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="clear user entry"
-                  onClick={handleResetCell}
+                  onClick={handleClearCell}
                   disabled={!isEdited}
                 >
                   {isEdited ? (
@@ -88,7 +92,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
                 </IconButton>
               </InputAdornment>
             }
-            onChange={handleEditValueChange}
+            onChange={handleValueChange}
             onClick={handleEditCellOnClick}
             onKeyDown={onKeyDown}
             value={value}

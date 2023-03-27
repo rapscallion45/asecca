@@ -6,9 +6,9 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import DataRow from './DataRow/DataRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
-import DataTableErrorRow from './ErrorRow/ErrorRow';
-import DataTableLoadingRow from './LoadingRow/LoadingRow';
-import DataTableHeader from './HeaderRow/HeaderRow';
+import ErrorRow from './ErrorRow/ErrorRow';
+import LoadingRow from './LoadingRow/LoadingRow';
+import HeaderRow from './HeaderRow/HeaderRow';
 import { DataTableColumn } from './types';
 
 interface DataTableProps {
@@ -38,7 +38,7 @@ const DataTable: FC<DataTableProps> = (props) => {
       <TableContainer component={Paper}>
         <Table aria-label={`${name} table`}>
           <TableHead>
-            <DataTableHeader columns={columns} />
+            <HeaderRow columns={columns} />
           </TableHead>
           <TableBody>
             <>
@@ -60,13 +60,13 @@ const DataTable: FC<DataTableProps> = (props) => {
                 </>
               )}
               {!isLoading && isError && (
-                <DataTableErrorRow
+                <ErrorRow
                   columns={columns}
                   message="Error loading the requested data"
                 />
               )}
               {isLoading && (
-                <DataTableLoadingRow columns={columns} message="Loading..." />
+                <LoadingRow columns={columns} message="Loading..." />
               )}
             </>
           </TableBody>

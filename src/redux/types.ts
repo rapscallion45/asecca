@@ -9,6 +9,12 @@ export type UserPermissionLevelState = {
   level: 'Global' | 'Customer' | 'Project' | 'Collection';
 };
 
+export type CostsConfigEditCostsPayload = {
+  colName: string;
+  rowIdx: number;
+  value: string | null;
+};
+
 export type CostsConfigState = {
   data?: CostsConfigDataPayload | null;
   error?: string | null;

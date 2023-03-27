@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CostsConfigDataPayload } from '@/api-types';
 import costsConfigService from '@/services/costsConfigService';
-import { FetchCostsConfigBySourceIdArgs } from '../types';
+import {
+  FetchCostsConfigBySourceIdArgs,
+  CostsConfigEditCostsPayload,
+} from '../types';
 
 /* async thunk for GET /api/costs_config API handling */
 export const fetchBySourceId = createAsyncThunk(
@@ -27,7 +30,19 @@ const initialState: InitialCostsConfigState = {
 const costsConfigSlice = createSlice({
   name: 'costsConfig',
   initialState,
-  reducers: {},
+  reducers: {
+    editConfigCosts: (
+      state,
+      action: PayloadAction<CostsConfigEditCostsPayload>
+    ) => {
+      if (state.data?.costs?.length)
+        // @ts-ignore
+        state.data.costs[action.payload.rowIdx][action.payload.colName] = action
+          .payload.value
+          ? parseFloat(action.payload.value)
+          : null;
+    },
+  },
   extraReducers: {
     [fetchBySourceId.pending.type]: (state) => {
       state.loading = true;
@@ -49,5 +64,7 @@ const costsConfigSlice = createSlice({
     },
   },
 });
+
+export const { editConfigCosts } = costsConfigSlice.actions;
 
 export default costsConfigSlice.reducer;

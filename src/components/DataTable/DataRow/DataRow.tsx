@@ -1,9 +1,11 @@
-import { FC, useState, useEffect, ChangeEvent, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { editConfigCosts } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
-import { DataTableColumn } from '../types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
+import { DataTableColumn } from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -25,54 +27,45 @@ interface DataTableRowProps {
 
 /* Data Table Row component */
 /* ======================== */
-const DataTableRow: FC<DataTableRowProps> = (props) => {
+const DataRow: FC<DataTableRowProps> = (props) => {
   const { row, columns, editCol } = props;
+  const dispatch = useDispatch();
 
   /* initialise the edit value state to original column value */
   const [editValue, setEditValue] = useState<string>(
     row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
   );
 
-  /* flag in state for whether the edit column has been changed by user */
-  const [isEdited, setIsEdited] = useState<boolean>(false);
+  /* flag in state for whether the edit column is null */
+  const [isEdited, setIsEdited] = useState<boolean>(row[editCol?.key] !== null);
 
   /* whenever the edit val changes, check if it is different from the original */
   useEffect(() => {
-    if (
-      row[editCol?.key] !== null &&
-      editValue !== parseFloat(row[editCol?.key]).toFixed(2)
-    ) {
-      setIsEdited(true);
-    } else if (
-      row[editCol?.key] === null &&
-      editValue !== '--' &&
-      editValue !== ''
-    ) {
-      setIsEdited(true);
-    } else {
-      setIsEdited(false);
-    }
-  }, [editValue, row, editCol?.key]);
+    setIsEdited(editValue !== '--');
+  }, [editValue]);
 
   /* callback for handling user input to the edit cell */
-  const handleCurrencyValueChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      setEditValue(event.target.value);
-    },
-    []
-  );
+  const handleCurrencyValueChange = useCallback((value: string) => {
+    setEditValue(value);
+  }, []);
 
   const handleEditCellReformat = useCallback(() => {
     /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
+      dispatch(
+        editConfigCosts({ value: null, colName: editCol.label, rowIdx: 1 })
+      );
       return;
     }
 
     /* check if user input is number, if so, format correctly */
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
+      dispatch(
+        editConfigCosts({ value: editValue, colName: editCol.label, rowIdx: 1 })
+      );
     } else {
       /* user entered non-number, ignore input */
       setEditValue(
@@ -80,8 +73,11 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
           ? parseFloat(row[editCol?.key]).toFixed(2)
           : '--'
       );
+      dispatch(
+        editConfigCosts({ value: null, colName: editCol.label, rowIdx: 1 })
+      );
     }
-  }, [row, editCol?.key, editValue]);
+  }, [row, editCol?.label, editCol?.key, editValue, dispatch]);
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
@@ -90,14 +86,10 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
       setEditValue('');
   }, [editValue, isEdited]);
 
-  const handleResetCell = useCallback(() => {
-    /* user has decided to clear their edits, restore cell to orig value */
-    setEditValue(
-      row[editCol?.key] !== null
-        ? parseFloat(row[editCol?.key]).toFixed(2)
-        : '--'
-    );
-  }, [row, editCol?.key]);
+  const handleClearCell = useCallback(() => {
+    /* user has decided to enter null value */
+    setEditValue('--');
+  }, []);
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {
@@ -130,7 +122,7 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
             handleEditValueChange={handleCurrencyValueChange}
             handleEditValueReformat={handleEditCellReformat}
             handleEditCellOnClick={handleEditCellOnClick}
-            handleResetCell={handleResetCell}
+            handleClearCell={handleClearCell}
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
@@ -141,4 +133,4 @@ const DataTableRow: FC<DataTableRowProps> = (props) => {
   );
 };
 
-export default DataTableRow;
+export default DataRow;
