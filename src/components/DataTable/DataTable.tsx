@@ -45,10 +45,11 @@ const DataTable: FC<DataTableProps> = (props) => {
               {!isLoading && !isError && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map((row: any) => (
+                  {rows?.map((row: any, index: number) => (
                     <Fragment key={row.name}>
                       <DataRow
                         row={row}
+                        rowIdx={index}
                         columns={columns}
                         /* we need the edit col to get 'Prevailing' value */
                         editCol={columns.find(

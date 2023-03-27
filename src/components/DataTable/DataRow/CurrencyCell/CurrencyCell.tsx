@@ -27,7 +27,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 interface CurrencyCellProps {
   inputId: string;
   canEdit: boolean;
-  isEdited: boolean;
+  isNull: boolean;
   value: string;
   handleEditValueChange?: (value: string) => void;
   handleEditValueReformat?: () => void;
@@ -42,7 +42,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
   const {
     inputId,
     canEdit,
-    isEdited,
+    isNull,
     value,
     handleEditValueChange,
     handleEditValueReformat,
@@ -92,9 +92,9 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
                 <IconButton
                   aria-label="clear user entry"
                   onClick={handleClearCell}
-                  disabled={!isEdited}
+                  disabled={!isNull}
                 >
-                  {isEdited ? (
+                  {isNull ? (
                     <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
                   ) : null}
                 </IconButton>

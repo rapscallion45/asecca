@@ -20,15 +20,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface DataTableRowProps {
-  columns: Array<DataTableColumn>;
   row: any;
+  rowIdx: number;
+  columns: Array<DataTableColumn>;
   editCol: any;
 }
 
 /* Data Table Row component */
 /* ======================== */
 const DataRow: FC<DataTableRowProps> = (props) => {
-  const { row, columns, editCol } = props;
+  const { row, rowIdx, columns, editCol } = props;
   const dispatch = useDispatch();
 
   /* initialise the edit value state to original column value */
@@ -37,11 +38,11 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   );
 
   /* flag in state for whether the edit column is null */
-  const [isEdited, setIsEdited] = useState<boolean>(row[editCol?.key] !== null);
+  const [isNull, setIsNull] = useState<boolean>(row[editCol?.key] !== null);
 
-  /* whenever the edit val changes, check if it is different from the original */
+  /* whenever the edit val changes, check if it is null */
   useEffect(() => {
-    setIsEdited(editValue !== '--');
+    setIsNull(editValue !== '--');
   }, [editValue]);
 
   /* whenever the row data changes, reset the edit value back to the original */
@@ -63,9 +64,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
-      dispatch(
-        editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 })
-      );
+      dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
       return;
     }
 
@@ -73,7 +72,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
       dispatch(
-        editConfigCosts({ value: editValue, colKey: editCol.key, rowIdx: 1 })
+        editConfigCosts({ value: editValue, colKey: editCol.key, rowIdx })
       );
     } else {
       /* user entered non-number, ignore input */
@@ -82,24 +81,22 @@ const DataRow: FC<DataTableRowProps> = (props) => {
           ? parseFloat(row[editCol?.key]).toFixed(2)
           : '--'
       );
-      dispatch(
-        editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 })
-      );
+      dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
     }
-  }, [row, editCol?.key, editValue, dispatch]);
+  }, [row, editCol?.key, editValue, rowIdx, dispatch]);
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
-    if (editValue === '--' && !isEdited)
+    if (editValue === '--' && !isNull)
       /* clear cell if null, ready for new input */
       setEditValue('');
-  }, [editValue, isEdited]);
+  }, [editValue, isNull]);
 
   const handleClearCell = useCallback(() => {
     /* user has decided to enter null value */
     setEditValue('--');
-    dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx: 1 }));
-  }, [editCol?.key, dispatch]);
+    dispatch(editConfigCosts({ value: null, colKey: editCol.key, rowIdx }));
+  }, [editCol?.key, rowIdx, dispatch]);
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {
@@ -108,14 +105,13 @@ const DataRow: FC<DataTableRowProps> = (props) => {
        ** editable col (permission level), unless editable col is null or NaN.
        ** if null or NaN, Prevailing is equal to the "effective_charge"
        */
-      if (column.label === 'Prevailing' && isEdited) return editValue;
-      if (column.label === 'Prevailing' && !isEdited)
-        return row.effective_charge;
+      if (column.label === 'Prevailing' && isNull) return editValue;
+      if (column.label === 'Prevailing' && !isNull) return row.effective_charge;
 
       /* return the edited value if edit cell, else original value */
       return column.label === editCol?.label ? editValue : row[column.key];
     },
-    [row, isEdited, editCol?.label, editValue]
+    [row, isNull, editCol?.label, editValue]
   );
 
   return (
@@ -127,7 +123,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
             key={`${row.name}-${column.key}`}
             inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
-            isEdited={isEdited}
+            isNull={isNull}
             value={getColumnCellValue(column)}
             handleEditValueChange={handleCurrencyValueChange}
             handleEditValueReformat={handleEditCellReformat}
