@@ -15,6 +15,7 @@ import { DataTableColumn } from '@/components/DataTable/types';
 /* costs config data table column defintions */
 const columns: Array<DataTableColumn> = [
   { label: 'Product', key: 'name' },
+  { label: 'Application', key: 'application' },
   { label: 'Global', key: 'global_charge' },
   { label: 'Customer', key: 'customer_charge' },
   { label: 'Project', key: 'project_charge' },

@@ -112,7 +112,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     <StyledTableRow>
       {/* map passed column data for current row */}
       {columns.map((column: DataTableColumn) =>
-        column.key !== 'name' ? (
+        column.key !== 'name' && column.key !== 'application' ? (
           <CurrencyCell
             key={`${row.name}-${column.key}`}
             inputId={`${row.name}-${column.key}-input`}
