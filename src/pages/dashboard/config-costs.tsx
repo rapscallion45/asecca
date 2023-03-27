@@ -94,7 +94,13 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
 
   /* handle the saving of the table data */
   const handleSave = () => {
-    dispatch(saveBySourceId({ source: permission.level, dataId: query, data }));
+    dispatch(
+      saveBySourceId({
+        source: permission.level,
+        dataId: query,
+        data,
+      })
+    );
   };
 
   /* handle the resetting of the table data */

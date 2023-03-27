@@ -25,14 +25,15 @@ async function setCostsConfig(
   dataId: string | (string | null)[],
   data: any
 ) {
+  /* TODO: pack data into correct format for API */
+  console.log(source);
+  console.log(dataId);
+
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
-
-  console.log(data);
-  console.log(JSON.stringify(data));
 
   return fetch(`/api/costs_config`, requestOptions).then((res) => res.json());
 }
