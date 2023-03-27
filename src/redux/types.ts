@@ -5,6 +5,12 @@ export type FetchCostsConfigBySourceIdArgs = {
   dataId: string | (string | null)[];
 };
 
+export type SaveCostsConfigBySourceIdArgs = {
+  source: string;
+  dataId: string | (string | null)[];
+  data: any;
+};
+
 export type UserPermissionLevelState = {
   level: 'Global' | 'Customer' | 'Project' | 'Collection';
 };

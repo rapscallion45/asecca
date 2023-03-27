@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import queryString from 'query-string';
 import { Box, Button, Container, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
@@ -12,6 +13,7 @@ import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
   resetCostsConfig,
+  saveBySourceId,
 } from '@/redux/slices/costsConfigSlice';
 import { DataTableColumn } from '@/components/DataTable/types';
 
@@ -33,7 +35,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get costs config data held in redux state */
-  const { data, loading, error } = useSelector(
+  const { data, loading, error, saving } = useSelector(
     (state: AppState) => state.costsConfig
   );
 
@@ -91,7 +93,9 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   }, [permission.level]);
 
   /* handle the saving of the table data */
-  const handleSave = () => {};
+  const handleSave = () => {
+    dispatch(saveBySourceId({ source: permission.level, dataId: query, data }));
+  };
 
   /* handle the resetting of the table data */
   const handleCancel = () => {
@@ -127,13 +131,20 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
           justifyContent: 'center',
         }}
       >
-        <Button color="secondary" variant="contained" onClick={handleSave}>
+        <LoadingButton
+          color="secondary"
+          variant="contained"
+          onClick={handleSave}
+          disabled={saving}
+          loading={saving}
+        >
           Save
-        </Button>
+        </LoadingButton>
         <Button
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
+          disabled={saving}
           sx={{ backgroundColor: 'common.white', ml: 2 }}
         >
           Cancel

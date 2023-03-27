@@ -3,6 +3,7 @@ import { CostsConfigDataPayload } from '@/api-types';
 import costsConfigService from '@/services/costsConfigService';
 import {
   FetchCostsConfigBySourceIdArgs,
+  SaveCostsConfigBySourceIdArgs,
   CostsConfigEditCostsPayload,
 } from '../types';
 
@@ -13,11 +14,19 @@ export const fetchBySourceId = createAsyncThunk(
     costsConfigService.getCostsConfig(args.source, args.dataId)
 );
 
+/* async thunk for POST /api/costs_config API handling */
+export const saveBySourceId = createAsyncThunk(
+  'costsConfig/saveBySourecId',
+  async (args: SaveCostsConfigBySourceIdArgs) =>
+    costsConfigService.setCostsConfig(args.source, args.dataId, args.data)
+);
+
 interface InitialCostsConfigState {
   loading: boolean;
   data: CostsConfigDataPayload | null;
   dataShadow: CostsConfigDataPayload | null;
   error: string | null;
+  saving: boolean;
 }
 
 /* initialise costs config state to not loaded */
@@ -26,6 +35,7 @@ const initialState: InitialCostsConfigState = {
   data: null,
   dataShadow: null,
   error: null,
+  saving: false,
 };
 
 /* create the redux slice for interacting with the costs config state */
@@ -51,6 +61,7 @@ const costsConfigSlice = createSlice({
     },
   },
   extraReducers: {
+    /* Fetch Costs Config extra reducers */
     [fetchBySourceId.pending.type]: (state) => {
       state.loading = true;
       state.data = null;
@@ -71,6 +82,16 @@ const costsConfigSlice = createSlice({
       state.data = null;
       state.dataShadow = null;
       state.error = action.payload;
+    },
+    /* Save Costs Config extra reducers */
+    [saveBySourceId.pending.type]: (state) => {
+      state.saving = true;
+    },
+    [saveBySourceId.fulfilled.type]: (state) => {
+      state.saving = false;
+    },
+    [saveBySourceId.rejected.type]: (state) => {
+      state.saving = false;
     },
   },
 });

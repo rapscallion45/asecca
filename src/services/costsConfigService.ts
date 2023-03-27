@@ -20,8 +20,26 @@ async function getCostsConfig(
   );
 }
 
+async function setCostsConfig(
+  source: string,
+  dataId: string | (string | null)[],
+  data: any
+) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+
+  console.log(data);
+  console.log(JSON.stringify(data));
+
+  return fetch(`/api/costs_config`, requestOptions).then((res) => res.json());
+}
+
 const costsConfigService = {
   getCostsConfig,
+  setCostsConfig,
 };
 
 export default costsConfigService;
