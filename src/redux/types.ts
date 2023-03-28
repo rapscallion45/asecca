@@ -3,6 +3,10 @@ import { AlertColor } from '@mui/material';
 import { CostsConfigDataPayload } from '@/api-types';
 
 /*
+ ** Type and interface definitions for Redux actions
+ */
+
+/*
  ** Fetch Costs Config args for async thunk requests
  */
 export interface IFetchCostsConfigBySourceIdArgs {

@@ -5,7 +5,9 @@ import userPermissionReducer from './slices/userPermissionSlice';
 import costsConfigReducer from './slices/costsConfigSlice';
 import notificationsSlice from './slices/notificationsSlice';
 
-/* configure the redux store to manage the user permission level of the app */
+/*
+ ** Configuration of the redux store to manage the global application state
+ */
 const store = configureStore({
   reducer: {
     userPermission: userPermissionReducer,

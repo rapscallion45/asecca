@@ -1,5 +1,9 @@
 import { getCostsConfigSourceQueryString } from '../utils';
 
+/*
+ ** API services for client application
+ */
+
 async function getCostsConfig(
   source: string,
   dataId: string | (string | null)[]

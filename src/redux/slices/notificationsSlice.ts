@@ -6,6 +6,14 @@ import {
   IRemoveNotificationPayload,
 } from '../types';
 
+/*
+ ** Global application state slice definition for Notifications
+ **
+ ** Notifications are the alert popups seen by the user on specific action
+ ** results, such as errors with API requests, login failures, etc. This state
+ ** is manipulated from multiple places in the application.
+ */
+
 interface InitialNotificationsState {
   data: Array<INotificationState>;
 }

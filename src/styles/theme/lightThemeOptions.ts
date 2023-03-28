@@ -1,7 +1,9 @@
 import { ThemeOptions, alpha } from '@mui/material/styles';
 import typography from './typography';
 
-/* ASECCA SPA light theme style definitions */
+/*
+ ** ASECCA SPA light theme style definitions
+ */
 
 const GREY = {
   0: '#FFFFFF',

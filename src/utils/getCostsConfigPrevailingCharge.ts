@@ -5,7 +5,7 @@ import {
 } from '@/components/DataTable/types';
 
 /*
- ** helper function for getting the Prevailing charge of a costs config scope
+ ** helper function for getting the Prevailing charge of a Costs Config scope
  */
 const getCostsConfigPrevailingCharge = (
   row: CostsConfigRowTypical | CostsConfigRowCustom,

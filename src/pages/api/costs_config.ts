@@ -48,8 +48,9 @@ export default async function handler(
         });
       }
 
-      /* try proxying request to ASECCA API */
+      /* call GET api */
       try {
+        /* try proxying request to ASECCA API */
         const response = await api.getCostsConfig(query);
         const data = await response.json();
 

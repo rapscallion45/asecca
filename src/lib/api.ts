@@ -45,9 +45,6 @@ async function setCostsConfig(body: CostsConfigSaveDataPayload) {
     body: JSON.stringify(body),
   };
 
-  /* construct query param string from passed query object */
-  // const queryParamString = queryString.stringify(query);
-
   /* send the costs config */
   return fetch(`${STAGING_DB_REST_API_URL}/api/costs_config`, requestOptions);
 }

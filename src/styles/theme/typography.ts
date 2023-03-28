@@ -1,4 +1,6 @@
-/* ASECCA SPA typography definitions */
+/*
+ ** ASECCA SPA typography definitions
+ */
 
 function pxToRem(value: number) {
   return `${value / 16}rem`;

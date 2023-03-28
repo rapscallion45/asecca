@@ -8,6 +8,13 @@ import {
 } from '../types';
 import { addNotification } from './notificationsSlice';
 
+/*
+ ** Global application state slice definition for Costs Config Data
+ **
+ ** Costs Config data is retrieve from the /api/costs_config endpoint, and
+ ** can be manipulated via the dashboard/costs-config page of the application.
+ */
+
 /* async thunk for GET /api/costs_config API handling */
 export const fetchBySourceId = createAsyncThunk(
   'costsConfig/fetchBySourecId',

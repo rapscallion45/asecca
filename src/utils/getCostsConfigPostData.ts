@@ -4,7 +4,7 @@ import {
 } from '@/api-types';
 
 /*
- ** returns formatted and packed data for saving to costs config to API
+ ** returns formatted and packed data for saving costs config to API
  */
 const getCostsConfigPostData = (
   source: string,
