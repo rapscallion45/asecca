@@ -36,16 +36,16 @@ const getCostsConfigPrevailingCharge = (
     switch (editCol?.label) {
       case 'Collection':
         /* if Collection, run through all other columns */
-        if (row.project_charge !== null)
+        if (row.project_charge !== null && row.project_charge !== undefined)
           return parseFloat(row.project_charge).toFixed(2);
-        if (row.customer_charge !== null)
+        if (row.customer_charge !== null && row.customer_charge !== undefined)
           return parseFloat(row.customer_charge).toFixed(2);
         if (row.global_charge !== null)
           return parseFloat(row.global_charge).toFixed(2);
         return null;
       case 'Project':
         /* if Project, only run through columns below Project */
-        if (row.customer_charge !== null)
+        if (row.customer_charge !== null && row.customer_charge !== undefined)
           return parseFloat(row.customer_charge).toFixed(2);
         if (row.global_charge !== null)
           return parseFloat(row.global_charge).toFixed(2);
