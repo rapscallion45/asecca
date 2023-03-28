@@ -102,6 +102,7 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
             }
             onChange={handleValueChange}
             onClick={handleClick}
+            onFocus={handleClick}
             onKeyDown={onKeyDown}
             value={value}
             required
