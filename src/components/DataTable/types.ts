@@ -6,6 +6,7 @@ import { CostsConfigApplication, CostsConfigCostSource } from '@/api-types';
 export interface IDataTableColumn {
   label: string;
   key: string;
+  type: 'string' | 'currency';
 }
 
 /*

@@ -19,13 +19,13 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 
 /* costs config data table column defintions */
 const columns: Array<IDataTableColumn> = [
-  { label: 'Product', key: 'name' },
-  { label: 'Application', key: 'application' },
-  { label: 'Global', key: 'global_charge' },
-  { label: 'Customer', key: 'customer_charge' },
-  { label: 'Project', key: 'project_charge' },
-  { label: 'Collection', key: 'collection_charge' },
-  { label: 'Prevailing', key: 'effective_charge' },
+  { label: 'Product', key: 'name', type: 'string' },
+  { label: 'Application', key: 'application', type: 'string' },
+  { label: 'Global', key: 'global_charge', type: 'currency' },
+  { label: 'Customer', key: 'customer_charge', type: 'currency' },
+  { label: 'Project', key: 'project_charge', type: 'currency' },
+  { label: 'Collection', key: 'collection_charge', type: 'currency' },
+  { label: 'Prevailing', key: 'effective_charge', type: 'currency' },
 ];
 
 /* Costs Config Test Page */
