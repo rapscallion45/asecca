@@ -117,7 +117,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         </Typography>
       </Box>
       <DataTable
-        name="config costs"
+        name="costs config"
         /* table editable cell(s) defined by user permission level */
         editColName={permission.level}
         /* filter table columns by current permission level */
