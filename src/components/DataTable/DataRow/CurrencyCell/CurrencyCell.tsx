@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, memo } from 'react';
+import { FC, useState, ChangeEvent, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Input,
@@ -27,14 +27,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 interface CurrencyCellProps {
   inputId: string;
   canEdit: boolean;
-  isEdited: boolean;
+  isNull: boolean;
   value: string;
-  handleEditValueChange?: (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => void;
+  handleEditValueChange?: (value: string) => void;
   handleEditValueReformat?: () => void;
   handleEditCellOnClick?: () => void;
-  handleResetCell?: () => void;
+  handleClearCell?: () => void;
   sx: any;
 }
 
@@ -44,14 +42,21 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
   const {
     inputId,
     canEdit,
-    isEdited,
+    isNull,
     value,
     handleEditValueChange,
     handleEditValueReformat,
     handleEditCellOnClick,
-    handleResetCell,
+    handleClearCell,
     sx,
   } = props;
+  const [clicked, setClicked] = useState<boolean>(false);
+
+  const handleValueChange = (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    if (handleEditValueChange) handleEditValueChange(event.target.value);
+  };
 
   const onKeyDown = (event: any) => {
     /* listen for enter key hits */
@@ -59,9 +64,16 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
       handleEditValueReformat();
   };
 
+  const handleClick = () => {
+    /* listens for clicks on cell */
+    if (!clicked && handleEditCellOnClick) handleEditCellOnClick();
+    setClicked(true);
+  };
+
   const handleClickAway = () => {
     /* listen for click away from cell */
-    if (handleEditValueReformat) handleEditValueReformat();
+    if (clicked && handleEditValueReformat) handleEditValueReformat();
+    setClicked(false);
   };
 
   return canEdit ? (
@@ -79,17 +91,18 @@ const CurrencyCell: FC<CurrencyCellProps> = (props) => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="clear user entry"
-                  onClick={handleResetCell}
-                  disabled={!isEdited}
+                  onClick={handleClearCell}
+                  disabled={!isNull}
                 >
-                  {isEdited ? (
+                  {isNull ? (
                     <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
                   ) : null}
                 </IconButton>
               </InputAdornment>
             }
-            onChange={handleEditValueChange}
-            onClick={handleEditCellOnClick}
+            onChange={handleValueChange}
+            onClick={handleClick}
+            onFocus={handleClick}
             onKeyDown={onKeyDown}
             value={value}
             required

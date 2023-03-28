@@ -6,16 +6,20 @@ import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 import DataRow from './DataRow/DataRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
-import DataTableErrorRow from './ErrorRow/ErrorRow';
-import DataTableLoadingRow from './LoadingRow/LoadingRow';
-import DataTableHeader from './HeaderRow/HeaderRow';
-import { DataTableColumn } from './types';
+import ErrorRow from './ErrorRow/ErrorRow';
+import LoadingRow from './LoadingRow/LoadingRow';
+import HeaderRow from './HeaderRow/HeaderRow';
+import {
+  CostsConfigRowCustom,
+  CostsConfigRowTypical,
+  DataTableColumn,
+} from './types';
 
 interface DataTableProps {
   name: string;
   editColName: string;
   columns: Array<DataTableColumn>;
-  rows: any;
+  rows: Array<CostsConfigRowTypical | CostsConfigRowCustom>;
   isLoading?: boolean;
   isError?: boolean;
 }
@@ -38,35 +42,41 @@ const DataTable: FC<DataTableProps> = (props) => {
       <TableContainer component={Paper}>
         <Table aria-label={`${name} table`}>
           <TableHead>
-            <DataTableHeader columns={columns} />
+            <HeaderRow columns={columns} />
           </TableHead>
           <TableBody>
             <>
               {!isLoading && !isError && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map((row: any) => (
-                    <Fragment key={row.name}>
-                      <DataRow
-                        row={row}
-                        columns={columns}
-                        /* we need the edit col to get 'Prevailing' value */
-                        editCol={columns.find(
-                          (col: DataTableColumn) => editColName === col.label
-                        )}
-                      />
-                    </Fragment>
-                  ))}
+                  {rows?.map(
+                    (
+                      row: CostsConfigRowTypical | CostsConfigRowCustom,
+                      index: number
+                    ) => (
+                      <Fragment key={row.name}>
+                        <DataRow
+                          row={row}
+                          rowIdx={index}
+                          columns={columns}
+                          /* we need the edit col to get 'Prevailing' value */
+                          editCol={columns.find(
+                            (col: DataTableColumn) => editColName === col.label
+                          )}
+                        />
+                      </Fragment>
+                    )
+                  )}
                 </>
               )}
               {!isLoading && isError && (
-                <DataTableErrorRow
+                <ErrorRow
                   columns={columns}
                   message="Error loading the requested data"
                 />
               )}
               {isLoading && (
-                <DataTableLoadingRow columns={columns} message="Loading..." />
+                <LoadingRow columns={columns} message="Loading..." />
               )}
             </>
           </TableBody>

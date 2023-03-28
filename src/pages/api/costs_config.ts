@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { CostsConfigDataPayload, ProxyErrorPayload } from '@/api-types';
-import getCostsConfig from '../../lib/api';
+import api from '../../lib/api';
 
 /* proxy for handling requests to ASECCA 'costs_config' API */
 export default async function handler(
@@ -15,10 +15,30 @@ export default async function handler(
     case 'POST':
       /* call POST api */
       try {
-        /* placeholder for now */
-        return res.status(401);
+        /* try proxying request to ASECCA API */
+        const response = await api.setCostsConfig({
+          costs: [
+            {
+              name: 'Device Processing',
+              charge: '444.44',
+              line_type: 'Typical',
+              application: 'Per Device',
+            },
+          ],
+          selection: {
+            collection: 66135000015737072,
+          },
+        });
+
+        /* send back server response */
+        if (response.status === 200) {
+          return res.status(200).json({ message: 'Ok' });
+        }
+        return res.status(response.status).json({
+          message: response.statusText,
+        });
       } catch (error) {
-        return res.status(501);
+        return res.status(501).json({ message: error as string });
       }
     case 'GET':
       /* check if we have correct query param, if not return error */
@@ -30,7 +50,7 @@ export default async function handler(
 
       /* try proxying request to ASECCA API */
       try {
-        const response = await getCostsConfig(query);
+        const response = await api.getCostsConfig(query);
         const data = await response.json();
 
         /* send back server response */

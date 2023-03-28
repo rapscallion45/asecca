@@ -1,9 +1,16 @@
-import { FC, useState, useEffect, ChangeEvent, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
-import { DataTableColumn } from '../types';
+import { getCostsConfigPrevailingCharge } from '@/utils';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
+import {
+  DataTableColumn,
+  CostsConfigRowCustom,
+  CostsConfigRowTypical,
+} from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -18,127 +25,130 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface DataTableRowProps {
+  row: CostsConfigRowTypical | CostsConfigRowCustom;
+  rowIdx: number;
   columns: Array<DataTableColumn>;
-  row: any;
-  editCol: any;
+  editCol: DataTableColumn | undefined;
 }
 
 /* Data Table Row component */
 /* ======================== */
-const DataTableRow: FC<DataTableRowProps> = (props) => {
-  const { row, columns, editCol } = props;
+const DataRow: FC<DataTableRowProps> = (props) => {
+  const { row, rowIdx, columns, editCol } = props;
+  const dispatch = useDispatch();
 
   /* initialise the edit value state to original column value */
   const [editValue, setEditValue] = useState<string>(
-    row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
+    row[editCol ? editCol?.key : 0] !== null
+      ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+      : '--'
   );
 
-  /* flag in state for whether the edit column has been changed by user */
-  const [isEdited, setIsEdited] = useState<boolean>(false);
+  /* flag in state for whether the edit column is null */
+  const [isNull, setIsNull] = useState<boolean>(
+    row[editCol ? editCol?.key : 0] !== null
+  );
 
-  /* whenever the edit val changes, check if it is different from the original */
+  /* whenever the edit val changes, check if it is null */
   useEffect(() => {
-    if (
-      row[editCol?.key] !== null &&
-      editValue !== parseFloat(row[editCol?.key]).toFixed(2)
-    ) {
-      setIsEdited(true);
-    } else if (
-      row[editCol?.key] === null &&
-      editValue !== '--' &&
-      editValue !== ''
-    ) {
-      setIsEdited(true);
-    } else {
-      setIsEdited(false);
-    }
-  }, [editValue, row, editCol?.key]);
+    setIsNull(editValue !== '--');
+  }, [editValue]);
+
+  /* whenever the row data changes, reset the edit value back to the original */
+  useEffect(() => {
+    setEditValue(
+      row[editCol ? editCol?.key : 0] !== null
+        ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+        : '--'
+    );
+  }, [row, editCol]);
 
   /* callback for handling user input to the edit cell */
-  const handleCurrencyValueChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      setEditValue(event.target.value);
-    },
-    []
-  );
+  const handleCurrencyValueChange = useCallback((value: string) => {
+    setEditValue(value);
+  }, []);
 
   const handleEditCellReformat = useCallback(() => {
     /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
+      dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
       return;
     }
 
     /* check if user input is number, if so, format correctly */
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
+      dispatch(
+        editCostsConfig({ value: editValue, colKey: editCol?.key, rowIdx })
+      );
     } else {
       /* user entered non-number, ignore input */
       setEditValue(
-        row[editCol?.key] !== null
-          ? parseFloat(row[editCol?.key]).toFixed(2)
+        row[editCol ? editCol?.key : 0] !== null
+          ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
           : '--'
       );
+      dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
     }
-  }, [row, editCol?.key, editValue]);
+  }, [row, editCol, editValue, rowIdx, dispatch]);
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
-    if (editValue === '--' && !isEdited)
+    if (editValue === '--' && !isNull)
       /* clear cell if null, ready for new input */
       setEditValue('');
-  }, [editValue, isEdited]);
+  }, [editValue, isNull]);
 
-  const handleResetCell = useCallback(() => {
-    /* user has decided to clear their edits, restore cell to orig value */
-    setEditValue(
-      row[editCol?.key] !== null
-        ? parseFloat(row[editCol?.key]).toFixed(2)
-        : '--'
-    );
-  }, [row, editCol?.key]);
+  const handleClearCell = useCallback(() => {
+    /* user has decided to enter null value */
+    setEditValue('--');
+    dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
+  }, [editCol?.key, rowIdx, dispatch]);
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {
-      /*
-       ** the 'Prevailing' column is always equal to the
-       ** editable col (permission level), unless editable col is null or NaN.
-       ** if null or NaN, Prevailing is equal to the "effective_charge"
-       */
-      if (column.label === 'Prevailing' && isEdited) return editValue;
-      if (column.label === 'Prevailing' && !isEdited)
-        return row.effective_charge;
+      /* apply Prevailing column logic */
+      if (column.label === 'Prevailing')
+        return getCostsConfigPrevailingCharge(row, editCol);
 
       /* return the edited value if edit cell, else original value */
       return column.label === editCol?.label ? editValue : row[column.key];
     },
-    [row, isEdited, editCol?.label, editValue]
+    [row, editCol, editValue]
   );
 
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
       {columns.map((column: DataTableColumn) =>
-        column.key !== 'name' ? (
+        column.key !== 'name' && column.key !== 'application' ? (
           <CurrencyCell
             key={`${row.name}-${column.key}`}
             inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
-            isEdited={isEdited}
+            isNull={isNull}
             value={getColumnCellValue(column)}
             handleEditValueChange={handleCurrencyValueChange}
             handleEditValueReformat={handleEditCellReformat}
             handleEditCellOnClick={handleEditCellOnClick}
-            handleResetCell={handleResetCell}
+            handleClearCell={handleClearCell}
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
-          <Cell value={row[column.key]} />
+          <Cell
+            key={`${row.name}-${column.key}`}
+            value={row[column.key]}
+            sx={{
+              fontSize:
+                column.key !== 'application' ? 'inherit' : '12px !important',
+            }}
+          />
         )
       )}
     </StyledTableRow>
   );
 };
 
-export default DataTableRow;
+export default DataRow;

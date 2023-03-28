@@ -2,7 +2,7 @@
  ** return list of columns to be filtered out of Config Costs
  ** data table according to passed permission level
  */
-const getConfigCostsColFilterList = (permissionLevel: string) => {
+const getCostsConfigColFilterList = (permissionLevel: string) => {
   switch (permissionLevel) {
     case 'Collection':
       return [];
@@ -15,4 +15,4 @@ const getConfigCostsColFilterList = (permissionLevel: string) => {
       return ['Customer', 'Project', 'Collection'];
   }
 };
-export default getConfigCostsColFilterList;
+export default getCostsConfigColFilterList;

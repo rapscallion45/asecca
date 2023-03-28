@@ -1,19 +1,32 @@
 /*
+ ** Primitive API types
+ */
+export type CostsConfigApplication =
+  | 'Per Device'
+  | 'Per Batch'
+  | 'Per Collection'
+  | 'Per Project'
+  | 'Per Destruction';
+
+export type CostsConfigLineType = 'Typical' | 'Custom';
+
+export type CostsConfigCostSource =
+  | 'Global'
+  | 'Customer'
+  | 'Project'
+  | 'Collection';
+
+/*
  ** Costs Config return data type definition
  */
 export type CostsConfigData = {
-  application:
-    | 'Per Device'
-    | 'Per Batch'
-    | 'Per Collection'
-    | 'Per Project'
-    | 'Per Destruction';
+  application: CostsConfigApplication;
   collection_charge?: number | null;
-  cost_source: 'Global' | 'Customer' | 'Project' | 'Collection';
+  cost_source: CostsConfigCostSource;
   customer_charge?: number | null;
-  effective_charge: number;
+  effective_charge: number | null;
   global_charge?: number | null;
-  line_type: 'Typical' | 'Custom';
+  line_type: CostsConfigLineType;
   name: string;
   project_charge?: number | null;
 };
@@ -23,6 +36,34 @@ export type CostsConfigData = {
  */
 export type CostsConfigDataPayload = {
   costs: Array<CostsConfigData>;
+};
+
+/*
+ ** Costs Config save data costs type
+ */
+export type CostsConfigSaveDataCosts = {
+  application: CostsConfigApplication;
+  charge: string;
+  line_type: CostsConfigLineType;
+  name: string;
+};
+
+/*
+ ** Costs Config save data selection type
+ */
+export type CostsConfigSaveDataSelection = {
+  collection?: number;
+  project?: number;
+  customer?: number;
+  global?: number;
+};
+
+/*
+ ** Costs Config save data payload type
+ */
+export type CostsConfigSaveDataPayload = {
+  costs: Array<CostsConfigSaveDataCosts>;
+  selection: CostsConfigSaveDataSelection;
 };
 
 /*
