@@ -51,7 +51,7 @@ const getCostsConfigPrevailingCharge = (
           return parseFloat(row.global_charge).toFixed(2);
         return null;
       case 'Customer':
-        /* if Customer, only run through columns below Project */
+        /* if Customer, only run through columns below Customer */
         if (row.global_charge !== null)
           return parseFloat(row.global_charge).toFixed(2);
         return null;
