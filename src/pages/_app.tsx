@@ -14,6 +14,7 @@ import { createEmotionCache } from '@/utils';
 import store from '@/redux/store';
 import lightThemeOptions from '@/styles/theme/lightThemeOptions';
 import DefaultLayout from '@/layouts/default/DefaultLayout';
+import AlertProvider from '@/components/AlertProvider/AlertProvider';
 
 /* initialise client MUI styles cache */
 const clientSideEmotionCache = createEmotionCache();
@@ -39,9 +40,11 @@ const AseccaApp: React.FunctionComponent<AseccaAppProps> = (props) => {
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={lightTheme}>
           <CssBaseline />
-          <PageLayout>
-            <Component {...pageProps} />
-          </PageLayout>
+          <AlertProvider>
+            <PageLayout>
+              <Component {...pageProps} />
+            </PageLayout>
+          </AlertProvider>
         </ThemeProvider>
       </CacheProvider>
     </Provider>

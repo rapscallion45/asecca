@@ -54,6 +54,7 @@ export interface IUserPermissionLevelState {
 export interface INotificationOptions {
   key: SnackbarKey;
   variant: AlertColor;
+  onClose?: any;
 }
 
 /*

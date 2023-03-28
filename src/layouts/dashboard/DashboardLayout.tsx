@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import NavBar from '@/components/NavBar/NavBar';
+import useNotifier from '@/hooks/useNotifier';
 
 /* background image styling */
 const BackgroundStyle = styled('div')(({ theme }) => ({
@@ -35,6 +36,9 @@ interface DashboardLayoutProps {
 /* =========================== */
 const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   const { children } = props;
+
+  /* initialise alert notifications */
+  useNotifier();
 
   return (
     <main>
