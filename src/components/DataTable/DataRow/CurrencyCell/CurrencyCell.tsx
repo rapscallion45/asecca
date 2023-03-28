@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent, memo } from 'react';
+import { FC, useState, ChangeEvent, memo, useCallback, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import {
   Input,
@@ -27,54 +27,90 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 interface ICurrencyCellProps {
   inputId: string;
   canEdit: boolean;
-  isNull: boolean;
   value: string;
-  handleEditValueChange?: (value: string) => void;
-  handleEditValueReformat?: () => void;
-  handleEditCellOnClick?: () => void;
-  handleClearCell?: () => void;
+  submitCellValue?: (value: string | null) => void;
   sx: any;
 }
 
-/* Data Table Currency Cell helper component */
-/* ========================================= */
+/* Data Table Currency Cell */
+/* ======================== */
 const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
-  const {
-    inputId,
-    canEdit,
-    isNull,
-    value,
-    handleEditValueChange,
-    handleEditValueReformat,
-    handleEditCellOnClick,
-    handleClearCell,
-    sx,
-  } = props;
+  const { inputId, canEdit, value, submitCellValue, sx } = props;
+
+  /* whether or not cell is currently clicked */
   const [clicked, setClicked] = useState<boolean>(false);
 
-  const handleValueChange = (
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    if (handleEditValueChange) handleEditValueChange(event.target.value);
-  };
+  /* edited cell value state initialised to passed cell value */
+  const [editValue, setEditValue] = useState<string>(
+    value !== null ? parseFloat(value).toFixed(2) : '--'
+  );
 
-  const onKeyDown = (event: any) => {
-    /* listen for enter key hits */
-    if (event.keyCode === 13 && handleEditValueReformat)
-      handleEditValueReformat();
-  };
+  /* ensure edit value is reset when there is update to passed value */
+  useEffect(() => {
+    setEditValue(value !== null ? parseFloat(value).toFixed(2) : '--');
+  }, [value]);
 
-  const handleClick = () => {
-    /* listens for clicks on cell */
-    if (!clicked && handleEditCellOnClick) handleEditCellOnClick();
+  /* callback for handling user input */
+  const handleValueChange = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      setEditValue(event.target.value);
+    },
+    []
+  );
+
+  /*
+   ** reformat currency value to floating point, two decimal places,
+   ** or display null indicator
+   */
+  const handleValueReformat = useCallback(() => {
+    /* check if cell is null or indicating null */
+    if (editValue === '' || editValue === '--') {
+      /* leave cell as null input indication */
+      setEditValue('--');
+      if (submitCellValue) submitCellValue('--');
+      return;
+    }
+
+    /* check if user input is number */
+    if (/^(\d+.)*(\d+)$/.test(editValue)) {
+      /* user entered number, format correctly */
+      setEditValue(parseFloat(editValue).toFixed(2));
+      if (submitCellValue) submitCellValue(parseFloat(editValue).toFixed(2));
+    } else {
+      /* user entered non-number, ignore input and reset to original cell value */
+      setEditValue(value !== null ? parseFloat(value).toFixed(2) : '--');
+      if (submitCellValue)
+        submitCellValue(value !== null ? parseFloat(value).toFixed(2) : '--');
+    }
+  }, [value, editValue, submitCellValue]);
+
+  /* listens for clicks on cell */
+  const handleClick = useCallback(() => {
+    if (!clicked && editValue === '--')
+      /* clear cell if null, ready for new input */
+      setEditValue('');
     setClicked(true);
-  };
+  }, [clicked, editValue]);
 
-  const handleClickAway = () => {
-    /* listen for click away from cell */
-    if (clicked && handleEditValueReformat) handleEditValueReformat();
+  /* listen for enter key hits */
+  const onKeyDown = useCallback(
+    (event: any) => {
+      if (event.keyCode === 13) handleValueReformat();
+    },
+    [handleValueReformat]
+  );
+
+  /* listen for click away from cell */
+  const handleClickAway = useCallback(() => {
+    if (clicked) handleValueReformat();
     setClicked(false);
-  };
+  }, [clicked, handleValueReformat]);
+
+  const handleClearCell = useCallback(() => {
+    /* user has decided to enter null value for this cell */
+    setEditValue('--');
+    if (submitCellValue) submitCellValue('--');
+  }, [submitCellValue]);
 
   return canEdit ? (
     <StyledTableCell sx={{ p: 0 }}>
@@ -92,9 +128,9 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
                 <IconButton
                   aria-label="clear user entry"
                   onClick={handleClearCell}
-                  disabled={!isNull}
+                  disabled={value === null}
                 >
-                  {isNull ? (
+                  {value !== null ? (
                     <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
                   ) : null}
                 </IconButton>
@@ -104,7 +140,7 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
             onClick={handleClick}
             onFocus={handleClick}
             onKeyDown={onKeyDown}
-            value={value}
+            value={editValue}
             required
           />
         </ClickAwayListener>
