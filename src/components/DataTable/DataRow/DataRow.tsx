@@ -108,7 +108,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
       /* return the edited value if edit cell, else original value */
       return column.label === editCol?.label ? editValue : row[column.key];
     },
-    [row, isNull, editCol?.label, editValue]
+    [row, editCol, editValue]
   );
 
   return (

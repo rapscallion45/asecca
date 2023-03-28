@@ -1,11 +1,11 @@
-import { getCostsSourceQueryString } from '../utils';
+import { getCostsConfigSourceQueryString } from '../utils';
 
 async function getCostsConfig(
   source: string,
   dataId: string | (string | null)[]
 ) {
   /* detemine which cost source this is, and build query string */
-  const queryString: string = getCostsSourceQueryString(
+  const queryString: string = getCostsConfigSourceQueryString(
     source,
     dataId as string
   );

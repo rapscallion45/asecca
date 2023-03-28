@@ -8,7 +8,7 @@ import { LoadingButton } from '@mui/lab';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { getConfigCostsColFilterList } from '@/utils';
+import { getCostsConfigColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
@@ -44,7 +44,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
 
   /* filter the data table columns for current permission level */
   const [colFilterList, setColFilterList] = useState<Array<string>>(
-    getConfigCostsColFilterList(permission.level)
+    getCostsConfigColFilterList(permission.level)
   );
 
   /* copy of page query param held in local page state */
@@ -89,7 +89,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
 
   /* whenever the user permission global state is updated, re-filter cols */
   useEffect(() => {
-    setColFilterList(getConfigCostsColFilterList(permission.level));
+    setColFilterList(getCostsConfigColFilterList(permission.level));
   }, [permission.level]);
 
   /* handle the saving of the table data */

@@ -1,7 +1,7 @@
 /*
- ** helper function for formatting costs_config query param string
+ ** helper function for formatting costs config query param string
  */
-const getCostsSourceQueryString = (source: string, dataId: string) => {
+const getCostsConfigSourceQueryString = (source: string, dataId: string) => {
   const sourceString = () => {
     switch (source) {
       case 'Customer':
@@ -18,4 +18,4 @@ const getCostsSourceQueryString = (source: string, dataId: string) => {
   return `${sourceString()}=${dataId}`;
 };
 
-export default getCostsSourceQueryString;
+export default getCostsConfigSourceQueryString;
