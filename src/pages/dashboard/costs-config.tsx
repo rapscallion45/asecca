@@ -12,8 +12,8 @@ import { getConfigCostsColFilterList } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
+  saveBySourceId as saveCostsConfigBySourceId,
   resetCostsConfig,
-  saveBySourceId,
 } from '@/redux/slices/costsConfigSlice';
 import { DataTableColumn } from '@/components/DataTable/types';
 
@@ -28,9 +28,9 @@ const columns: Array<DataTableColumn> = [
   { label: 'Prevailing', key: 'effective_charge' },
 ];
 
-/* Configure Costs Test Page */
-/* ========================= */
-const ConfigureCostsTestPage: NextPageWithLayout = () => {
+/* Costs Config Test Page */
+/* ====================== */
+const CostsConfigTestPage: NextPageWithLayout = () => {
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
@@ -95,7 +95,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   /* handle the saving of the table data */
   const handleSave = () => {
     dispatch(
-      saveBySourceId({
+      saveCostsConfigBySourceId({
         source: permission.level,
         dataId: query,
         data,
@@ -160,7 +160,7 @@ const ConfigureCostsTestPage: NextPageWithLayout = () => {
   );
 };
 
-/* dashboard layout used for Configure Costs page */
-ConfigureCostsTestPage.Layout = DashboardLayout;
+/* dashboard layout used for Costs Config page */
+CostsConfigTestPage.Layout = DashboardLayout;
 
-export default ConfigureCostsTestPage;
+export default CostsConfigTestPage;
