@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
+import { getCostsConfigPrevailingCharge } from '@/utils';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
 import { DataTableColumn } from '../types';
@@ -100,13 +101,9 @@ const DataRow: FC<DataTableRowProps> = (props) => {
 
   const getColumnCellValue = useCallback(
     (column: DataTableColumn) => {
-      /*
-       ** the 'Prevailing' column is always equal to the
-       ** editable col (permission level), unless editable col is null or NaN.
-       ** if null or NaN, Prevailing is equal to the "effective_charge"
-       */
-      if (column.label === 'Prevailing' && isNull) return editValue;
-      if (column.label === 'Prevailing' && !isNull) return row.effective_charge;
+      /* apply Prevailing column logic */
+      if (column.label === 'Prevailing')
+        return getCostsConfigPrevailingCharge(row, editCol);
 
       /* return the edited value if edit cell, else original value */
       return column.label === editCol?.label ? editValue : row[column.key];
