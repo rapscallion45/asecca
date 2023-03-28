@@ -19,27 +19,35 @@ const getCostsConfigPrevailingCharge = (row: any, editCol: DataTableColumn) => {
     return parseFloat(row[editCol?.key]).toFixed(2);
 
   /*
-   ** if editbale col is null, return "effective charge" value if
-   ** "cost source" is not set to the editable col value
-   */
-  if (row.cost_source !== editCol?.label) return row.effective_charge;
-
-  /*
-   ** if editable col ius null and editbale col and "effective charge" are
-   ** same "cost source", determine charge according to the permission hierachy
+   ** if editable col is null, determine charge according to
+   ** the col permission hierachy
    */
   const getCharge = () => {
     switch (editCol?.label) {
       case 'Collection':
-        if (row.project_charge !== null) return row.project_charge;
-        if (row.customer_charge !== null) return row.customer_charge;
-        return row.global_charge;
+        /* if Collection, run through all other columns */
+        if (row.project_charge !== null)
+          return parseFloat(row.project_charge).toFixed(2);
+        if (row.customer_charge !== null)
+          return parseFloat(row.customer_charge).toFixed(2);
+        if (row.global_charge !== null)
+          return parseFloat(row.global_charge).toFixed(2);
+        return null;
       case 'Project':
-        if (row.customer_charge !== null) return row.customer_charge;
-        return row.global_charge;
+        /* if Project, only run through columns below Project */
+        if (row.customer_charge !== null)
+          return parseFloat(row.customer_charge).toFixed(2);
+        if (row.global_charge !== null)
+          return parseFloat(row.global_charge).toFixed(2);
+        return null;
       case 'Customer':
-        return row.global_charge;
+        /* if Customer, only run through columns below Project */
+        if (row.global_charge !== null)
+          return parseFloat(row.global_charge).toFixed(2);
+        return null;
+      case 'Global':
       default:
+        /* if Global, no checks needed, value is null at this point */
         return null;
     }
   };
