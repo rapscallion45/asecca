@@ -2,23 +2,62 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CostsConfigDataPayload } from '@/api-types';
 import costsConfigService from '@/services/costsConfigService';
 import {
-  FetchCostsConfigBySourceIdArgs,
-  SaveCostsConfigBySourceIdArgs,
-  CostsConfigEditCostsPayload,
+  IFetchCostsConfigBySourceIdArgs,
+  ISaveCostsConfigBySourceIdArgs,
+  ICostsConfigEditCostsPayload,
 } from '../types';
+import { addNotification } from './notificationsSlice';
 
 /* async thunk for GET /api/costs_config API handling */
 export const fetchBySourceId = createAsyncThunk(
   'costsConfig/fetchBySourecId',
-  async (args: FetchCostsConfigBySourceIdArgs) =>
-    costsConfigService.getCostsConfig(args.source, args.dataId)
+  async (args: IFetchCostsConfigBySourceIdArgs, thunkAPI) => {
+    /* await the result from the GET request */
+    const res = await costsConfigService.getCostsConfig(
+      args.source,
+      args.dataId
+    );
+
+    /* add a notification and reject if bad response from server */
+    if (res.status !== 200) {
+      thunkAPI.dispatch(
+        addNotification({
+          message: 'Failed to load Costs Configuration from server.',
+          variant: 'error',
+        })
+      );
+      throw new Error(res.statusText);
+    }
+
+    /* no error, serialize the data and return */
+    return res.json();
+  }
 );
 
 /* async thunk for POST /api/costs_config API handling */
 export const saveBySourceId = createAsyncThunk(
   'costsConfig/saveBySourecId',
-  async (args: SaveCostsConfigBySourceIdArgs) =>
-    costsConfigService.setCostsConfig(args.source, args.dataId, args.data)
+  async (args: ISaveCostsConfigBySourceIdArgs, thunkAPI) => {
+    const res = await costsConfigService.setCostsConfig(
+      args.source,
+      args.dataId,
+      args.data
+    );
+
+    /* add a notification and reject if bad response from server */
+    if (res.status !== 200) {
+      thunkAPI.dispatch(
+        addNotification({
+          message: 'Failed to save Costs Configuration to server.',
+          variant: 'error',
+        })
+      );
+      throw new Error(res.statusText);
+    }
+
+    /* no error, serialize the data and return */
+    return res.json();
+  }
 );
 
 interface InitialCostsConfigState {
@@ -45,7 +84,7 @@ const costsConfigSlice = createSlice({
   reducers: {
     editCostsConfig: (
       state,
-      action: PayloadAction<CostsConfigEditCostsPayload>
+      action: PayloadAction<ICostsConfigEditCostsPayload>
     ) => {
       /* ensure we have some costs, if so, find and update passed cost */
       if (state.data?.costs?.length)

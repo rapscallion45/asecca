@@ -3,12 +3,14 @@ import { ThunkAction } from 'redux-thunk';
 import logger from 'redux-logger';
 import userPermissionReducer from './slices/userPermissionSlice';
 import costsConfigReducer from './slices/costsConfigSlice';
+import notificationsSlice from './slices/notificationsSlice';
 
 /* configure the redux store to manage the user permission level of the app */
 const store = configureStore({
   reducer: {
     userPermission: userPermissionReducer,
     costsConfig: costsConfigReducer,
+    notifications: notificationsSlice,
   },
   // @ts-ignore
   middleware:

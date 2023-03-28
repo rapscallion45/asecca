@@ -17,12 +17,7 @@ async function getCostsConfig(
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/costs_config?${queryString}`, requestOptions).then(
-    (res) => {
-      if (res.status !== 200) throw new Error(res.statusText);
-      return res.json();
-    }
-  );
+  return fetch(`/api/costs_config?${queryString}`, requestOptions);
 }
 
 async function setCostsConfig(
@@ -42,10 +37,7 @@ async function setCostsConfig(
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/costs_config`, requestOptions).then((res) => {
-    if (res.status !== 200) throw new Error(res.statusText);
-    return res.json();
-  });
+  return fetch(`/api/costs_config`, requestOptions);
 }
 
 const costsConfigService = {

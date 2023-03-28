@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserPermissionLevelState } from '../types';
+import { IUserPermissionLevelState } from '../types';
 
 interface InitialUserPermissionState {
-  permission: UserPermissionLevelState;
+  permission: IUserPermissionLevelState;
 }
 
 /* initialise user permission level state - always set lowest level, 'Global' */
@@ -17,7 +17,7 @@ const userPermissionSlice = createSlice({
   reducers: {
     setPermissionLevel: (
       state,
-      action: PayloadAction<UserPermissionLevelState>
+      action: PayloadAction<IUserPermissionLevelState>
     ) => {
       state.permission = action.payload;
     },
