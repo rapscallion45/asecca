@@ -50,7 +50,11 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* copy of page query param held in local page state */
   const [query, setQuery] = useState<string | (string | null)[]>('');
 
-  /* get page query params from URL on first load */
+  /* *** THIS IS A TEST PARAM - USER WILL NOT BE ABLE TO CHANGE PERMISSION *** */
+  /* keep a copy of the original API request permission level in local state */
+  const [apiPermission, setApiPermission] = useState<string>('');
+
+  /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
     /* check for customer, project or collection data query */
     const { customer, project, collection } = queryString.parse(
@@ -62,16 +66,19 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
       /* set Customer permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Customer' }));
       setQuery(customer);
+      setApiPermission('Customer');
     }
     if (project !== undefined && project !== null && project !== '') {
       /* set Project permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Project' }));
       setQuery(project);
+      setApiPermission('Project');
     }
     if (collection !== undefined && collection !== null && collection !== '') {
       /* set Collection permission level and data ID to be fetched from API */
       dispatch(setPermissionLevel({ level: 'Collection' }));
       setQuery(collection);
+      setApiPermission('Collection');
     }
   }, [dispatch]);
 
@@ -80,12 +87,12 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
     if (query) {
       dispatch(
         fetchCostsConfigBySourceId({
-          source: permission.level as string,
+          source: apiPermission,
           dataId: query,
         })
       );
     }
-  }, [query, dispatch]);
+  }, [query, apiPermission, dispatch]);
 
   /* whenever the user permission global state is updated, re-filter cols */
   useEffect(() => {
