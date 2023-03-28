@@ -1,9 +1,16 @@
-import { DataTableColumn } from '@/components/DataTable/types';
+import {
+  DataTableColumn,
+  CostsConfigRowTypical,
+  CostsConfigRowCustom,
+} from '@/components/DataTable/types';
 
 /*
  ** helper function for getting the Prevailing charge of a costs config scope
  */
-const getCostsConfigPrevailingCharge = (row: any, editCol: DataTableColumn) => {
+const getCostsConfigPrevailingCharge = (
+  row: CostsConfigRowTypical | CostsConfigRowCustom,
+  editCol: DataTableColumn | undefined | null
+) => {
   /*
    ** the 'Prevailing' column of a costs config table row is always equal
    ** to the editable col (permission level), unless editable col
@@ -13,6 +20,9 @@ const getCostsConfigPrevailingCharge = (row: any, editCol: DataTableColumn) => {
    ** according to permission hierachy:
    ** Collection (highest) -> Project -> Customer > Global (lowest)
    */
+
+  /* sanity check input */
+  if (!row || !editCol) return null;
 
   /* firstly, if editable col is not null, simply return editable col value */
   if (row[editCol?.key] !== null)

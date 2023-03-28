@@ -9,13 +9,17 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 import ErrorRow from './ErrorRow/ErrorRow';
 import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
-import { DataTableColumn } from './types';
+import {
+  CostsConfigRowCustom,
+  CostsConfigRowTypical,
+  DataTableColumn,
+} from './types';
 
 interface DataTableProps {
   name: string;
   editColName: string;
   columns: Array<DataTableColumn>;
-  rows: any;
+  rows: Array<CostsConfigRowTypical | CostsConfigRowCustom>;
   isLoading?: boolean;
   isError?: boolean;
 }
@@ -45,19 +49,24 @@ const DataTable: FC<DataTableProps> = (props) => {
               {!isLoading && !isError && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map((row: any, index: number) => (
-                    <Fragment key={row.name}>
-                      <DataRow
-                        row={row}
-                        rowIdx={index}
-                        columns={columns}
-                        /* we need the edit col to get 'Prevailing' value */
-                        editCol={columns.find(
-                          (col: DataTableColumn) => editColName === col.label
-                        )}
-                      />
-                    </Fragment>
-                  ))}
+                  {rows?.map(
+                    (
+                      row: CostsConfigRowTypical | CostsConfigRowCustom,
+                      index: number
+                    ) => (
+                      <Fragment key={row.name}>
+                        <DataRow
+                          row={row}
+                          rowIdx={index}
+                          columns={columns}
+                          /* we need the edit col to get 'Prevailing' value */
+                          editCol={columns.find(
+                            (col: DataTableColumn) => editColName === col.label
+                          )}
+                        />
+                      </Fragment>
+                    )
+                  )}
                 </>
               )}
               {!isLoading && isError && (

@@ -6,7 +6,11 @@ import TableRow from '@mui/material/TableRow';
 import { getCostsConfigPrevailingCharge } from '@/utils';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
-import { DataTableColumn } from '../types';
+import {
+  DataTableColumn,
+  CostsConfigRowCustom,
+  CostsConfigRowTypical,
+} from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -21,10 +25,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface DataTableRowProps {
-  row: any;
+  row: CostsConfigRowTypical | CostsConfigRowCustom;
   rowIdx: number;
   columns: Array<DataTableColumn>;
-  editCol: any;
+  editCol: DataTableColumn | undefined;
 }
 
 /* Data Table Row component */
@@ -35,11 +39,15 @@ const DataRow: FC<DataTableRowProps> = (props) => {
 
   /* initialise the edit value state to original column value */
   const [editValue, setEditValue] = useState<string>(
-    row[editCol?.key] !== null ? parseFloat(row[editCol?.key]).toFixed(2) : '--'
+    row[editCol ? editCol?.key : 0] !== null
+      ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+      : '--'
   );
 
   /* flag in state for whether the edit column is null */
-  const [isNull, setIsNull] = useState<boolean>(row[editCol?.key] !== null);
+  const [isNull, setIsNull] = useState<boolean>(
+    row[editCol ? editCol?.key : 0] !== null
+  );
 
   /* whenever the edit val changes, check if it is null */
   useEffect(() => {
@@ -49,11 +57,11 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   /* whenever the row data changes, reset the edit value back to the original */
   useEffect(() => {
     setEditValue(
-      row[editCol?.key] !== null
-        ? parseFloat(row[editCol?.key]).toFixed(2)
+      row[editCol ? editCol?.key : 0] !== null
+        ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
         : '--'
     );
-  }, [row, editCol?.key]);
+  }, [row, editCol]);
 
   /* callback for handling user input to the edit cell */
   const handleCurrencyValueChange = useCallback((value: string) => {
@@ -65,7 +73,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
-      dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
+      dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
       return;
     }
 
@@ -73,18 +81,18 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       setEditValue(parseFloat(editValue).toFixed(2));
       dispatch(
-        editCostsConfig({ value: editValue, colKey: editCol.key, rowIdx })
+        editCostsConfig({ value: editValue, colKey: editCol?.key, rowIdx })
       );
     } else {
       /* user entered non-number, ignore input */
       setEditValue(
-        row[editCol?.key] !== null
-          ? parseFloat(row[editCol?.key]).toFixed(2)
+        row[editCol ? editCol?.key : 0] !== null
+          ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
           : '--'
       );
-      dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
+      dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
     }
-  }, [row, editCol?.key, editValue, rowIdx, dispatch]);
+  }, [row, editCol, editValue, rowIdx, dispatch]);
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
@@ -96,7 +104,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   const handleClearCell = useCallback(() => {
     /* user has decided to enter null value */
     setEditValue('--');
-    dispatch(editCostsConfig({ value: null, colKey: editCol.key, rowIdx }));
+    dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
   }, [editCol?.key, rowIdx, dispatch]);
 
   const getColumnCellValue = useCallback(

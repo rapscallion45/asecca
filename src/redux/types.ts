@@ -16,7 +16,7 @@ export type UserPermissionLevelState = {
 };
 
 export type CostsConfigEditCostsPayload = {
-  colKey: string;
+  colKey: string | undefined;
   rowIdx: number;
   value: string | null;
 };

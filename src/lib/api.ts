@@ -1,5 +1,6 @@
 import base64 from 'base-64';
 import queryString from 'query-string';
+import { CostsConfigSaveDataPayload } from '@/api-types';
 
 /* configuration params for staging DB */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
@@ -31,7 +32,7 @@ async function getCostsConfig(
   );
 }
 
-async function setCostsConfig(body: any) {
+async function setCostsConfig(body: CostsConfigSaveDataPayload) {
   /* setup POST request options with basic auth */
   const requestOptions = {
     method: 'POST',

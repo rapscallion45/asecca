@@ -129,9 +129,9 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         editColName={permission.level}
         /* filter table columns by current permission level */
         columns={columns.filter(
-          (col: any) => !colFilterList.includes(col.label)
+          (col: DataTableColumn) => !colFilterList.includes(col.label)
         )}
-        rows={data?.costs}
+        rows={data?.costs || []}
         isLoading={loading}
         isError={Boolean(error)}
       />
