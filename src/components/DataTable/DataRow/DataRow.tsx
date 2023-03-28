@@ -37,24 +37,14 @@ const DataRow: FC<IDataRowProps> = (props) => {
   const { row, rowIdx, columns, editCol } = props;
   const dispatch = useDispatch();
 
-  /* initialise the edit value state to original column value */
+  /* initialise the row edit value state to original edit column value */
   const [editValue, setEditValue] = useState<string>(
     row[editCol ? editCol?.key : ''] !== null
       ? parseFloat(row[editCol ? editCol?.key : '']).toFixed(2)
       : '--'
   );
 
-  /* flag in state for whether the edit column is null */
-  const [isNull, setIsNull] = useState<boolean>(
-    row[editCol ? editCol?.key : ''] !== null
-  );
-
-  /* whenever the edit val changes, check if it is null */
-  useEffect(() => {
-    setIsNull(editValue !== '--');
-  }, [editValue]);
-
-  /* whenever the row data changes, reset the edit value back to the original */
+  /* on row changes, reset the edit value back to the original edit col value */
   useEffect(() => {
     setEditValue(
       row[editCol ? editCol?.key : ''] !== null
@@ -96,13 +86,13 @@ const DataRow: FC<IDataRowProps> = (props) => {
 
   const handleEditCellOnClick = useCallback(() => {
     /* check if cell is currently null or indicating null */
-    if (editValue === '--' && !isNull)
+    if (editValue === '--')
       /* clear cell if null, ready for new input */
       setEditValue('');
-  }, [editValue, isNull]);
+  }, [editValue]);
 
   const handleClearCell = useCallback(() => {
-    /* user has decided to enter null value */
+    /* user has decided to enter null value for edit cell */
     setEditValue('--');
     dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
   }, [editCol?.key, rowIdx, dispatch]);
@@ -128,7 +118,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
             key={`${row.name}-${column.key}`}
             inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
-            isNull={isNull}
+            isNull={editValue !== '--'}
             value={getColumnCellValue(column)}
             handleEditValueChange={handleCurrencyValueChange}
             handleEditValueReformat={handleEditCellReformat}
