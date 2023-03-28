@@ -15,20 +15,21 @@ const getCostsConfigPrevailingCharge = (row: any, editCol: DataTableColumn) => {
    */
 
   /* firstly, if editable col is not null, simply return editable col value */
-  if (row[editCol.key] !== null) return parseFloat(row[editCol.key]).toFixed(2);
+  if (row[editCol?.key] !== null)
+    return parseFloat(row[editCol?.key]).toFixed(2);
 
   /*
    ** if editbale col is null, return "effective charge" value if
    ** "cost source" is not set to the editable col value
    */
-  if (row.cost_source !== editCol.label) return row.effective_charge;
+  if (row.cost_source !== editCol?.label) return row.effective_charge;
 
   /*
    ** if editable col ius null and editbale col and "effective charge" are
    ** same "cost source", determine charge according to the permission hierachy
    */
   const getCharge = () => {
-    switch (editCol.label) {
+    switch (editCol?.label) {
       case 'Collection':
         if (row.project_charge !== null) return row.project_charge;
         if (row.customer_charge !== null) return row.customer_charge;
