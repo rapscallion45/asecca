@@ -15,10 +15,10 @@ import {
   saveBySourceId as saveCostsConfigBySourceId,
   resetCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
-import { DataTableColumn } from '@/components/DataTable/types';
+import { IDataTableColumn } from '@/components/DataTable/types';
 
 /* costs config data table column defintions */
-const columns: Array<DataTableColumn> = [
+const columns: Array<IDataTableColumn> = [
   { label: 'Product', key: 'name' },
   { label: 'Application', key: 'application' },
   { label: 'Global', key: 'global_charge' },
@@ -129,7 +129,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         editColName={permission.level}
         /* filter table columns by current permission level */
         columns={columns.filter(
-          (col: DataTableColumn) => !colFilterList.includes(col.label)
+          (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
         rows={data?.costs || []}
         isLoading={loading}

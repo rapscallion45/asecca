@@ -1,6 +1,6 @@
 import {
-  DataTableColumn,
-  CostsConfigRowTypical,
+  IDataTableColumn,
+  ICostsConfigRowTypical,
   CostsConfigRowCustom,
 } from '@/components/DataTable/types';
 
@@ -8,8 +8,8 @@ import {
  ** helper function for getting the Prevailing charge of a Costs Config scope
  */
 const getCostsConfigPrevailingCharge = (
-  row: CostsConfigRowTypical | CostsConfigRowCustom,
-  editCol: DataTableColumn | undefined | null
+  row: ICostsConfigRowTypical | CostsConfigRowCustom,
+  editCol: IDataTableColumn | undefined | null
 ) => {
   /*
    ** the 'Prevailing' column of a costs config table row is always equal

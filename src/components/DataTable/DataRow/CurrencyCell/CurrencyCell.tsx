@@ -24,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-interface CurrencyCellProps {
+interface ICurrencyCellProps {
   inputId: string;
   canEdit: boolean;
   isNull: boolean;
@@ -38,7 +38,7 @@ interface CurrencyCellProps {
 
 /* Data Table Currency Cell helper component */
 /* ========================================= */
-const CurrencyCell: FC<CurrencyCellProps> = (props) => {
+const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   const {
     inputId,
     canEdit,

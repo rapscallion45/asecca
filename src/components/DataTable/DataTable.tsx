@@ -11,22 +11,22 @@ import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
 import {
   CostsConfigRowCustom,
-  CostsConfigRowTypical,
-  DataTableColumn,
+  ICostsConfigRowTypical,
+  IDataTableColumn,
 } from './types';
 
-interface DataTableProps {
+interface IDataTableProps {
   name: string;
   editColName: string;
-  columns: Array<DataTableColumn>;
-  rows: Array<CostsConfigRowTypical | CostsConfigRowCustom>;
+  columns: Array<IDataTableColumn>;
+  rows: Array<ICostsConfigRowTypical | CostsConfigRowCustom>;
   isLoading?: boolean;
   isError?: boolean;
 }
 
 /* Data Table */
 /* ========== */
-const DataTable: FC<DataTableProps> = (props) => {
+const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,
     editColName,
@@ -51,7 +51,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                   {/* map passed rows */}
                   {rows?.map(
                     (
-                      row: CostsConfigRowTypical | CostsConfigRowCustom,
+                      row: ICostsConfigRowTypical | CostsConfigRowCustom,
                       index: number
                     ) => (
                       <Fragment key={row.name}>
@@ -61,7 +61,7 @@ const DataTable: FC<DataTableProps> = (props) => {
                           columns={columns}
                           /* we need the edit col to get 'Prevailing' value */
                           editCol={columns.find(
-                            (col: DataTableColumn) => editColName === col.label
+                            (col: IDataTableColumn) => editColName === col.label
                           )}
                         />
                       </Fragment>

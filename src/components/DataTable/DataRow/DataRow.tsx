@@ -7,9 +7,9 @@ import { getCostsConfigPrevailingCharge } from '@/utils';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
 import {
-  DataTableColumn,
+  IDataTableColumn,
   CostsConfigRowCustom,
-  CostsConfigRowTypical,
+  ICostsConfigRowTypical,
 } from '../types';
 
 /* table row stylings */
@@ -24,29 +24,29 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-interface DataTableRowProps {
-  row: CostsConfigRowTypical | CostsConfigRowCustom;
+interface IDataRowProps {
+  row: ICostsConfigRowTypical | CostsConfigRowCustom;
   rowIdx: number;
-  columns: Array<DataTableColumn>;
-  editCol: DataTableColumn | undefined;
+  columns: Array<IDataTableColumn>;
+  editCol: IDataTableColumn | undefined;
 }
 
 /* Data Table Row component */
 /* ======================== */
-const DataRow: FC<DataTableRowProps> = (props) => {
+const DataRow: FC<IDataRowProps> = (props) => {
   const { row, rowIdx, columns, editCol } = props;
   const dispatch = useDispatch();
 
   /* initialise the edit value state to original column value */
   const [editValue, setEditValue] = useState<string>(
-    row[editCol ? editCol?.key : 0] !== null
-      ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+    row[editCol ? editCol?.key : ''] !== null
+      ? parseFloat(row[editCol ? editCol?.key : '']).toFixed(2)
       : '--'
   );
 
   /* flag in state for whether the edit column is null */
   const [isNull, setIsNull] = useState<boolean>(
-    row[editCol ? editCol?.key : 0] !== null
+    row[editCol ? editCol?.key : ''] !== null
   );
 
   /* whenever the edit val changes, check if it is null */
@@ -57,8 +57,8 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   /* whenever the row data changes, reset the edit value back to the original */
   useEffect(() => {
     setEditValue(
-      row[editCol ? editCol?.key : 0] !== null
-        ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+      row[editCol ? editCol?.key : ''] !== null
+        ? parseFloat(row[editCol ? editCol?.key : '']).toFixed(2)
         : '--'
     );
   }, [row, editCol]);
@@ -86,8 +86,8 @@ const DataRow: FC<DataTableRowProps> = (props) => {
     } else {
       /* user entered non-number, ignore input */
       setEditValue(
-        row[editCol ? editCol?.key : 0] !== null
-          ? parseFloat(row[editCol ? editCol?.key : 0]).toFixed(2)
+        row[editCol ? editCol?.key : ''] !== null
+          ? parseFloat(row[editCol ? editCol?.key : '']).toFixed(2)
           : '--'
       );
       dispatch(editCostsConfig({ value: null, colKey: editCol?.key, rowIdx }));
@@ -108,7 +108,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   }, [editCol?.key, rowIdx, dispatch]);
 
   const getColumnCellValue = useCallback(
-    (column: DataTableColumn) => {
+    (column: IDataTableColumn) => {
       /* apply Prevailing column logic */
       if (column.label === 'Prevailing')
         return getCostsConfigPrevailingCharge(row, editCol);
@@ -122,7 +122,7 @@ const DataRow: FC<DataTableRowProps> = (props) => {
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
-      {columns.map((column: DataTableColumn) =>
+      {columns.map((column: IDataTableColumn) =>
         column.key !== 'name' && column.key !== 'application' ? (
           <CurrencyCell
             key={`${row.name}-${column.key}`}
