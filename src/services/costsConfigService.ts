@@ -10,13 +10,18 @@ async function getCostsConfig(
     dataId as string
   );
 
+  /* configure GET header options */
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`/api/costs_config?${queryString}`, requestOptions).then((res) =>
-    res.json()
+  /* send request and catch any errors */
+  return fetch(`/api/costs_config?${queryString}`, requestOptions).then(
+    (res) => {
+      if (res.status !== 200) throw new Error(res.statusText);
+      return res.json();
+    }
   );
 }
 
@@ -29,13 +34,18 @@ async function setCostsConfig(
   console.log(source);
   console.log(dataId);
 
+  /* configure POST header options */
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
 
-  return fetch(`/api/costs_config`, requestOptions).then((res) => res.json());
+  /* send request and catch any errors */
+  return fetch(`/api/costs_config`, requestOptions).then((res) => {
+    if (res.status !== 200) throw new Error(res.statusText);
+    return res.json();
+  });
 }
 
 const costsConfigService = {
