@@ -1,6 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { ICostsConfigDataPayload, IProxyErrorPayload } from '@/api-types';
+import type {
+  ICostsConfigDataPayload,
+  IProxyErrorPayload,
+} from '@/lib/api-types';
 import api from '../../lib/api';
 
 /* proxy for handling requests to ASECCA 'costs_config' API */

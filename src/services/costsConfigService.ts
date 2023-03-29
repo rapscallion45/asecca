@@ -1,4 +1,4 @@
-import { ICostsConfigSaveDataPayload } from '@/api-types';
+import { ICostsConfigSaveDataPayload } from '@/lib/api-types';
 import { getCostsConfigSourceQueryString } from '../utils';
 
 /*

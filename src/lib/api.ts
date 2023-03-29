@@ -1,6 +1,6 @@
 import base64 from 'base-64';
 import queryString from 'query-string';
-import { ICostsConfigSaveDataPayload } from '@/api-types';
+import { ICostsConfigSaveDataPayload } from '@/lib/api-types';
 
 /* configuration params for staging DB */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =

@@ -3,7 +3,7 @@ import { AlertColor } from '@mui/material';
 import {
   ICostsConfigDataPayload,
   ICostsConfigSaveDataPayload,
-} from '@/api-types';
+} from '@/lib/api-types';
 
 /*
  ** Type and interface definitions for Redux actions
