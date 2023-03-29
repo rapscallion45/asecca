@@ -71,7 +71,7 @@ interface InitialCostsConfigState {
   loading: boolean;
   data: CostsConfigDataPayload | null;
   dataShadow: CostsConfigDataPayload | null;
-  error: string | null;
+  error?: string;
   saving: boolean;
 }
 
@@ -80,7 +80,6 @@ const initialState: InitialCostsConfigState = {
   loading: false,
   data: null,
   dataShadow: null,
-  error: null,
   saving: false,
 };
 
@@ -112,7 +111,7 @@ const costsConfigSlice = createSlice({
       state.loading = true;
       state.data = null;
       state.dataShadow = null;
-      state.error = null;
+      state.error = undefined;
     },
     [fetchBySourceId.fulfilled.type]: (
       state,
@@ -121,13 +120,14 @@ const costsConfigSlice = createSlice({
       state.loading = false;
       state.data = action.payload;
       state.dataShadow = action.payload;
-      state.error = null;
+      state.error = undefined;
     },
     [fetchBySourceId.rejected.type]: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.data = null;
       state.dataShadow = null;
-      state.error = action.payload;
+      state.error =
+        action.payload || 'Failed to load Costs Config data from server.';
     },
     /* Save Costs Config extra reducers */
     [saveBySourceId.pending.type]: (state) => {

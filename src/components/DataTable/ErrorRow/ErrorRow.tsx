@@ -8,7 +8,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 
 interface IErrorRowProps {
   columns: Array<IDataTableColumn>;
-  message: string;
+  message?: string;
 }
 
 /* Data Table Error Row helper */

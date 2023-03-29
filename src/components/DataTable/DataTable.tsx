@@ -21,7 +21,7 @@ interface IDataTableProps {
   columns: Array<IDataTableColumn>;
   rows: Array<ICostsConfigRowTypical | CostsConfigRowCustom>;
   isLoading?: boolean;
-  isError?: boolean;
+  error?: string;
 }
 
 /* Data Table */
@@ -33,7 +33,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     columns,
     rows,
     isLoading = false,
-    isError = false,
+    error = '',
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -46,7 +46,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
           </TableHead>
           <TableBody>
             <>
-              {!isLoading && !isError && (
+              {!isLoading && !error && (
                 <>
                   {/* map passed rows */}
                   {rows?.map(
@@ -69,11 +69,8 @@ const DataTable: FC<IDataTableProps> = (props) => {
                   )}
                 </>
               )}
-              {!isLoading && isError && (
-                <ErrorRow
-                  columns={columns}
-                  message="Error loading the requested data"
-                />
+              {!isLoading && Boolean(error) && (
+                <ErrorRow columns={columns} message={error} />
               )}
               {isLoading && (
                 <LoadingRow columns={columns} message="Loading..." />

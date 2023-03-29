@@ -37,7 +37,7 @@ export interface ICostsConfigEditCostsPayload {
  */
 export interface ICostsConfigState {
   data?: CostsConfigDataPayload | null;
-  error?: string | null;
+  error?: string;
   loading?: boolean;
 }
 

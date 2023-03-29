@@ -133,7 +133,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         )}
         rows={data?.costs || []}
         isLoading={loading}
-        isError={Boolean(error)}
+        error={error}
       />
       <Box
         sx={{
