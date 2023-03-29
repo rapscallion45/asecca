@@ -8,7 +8,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>
 ) {
-  const { method, query } = req;
+  const { method, query, body } = req;
 
   /* determine which request type this is */
   switch (method) {
@@ -16,19 +16,7 @@ export default async function handler(
       /* call POST api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await api.setCostsConfig({
-          costs: [
-            {
-              name: 'Device Processing',
-              charge: '444.44',
-              line_type: 'Typical',
-              application: 'Per Device',
-            },
-          ],
-          selection: {
-            collection: 66135000015737072,
-          },
-        });
+        const response = await api.setCostsConfig(body);
 
         /* send back server response */
         if (response.status === 200) {
