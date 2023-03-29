@@ -4,22 +4,19 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
+import { ICostsConfigData } from '@/api-types';
 import DataRow from './DataRow/DataRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
 import ErrorRow from './ErrorRow/ErrorRow';
 import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
-import {
-  CostsConfigRowCustom,
-  ICostsConfigRowTypical,
-  IDataTableColumn,
-} from './types';
+import { IDataTableColumn } from './types';
 
 interface IDataTableProps {
   name: string;
   editColName: string;
   columns: Array<IDataTableColumn>;
-  rows: Array<ICostsConfigRowTypical | CostsConfigRowCustom>;
+  rows: Array<ICostsConfigData>;
   isLoading?: boolean;
   error?: string;
 }
@@ -49,24 +46,19 @@ const DataTable: FC<IDataTableProps> = (props) => {
               {!isLoading && !error && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map(
-                    (
-                      row: ICostsConfigRowTypical | CostsConfigRowCustom,
-                      index: number
-                    ) => (
-                      <Fragment key={row.name}>
-                        <DataRow
-                          row={row}
-                          rowIdx={index}
-                          columns={columns}
-                          /* we need the edit col to get 'Prevailing' value */
-                          editCol={columns.find(
-                            (col: IDataTableColumn) => editColName === col.label
-                          )}
-                        />
-                      </Fragment>
-                    )
-                  )}
+                  {rows?.map((row: ICostsConfigData, index: number) => (
+                    <Fragment key={row.name}>
+                      <DataRow
+                        row={row}
+                        rowIdx={index}
+                        columns={columns}
+                        /* we need the edit col to get 'Prevailing' value */
+                        editCol={columns.find(
+                          (col: IDataTableColumn) => editColName === col.label
+                        )}
+                      />
+                    </Fragment>
+                  ))}
                 </>
               )}
               {!isLoading && Boolean(error) && (

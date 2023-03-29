@@ -28,7 +28,7 @@ export interface ISaveCostsConfigBySourceIdArgs {
  ** Costs Config edit redux action payload definition
  */
 export interface ICostsConfigEditCostsPayload {
-  colKey: string | undefined;
+  colKey: string;
   rowIdx: number;
   value: string | null;
 }

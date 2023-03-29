@@ -17,7 +17,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 interface ICellProps {
-  value: string;
+  value: string | null;
   sx: any;
 }
 

@@ -1,4 +1,13 @@
 /*
+ **
+ ** ASECCA API type definitions
+ **
+ ** These type definitions directly follow the Asecca API documentation.
+ ** Only make changes to this file if a corresponding change to the API has
+ ** been made.
+ */
+
+/*
  ** Primitive API types
  */
 export type CostsConfigApplication =
@@ -17,39 +26,39 @@ export type CostsConfigCostSource =
   | 'Collection';
 
 /*
- ** Costs Config return data type definition
+ ** Costs Config data type definition
  */
 export interface ICostsConfigData {
   application: CostsConfigApplication;
-  collection_charge?: number | null;
+  collection_charge?: string | null;
   cost_source: CostsConfigCostSource;
-  customer_charge?: number | null;
-  effective_charge: number | null;
-  global_charge?: number | null;
+  customer_charge?: string | null;
+  effective_charge: string | null;
+  global_charge?: string | null;
   line_type: CostsConfigLineType;
   name: string;
-  project_charge?: number | null;
+  project_charge?: string | null;
 }
 
 /*
- ** Costs Config return data payload type definition
+ ** Costs Config GET request data payload type definition
  */
 export interface ICostsConfigDataPayload {
   costs: Array<ICostsConfigData>;
 }
 
 /*
- ** Costs Config save data costs type
+ ** Costs Config POST data Costs type definition
  */
 export interface ICostsConfigSaveDataCosts {
   application: CostsConfigApplication;
-  charge: string;
+  charge: string | null;
   line_type: CostsConfigLineType;
   name: string;
 }
 
 /*
- ** Costs Config save data selection type
+ ** Costs Config POST data Selection type definition
  */
 export interface ICostsConfigSaveDataSelection {
   collection?: number;
@@ -59,7 +68,7 @@ export interface ICostsConfigSaveDataSelection {
 }
 
 /*
- ** Costs Config save data payload type
+ ** Costs Config POST data payload type
  */
 export interface ICostsConfigSaveDataPayload {
   costs: Array<ICostsConfigSaveDataCosts>;
@@ -67,7 +76,7 @@ export interface ICostsConfigSaveDataPayload {
 }
 
 /*
- ** Proxy Error return data payload type definition
+ ** Proxy server error return data payload type definition
  */
 export interface IProxyErrorPayload {
   message: string;

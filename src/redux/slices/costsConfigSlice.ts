@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICostsConfigDataPayload } from '@/api-types';
+import { ICostsConfigData, ICostsConfigDataPayload } from '@/api-types';
 import costsConfigService from '@/services/costsConfigService';
 import {
   IFetchCostsConfigBySourceIdArgs,
@@ -65,17 +65,17 @@ export const saveBySourceId = createAsyncThunk(
 
 interface InitialCostsConfigState {
   loading: boolean;
-  data: ICostsConfigDataPayload | null;
-  dataShadow: ICostsConfigDataPayload | null;
+  data: ICostsConfigDataPayload;
+  dataShadow: ICostsConfigDataPayload;
   error?: string;
   saving: boolean;
 }
 
-/* initialise costs config state to not loaded */
+/* initialise Costs Config state to empty */
 const initialState: InitialCostsConfigState = {
   loading: false,
-  data: null,
-  dataShadow: null,
+  data: { costs: [] },
+  dataShadow: { costs: [] },
   saving: false,
 };
 
@@ -84,18 +84,28 @@ const costsConfigSlice = createSlice({
   name: 'costsConfig',
   initialState,
   reducers: {
+    /* reducer used for user input changes to the Costs Config data */
     editCostsConfig: (
       state,
       action: PayloadAction<ICostsConfigEditCostsPayload>
     ) => {
-      /* ensure we have some costs, if so, find and update passed cost */
-      if (state.data?.costs?.length)
-        // @ts-ignore
-        state.data.costs[action.payload.rowIdx][action.payload.colKey] = action
-          .payload.value
-          ? parseFloat(action.payload.value)
-          : null;
+      /* find and update passed cost */
+      state.data.costs = state.data.costs.map(
+        (cost: ICostsConfigData, index: number) => {
+          /* perform update for passed table row number */
+          if (index === action.payload.rowIdx) {
+            return {
+              ...cost,
+              /* update the value of the passed column */
+              [action.payload.colKey as keyof ICostsConfigData]:
+                action.payload.value,
+            };
+          }
+          return cost;
+        }
+      );
     },
+    /* reducer used for when user clears edits to Costs Config data */
     resetCostsConfig: (state) => {
       /* reset the data by simply copying the shadow to working copy */
       state.data = state.dataShadow;
@@ -111,8 +121,8 @@ const costsConfigSlice = createSlice({
       /* Fetch Costs Config extra reducers */
       .addCase(fetchBySourceId.pending, (state) => {
         state.loading = true;
-        state.data = null;
-        state.dataShadow = null;
+        state.data = { costs: [] };
+        state.dataShadow = { costs: [] };
         state.error = undefined;
       })
       .addCase(
@@ -126,8 +136,8 @@ const costsConfigSlice = createSlice({
       )
       .addCase(fetchBySourceId.rejected, (state) => {
         state.loading = false;
-        state.data = null;
-        state.dataShadow = null;
+        state.data = { costs: [] };
+        state.dataShadow = { costs: [] };
         state.error = 'Failed to load Costs Config data from server.';
       })
       /* Save Costs Config extra reducers */

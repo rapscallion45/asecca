@@ -25,12 +25,12 @@ async function getCostsConfig(
   return fetch(`/api/costs_config?${queryString}`, requestOptions);
 }
 
-async function setCostsConfig(data: ICostsConfigSaveDataPayload) {
+async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   /* configure POST header options */
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   };
 
   /* send request and catch any errors */

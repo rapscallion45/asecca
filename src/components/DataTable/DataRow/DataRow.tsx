@@ -4,13 +4,10 @@ import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { getCostsConfigPrevailingCharge } from '@/utils';
+import { ICostsConfigData } from '@/api-types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
-import {
-  IDataTableColumn,
-  CostsConfigRowCustom,
-  ICostsConfigRowTypical,
-} from '../types';
+import { IDataTableColumn } from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -25,7 +22,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface IDataRowProps {
-  row: ICostsConfigRowTypical | CostsConfigRowCustom;
+  row: ICostsConfigData;
   rowIdx: number;
   columns: Array<IDataTableColumn>;
   editCol: IDataTableColumn | undefined;
@@ -43,7 +40,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
       dispatch(
         editCostsConfig({
           value: value !== '--' ? value : null,
-          colKey: editCol?.key,
+          colKey: editCol?.key as keyof ICostsConfigData,
           rowIdx,
         })
       );
@@ -57,7 +54,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
       /* apply Prevailing column logic or simply return value */
       if (column.label === 'Prevailing')
         return getCostsConfigPrevailingCharge(row, editCol);
-      return row[column.key];
+      return row[column.key as keyof ICostsConfigData];
     },
     [row, editCol]
   );
@@ -71,14 +68,14 @@ const DataRow: FC<IDataRowProps> = (props) => {
             key={`${row.name}-${column.key}`}
             inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
-            value={getCellValueByColumn(column)}
+            value={getCellValueByColumn(column) || null}
             submitCellValue={submitCellValue}
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
           <Cell
             key={`${row.name}-${column.key}`}
-            value={row[column.key]}
+            value={row[column.key as keyof ICostsConfigData] || null}
             sx={{
               fontSize:
                 column.key !== 'application' ? 'inherit' : '12px !important',

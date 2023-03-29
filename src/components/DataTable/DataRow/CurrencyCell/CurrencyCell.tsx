@@ -27,7 +27,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 interface ICurrencyCellProps {
   inputId: string;
   canEdit: boolean;
-  value: string;
+  value: string | null;
   submitCellValue?: (value: string | null) => void;
   sx: any;
 }
@@ -42,12 +42,12 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
 
   /* edited cell value state initialised to passed cell value */
   const [editValue, setEditValue] = useState<string>(
-    value !== null ? parseFloat(value).toFixed(2) : '--'
+    value !== null ? value : '--'
   );
 
   /* ensure edit value is reset when there is update to passed value */
   useEffect(() => {
-    setEditValue(value !== null ? parseFloat(value).toFixed(2) : '--');
+    setEditValue(value !== null ? value : '--');
   }, [value]);
 
   /* callback for handling user input */
@@ -67,20 +67,20 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     if (editValue === '' || editValue === '--') {
       /* leave cell as null input indication */
       setEditValue('--');
-      if (submitCellValue) submitCellValue('--');
+      if (submitCellValue) submitCellValue(null);
       return;
     }
 
     /* check if user input is number */
     if (/^(\d+.)*(\d+)$/.test(editValue)) {
       /* user entered number, format correctly */
-      setEditValue(parseFloat(editValue).toFixed(2));
-      if (submitCellValue) submitCellValue(parseFloat(editValue).toFixed(2));
+      setEditValue(parseFloat(editValue).toFixed(2).toString());
+      if (submitCellValue)
+        submitCellValue(parseFloat(editValue).toFixed(2).toString());
     } else {
       /* user entered non-number, ignore input and reset to original cell value */
-      setEditValue(value !== null ? parseFloat(value).toFixed(2) : '--');
-      if (submitCellValue)
-        submitCellValue(value !== null ? parseFloat(value).toFixed(2) : '--');
+      setEditValue(value !== null ? value : '--');
+      if (submitCellValue) submitCellValue(value);
     }
   }, [value, editValue, submitCellValue]);
 

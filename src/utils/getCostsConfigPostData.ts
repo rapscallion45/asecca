@@ -4,10 +4,6 @@ import {
   ICostsConfigSaveDataPayload,
   ICostsConfigSaveDataSelection,
 } from '@/api-types';
-import {
-  CostsConfigRowCustom,
-  ICostsConfigRowTypical,
-} from '../components/DataTable/types';
 
 /* selection ID is in the form of a decimal number */
 const SELECTION_ID_PARAM_RADIX_VAL = 10;
@@ -25,11 +21,13 @@ const getCostsConfigPostData = (
 
   /* get costs requests - cycle through data and pull out required cols */
   const costs: Array<ICostsConfigSaveDataCosts> = data.map(
-    (dataRow: ICostsConfigRowTypical | CostsConfigRowCustom) => ({
+    (dataRow: ICostsConfigData) => ({
       application: dataRow.application,
       line_type: dataRow.line_type,
       name: dataRow.name,
-      charge: dataRow[`${source.toLowerCase()}_charge`],
+      charge:
+        dataRow[`${source.toLowerCase()}_charge` as keyof ICostsConfigData] ||
+        null,
     })
   );
 
