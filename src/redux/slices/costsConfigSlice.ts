@@ -101,40 +101,45 @@ const costsConfigSlice = createSlice({
       state.data = state.dataShadow;
     },
   },
-  extraReducers: {
-    /* Fetch Costs Config extra reducers */
-    [fetchBySourceId.pending.type]: (state) => {
-      state.loading = true;
-      state.data = null;
-      state.dataShadow = null;
-      state.error = undefined;
-    },
-    [fetchBySourceId.fulfilled.type]: (
-      state,
-      action: PayloadAction<ICostsConfigDataPayload>
-    ) => {
-      state.loading = false;
-      state.data = action.payload;
-      state.dataShadow = action.payload;
-      state.error = undefined;
-    },
-    [fetchBySourceId.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.data = null;
-      state.dataShadow = null;
-      state.error =
-        action.payload || 'Failed to load Costs Config data from server.';
-    },
-    /* Save Costs Config extra reducers */
-    [saveBySourceId.pending.type]: (state) => {
-      state.saving = true;
-    },
-    [saveBySourceId.fulfilled.type]: (state) => {
-      state.saving = false;
-    },
-    [saveBySourceId.rejected.type]: (state) => {
-      state.saving = false;
-    },
+  extraReducers: (builder) => {
+    /*
+     ** `extraReducers` used to handle actions that were generated
+     ** outside of the Costs Config slice, such as the async thunks
+     ** for the API requests, defined at the top of this file.
+     */
+    builder
+      /* Fetch Costs Config extra reducers */
+      .addCase(fetchBySourceId.pending, (state) => {
+        state.loading = true;
+        state.data = null;
+        state.dataShadow = null;
+        state.error = undefined;
+      })
+      .addCase(
+        fetchBySourceId.fulfilled,
+        (state, action: PayloadAction<ICostsConfigDataPayload>) => {
+          state.loading = false;
+          state.data = action.payload;
+          state.dataShadow = action.payload;
+          state.error = undefined;
+        }
+      )
+      .addCase(fetchBySourceId.rejected, (state) => {
+        state.loading = false;
+        state.data = null;
+        state.dataShadow = null;
+        state.error = 'Failed to load Costs Config data from server.';
+      })
+      /* Save Costs Config extra reducers */
+      .addCase(saveBySourceId.pending, (state) => {
+        state.saving = true;
+      })
+      .addCase(saveBySourceId.fulfilled, (state) => {
+        state.saving = false;
+      })
+      .addCase(saveBySourceId.rejected, (state) => {
+        state.saving = false;
+      });
   },
 });
 
