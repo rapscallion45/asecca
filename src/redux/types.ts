@@ -1,6 +1,9 @@
 import { SnackbarKey } from 'notistack';
 import { AlertColor } from '@mui/material';
-import { ICostsConfigDataPayload } from '@/api-types';
+import {
+  ICostsConfigDataPayload,
+  ICostsConfigSaveDataPayload,
+} from '@/api-types';
 
 /*
  ** Type and interface definitions for Redux actions
@@ -18,9 +21,7 @@ export interface IFetchCostsConfigBySourceIdArgs {
  ** Save Costs Config args for async thunk requests
  */
 export interface ISaveCostsConfigBySourceIdArgs {
-  source: string;
-  dataId: string | (string | null)[];
-  data: any;
+  data: ICostsConfigSaveDataPayload;
 }
 
 /*

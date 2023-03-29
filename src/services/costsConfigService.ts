@@ -1,3 +1,4 @@
+import { ICostsConfigSaveDataPayload } from '@/api-types';
 import { getCostsConfigSourceQueryString } from '../utils';
 
 /*
@@ -24,15 +25,7 @@ async function getCostsConfig(
   return fetch(`/api/costs_config?${queryString}`, requestOptions);
 }
 
-async function setCostsConfig(
-  source: string,
-  dataId: string | (string | null)[],
-  data: any
-) {
-  /* TODO: pack data into correct format for API */
-  console.log(source);
-  console.log(dataId);
-
+async function setCostsConfig(data: ICostsConfigSaveDataPayload) {
   /* configure POST header options */
   const requestOptions = {
     method: 'POST',

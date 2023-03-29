@@ -45,11 +45,7 @@ export const fetchBySourceId = createAsyncThunk(
 export const saveBySourceId = createAsyncThunk(
   'costsConfig/saveBySourecId',
   async (args: ISaveCostsConfigBySourceIdArgs, thunkAPI) => {
-    const res = await costsConfigService.setCostsConfig(
-      args.source,
-      args.dataId,
-      args.data
-    );
+    const res = await costsConfigService.setCostsConfig(args.data);
 
     /* add a notification and reject if bad response from server */
     if (res.status !== 200) {

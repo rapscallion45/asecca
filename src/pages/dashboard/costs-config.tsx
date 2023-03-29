@@ -8,7 +8,7 @@ import { LoadingButton } from '@mui/lab';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { getCostsConfigColFilterList } from '@/utils';
+import { getCostsConfigColFilterList, getCostsConfigPostData } from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
@@ -103,9 +103,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   const handleSave = () => {
     dispatch(
       saveCostsConfigBySourceId({
-        source: permission.level,
-        dataId: query,
-        data,
+        data: getCostsConfigPostData(permission.level, query, data?.costs),
       })
     );
   };
@@ -148,7 +146,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving}
+          disabled={saving || loading}
           loading={saving}
         >
           Save
@@ -157,7 +155,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
-          disabled={saving}
+          disabled={saving || loading}
           sx={{ backgroundColor: 'common.white', ml: 2 }}
         >
           Cancel
