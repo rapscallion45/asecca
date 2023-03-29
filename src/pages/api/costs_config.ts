@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type {
   ICostsConfigDataPayload,
   IProxyErrorPayload,
-} from '@/lib/api-types';
-import api from '../../lib/api';
+} from '@/lib/api/api-types';
+import { getCostsConfig, setCostsConfig } from '../../lib/api';
 
 /* proxy for handling requests to ASECCA 'costs_config' API */
 export default async function handler(
@@ -19,7 +19,7 @@ export default async function handler(
       /* call POST api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await api.setCostsConfig(body);
+        const response = await setCostsConfig(body);
 
         /* send back server response */
         if (response.status === 200) {
@@ -42,7 +42,7 @@ export default async function handler(
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await api.getCostsConfig(query);
+        const response = await getCostsConfig(query);
         const data = await response.json();
 
         /* send back server response */

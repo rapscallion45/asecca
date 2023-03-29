@@ -4,7 +4,7 @@ import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { getCostsConfigPrevailingCharge } from '@/utils';
-import { ICostsConfigData } from '@/lib/api-types';
+import { ICostsConfigData } from '@/lib/api/api-types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
 import { IDataTableColumn } from '../types';

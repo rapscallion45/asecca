@@ -1,4 +1,4 @@
-import { ICostsConfigData } from '@/lib/api-types';
+import { ICostsConfigData } from '@/lib/api/api-types';
 import { IDataTableColumn } from '@/components/DataTable/types';
 
 /*

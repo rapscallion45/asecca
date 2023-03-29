@@ -3,7 +3,7 @@ import {
   ICostsConfigSaveDataCosts,
   ICostsConfigSaveDataPayload,
   ICostsConfigSaveDataSelection,
-} from '@/lib/api-types';
+} from '@/lib/api/api-types';
 
 /* selection ID is in the form of a decimal number */
 const SELECTION_ID_PARAM_RADIX_VAL = 10;
