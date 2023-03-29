@@ -84,6 +84,20 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     }
   }, [value, editValue, submitCellValue]);
 
+  /* user has decided to clear input and enter null value for this cell */
+  const handleClearCell = useCallback(() => {
+    setEditValue('--');
+    if (submitCellValue) submitCellValue('--');
+  }, [submitCellValue]);
+
+  /* listens for enter key hits */
+  const onKeyDown = useCallback(
+    (event: any) => {
+      if (event.keyCode === 13) handleValueReformat();
+    },
+    [handleValueReformat]
+  );
+
   /* listens for clicks on cell */
   const handleClick = useCallback(() => {
     if (!clicked && editValue === '--')
@@ -92,25 +106,11 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     setClicked(true);
   }, [clicked, editValue]);
 
-  /* listen for enter key hits */
-  const onKeyDown = useCallback(
-    (event: any) => {
-      if (event.keyCode === 13) handleValueReformat();
-    },
-    [handleValueReformat]
-  );
-
-  /* listen for click away from cell */
+  /* listens for click away from cell */
   const handleClickAway = useCallback(() => {
     if (clicked) handleValueReformat();
     setClicked(false);
   }, [clicked, handleValueReformat]);
-
-  const handleClearCell = useCallback(() => {
-    /* user has decided to enter null value for this cell */
-    setEditValue('--');
-    if (submitCellValue) submitCellValue('--');
-  }, [submitCellValue]);
 
   return canEdit ? (
     <StyledTableCell sx={{ p: 0 }}>
