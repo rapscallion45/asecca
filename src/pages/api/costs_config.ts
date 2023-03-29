@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { CostsConfigDataPayload, ProxyErrorPayload } from '@/api-types';
+import type { ICostsConfigDataPayload, IProxyErrorPayload } from '@/api-types';
 import api from '../../lib/api';
 
 /* proxy for handling requests to ASECCA 'costs_config' API */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<CostsConfigDataPayload | ProxyErrorPayload | null>
+  res: NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>
 ) {
   const { method, query } = req;
 

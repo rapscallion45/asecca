@@ -1,6 +1,6 @@
 import { SnackbarKey } from 'notistack';
 import { AlertColor } from '@mui/material';
-import { CostsConfigDataPayload } from '@/api-types';
+import { ICostsConfigDataPayload } from '@/api-types';
 
 /*
  ** Type and interface definitions for Redux actions
@@ -36,7 +36,7 @@ export interface ICostsConfigEditCostsPayload {
  ** Costs Config state definition
  */
 export interface ICostsConfigState {
-  data?: CostsConfigDataPayload | null;
+  data?: ICostsConfigDataPayload | null;
   error?: string;
   loading?: boolean;
 }

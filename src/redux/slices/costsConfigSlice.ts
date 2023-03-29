@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CostsConfigDataPayload } from '@/api-types';
+import { ICostsConfigDataPayload } from '@/api-types';
 import costsConfigService from '@/services/costsConfigService';
 import {
   IFetchCostsConfigBySourceIdArgs,
@@ -69,8 +69,8 @@ export const saveBySourceId = createAsyncThunk(
 
 interface InitialCostsConfigState {
   loading: boolean;
-  data: CostsConfigDataPayload | null;
-  dataShadow: CostsConfigDataPayload | null;
+  data: ICostsConfigDataPayload | null;
+  dataShadow: ICostsConfigDataPayload | null;
   error?: string;
   saving: boolean;
 }
@@ -115,7 +115,7 @@ const costsConfigSlice = createSlice({
     },
     [fetchBySourceId.fulfilled.type]: (
       state,
-      action: PayloadAction<CostsConfigDataPayload>
+      action: PayloadAction<ICostsConfigDataPayload>
     ) => {
       state.loading = false;
       state.data = action.payload;

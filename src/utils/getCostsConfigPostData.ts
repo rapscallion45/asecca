@@ -1,6 +1,7 @@
 import {
-  CostsConfigSaveDataCosts,
-  CostsConfigSaveDataSelection,
+  ICostsConfigSaveDataCosts,
+  ICostsConfigSaveDataPayload,
+  ICostsConfigSaveDataSelection,
 } from '@/api-types';
 
 /*
@@ -10,9 +11,9 @@ const getCostsConfigPostData = (
   source: string,
   dataId: string | (string | null)[],
   data: any
-) => {
-  const costs: Array<CostsConfigSaveDataCosts> = data;
-  const selection: CostsConfigSaveDataSelection = {
+): ICostsConfigSaveDataPayload => {
+  const costs: Array<ICostsConfigSaveDataCosts> = data;
+  const selection: ICostsConfigSaveDataSelection = {
     [source.toLowerCase()]: dataId,
   };
 

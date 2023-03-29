@@ -19,7 +19,7 @@ export type CostsConfigCostSource =
 /*
  ** Costs Config return data type definition
  */
-export type CostsConfigData = {
+export interface ICostsConfigData {
   application: CostsConfigApplication;
   collection_charge?: number | null;
   cost_source: CostsConfigCostSource;
@@ -29,46 +29,46 @@ export type CostsConfigData = {
   line_type: CostsConfigLineType;
   name: string;
   project_charge?: number | null;
-};
+}
 
 /*
  ** Costs Config return data payload type definition
  */
-export type CostsConfigDataPayload = {
-  costs: Array<CostsConfigData>;
-};
+export interface ICostsConfigDataPayload {
+  costs: Array<ICostsConfigData>;
+}
 
 /*
  ** Costs Config save data costs type
  */
-export type CostsConfigSaveDataCosts = {
+export interface ICostsConfigSaveDataCosts {
   application: CostsConfigApplication;
   charge: string;
   line_type: CostsConfigLineType;
   name: string;
-};
+}
 
 /*
  ** Costs Config save data selection type
  */
-export type CostsConfigSaveDataSelection = {
+export interface ICostsConfigSaveDataSelection {
   collection?: number;
   project?: number;
   customer?: number;
   global?: number;
-};
+}
 
 /*
  ** Costs Config save data payload type
  */
-export type CostsConfigSaveDataPayload = {
-  costs: Array<CostsConfigSaveDataCosts>;
-  selection: CostsConfigSaveDataSelection;
-};
+export interface ICostsConfigSaveDataPayload {
+  costs: Array<ICostsConfigSaveDataCosts>;
+  selection: ICostsConfigSaveDataSelection;
+}
 
 /*
  ** Proxy Error return data payload type definition
  */
-export type ProxyErrorPayload = {
+export interface IProxyErrorPayload {
   message: string;
-};
+}
