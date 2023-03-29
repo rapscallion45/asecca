@@ -10,6 +10,11 @@ import {
  */
 
 /*
+ ** Theme Type options
+ */
+export type ThemeType = 'light' | 'dark';
+
+/*
  ** Fetch Costs Config args for async thunk requests
  */
 export interface IFetchCostsConfigBySourceIdArgs {
@@ -87,4 +92,11 @@ export interface ICloseNotificationPayload {
  */
 export interface IRemoveNotificationPayload {
   key: SnackbarKey;
+}
+
+/*
+ ** Theme state
+ */
+export interface IThemeState {
+  type: ThemeType;
 }

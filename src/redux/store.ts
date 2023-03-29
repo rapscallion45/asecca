@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import userPermissionReducer from './slices/userPermissionSlice';
 import costsConfigReducer from './slices/costsConfigSlice';
 import notificationsSlice from './slices/notificationsSlice';
+import themeSlice from './slices/themeSlice';
 
 /*
  ** Configuration of the redux store to manage the global application state
@@ -13,6 +14,7 @@ const store = configureStore({
     userPermission: userPermissionReducer,
     costsConfig: costsConfigReducer,
     notifications: notificationsSlice,
+    theme: themeSlice,
   },
   // @ts-ignore
   middleware:

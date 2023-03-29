@@ -1,3 +1,5 @@
+import { TypographyVariantsOptions } from '@mui/material/styles';
+
 /*
  ** ASECCA SPA typography definitions
  */
@@ -22,7 +24,7 @@ function responsiveFontSizes({ sm, md, lg }: any) {
 
 const FONT_PRIMARY = 'Poppins, Roboto';
 
-const typography = {
+const typography: TypographyVariantsOptions = {
   fontFamily: FONT_PRIMARY,
   fontWeightRegular: 400,
   fontWeightMedium: 600,
