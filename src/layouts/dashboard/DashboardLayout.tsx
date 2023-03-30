@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
+import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
+import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
 
 /* background image styling */
@@ -41,10 +43,15 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   useNotifier();
 
   return (
-    <main>
+    <main id="dashboard-page">
       <BackgroundStyle id="background" />
       <NavBar showLogin />
-      <RootStyle id="page-content">{children}</RootStyle>
+      <RootStyle id="page-content">
+        <Container maxWidth="lg">
+          <AdminTestPanel />
+          {children}
+        </Container>
+      </RootStyle>
     </main>
   );
 };

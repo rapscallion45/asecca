@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { AppState } from '@/redux/store';
+import { UserPermissionLevel } from '@/redux/types';
 
 const permissions = [
   {
@@ -41,8 +42,9 @@ const AdminTestPanel: FC = () => {
   const handlePermissionChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    // @ts-ignore
-    dispatch(setPermissionLevel({ level: event.target.value }));
+    dispatch(
+      setPermissionLevel({ level: event.target.value as UserPermissionLevel })
+    );
   };
 
   return (
