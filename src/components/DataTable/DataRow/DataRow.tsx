@@ -25,7 +25,7 @@ interface IDataRowProps {
   rowName: string;
   rowIdx: number;
   columns: Array<IDataTableColumn>;
-  editCol: IDataTableColumn | undefined;
+  editableColLabels: Array<string>;
   editCellCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
@@ -37,7 +37,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
     rowName,
     rowIdx,
     columns,
-    editCol,
+    editableColLabels,
     editCellCallback,
     getCellValueCallback,
   } = props;
@@ -67,7 +67,9 @@ const DataRow: FC<IDataRowProps> = (props) => {
           <CurrencyCell
             key={`${rowName}-${column.key}`}
             inputId={`${rowName}-${column.key}-input`}
-            canEdit={column.label === editCol?.label}
+            canEdit={editableColLabels.some(
+              (editCol) => editCol === column.label
+            )}
             value={getCellValueByColumn(column) || null}
             submitCellValue={(value) => submitCellValue(value, column.key)}
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}

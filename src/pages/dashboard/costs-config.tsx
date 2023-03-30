@@ -157,12 +157,12 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
       </Box>
       <DataTable
         name="costs config"
-        /* table editable cell(s) defined by user permission level */
-        editColName={permission.level}
         /* filter table columns by current permission level */
         columns={columns.filter(
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
+        /* table editable cell(s) defined by user permission level */
+        editableColLabels={[permission.level]}
         /* build table row props from costs config data */
         rows={data?.costs.map((cost: ICostsConfigData) => ({
           label: cost.name,

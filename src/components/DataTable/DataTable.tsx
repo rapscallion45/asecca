@@ -18,8 +18,8 @@ import {
 
 interface IDataTableProps {
   name: string;
-  editColName: string;
   columns: Array<IDataTableColumn>;
+  editableColLabels: Array<string>;
   rows: Array<IDataTableRow>;
   isLoading?: boolean;
   error?: string;
@@ -32,8 +32,8 @@ interface IDataTableProps {
 const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,
-    editColName,
     columns,
+    editableColLabels,
     rows,
     isLoading = false,
     error = '',
@@ -60,9 +60,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         rowName={row.label}
                         rowIdx={index}
                         columns={columns}
-                        editCol={columns.find(
-                          (col: IDataTableColumn) => editColName === col.label
-                        )}
+                        editableColLabels={editableColLabels}
                         editCellCallback={editCellCallback}
                         getCellValueCallback={getCellValueCallback}
                       />
