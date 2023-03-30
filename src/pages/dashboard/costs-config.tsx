@@ -135,14 +135,11 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   };
 
   /* handle any required logic when determining a cell's display value */
-  const handleGetCellValue = (
-    row: ICostsConfigData,
-    column: IDataTableColumn
-  ) => {
+  const handleGetCellValue = (rowIdx: number, column: IDataTableColumn) => {
     /* apply Prevailing column logic or simply return value */
     if (column.label === 'Prevailing')
-      return getCostsConfigPrevailingCharge(row, permission);
-    return row[column.key as keyof ICostsConfigData];
+      return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
+    return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
   };
 
   return (
@@ -161,7 +158,8 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         columns={columns.filter(
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
-        rows={data?.costs || []}
+        /* build table row props from costs config data */
+        rows={data?.costs.map((cost) => ({ label: cost.name }))}
         isLoading={loading}
         error={error}
         editCellCallback={handleEditellCallback}

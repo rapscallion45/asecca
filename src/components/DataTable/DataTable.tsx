@@ -4,7 +4,6 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
-import { ICostsConfigData } from '@/lib/api/api-types';
 import DataRow from './DataRow/DataRow';
 import ClientOnly from '../ClientOnly/ClientOnly';
 import ErrorRow from './ErrorRow/ErrorRow';
@@ -12,6 +11,7 @@ import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
 import {
   IDataTableColumn,
+  IDataTableRow,
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
 } from './types';
@@ -20,7 +20,7 @@ interface IDataTableProps {
   name: string;
   editColName: string;
   columns: Array<IDataTableColumn>;
-  rows: Array<ICostsConfigData>;
+  rows: Array<IDataTableRow>;
   isLoading?: boolean;
   error?: string;
   editCellCallback?: IDataTableEditCellValueCallback;
@@ -54,10 +54,10 @@ const DataTable: FC<IDataTableProps> = (props) => {
               {!isLoading && !error && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map((row: ICostsConfigData, index: number) => (
-                    <Fragment key={row.name}>
+                  {rows?.map((row: IDataTableRow, index: number) => (
+                    <Fragment key={row.label}>
                       <DataRow
-                        row={row}
+                        rowName={row.label}
                         rowIdx={index}
                         columns={columns}
                         editCol={columns.find(

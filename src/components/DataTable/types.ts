@@ -1,5 +1,3 @@
-import { ICostsConfigData } from '@/lib/api/api-types';
-
 /*
  ** type definition for Data Table column properties
  */
@@ -7,6 +5,13 @@ export interface IDataTableColumn {
   label: string;
   key: string;
   type: 'string' | 'currency';
+}
+
+/*
+ ** type definition for Data Table row properties
+ */
+export interface IDataTableRow {
+  label: string;
 }
 
 /*
@@ -20,5 +25,5 @@ export interface IDataTableEditCellValueCallback {
  ** function type definition for Data Table Cell value retrieval
  */
 export interface IDataTableGetCellValueCallback {
-  (row: ICostsConfigData, column: IDataTableColumn): string | null | undefined;
+  (rowIdx: number, column: IDataTableColumn): string | null | undefined;
 }

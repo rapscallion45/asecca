@@ -1,7 +1,6 @@
 import { FC, useCallback, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
-import { ICostsConfigData } from '@/lib/api/api-types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
 import {
@@ -23,7 +22,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 interface IDataRowProps {
-  row: ICostsConfigData;
+  rowName: string;
   rowIdx: number;
   columns: Array<IDataTableColumn>;
   editCol: IDataTableColumn | undefined;
@@ -35,7 +34,7 @@ interface IDataRowProps {
 /* ======================== */
 const DataRow: FC<IDataRowProps> = (props) => {
   const {
-    row,
+    rowName,
     rowIdx,
     columns,
     editCol,
@@ -56,8 +55,8 @@ const DataRow: FC<IDataRowProps> = (props) => {
   const getCellValueByColumn = useCallback(
     (column: IDataTableColumn) =>
       /* apply column logic required by the parent */
-      getCellValueCallback(row, column),
-    [row, getCellValueCallback]
+      getCellValueCallback(rowIdx, column),
+    [rowIdx, getCellValueCallback]
   );
 
   return (
@@ -66,8 +65,8 @@ const DataRow: FC<IDataRowProps> = (props) => {
       {columns.map((column: IDataTableColumn) =>
         column.type === 'currency' ? (
           <CurrencyCell
-            key={`${row.name}-${column.key}`}
-            inputId={`${row.name}-${column.key}-input`}
+            key={`${rowName}-${column.key}`}
+            inputId={`${rowName}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
             value={getCellValueByColumn(column) || null}
             submitCellValue={(value) => submitCellValue(value, column.key)}
@@ -75,7 +74,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
           />
         ) : (
           <Cell
-            key={`${row.name}-${column.key}`}
+            key={`${rowName}-${column.key}`}
             value={getCellValueByColumn(column) || null}
             sx={{
               fontSize:
