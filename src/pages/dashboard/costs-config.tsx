@@ -164,7 +164,9 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
         /* build table row props from costs config data */
-        rows={data?.costs.map((cost) => ({ label: cost.name }))}
+        rows={data?.costs.map((cost: ICostsConfigData) => ({
+          label: cost.name,
+        }))}
         isLoading={loading}
         error={error}
         editCellCallback={handleEditellCallback}
