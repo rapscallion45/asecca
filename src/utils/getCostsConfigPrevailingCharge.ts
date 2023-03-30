@@ -21,9 +21,12 @@ const getCostsConfigPrevailingCharge = (
   /* sanity check input */
   if (!tableRow || !permissionLevel) return null;
 
-  /* firstly, if editable col is not null, simply return editable col value */
+  /* firstly, if editable col is not null or undefined, return edit col value */
   const editCellKey = `${permissionLevel.level.toLowerCase()}_charge`;
-  if (tableRow[editCellKey as keyof ICostsConfigData] !== null)
+  if (
+    tableRow[editCellKey as keyof ICostsConfigData] !== null &&
+    tableRow[editCellKey as keyof ICostsConfigData] !== undefined
+  )
     return tableRow[editCellKey as keyof ICostsConfigData];
 
   /*
