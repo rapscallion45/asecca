@@ -10,7 +10,11 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 import ErrorRow from './ErrorRow/ErrorRow';
 import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
-import { IDataTableColumn, IDataTableEditCellCallback } from './types';
+import {
+  IDataTableColumn,
+  IDataTableEditCellCallback,
+  IDataTableGetCellValueCallback,
+} from './types';
 
 interface IDataTableProps {
   name: string;
@@ -20,6 +24,7 @@ interface IDataTableProps {
   isLoading?: boolean;
   error?: string;
   editCellCallback?: IDataTableEditCellCallback;
+  getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
 /* Data Table */
@@ -33,6 +38,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     isLoading = false,
     error = '',
     editCellCallback,
+    getCellValueCallback,
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -54,11 +60,11 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         row={row}
                         rowIdx={index}
                         columns={columns}
-                        /* we need the edit col to get 'Prevailing' value */
                         editCol={columns.find(
                           (col: IDataTableColumn) => editColName === col.label
                         )}
                         editCellCallback={editCellCallback}
+                        getCellValueCallback={getCellValueCallback}
                       />
                     </Fragment>
                   ))}

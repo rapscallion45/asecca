@@ -8,7 +8,12 @@ import { LoadingButton } from '@mui/lab';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { getCostsConfigColFilterList, getCostsConfigPostData } from '@/utils';
+import { ICostsConfigData } from '@/lib/api/api-types';
+import {
+  getCostsConfigColFilterList,
+  getCostsConfigPostData,
+  getCostsConfigPrevailingCharge,
+} from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
@@ -17,7 +22,6 @@ import {
   editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
 import { IDataTableColumn } from '@/components/DataTable/types';
-import { ICostsConfigData } from '@/lib/api/api-types';
 
 /* costs config data table column defintions */
 const columns: Array<IDataTableColumn> = [
@@ -130,6 +134,18 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
     );
   };
 
+  /* handle any required logic when determining a cell's display value */
+  const handleGetCellValue = (
+    row: ICostsConfigData,
+    column: IDataTableColumn,
+    editCol: IDataTableColumn | undefined
+  ) => {
+    /* apply Prevailing column logic or simply return value */
+    if (column.label === 'Prevailing')
+      return getCostsConfigPrevailingCharge(row, editCol);
+    return row[column.key as keyof ICostsConfigData];
+  };
+
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
@@ -150,6 +166,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         isLoading={loading}
         error={error}
         editCellCallback={handleEditellCallback}
+        getCellValueCallback={handleGetCellValue}
       />
       <Box
         sx={{

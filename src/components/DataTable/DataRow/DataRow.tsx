@@ -1,11 +1,14 @@
 import { FC, useCallback, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
-import { getCostsConfigPrevailingCharge } from '@/utils';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
-import { IDataTableColumn, IDataTableEditCellCallback } from '../types';
+import {
+  IDataTableColumn,
+  IDataTableEditCellCallback,
+  IDataTableGetCellValueCallback,
+} from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -25,12 +28,20 @@ interface IDataRowProps {
   columns: Array<IDataTableColumn>;
   editCol: IDataTableColumn | undefined;
   editCellCallback?: IDataTableEditCellCallback;
+  getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
 /* Data Table Row component */
 /* ======================== */
 const DataRow: FC<IDataRowProps> = (props) => {
-  const { row, rowIdx, columns, editCol, editCellCallback } = props;
+  const {
+    row,
+    rowIdx,
+    columns,
+    editCol,
+    editCellCallback,
+    getCellValueCallback,
+  } = props;
 
   /* submit the updated cell value */
   const submitCellValue = useCallback(
@@ -43,13 +54,10 @@ const DataRow: FC<IDataRowProps> = (props) => {
 
   /* retrieve the row cell value for passed column */
   const getCellValueByColumn = useCallback(
-    (column: IDataTableColumn) => {
-      /* apply Prevailing column logic or simply return value */
-      if (column.label === 'Prevailing')
-        return getCostsConfigPrevailingCharge(row, editCol);
-      return row[column.key as keyof ICostsConfigData];
-    },
-    [row, editCol]
+    (column: IDataTableColumn) =>
+      /* apply column logic required by the parent */
+      getCellValueCallback(row, column, editCol),
+    [row, editCol, getCellValueCallback]
   );
 
   return (
@@ -68,7 +76,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
         ) : (
           <Cell
             key={`${row.name}-${column.key}`}
-            value={row[column.key as keyof ICostsConfigData] || null}
+            value={getCellValueByColumn(column) || null}
             sx={{
               fontSize:
                 column.key !== 'application' ? 'inherit' : '12px !important',
