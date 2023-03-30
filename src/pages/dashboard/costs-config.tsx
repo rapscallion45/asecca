@@ -124,7 +124,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   };
 
   /* handle the update of the table data */
-  const handleEditellCallback = (
+  const handleEditCellCallback = (
     value: string | null,
     colKey: string,
     rowIdx: number
@@ -169,7 +169,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         }))}
         isLoading={loading}
         error={error}
-        editCellCallback={handleEditellCallback}
+        editCellValueCallback={handleEditCellCallback}
         getCellValueCallback={handleGetCellValue}
       />
       <Box

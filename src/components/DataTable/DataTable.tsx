@@ -23,7 +23,7 @@ interface IDataTableProps {
   rows: Array<IDataTableRow>;
   isLoading?: boolean;
   error?: string;
-  editCellCallback?: IDataTableEditCellValueCallback;
+  editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
@@ -37,7 +37,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     rows,
     isLoading = false,
     error = '',
-    editCellCallback,
+    editCellValueCallback,
     getCellValueCallback,
   } = props;
 
@@ -61,7 +61,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         rowIdx={index}
                         columns={columns}
                         editableColLabels={editableColLabels}
-                        editCellCallback={editCellCallback}
+                        editCellValueCallback={editCellValueCallback}
                         getCellValueCallback={getCellValueCallback}
                       />
                     </Fragment>

@@ -26,7 +26,7 @@ interface IDataRowProps {
   rowIdx: number;
   columns: Array<IDataTableColumn>;
   editableColLabels: Array<string>;
-  editCellCallback?: IDataTableEditCellValueCallback;
+  editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
@@ -38,23 +38,23 @@ const DataRow: FC<IDataRowProps> = (props) => {
     rowIdx,
     columns,
     editableColLabels,
-    editCellCallback,
+    editCellValueCallback,
     getCellValueCallback,
   } = props;
 
   /* submit the updated cell value */
   const submitCellValue = useCallback(
     (value: string | null, colKey: string) => {
-      if (editCellCallback)
-        editCellCallback(value !== '--' ? value : null, colKey, rowIdx);
+      if (editCellValueCallback)
+        editCellValueCallback(value !== '--' ? value : null, colKey, rowIdx);
     },
-    [rowIdx, editCellCallback]
+    [rowIdx, editCellValueCallback]
   );
 
-  /* retrieve the row cell value for passed column */
+  /* retrieve cell value for passed table column and row index */
   const getCellValueByColumn = useCallback(
     (column: IDataTableColumn) =>
-      /* apply column logic required by the parent */
+      /* apply any logic required for this column (such as 'Prevailing') */
       getCellValueCallback(rowIdx, column),
     [rowIdx, getCellValueCallback]
   );
@@ -72,12 +72,14 @@ const DataRow: FC<IDataRowProps> = (props) => {
             )}
             value={getCellValueByColumn(column) || null}
             submitCellValue={(value) => submitCellValue(value, column.key)}
+            /* specific requirement for 'Prevailing' columns */
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
           <Cell
             key={`${rowName}-${column.key}`}
             value={getCellValueByColumn(column) || null}
+            /* specific requirement for 'Application' columns */
             sx={{
               fontSize:
                 column.key !== 'application' ? 'inherit' : '12px !important',
