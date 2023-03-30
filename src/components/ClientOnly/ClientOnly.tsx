@@ -12,12 +12,13 @@ const ClientOnly: FC<IClientOnlyProps> = (props) => {
 
   /* useEffect is only run in the client/browser environment */
   useEffect(() => {
+    /* useEffect has run, therefore this is browser/client environment */
     setHasMounted(true);
   }, []);
 
-  if (!hasMounted) return null;
-
-  return <div>{children}</div>;
+  return hasMounted ? (
+    <div aria-labelledby="client-only-element">{children}</div>
+  ) : null;
 };
 
 export default ClientOnly;
