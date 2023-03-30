@@ -60,6 +60,9 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* keep a copy of the original API request permission level in local state */
   const [apiPermission, setApiPermission] = useState<string>('');
 
+  /* keep track of whether table has been edited or not */
+  const [isEdited, setIsEdited] = useState<boolean>(false);
+
   /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
     /* check for customer, project or collection data query */
@@ -117,6 +120,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* handle the resetting of the table data */
   const handleCancel = () => {
     dispatch(resetCostsConfig());
+    setIsEdited(false);
   };
 
   /* handle the update of the table data */
@@ -132,6 +136,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         rowIdx,
       })
     );
+    setIsEdited(true);
   };
 
   /* handle any required logic when determining a cell's display value */
@@ -178,7 +183,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving || loading}
+          disabled={saving || loading || !isEdited}
           loading={saving}
         >
           Save
@@ -187,7 +192,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
-          disabled={saving || loading}
+          disabled={saving || loading || !isEdited}
           sx={{ backgroundColor: 'common.white', ml: 2 }}
         >
           Cancel
