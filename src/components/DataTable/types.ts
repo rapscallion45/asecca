@@ -12,7 +12,7 @@ export interface IDataTableColumn {
 /*
  ** function type definition for Data Table Cell edits
  */
-export interface IDataTableEditCellCallback {
+export interface IDataTableEditCellValueCallback {
   (value: string | null, colKey: string, rowIdx: number): void;
 }
 
@@ -20,9 +20,5 @@ export interface IDataTableEditCellCallback {
  ** function type definition for Data Table Cell value retrieval
  */
 export interface IDataTableGetCellValueCallback {
-  (
-    row: ICostsConfigData,
-    column: IDataTableColumn,
-    editCol: IDataTableColumn | undefined
-  ): string | null | undefined;
+  (row: ICostsConfigData, column: IDataTableColumn): string | null | undefined;
 }

@@ -1,12 +1,12 @@
 import { ICostsConfigData } from '@/lib/api/api-types';
-import { IDataTableColumn } from '@/components/DataTable/types';
+import { IUserPermissionLevelState } from '@/redux/types';
 
 /*
  ** helper function for getting the Prevailing charge of a Costs Config scope
  */
 const getCostsConfigPrevailingCharge = (
   tableRow: ICostsConfigData,
-  editCol: IDataTableColumn | undefined | null
+  permissionLevel: IUserPermissionLevelState
 ) => {
   /*
    ** the 'Prevailing' column of a costs config table row is always equal
@@ -19,18 +19,19 @@ const getCostsConfigPrevailingCharge = (
    */
 
   /* sanity check input */
-  if (!tableRow || !editCol) return null;
+  if (!tableRow || !permissionLevel) return null;
 
   /* firstly, if editable col is not null, simply return editable col value */
-  if (tableRow[editCol?.key as keyof ICostsConfigData] !== null)
-    return tableRow[editCol?.key as keyof ICostsConfigData];
+  const editCellKey = `${permissionLevel.level.toLowerCase()}_charge`;
+  if (tableRow[editCellKey as keyof ICostsConfigData] !== null)
+    return tableRow[editCellKey as keyof ICostsConfigData];
 
   /*
    ** if editable col is null, determine charge according to
    ** the col permission hierachy
    */
   const getCharge = () => {
-    switch (editCol?.label) {
+    switch (permissionLevel.level) {
       case 'Collection':
         /* if Collection, run through all other columns */
         if (

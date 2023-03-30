@@ -6,7 +6,7 @@ import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
 import {
   IDataTableColumn,
-  IDataTableEditCellCallback,
+  IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
 } from '../types';
 
@@ -27,7 +27,7 @@ interface IDataRowProps {
   rowIdx: number;
   columns: Array<IDataTableColumn>;
   editCol: IDataTableColumn | undefined;
-  editCellCallback?: IDataTableEditCellCallback;
+  editCellCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
@@ -56,8 +56,8 @@ const DataRow: FC<IDataRowProps> = (props) => {
   const getCellValueByColumn = useCallback(
     (column: IDataTableColumn) =>
       /* apply column logic required by the parent */
-      getCellValueCallback(row, column, editCol),
-    [row, editCol, getCellValueCallback]
+      getCellValueCallback(row, column),
+    [row, getCellValueCallback]
   );
 
   return (

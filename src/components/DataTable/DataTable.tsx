@@ -12,7 +12,7 @@ import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
 import {
   IDataTableColumn,
-  IDataTableEditCellCallback,
+  IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
 } from './types';
 
@@ -23,7 +23,7 @@ interface IDataTableProps {
   rows: Array<ICostsConfigData>;
   isLoading?: boolean;
   error?: string;
-  editCellCallback?: IDataTableEditCellCallback;
+  editCellCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 

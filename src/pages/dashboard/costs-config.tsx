@@ -137,12 +137,11 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* handle any required logic when determining a cell's display value */
   const handleGetCellValue = (
     row: ICostsConfigData,
-    column: IDataTableColumn,
-    editCol: IDataTableColumn | undefined
+    column: IDataTableColumn
   ) => {
     /* apply Prevailing column logic or simply return value */
     if (column.label === 'Prevailing')
-      return getCostsConfigPrevailingCharge(row, editCol);
+      return getCostsConfigPrevailingCharge(row, permission);
     return row[column.key as keyof ICostsConfigData];
   };
 
