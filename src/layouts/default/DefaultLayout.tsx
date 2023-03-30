@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import useNotifier from '@/hooks/useNotifier';
 
 interface DefaultLayoutProps {
   children?: ReactNode;
@@ -8,6 +9,9 @@ interface DefaultLayoutProps {
 /* ============================ */
 const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
   const { children } = props;
+
+  /* initialise alert notifications */
+  useNotifier();
 
   return (
     <main>

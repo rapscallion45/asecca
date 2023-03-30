@@ -1,8 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserPermissionLevelState } from '../types';
+import { IUserPermissionLevelState } from '../types';
+
+/*
+ ** Global application state slice definition for User Permission
+ **
+ ** The User Permission state is used to determine what the current
+ ** logged in user can view and edit in the application. This state can only
+ ** be manipulated from the Admin Test Panel component, but is used
+ ** across the application.
+ */
 
 interface InitialUserPermissionState {
-  permission: UserPermissionLevelState;
+  permission: IUserPermissionLevelState;
 }
 
 /* initialise user permission level state - always set lowest level, 'Global' */
@@ -17,7 +26,7 @@ const userPermissionSlice = createSlice({
   reducers: {
     setPermissionLevel: (
       state,
-      action: PayloadAction<UserPermissionLevelState>
+      action: PayloadAction<IUserPermissionLevelState>
     ) => {
       state.permission = action.payload;
     },

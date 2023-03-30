@@ -1,12 +1,12 @@
 import base64 from 'base-64';
 import queryString from 'query-string';
-import { CostsConfigSaveDataPayload } from '@/api-types';
+import { ICostsConfigSaveDataPayload } from '@/lib/api/api-types';
 
 /* configuration params for staging DB */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
 
-async function getCostsConfig(
+export async function getCostsConfig(
   query: Partial<{
     [key: string]: string | string[];
   }>
@@ -32,7 +32,7 @@ async function getCostsConfig(
   );
 }
 
-async function setCostsConfig(body: CostsConfigSaveDataPayload) {
+export async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   /* setup POST request options with basic auth */
   const requestOptions = {
     method: 'POST',
@@ -45,16 +45,6 @@ async function setCostsConfig(body: CostsConfigSaveDataPayload) {
     body: JSON.stringify(body),
   };
 
-  /* construct query param string from passed query object */
-  // const queryParamString = queryString.stringify(query);
-
   /* send the costs config */
   return fetch(`${STAGING_DB_REST_API_URL}/api/costs_config`, requestOptions);
 }
-
-const api = {
-  getCostsConfig,
-  setCostsConfig,
-};
-
-export default api;

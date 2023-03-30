@@ -8,24 +8,30 @@ import { LoadingButton } from '@mui/lab';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { getCostsConfigColFilterList } from '@/utils';
+import { ICostsConfigData } from '@/lib/api/api-types';
+import {
+  getCostsConfigColFilterList,
+  getCostsConfigPostData,
+  getCostsConfigPrevailingCharge,
+} from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import {
   fetchBySourceId as fetchCostsConfigBySourceId,
   saveBySourceId as saveCostsConfigBySourceId,
   resetCostsConfig,
+  editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
-import { DataTableColumn } from '@/components/DataTable/types';
+import { IDataTableColumn } from '@/components/DataTable/types';
 
 /* costs config data table column defintions */
-const columns: Array<DataTableColumn> = [
-  { label: 'Product', key: 'name' },
-  { label: 'Application', key: 'application' },
-  { label: 'Global', key: 'global_charge' },
-  { label: 'Customer', key: 'customer_charge' },
-  { label: 'Project', key: 'project_charge' },
-  { label: 'Collection', key: 'collection_charge' },
-  { label: 'Prevailing', key: 'effective_charge' },
+const columns: Array<IDataTableColumn> = [
+  { label: 'Product', key: 'name', type: 'string' },
+  { label: 'Application', key: 'application', type: 'string' },
+  { label: 'Global', key: 'global_charge', type: 'currency' },
+  { label: 'Customer', key: 'customer_charge', type: 'currency' },
+  { label: 'Project', key: 'project_charge', type: 'currency' },
+  { label: 'Collection', key: 'collection_charge', type: 'currency' },
+  { label: 'Prevailing', key: 'effective_charge', type: 'currency' },
 ];
 
 /* Costs Config Test Page */
@@ -53,6 +59,9 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* *** THIS IS A TEST PARAM - USER WILL NOT BE ABLE TO CHANGE PERMISSION *** */
   /* keep a copy of the original API request permission level in local state */
   const [apiPermission, setApiPermission] = useState<string>('');
+
+  /* keep track of whether table has been edited or not */
+  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
@@ -103,9 +112,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   const handleSave = () => {
     dispatch(
       saveCostsConfigBySourceId({
-        source: permission.level,
-        dataId: query,
-        data,
+        data: getCostsConfigPostData(permission.level, query, data?.costs),
       })
     );
   };
@@ -113,6 +120,31 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* handle the resetting of the table data */
   const handleCancel = () => {
     dispatch(resetCostsConfig());
+    setIsEdited(false);
+  };
+
+  /* handle the update of the table data */
+  const handleEditellCallback = (
+    value: string | null,
+    colKey: string,
+    rowIdx: number
+  ) => {
+    dispatch(
+      editCostsConfig({
+        value: value !== '--' ? value : null,
+        colKey: colKey as keyof ICostsConfigData,
+        rowIdx,
+      })
+    );
+    setIsEdited(true);
+  };
+
+  /* handle any required logic when determining a cell's display value */
+  const handleGetCellValue = (rowIdx: number, column: IDataTableColumn) => {
+    /* apply Prevailing column logic or simply return value */
+    if (column.label === 'Prevailing')
+      return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
+    return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
   };
 
   return (
@@ -129,11 +161,14 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         editColName={permission.level}
         /* filter table columns by current permission level */
         columns={columns.filter(
-          (col: DataTableColumn) => !colFilterList.includes(col.label)
+          (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
-        rows={data?.costs || []}
+        /* build table row props from costs config data */
+        rows={data?.costs.map((cost) => ({ label: cost.name }))}
         isLoading={loading}
-        isError={Boolean(error)}
+        error={error}
+        editCellCallback={handleEditellCallback}
+        getCellValueCallback={handleGetCellValue}
       />
       <Box
         sx={{
@@ -148,7 +183,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving}
+          disabled={saving || loading || !isEdited}
           loading={saving}
         >
           Save
@@ -157,7 +192,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
-          disabled={saving}
+          disabled={saving || loading || !isEdited}
           sx={{ backgroundColor: 'common.white', ml: 2 }}
         >
           Cancel

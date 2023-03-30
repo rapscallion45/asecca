@@ -1,15 +1,12 @@
-import {
-  DataTableColumn,
-  CostsConfigRowTypical,
-  CostsConfigRowCustom,
-} from '@/components/DataTable/types';
+import { ICostsConfigData } from '@/lib/api/api-types';
+import { IUserPermissionLevelState } from '@/redux/types';
 
 /*
- ** helper function for getting the Prevailing charge of a costs config scope
+ ** helper function for getting the Prevailing charge of a Costs Config scope
  */
 const getCostsConfigPrevailingCharge = (
-  row: CostsConfigRowTypical | CostsConfigRowCustom,
-  editCol: DataTableColumn | undefined | null
+  tableRow: ICostsConfigData,
+  permissionLevel: IUserPermissionLevelState
 ) => {
   /*
    ** the 'Prevailing' column of a costs config table row is always equal
@@ -22,38 +19,48 @@ const getCostsConfigPrevailingCharge = (
    */
 
   /* sanity check input */
-  if (!row || !editCol) return null;
+  if (!tableRow || !permissionLevel) return null;
 
-  /* firstly, if editable col is not null, simply return editable col value */
-  if (row[editCol?.key] !== null)
-    return parseFloat(row[editCol?.key]).toFixed(2);
+  /* firstly, if editable col is not null or undefined, return edit col value */
+  const editCellKey = `${permissionLevel.level.toLowerCase()}_charge`;
+  if (
+    tableRow[editCellKey as keyof ICostsConfigData] !== null &&
+    tableRow[editCellKey as keyof ICostsConfigData] !== undefined
+  )
+    return tableRow[editCellKey as keyof ICostsConfigData];
 
   /*
    ** if editable col is null, determine charge according to
    ** the col permission hierachy
    */
   const getCharge = () => {
-    switch (editCol?.label) {
+    switch (permissionLevel.level) {
       case 'Collection':
         /* if Collection, run through all other columns */
-        if (row.project_charge !== null && row.project_charge !== undefined)
-          return parseFloat(row.project_charge).toFixed(2);
-        if (row.customer_charge !== null && row.customer_charge !== undefined)
-          return parseFloat(row.customer_charge).toFixed(2);
-        if (row.global_charge !== null)
-          return parseFloat(row.global_charge).toFixed(2);
+        if (
+          tableRow.project_charge !== null &&
+          tableRow.project_charge !== undefined
+        )
+          return tableRow.project_charge;
+        if (
+          tableRow.customer_charge !== null &&
+          tableRow.customer_charge !== undefined
+        )
+          return tableRow.customer_charge;
+        if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Project':
         /* if Project, only run through columns below Project */
-        if (row.customer_charge !== null && row.customer_charge !== undefined)
-          return parseFloat(row.customer_charge).toFixed(2);
-        if (row.global_charge !== null)
-          return parseFloat(row.global_charge).toFixed(2);
+        if (
+          tableRow.customer_charge !== null &&
+          tableRow.customer_charge !== undefined
+        )
+          return tableRow.customer_charge;
+        if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Customer':
-        /* if Customer, only run through columns below Project */
-        if (row.global_charge !== null)
-          return parseFloat(row.global_charge).toFixed(2);
+        /* if Customer, only run through columns below Customer */
+        if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Global':
       default:

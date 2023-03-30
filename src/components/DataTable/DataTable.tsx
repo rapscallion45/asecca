@@ -10,30 +10,35 @@ import ErrorRow from './ErrorRow/ErrorRow';
 import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
 import {
-  CostsConfigRowCustom,
-  CostsConfigRowTypical,
-  DataTableColumn,
+  IDataTableColumn,
+  IDataTableRow,
+  IDataTableEditCellValueCallback,
+  IDataTableGetCellValueCallback,
 } from './types';
 
-interface DataTableProps {
+interface IDataTableProps {
   name: string;
   editColName: string;
-  columns: Array<DataTableColumn>;
-  rows: Array<CostsConfigRowTypical | CostsConfigRowCustom>;
+  columns: Array<IDataTableColumn>;
+  rows: Array<IDataTableRow>;
   isLoading?: boolean;
-  isError?: boolean;
+  error?: string;
+  editCellCallback?: IDataTableEditCellValueCallback;
+  getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
 /* Data Table */
 /* ========== */
-const DataTable: FC<DataTableProps> = (props) => {
+const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,
     editColName,
     columns,
     rows,
     isLoading = false,
-    isError = false,
+    error = '',
+    editCellCallback,
+    getCellValueCallback,
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -46,34 +51,27 @@ const DataTable: FC<DataTableProps> = (props) => {
           </TableHead>
           <TableBody>
             <>
-              {!isLoading && !isError && (
+              {!isLoading && !error && (
                 <>
                   {/* map passed rows */}
-                  {rows?.map(
-                    (
-                      row: CostsConfigRowTypical | CostsConfigRowCustom,
-                      index: number
-                    ) => (
-                      <Fragment key={row.name}>
-                        <DataRow
-                          row={row}
-                          rowIdx={index}
-                          columns={columns}
-                          /* we need the edit col to get 'Prevailing' value */
-                          editCol={columns.find(
-                            (col: DataTableColumn) => editColName === col.label
-                          )}
-                        />
-                      </Fragment>
-                    )
-                  )}
+                  {rows?.map((row: IDataTableRow, index: number) => (
+                    <Fragment key={row.label}>
+                      <DataRow
+                        rowName={row.label}
+                        rowIdx={index}
+                        columns={columns}
+                        editCol={columns.find(
+                          (col: IDataTableColumn) => editColName === col.label
+                        )}
+                        editCellCallback={editCellCallback}
+                        getCellValueCallback={getCellValueCallback}
+                      />
+                    </Fragment>
+                  ))}
                 </>
               )}
-              {!isLoading && isError && (
-                <ErrorRow
-                  columns={columns}
-                  message="Error loading the requested data"
-                />
+              {!isLoading && Boolean(error) && (
+                <ErrorRow columns={columns} message={error} />
               )}
               {isLoading && (
                 <LoadingRow columns={columns} message="Loading..." />

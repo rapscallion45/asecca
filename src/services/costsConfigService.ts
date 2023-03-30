@@ -1,4 +1,9 @@
+import { ICostsConfigSaveDataPayload } from '@/lib/api/api-types';
 import { getCostsConfigSourceQueryString } from '../utils';
+
+/*
+ ** API services for client application
+ */
 
 async function getCostsConfig(
   source: string,
@@ -10,32 +15,26 @@ async function getCostsConfig(
     dataId as string
   );
 
+  /* configure GET header options */
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`/api/costs_config?${queryString}`, requestOptions).then((res) =>
-    res.json()
-  );
+  /* send request and catch any errors */
+  return fetch(`/api/costs_config?${queryString}`, requestOptions);
 }
 
-async function setCostsConfig(
-  source: string,
-  dataId: string | (string | null)[],
-  data: any
-) {
-  /* TODO: pack data into correct format for API */
-  console.log(source);
-  console.log(dataId);
-
+async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
+  /* configure POST header options */
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   };
 
-  return fetch(`/api/costs_config`, requestOptions).then((res) => res.json());
+  /* send request and catch any errors */
+  return fetch(`/api/costs_config`, requestOptions);
 }
 
 const costsConfigService = {

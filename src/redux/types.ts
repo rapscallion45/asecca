@@ -1,28 +1,102 @@
-import { CostsConfigDataPayload } from '@/api-types';
+import { SnackbarKey } from 'notistack';
+import { AlertColor } from '@mui/material';
+import {
+  ICostsConfigDataPayload,
+  ICostsConfigSaveDataPayload,
+} from '@/lib/api/api-types';
 
-export type FetchCostsConfigBySourceIdArgs = {
+/*
+ ** Type and interface definitions for Redux actions
+ */
+
+/*
+ ** Theme Type options
+ */
+export type ThemeType = 'light' | 'dark';
+
+/*
+ ** Fetch Costs Config args for async thunk requests
+ */
+export interface IFetchCostsConfigBySourceIdArgs {
   source: string;
   dataId: string | (string | null)[];
-};
+}
 
-export type SaveCostsConfigBySourceIdArgs = {
-  source: string;
-  dataId: string | (string | null)[];
-  data: any;
-};
+/*
+ ** Save Costs Config args for async thunk requests
+ */
+export interface ISaveCostsConfigBySourceIdArgs {
+  data: ICostsConfigSaveDataPayload;
+}
 
-export type UserPermissionLevelState = {
-  level: 'Global' | 'Customer' | 'Project' | 'Collection';
-};
-
-export type CostsConfigEditCostsPayload = {
-  colKey: string | undefined;
+/*
+ ** Costs Config edit redux action payload definition
+ */
+export interface ICostsConfigEditCostsPayload {
+  colKey: string;
   rowIdx: number;
   value: string | null;
-};
+}
 
-export type CostsConfigState = {
-  data?: CostsConfigDataPayload | null;
-  error?: string | null;
+/*
+ ** Costs Config state definition
+ */
+export interface ICostsConfigState {
+  data?: ICostsConfigDataPayload | null;
+  error?: string;
   loading?: boolean;
-};
+}
+
+/*
+ ** User Permission Level state definition
+ */
+export interface IUserPermissionLevelState {
+  level: 'Global' | 'Customer' | 'Project' | 'Collection';
+}
+
+/*
+ ** Notification options definition
+ */
+export interface INotificationOptions {
+  key: SnackbarKey;
+  variant: AlertColor;
+  onClose?: any;
+}
+
+/*
+ ** Notification state definition
+ */
+export interface INotificationState {
+  message: string;
+  dismissed: boolean;
+  options: INotificationOptions;
+}
+
+/*
+ ** Add Notification action payload
+ */
+export interface IAddNotificationPayload {
+  message: string;
+  variant: AlertColor;
+}
+
+/*
+ ** Close Notification action payload
+ */
+export interface ICloseNotificationPayload {
+  key: SnackbarKey;
+}
+
+/*
+ ** Remove Notification action payload
+ */
+export interface IRemoveNotificationPayload {
+  key: SnackbarKey;
+}
+
+/*
+ ** Theme state
+ */
+export interface IThemeState {
+  type: ThemeType;
+}

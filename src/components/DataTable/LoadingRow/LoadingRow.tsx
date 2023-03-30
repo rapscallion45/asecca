@@ -4,16 +4,16 @@ import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { DataTableColumn } from '@/components/DataTable/types';
+import { IDataTableColumn } from '@/components/DataTable/types';
 
-interface LoadingRowProps {
-  columns: Array<DataTableColumn>;
+interface ILoadingRowProps {
+  columns: Array<IDataTableColumn>;
   message: string;
 }
 
 /* Data Table Loading Row helper */
 /* ============================= */
-const LoadingRow: FC<LoadingRowProps> = (props) => {
+const LoadingRow: FC<ILoadingRowProps> = (props) => {
   const { columns, message } = props;
 
   return (

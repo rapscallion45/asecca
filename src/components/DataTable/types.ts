@@ -1,29 +1,29 @@
-import { CostsConfigApplication, CostsConfigCostSource } from '@/api-types';
-
 /*
- ** type definition for data table column props
+ ** type definition for Data Table column properties
  */
-export type DataTableColumn = {
+export interface IDataTableColumn {
   label: string;
   key: string;
-};
+  type: 'string' | 'currency';
+}
 
 /*
- ** type definition for Costs Config "Typical" data row
+ ** type definition for Data Table row properties
  */
-export type CostsConfigRowTypical = {
-  application: CostsConfigApplication;
-  collection_charge: string | null;
-  cost_source: CostsConfigCostSource;
-  customer_charge: string | null;
-  effective_charge: string | null;
-  global_charge: string | null;
-  line_type: string | null;
-  name: string;
-  project_charge: string | null;
-};
+export interface IDataTableRow {
+  label: string;
+}
 
 /*
- ** type definition for Costs Config "Custom" data row
+ ** function type definition for Data Table Cell edits
  */
-export type CostsConfigRowCustom = any;
+export interface IDataTableEditCellValueCallback {
+  (value: string | null, colKey: string, rowIdx: number): void;
+}
+
+/*
+ ** function type definition for Data Table Cell value retrieval
+ */
+export interface IDataTableGetCellValueCallback {
+  (rowIdx: number, column: IDataTableColumn): string | null | undefined;
+}

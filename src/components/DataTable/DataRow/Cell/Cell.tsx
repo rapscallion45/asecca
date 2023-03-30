@@ -16,14 +16,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-interface CellProps {
-  value: string;
+interface ICellProps {
+  value: string | null;
   sx: any;
 }
 
 /* Data Table Cell helper component */
 /* ================================ */
-const Cell: FC<CellProps> = (props) => {
+const Cell: FC<ICellProps> = (props) => {
   const { value, sx } = props;
 
   return (

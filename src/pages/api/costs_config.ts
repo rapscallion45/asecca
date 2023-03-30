@@ -1,14 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { CostsConfigDataPayload, ProxyErrorPayload } from '@/api-types';
-import api from '../../lib/api';
+import type {
+  ICostsConfigDataPayload,
+  IProxyErrorPayload,
+} from '@/lib/api/api-types';
+import { getCostsConfig, setCostsConfig } from '../../lib/api';
 
 /* proxy for handling requests to ASECCA 'costs_config' API */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<CostsConfigDataPayload | ProxyErrorPayload | null>
+  res: NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>
 ) {
-  const { method, query } = req;
+  const { method, query, body } = req;
 
   /* determine which request type this is */
   switch (method) {
@@ -16,19 +19,7 @@ export default async function handler(
       /* call POST api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await api.setCostsConfig({
-          costs: [
-            {
-              name: 'Device Processing',
-              charge: '444.44',
-              line_type: 'Typical',
-              application: 'Per Device',
-            },
-          ],
-          selection: {
-            collection: 66135000015737072,
-          },
-        });
+        const response = await setCostsConfig(body);
 
         /* send back server response */
         if (response.status === 200) {
@@ -48,9 +39,10 @@ export default async function handler(
         });
       }
 
-      /* try proxying request to ASECCA API */
+      /* call GET api */
       try {
-        const response = await api.getCostsConfig(query);
+        /* try proxying request to ASECCA API */
+        const response = await getCostsConfig(query);
         const data = await response.json();
 
         /* send back server response */

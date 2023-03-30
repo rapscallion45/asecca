@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { DataTableColumn } from '@/components/DataTable/types';
+import { IDataTableColumn } from '@/components/DataTable/types';
 
 /* table header cell stylings */
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
@@ -15,19 +15,19 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-interface HeaderRowProps {
-  columns: Array<DataTableColumn>;
+interface IHeaderRowProps {
+  columns: Array<IDataTableColumn>;
 }
 
 /* Data Table Header helper */
 /* ======================== */
-const HeaderRow: FC<HeaderRowProps> = (props) => {
+const HeaderRow: FC<IHeaderRowProps> = (props) => {
   const { columns } = props;
 
   return (
     <TableRow>
       {/* map passed columns to table headers row */}
-      {columns.map((column: DataTableColumn) => (
+      {columns.map((column: IDataTableColumn) => (
         <StyledTableHeadCell key={column.key} align="left">
           {column.label}
         </StyledTableHeadCell>

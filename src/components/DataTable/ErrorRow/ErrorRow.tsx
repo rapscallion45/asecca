@@ -4,16 +4,16 @@ import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Error';
-import { DataTableColumn } from '@/components/DataTable/types';
+import { IDataTableColumn } from '@/components/DataTable/types';
 
-interface ErrorRowProps {
-  columns: Array<DataTableColumn>;
-  message: string;
+interface IErrorRowProps {
+  columns: Array<IDataTableColumn>;
+  message?: string;
 }
 
 /* Data Table Error Row helper */
 /* =========================== */
-const ErrorRow: FC<ErrorRowProps> = (props) => {
+const ErrorRow: FC<IErrorRowProps> = (props) => {
   const { columns, message } = props;
 
   return (
