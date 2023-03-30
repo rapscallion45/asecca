@@ -1,13 +1,11 @@
 import { FC, useCallback, memo } from 'react';
-import { useDispatch } from 'react-redux';
-import { editCostsConfig } from '@/redux/slices/costsConfigSlice';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import { getCostsConfigPrevailingCharge } from '@/utils';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import Cell from './Cell/Cell';
-import { IDataTableColumn } from '../types';
+import { IDataTableColumn, IDataTableEditCellCallback } from '../types';
 
 /* table row stylings */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -26,26 +24,21 @@ interface IDataRowProps {
   rowIdx: number;
   columns: Array<IDataTableColumn>;
   editCol: IDataTableColumn | undefined;
+  editCellCallback?: IDataTableEditCellCallback;
 }
 
 /* Data Table Row component */
 /* ======================== */
 const DataRow: FC<IDataRowProps> = (props) => {
-  const { row, rowIdx, columns, editCol } = props;
-  const dispatch = useDispatch();
+  const { row, rowIdx, columns, editCol, editCellCallback } = props;
 
-  /* submit the cell value to global state */
+  /* submit the updated cell value */
   const submitCellValue = useCallback(
-    (value: string | null) => {
-      dispatch(
-        editCostsConfig({
-          value: value !== '--' ? value : null,
-          colKey: editCol?.key as keyof ICostsConfigData,
-          rowIdx,
-        })
-      );
+    (value: string | null, colKey: string) => {
+      if (editCellCallback)
+        editCellCallback(value !== '--' ? value : null, colKey, rowIdx);
     },
-    [editCol?.key, rowIdx, dispatch]
+    [rowIdx, editCellCallback]
   );
 
   /* retrieve the row cell value for passed column */
@@ -69,7 +62,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
             inputId={`${row.name}-${column.key}-input`}
             canEdit={column.label === editCol?.label}
             value={getCellValueByColumn(column) || null}
-            submitCellValue={submitCellValue}
+            submitCellValue={(value) => submitCellValue(value, column.key)}
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (

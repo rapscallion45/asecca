@@ -10,7 +10,7 @@ import ClientOnly from '../ClientOnly/ClientOnly';
 import ErrorRow from './ErrorRow/ErrorRow';
 import LoadingRow from './LoadingRow/LoadingRow';
 import HeaderRow from './HeaderRow/HeaderRow';
-import { IDataTableColumn } from './types';
+import { IDataTableColumn, IDataTableEditCellCallback } from './types';
 
 interface IDataTableProps {
   name: string;
@@ -19,6 +19,7 @@ interface IDataTableProps {
   rows: Array<ICostsConfigData>;
   isLoading?: boolean;
   error?: string;
+  editCellCallback?: IDataTableEditCellCallback;
 }
 
 /* Data Table */
@@ -31,6 +32,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     rows,
     isLoading = false,
     error = '',
+    editCellCallback,
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -56,6 +58,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         editCol={columns.find(
                           (col: IDataTableColumn) => editColName === col.label
                         )}
+                        editCellCallback={editCellCallback}
                       />
                     </Fragment>
                   ))}

@@ -14,8 +14,10 @@ import {
   fetchBySourceId as fetchCostsConfigBySourceId,
   saveBySourceId as saveCostsConfigBySourceId,
   resetCostsConfig,
+  editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
 import { IDataTableColumn } from '@/components/DataTable/types';
+import { ICostsConfigData } from '@/lib/api/api-types';
 
 /* costs config data table column defintions */
 const columns: Array<IDataTableColumn> = [
@@ -113,6 +115,21 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
     dispatch(resetCostsConfig());
   };
 
+  /* handle the update of the table data */
+  const handleEditellCallback = (
+    value: string | null,
+    colKey: string,
+    rowIdx: number
+  ) => {
+    dispatch(
+      editCostsConfig({
+        value: value !== '--' ? value : null,
+        colKey: colKey as keyof ICostsConfigData,
+        rowIdx,
+      })
+    );
+  };
+
   return (
     <Container maxWidth="lg">
       <AdminTestPanel />
@@ -132,6 +149,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
         rows={data?.costs || []}
         isLoading={loading}
         error={error}
+        editCellCallback={handleEditellCallback}
       />
       <Box
         sx={{

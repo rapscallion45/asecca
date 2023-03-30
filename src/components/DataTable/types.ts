@@ -6,3 +6,10 @@ export interface IDataTableColumn {
   key: string;
   type: 'string' | 'currency';
 }
+
+/*
+ ** function type definition for Data Table Cell edits
+ */
+export interface IDataTableEditCellCallback {
+  (value: string | null, colKey: string, rowIdx: number): void;
+}
