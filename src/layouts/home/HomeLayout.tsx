@@ -41,7 +41,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   useNotifier();
 
   return (
-    <main>
+    <main id="home-page">
       <BackgroundStyle id="background" />
       <NavBar />
       <RootStyle id="page-content">{children}</RootStyle>

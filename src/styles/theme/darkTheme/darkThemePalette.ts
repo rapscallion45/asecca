@@ -1,7 +1,7 @@
-import { PaletteOptions, alpha } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 
 /*
- ** ASECCA SPA light theme style definitions
+ ** ASECCA SPA dark theme style definitions
  */
 
 const GREY = {
@@ -26,20 +26,20 @@ const GREY = {
 };
 
 const PRIMARY = {
+  lighter: '#8798fa',
+  light: '#6a77c4',
+  main: '#56609C',
+  dark: '#3a4069',
+  darker: '#1d2136',
+  contrastText: '#fff',
+};
+const SECONDARY = {
   lighter: '#bdbaff',
   light: '#8782ff',
   main: '#544dff',
   dark: '#312d9c',
   darker: '#19174f',
   contrastText: '#fff',
-};
-const SECONDARY = {
-  lighter: '#FEFDCD',
-  light: '#FDF74E',
-  main: '#F9F002',
-  dark: '#CAC302',
-  darker: '#7E7A01',
-  contrastText: GREY[800],
 };
 const INFO = {
   lighter: '#bdbaff',
@@ -75,10 +75,10 @@ const ERROR = {
 };
 
 /*
- ** Build the light theme options struct
+ ** Build the dark theme options struct
  */
-const lightThemePalette: PaletteOptions = {
-  mode: 'light',
+const darkThemePalette = {
+  mode: 'dark',
   common: { black: '#2E2A2B', white: '#fff' },
   primary: { ...PRIMARY },
   secondary: { ...SECONDARY },
@@ -101,4 +101,4 @@ const lightThemePalette: PaletteOptions = {
   },
 };
 
-export default lightThemePalette;
+export default darkThemePalette;
