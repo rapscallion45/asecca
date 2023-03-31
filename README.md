@@ -1,8 +1,14 @@
 # ASECCA - Front end client SPA Prototype
 
-Asecca prototype front end client SPA, demonstrating "Configure Costs" page.
+Asecca prototype front end client SPA, demonstrating "Costs Configuration" page.
 
-The application has been built using React, Next.JS, TypeScript and Redux state managment. The application demonstrates how a user can update the costs configuration for a particular data record, served from the company's existing API.
+The application demonstrates how a user can update the costs configuration for a
+particular data record, served from the company's existing API.
+
+The application has been built using React, Next.JS, TypeScript and Redux
+state managment. The application is styled with MUI v5, with custom theme.
+
+Application unit tests are performed with Jest and React Testing Library.
 
 ## Project Status
 
@@ -19,6 +25,10 @@ Installation:
 To Run Test Suite:
 
         npm test
+
+To Run Test Suite and update snapshots:
+
+        npm test ---u
 
 To run a build:
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import next from 'next';
 import server from './__mocks__/serverMock';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -6,25 +7,29 @@ import '@testing-library/jest-dom/extend-expect';
  ** setup file for Jest & React Testing Library Unit Test environment
  */
 
-/* Polyfill "window.fetch" used in the React component. */
+/* instatiate NexJS before running tests - this loads next.config.js */
+next({ dev: true });
+
+/* polyfill "window.fetch" used in the React component. */
 import 'whatwg-fetch';
 
-/* Extend Jest "expect" functionality with Testing Library assertions. */
+/* extend Jest "expect" functionality with Testing Library assertions. */
 import '@testing-library/jest-dom';
 
-/* Get rid of useLayoutEffect warning when running tests */
+/* get rid of useLayoutEffect warning when running tests */
 React.useLayoutEffect = React.useEffect;
 
-/* Start test msw server */
+/* start test msw server */
 beforeAll(() => {
   server.listen({
-    /* Everything should be mocked, error if an API is unhandled */
+    /* everything should be mocked, error if an API is unhandled */
     onUnhandledRequest: 'error',
   });
 });
-/**
- * Reset handlers after each test just in case we need to reconfigure a
- * handler for a specific test
+
+/*
+ ** reset handlers after each test just in case we need to
+ ** reconfigure a handler for a specific test
  */
 afterEach(() => {
   server.resetHandlers();

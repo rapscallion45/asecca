@@ -8,8 +8,11 @@ const Meta: FC = () => {
 
   return (
     <>
-      <title>{process.env.APP_NAME}</title>
-      <meta name="description" content={process.env.APP_DESCRIPTION} />
+      <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
+      <meta
+        name="description"
+        content={process.env.NEXT_PUBLIC_APP_DESCRIPTION}
+      />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
       <link
@@ -41,8 +44,14 @@ const Meta: FC = () => {
         content={theme.palette.primary.main}
       />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-      <meta name="apple-mobile-web-app-title" content={process.env.APP_NAME} />
-      <meta name="application-name" content={process.env.APP_NAME} />
+      <meta
+        name="apple-mobile-web-app-title"
+        content={process.env.NEXT_PUBLIC_APP_NAME}
+      />
+      <meta
+        name="application-name"
+        content={process.env.NEXT_PUBLIC_APP_NAME}
+      />
       <meta name="theme-color" content={theme.palette.primary.main} />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
