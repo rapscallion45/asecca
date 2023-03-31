@@ -7,6 +7,7 @@ import {
   screen,
   act,
 } from '@testing-library/react';
+import renderer from 'react-test-renderer';
 import createEmotionCache from '../../utils/createEmotionCache';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
 import palette from '../../styles/theme/lightTheme/lightThemePalette';
@@ -27,9 +28,7 @@ const TestChild: FC = () => {
 /* Alert Provider Unit Tests */
 /* ========================= */
 describe('Alert Provider', () => {
-  it('Renders correctly', () => {});
-
-  describe('Alert Provider Text', () => {
+  describe('Message Text', () => {
     it('Should render the passed message', async () => {
       /* Arrange */
       store.dispatch(
@@ -59,7 +58,7 @@ describe('Alert Provider', () => {
     });
   });
 
-  describe('Alert Provider Box', () => {
+  describe('Message Box', () => {
     it('Should render the passed severity type', async () => {
       /* Arrange - create "success" notification */
       store.dispatch(
@@ -167,5 +166,35 @@ describe('Alert Provider', () => {
         expect(screen.queryByRole('alert')).toBeNull();
       });
     });
+  });
+
+  it('Renders correctly', async () => {
+    /* Arrange */
+    store.dispatch(
+      addNotification({
+        message: testMessage,
+        variant: 'success',
+      })
+    );
+    store.dispatch(
+      addNotification({
+        message: testMessage,
+        variant: 'error',
+      })
+    );
+
+    /* perform snapshot test */
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <AlertProvider>
+              <TestChild />
+            </AlertProvider>
+          </ThemeConfig>
+        </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
