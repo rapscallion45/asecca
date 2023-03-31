@@ -30,6 +30,22 @@ const jestConfig = {
     '@testing-library/jest-dom/extend-expect',
   ],
 
+  /* configure test coverage report */
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/.next/',
+    '<rootDir>/coverage/',
+    '<rootDir>/.eslintrc.json',
+    '<rootDir>/jest.config.ts',
+    '<rootDir>/jest.setup.ts',
+    '<rootDir>/next.config.js',
+  ],
+
   /* the test environment that will be used for Jest unit testing */
   testEnvironment: 'jest-environment-jsdom',
 };
