@@ -34,5 +34,14 @@ describe('NavBar', () => {
       /* Assert - login button should show */
       expect(screen.queryByText('Logout')).toBeNull();
     });
+
+    it('Should not render by default', async () => {
+      /* Arrange */
+      /* Act */
+      render(<NavBar />);
+
+      /* Assert - login button should show */
+      expect(screen.queryByText('Logout')).toBeNull();
+    });
   });
 });
