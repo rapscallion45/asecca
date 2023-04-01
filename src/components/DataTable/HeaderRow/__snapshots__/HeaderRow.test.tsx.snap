@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Header Row Renders correctly 1`] = `
+<table
+  className="MuiTable-root css-rqglhn-MuiTable-root"
+  role={null}
+>
+  <tbody
+    className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+    role={null}
+  >
+    <tr
+      className="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+      role={null}
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Product
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Application
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Global
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Customer
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Project
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Collection
+      </td>
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-hb3prk-MuiTableCell-root"
+      >
+        Prevailing
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

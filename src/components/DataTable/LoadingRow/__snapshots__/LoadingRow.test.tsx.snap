@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Loading Row Renders correctly 1`] = `
+<table
+  className="MuiTable-root css-rqglhn-MuiTable-root"
+  role={null}
+>
+  <tbody
+    className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+    role={null}
+  >
+    <tr
+      className="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+      role={null}
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        colSpan={7}
+      >
+        <div
+          className="MuiBox-root css-1lu6zdn"
+        >
+          <span
+            className="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+            role="progressbar"
+            style={
+              {
+                "height": 30,
+                "width": 30,
+              }
+            }
+          >
+            <svg
+              className="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx={44}
+                cy={44}
+                fill="none"
+                r={20.2}
+                strokeWidth={3.6}
+                style={{}}
+              />
+            </svg>
+          </span>
+          <p
+            className="MuiTypography-root MuiTypography-body1 css-ix1f03-MuiTypography-root"
+          >
+            This is a loading message
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
