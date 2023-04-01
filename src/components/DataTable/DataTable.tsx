@@ -51,7 +51,8 @@ const DataTable: FC<IDataTableProps> = (props) => {
           </TableHead>
           <TableBody>
             <>
-              {!isLoading && !error && (
+              {/* check loading and error states, and if we have data */}
+              {!isLoading && !error && rows.length > 0 && (
                 <>
                   {/* map passed rows */}
                   {rows?.map((row: IDataTableRow, index: number) => (
@@ -68,9 +69,15 @@ const DataTable: FC<IDataTableProps> = (props) => {
                   ))}
                 </>
               )}
+              {/* passed error state */}
               {!isLoading && Boolean(error) && (
                 <ErrorRow columns={columns} message={error} />
               )}
+              {/* no data rows passed to table */}
+              {!isLoading && Boolean(!error) && rows.length <= 0 && (
+                <ErrorRow columns={columns} message="No data loaded." />
+              )}
+              {/* loading state */}
               {isLoading && (
                 <LoadingRow columns={columns} message="Loading..." />
               )}

@@ -46,7 +46,7 @@ describe('Home Layout', () => {
         </Provider>
       );
 
-      /* Assert - expect admin test panel not rendered and navbar rendered */
+      /* Assert - expect admin test panel and navbar not rendered */
       expect(screen.queryByText('Admin Test Panel')).toBeNull();
       expect(screen.queryByText('Logout')).toBeNull();
       expect(screen.queryByText(testMessage)).toBeInTheDocument();
