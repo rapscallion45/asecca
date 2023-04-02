@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Cell Renders correctly 1`] = `
+<td
+  aria-sort={null}
+  className="MuiTableCell-root MuiTableCell-alignLeft MuiTableCell-sizeMedium css-13d723p-MuiTableCell-root"
+>
+  Device Processing
+</td>
+`;

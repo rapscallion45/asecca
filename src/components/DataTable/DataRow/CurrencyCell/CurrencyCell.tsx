@@ -29,7 +29,7 @@ interface ICurrencyCellProps {
   canEdit: boolean;
   value: string | null;
   submitCellValue?: (value: string | null) => void;
-  sx: any;
+  sx?: any;
 }
 
 /* Data Table Currency Cell */

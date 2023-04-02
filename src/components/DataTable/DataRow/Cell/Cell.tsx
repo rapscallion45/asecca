@@ -18,7 +18,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 interface ICellProps {
   value: string | null;
-  sx: any;
+  sx?: any;
 }
 
 /* Data Table Cell helper component */
