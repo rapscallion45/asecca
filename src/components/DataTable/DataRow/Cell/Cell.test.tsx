@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
+import { Table, TableBody, TableRow } from '@mui/material';
 import Cell from './Cell';
 
 /* test text */
@@ -15,7 +16,15 @@ describe('Data Table Cell', () => {
   it('Renders correctly', async () => {
     /* perform snapshot test */
     const tree = renderer
-      .create(<Cell value={testValue} sx={testSx} />)
+      .create(
+        <Table>
+          <TableBody>
+            <TableRow>
+              <Cell value={testValue} sx={testSx} />
+            </TableRow>
+          </TableBody>
+        </Table>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -24,7 +33,15 @@ describe('Data Table Cell', () => {
     it('Should render passed value', async () => {
       /* Arrange */
       /* Act */
-      render(<Cell value={testValue} sx={testSx} />);
+      render(
+        <Table>
+          <TableBody>
+            <TableRow>
+              <Cell value={testValue} sx={testSx} />
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
 
       /* Assert */
       expect(screen.getByText(testValue)).toBeInTheDocument();
@@ -35,7 +52,15 @@ describe('Data Table Cell', () => {
     it('Should render passed styling props', async () => {
       /* Arrange */
       /* Act */
-      render(<Cell value={testValue} sx={testSx} />);
+      render(
+        <Table>
+          <TableBody>
+            <TableRow>
+              <Cell value={testValue} sx={testSx} />
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
 
       /* Assert */
       expect(screen.getByText(testValue)).toBeInTheDocument();
