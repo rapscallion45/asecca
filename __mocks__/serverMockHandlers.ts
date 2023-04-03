@@ -3,9 +3,7 @@
  */
 import { rest } from 'msw';
 import costsConfigDataMock from './costsConfigDataMock';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  ICostsConfigData,
   ICostsConfigDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
