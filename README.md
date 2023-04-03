@@ -28,7 +28,7 @@ To Run Test Suite:
 
 To Run Test Suite and update snapshots:
 
-        npm test ---u
+        npm test -- -u
 
 To run a build:
 
