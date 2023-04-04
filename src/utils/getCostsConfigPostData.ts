@@ -5,9 +5,6 @@ import {
   ICostsConfigSaveDataSelection,
 } from '@/lib/api/api-types';
 
-/* selection ID is in the form of a decimal number */
-const SELECTION_ID_PARAM_RADIX_VAL = 10;
-
 /*
  ** returns formatted data for saving Costs Config to API
  */
@@ -31,12 +28,10 @@ const getCostsConfigPostData = (
     })
   );
 
-  /* get the selection param - ID must be parsed to number! */
+  /* get the selection param */
   const selection: ICostsConfigSaveDataSelection = {
-    [source.toLowerCase()]: parseInt(
+    [source.toLowerCase() as keyof ICostsConfigSaveDataSelection]:
       dataId as string,
-      SELECTION_ID_PARAM_RADIX_VAL
-    ),
   };
 
   return { costs, selection };
