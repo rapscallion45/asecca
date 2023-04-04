@@ -2,9 +2,9 @@ import { FC, ReactNode, forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SnackbarProvider, SnackbarKey } from 'notistack';
 import { Alert } from '@mui/material';
-import { closeNotification } from '@/redux/slices/notificationsSlice';
-import { AppState } from '@/redux/store';
-import { INotificationState } from '@/redux/types';
+import { closeNotification } from '../../redux/slices/notificationsSlice';
+import { AppState } from '../../redux/store';
+import { INotificationState } from '../../redux/types';
 
 interface IAlertNotificationProps {
   id: SnackbarKey;

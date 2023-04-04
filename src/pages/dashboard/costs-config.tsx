@@ -3,9 +3,8 @@ import type { NextPageWithLayout } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import queryString from 'query-string';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import DataTable from '@/components/DataTable/DataTable';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { ICostsConfigData } from '@/lib/api/api-types';
@@ -124,7 +123,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   };
 
   /* handle the update of the table data */
-  const handleEditellCallback = (
+  const handleEditCellValue = (
     value: string | null,
     colKey: string,
     rowIdx: number
@@ -148,8 +147,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <AdminTestPanel />
+    <>
       <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4" color="common.white">
           Costing Configuration - Lloyds Bank - {permission.level} {query}
@@ -157,17 +155,19 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
       </Box>
       <DataTable
         name="costs config"
-        /* table editable cell(s) defined by user permission level */
-        editColName={permission.level}
         /* filter table columns by current permission level */
         columns={columns.filter(
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
+        /* table editable cell(s) defined by user permission level */
+        editableColLabels={[permission.level]}
         /* build table row props from costs config data */
-        rows={data?.costs.map((cost) => ({ label: cost.name }))}
+        rows={data?.costs.map((cost: ICostsConfigData) => ({
+          label: cost.name,
+        }))}
         isLoading={loading}
         error={error}
-        editCellCallback={handleEditellCallback}
+        editCellValueCallback={handleEditCellValue}
         getCellValueCallback={handleGetCellValue}
       />
       <Box
@@ -198,7 +198,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           Cancel
         </Button>
       </Box>
-    </Container>
+    </>
   );
 };
 

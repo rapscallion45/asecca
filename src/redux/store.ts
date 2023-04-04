@@ -18,7 +18,7 @@ const store = configureStore({
   },
   // @ts-ignore
   middleware:
-    process.env.NODE_ENV !== 'production'
+    process.env.NODE_ENV === 'development'
       ? (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
       : (getDefaultMiddleware) => getDefaultMiddleware(),
 });

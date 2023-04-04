@@ -7,7 +7,9 @@ import {
   createTheme,
   Theme,
   ThemeOptions,
+  PaletteOptions,
 } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { AppState } from '@/redux/store';
 import lightThemePalette from './lightTheme/lightThemePalette';
 import darkThemePalette from './darkTheme/darkThemePalette';
@@ -28,14 +30,19 @@ const ThemeConfig: FC<ThemeConfigProps> = (props) => {
     (state: AppState) => state.theme
   );
 
+  /* check if user has dark mode preference */
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
   /* get options and create theme for current state */
   const themeOptions: ThemeOptions = useMemo(
     () => ({
       palette:
-        themeSelection.type === 'light' ? lightThemePalette : darkThemePalette,
+        themeSelection.type === 'light' && !prefersDarkMode
+          ? (lightThemePalette as PaletteOptions)
+          : (darkThemePalette as PaletteOptions),
       typography,
     }),
-    [themeSelection]
+    [themeSelection, prefersDarkMode]
   );
   const theme: Theme = createTheme(themeOptions);
 

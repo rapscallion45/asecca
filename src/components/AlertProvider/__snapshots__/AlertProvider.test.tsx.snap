@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert Provider Renders correctly 1`] = `
+<div>
+  Test child
+</div>
+`;

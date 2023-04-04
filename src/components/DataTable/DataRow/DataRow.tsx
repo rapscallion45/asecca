@@ -25,8 +25,8 @@ interface IDataRowProps {
   rowName: string;
   rowIdx: number;
   columns: Array<IDataTableColumn>;
-  editCol: IDataTableColumn | undefined;
-  editCellCallback?: IDataTableEditCellValueCallback;
+  editableColLabels: Array<string>;
+  editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
@@ -37,24 +37,24 @@ const DataRow: FC<IDataRowProps> = (props) => {
     rowName,
     rowIdx,
     columns,
-    editCol,
-    editCellCallback,
+    editableColLabels,
+    editCellValueCallback,
     getCellValueCallback,
   } = props;
 
   /* submit the updated cell value */
   const submitCellValue = useCallback(
     (value: string | null, colKey: string) => {
-      if (editCellCallback)
-        editCellCallback(value !== '--' ? value : null, colKey, rowIdx);
+      if (editCellValueCallback)
+        editCellValueCallback(value !== '--' ? value : null, colKey, rowIdx);
     },
-    [rowIdx, editCellCallback]
+    [rowIdx, editCellValueCallback]
   );
 
-  /* retrieve the row cell value for passed column */
+  /* retrieve cell value for passed table column and row index */
   const getCellValueByColumn = useCallback(
     (column: IDataTableColumn) =>
-      /* apply column logic required by the parent */
+      /* apply any logic required for this column (such as 'Prevailing') */
       getCellValueCallback(rowIdx, column),
     [rowIdx, getCellValueCallback]
   );
@@ -67,15 +67,19 @@ const DataRow: FC<IDataRowProps> = (props) => {
           <CurrencyCell
             key={`${rowName}-${column.key}`}
             inputId={`${rowName}-${column.key}-input`}
-            canEdit={column.label === editCol?.label}
+            canEdit={editableColLabels.some(
+              (editCol) => editCol === column.label
+            )}
             value={getCellValueByColumn(column) || null}
             submitCellValue={(value) => submitCellValue(value, column.key)}
+            /* specific requirement for 'Prevailing' columns */
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
           <Cell
             key={`${rowName}-${column.key}`}
             value={getCellValueByColumn(column) || null}
+            /* specific requirement for 'Application' columns */
             sx={{
               fontSize:
                 column.key !== 'application' ? 'inherit' : '12px !important',

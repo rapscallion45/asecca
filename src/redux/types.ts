@@ -48,10 +48,19 @@ export interface ICostsConfigState {
 }
 
 /*
+ ** User Permission Level definition
+ */
+export type UserPermissionLevel =
+  | 'Global'
+  | 'Customer'
+  | 'Project'
+  | 'Collection';
+
+/*
  ** User Permission Level state definition
  */
 export interface IUserPermissionLevelState {
-  level: 'Global' | 'Customer' | 'Project' | 'Collection';
+  level: UserPermissionLevel;
 }
 
 /*

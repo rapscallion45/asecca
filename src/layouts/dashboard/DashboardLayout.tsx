@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
+import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
+import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
 
 /* background image styling */
@@ -11,11 +13,6 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
   minHeight: '100vh',
   minWidth: '100%',
   backgroundColor: theme.palette.grey[400],
-  // background:
-  //   'linear-gradient(0deg, rgba(86,96,156, 0.7), rgba(86,96,156, 0.7)), url(/static/background.webp)',
-  // backgroundSize: 'cover',
-  // backgroundPositionX: 'center',
-  // backgroundPositionY: 'center',
 }));
 
 /* root style for the dashboard page content */
@@ -41,10 +38,15 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   useNotifier();
 
   return (
-    <main>
+    <main id="dashboard-page">
       <BackgroundStyle id="background" />
       <NavBar showLogin />
-      <RootStyle id="page-content">{children}</RootStyle>
+      <RootStyle id="page-content">
+        <Container maxWidth="lg">
+          <AdminTestPanel />
+          {children}
+        </Container>
+      </RootStyle>
     </main>
   );
 };

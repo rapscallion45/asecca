@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Cell Renders correctly 1`] = `
+<table
+  className="MuiTable-root css-rqglhn-MuiTable-root"
+  role={null}
+>
+  <tbody
+    className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+    role={null}
+  >
+    <tr
+      className="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+      role={null}
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1nt70hm-MuiTableCell-root"
+      >
+        Device Processing
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

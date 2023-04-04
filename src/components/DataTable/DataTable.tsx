@@ -18,12 +18,12 @@ import {
 
 interface IDataTableProps {
   name: string;
-  editColName: string;
   columns: Array<IDataTableColumn>;
+  editableColLabels: Array<string>;
   rows: Array<IDataTableRow>;
   isLoading?: boolean;
   error?: string;
-  editCellCallback?: IDataTableEditCellValueCallback;
+  editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
@@ -32,12 +32,12 @@ interface IDataTableProps {
 const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,
-    editColName,
     columns,
+    editableColLabels,
     rows,
     isLoading = false,
     error = '',
-    editCellCallback,
+    editCellValueCallback,
     getCellValueCallback,
   } = props;
 
@@ -51,7 +51,8 @@ const DataTable: FC<IDataTableProps> = (props) => {
           </TableHead>
           <TableBody>
             <>
-              {!isLoading && !error && (
+              {/* check loading and error states, and if we have data */}
+              {!isLoading && !error && rows.length > 0 && (
                 <>
                   {/* map passed rows */}
                   {rows?.map((row: IDataTableRow, index: number) => (
@@ -60,19 +61,23 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         rowName={row.label}
                         rowIdx={index}
                         columns={columns}
-                        editCol={columns.find(
-                          (col: IDataTableColumn) => editColName === col.label
-                        )}
-                        editCellCallback={editCellCallback}
+                        editableColLabels={editableColLabels}
+                        editCellValueCallback={editCellValueCallback}
                         getCellValueCallback={getCellValueCallback}
                       />
                     </Fragment>
                   ))}
                 </>
               )}
+              {/* passed error state */}
               {!isLoading && Boolean(error) && (
                 <ErrorRow columns={columns} message={error} />
               )}
+              {/* no data rows passed to table */}
+              {!isLoading && Boolean(!error) && rows.length <= 0 && (
+                <ErrorRow columns={columns} message="No data loaded." />
+              )}
+              {/* loading state */}
               {isLoading && (
                 <LoadingRow columns={columns} message="Loading..." />
               )}

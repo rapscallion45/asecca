@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default Layout Renders correctly 1`] = `
+<main>
+  <section
+    id="page-content"
+  >
+    <div>
+      Test render message
+    </div>
+  </section>
+</main>
+`;

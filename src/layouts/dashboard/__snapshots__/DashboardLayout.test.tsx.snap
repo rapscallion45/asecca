@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Layout Renders correctly 1`] = `
+<main
+  id="dashboard-page"
+>
+  <div
+    className="css-sks9iv"
+    id="background"
+  />
+  <div
+    className="MuiBox-root css-i9gxme"
+  >
+    <header
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionFixed mui-fixed css-zlpppg-MuiPaper-root-MuiAppBar-root"
+    >
+      <div
+        className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+      >
+        <img
+          alt="Asecca logo"
+          data-nimg="1"
+          decoding="async"
+          height={40}
+          loading="lazy"
+          onError={[Function]}
+          onLoad={[Function]}
+          src="/_next/image?url=%2Flogowhite-02.webp&w=828&q=75"
+          srcSet="/_next/image?url=%2Flogowhite-02.webp&w=640&q=75 1x, /_next/image?url=%2Flogowhite-02.webp&w=828&q=75 2x"
+          style={
+            {
+              "color": "transparent",
+            }
+          }
+          width={395}
+        />
+        <div
+          className="MuiBox-root css-i9gxme"
+        />
+        <a
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1844psz-MuiButtonBase-root-MuiButton-root"
+          href="/"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+        >
+          Logout
+        </a>
+      </div>
+    </header>
+  </div>
+  <section
+    className="css-1jvnjzr"
+    id="page-content"
+  >
+    <div
+      className="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+    >
+      <div
+        className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhmbct-MuiPaper-root-MuiCard-root"
+      >
+        <div
+          className="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        >
+          <p
+            className="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-1xbr41s-MuiTypography-root"
+          >
+            Admin Test Panel
+          </p>
+          <div
+            className="MuiBox-root css-h5fkc8"
+          >
+            <div
+              className="MuiFormControl-root MuiTextField-root css-j1gnhe-MuiFormControl-root-MuiTextField-root"
+            >
+              <label
+                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1fz07n4-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink={true}
+                htmlFor="user-permission-level-select"
+                id="user-permission-level-select-label"
+              >
+                User Permission
+              </label>
+              <div
+                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-rs3fbt-MuiInputBase-root-MuiOutlinedInput-root"
+                onClick={[Function]}
+              >
+                <select
+                  aria-invalid={false}
+                  autoFocus={false}
+                  className="MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-tgau9p-MuiNativeSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                  disabled={false}
+                  id="user-permission-level-select"
+                  multiple={false}
+                  onAnimationStart={[Function]}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  value="Global"
+                >
+                  <option
+                    value="Global"
+                  >
+                    Global
+                  </option>
+                  <option
+                    value="Customer"
+                  >
+                    Customer
+                  </option>
+                  <option
+                    value="Project"
+                  >
+                    Project
+                  </option>
+                  <option
+                    value="Collection"
+                  >
+                    Collection
+                  </option>
+                </select>
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiNativeSelect-icon MuiNativeSelect-iconOutlined css-1o9beye-MuiSvgIcon-root-MuiNativeSelect-icon"
+                  data-testid="ArrowDropDownIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M7 10l5 5 5-5z"
+                  />
+                </svg>
+                <fieldset
+                  aria-hidden={true}
+                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    className="css-14lo706"
+                  >
+                    <span>
+                      User Permission
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <p
+            className="MuiTypography-root MuiTypography-body1 css-xsmv6n-MuiTypography-root"
+          >
+            Selection of simulated user permission level
+          </p>
+        </div>
+      </div>
+      <div>
+        Test render message
+      </div>
+    </div>
+  </section>
+</main>
+`;

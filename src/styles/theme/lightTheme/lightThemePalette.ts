@@ -1,4 +1,4 @@
-import { PaletteOptions, alpha } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 
 /*
  ** ASECCA SPA light theme style definitions
@@ -77,7 +77,7 @@ const ERROR = {
 /*
  ** Build the light theme options struct
  */
-const lightThemePalette: PaletteOptions = {
+const lightThemePalette = {
   mode: 'light',
   common: { black: '#2E2A2B', white: '#fff' },
   primary: { ...PRIMARY },

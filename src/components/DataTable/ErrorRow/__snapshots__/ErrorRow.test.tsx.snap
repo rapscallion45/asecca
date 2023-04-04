@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Error Row Renders correctly 1`] = `
+<table
+  className="MuiTable-root css-rqglhn-MuiTable-root"
+  role={null}
+>
+  <tbody
+    className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+    role={null}
+  >
+    <tr
+      className="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+      role={null}
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        colSpan={7}
+      >
+        <div
+          className="MuiBox-root css-1lu6zdn"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeMedium css-1wxstni-MuiSvgIcon-root"
+            data-testid="ErrorIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root MuiTypography-body1 css-ix1f03-MuiTypography-root"
+          >
+            This is an error message
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
