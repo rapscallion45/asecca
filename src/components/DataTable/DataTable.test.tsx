@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import DataTable from './DataTable';
-import dataTableColumnsMock from '../../../__mocks__/dataTableColumnsMock';
+import dataTableColumns from '../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../__mocks__/costsConfigDataMock';
 import { IDataTableColumn } from './types';
 
@@ -22,7 +22,7 @@ describe('Data Table', () => {
       .create(
         <DataTable
           name="testtable"
-          columns={dataTableColumnsMock}
+          columns={dataTableColumns}
           editableColLabels={['Collection']}
           rows={costsConfigDataMock.costs.map((cost: ICostsConfigData) => ({
             label: cost.name,
@@ -46,7 +46,7 @@ describe('Data Table', () => {
       render(
         <DataTable
           name="testtable"
-          columns={dataTableColumnsMock}
+          columns={dataTableColumns}
           editableColLabels={['Collection']}
           rows={costsConfigDataMock.costs.map((cost: ICostsConfigData) => ({
             label: cost.name,
@@ -75,7 +75,7 @@ describe('Data Table', () => {
       render(
         <DataTable
           name="testtable"
-          columns={dataTableColumnsMock}
+          columns={dataTableColumns}
           editableColLabels={['Collection']}
           rows={costsConfigDataMock.costs.map((cost: ICostsConfigData) => ({
             label: cost.name,
@@ -98,7 +98,7 @@ describe('Data Table', () => {
       render(
         <DataTable
           name="testtable"
-          columns={dataTableColumnsMock}
+          columns={dataTableColumns}
           editableColLabels={['Collection']}
           rows={costsConfigDataMock.costs.map((cost: ICostsConfigData) => ({
             label: cost.name,

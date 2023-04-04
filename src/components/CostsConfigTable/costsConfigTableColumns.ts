@@ -2,7 +2,7 @@
 import { IDataTableColumn } from '@/components/DataTable/types';
 
 /*
- ** mock of example data table column config
+ ** Costs Config data table column defintions
  */
 const columns: Array<IDataTableColumn> = [
   { label: 'Product', key: 'name', type: 'string' },

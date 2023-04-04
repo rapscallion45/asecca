@@ -3,35 +3,11 @@ import type { NextPageWithLayout } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import queryString from 'query-string';
-import { Box, Button, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import DataTable from '@/components/DataTable/DataTable';
+import { Box, Typography } from '@mui/material';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { ICostsConfigData } from '@/lib/api/api-types';
-import {
-  getCostsConfigColFilterList,
-  getCostsConfigPostData,
-  getCostsConfigPrevailingCharge,
-} from '@/utils';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
-import {
-  fetchBySourceId as fetchCostsConfigBySourceId,
-  saveBySourceId as saveCostsConfigBySourceId,
-  resetCostsConfig,
-  editCostsConfig,
-} from '@/redux/slices/costsConfigSlice';
-import { IDataTableColumn } from '@/components/DataTable/types';
-
-/* costs config data table column defintions */
-const columns: Array<IDataTableColumn> = [
-  { label: 'Product', key: 'name', type: 'string' },
-  { label: 'Application', key: 'application', type: 'string' },
-  { label: 'Global', key: 'global_charge', type: 'currency' },
-  { label: 'Customer', key: 'customer_charge', type: 'currency' },
-  { label: 'Project', key: 'project_charge', type: 'currency' },
-  { label: 'Collection', key: 'collection_charge', type: 'currency' },
-  { label: 'Prevailing', key: 'effective_charge', type: 'currency' },
-];
+import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
+import CostsConfigTable from '@/components/CostsConfigTable/CostsConfigTable';
 
 /* Costs Config Test Page */
 /* ====================== */
@@ -39,18 +15,8 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get costs config data held in redux state */
-  const { data, loading, error, saving } = useSelector(
-    (state: AppState) => state.costsConfig
-  );
-
   /* get user permission level held in redux state */
   const { permission } = useSelector((state: AppState) => state.userPermission);
-
-  /* filter the data table columns for current permission level */
-  const [colFilterList, setColFilterList] = useState<Array<string>>(
-    getCostsConfigColFilterList(permission.level)
-  );
 
   /* copy of page query param held in local page state */
   const [query, setQuery] = useState<string | (string | null)[]>('');
@@ -58,9 +24,6 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
   /* *** THIS IS A TEST PARAM - USER WILL NOT BE ABLE TO CHANGE PERMISSION *** */
   /* keep a copy of the original API request permission level in local state */
   const [apiPermission, setApiPermission] = useState<string>('');
-
-  /* keep track of whether table has been edited or not */
-  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
@@ -102,50 +65,6 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
     }
   }, [query, apiPermission, dispatch]);
 
-  /* whenever the user permission global state is updated, re-filter cols */
-  useEffect(() => {
-    setColFilterList(getCostsConfigColFilterList(permission.level));
-  }, [permission.level]);
-
-  /* handle the saving of the table data */
-  const handleSave = () => {
-    dispatch(
-      saveCostsConfigBySourceId({
-        data: getCostsConfigPostData(permission.level, query, data?.costs),
-      })
-    );
-  };
-
-  /* handle the resetting of the table data */
-  const handleCancel = () => {
-    dispatch(resetCostsConfig());
-    setIsEdited(false);
-  };
-
-  /* handle the update of the table data */
-  const handleEditCellValue = (
-    value: string | null,
-    colKey: string,
-    rowIdx: number
-  ) => {
-    dispatch(
-      editCostsConfig({
-        value: value !== '--' ? value : null,
-        colKey: colKey as keyof ICostsConfigData,
-        rowIdx,
-      })
-    );
-    setIsEdited(true);
-  };
-
-  /* handle any required logic when determining a cell's display value */
-  const handleGetCellValue = (rowIdx: number, column: IDataTableColumn) => {
-    /* apply Prevailing column logic or simply return value */
-    if (column.label === 'Prevailing')
-      return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
-    return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
-  };
-
   return (
     <>
       <Box my={5} sx={{ maxWidth: 500 }}>
@@ -153,51 +72,7 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           Costing Configuration - Lloyds Bank - {permission.level} {query}
         </Typography>
       </Box>
-      <DataTable
-        name="costs config"
-        /* filter table columns by current permission level */
-        columns={columns.filter(
-          (col: IDataTableColumn) => !colFilterList.includes(col.label)
-        )}
-        /* table editable cell(s) defined by user permission level */
-        editableColLabels={[permission.level]}
-        /* build table row props from costs config data */
-        rows={data?.costs.map((cost: ICostsConfigData) => ({
-          label: cost.name,
-        }))}
-        isLoading={loading}
-        error={error}
-        editCellValueCallback={handleEditCellValue}
-        getCellValueCallback={handleGetCellValue}
-      />
-      <Box
-        sx={{
-          marginTop: 10,
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <LoadingButton
-          color="secondary"
-          variant="contained"
-          onClick={handleSave}
-          disabled={saving || loading || !isEdited}
-          loading={saving}
-        >
-          Save
-        </LoadingButton>
-        <Button
-          color="secondary"
-          variant="outlined"
-          onClick={handleCancel}
-          disabled={saving || loading || !isEdited}
-          sx={{ backgroundColor: 'common.white', ml: 2 }}
-        >
-          Cancel
-        </Button>
-      </Box>
+      <CostsConfigTable permission={permission} query={query as string} />
     </>
   );
 };

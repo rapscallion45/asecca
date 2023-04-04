@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { Table, TableBody } from '@mui/material';
 import HeaderRow from './HeaderRow';
-import columnsMock from '../../../../__mocks__/dataTableColumnsMock';
+import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
 /* Heading Row Unit Tests */
 /* ====================== */
@@ -14,7 +14,7 @@ describe('Data Table Header Row', () => {
       .create(
         <Table>
           <TableBody>
-            <HeaderRow columns={columnsMock} />
+            <HeaderRow columns={dataTableColumns} />
           </TableBody>
         </Table>
       )
@@ -29,13 +29,13 @@ describe('Data Table Header Row', () => {
       render(
         <Table>
           <TableBody>
-            <HeaderRow columns={columnsMock} />
+            <HeaderRow columns={dataTableColumns} />
           </TableBody>
         </Table>
       );
 
       /* Assert - make sure each column heading is rendered */
-      columnsMock.forEach((column) => {
+      dataTableColumns.forEach((column) => {
         expect(screen.getByText(column.label)).toBeInTheDocument();
       });
     });
