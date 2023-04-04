@@ -61,10 +61,10 @@ export interface ICostsConfigSaveDataCosts {
  ** Costs Config POST data Selection type definition
  */
 export interface ICostsConfigSaveDataSelection {
-  collection?: number;
-  project?: number;
-  customer?: number;
-  global?: number;
+  collection?: string;
+  project?: string;
+  customer?: string;
+  global?: string;
 }
 
 /*
