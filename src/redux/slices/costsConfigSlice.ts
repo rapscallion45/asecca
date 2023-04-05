@@ -79,6 +79,7 @@ interface InitialCostsConfigState {
   dataShadow: ICostsConfigDataPayload;
   error?: string;
   saving: boolean;
+  edited: boolean;
 }
 
 /* initialise Costs Config state to empty */
@@ -87,6 +88,7 @@ const initialState: InitialCostsConfigState = {
   data: { costs: [] },
   dataShadow: { costs: [] },
   saving: false,
+  edited: false,
 };
 
 /* create the redux slice for interacting with the costs config state */
@@ -114,11 +116,13 @@ const costsConfigSlice = createSlice({
           return cost;
         }
       );
+      state.edited = true;
     },
     /* reducer used for when user clears edits to Costs Config data */
     resetCostsConfig: (state) => {
       /* reset the data by simply copying the shadow to working copy */
       state.data = state.dataShadow;
+      state.edited = false;
     },
   },
   extraReducers: (builder) => {
@@ -134,6 +138,7 @@ const costsConfigSlice = createSlice({
         state.data = { costs: [] };
         state.dataShadow = { costs: [] };
         state.error = undefined;
+        state.edited = false;
       })
       .addCase(
         fetchBySourceId.fulfilled,
@@ -156,6 +161,7 @@ const costsConfigSlice = createSlice({
       })
       .addCase(saveBySourceId.fulfilled, (state) => {
         state.saving = false;
+        state.edited = false;
       })
       .addCase(saveBySourceId.rejected, (state) => {
         state.saving = false;
