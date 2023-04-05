@@ -59,6 +59,13 @@ export const saveBySourceId = createAsyncThunk(
         })
       );
       throw new Error(res.statusText);
+    } else {
+      thunkAPI.dispatch(
+        addNotification({
+          message: 'Successfully saved Costs Configuration to server',
+          variant: 'success',
+        })
+      );
     }
 
     /* no error, serialize the data and return */
