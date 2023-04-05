@@ -58,6 +58,46 @@ describe('Alert Provider', () => {
     });
   });
 
+  describe('Children', () => {
+    it('Should render passed children', async () => {
+      /* Arrange */
+      /* Act */
+      render(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <AlertProvider>
+              <TestChild />
+            </AlertProvider>
+          </ThemeConfig>
+        </Provider>
+      );
+
+      /* Assert */
+      await waitFor(() => {
+        /* After all state updates have completed */
+        expect(screen.queryByText('test child')).toBeNull();
+      });
+    });
+
+    it('Should render no children if non-passed', async () => {
+      /* Arrange */
+      /* Act */
+      render(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <AlertProvider />
+          </ThemeConfig>
+        </Provider>
+      );
+
+      /* Assert */
+      await waitFor(() => {
+        /* After all state updates have completed */
+        expect(screen.queryByText('test child')).toBeNull();
+      });
+    });
+  });
+
   describe('Message Box', () => {
     it('Should render the passed severity type', async () => {
       /* Arrange - create "success" notification */
