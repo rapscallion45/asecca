@@ -33,7 +33,7 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get costs config data held in redux state */
-  const { data, loading, error, saving } = useSelector(
+  const { data, loading, error, saving, edited } = useSelector(
     (state: AppState) => state.costsConfig
   );
 
@@ -41,9 +41,6 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
   const [colFilterList, setColFilterList] = useState<Array<string>>(
     getCostsConfigColFilterList(permission.level)
   );
-
-  /* keep track of whether table has been edited or not */
-  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   /* whenever the user permission global state is updated, re-filter cols */
   useEffect(() => {
@@ -62,7 +59,6 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
   /* handle the resetting of the table data */
   const handleCancel = () => {
     dispatch(resetCostsConfig());
-    setIsEdited(false);
   };
 
   /* handle the update of the table data */
@@ -78,7 +74,6 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
         rowIdx,
       })
     );
-    setIsEdited(true);
   };
 
   /* handle any required logic when determining a cell's display value */
@@ -121,7 +116,7 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving || loading || !isEdited}
+          disabled={saving || loading || !edited}
           loading={saving}
         >
           Save
@@ -130,7 +125,7 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
-          disabled={saving || loading || !isEdited}
+          disabled={saving || loading || !edited}
           sx={{ backgroundColor: 'common.white', ml: 2 }}
         >
           Cancel
