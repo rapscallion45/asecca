@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { Table, TableBody } from '@mui/material';
 import ErrorRow from './ErrorRow';
-import columnsMock from '../../../../__mocks__/dataTableColumnsMock';
+import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
 /* default test error message */
 const testMessage = 'This is an error message';
@@ -17,7 +17,7 @@ describe('Data Table Error Row', () => {
       .create(
         <Table>
           <TableBody>
-            <ErrorRow columns={columnsMock} message={testMessage} />
+            <ErrorRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       )
@@ -32,7 +32,7 @@ describe('Data Table Error Row', () => {
       render(
         <Table>
           <TableBody>
-            <ErrorRow columns={columnsMock} message={testMessage} />
+            <ErrorRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       );
@@ -49,7 +49,7 @@ describe('Data Table Error Row', () => {
       render(
         <Table>
           <TableBody>
-            <ErrorRow columns={columnsMock} message={testMessage} />
+            <ErrorRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       );

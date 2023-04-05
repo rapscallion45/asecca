@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SnackbarProvider, SnackbarKey } from 'notistack';
 import { Alert } from '@mui/material';
 import { closeNotification } from '../../redux/slices/notificationsSlice';
-import { AppState } from '../../redux/store';
+import { AppDispatch, AppState } from '../../redux/store';
 import { INotificationState } from '../../redux/types';
 
 interface IAlertNotificationProps {
@@ -15,7 +15,7 @@ type Ref = HTMLDivElement;
 /* ================== */
 const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
   (props, ref) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const { id } = props;
 
     /* close alert callback */

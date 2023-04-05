@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import { UserPermissionLevel } from '@/redux/types';
 
 const permissions = [
@@ -31,7 +31,7 @@ const permissions = [
 /* Admin Test Panel */
 /* ================ */
 const AdminTestPanel: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   /* get user permission level held in redux state */
   const { permission: userPermission } = useSelector(

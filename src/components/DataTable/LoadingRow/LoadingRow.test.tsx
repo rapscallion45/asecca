@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { Table, TableBody } from '@mui/material';
 import LoadingRow from './LoadingRow';
-import columnsMock from '../../../../__mocks__/dataTableColumnsMock';
+import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
 /* default test error message */
 const testMessage = 'This is a loading message';
@@ -17,7 +17,7 @@ describe('Data Table Loading Row', () => {
       .create(
         <Table>
           <TableBody>
-            <LoadingRow columns={columnsMock} message={testMessage} />
+            <LoadingRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       )
@@ -32,7 +32,7 @@ describe('Data Table Loading Row', () => {
       render(
         <Table>
           <TableBody>
-            <LoadingRow columns={columnsMock} message={testMessage} />
+            <LoadingRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       );
@@ -49,7 +49,7 @@ describe('Data Table Loading Row', () => {
       render(
         <Table>
           <TableBody>
-            <LoadingRow columns={columnsMock} message={testMessage} />
+            <LoadingRow columns={dataTableColumns} message={testMessage} />
           </TableBody>
         </Table>
       );

@@ -17,16 +17,22 @@ const getCostsConfigPostData = (
   if (!source || !dataId || !data) return { costs: [], selection: {} };
 
   /* get costs requests - cycle through data and pull out required cols */
-  const costs: Array<ICostsConfigSaveDataCosts> = data.map(
-    (dataRow: ICostsConfigData) => ({
+  const costs: Array<ICostsConfigSaveDataCosts> = data
+    /* filter out any rows where user has entered null */
+    .filter(
+      (dataRow: ICostsConfigData) =>
+        dataRow[`${source.toLowerCase()}_charge` as keyof ICostsConfigData] !==
+        null
+    )
+    /* map required fields for post request */
+    .map((dataRow: ICostsConfigData) => ({
       application: dataRow.application,
       line_type: dataRow.line_type,
       name: dataRow.name,
       charge:
         dataRow[`${source.toLowerCase()}_charge` as keyof ICostsConfigData] ||
         null,
-    })
-  );
+    }));
 
   /* get the selection param */
   const selection: ICostsConfigSaveDataSelection = {

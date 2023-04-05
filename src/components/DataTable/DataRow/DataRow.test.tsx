@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { Table, TableBody } from '@mui/material';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import DataRow from './DataRow';
-import dataTableColumnsMock from '../../../../__mocks__/dataTableColumnsMock';
+import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../../__mocks__/costsConfigDataMock';
 import { IDataTableColumn } from '../types';
 
@@ -30,7 +30,7 @@ describe('Data Table Data Row', () => {
             <DataRow
               rowName="testrow"
               rowIdx={0}
-              columns={dataTableColumnsMock}
+              columns={dataTableColumns}
               editableColLabels={['Collection']}
               getCellValueCallback={mockGetCellValueCallback}
               editCellValueCallback={mockEditCellValueCallback}
@@ -61,7 +61,7 @@ describe('Data Table Data Row', () => {
             <DataRow
               rowName="testrow"
               rowIdx={testRowIdx}
-              columns={dataTableColumnsMock}
+              columns={dataTableColumns}
               editableColLabels={[testEditCol]}
               getCellValueCallback={mockGetCellValueCallback}
               editCellValueCallback={mockEditCellValueCallback}
@@ -92,7 +92,7 @@ describe('Data Table Data Row', () => {
             <DataRow
               rowName="testrow"
               rowIdx={testRowIdx}
-              columns={dataTableColumnsMock}
+              columns={dataTableColumns}
               editableColLabels={[testEditCol]}
               getCellValueCallback={mockGetCellValueCallback}
               editCellValueCallback={mockEditCellValueCallback}
@@ -109,7 +109,7 @@ describe('Data Table Data Row', () => {
       /* Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Collection';
-      const testColumn: Array<IDataTableColumn> = dataTableColumnsMock.filter(
+      const testColumn: Array<IDataTableColumn> = dataTableColumns.filter(
         (column) => column.label === 'Collection'
       );
 
@@ -137,7 +137,7 @@ describe('Data Table Data Row', () => {
       /* Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Product';
-      const testColumn: Array<IDataTableColumn> = dataTableColumnsMock.filter(
+      const testColumn: Array<IDataTableColumn> = dataTableColumns.filter(
         (column) => column.label === 'Product'
       );
 
@@ -179,7 +179,7 @@ describe('Data Table Data Row', () => {
             <DataRow
               rowName="testrow"
               rowIdx={testRowIdx}
-              columns={dataTableColumnsMock}
+              columns={dataTableColumns}
               editableColLabels={[testEditCol]}
               getCellValueCallback={mockGetCellValueCallback}
               editCellValueCallback={mockEditCellValueCallback}
@@ -265,7 +265,7 @@ describe('Data Table Data Row', () => {
             <DataRow
               rowName="testrow"
               rowIdx={testRowIdx}
-              columns={dataTableColumnsMock}
+              columns={dataTableColumns}
               editableColLabels={[testEditCol]}
               getCellValueCallback={mockGetCellValueCallback}
               editCellValueCallback={mockEditCellValueCallback}
