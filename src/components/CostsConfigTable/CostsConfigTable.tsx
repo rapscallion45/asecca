@@ -38,7 +38,7 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
   );
 
   /* filter the data table columns for current permission level */
-  const [colFilterList, setColFilterList] = useState<Array<string>>(
+  const [colFilterList, setColFilterList] = useState<Array<string | null>>(
     getCostsConfigColFilterList(permission.level)
   );
 
