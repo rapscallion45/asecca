@@ -1,13 +1,28 @@
 import { TypographyVariantsOptions } from '@mui/material/styles';
 
-/*
- ** ASECCA SPA typography definitions
+/**
+ * ASECCA SPA typography definitions
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 
+/**
+ * Pixel value to REM conversion helper
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 function pxToRem(value: number) {
   return `${value / 16}rem`;
 }
 
+/**
+ * Responsive font size calculation helper
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 function responsiveFontSizes({ sm, md, lg }: any) {
   return {
     '@media (min-width:600px)': {
@@ -22,8 +37,19 @@ function responsiveFontSizes({ sm, md, lg }: any) {
   };
 }
 
+/**
+ * Primary font family
+ *
+ * @since - 0.0.0
+ */
 const FONT_PRIMARY = 'Poppins, Roboto';
 
+/**
+ * Typography theme option defintions
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 const typography: TypographyVariantsOptions = {
   fontFamily: FONT_PRIMARY,
   fontWeightRegular: 400,

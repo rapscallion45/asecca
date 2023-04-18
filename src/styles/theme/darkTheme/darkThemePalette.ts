@@ -1,9 +1,17 @@
 import { alpha } from '@mui/material/styles';
 
-/*
- ** ASECCA SPA dark theme style definitions
+/**
+ * ASECCA SPA dark theme style definitions
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 
+/**
+ * Dark theme grey definition
+ *
+ * @since - 0.0.0
+ */
 const GREY = {
   0: '#FFFFFF',
   100: '#F9FAFB',
@@ -25,6 +33,11 @@ const GREY = {
   500_80: alpha('#919EAB', 0.8),
 };
 
+/**
+ * Dark theme primary color definition
+ *
+ * @since - 0.0.0
+ */
 const PRIMARY = {
   lighter: '#8798fa',
   light: '#6a77c4',
@@ -33,6 +46,12 @@ const PRIMARY = {
   darker: '#1d2136',
   contrastText: '#fff',
 };
+
+/**
+ * Dark theme secondary color definition
+ *
+ * @since - 0.0.0
+ */
 const SECONDARY = {
   lighter: '#bdbaff',
   light: '#8782ff',
@@ -41,6 +60,12 @@ const SECONDARY = {
   darker: '#19174f',
   contrastText: '#fff',
 };
+
+/**
+ * Dark theme info color definition
+ *
+ * @since - 0.0.0
+ */
 const INFO = {
   lighter: '#bdbaff',
   light: '#8782ff',
@@ -49,6 +74,12 @@ const INFO = {
   darker: '#19174f',
   contrastText: '#fff',
 };
+
+/**
+ * Dark theme success color definition
+ *
+ * @since - 0.0.0
+ */
 const SUCCESS = {
   lighter: '#bdbaff',
   light: '#8782ff',
@@ -57,6 +88,12 @@ const SUCCESS = {
   darker: '#19174f',
   contrastText: '#fff',
 };
+
+/**
+ * Dark theme warning color definition
+ *
+ * @since - 0.0.0
+ */
 const WARNING = {
   lighter: '#FEFDCD',
   light: '#FDF74E',
@@ -65,6 +102,12 @@ const WARNING = {
   darker: '#7E7A01',
   contrastText: GREY[800],
 };
+
+/**
+ * Dark theme error color definition
+ *
+ * @since - 0.0.0
+ */
 const ERROR = {
   lighter: '#FA5A5A',
   light: '#E65C5C',
@@ -74,8 +117,11 @@ const ERROR = {
   contrastText: '#fff',
 };
 
-/*
- ** Build the dark theme options struct
+/**
+ * Build the dark theme options struct
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 const darkThemePalette = {
   mode: 'dark',

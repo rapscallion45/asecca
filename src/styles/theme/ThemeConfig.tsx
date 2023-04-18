@@ -20,20 +20,30 @@ interface ThemeConfigProps {
   children?: ReactNode;
 }
 
-/* Theme Config */
-/* ============ */
+/**
+ * Theme Config
+ *
+ * Global application theme definitions and setup
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - emotion cache and component children
+ * @returns {FC} - theme config HOC
+ * @type {(props : ThemeConfigProps)}
+ */
 const ThemeConfig: FC<ThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
 
-  /* grab global theme state */
+  /** grab global theme state */
   const { theme: themeSelection } = useSelector(
     (state: AppState) => state.theme
   );
 
-  /* check if user has dark mode preference */
+  /** check if user has dark mode preference */
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  /* get options and create theme for current state */
+  /** get options and create theme for current state */
   const themeOptions: ThemeOptions = useMemo(
     () => ({
       palette:
