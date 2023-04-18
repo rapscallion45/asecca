@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar, SnackbarKey } from 'notistack';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import { removeNotification } from '../redux/slices/notificationsSlice';
 
 /**
@@ -19,20 +19,38 @@ let displayed: any = [];
  * @since - 0.0.0
  */
 const useNotifier = () => {
-  const dispatch = useDispatch();
+  /** app dispatch shorthand helper */
+  const dispatch = useDispatch<AppDispatch>();
+
+  /** global app notification state data */
   const { data: notifications } = useSelector(
     (state: AppState) => state.notifications
   );
+
+  /** snackbar hooks */
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
+  /**
+   * Store displayed notification ID key helper
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   */
   const storeDisplayed = (id: SnackbarKey | undefined) => {
     displayed = [...displayed, id];
   };
 
+  /**
+   * Remove displayed notification ID key helper
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   */
   const removeDisplayed = (id: SnackbarKey) => {
     displayed = [...displayed.filter((key: SnackbarKey) => id !== key)];
   };
 
+  /** whenever notifications state changes, update displayed/removed list */
   useEffect(() => {
     notifications.forEach(({ message, options = {}, dismissed = false }) => {
       if (dismissed) {
