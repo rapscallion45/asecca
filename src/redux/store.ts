@@ -6,8 +6,11 @@ import costsConfigReducer from './slices/costsConfigSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import themeReducer from './slices/themeSlice';
 
-/*
- ** Configuration of the redux store to manage the global application state
+/**
+ * Configuration of the redux store to manage the global application state
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 const store = configureStore({
   reducer: {
@@ -23,10 +26,25 @@ const store = configureStore({
       : (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
+/**
+ * Shorthand application store dispatch type helper
+ *
+ * @since - 0.0.0
+ */
 export type AppDispatch = typeof store.dispatch;
 
+/**
+ * Shorthand application state type helper
+ *
+ * @since - 0.0.0
+ */
 export type AppState = ReturnType<typeof store.getState>;
 
+/**
+ * Shorthand application Thunk Action type helper
+ *
+ * @since - 0.0.0
+ */
 export type AppThunk = ThunkAction<void, AppState, unknown, Action<string>>;
 
 export default store;

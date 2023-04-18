@@ -6,24 +6,36 @@ import {
   IRemoveNotificationPayload,
 } from '../types';
 
-/*
- ** Global application state slice definition for Notifications
- **
- ** Notifications are the alert popups seen by the user on specific action
- ** results, such as errors with API requests, login failures, etc. This state
- ** is manipulated from multiple places in the application.
+/**
+ * Global application state slice definition for Notifications
+ *
+ * Notifications are the alert popups seen by the user on specific action
+ * results, such as errors with API requests, login failures, etc. This state
+ * is manipulated from multiple places in the application.
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 
 interface InitialNotificationsState {
   data: Array<INotificationState>;
 }
 
-/* initialise notification state to empty array */
+/**
+ * Initialise notification state to empty array
+ *
+ * @since - 0.0.0
+ */
 const initialState: InitialNotificationsState = {
   data: [],
 };
 
-/* create the redux slice for interacting with the notifications state */
+/**
+ * Create the redux slice for interacting with the notifications state
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
@@ -69,7 +81,11 @@ const notificationsSlice = createSlice({
   },
 });
 
-/* the redux actions for adding, closing and removing a notification */
+/**
+ * Notification actions for adding, closing and removing a notifications
+ *
+ * @since - 0.0.0
+ */
 export const { addNotification, closeNotification, removeNotification } =
   notificationsSlice.actions;
 

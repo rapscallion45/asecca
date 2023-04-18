@@ -5,32 +5,43 @@ import {
   ICostsConfigSaveDataPayload,
 } from '@/lib/api/api-types';
 
-/*
- ** Type and interface definitions for Redux actions
+/**
+ * Type and interface definitions for Redux actions
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 
-/*
- ** Theme Type options
+/**
+ * Theme Type options
+ *
+ * @since 0.0.0
  */
 export type ThemeType = 'light' | 'dark';
 
-/*
- ** Fetch Costs Config args for async thunk requests
+/**
+ * Fetch Costs Config args for async thunk requests
+ *
+ * @since 0.0.0
  */
 export interface IFetchCostsConfigBySourceIdArgs {
   source: string;
   dataId: string | (string | null)[];
 }
 
-/*
- ** Save Costs Config args for async thunk requests
+/**
+ * Save Costs Config args for async thunk requests
+ *
+ * @since 0.0.0
  */
 export interface ISaveCostsConfigBySourceIdArgs {
   data: ICostsConfigSaveDataPayload;
 }
 
-/*
- ** Costs Config edit redux action payload definition
+/**
+ * Costs Config edit redux action payload definition
+ *
+ * @since 0.0.0
  */
 export interface ICostsConfigEditCostsPayload {
   colKey: string;
@@ -38,8 +49,10 @@ export interface ICostsConfigEditCostsPayload {
   value: string | null;
 }
 
-/*
- ** Costs Config state definition
+/**
+ * Costs Config state definition
+ *
+ * @since 0.0.0
  */
 export interface ICostsConfigState {
   data?: ICostsConfigDataPayload | null;
@@ -47,8 +60,10 @@ export interface ICostsConfigState {
   loading?: boolean;
 }
 
-/*
- ** User Permission Level definition
+/**
+ * User Permission Level definition
+ *
+ * @since 0.0.0
  */
 export type UserPermissionLevel =
   | 'Global'
@@ -56,15 +71,19 @@ export type UserPermissionLevel =
   | 'Project'
   | 'Collection';
 
-/*
- ** User Permission Level state definition
+/**
+ * User Permission Level state definition
+ *
+ * @since 0.0.0
  */
 export interface IUserPermissionLevelState {
   level: UserPermissionLevel;
 }
 
-/*
- ** Notification options definition
+/**
+ * Notification options definition
+ *
+ * @since 0.0.0
  */
 export interface INotificationOptions {
   key: SnackbarKey;
@@ -72,8 +91,10 @@ export interface INotificationOptions {
   onClose?: any;
 }
 
-/*
- ** Notification state definition
+/**
+ * Notification state definition
+ *
+ * @since 0.0.0
  */
 export interface INotificationState {
   message: string;
@@ -81,30 +102,38 @@ export interface INotificationState {
   options: INotificationOptions;
 }
 
-/*
- ** Add Notification action payload
+/**
+ * Add Notification action payload
+ *
+ * @since 0.0.0
  */
 export interface IAddNotificationPayload {
   message: string;
   variant: AlertColor;
 }
 
-/*
- ** Close Notification action payload
+/**
+ * Close Notification action payload
+ *
+ * @since 0.0.0
  */
 export interface ICloseNotificationPayload {
   key: SnackbarKey;
 }
 
-/*
- ** Remove Notification action payload
+/**
+ * Remove Notification action payload
+ *
+ * @since 0.0.0
  */
 export interface IRemoveNotificationPayload {
   key: SnackbarKey;
 }
 
-/*
- ** Theme state
+/**
+ * Theme state
+ *
+ * @since 0.0.0
  */
 export interface IThemeState {
   type: ThemeType;

@@ -1,25 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUserPermissionLevelState } from '../types';
 
-/*
- ** Global application state slice definition for User Permission
- **
- ** The User Permission state is used to determine what the current
- ** logged in user can view and edit in the application. This state can only
- ** be manipulated from the Admin Test Panel component, but is used
- ** across the application.
+/**
+ * Global application state slice definition for User Permission
+ *
+ * The User Permission state is used to determine what the current
+ * logged in user can view and edit in the application. This state can only
+ * be manipulated from the Admin Test Panel component, but is used
+ * across the application.
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
  */
 
 interface InitialUserPermissionState {
   permission: IUserPermissionLevelState;
 }
 
-/* initialise user permission level state - always set lowest level, 'Global' */
+/**
+ * Initialise user permission level state - always set lowest level, 'Global'
+ *
+ * @since - 0.0.0
+ */
 const initialState: InitialUserPermissionState = {
   permission: { level: 'Global' },
 };
 
-/* create the redux slice for interacting with the user permission state */
+/**
+ * Create the redux slice for interacting with the user permission state
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 const userPermissionSlice = createSlice({
   name: 'userPermission',
   initialState,
@@ -33,7 +45,11 @@ const userPermissionSlice = createSlice({
   },
 });
 
-/* the redux action for changing the user permission level */
+/**
+ * Costs Config actions for changing the user permission level
+ *
+ * @since - 0.0.0
+ */
 export const { setPermissionLevel } = userPermissionSlice.actions;
 
 export default userPermissionSlice.reducer;
