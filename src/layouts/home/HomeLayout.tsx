@@ -3,7 +3,11 @@ import { styled } from '@mui/material/styles';
 import NavBar from '@/components/NavBar/NavBar';
 import useNotifier from '@/hooks/useNotifier';
 
-/* background image styling */
+/**
+ * background styling
+ *
+ * @since - 0.0.0
+ */
 const BackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
@@ -13,7 +17,11 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[400],
 }));
 
-/* root style for the dashboard page content */
+/**
+ * root style for the dashboard page content
+ *
+ * @since - 0.0.0
+ */
 const RootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
@@ -23,16 +31,24 @@ const RootStyle = styled('section')({
   paddingTop: '100px',
 });
 
-interface DashboardLayoutProps {
+interface HomeLayoutProps {
   children?: ReactNode;
 }
 
-/* Base Dashboard Page Layout  */
-/* =========================== */
-const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
+/**
+ * Home Page Layout
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - component children
+ * @returns {FC} - home page layout functional component
+ * @type {( props : HomeLayoutProps)}
+ */
+const DashboardLayout: FC<HomeLayoutProps> = (props) => {
   const { children } = props;
 
-  /* initialise alert notifications */
+  /** initialise alert notifications */
   useNotifier();
 
   return (

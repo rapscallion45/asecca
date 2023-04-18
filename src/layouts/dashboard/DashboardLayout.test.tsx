@@ -7,17 +7,29 @@ import store from '../../redux/store';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
 import DashboardLayout from './DashboardLayout';
 
-/* test text */
+/**
+ * test text
+ *
+ * @since - 0.0.0
+ */
 const testMessage = 'Test render message';
 
-/* test child component */
+/**
+ * test child component
+ *
+ * @since - 0.0.0
+ */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
-/* Dashboard Layout Unit Tests */
-/* =========================== */
+/**
+ * Dashboard Layout Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Dashboard Layout', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Provider store={store}>
@@ -34,8 +46,8 @@ describe('Dashboard Layout', () => {
 
   describe('Admin Test Panel & NavBar', () => {
     it('Should be rendered', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Provider store={store}>
           <ThemeConfig emotionCache={createEmotionCache()}>
@@ -46,7 +58,7 @@ describe('Dashboard Layout', () => {
         </Provider>
       );
 
-      /* Assert - expect admin test panel and navbar rendered */
+      /** Assert - expect admin test panel and navbar rendered */
       expect(screen.getByText('Admin Test Panel')).toBeInTheDocument();
       expect(screen.getByText('Logout')).toBeInTheDocument();
       expect(screen.getByText(testMessage)).toBeInTheDocument();

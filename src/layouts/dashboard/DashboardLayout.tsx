@@ -5,7 +5,11 @@ import NavBar from '@/components/NavBar/NavBar';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
 
-/* background image styling */
+/**
+ * background styling
+ *
+ * @since - 0.0.0
+ */
 const BackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
@@ -15,7 +19,11 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[400],
 }));
 
-/* root style for the dashboard page content */
+/**
+ * root style for the dashboard page content
+ *
+ * @since - 0.0.0
+ */
 const RootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
@@ -29,12 +37,20 @@ interface DashboardLayoutProps {
   children?: ReactNode;
 }
 
-/* Base Dashboard Page Layout  */
-/* =========================== */
+/**
+ * Base Dashboard Page Layout
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - component children
+ * @returns {FC} - dashboard layout functional component
+ * @type {( props : DashboardLayoutProps)}
+ */
 const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
   const { children } = props;
 
-  /* initialise alert notifications */
+  /** initialise alert notifications */
   useNotifier();
 
   return (

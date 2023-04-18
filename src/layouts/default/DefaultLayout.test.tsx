@@ -7,17 +7,29 @@ import store from '../../redux/store';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
 import DefaultLayout from './DefaultLayout';
 
-/* test text */
+/**
+ * test text
+ *
+ * @since - 0.0.0
+ */
 const testMessage = 'Test render message';
 
-/* test child component */
+/**
+ * test child component
+ *
+ * @since - 0.0.0
+ */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
-/* Default Layout Unit Tests */
-/* ========================= */
+/**
+ * Default Layout Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Default Layout', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Provider store={store}>
@@ -34,8 +46,8 @@ describe('Default Layout', () => {
 
   describe('Admin Test Panel & NavBar', () => {
     it('Should not be rendered', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Provider store={store}>
           <ThemeConfig emotionCache={createEmotionCache()}>
@@ -46,7 +58,7 @@ describe('Default Layout', () => {
         </Provider>
       );
 
-      /* Assert - expect admin test panel and navbar not rendered */
+      /** Assert - expect admin test panel and navbar not rendered */
       expect(screen.queryByText('Admin Test Panel')).toBeNull();
       expect(screen.queryByText('Logout')).toBeNull();
       expect(screen.queryByText(testMessage)).toBeInTheDocument();
