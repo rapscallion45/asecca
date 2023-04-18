@@ -9,13 +9,17 @@ import {
   IDataTableGetCellValueCallback,
 } from '../types';
 
-/* table row stylings */
+/**
+ * table row stylings
+ *
+ * @since - 0.0.0
+ */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  /* alternate row background colors */
+  /** alternate row background colors */
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  /* hide last border */
+  /** hide last border */
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -30,8 +34,16 @@ interface IDataRowProps {
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
-/* Data Table Row component */
-/* ======================== */
+/**
+ * Data Table Row helper
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - row name, row table index, row columns, editable column names
+ * @returns {FC} - data table row functional component
+ * @type {( props : IDataRowProps)}
+ */
 const DataRow: FC<IDataRowProps> = (props) => {
   const {
     rowName,
@@ -42,7 +54,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
     getCellValueCallback,
   } = props;
 
-  /* submit the updated cell value */
+  /** submit the updated cell value */
   const submitCellValue = useCallback(
     (value: string | null, colKey: string) => {
       if (editCellValueCallback)
@@ -51,17 +63,17 @@ const DataRow: FC<IDataRowProps> = (props) => {
     [rowIdx, editCellValueCallback]
   );
 
-  /* retrieve cell value for passed table column and row index */
+  /** retrieve cell value for passed table column and row index */
   const getCellValueByColumn = useCallback(
     (column: IDataTableColumn) =>
-      /* apply any logic required for this column (such as 'Prevailing') */
+      /** apply any logic required for this column (such as 'Prevailing') */
       getCellValueCallback(rowIdx, column),
     [rowIdx, getCellValueCallback]
   );
 
   return (
     <StyledTableRow>
-      {/* map passed column data for current row */}
+      {/** map passed column data for current row */}
       {columns.map((column: IDataTableColumn) =>
         column.type === 'currency' ? (
           <CurrencyCell
@@ -72,14 +84,14 @@ const DataRow: FC<IDataRowProps> = (props) => {
             )}
             value={getCellValueByColumn(column) || null}
             submitCellValue={(value) => submitCellValue(value, column.key)}
-            /* specific requirement for 'Prevailing' columns */
+            /** specific requirement for 'Prevailing' columns */
             sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
           />
         ) : (
           <Cell
             key={`${rowName}-${column.key}`}
             value={getCellValueByColumn(column) || null}
-            /* specific requirement for 'Application' columns */
+            /** specific requirement for 'Application' columns */
             sx={{
               fontSize:
                 column.key !== 'application' ? 'inherit' : '12px !important',

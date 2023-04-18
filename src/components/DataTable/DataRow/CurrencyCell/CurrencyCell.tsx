@@ -32,25 +32,42 @@ interface ICurrencyCellProps {
   sx?: any;
 }
 
-/* Data Table Currency Cell */
-/* ======================== */
+/**
+ * Data Table Currency Cell
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - input ID, is cell editable, cell value string, submit value, style
+ * @returns {FC} - data table row functional component
+ * @type {( props : ICurrencyCellProps)}
+ */
 const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   const { inputId, canEdit, value, submitCellValue, sx } = props;
 
-  /* whether or not cell is currently clicked */
+  /** whether or not cell is currently clicked */
   const [clicked, setClicked] = useState<boolean>(false);
 
-  /* edited cell value state initialised to passed cell value */
+  /** edited cell value state initialised to passed cell value */
   const [editValue, setEditValue] = useState<string>(
     value !== null ? value : '--'
   );
 
-  /* ensure edit value is reset when there is update to passed value */
+  /** ensure edit value is reset when there is update to passed value */
   useEffect(() => {
     setEditValue(value !== null ? value : '--');
   }, [value]);
 
-  /* callback for handling user input */
+  /**
+   * Callback for handling user input.
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @param event - value change trigger event
+   * @returns - none
+   * @type {( event : ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)}
+   */
   const handleValueChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
       setEditValue(event.target.value);
@@ -58,9 +75,14 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     []
   );
 
-  /*
-   ** reformat currency value to floating point, two decimal places,
-   ** or display null indicator
+  /**
+   * Callback to reformat currency value to floating point, two decimal places,
+   * or display null indicator.
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @returns - none
    */
   const handleValueReformat = useCallback(() => {
     /* check if cell is null or indicating null */
@@ -84,7 +106,15 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     }
   }, [value, editValue, submitCellValue]);
 
-  /* user has decided to clear input and enter null value for this cell */
+  /**
+   * Callback for when user has decided to clear input and enter null value
+   * for this cell
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @returns - none
+   */
   const handleClearCell = useCallback(() => {
     setEditValue('--');
     if (submitCellValue) submitCellValue('--');
@@ -98,7 +128,14 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     [handleValueReformat]
   );
 
-  /* listens for clicks on cell */
+  /**
+   * Callback listens for clicks on cell
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @returns - none
+   */
   const handleClick = useCallback(() => {
     if (!clicked && editValue === '--')
       /* clear cell if null, ready for new input */
@@ -106,7 +143,14 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
     setClicked(true);
   }, [clicked, editValue]);
 
-  /* listens for click away from cell */
+  /**
+   * Callback listens for click away from cell
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @returns - none
+   */
   const handleClickAway = useCallback(() => {
     if (clicked) handleValueReformat();
     setClicked(false);

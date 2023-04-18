@@ -9,6 +9,11 @@ import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { AppDispatch, AppState } from '@/redux/store';
 import { UserPermissionLevel } from '@/redux/types';
 
+/**
+ * permissions list
+ *
+ * @since - 0.0.0
+ */
 const permissions = [
   {
     value: 'Global',
@@ -28,17 +33,23 @@ const permissions = [
   },
 ];
 
-/* Admin Test Panel */
-/* ================ */
+/**
+ * Admin Test Panel
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @returns {FC} - admin test panel functional component
+ */
 const AdminTestPanel: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get user permission level held in redux state */
+  /** get user permission level held in redux state */
   const { permission: userPermission } = useSelector(
     (state: AppState) => state.userPermission
   );
 
-  /* change user permission level state when dropdown changed */
+  /** change user permission level state when dropdown changed */
   const handlePermissionChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

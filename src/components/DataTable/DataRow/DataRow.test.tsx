@@ -8,7 +8,11 @@ import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../../__mocks__/costsConfigDataMock';
 import { IDataTableColumn } from '../types';
 
-/* mock callbacks for get and edit cell values */
+/**
+ * mock callbacks for get and edit cell values
+ *
+ * @since - 0.0.0
+ */
 const mockGetCellValueCallback = jest.fn(
   (rowIdx: number, column: IDataTableColumn) =>
     costsConfigDataMock.costs[rowIdx][column.key as keyof ICostsConfigData]
@@ -18,11 +22,15 @@ const mockEditCellValueCallback = jest.fn(
     costsConfigDataMock.costs[rowIdx][colKey as keyof ICostsConfigData]
 );
 
-/* Data Table Data Row Unit Tests */
-/* ============================== */
+/**
+ * Data Table Data Row Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Data Table Data Row', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Table>
@@ -43,18 +51,18 @@ describe('Data Table Data Row', () => {
   });
 
   describe('Value', () => {
-    /* ensure mock function calls are cleared after test */
+    /** ensure mock function calls are cleared after test */
     afterEach(() => {
       jest.clearAllMocks();
     });
 
     it('Should render expected value for row and column', async () => {
-      /* Arrange */
+      /** Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Global';
       const testEditColKey: string = 'global_charge';
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -70,7 +78,7 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* Assert - correct value should be displayed from test data */
+      /** Assert - correct value should be displayed from test data */
       expect(
         screen.getByDisplayValue(
           costsConfigDataMock.costs[testRowIdx][
@@ -81,11 +89,11 @@ describe('Data Table Data Row', () => {
     });
 
     it('Should render null indicator if null for this row and column', async () => {
-      /* Arrange */
+      /** Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Collection';
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -101,19 +109,19 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* passed value is null, therefore clear icon should not render */
+      /** Assert - passed value is null, therefore clear icon should not render */
       expect(screen.getByDisplayValue('--')).toBeInTheDocument();
     });
 
     it('Should render Currency Cell for column type curreny', async () => {
-      /* Arrange */
+      /** Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Collection';
       const testColumn: Array<IDataTableColumn> = dataTableColumns.filter(
         (column) => column.label === 'Collection'
       );
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -129,19 +137,19 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* Assert - currency cell will display currency symbol */
+      /** Assert - currency cell will display currency symbol */
       expect(screen.getByText('£')).toBeInTheDocument();
     });
 
     it('Should render normal Cell for non curreny type', async () => {
-      /* Arrange */
+      /** Arrange */
       const testRowIdx: number = 0;
       const testEditCol: string = 'Product';
       const testColumn: Array<IDataTableColumn> = dataTableColumns.filter(
         (column) => column.label === 'Product'
       );
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -157,12 +165,12 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* Assert - currency cell should not be rendered */
+      /** Assert - currency cell should not be rendered */
       expect(screen.queryByText('£')).toBeNull();
     });
 
     it('Should submit passed value with row index and column key', async () => {
-      /* Arrange */
+      /** Arrange */
       const testInput: string = '128';
       const testFormattedInput: string = '128.00';
       const testRowIdx: number = 0;
@@ -172,7 +180,7 @@ describe('Data Table Data Row', () => {
         testEditColKey as keyof ICostsConfigData
       ] as string;
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -188,12 +196,12 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* Assert - input field, button, and clear icon should be rendered */
+      /** Assert - input field, button, and clear icon should be rendered */
       expect(screen.getByDisplayValue(assertValue)).toBeInTheDocument();
       expect(screen.queryByRole('button')).toBeInTheDocument();
       expect(screen.queryByTestId('CloseIcon')).toBeInTheDocument();
 
-      /* Act - click on input field, update value and press enter */
+      /** Act - click on input field, update value and press enter */
       fireEvent(
         screen.getByDisplayValue(
           costsConfigDataMock.costs[testRowIdx][
@@ -216,12 +224,12 @@ describe('Data Table Data Row', () => {
         }
       );
 
-      /* Assert - wait for input to update */
+      /** Assert - wait for input to update */
       await waitFor(() => {
         expect(screen.getByDisplayValue(testInput)).toBeInTheDocument();
       });
 
-      /* Act - press enter key */
+      /** Act - press enter key */
       fireEvent.keyDown(screen.getByDisplayValue(testInput), {
         key: 'Enter',
         code: 'Enter',
@@ -229,26 +237,26 @@ describe('Data Table Data Row', () => {
         charCode: 13,
       });
 
-      /* Assert - button and clear icon not rendered, values updated */
+      /** Assert - button and clear icon not rendered, values updated */
       await waitFor(() => {
-        /* display value of cell updated to formatted value */
+        /** display value of cell updated to formatted value */
         expect(
           screen.getByDisplayValue(testFormattedInput)
         ).toBeInTheDocument();
       });
-      /* edit cell callback to have been called once, with formatted value */
+      /** edit cell callback to have been called once, with formatted value */
       expect(mockEditCellValueCallback.mock.calls).toHaveLength(1);
       expect(mockEditCellValueCallback.mock.calls[0][0]).toBe(
         testFormattedInput
       );
-      /* edit cell callback to have been called with correct column key */
+      /** edit cell callback to have been called with correct column key */
       expect(mockEditCellValueCallback.mock.calls[0][1]).toBe(testEditColKey);
-      /* edit cell callback to have been called with correct column key */
+      /** edit cell callback to have been called with correct column key */
       expect(mockEditCellValueCallback.mock.calls[0][2]).toBe(testRowIdx);
     });
 
     it('Should submit null with row and column if null indicated for cell', async () => {
-      /* Arrange */
+      /** Arrange */
       const testInput: string = '';
       const testFormattedInput: string = '--';
       const testRowIdx: number = 0;
@@ -258,7 +266,7 @@ describe('Data Table Data Row', () => {
         testEditColKey as keyof ICostsConfigData
       ] as string;
 
-      /* Act */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -274,12 +282,12 @@ describe('Data Table Data Row', () => {
         </Table>
       );
 
-      /* Assert - input field, button, and clear icon should be rendered */
+      /** Assert - input field, button, and clear icon should be rendered */
       expect(screen.getByDisplayValue(assertValue)).toBeInTheDocument();
       expect(screen.queryByRole('button')).toBeInTheDocument();
       expect(screen.queryByTestId('CloseIcon')).toBeInTheDocument();
 
-      /* Act - click on input field, update value and press enter */
+      /** Act - click on input field, update value and press enter */
       fireEvent(
         screen.getByDisplayValue(
           costsConfigDataMock.costs[testRowIdx][
@@ -302,12 +310,12 @@ describe('Data Table Data Row', () => {
         }
       );
 
-      /* Assert - wait for input to update */
+      /** Assert - wait for input to update */
       await waitFor(() => {
         expect(screen.getByDisplayValue(testInput)).toBeInTheDocument();
       });
 
-      /* Act - press enter key */
+      /** Act - press enter key */
       fireEvent.keyDown(screen.getByDisplayValue(testInput), {
         key: 'Enter',
         code: 'Enter',
@@ -315,19 +323,19 @@ describe('Data Table Data Row', () => {
         charCode: 13,
       });
 
-      /* Assert - button and clear icon not rendered, values updated */
+      /** Assert - button and clear icon not rendered, values updated */
       await waitFor(() => {
-        /* display value of cell updated to formatted value */
+        /** display value of cell updated to formatted value */
         expect(
           screen.getByDisplayValue(testFormattedInput)
         ).toBeInTheDocument();
       });
-      /* edit cell callback to have been called once, with null value */
+      /** edit cell callback to have been called once, with null value */
       expect(mockEditCellValueCallback.mock.calls).toHaveLength(1);
       expect(mockEditCellValueCallback.mock.calls[0][0]).toBe(null);
-      /* edit cell callback to have been called with correct column key */
+      /** edit cell callback to have been called with correct column key */
       expect(mockEditCellValueCallback.mock.calls[0][1]).toBe(testEditColKey);
-      /* edit cell callback to have been called with correct column key */
+      /** edit cell callback to have been called with correct column key */
       expect(mockEditCellValueCallback.mock.calls[0][2]).toBe(testRowIdx);
     });
   });

@@ -27,8 +27,16 @@ interface IDataTableProps {
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
-/* Data Table */
-/* ========== */
+/**
+ * Data Table
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - table name, columns, editable column name, rows, loading and error flags
+ * @returns {FC} - data table functional component
+ * @type {( props : IDataTableProps)}
+ */
 const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,

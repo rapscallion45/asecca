@@ -24,30 +24,38 @@ interface CostsConfigTableProps {
   query: string;
 }
 
-/* Costs Config Data Table */
-/* ======================= */
+/**
+ * Costs Config Data Table
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - table permission level and query identifier
+ * @returns {FC} - costs config table functional component
+ * @type {(permission : IUserPermissionLevelState), (query : string)}
+ */
 const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
   const { permission, query } = props;
 
-  /* shorthand helper for dispatching redux actions */
+  /** shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get costs config data held in redux state */
+  /** get costs config data held in redux state */
   const { data, loading, error, saving, edited } = useSelector(
     (state: AppState) => state.costsConfig
   );
 
-  /* filter the data table columns for current permission level */
+  /** filter the data table columns for current permission level */
   const [colFilterList, setColFilterList] = useState<Array<string | null>>(
     getCostsConfigColFilterList(permission.level)
   );
 
-  /* whenever the user permission global state is updated, re-filter cols */
+  /** whenever the user permission global state is updated, re-filter cols */
   useEffect(() => {
     setColFilterList(getCostsConfigColFilterList(permission.level));
   }, [permission.level]);
 
-  /* handle the saving of the table data */
+  /** handle the saving of the table data */
   const handleSave = () => {
     dispatch(
       saveCostsConfigBySourceId({
@@ -56,12 +64,12 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
     );
   };
 
-  /* handle the resetting of the table data */
+  /** handle the resetting of the table data */
   const handleCancel = () => {
     dispatch(resetCostsConfig());
   };
 
-  /* handle the update of the table data */
+  /** handle the update of the table data */
   const handleEditCellValue = (
     value: string | null,
     colKey: string,
@@ -76,9 +84,9 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
     );
   };
 
-  /* handle any required logic when determining a cell's display value */
+  /** handle any required logic when determining a cell's display value */
   const handleGetCellValue = (rowIdx: number, column: IDataTableColumn) => {
-    /* apply Prevailing column logic or simply return value */
+    /** apply Prevailing column logic or simply return value */
     if (column.label === 'Prevailing')
       return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
     return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
@@ -88,13 +96,13 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
     <>
       <DataTable
         name="costs config"
-        /* filter table columns by current permission level */
+        /** filter table columns by current permission level */
         columns={columns.filter(
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
-        /* table editable cell(s) defined by user permission level */
+        /** table editable cell(s) defined by user permission level */
         editableColLabels={[permission.level]}
-        /* build table row props from costs config data */
+        /** build table row props from costs config data */
         rows={data?.costs.map((cost: ICostsConfigData) => ({
           label: cost.name,
         }))}

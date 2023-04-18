@@ -11,8 +11,16 @@ interface IErrorRowProps {
   message?: string;
 }
 
-/* Data Table Error Row helper */
-/* =========================== */
+/**
+ * Data Table Error Row helper
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - table columns and error message
+ * @returns {FC} - data table error row functional component
+ * @type {( props : IErrorRowProps)}
+ */
 const ErrorRow: FC<IErrorRowProps> = (props) => {
   const { columns, message } = props;
 

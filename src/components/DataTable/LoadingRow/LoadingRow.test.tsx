@@ -5,14 +5,22 @@ import { Table, TableBody } from '@mui/material';
 import LoadingRow from './LoadingRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
-/* default test error message */
+/**
+ * default test loading message
+ *
+ * @since - 0.0.0
+ */
 const testMessage = 'This is a loading message';
 
-/* Loading Row Unit Tests */
-/* ====================== */
+/**
+ * Loading Row Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Data Table Loading Row', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Table>
@@ -27,8 +35,8 @@ describe('Data Table Loading Row', () => {
 
   describe('Message', () => {
     it('Should render the passed message text', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -37,15 +45,15 @@ describe('Data Table Loading Row', () => {
         </Table>
       );
 
-      /* Assert */
+      /** Assert */
       expect(screen.getByText(testMessage)).toBeInTheDocument();
     });
   });
 
   describe('Spinner', () => {
     it('Should render circular progress', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -54,7 +62,7 @@ describe('Data Table Loading Row', () => {
         </Table>
       );
 
-      /* Assert */
+      /** Assert */
       expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
   });

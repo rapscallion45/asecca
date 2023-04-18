@@ -11,19 +11,27 @@ interface IAlertNotificationProps {
 }
 type Ref = HTMLDivElement;
 
-/* Alert Notification */
-/* ================== */
+/**
+ * Alert Notification
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - notification ID key
+ * @param ref - reference to the alert provider parent component
+ * @returns {ForwardRefExoticComponent} - alert notification component
+ */
 const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
   (props, ref) => {
     const dispatch = useDispatch<AppDispatch>();
     const { id } = props;
 
-    /* close alert callback */
+    /** close alert callback */
     const handleClose = () => {
       dispatch(closeNotification({ key: id }));
     };
 
-    /* find this alert in state and get variant */
+    /** find this alert in state and get variant */
     const { data: notifications } = useSelector(
       (state: AppState) => state.notifications
     );
@@ -49,8 +57,15 @@ interface IAlertProviderProps {
   children?: ReactNode;
 }
 
-/* Alert Provider */
-/* ============== */
+/**
+ * Alert Provider
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - component children
+ * @returns {FC} - alert provider HOC
+ */
 const AlertProvider: FC<IAlertProviderProps> = (props) => {
   const { children = null } = props;
 
@@ -61,7 +76,7 @@ const AlertProvider: FC<IAlertProviderProps> = (props) => {
         vertical: 'bottom',
         horizontal: 'center',
       }}
-      /* override all alert variants with our custom component */
+      /** override all alert variants with our custom component */
       Components={{
         success: AlertNotification,
         error: AlertNotification,

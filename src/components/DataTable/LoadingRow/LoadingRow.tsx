@@ -11,8 +11,16 @@ interface ILoadingRowProps {
   message: string;
 }
 
-/* Data Table Loading Row helper */
-/* ============================= */
+/**
+ * Data Table Loading Row helper
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - component children
+ * @returns {FC} - data table loading row functional component
+ * @type {( props : ILoadingRowProps)}
+ */
 const LoadingRow: FC<ILoadingRowProps> = (props) => {
   const { columns, message } = props;
 

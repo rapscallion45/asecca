@@ -7,17 +7,25 @@ import dataTableColumns from '../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../__mocks__/costsConfigDataMock';
 import { IDataTableColumn } from './types';
 
-/* mock callback for get cell value */
+/**
+ * mock callback for get cell value
+ *
+ * @since - 0.0.0
+ */
 const mockGetCellValueCallback = jest.fn(
   (rowIdx: number, column: IDataTableColumn) =>
     costsConfigDataMock.costs[rowIdx][column.key as keyof ICostsConfigData]
 );
 
-/* Data Table Unit Tests */
-/* ===================== */
+/**
+ * Data Table Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Data Table', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <DataTable
@@ -35,14 +43,14 @@ describe('Data Table', () => {
   });
 
   describe('Values', () => {
-    /* ensure mock function calls are cleared after test */
+    /** ensure mock function calls are cleared after test */
     afterEach(() => {
       jest.clearAllMocks();
     });
 
     it('Should render expected values for passed data structure', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <DataTable
           name="testtable"
@@ -55,7 +63,7 @@ describe('Data Table', () => {
         />
       );
 
-      /* Assert - correct value should be displayed from test data */
+      /** Assert - correct value should be displayed from test data */
       costsConfigDataMock.costs.forEach((cost) => {
         expect(screen.getByText(cost.application)).toBeInTheDocument();
         expect(screen.getByText(cost.name)).toBeInTheDocument();
@@ -64,14 +72,14 @@ describe('Data Table', () => {
   });
 
   describe('Error and Loading', () => {
-    /* ensure mock function calls are cleared after test */
+    /** ensure mock function calls are cleared after test */
     afterEach(() => {
       jest.clearAllMocks();
     });
 
     it('Should render loading spinner when loading prop set', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <DataTable
           name="testtable"
@@ -85,16 +93,16 @@ describe('Data Table', () => {
         />
       );
 
-      /* Assert - loading spinner and message should be rendered */
+      /** Assert - loading spinner and message should be rendered */
       expect(screen.getByRole('progressbar')).toBeInTheDocument();
       expect(screen.getByText('Loading...')).toBeInTheDocument();
     });
 
     it('Should render error message when loading prop set', async () => {
-      /* Arrange */
+      /** Arrange */
       const errorMsg: string = 'Failed to laod data.';
 
-      /* Act */
+      /** Act */
       render(
         <DataTable
           name="testtable"
@@ -108,7 +116,7 @@ describe('Data Table', () => {
         />
       );
 
-      /* Assert - correct value should be displayed from test data */
+      /** Assert - correct value should be displayed from test data */
       expect(screen.getByTestId('ErrorIcon')).toBeInTheDocument();
       expect(screen.getByText(errorMsg)).toBeInTheDocument();
     });

@@ -5,11 +5,15 @@ import { Table, TableBody } from '@mui/material';
 import HeaderRow from './HeaderRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
-/* Heading Row Unit Tests */
-/* ====================== */
+/**
+ * Heading Row Unit Tests
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ */
 describe('Data Table Header Row', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Table>
@@ -24,8 +28,8 @@ describe('Data Table Header Row', () => {
 
   describe('Message', () => {
     it('Should render the passed message text', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -34,7 +38,7 @@ describe('Data Table Header Row', () => {
         </Table>
       );
 
-      /* Assert - make sure each column heading is rendered */
+      /** Assert - make sure each column heading is rendered */
       dataTableColumns.forEach((column) => {
         expect(screen.getByText(column.label)).toBeInTheDocument();
       });

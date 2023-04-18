@@ -10,8 +10,16 @@ interface NavBarProps {
   showLogin?: boolean;
 }
 
-/* App NavBar */
-/* ========== */
+/**
+ * App NavBar
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param props - show or hide login button
+ * @returns {FC} - default layout functional component
+ * @type {( props : NavBarProps)}
+ */
 const NavBar: FC<NavBarProps> = (props) => {
   const { showLogin = false } = props;
 
