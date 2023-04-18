@@ -14,6 +14,11 @@ import CostsConfigTable from '@/components/CostsConfigTable/CostsConfigTable';
  *
  * Presents user with costs configuration table, with data fetched from Asecca
  * API, based on passed page query params
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @returns {NextPageWithLayout} - Costs Configuration page
  */
 const CostsConfigTestPage: NextPageWithLayout = () => {
   /** shorthand helper for dispatching redux actions */

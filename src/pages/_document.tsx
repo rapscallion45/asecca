@@ -4,9 +4,20 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { createEmotionCache } from '@/utils';
 import Meta from '@/components/Meta/Meta';
 
-/* boilerplate code from Material UI */
-/* https://github.com/mui/material-ui/blob/master/examples/material-next-ts/pages/_document.tsx */
-
+/**
+ * Custom Document definition
+ *
+ * Custom Document for configuring MaterialUI functionality. This file is only
+ * rendered on the server.
+ *
+ * @see See [Boilerplate code from Material UI](https://github.com/mui/material-ui/blob/master/examples/material-next-ts/pages/_document.tsx)
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @class
+ * @returns {Document} - custom document component
+ */
 export default class MyDocument extends Document {
   render() {
     return (

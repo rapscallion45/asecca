@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { NextLayoutComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -22,12 +23,23 @@ interface AseccaAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-/* Asecca SPA entry point */
-/* ====================== */
-const AseccaApp: React.FunctionComponent<AseccaAppProps> = (props) => {
+/**
+ * Asecca SPA entry point
+ *
+ * Entry point of the application. Sets up all state and theme providers, layout,
+ * and renders requested page.
+ *
+ * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @since - 0.0.0
+ *
+ * @param {props} - app props, with emotion cache and component layout extensions
+ * @returns {FC} - application entry point functional component
+ * @type {(props : AssecaAppProps)}
+ */
+const AseccaApp: FC<AseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  /* the page layout is defined in each page's definition, else default */
+  /** the page layout is defined in each page's definition, else default */
   const PageLayout = Component.Layout || DefaultLayout;
 
   return (
