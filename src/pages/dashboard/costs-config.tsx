@@ -11,7 +11,7 @@ import CostsConfigTable from '@/components/CostsConfigTable/CostsConfigTable';
 import { CostsConfigCostSource } from '@/lib/api/api-types';
 
 /**
- * Costs Config Test Page
+ * Costs Config Page
  *
  * Presents user with costs configuration table, with data fetched from Asecca
  * API, based on passed page query params
@@ -21,7 +21,7 @@ import { CostsConfigCostSource } from '@/lib/api/api-types';
  *
  * @returns {NextPageWithLayout} - Costs Configuration page
  */
-const CostsConfigTestPage: NextPageWithLayout = () => {
+const CostsConfigPage: NextPageWithLayout = () => {
   /** shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
@@ -90,6 +90,6 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
 };
 
 /** dashboard layout used for Costs Config page */
-CostsConfigTestPage.Layout = DashboardLayout;
+CostsConfigPage.Layout = DashboardLayout;
 
-export default CostsConfigTestPage;
+export default CostsConfigPage;
