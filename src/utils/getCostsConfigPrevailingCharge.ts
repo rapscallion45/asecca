@@ -37,8 +37,15 @@ const getCostsConfigPrevailingCharge = (
     return tableRow[editCellKey as keyof ICostsConfigData];
 
   /**
+   * Get Charge
+   *
    * if editable col is null, determine charge according to
    * the col permission hierachy
+   *
+   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @since - 0.0.0
+   *
+   * @returns {string | null | undefined} - charge value, can be null or undefined
    */
   const getCharge = (): string | null | undefined => {
     switch (permissionLevel.level) {
