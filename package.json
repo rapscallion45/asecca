@@ -11,7 +11,8 @@
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "docs": "jsdoc -c jsdoc.conf.json"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.5",
@@ -25,7 +26,9 @@
     "@mui/material": "^5.11.14",
     "@reduxjs/toolkit": "^1.9.3",
     "base-64": "^1.0.0",
+    "better-docs": "^2.7.2",
     "dotenv": "^16.0.3",
+    "jsdoc": "^4.0.2",
     "next": "13.2.4",
     "notistack": "^3.0.1",
     "query-string": "^8.1.0",
@@ -45,6 +48,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/react-test-renderer": "^18.0.0",
     "@types/redux-logger": "^3.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
     "babel-jest": "^29.5.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
