@@ -11,7 +11,15 @@ import { IThemeState, ThemeType } from '../types';
  * @since - 0.0.0
  */
 
-interface InitialThemeState {
+/**
+ * Initial Theme State
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IInitialThemeState
+ * @prop {IThemeState} theme - initial theme state
+ */
+interface IInitialThemeState {
   theme: IThemeState;
 }
 
@@ -20,7 +28,7 @@ interface InitialThemeState {
  *
  * @since - 0.0.0
  */
-const initialState: InitialThemeState = {
+const initialState: IInitialThemeState = {
   theme: { type: 'light' },
 };
 

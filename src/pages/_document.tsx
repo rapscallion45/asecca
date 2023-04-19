@@ -16,7 +16,8 @@ import Meta from '@/components/Meta/Meta';
  * @since - 0.0.0
  *
  * @class
- * @returns {Document} - custom document component
+ * @extends Document
+ * @returns {MyDocument} - custom document class
  */
 export default class MyDocument extends Document {
   render() {

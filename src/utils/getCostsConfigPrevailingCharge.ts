@@ -7,10 +7,9 @@ import { IUserPermissionLevelState } from '@/redux/types';
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param tableRow - can be any of 'collection', 'project', 'customer' or 'global'
- * @param permissionLevel- ID number of the costs configuration
+ * @param {ICostsConfigData} tableRow - table row to be processed for 'Prevailing'
+ * @param {IUserPermissionLevelState} permissionLevel - permission level to process
  * @returns {string | null | undefined} - resulting value string, null or undefined
- * @type {(source : string), (dataId : string | (string | null)[]), (data : Array<ICostsConfigData> | undefined)}
  */
 const getCostsConfigPrevailingCharge = (
   tableRow: ICostsConfigData,

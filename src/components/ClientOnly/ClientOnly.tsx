@@ -1,5 +1,13 @@
 import { FC, useState, useEffect, ReactNode } from 'react';
 
+/**
+ * ClientOnly Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IClientOnlyProps
+ * @prop {ReactNode} children - component children nodes
+ */
 interface IClientOnlyProps {
   children: ReactNode;
 }
@@ -10,8 +18,8 @@ interface IClientOnlyProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - component children
- * @returns {FC} - client only HOC
+ * @param {IClientOnlyProps} props - component props
+ * @returns {FC} - client only functional component
  */
 const ClientOnly: FC<IClientOnlyProps> = (props) => {
   const { children } = props;

@@ -30,6 +30,8 @@ const store = configureStore({
  * Shorthand application store dispatch type helper
  *
  * @since - 0.0.0
+ *
+ * @typedef AppDispatch - application specific store dispatch type
  */
 export type AppDispatch = typeof store.dispatch;
 
@@ -37,6 +39,8 @@ export type AppDispatch = typeof store.dispatch;
  * Shorthand application state type helper
  *
  * @since - 0.0.0
+ *
+ * @typedef AppState - application specific state object shape
  */
 export type AppState = ReturnType<typeof store.getState>;
 
@@ -44,6 +48,8 @@ export type AppState = ReturnType<typeof store.getState>;
  * Shorthand application Thunk Action type helper
  *
  * @since - 0.0.0
+ *
+ * @typedef AppThunk - application specific Thunk action definition
  */
 export type AppThunk = ThunkAction<void, AppState, unknown, Action<string>>;
 

@@ -1,6 +1,7 @@
 import { SnackbarKey } from 'notistack';
 import { AlertColor } from '@mui/material';
 import {
+  CostsConfigCostSource,
   ICostsConfigDataPayload,
   ICostsConfigSaveDataPayload,
 } from '@/lib/api/api-types';
@@ -16,6 +17,8 @@ import {
  * Theme Type options
  *
  * @since 0.0.0
+ *
+ * @typedef ThemeType - theme can either be 'light' or 'dark' mode
  */
 export type ThemeType = 'light' | 'dark';
 
@@ -23,9 +26,12 @@ export type ThemeType = 'light' | 'dark';
  * Fetch Costs Config args for async thunk requests
  *
  * @since 0.0.0
+ *
+ * @typedef IFetchCostsConfigBySourceIdArgs
+ * @prop {CostsConfigCostSource} source - costs config cost source option
  */
 export interface IFetchCostsConfigBySourceIdArgs {
-  source: string;
+  source: CostsConfigCostSource;
   dataId: string | (string | null)[];
 }
 
@@ -33,6 +39,9 @@ export interface IFetchCostsConfigBySourceIdArgs {
  * Save Costs Config args for async thunk requests
  *
  * @since 0.0.0
+ *
+ * @typedef ISaveCostsConfigBySourceIdArgs
+ * @prop {ICostsConfigSaveDataPayload} data - data payload to be sent
  */
 export interface ISaveCostsConfigBySourceIdArgs {
   data: ICostsConfigSaveDataPayload;
@@ -42,6 +51,11 @@ export interface ISaveCostsConfigBySourceIdArgs {
  * Costs Config edit redux action payload definition
  *
  * @since 0.0.0
+ *
+ * @typedef ICostsConfigEditCostsPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {string | null} value - updated column value
  */
 export interface ICostsConfigEditCostsPayload {
   colKey: string;
@@ -53,6 +67,11 @@ export interface ICostsConfigEditCostsPayload {
  * Costs Config state definition
  *
  * @since 0.0.0
+ *
+ * @typedef ICostsConfigState
+ * @prop {ICostsConfigDataPayload | null} data - costs config data held in state
+ * @prop {string} error - costs config error message
+ * @prop {boolean} loading - costs config data loading flag
  */
 export interface ICostsConfigState {
   data?: ICostsConfigDataPayload | null;
@@ -61,9 +80,11 @@ export interface ICostsConfigState {
 }
 
 /**
- * Permission definition
+ * Permissions definition
  *
  * @since 0.0.0
+ *
+ * @type {Array<string>} - list of possible permission levels
  */
 export const permissions = [
   'Global',
@@ -76,17 +97,18 @@ export const permissions = [
  * User Permission Level definition
  *
  * @since 0.0.0
+ *
+ * @type {string} - list of possible permission levels
  */
-export type UserPermissionLevel =
-  | 'Global'
-  | 'Customer'
-  | 'Project'
-  | 'Collection';
+export type UserPermissionLevel = (typeof permissions)[number];
 
 /**
  * User Permission Level state definition
  *
  * @since 0.0.0
+ *
+ * @typedef IUserPermissionLevelState
+ * @prop {UserPermissionLevel} level - current user permission level
  */
 export interface IUserPermissionLevelState {
   level: UserPermissionLevel;
@@ -96,6 +118,11 @@ export interface IUserPermissionLevelState {
  * Notification options definition
  *
  * @since 0.0.0
+ *
+ * @typedef INotificationOptions
+ * @prop {SnackbarKey} key - ID key of the notification
+ * @prop {AlertColor} variant - notification type, i.e. "error", "success"
+ * @prop {any} onClose - callback function invoked when notification is closed
  */
 export interface INotificationOptions {
   key: SnackbarKey;
@@ -107,6 +134,11 @@ export interface INotificationOptions {
  * Notification state definition
  *
  * @since 0.0.0
+ *
+ * @typedef INotificationState
+ * @prop {string} message - notification message text
+ * @prop {boolean} dismissed - has notification been dismissed by user and/or system
+ * @prop {INotificationOptions} options - notification options
  */
 export interface INotificationState {
   message: string;
@@ -118,6 +150,10 @@ export interface INotificationState {
  * Add Notification action payload
  *
  * @since 0.0.0
+ *
+ * @typedef IAddNotificationPayload
+ * @prop {string} message - notification message text
+ * @prop {AlertColor} variant - notification type, i.e. "error", "success"
  */
 export interface IAddNotificationPayload {
   message: string;
@@ -128,6 +164,9 @@ export interface IAddNotificationPayload {
  * Close Notification action payload
  *
  * @since 0.0.0
+ *
+ * @typedef ICloseNotificationPayload
+ * @prop {SnackbarKey} key - ID key of the notification
  */
 export interface ICloseNotificationPayload {
   key: SnackbarKey;
@@ -137,6 +176,9 @@ export interface ICloseNotificationPayload {
  * Remove Notification action payload
  *
  * @since 0.0.0
+ *
+ * @typedef IRemoveNotificationPayload
+ * @prop {SnackbarKey} key - ID key of the notification
  */
 export interface IRemoveNotificationPayload {
   key: SnackbarKey;
@@ -146,6 +188,9 @@ export interface IRemoveNotificationPayload {
  * Theme state
  *
  * @since 0.0.0
+ *
+ * @typedef IThemeState
+ * @prop {ThemeType} type - current theme type, i.e. 'light' or 'dark'
  */
 export interface IThemeState {
   type: ThemeType;

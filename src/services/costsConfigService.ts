@@ -1,4 +1,7 @@
-import { ICostsConfigSaveDataPayload } from '@/lib/api/api-types';
+import {
+  CostsConfigCostSource,
+  ICostsConfigSaveDataPayload,
+} from '@/lib/api/api-types';
 import { getCostsConfigSourceQueryString } from '../utils';
 
 /**
@@ -14,14 +17,13 @@ import { getCostsConfigSourceQueryString } from '../utils';
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param source - can be any of 'collection', 'project', 'customer' or 'global'
- * @param dataId - ID number of the costs configuration
+ * @param {CostsConfigCostSource} source - costs config source, i.e "Project"
+ * @param {string | Array<(string | null)>} dataId - ID of the costs configuration
  * @returns {Promise<any>} - resulting Promise of the fetch request
- * @type {(source : string), (dataId : string | (string | null)[])}
  */
 async function getCostsConfig(
-  source: string,
-  dataId: string | (string | null)[]
+  source: CostsConfigCostSource,
+  dataId: string | Array<string | null>
 ) {
   /** detemine which cost source this is, and build query string */
   const queryString: string = getCostsConfigSourceQueryString(
@@ -45,9 +47,8 @@ async function getCostsConfig(
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param body - Costs Config data to be saved
+ * @param {ICostsConfigSaveDataPayload} body - Costs Config data to be saved
  * @returns {Promise<any>} - resulting Promise of the fetch request
- * @type {(body: ICostsConfigSaveDataPayload)}
  */
 async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   /** configure POST header options */

@@ -25,6 +25,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+/**
+ * Data Table Row Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IDataRowProps
+ * @prop {string} rowName - row name identifier
+ * @prop {number} rowIdx - row index number within data table
+ * @prop {Array<IDataTableColumn>} columns - data table columns
+ * @prop {Array<string>} editableColLabels - editable column label list
+ * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when user updates cell value
+ * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when row cell rendered
+ */
 interface IDataRowProps {
   rowName: string;
   rowIdx: number;
@@ -35,14 +48,13 @@ interface IDataRowProps {
 }
 
 /**
- * Data Table Row helper
+ * Data Table Row
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - row name, row table index, row columns, editable column names
+ * @param {IDataRowProps} props - component props
  * @returns {FC} - data table row functional component
- * @type {( props : IDataRowProps)}
  */
 const DataRow: FC<IDataRowProps> = (props) => {
   const {

@@ -1,4 +1,5 @@
 import {
+  CostsConfigCostSource,
   ICostsConfigData,
   ICostsConfigSaveDataCosts,
   ICostsConfigSaveDataPayload,
@@ -13,15 +14,14 @@ import {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param source - can be any of 'collection', 'project', 'customer' or 'global'
- * @param dataId - ID number of the costs configuration
- * @param data - costs config data to process
+ * @param {CostsConfigCostSource} source - costs config source, i.e. 'Project'
+ * @param {string | Array<string | null>} dataId - ID number of the costs config
+ * @param {Array<ICostsConfigData> | undefined} data - costs config data to process
  * @returns {ICostsConfigSaveDataPayload} - resulting payload data
- * @type {(source : string), (dataId : string | (string | null)[]), (data : Array<ICostsConfigData> | undefined)}
  */
 const getCostsConfigPostData = (
-  source: string,
-  dataId: string | (string | null)[],
+  source: CostsConfigCostSource,
+  dataId: string | Array<string | null>,
   data: Array<ICostsConfigData> | undefined
 ): ICostsConfigSaveDataPayload => {
   /** sanity check input, return empties if incorrect */

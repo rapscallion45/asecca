@@ -12,9 +12,28 @@ import { TypographyVariantsOptions } from '@mui/material/styles';
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
+ *
+ * @param {number} value - pixel value to convert to REM units
+ * @returns {string} - REM value string from passed pixel units
  */
 function pxToRem(value: number) {
   return `${value / 16}rem`;
+}
+
+/**
+ * Responsive Font Sizes
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IResposiveFontSizes
+ * @prop {number} sm - small font pixel size
+ * @prop {number} md - medium font pixel size
+ * @prop {number} lg - large font pixel size
+ */
+interface IResposiveFontSizes {
+  sm: number;
+  md: number;
+  lg: number;
 }
 
 /**
@@ -22,17 +41,19 @@ function pxToRem(value: number) {
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
+ *
+ * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated for
  */
-function responsiveFontSizes({ sm, md, lg }: any) {
+function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
   return {
     '@media (min-width:600px)': {
-      fontSize: pxToRem(sm),
+      fontSize: pxToRem(fontSizes.sm),
     },
     '@media (min-width:900px)': {
-      fontSize: pxToRem(md),
+      fontSize: pxToRem(fontSizes.md),
     },
     '@media (min-width:1200px)': {
-      fontSize: pxToRem(lg),
+      fontSize: pxToRem(fontSizes.lg),
     },
   };
 }

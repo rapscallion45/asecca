@@ -13,7 +13,15 @@ import { IUserPermissionLevelState } from '../types';
  * @since - 0.0.0
  */
 
-interface InitialUserPermissionState {
+/**
+ * Initial User Permission State
+ *
+ * @since - 0.0.0
+ *
+ * @typedef InitialNotificationsState
+ * @prop {Array<INotificationState>} data - notification state data
+ */
+interface IInitialUserPermissionState {
   permission: IUserPermissionLevelState;
 }
 
@@ -22,7 +30,7 @@ interface InitialUserPermissionState {
  *
  * @since - 0.0.0
  */
-const initialState: InitialUserPermissionState = {
+const initialState: IInitialUserPermissionState = {
   permission: { level: 'Global' },
 };
 

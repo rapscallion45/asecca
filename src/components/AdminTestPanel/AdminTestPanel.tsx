@@ -18,6 +18,7 @@ import { permissions, UserPermissionLevel } from '@/redux/types';
  * @returns {FC} - admin test panel functional component
  */
 const AdminTestPanel: FC = () => {
+  /** shorthand redux action dispatcher */
   const dispatch = useDispatch<AppDispatch>();
 
   /** get user permission level held in redux state */

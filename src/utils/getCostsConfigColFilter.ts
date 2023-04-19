@@ -4,11 +4,14 @@
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
+ *
+ * @param {string} permissionLevel - permission level to filter columns for
+ * @returns {Array<string | null>} - filtered columns for passed permission level
  */
 const getCostsConfigColFilterList = (
   permissionLevel: string
 ): Array<string | null> => {
-  /** filter out columns depending on passed permission level */
+  /** return columns to be filtered depending on passed permission level */
   switch (permissionLevel) {
     case 'Collection':
       return [];

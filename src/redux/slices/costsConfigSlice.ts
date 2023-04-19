@@ -86,7 +86,20 @@ export const saveBySourceId = createAsyncThunk(
   }
 );
 
-interface InitialCostsConfigState {
+/**
+ * Initial Costs Config State
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IInitialCostsConfigState
+ * @prop {boolean} loading - costs config loading state
+ * @prop {ICostsConfigDataPayload} data - currently loaded costs config data
+ * @prop {ICostsConfigDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of costs config
+ * @prop {boolean} saving - saving state flag of costs config data
+ * @prop {boolean} edited - costs config data has been edited flag
+ */
+interface IInitialCostsConfigState {
   loading: boolean;
   data: ICostsConfigDataPayload;
   dataShadow: ICostsConfigDataPayload;
@@ -100,7 +113,7 @@ interface InitialCostsConfigState {
  *
  * @since - 0.0.0
  */
-const initialState: InitialCostsConfigState = {
+const initialState: IInitialCostsConfigState = {
   loading: false,
   data: { costs: [] },
   dataShadow: { costs: [] },

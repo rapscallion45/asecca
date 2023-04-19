@@ -17,7 +17,15 @@ import {
  * @since - 0.0.0
  */
 
-interface InitialNotificationsState {
+/**
+ * Initial Notifications State
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IInitialNotificationsState
+ * @prop {Array<INotificationState>} data - notification state data
+ */
+interface IInitialNotificationsState {
   data: Array<INotificationState>;
 }
 
@@ -26,7 +34,7 @@ interface InitialNotificationsState {
  *
  * @since - 0.0.0
  */
-const initialState: InitialNotificationsState = {
+const initialState: IInitialNotificationsState = {
   data: [],
 };
 

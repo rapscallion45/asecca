@@ -6,9 +6,25 @@ import { closeNotification } from '../../redux/slices/notificationsSlice';
 import { AppDispatch, AppState } from '../../redux/store';
 import { INotificationState } from '../../redux/types';
 
+/**
+ * Alert Notification Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IAlertNotificationProps
+ * @prop {SnackbarKey} id - ID of the passed alert notification
+ */
 interface IAlertNotificationProps {
   id: SnackbarKey;
 }
+
+/**
+ * Alert Notification Ref type
+ *
+ * @since - 0.0.0
+ *
+ * @typedef {HTMLDivElement} Ref - ref to Alert Provider parent div
+ */
 type Ref = HTMLDivElement;
 
 /**
@@ -17,8 +33,8 @@ type Ref = HTMLDivElement;
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - notification ID key
- * @param ref - reference to the alert provider parent component
+ * @param {IAlertNotificationProps} props - component props
+ * @param {Ref} ref - reference to the alert provider parent component
  * @returns {ForwardRefExoticComponent} - alert notification component
  */
 const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
@@ -53,6 +69,14 @@ const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
   }
 );
 
+/**
+ * Alert Provider Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IAlertProviderProps
+ * @prop {ReactNode} children - component children nodes
+ */
 interface IAlertProviderProps {
   children?: ReactNode;
 }
@@ -63,8 +87,8 @@ interface IAlertProviderProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - component children
- * @returns {FC} - alert provider HOC
+ * @param {IAlertProviderProps} props - component props
+ * @returns {FC} - alert provider functional component
  */
 const AlertProvider: FC<IAlertProviderProps> = (props) => {
   const { children = null } = props;

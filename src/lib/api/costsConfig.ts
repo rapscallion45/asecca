@@ -16,9 +16,8 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param query - source and data ID for the request
+ * @param {Partial<{[key: string]: string | string[];}>} query - request query string
  * @returns {Promise<any>} - resulting Promise of the fetch request
- * @type {( query : Partial<{[key: string]: string | string[];}>)}
  */
 export async function getCostsConfig(
   query: Partial<{
@@ -47,14 +46,13 @@ export async function getCostsConfig(
 }
 
 /**
- * GET request to Asecca API /costs-config
+ * POST request to Asecca API /costs-config
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param body - source and data ID for the request
+ * @param {ICostsConfigSaveDataPayload} body - source and data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request
- * @type {( body : ICostsConfigSaveDataPayload)}
  */
 export async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   /** setup POST request options with basic auth */

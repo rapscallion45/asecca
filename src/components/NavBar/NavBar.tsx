@@ -6,7 +6,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 
-interface NavBarProps {
+/**
+ * App NavBar Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IErrorRowProps
+ * @prop {boolean} showLogin - flag to show or hide login button
+ */
+interface INavBarProps {
   showLogin?: boolean;
 }
 
@@ -16,11 +24,10 @@ interface NavBarProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - show or hide login button
+ * @param {INavBarProps} props - component props
  * @returns {FC} - default layout functional component
- * @type {( props : NavBarProps)}
  */
-const NavBar: FC<NavBarProps> = (props) => {
+const NavBar: FC<INavBarProps> = (props) => {
   const { showLogin = false } = props;
 
   return (

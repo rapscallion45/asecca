@@ -15,7 +15,16 @@ import lightThemePalette from './lightTheme/lightThemePalette';
 import darkThemePalette from './darkTheme/darkThemePalette';
 import typography from './typography';
 
-interface ThemeConfigProps {
+/**
+ * Theme Config Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IThemeConfigProps
+ * @prop {EmotionCache} emotionCache - emotion styling engine cache
+ * @prop {ReactNode} children - component child node
+ */
+interface IThemeConfigProps {
   emotionCache: EmotionCache;
   children?: ReactNode;
 }
@@ -28,11 +37,10 @@ interface ThemeConfigProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - emotion cache and component children
- * @returns {FC} - theme config HOC
- * @type {(props : ThemeConfigProps)}
+ * @param {IThemeConfigProps} props - component props
+ * @returns {FC} - theme config functional component
  */
-const ThemeConfig: FC<ThemeConfigProps> = (props) => {
+const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
 
   /** grab global theme state */

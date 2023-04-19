@@ -33,7 +33,15 @@ const RootStyle = styled('section')({
   paddingTop: '100px',
 });
 
-interface DashboardLayoutProps {
+/**
+ * Base Dashboard Page Layout Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IDashboardLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IDashboardLayoutProps {
   children?: ReactNode;
 }
 
@@ -43,11 +51,10 @@ interface DashboardLayoutProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - component children
+ * @param {IDashboardLayoutProps} props - component props
  * @returns {FC} - dashboard layout functional component
- * @type {( props : DashboardLayoutProps)}
  */
-const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
+const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
   /** initialise alert notifications */

@@ -19,7 +19,16 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 import { IUserPermissionLevelState } from '@/redux/types';
 import columns from './costsConfigTableColumns';
 
-interface CostsConfigTableProps {
+/**
+ * Costs Config Data Table Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef ICostsConfigTableProps
+ * @prop {IUserPermissionLevelState} permission - permission level of table
+ * @prop {string} query - query string of fetch table data API call
+ */
+interface ICostsConfigTableProps {
   permission: IUserPermissionLevelState;
   query: string;
 }
@@ -30,11 +39,10 @@ interface CostsConfigTableProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - table permission level and query identifier
+ * @param {ICostsConfigTableProps} props - component props
  * @returns {FC} - costs config table functional component
- * @type {(permission : IUserPermissionLevelState), (query : string)}
  */
-const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
+const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
   const { permission, query } = props;
 
   /** shorthand helper for dispatching redux actions */

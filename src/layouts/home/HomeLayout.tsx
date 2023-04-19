@@ -31,7 +31,15 @@ const RootStyle = styled('section')({
   paddingTop: '100px',
 });
 
-interface HomeLayoutProps {
+/**
+ * Home Page Layout Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IHomeLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IHomeLayoutProps {
   children?: ReactNode;
 }
 
@@ -41,11 +49,10 @@ interface HomeLayoutProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - component children
+ * @param {IHomeLayoutProps} props - component props
  * @returns {FC} - home page layout functional component
- * @type {( props : HomeLayoutProps)}
  */
-const DashboardLayout: FC<HomeLayoutProps> = (props) => {
+const DashboardLayout: FC<IHomeLayoutProps> = (props) => {
   const { children } = props;
 
   /** initialise alert notifications */

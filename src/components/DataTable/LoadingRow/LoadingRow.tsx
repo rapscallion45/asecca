@@ -6,20 +6,27 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { IDataTableColumn } from '@/components/DataTable/types';
 
+/**
+ * Data Table Loading Row Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef ILoadingRowProps
+ * @prop {Array<IDataTableColumn>} columns - data table columns
+ */
 interface ILoadingRowProps {
   columns: Array<IDataTableColumn>;
   message: string;
 }
 
 /**
- * Data Table Loading Row helper
+ * Data Table Loading Row
  *
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param props - component children
+ * @param {ILoadingRowProps} props - component children
  * @returns {FC} - data table loading row functional component
- * @type {( props : ILoadingRowProps)}
  */
 const LoadingRow: FC<ILoadingRowProps> = (props) => {
   const { columns, message } = props;

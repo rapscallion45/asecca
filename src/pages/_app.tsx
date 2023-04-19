@@ -15,16 +15,30 @@ import DefaultLayout from '@/layouts/default/DefaultLayout';
 import AlertProvider from '@/components/AlertProvider/AlertProvider';
 import ThemeConfig from '@/styles/theme/ThemeConfig';
 
-/* initialise client MUI styles cache */
+/**
+ * initialise client MUI styles cache
+ *
+ * @since - 0.0.0
+ */
 const clientSideEmotionCache = createEmotionCache();
 
-interface AseccaAppProps extends AppProps {
+/**
+ * Asecca SPA Entry Point Props
+ *
+ * @since - 0.0.0
+ *
+ * @typedef IAseccaAppProps
+ * @extends AppProps
+ * @prop {NextLayoutComponentType} Component - intial component for app to render
+ * @prop {EmotionCache} emotionCache - emotion styling engine cache
+ */
+interface IAseccaAppProps extends AppProps {
   Component: NextLayoutComponentType;
   emotionCache?: EmotionCache;
 }
 
 /**
- * Asecca SPA entry point
+ * Asecca SPA Entry Point
  *
  * Entry point of the application. Sets up all state and theme providers, layout,
  * and renders requested page.
@@ -32,11 +46,10 @@ interface AseccaAppProps extends AppProps {
  * @author - [Carl Scrivener](https://github.com/rapscallion45)
  * @since - 0.0.0
  *
- * @param {props} - app props, with emotion cache and component layout extensions
+ * @param {IAseccaAppProps} props - app props
  * @returns {FC} - application entry point functional component
- * @type {(props : AssecaAppProps)}
  */
-const AseccaApp: FC<AseccaAppProps> = (props) => {
+const AseccaApp: FC<IAseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   /** the page layout is defined in each page's definition, else default */
