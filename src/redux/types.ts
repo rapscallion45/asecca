@@ -61,6 +61,18 @@ export interface ICostsConfigState {
 }
 
 /**
+ * Permission definition
+ *
+ * @since 0.0.0
+ */
+export const permissions = [
+  'Global',
+  'Customer',
+  'Project',
+  'Collection',
+] as const;
+
+/**
  * User Permission Level definition
  *
  * @since 0.0.0

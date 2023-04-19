@@ -7,31 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { AppDispatch, AppState } from '@/redux/store';
-import { UserPermissionLevel } from '@/redux/types';
-
-/**
- * permissions list
- *
- * @since - 0.0.0
- */
-const permissions = [
-  {
-    value: 'Global',
-    label: 'Global',
-  },
-  {
-    value: 'Customer',
-    label: 'Customer',
-  },
-  {
-    value: 'Project',
-    label: 'Project',
-  },
-  {
-    value: 'Collection',
-    label: 'Collection',
-  },
-];
+import { permissions, UserPermissionLevel } from '@/redux/types';
 
 /**
  * Admin Test Panel
@@ -77,8 +53,8 @@ const AdminTestPanel: FC = () => {
             sx={{ minWidth: 170 }}
           >
             {permissions.map((permission) => (
-              <option key={permission.value} value={permission.value}>
-                {permission.label}
+              <option key={permission} value={permission}>
+                {permission}
               </option>
             ))}
           </TextField>
