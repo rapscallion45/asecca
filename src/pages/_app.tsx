@@ -43,7 +43,7 @@ interface IAseccaAppProps extends AppProps {
  * Entry point of the application. Sets up all state and theme providers, layout,
  * and renders requested page.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IAseccaAppProps} props - app props

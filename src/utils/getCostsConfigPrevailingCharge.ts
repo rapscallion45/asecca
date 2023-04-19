@@ -4,7 +4,7 @@ import { IUserPermissionLevelState } from '@/redux/types';
 /**
  * Helper function for getting the Prevailing charge of a Costs Config scope
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {ICostsConfigData} tableRow - table row to be processed for 'Prevailing'
@@ -42,7 +42,7 @@ const getCostsConfigPrevailingCharge = (
    * if editable col is null, determine charge according to
    * the col permission hierachy
    *
-   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since - 0.0.0
    *
    * @returns {string | null | undefined} - charge value, can be null or undefined

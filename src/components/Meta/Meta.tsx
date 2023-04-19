@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material';
 /**
  * App Meta - App Name, Description, SEO, favicon, etc
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @returns {FC} - meta functional component

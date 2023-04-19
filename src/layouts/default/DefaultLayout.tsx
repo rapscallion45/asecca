@@ -16,7 +16,7 @@ interface IDefaultLayoutProps {
 /**
  * Default Fallback Page Layout
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IDefaultLayoutProps} props - component props

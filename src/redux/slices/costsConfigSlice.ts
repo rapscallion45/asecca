@@ -17,14 +17,14 @@ import { addNotification } from './notificationsSlice';
  * Costs Config data is retrieve from the /api/costs_config endpoint, and
  * can be manipulated via the dashboard/costs-config page of the application.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 
 /**
  * Async thunk for GET /api/costs_config API handling
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 export const fetchBySourceId = createAsyncThunk(
@@ -55,7 +55,7 @@ export const fetchBySourceId = createAsyncThunk(
 /**
  * Async thunk for POST /api/costs_config API handling
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 export const saveBySourceId = createAsyncThunk(
@@ -124,7 +124,7 @@ const initialState: IInitialCostsConfigState = {
 /**
  * Create the redux slice for interacting with the costs config state
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const costsConfigSlice = createSlice({

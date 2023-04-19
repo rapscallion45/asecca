@@ -13,7 +13,7 @@ import {
  * results, such as errors with API requests, login failures, etc. This state
  * is manipulated from multiple places in the application.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 
@@ -41,7 +41,7 @@ const initialState: IInitialNotificationsState = {
 /**
  * Create the redux slice for interacting with the notifications state
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const notificationsSlice = createSlice({

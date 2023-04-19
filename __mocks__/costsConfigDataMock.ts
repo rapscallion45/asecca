@@ -3,7 +3,7 @@ import { ICostsConfigDataPayload } from '@/lib/api/api-types';
 /**
  * mock file defining returned data from API GET /costs_config
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const assetDataMock: ICostsConfigDataPayload = {

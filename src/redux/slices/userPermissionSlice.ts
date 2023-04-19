@@ -9,7 +9,7 @@ import { IUserPermissionLevelState } from '../types';
  * be manipulated from the Admin Test Panel component, but is used
  * across the application.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 
@@ -37,7 +37,7 @@ const initialState: IInitialUserPermissionState = {
 /**
  * Create the redux slice for interacting with the user permission state
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const userPermissionSlice = createSlice({

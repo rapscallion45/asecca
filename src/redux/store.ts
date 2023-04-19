@@ -9,7 +9,7 @@ import themeReducer from './slices/themeSlice';
 /**
  * Configuration of the redux store to manage the global application state
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const store = configureStore({

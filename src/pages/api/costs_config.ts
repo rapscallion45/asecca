@@ -10,7 +10,7 @@ import { getCostsConfig, setCostsConfig } from '../../lib/api';
  *
  * @see See [Next.js API route support](https://nextjs.org/docs/api-routes/introduction)
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @returns {NextApiResponse} - handler response

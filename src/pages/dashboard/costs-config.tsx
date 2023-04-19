@@ -16,7 +16,7 @@ import { CostsConfigCostSource } from '@/lib/api/api-types';
  * Presents user with costs configuration table, with data fetched from Asecca
  * API, based on passed page query params
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @returns {NextPageWithLayout} - Costs Configuration page

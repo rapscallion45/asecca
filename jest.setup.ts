@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 /**
  * Configuration file for Jest & React Testing Library Unit Test environment
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 

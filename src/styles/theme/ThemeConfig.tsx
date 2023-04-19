@@ -34,7 +34,7 @@ interface IThemeConfigProps {
  *
  * Global application theme definitions and setup
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IThemeConfigProps} props - component props

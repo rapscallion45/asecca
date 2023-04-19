@@ -5,7 +5,7 @@
  * Only make changes to this file if a corresponding change to the API has
  * been made.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 

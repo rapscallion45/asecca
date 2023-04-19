@@ -15,7 +15,7 @@ interface IClientOnlyProps {
 /**
  * Client Only - renders component on client only, no SSR
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IClientOnlyProps} props - component props

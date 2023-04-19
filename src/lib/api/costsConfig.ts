@@ -13,7 +13,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
 /**
  * GET request to Asecca API /costs-config
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {Partial<{[key: string]: string | string[];}>} query - request query string
@@ -48,7 +48,7 @@ export async function getCostsConfig(
 /**
  * POST request to Asecca API /costs-config
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {ICostsConfigSaveDataPayload} body - source and data ID for the request

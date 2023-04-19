@@ -1,7 +1,7 @@
 /**
  * mock file for handling browser API calls during tests
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const localStorageMock = (function localStorageMock() {

@@ -3,7 +3,7 @@ import { alpha } from '@mui/material/styles';
 /**
  * ASECCA SPA dark theme style definitions
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 
@@ -120,7 +120,7 @@ const ERROR = {
 /**
  * Build the dark theme options struct
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const darkThemePalette = {

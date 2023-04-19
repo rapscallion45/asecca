@@ -20,7 +20,7 @@ const mockGetCellValueCallback = jest.fn(
 /**
  * Data Table Unit Tests
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 describe('Data Table', () => {

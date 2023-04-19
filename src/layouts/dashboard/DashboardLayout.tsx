@@ -48,7 +48,7 @@ interface IDashboardLayoutProps {
 /**
  * Base Dashboard Page Layout
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IDashboardLayoutProps} props - component props

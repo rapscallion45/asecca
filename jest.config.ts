@@ -10,7 +10,7 @@ import nextJest from 'next/jest.js';
  * Configuration based on example given in the official Next.JS docs:
  * @see See [Next.js example Jest config](https://nextjs.org/docs/testing)
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 

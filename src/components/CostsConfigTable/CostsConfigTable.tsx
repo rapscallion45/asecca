@@ -36,7 +36,7 @@ interface ICostsConfigTableProps {
 /**
  * Costs Config Data Table
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {ICostsConfigTableProps} props - component props

@@ -30,7 +30,7 @@ type Ref = HTMLDivElement;
 /**
  * Alert Notification
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IAlertNotificationProps} props - component props
@@ -84,7 +84,7 @@ interface IAlertProviderProps {
 /**
  * Alert Provider
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IAlertProviderProps} props - component props

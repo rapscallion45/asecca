@@ -12,7 +12,7 @@ import Meta from '@/components/Meta/Meta';
  *
  * @see See [Boilerplate code from Material UI](https://github.com/mui/material-ui/blob/master/examples/material-next-ts/pages/_document.tsx)
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @class

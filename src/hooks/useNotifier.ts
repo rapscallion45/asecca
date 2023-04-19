@@ -15,7 +15,7 @@ let displayed: any = [];
  * Notifier hook for processing currently active notifications held in
  * global app state.
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const useNotifier = () => {
@@ -33,7 +33,7 @@ const useNotifier = () => {
   /**
    * Store displayed notification ID key helper
    *
-   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since - 0.0.0
    */
   const storeDisplayed = (id: SnackbarKey | undefined) => {
@@ -43,7 +43,7 @@ const useNotifier = () => {
   /**
    * Remove displayed notification ID key helper
    *
-   * @author - [Carl Scrivener](https://github.com/rapscallion45)
+   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since - 0.0.0
    */
   const removeDisplayed = (id: SnackbarKey) => {

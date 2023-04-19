@@ -12,7 +12,7 @@ import { permissions, UserPermissionLevel } from '@/redux/types';
 /**
  * Admin Test Panel
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @returns {FC} - admin test panel functional component

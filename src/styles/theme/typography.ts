@@ -3,14 +3,14 @@ import { TypographyVariantsOptions } from '@mui/material/styles';
 /**
  * ASECCA SPA typography definitions
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 
 /**
  * Pixel value to REM conversion helper
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {number} value - pixel value to convert to REM units
@@ -39,7 +39,7 @@ interface IResposiveFontSizes {
 /**
  * Responsive font size calculation helper
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated for
@@ -68,7 +68,7 @@ const FONT_PRIMARY = 'Poppins, Roboto';
 /**
  * Typography theme option defintions
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  */
 const typography: TypographyVariantsOptions = {

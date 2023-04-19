@@ -23,7 +23,7 @@ interface IErrorRowProps {
 /**
  * Data Table Error Row
  *
- * @author - [Carl Scrivener](https://github.com/rapscallion45)
+ * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since - 0.0.0
  *
  * @param {IErrorRowProps} props - component props
