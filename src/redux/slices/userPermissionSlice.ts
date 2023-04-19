@@ -9,14 +9,14 @@ import { IUserPermissionLevelState } from '../types';
  * be manipulated from the Admin Test Panel component, but is used
  * across the application.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Initial User Permission State
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef InitialNotificationsState
  * @prop {Array<INotificationState>} data - notification state data
@@ -28,7 +28,7 @@ interface IInitialUserPermissionState {
 /**
  * Initialise user permission level state - always set lowest level, 'Global'
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const initialState: IInitialUserPermissionState = {
   permission: { level: 'Global' },
@@ -37,8 +37,8 @@ const initialState: IInitialUserPermissionState = {
 /**
  * Create the redux slice for interacting with the user permission state
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const userPermissionSlice = createSlice({
   name: 'userPermission',
@@ -56,7 +56,7 @@ const userPermissionSlice = createSlice({
 /**
  * Costs Config actions for changing the user permission level
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export const { setPermissionLevel } = userPermissionSlice.actions;
 

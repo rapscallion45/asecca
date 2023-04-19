@@ -19,7 +19,7 @@ import {
 /**
  * Data Table Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IDataTableProps
  * @prop {string} name - data table name identifier
@@ -45,8 +45,8 @@ interface IDataTableProps {
 /**
  * Data Table
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IDataTableProps} props - component props
  * @returns {FC} - data table functional component

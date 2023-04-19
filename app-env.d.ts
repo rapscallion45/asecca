@@ -9,8 +9,8 @@ import type { AppProps } from 'next/app';
 /**
  * extend NextPage and NextComponentType to include our custom Layout prop
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 declare module 'next' {
   type NextLayoutComponentType<P = {}> = NextComponentType<
@@ -29,8 +29,8 @@ declare module 'next' {
 /**
  * extend AppProps to include our customised NextComponentType with Layout prop
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 declare module 'next/app' {
   type AppLayoutProps<P = {}> = AppProps & {

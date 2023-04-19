@@ -3,14 +3,14 @@ import { alpha } from '@mui/material/styles';
 /**
  * ASECCA SPA dark theme style definitions
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Dark theme grey definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const GREY = {
   0: '#FFFFFF',
@@ -36,7 +36,7 @@ const GREY = {
 /**
  * Dark theme primary color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const PRIMARY = {
   lighter: '#8798fa',
@@ -50,7 +50,7 @@ const PRIMARY = {
 /**
  * Dark theme secondary color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const SECONDARY = {
   lighter: '#bdbaff',
@@ -64,7 +64,7 @@ const SECONDARY = {
 /**
  * Dark theme info color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const INFO = {
   lighter: '#bdbaff',
@@ -78,7 +78,7 @@ const INFO = {
 /**
  * Dark theme success color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const SUCCESS = {
   lighter: '#bdbaff',
@@ -92,7 +92,7 @@ const SUCCESS = {
 /**
  * Dark theme warning color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const WARNING = {
   lighter: '#FEFDCD',
@@ -106,7 +106,7 @@ const WARNING = {
 /**
  * Dark theme error color definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const ERROR = {
   lighter: '#FA5A5A',
@@ -120,8 +120,8 @@ const ERROR = {
 /**
  * Build the dark theme options struct
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const darkThemePalette = {
   mode: 'dark',

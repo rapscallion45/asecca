@@ -3,7 +3,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 /**
  * Costs Config data table column defintions
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const columns: Array<IDataTableColumn> = [
   { label: 'Product', key: 'name', type: 'string' },

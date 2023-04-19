@@ -5,14 +5,14 @@
  * Only make changes to this file if a corresponding change to the API has
  * been made.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Cost Config Applications values
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef CostsConfigApplication
  */
@@ -26,7 +26,7 @@ export type CostsConfigApplication =
 /**
  * Cost Config Line Type values
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef CostsConfigLineType
  */
@@ -35,7 +35,7 @@ export type CostsConfigLineType = 'Typical' | 'Custom';
 /**
  * Cost Config Cost Source values
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef CostsConfigCostSource
  */
@@ -48,7 +48,7 @@ export type CostsConfigCostSource =
 /**
  * Costs Config data type definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigData
  * @prop {CostsConfigApplication} application - costs config application type
@@ -76,7 +76,7 @@ export interface ICostsConfigData {
 /**
  * Costs Config GET request data payload type definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigDataPayload
  * @prop {Array<ICostsConfigData>} costs - costs data for API request
@@ -88,7 +88,7 @@ export interface ICostsConfigDataPayload {
 /**
  * Costs Config POST data Costs type definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataCosts
  * @prop {CostsConfigApplication} application - costs config application type
@@ -106,7 +106,7 @@ export interface ICostsConfigSaveDataCosts {
 /**
  * Costs Config POST data Selection type definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataSelection
  * @prop {string} collection - collection ID to use as selection
@@ -124,7 +124,7 @@ export interface ICostsConfigSaveDataSelection {
 /**
  * Costs Config POST data payload type
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataPayload
  * @prop {Array<ICostsConfigSaveDataCosts>} costs - costs data to save to API
@@ -138,7 +138,7 @@ export interface ICostsConfigSaveDataPayload {
 /**
  * Proxy server error return data payload type definition
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IProxyErrorPayload
  * @prop {message} string - error message sent back from proxy

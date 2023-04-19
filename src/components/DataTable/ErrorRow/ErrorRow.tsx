@@ -9,7 +9,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 /**
  * Data Table Error Row Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IErrorRowProps
  * @prop {Array<IDataTableColumn>} columns - data table columns
@@ -23,8 +23,8 @@ interface IErrorRowProps {
 /**
  * Data Table Error Row
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IErrorRowProps} props - component props
  * @returns {FC} - data table error row functional component

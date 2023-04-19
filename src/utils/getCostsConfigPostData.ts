@@ -11,8 +11,8 @@ import {
  * data block. The passed data is cycled, pulling the required fields for
  * the POST request.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {CostsConfigCostSource} source - costs config source, i.e. 'Project'
  * @param {string | Array<string | null>} dataId - ID number of the costs config

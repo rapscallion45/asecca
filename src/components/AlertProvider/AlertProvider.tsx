@@ -9,7 +9,7 @@ import { INotificationState } from '../../redux/types';
 /**
  * Alert Notification Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IAlertNotificationProps
  * @prop {SnackbarKey} id - ID of the passed alert notification
@@ -21,7 +21,7 @@ interface IAlertNotificationProps {
 /**
  * Alert Notification Ref type
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef {HTMLDivElement} Ref - ref to Alert Provider parent div
  */
@@ -30,8 +30,8 @@ type Ref = HTMLDivElement;
 /**
  * Alert Notification
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IAlertNotificationProps} props - component props
  * @param {Ref} ref - reference to the alert provider parent component
@@ -72,7 +72,7 @@ const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
 /**
  * Alert Provider Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IAlertProviderProps
  * @prop {ReactNode} children - component children nodes
@@ -84,8 +84,8 @@ interface IAlertProviderProps {
 /**
  * Alert Provider
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IAlertProviderProps} props - component props
  * @returns {FC} - alert provider functional component

@@ -7,7 +7,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 /**
  * table header cell stylings
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
   /** table header colors */
@@ -22,7 +22,7 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
 /**
  * Data Table Header Row Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IHeaderRowProps
  * @prop {Array<IDataTableColumn>} columns - data table columns
@@ -34,8 +34,8 @@ interface IHeaderRowProps {
 /**
  * Data Table Header Row
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IHeaderRowProps} props - component props
  * @returns {FC} - data table header row functional component

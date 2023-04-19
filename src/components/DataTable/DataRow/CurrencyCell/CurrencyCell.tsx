@@ -35,8 +35,8 @@ interface ICurrencyCellProps {
 /**
  * Data Table Currency Cell
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param props - input ID, is cell editable, cell value string, submit value, style
  * @returns {FC} - data table row functional component
@@ -61,8 +61,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   /**
    * Callback for handling user input.
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    *
    * @param event - value change trigger event
    * @returns - none
@@ -79,8 +79,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * Callback to reformat currency value to floating point, two decimal places,
    * or display null indicator.
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    *
    * @returns - none
    */
@@ -110,8 +110,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * Callback for when user has decided to clear input and enter null value
    * for this cell
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    *
    * @returns - none
    */
@@ -131,8 +131,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   /**
    * Callback listens for clicks on cell
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    *
    * @returns - none
    */
@@ -146,8 +146,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   /**
    * Callback listens for click away from cell
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    *
    * @returns - none
    */

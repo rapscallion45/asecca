@@ -7,15 +7,15 @@ import { getCostsConfigSourceQueryString } from '../utils';
 /**
  * API services for client application
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * GET request to /api/costs_config
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {CostsConfigCostSource} source - costs config source, i.e "Project"
  * @param {string | Array<(string | null)>} dataId - ID of the costs configuration
@@ -44,8 +44,8 @@ async function getCostsConfig(
 /**
  * POST request to /api/costs_config
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {ICostsConfigSaveDataPayload} body - Costs Config data to be saved
  * @returns {Promise<any>} - resulting Promise of the fetch request
@@ -65,7 +65,7 @@ async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
 /**
  * Costs Config API service handlers
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const costsConfigService = {
   getCostsConfig,

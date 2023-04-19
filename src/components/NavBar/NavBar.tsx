@@ -9,7 +9,7 @@ import Image from 'next/image';
 /**
  * App NavBar Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IErrorRowProps
  * @prop {boolean} showLogin - flag to show or hide login button
@@ -21,8 +21,8 @@ interface INavBarProps {
 /**
  * App NavBar
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {INavBarProps} props - component props
  * @returns {FC} - default layout functional component

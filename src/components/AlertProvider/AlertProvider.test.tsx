@@ -19,14 +19,14 @@ import { addNotification } from '../../redux/slices/notificationsSlice';
 /**
  * test text
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testMessage = 'Test render alert message';
 
 /**
  * test child component
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const TestChild: FC = () => {
   useNotifier();
@@ -36,8 +36,8 @@ const TestChild: FC = () => {
 /**
  * Alert Provider Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Alert Provider', () => {
   describe('Message Text', () => {

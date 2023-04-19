@@ -19,22 +19,22 @@ import CostsConfigTable from './CostsConfigTable';
 /**
  * default test permission level
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const permission: UserPermissionLevel = 'Collection';
 
 /**
  * default test query ID
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const query: string = '66135000001760012';
 
 /**
  * Costs Config Table Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Costs Config Table', () => {
   it('Renders correctly', async () => {

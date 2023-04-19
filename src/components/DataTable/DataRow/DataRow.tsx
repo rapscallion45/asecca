@@ -12,7 +12,7 @@ import {
 /**
  * table row stylings
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   /** alternate row background colors */
@@ -28,7 +28,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 /**
  * Data Table Row Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IDataRowProps
  * @prop {string} rowName - row name identifier
@@ -50,8 +50,8 @@ interface IDataRowProps {
 /**
  * Data Table Row
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IDataRowProps} props - component props
  * @returns {FC} - data table row functional component

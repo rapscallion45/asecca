@@ -6,7 +6,7 @@ import useNotifier from '@/hooks/useNotifier';
 /**
  * background styling
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const BackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -20,7 +20,7 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
 /**
  * root style for the dashboard page content
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const RootStyle = styled('section')({
   display: 'flex',
@@ -34,7 +34,7 @@ const RootStyle = styled('section')({
 /**
  * Home Page Layout Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IHomeLayoutProps
  * @prop {ReactNode} children - component children nodes
@@ -46,8 +46,8 @@ interface IHomeLayoutProps {
 /**
  * Home Page Layout
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IHomeLayoutProps} props - component props
  * @returns {FC} - home page layout functional component

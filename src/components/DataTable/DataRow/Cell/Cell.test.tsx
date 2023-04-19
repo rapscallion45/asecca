@@ -7,22 +7,22 @@ import Cell from './Cell';
 /**
  * test text
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testValue = 'Device Processing';
 
 /**
  * test style
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testSx = { fontWeight: 'bold' };
 
 /**
  * Data Table Cell Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table Cell', () => {
   it('Renders correctly', async () => {

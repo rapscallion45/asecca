@@ -18,7 +18,7 @@ import typography from './typography';
 /**
  * Theme Config Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IThemeConfigProps
  * @prop {EmotionCache} emotionCache - emotion styling engine cache
@@ -34,8 +34,8 @@ interface IThemeConfigProps {
  *
  * Global application theme definitions and setup
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IThemeConfigProps} props - component props
  * @returns {FC} - theme config functional component

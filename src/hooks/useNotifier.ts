@@ -7,7 +7,7 @@ import { removeNotification } from '../redux/slices/notificationsSlice';
 /**
  * local copy of currently displayed notification ID keys
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 let displayed: any = [];
 
@@ -15,8 +15,8 @@ let displayed: any = [];
  * Notifier hook for processing currently active notifications held in
  * global app state.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const useNotifier = () => {
   /** app dispatch shorthand helper */
@@ -33,8 +33,8 @@ const useNotifier = () => {
   /**
    * Store displayed notification ID key helper
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    */
   const storeDisplayed = (id: SnackbarKey | undefined) => {
     displayed = [...displayed, id];
@@ -43,8 +43,8 @@ const useNotifier = () => {
   /**
    * Remove displayed notification ID key helper
    *
-   * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since - 0.0.0
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
    */
   const removeDisplayed = (id: SnackbarKey) => {
     displayed = [...displayed.filter((key: SnackbarKey) => id !== key)];

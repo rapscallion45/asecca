@@ -8,15 +8,15 @@ import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 /**
  * default test error message
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testMessage = 'This is an error message';
 
 /**
  * Error Row Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table Error Row', () => {
   it('Renders correctly', async () => {

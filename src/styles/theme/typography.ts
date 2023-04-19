@@ -3,15 +3,15 @@ import { TypographyVariantsOptions } from '@mui/material/styles';
 /**
  * ASECCA SPA typography definitions
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Pixel value to REM conversion helper
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {number} value - pixel value to convert to REM units
  * @returns {string} - REM value string from passed pixel units
@@ -23,7 +23,7 @@ function pxToRem(value: number) {
 /**
  * Responsive Font Sizes
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IResposiveFontSizes
  * @prop {number} sm - small font pixel size
@@ -39,8 +39,8 @@ interface IResposiveFontSizes {
 /**
  * Responsive font size calculation helper
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated for
  */
@@ -61,15 +61,15 @@ function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
 /**
  * Primary font family
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const FONT_PRIMARY = 'Poppins, Roboto';
 
 /**
  * Typography theme option defintions
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const typography: TypographyVariantsOptions = {
   fontFamily: FONT_PRIMARY,

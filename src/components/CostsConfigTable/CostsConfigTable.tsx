@@ -22,7 +22,7 @@ import columns from './costsConfigTableColumns';
 /**
  * Costs Config Data Table Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ICostsConfigTableProps
  * @prop {IUserPermissionLevelState} permission - permission level of table
@@ -36,8 +36,8 @@ interface ICostsConfigTableProps {
 /**
  * Costs Config Data Table
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {ICostsConfigTableProps} props - component props
  * @returns {FC} - costs config table functional component

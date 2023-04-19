@@ -4,7 +4,7 @@ import useNotifier from '@/hooks/useNotifier';
 /**
  * Default Fallback Page Layout Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IDefaultLayoutProps
  * @prop {ReactNode} children - component children nodes
@@ -16,8 +16,8 @@ interface IDefaultLayoutProps {
 /**
  * Default Fallback Page Layout
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IDefaultLayoutProps} props - component props
  * @returns {FC} - default layout functional component

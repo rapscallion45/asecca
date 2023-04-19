@@ -5,7 +5,7 @@ import { ICostsConfigSaveDataPayload } from '@/lib/api/api-types';
 /**
  * configuration param environment variables for staging DB
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
@@ -13,8 +13,8 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
 /**
  * GET request to Asecca API /costs-config
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {Partial<{[key: string]: string | string[];}>} query - request query string
  * @returns {Promise<any>} - resulting Promise of the fetch request
@@ -48,8 +48,8 @@ export async function getCostsConfig(
 /**
  * POST request to Asecca API /costs-config
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {ICostsConfigSaveDataPayload} body - source and data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request

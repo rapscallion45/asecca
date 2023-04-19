@@ -18,14 +18,14 @@ import ThemeConfig from '@/styles/theme/ThemeConfig';
 /**
  * initialise client MUI styles cache
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const clientSideEmotionCache = createEmotionCache();
 
 /**
  * Asecca SPA Entry Point Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IAseccaAppProps
  * @extends AppProps
@@ -43,8 +43,8 @@ interface IAseccaAppProps extends AppProps {
  * Entry point of the application. Sets up all state and theme providers, layout,
  * and renders requested page.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IAseccaAppProps} props - app props
  * @returns {FC} - application entry point functional component

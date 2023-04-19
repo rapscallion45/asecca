@@ -9,8 +9,8 @@ import themeReducer from './slices/themeSlice';
 /**
  * Configuration of the redux store to manage the global application state
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const store = configureStore({
   reducer: {
@@ -29,7 +29,7 @@ const store = configureStore({
 /**
  * Shorthand application store dispatch type helper
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef AppDispatch - application specific store dispatch type
  */
@@ -38,7 +38,7 @@ export type AppDispatch = typeof store.dispatch;
 /**
  * Shorthand application state type helper
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef AppState - application specific state object shape
  */
@@ -47,7 +47,7 @@ export type AppState = ReturnType<typeof store.getState>;
 /**
  * Shorthand application Thunk Action type helper
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef AppThunk - application specific Thunk action definition
  */

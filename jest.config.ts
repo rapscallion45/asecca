@@ -10,8 +10,8 @@ import nextJest from 'next/jest.js';
  * Configuration based on example given in the official Next.JS docs:
  * @see See [Next.js example Jest config](https://nextjs.org/docs/testing)
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 const createJestConfig = nextJest({
@@ -19,7 +19,7 @@ const createJestConfig = nextJest({
    * path to the Next.js app to load next.config.js and .env files into the
    * test environment
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   dir: './',
 });
@@ -29,7 +29,7 @@ const jestConfig = {
    * list of paths to modules that run some code to configure or
    * set up the testing framework before each test
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.ts',
@@ -40,7 +40,7 @@ const jestConfig = {
   /**
    * configure test coverage report
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   collectCoverage: true,
   collectCoverageFrom: [
@@ -60,7 +60,7 @@ const jestConfig = {
   /**
    * the test environment that will be used for Jest unit testing
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   testEnvironment: 'jest-environment-jsdom',
 };

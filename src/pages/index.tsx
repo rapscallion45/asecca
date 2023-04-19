@@ -13,8 +13,8 @@ import HomeLayout from '@/layouts/home/HomeLayout';
  *
  * Home page of the Asecca front end client application.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @returns {NextPageWithLayout} - application homepage
  */

@@ -7,14 +7,14 @@ import { IThemeState, ThemeType } from '../types';
  * The Theme state is used to determine what the current colour scheme is
  * for the application.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Initial Theme State
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IInitialThemeState
  * @prop {IThemeState} theme - initial theme state
@@ -26,7 +26,7 @@ interface IInitialThemeState {
 /**
  * Initialise Theme state to 'light'
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const initialState: IInitialThemeState = {
   theme: { type: 'light' },
@@ -35,8 +35,8 @@ const initialState: IInitialThemeState = {
 /**
  * Create the redux slice for interacting with the app theme state
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const themeSlice = createSlice({
   name: 'theme',
@@ -51,7 +51,7 @@ const themeSlice = createSlice({
 /**
  * Theme actions for setting the app theme
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export const { setTheme } = themeSlice.actions;
 

@@ -17,15 +17,15 @@ import { addNotification } from './notificationsSlice';
  * Costs Config data is retrieve from the /api/costs_config endpoint, and
  * can be manipulated via the dashboard/costs-config page of the application.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Async thunk for GET /api/costs_config API handling
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 export const fetchBySourceId = createAsyncThunk(
   'costsConfig/fetchBySourecId',
@@ -55,8 +55,8 @@ export const fetchBySourceId = createAsyncThunk(
 /**
  * Async thunk for POST /api/costs_config API handling
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 export const saveBySourceId = createAsyncThunk(
   'costsConfig/saveBySourecId',
@@ -89,7 +89,7 @@ export const saveBySourceId = createAsyncThunk(
 /**
  * Initial Costs Config State
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IInitialCostsConfigState
  * @prop {boolean} loading - costs config loading state
@@ -111,7 +111,7 @@ interface IInitialCostsConfigState {
 /**
  * Initialise Costs Config state to empty
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const initialState: IInitialCostsConfigState = {
   loading: false,
@@ -124,8 +124,8 @@ const initialState: IInitialCostsConfigState = {
 /**
  * Create the redux slice for interacting with the costs config state
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const costsConfigSlice = createSlice({
   name: 'costsConfig',
@@ -207,7 +207,7 @@ const costsConfigSlice = createSlice({
 /**
  * Costs Config actions for editing and resetting costs config data
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export const { editCostsConfig, resetCostsConfig } = costsConfigSlice.actions;
 

@@ -9,7 +9,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 /**
  * Data Table Loading Row Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef ILoadingRowProps
  * @prop {Array<IDataTableColumn>} columns - data table columns
@@ -22,8 +22,8 @@ interface ILoadingRowProps {
 /**
  * Data Table Loading Row
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {ILoadingRowProps} props - component children
  * @returns {FC} - data table loading row functional component

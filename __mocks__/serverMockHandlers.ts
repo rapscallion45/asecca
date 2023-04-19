@@ -8,14 +8,14 @@ import {
 /**
  * mock server API handlers shared between all tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * GET /costs_config definitions
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 /** shape of the "req.body"  */
 type CostsConfigGetRequestBody = null;
@@ -29,7 +29,7 @@ type CostsConfigGetResponseBody = ICostsConfigDataPayload;
 /**
  * POST /costs_config definitions
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 /** shape of the "req.body" */
 type CostsConfigPostRequestBody = null;
@@ -43,13 +43,13 @@ type CostsConfigPostResponseBody = IProxyErrorPayload | null;
 /**
  * list of available test/mock handlers
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export const mockHandlers = [
   /**
    * Test/mock GET Costs Config
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   rest.get<
     CostsConfigGetRequestBody,
@@ -63,7 +63,7 @@ export const mockHandlers = [
   /**
    * Test/mock POST Costs Config
    *
-   * @since - 0.0.0
+   * @since 0.0.0
    */
   rest.post<
     CostsConfigPostRequestBody,

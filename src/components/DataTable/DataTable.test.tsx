@@ -10,7 +10,7 @@ import { IDataTableColumn } from './types';
 /**
  * mock callback for get cell value
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const mockGetCellValueCallback = jest.fn(
   (rowIdx: number, column: IDataTableColumn) =>
@@ -20,8 +20,8 @@ const mockGetCellValueCallback = jest.fn(
 /**
  * Data Table Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table', () => {
   it('Renders correctly', async () => {

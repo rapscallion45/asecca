@@ -11,7 +11,7 @@ import { IDataTableColumn } from '../types';
 /**
  * mock callbacks for get and edit cell values
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const mockGetCellValueCallback = jest.fn(
   (rowIdx: number, column: IDataTableColumn) =>
@@ -25,8 +25,8 @@ const mockEditCellValueCallback = jest.fn(
 /**
  * Data Table Data Row Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table Data Row', () => {
   it('Renders correctly', async () => {

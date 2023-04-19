@@ -10,22 +10,22 @@ import DashboardLayout from './DashboardLayout';
 /**
  * test text
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testMessage = 'Test render message';
 
 /**
  * test child component
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
 /**
  * Dashboard Layout Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Dashboard Layout', () => {
   it('Renders correctly', async () => {

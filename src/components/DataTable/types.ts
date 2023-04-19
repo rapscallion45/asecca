@@ -1,7 +1,7 @@
 /**
  * type definition for Data Table column properties
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export interface IDataTableColumn {
   label: string;
@@ -12,7 +12,7 @@ export interface IDataTableColumn {
 /**
  * type definition for Data Table row properties
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export interface IDataTableRow {
   label: string;
@@ -21,7 +21,7 @@ export interface IDataTableRow {
 /**
  * function type definition for Data Table Cell edits
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export interface IDataTableEditCellValueCallback {
   (value: string | null, colKey: string, rowIdx: number): void;
@@ -30,7 +30,7 @@ export interface IDataTableEditCellValueCallback {
 /**
  * function type definition for Data Table Cell value retrieval
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export interface IDataTableGetCellValueCallback {
   (rowIdx: number, column: IDataTableColumn): string | null | undefined;

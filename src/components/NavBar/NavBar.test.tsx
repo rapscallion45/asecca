@@ -6,8 +6,8 @@ import NavBar from './NavBar';
 /**
  * NavBar Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('NavBar', () => {
   it('Renders correctly', () => {

@@ -7,21 +7,21 @@ import CurrencyCell from './CurrencyCell';
 /**
  * test currency value
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 let testValue: string | null = '100.00';
 
 /**
  * test style
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testSx = { fontWeight: 'bold' };
 
 /**
  * mock callback for submit cell value
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const mockSubmitCellValueCallback = jest.fn((x: string | null) => {
   testValue = x;
@@ -30,8 +30,8 @@ const mockSubmitCellValueCallback = jest.fn((x: string | null) => {
 /**
  * Data Table Currency Cell Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table Currency Cell', () => {
   it('Renders correctly', async () => {

@@ -8,15 +8,15 @@ import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 /**
  * default test loading message
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testMessage = 'This is a loading message';
 
 /**
  * Loading Row Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Data Table Loading Row', () => {
   it('Renders correctly', async () => {

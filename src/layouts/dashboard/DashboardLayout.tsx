@@ -8,7 +8,7 @@ import useNotifier from '@/hooks/useNotifier';
 /**
  * background styling
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const BackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -22,7 +22,7 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
 /**
  * root style for the dashboard page content
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const RootStyle = styled('section')({
   display: 'flex',
@@ -36,7 +36,7 @@ const RootStyle = styled('section')({
 /**
  * Base Dashboard Page Layout Props
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IDashboardLayoutProps
  * @prop {ReactNode} children - component children nodes
@@ -48,8 +48,8 @@ interface IDashboardLayoutProps {
 /**
  * Base Dashboard Page Layout
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {IDashboardLayoutProps} props - component props
  * @returns {FC} - dashboard layout functional component

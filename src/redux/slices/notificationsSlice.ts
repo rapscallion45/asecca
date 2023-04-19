@@ -13,14 +13,14 @@ import {
  * results, such as errors with API requests, login failures, etc. This state
  * is manipulated from multiple places in the application.
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
  * Initial Notifications State
  *
- * @since - 0.0.0
+ * @since 0.0.0
  *
  * @typedef IInitialNotificationsState
  * @prop {Array<INotificationState>} data - notification state data
@@ -32,7 +32,7 @@ interface IInitialNotificationsState {
 /**
  * Initialise notification state to empty array
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const initialState: IInitialNotificationsState = {
   data: [],
@@ -41,8 +41,8 @@ const initialState: IInitialNotificationsState = {
 /**
  * Create the redux slice for interacting with the notifications state
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const notificationsSlice = createSlice({
   name: 'notifications',
@@ -92,7 +92,7 @@ const notificationsSlice = createSlice({
 /**
  * Notification actions for adding, closing and removing a notifications
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 export const { addNotification, closeNotification, removeNotification } =
   notificationsSlice.actions;

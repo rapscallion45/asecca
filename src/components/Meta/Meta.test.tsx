@@ -5,8 +5,8 @@ import Meta from './Meta';
 /**
  * Meta Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Meta', () => {
   it('Renders correctly', async () => {

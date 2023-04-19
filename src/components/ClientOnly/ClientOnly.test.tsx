@@ -6,22 +6,22 @@ import ClientOnly from './ClientOnly';
 /**
  * test text
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const testMessage = 'Test render client only message';
 
 /**
  * test child component
  *
- * @since - 0.0.0
+ * @since 0.0.0
  */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
 /**
  * Client Only Unit Tests
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 describe('Client Only', () => {
   describe('Children', () => {

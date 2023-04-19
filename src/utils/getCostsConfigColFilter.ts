@@ -2,8 +2,8 @@
  * Return list of columns to be filtered out of Config Costs
  * data table according to passed permission level
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  *
  * @param {string} permissionLevel - permission level to filter columns for
  * @returns {Array<string | null>} - filtered columns for passed permission level

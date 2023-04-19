@@ -6,8 +6,8 @@ import '@testing-library/jest-dom/extend-expect';
 /**
  * Configuration file for Jest & React Testing Library Unit Test environment
  *
- * @author - Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since - 0.0.0
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /** instatiate NexJS before running tests - this loads next.config.js */
