@@ -1,19 +1,26 @@
-import { alpha } from '@mui/material/styles';
+import {
+  PaletteOptions,
+  PaletteColorOptions,
+  alpha,
+} from '@mui/material/styles';
+import { IExtendedColorPartial } from '../types';
+
+/*
+ * ASECCA SPA dark theme style definitions
+ */
 
 /**
- * ASECCA SPA dark theme style definitions
+ * Dark theme grey color definitions
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
- */
-
-/**
- * Dark theme grey definition
  *
- * @since 0.0.0
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {IExtendedColorPartial}
  */
-const GREY = {
-  0: '#FFFFFF',
+const DARKTHEME_GREY: IExtendedColorPartial = {
   100: '#F9FAFB',
   200: '#F4F6F8',
   300: '#DFE3E8',
@@ -23,97 +30,121 @@ const GREY = {
   700: '#454F5B',
   800: '#212B36',
   900: '#161C24',
-  500_8: alpha('#919EAB', 0.08),
-  500_12: alpha('#919EAB', 0.12),
-  500_16: alpha('#919EAB', 0.16),
-  500_24: alpha('#919EAB', 0.24),
-  500_32: alpha('#919EAB', 0.32),
-  500_48: alpha('#919EAB', 0.48),
-  500_56: alpha('#919EAB', 0.56),
-  500_80: alpha('#919EAB', 0.8),
+  alpha8_500: alpha('#919EAB', 0.08),
+  alpha12_500: alpha('#919EAB', 0.12),
+  alpha16_500: alpha('#919EAB', 0.16),
+  alpha24_500: alpha('#919EAB', 0.24),
+  alpha32_500: alpha('#919EAB', 0.32),
+  alpha48_500: alpha('#919EAB', 0.48),
+  alpha56_500: alpha('#919EAB', 0.56),
+  alpha80_500: alpha('#919EAB', 0.8),
 };
 
 /**
  * Dark theme primary color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const PRIMARY = {
-  lighter: '#8798fa',
+const DARKTHEME_PRIMARY: PaletteColorOptions = {
   light: '#6a77c4',
   main: '#56609C',
   dark: '#3a4069',
-  darker: '#1d2136',
   contrastText: '#fff',
 };
 
 /**
  * Dark theme secondary color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const SECONDARY = {
-  lighter: '#bdbaff',
+const DARKTHEME_SECONDARY: PaletteColorOptions = {
   light: '#8782ff',
   main: '#544dff',
   dark: '#312d9c',
-  darker: '#19174f',
   contrastText: '#fff',
 };
 
 /**
  * Dark theme info color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const INFO = {
-  lighter: '#bdbaff',
+const DARKTHEME_INFO: PaletteColorOptions = {
   light: '#8782ff',
   main: '#544dff',
   dark: '#312d9c',
-  darker: '#19174f',
   contrastText: '#fff',
 };
 
 /**
  * Dark theme success color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const SUCCESS = {
-  lighter: '#bdbaff',
+const DARKTHEME_SUCCESS: PaletteColorOptions = {
   light: '#8782ff',
   main: '#544dff',
   dark: '#312d9c',
-  darker: '#19174f',
   contrastText: '#fff',
 };
 
 /**
  * Dark theme warning color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const WARNING = {
-  lighter: '#FEFDCD',
+const DARKTHEME_WARNING: PaletteColorOptions = {
   light: '#FDF74E',
   main: '#F9F002',
   dark: '#CAC302',
-  darker: '#7E7A01',
-  contrastText: GREY[800],
+  contrastText: DARKTHEME_GREY[800],
 };
 
 /**
  * Dark theme error color definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteColorOptions}
  */
-const ERROR = {
-  lighter: '#FA5A5A',
+const DARKTHEME_ERROR: PaletteColorOptions = {
   light: '#E65C5C',
   main: '#ED3B3B',
   dark: '#ED1515',
-  darker: '#7A0A0A',
   contrastText: '#fff',
 };
 
@@ -122,26 +153,35 @@ const ERROR = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
+ *
+ * @constant
+ * @type {PaletteOptions}
  */
-const darkThemePalette = {
+const darkThemePalette: PaletteOptions = {
   mode: 'dark',
   common: { black: '#2E2A2B', white: '#fff' },
-  primary: { ...PRIMARY },
-  secondary: { ...SECONDARY },
-  info: { ...INFO },
-  success: { ...SUCCESS },
-  warning: { ...WARNING },
-  error: { ...ERROR },
-  grey: GREY,
-  divider: GREY[500_24],
-  text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
+  primary: { ...DARKTHEME_PRIMARY },
+  secondary: { ...DARKTHEME_SECONDARY },
+  info: { ...DARKTHEME_INFO },
+  success: { ...DARKTHEME_SUCCESS },
+  warning: { ...DARKTHEME_WARNING },
+  error: { ...DARKTHEME_ERROR },
+  grey: DARKTHEME_GREY,
+  divider: DARKTHEME_GREY.alpha24_500,
+  text: {
+    primary: DARKTHEME_GREY[800],
+    secondary: DARKTHEME_GREY[600],
+    disabled: DARKTHEME_GREY[500],
+  },
   action: {
-    active: GREY[600],
-    hover: GREY[500_8],
-    selected: GREY[500_16],
-    disabled: GREY[500_80],
-    disabledBackground: GREY[500_24],
-    focus: GREY[500_24],
+    active: DARKTHEME_GREY[600],
+    hover: DARKTHEME_GREY.alpha8_500,
+    selected: DARKTHEME_GREY.alpha16_500,
+    disabled: DARKTHEME_GREY.alpha80_500,
+    disabledBackground: DARKTHEME_GREY.alpha24_500,
+    focus: DARKTHEME_GREY.alpha24_500,
     hoverOpacity: 0.08,
     disabledOpacity: 0.48,
   },

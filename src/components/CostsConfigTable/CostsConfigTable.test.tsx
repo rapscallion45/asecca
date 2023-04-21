@@ -16,18 +16,10 @@ import store from '../../redux/store';
 import columns from './costsConfigTableColumns';
 import CostsConfigTable from './CostsConfigTable';
 
-/**
- * default test permission level
- *
- * @since 0.0.0
- */
+/* default test permission level */
 const permission: UserPermissionLevel = 'Collection';
 
-/**
- * default test query ID
- *
- * @since 0.0.0
- */
+/* default test query ID */
 const query: string = '66135000001760012';
 
 /**

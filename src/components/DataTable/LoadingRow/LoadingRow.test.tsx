@@ -5,11 +5,7 @@ import { Table, TableBody } from '@mui/material';
 import LoadingRow from './LoadingRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
-/**
- * default test loading message
- *
- * @since 0.0.0
- */
+/* default test loading message */
 const testMessage = 'This is a loading message';
 
 /**

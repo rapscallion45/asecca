@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import useNotifier from '@/hooks/useNotifier';
 
 /**
- * Default Fallback Page Layout Props
+ * Default Page Layout Props
  *
  * @since 0.0.0
  *
@@ -14,18 +14,21 @@ interface IDefaultLayoutProps {
 }
 
 /**
- * Default Fallback Page Layout
+ * Default Page Layout
+ *
+ * Default layout styling and functionality
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IDefaultLayoutProps} props - component props
  * @returns {FC} - default layout functional component
  */
 const DefaultLayout: FC<IDefaultLayoutProps> = (props) => {
   const { children } = props;
 
-  /** initialise alert notifications */
+  /* initialise alert notifications */
   useNotifier();
 
   return (

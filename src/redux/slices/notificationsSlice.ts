@@ -20,6 +20,7 @@ import {
 /**
  * Initial Notifications State
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IInitialNotificationsState
@@ -32,9 +33,13 @@ interface IInitialNotificationsState {
 /**
  * Initialise notification state to empty array
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {IInitialNotificationsState}
  */
-const initialState: IInitialNotificationsState = {
+const initialNotificationsState: IInitialNotificationsState = {
   data: [],
 };
 
@@ -43,10 +48,15 @@ const initialState: IInitialNotificationsState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
+ *
+ * @constant
+ * @type {Slice<Object>}
  */
 const notificationsSlice = createSlice({
   name: 'notifications',
-  initialState,
+  initialState: initialNotificationsState,
   reducers: {
     addNotification: (
       state,

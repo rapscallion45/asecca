@@ -5,11 +5,7 @@ import { Table, TableBody } from '@mui/material';
 import ErrorRow from './ErrorRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 
-/**
- * default test error message
- *
- * @since 0.0.0
- */
+/* default test error message */
 const testMessage = 'This is an error message';
 
 /**

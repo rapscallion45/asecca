@@ -8,14 +8,12 @@ import {
 
 /**
  * Type and interface definitions for Redux actions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
  */
 
 /**
  * Theme Type options
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ThemeType - theme can either be 'light' or 'dark' mode
@@ -25,6 +23,7 @@ export type ThemeType = 'light' | 'dark';
 /**
  * Fetch Costs Config args for async thunk requests
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IFetchCostsConfigBySourceIdArgs
@@ -38,6 +37,7 @@ export interface IFetchCostsConfigBySourceIdArgs {
 /**
  * Save Costs Config args for async thunk requests
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ISaveCostsConfigBySourceIdArgs
@@ -50,6 +50,7 @@ export interface ISaveCostsConfigBySourceIdArgs {
 /**
  * Costs Config edit redux action payload definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigEditCostsPayload
@@ -66,6 +67,7 @@ export interface ICostsConfigEditCostsPayload {
 /**
  * Costs Config state definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigState
@@ -82,9 +84,12 @@ export interface ICostsConfigState {
 /**
  * Permissions definition
  *
+ * List of possible permission levels
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @type {Array<string>} - list of possible permission levels
+ * @type {Array<string>}
  */
 export const permissions = [
   'Global',
@@ -96,15 +101,17 @@ export const permissions = [
 /**
  * User Permission Level definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @type {string} - list of possible permission levels
+ * @typedef UserPermissionLevel
  */
 export type UserPermissionLevel = (typeof permissions)[number];
 
 /**
  * User Permission Level state definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IUserPermissionLevelState
@@ -117,6 +124,7 @@ export interface IUserPermissionLevelState {
 /**
  * Notification options definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef INotificationOptions
@@ -133,6 +141,7 @@ export interface INotificationOptions {
 /**
  * Notification state definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef INotificationState
@@ -149,6 +158,7 @@ export interface INotificationState {
 /**
  * Add Notification action payload
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IAddNotificationPayload
@@ -163,6 +173,7 @@ export interface IAddNotificationPayload {
 /**
  * Close Notification action payload
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICloseNotificationPayload
@@ -175,6 +186,7 @@ export interface ICloseNotificationPayload {
 /**
  * Remove Notification action payload
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IRemoveNotificationPayload
@@ -187,6 +199,7 @@ export interface IRemoveNotificationPayload {
 /**
  * Theme state
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IThemeState

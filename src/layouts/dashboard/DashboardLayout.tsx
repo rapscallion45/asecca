@@ -6,11 +6,17 @@ import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
 
 /**
- * background styling
+ * Dashboard Background Style
  *
+ * Application dashboard layout background component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled dashboard layout background component
  */
-const BackgroundStyle = styled('div')(({ theme }) => ({
+const DashboardBackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
   zIndex: 0,
@@ -20,11 +26,17 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
 }));
 
 /**
- * root style for the dashboard page content
+ * Dashboard Root Style
  *
+ * Dashboard page root styling for page content
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled dashboard layout root component
  */
-const RootStyle = styled('section')({
+const DashboardRootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
   minHeight: '100vh',
@@ -36,6 +48,7 @@ const RootStyle = styled('section')({
 /**
  * Base Dashboard Page Layout Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IDashboardLayoutProps
@@ -48,28 +61,31 @@ interface IDashboardLayoutProps {
 /**
  * Base Dashboard Page Layout
  *
+ * Dashboard base layout styling and functionality
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IDashboardLayoutProps} props - component props
  * @returns {FC} - dashboard layout functional component
  */
 const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
-  /** initialise alert notifications */
+  /* initialise alert notifications */
   useNotifier();
 
   return (
     <main id="dashboard-page">
-      <BackgroundStyle id="background" />
+      <DashboardBackgroundStyle id="background" />
       <NavBar showLogin />
-      <RootStyle id="page-content">
+      <DashboardRootStyle id="page-content">
         <Container maxWidth="lg">
           <AdminTestPanel />
           {children}
         </Container>
-      </RootStyle>
+      </DashboardRootStyle>
     </main>
   );
 };

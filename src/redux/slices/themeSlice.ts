@@ -14,6 +14,7 @@ import { IThemeState, ThemeType } from '../types';
 /**
  * Initial Theme State
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IInitialThemeState
@@ -26,9 +27,13 @@ interface IInitialThemeState {
 /**
  * Initialise Theme state to 'light'
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {IInitialThemeState}
  */
-const initialState: IInitialThemeState = {
+const initialThemeState: IInitialThemeState = {
   theme: { type: 'light' },
 };
 
@@ -37,10 +42,15 @@ const initialState: IInitialThemeState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
+ *
+ * @constant
+ * @type {Slice<Object>}
  */
 const themeSlice = createSlice({
   name: 'theme',
-  initialState,
+  initialState: initialThemeState,
   reducers: {
     setTheme: (state, action: PayloadAction<ThemeType>) => {
       state.theme.type = action.payload;

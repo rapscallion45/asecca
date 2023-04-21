@@ -1,6 +1,9 @@
 import base64 from 'base-64';
 import queryString from 'query-string';
-import { ICostsConfigSaveDataPayload } from '@/lib/api/api-types';
+import {
+  ICostsConfigSaveDataPayload,
+  ICostsConfigSaveDataSelection,
+} from '@/lib/api/api-types';
 
 /**
  * configuration param environment variables for staging DB
@@ -16,13 +19,11 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @param {Partial<{[key: string]: string | string[];}>} query - request query string
+ * @param {Partial<ICostsConfigSaveDataSelection>} query - request query
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
 export async function getCostsConfig(
-  query: Partial<{
-    [key: string]: string | string[];
-  }>
+  query: Partial<ICostsConfigSaveDataSelection>
 ) {
   /** setup GET request options with basic auth */
   const requestOptions = {

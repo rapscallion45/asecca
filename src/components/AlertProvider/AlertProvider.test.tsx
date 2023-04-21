@@ -16,18 +16,10 @@ import useNotifier from '../../hooks/useNotifier';
 import AlertProvider from './AlertProvider';
 import { addNotification } from '../../redux/slices/notificationsSlice';
 
-/**
- * test text
- *
- * @since 0.0.0
- */
+/* test text */
 const testMessage = 'Test render alert message';
 
-/**
- * test child component
- *
- * @since 0.0.0
- */
+/* test child component */
 const TestChild: FC = () => {
   useNotifier();
   return <div>Test child</div>;

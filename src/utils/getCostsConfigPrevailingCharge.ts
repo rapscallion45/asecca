@@ -25,10 +25,10 @@ const getCostsConfigPrevailingCharge = (
    * Collection (highest) -> Project -> Customer > Global (lowest)
    */
 
-  /** sanity check input */
+  /* sanity check input */
   if (!tableRow || !permissionLevel) return null;
 
-  /** firstly, if editable col is not null or undefined, return edit col value */
+  /* firstly, if editable col is not null or undefined, return edit col value */
   const editCellKey = `${permissionLevel.level.toLowerCase()}_charge`;
   if (
     tableRow[editCellKey as keyof ICostsConfigData] !== null &&
@@ -50,7 +50,7 @@ const getCostsConfigPrevailingCharge = (
   const getCharge = (): string | null | undefined => {
     switch (permissionLevel.level) {
       case 'Collection':
-        /** if Collection, run through all other columns */
+        /* if Collection, run through all other columns */
         if (
           tableRow.project_charge !== null &&
           tableRow.project_charge !== undefined
@@ -64,7 +64,7 @@ const getCostsConfigPrevailingCharge = (
         if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Project':
-        /** if Project, only run through columns below Project */
+        /* if Project, only run through columns below Project */
         if (
           tableRow.customer_charge !== null &&
           tableRow.customer_charge !== undefined
@@ -73,12 +73,12 @@ const getCostsConfigPrevailingCharge = (
         if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Customer':
-        /** if Customer, only run through columns below Customer */
+        /* if Customer, only run through columns below Customer */
         if (tableRow.global_charge !== null) return tableRow.global_charge;
         return null;
       case 'Global':
       default:
-        /** if Global, no checks needed, value is null at this point */
+        /* if Global, no checks needed, value is null at this point */
         return null;
     }
   };

@@ -1,17 +1,17 @@
-/**
+/*
  * ASECCA API type definitions
  *
  * These type definitions directly follow the Asecca API documentation.
  * Only make changes to this file if a corresponding change to the API has
  * been made.
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
  */
 
 /**
  * Cost Config Applications values
  *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef CostsConfigApplication
@@ -26,6 +26,9 @@ export type CostsConfigApplication =
 /**
  * Cost Config Line Type values
  *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef CostsConfigLineType
@@ -35,6 +38,9 @@ export type CostsConfigLineType = 'Typical' | 'Custom';
 /**
  * Cost Config Cost Source values
  *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef CostsConfigCostSource
@@ -48,6 +54,7 @@ export type CostsConfigCostSource =
 /**
  * Costs Config data type definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigData
@@ -76,6 +83,7 @@ export interface ICostsConfigData {
 /**
  * Costs Config GET request data payload type definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigDataPayload
@@ -88,6 +96,7 @@ export interface ICostsConfigDataPayload {
 /**
  * Costs Config POST data Costs type definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataCosts
@@ -106,6 +115,7 @@ export interface ICostsConfigSaveDataCosts {
 /**
  * Costs Config POST data Selection type definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataSelection
@@ -124,6 +134,7 @@ export interface ICostsConfigSaveDataSelection {
 /**
  * Costs Config POST data payload type
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef ICostsConfigSaveDataPayload
@@ -138,6 +149,7 @@ export interface ICostsConfigSaveDataPayload {
 /**
  * Proxy server error return data payload type definition
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IProxyErrorPayload

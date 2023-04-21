@@ -9,6 +9,7 @@ import { INotificationState } from '../../redux/types';
 /**
  * Alert Notification Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IAlertNotificationProps
@@ -21,6 +22,7 @@ interface IAlertNotificationProps {
 /**
  * Alert Notification Ref type
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef {HTMLDivElement} Ref - ref to Alert Provider parent div
@@ -30,9 +32,12 @@ type Ref = HTMLDivElement;
 /**
  * Alert Notification
  *
+ * Global application notification display component
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IAlertNotificationProps} props - component props
  * @param {Ref} ref - reference to the alert provider parent component
  * @returns {ForwardRefExoticComponent} - alert notification component
@@ -42,18 +47,25 @@ const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
     const dispatch = useDispatch<AppDispatch>();
     const { id } = props;
 
-    /** close alert callback */
-    const handleClose = () => {
-      dispatch(closeNotification({ key: id }));
-    };
-
-    /** find this alert in state and get variant */
+    /* find this alert in state and get variant */
     const { data: notifications } = useSelector(
       (state: AppState) => state.notifications
     );
     const successNotification = notifications.find(
       (notification: INotificationState) => notification.options.key === id
     );
+
+    /**
+     * Close alert callback
+     *
+     * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+     * @since 0.0.0
+     *
+     * @method
+     */
+    const handleClose = () => {
+      dispatch(closeNotification({ key: id }));
+    };
 
     return (
       <Alert
@@ -72,6 +84,7 @@ const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
 /**
  * Alert Provider Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IAlertProviderProps
@@ -84,9 +97,12 @@ interface IAlertProviderProps {
 /**
  * Alert Provider
  *
+ * Global provider for rendering notifications across the application
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IAlertProviderProps} props - component props
  * @returns {FC} - alert provider functional component
  */
@@ -100,7 +116,7 @@ const AlertProvider: FC<IAlertProviderProps> = (props) => {
         vertical: 'bottom',
         horizontal: 'center',
       }}
-      /** override all alert variants with our custom component */
+      /* override all alert variants with our custom component */
       Components={{
         success: AlertNotification,
         error: AlertNotification,

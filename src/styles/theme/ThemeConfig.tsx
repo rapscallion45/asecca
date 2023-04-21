@@ -7,7 +7,6 @@ import {
   createTheme,
   Theme,
   ThemeOptions,
-  PaletteOptions,
 } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AppState } from '@/redux/store';
@@ -18,7 +17,10 @@ import typography from './typography';
 /**
  * Theme Config Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on creating emotion styling engine cache](https://emotion.sh/docs/introduction)
  *
  * @typedef IThemeConfigProps
  * @prop {EmotionCache} emotionCache - emotion styling engine cache
@@ -37,27 +39,28 @@ interface IThemeConfigProps {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IThemeConfigProps} props - component props
  * @returns {FC} - theme config functional component
  */
 const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
 
-  /** grab global theme state */
+  /* grab global theme state */
   const { theme: themeSelection } = useSelector(
     (state: AppState) => state.theme
   );
 
-  /** check if user has dark mode preference */
+  /* check if user has dark mode preference */
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  /** get options and create theme for current state */
+  /* get options and create theme for current state */
   const themeOptions: ThemeOptions = useMemo(
     () => ({
       palette:
         themeSelection.type === 'light' && !prefersDarkMode
-          ? (lightThemePalette as PaletteOptions)
-          : (darkThemePalette as PaletteOptions),
+          ? lightThemePalette
+          : darkThemePalette,
       typography,
     }),
     [themeSelection, prefersDarkMode]

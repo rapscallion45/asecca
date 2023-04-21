@@ -3,18 +3,10 @@ import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import ClientOnly from './ClientOnly';
 
-/**
- * test text
- *
- * @since 0.0.0
- */
+/* test text */
 const testMessage = 'Test render client only message';
 
-/**
- * test child component
- *
- * @since 0.0.0
- */
+/* test child component */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
 /**

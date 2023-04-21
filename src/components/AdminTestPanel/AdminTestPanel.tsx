@@ -12,21 +12,33 @@ import { permissions, UserPermissionLevel } from '@/redux/types';
 /**
  * Admin Test Panel
  *
+ * Administration interface used only for testing purposes. Allows user to change
+ * global user permission level
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @returns {FC} - admin test panel functional component
  */
 const AdminTestPanel: FC = () => {
-  /** shorthand redux action dispatcher */
+  /* shorthand redux action dispatcher */
   const dispatch = useDispatch<AppDispatch>();
 
-  /** get user permission level held in redux state */
+  /* get user permission level held in redux state */
   const { permission: userPermission } = useSelector(
     (state: AppState) => state.userPermission
   );
 
-  /** change user permission level state when dropdown changed */
+  /**
+   * Change user permission level state when dropdown changed
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} event - trigger event DOM element
+   */
   const handlePermissionChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

@@ -9,6 +9,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 /**
  * Data Table Error Row Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IErrorRowProps
@@ -23,9 +24,12 @@ interface IErrorRowProps {
 /**
  * Data Table Error Row
  *
+ * Table row component for handling row error styling and functionality
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IErrorRowProps} props - component props
  * @returns {FC} - data table error row functional component
  */

@@ -5,11 +5,15 @@ import { AppDispatch, AppState } from '@/redux/store';
 import { removeNotification } from '../redux/slices/notificationsSlice';
 
 /**
- * local copy of currently displayed notification ID keys
+ * List of currently displayed notification ID keys
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {Array<SnackbarKey>}
  */
-let displayed: any = [];
+let notifierDisplayedIds: Array<SnackbarKey> = [];
 
 /**
  * Notifier hook for processing currently active notifications held in
@@ -36,8 +40,8 @@ const useNotifier = () => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    */
-  const storeDisplayed = (id: SnackbarKey | undefined) => {
-    displayed = [...displayed, id];
+  const storeDisplayed = (id: SnackbarKey) => {
+    notifierDisplayedIds = [...notifierDisplayedIds, id];
   };
 
   /**
@@ -47,12 +51,14 @@ const useNotifier = () => {
    * @since 0.0.0
    */
   const removeDisplayed = (id: SnackbarKey) => {
-    displayed = [...displayed.filter((key: SnackbarKey) => id !== key)];
+    notifierDisplayedIds = [
+      ...notifierDisplayedIds.filter((key: SnackbarKey) => id !== key),
+    ];
   };
 
   /** whenever notifications state changes, update displayed/removed list */
   useEffect(() => {
-    notifications.forEach(({ message, options = {}, dismissed = false }) => {
+    notifications.forEach(({ message, options, dismissed = false }) => {
       if (dismissed) {
         /** dismiss snackbar using notistack */
         closeSnackbar(options.key);
@@ -60,7 +66,7 @@ const useNotifier = () => {
       }
 
       /** do nothing if snackbar is already displayed */
-      if (displayed.includes(options.key)) return;
+      if (notifierDisplayedIds.includes(options.key)) return;
 
       /** display snackbar using notistack */
       enqueueSnackbar(message, {

@@ -8,11 +8,7 @@ import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../../__mocks__/costsConfigDataMock';
 import { IDataTableColumn } from '../types';
 
-/**
- * mock callbacks for get and edit cell values
- *
- * @since 0.0.0
- */
+/* mock callbacks for get and edit cell values */
 const mockGetCellValueCallback = jest.fn(
   (rowIdx: number, column: IDataTableColumn) =>
     costsConfigDataMock.costs[rowIdx][column.key as keyof ICostsConfigData]

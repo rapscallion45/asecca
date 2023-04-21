@@ -4,18 +4,10 @@ import renderer from 'react-test-renderer';
 import { Table, TableBody, TableRow } from '@mui/material';
 import Cell from './Cell';
 
-/**
- * test text
- *
- * @since 0.0.0
- */
+/* test text */
 const testValue = 'Device Processing';
 
-/**
- * test style
- *
- * @since 0.0.0
- */
+/* test style */
 const testSx = { fontWeight: 'bold' };
 
 /**

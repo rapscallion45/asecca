@@ -7,18 +7,10 @@ import store from '../../redux/store';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
 import DefaultLayout from './DefaultLayout';
 
-/**
- * test text
- *
- * @since 0.0.0
- */
+/* test text */
 const testMessage = 'Test render message';
 
-/**
- * test child component
- *
- * @since 0.0.0
- */
+/* test child component */
 const TestChild: FC = () => <div>{testMessage}</div>;
 
 /**

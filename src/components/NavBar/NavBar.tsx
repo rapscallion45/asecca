@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import Image from 'next/image';
 
 /**
- * App NavBar Props
+ * NavBar Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IErrorRowProps
@@ -19,13 +20,16 @@ interface INavBarProps {
 }
 
 /**
- * App NavBar
+ * NavBar
+ *
+ * Application main Navbar component
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {INavBarProps} props - component props
- * @returns {FC} - default layout functional component
+ * @returns {FC} - navbar functional component
  */
 const NavBar: FC<INavBarProps> = (props) => {
   const { showLogin = false } = props;

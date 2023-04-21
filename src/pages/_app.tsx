@@ -18,6 +18,7 @@ import ThemeConfig from '@/styles/theme/ThemeConfig';
 /**
  * initialise client MUI styles cache
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  */
 const clientSideEmotionCache = createEmotionCache();
@@ -25,6 +26,7 @@ const clientSideEmotionCache = createEmotionCache();
 /**
  * Asecca SPA Entry Point Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IAseccaAppProps
@@ -46,13 +48,14 @@ interface IAseccaAppProps extends AppProps {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IAseccaAppProps} props - app props
  * @returns {FC} - application entry point functional component
  */
 const AseccaApp: FC<IAseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  /** the page layout is defined in each page's definition, else default */
+  /* the page layout is defined in each page's definition, else default */
   const PageLayout = Component.Layout || DefaultLayout;
 
   return (

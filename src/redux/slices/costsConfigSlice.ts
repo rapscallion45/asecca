@@ -89,6 +89,7 @@ export const saveBySourceId = createAsyncThunk(
 /**
  * Initial Costs Config State
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IInitialCostsConfigState
@@ -109,11 +110,15 @@ interface IInitialCostsConfigState {
 }
 
 /**
- * Initialise Costs Config state to empty
+ * Initialise Costs Config state to empty array
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {IInitialCostsConfigState}
  */
-const initialState: IInitialCostsConfigState = {
+const initialCostsConfigState: IInitialCostsConfigState = {
   loading: false,
   data: { costs: [] },
   dataShadow: { costs: [] },
@@ -126,24 +131,29 @@ const initialState: IInitialCostsConfigState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
+ *
+ * @constant
+ * @type {Slice<Object>}
  */
 const costsConfigSlice = createSlice({
   name: 'costsConfig',
-  initialState,
+  initialState: initialCostsConfigState,
   reducers: {
-    /** reducer used for user input changes to the Costs Config data */
+    /* reducer used for user input changes to the Costs Config data */
     editCostsConfig: (
       state,
       action: PayloadAction<ICostsConfigEditCostsPayload>
     ) => {
-      /** find and update passed cost */
+      /* find and update passed cost */
       state.data.costs = state.data.costs.map(
         (cost: ICostsConfigData, index: number) => {
-          /** perform update for passed table row number */
+          /* perform update for passed table row number */
           if (index === action.payload.rowIdx) {
             return {
               ...cost,
-              /** update the value of the passed column */
+              /* update the value of the passed column */
               [action.payload.colKey as keyof ICostsConfigData]:
                 action.payload.value,
             };
@@ -207,6 +217,7 @@ const costsConfigSlice = createSlice({
 /**
  * Costs Config actions for editing and resetting costs config data
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  */
 export const { editCostsConfig, resetCostsConfig } = costsConfigSlice.actions;

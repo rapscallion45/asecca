@@ -4,11 +4,17 @@ import NavBar from '@/components/NavBar/NavBar';
 import useNotifier from '@/hooks/useNotifier';
 
 /**
- * background styling
+ * Home Background Style
  *
+ * Application home layout background component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled home layout background component
  */
-const BackgroundStyle = styled('div')(({ theme }) => ({
+const HomeBackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
   zIndex: 0,
@@ -18,11 +24,17 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
 }));
 
 /**
- * root style for the dashboard page content
+ * Home Root Style
  *
+ * Home page root styling for page content
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled home layout root component
  */
-const RootStyle = styled('section')({
+const HomeRootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
   minHeight: '100vh',
@@ -34,6 +46,7 @@ const RootStyle = styled('section')({
 /**
  * Home Page Layout Props
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IHomeLayoutProps
@@ -46,25 +59,28 @@ interface IHomeLayoutProps {
 /**
  * Home Page Layout
  *
+ * Home Page layout styling and functionality
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @param {IHomeLayoutProps} props - component props
  * @returns {FC} - home page layout functional component
  */
-const DashboardLayout: FC<IHomeLayoutProps> = (props) => {
+const HomeLayout: FC<IHomeLayoutProps> = (props) => {
   const { children } = props;
 
-  /** initialise alert notifications */
+  /* initialise alert notifications */
   useNotifier();
 
   return (
     <main id="home-page">
-      <BackgroundStyle id="background" />
+      <HomeBackgroundStyle id="background" />
       <NavBar />
-      <RootStyle id="page-content">{children}</RootStyle>
+      <HomeRootStyle id="page-content">{children}</HomeRootStyle>
     </main>
   );
 };
 
-export default DashboardLayout;
+export default HomeLayout;

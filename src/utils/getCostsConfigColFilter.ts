@@ -11,7 +11,7 @@
 const getCostsConfigColFilterList = (
   permissionLevel: string
 ): Array<string | null> => {
-  /** return columns to be filtered depending on passed permission level */
+  /* return columns to be filtered depending on passed permission level */
   switch (permissionLevel) {
     case 'Collection':
       return [];

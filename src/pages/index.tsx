@@ -16,6 +16,7 @@ import HomeLayout from '@/layouts/home/HomeLayout';
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
+ * @component
  * @returns {NextPageWithLayout} - application homepage
  */
 const Home: NextPageWithLayout = () => (

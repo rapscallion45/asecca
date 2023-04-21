@@ -4,25 +4,13 @@ import renderer from 'react-test-renderer';
 import { Table, TableBody, TableRow } from '@mui/material';
 import CurrencyCell from './CurrencyCell';
 
-/**
- * test currency value
- *
- * @since 0.0.0
- */
+/* test currency value */
 let testValue: string | null = '100.00';
 
-/**
- * test style
- *
- * @since 0.0.0
- */
+/* test style */
 const testSx = { fontWeight: 'bold' };
 
-/**
- * mock callback for submit cell value
- *
- * @since 0.0.0
- */
+/* mock callback for submit cell value */
 const mockSubmitCellValueCallback = jest.fn((x: string | null) => {
   testValue = x;
 });

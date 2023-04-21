@@ -16,6 +16,7 @@ import { IUserPermissionLevelState } from '../types';
 /**
  * Initial User Permission State
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef InitialNotificationsState
@@ -26,11 +27,15 @@ interface IInitialUserPermissionState {
 }
 
 /**
- * Initialise user permission level state - always set lowest level, 'Global'
+ * Initialise user permission level state to lowest level, 'Global'
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {IInitialUserPermissionState}
  */
-const initialState: IInitialUserPermissionState = {
+const initialUserPermissionState: IInitialUserPermissionState = {
   permission: { level: 'Global' },
 };
 
@@ -39,10 +44,15 @@ const initialState: IInitialUserPermissionState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
+ *
+ * @constant
+ * @type {Slice<Object>}
  */
 const userPermissionSlice = createSlice({
   name: 'userPermission',
-  initialState,
+  initialState: initialUserPermissionState,
   reducers: {
     setPermissionLevel: (
       state,

@@ -15,7 +15,7 @@ import Meta from '@/components/Meta/Meta';
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @class
+ * @component
  * @extends Document
  * @returns {MyDocument} - custom document class
  */

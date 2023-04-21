@@ -23,6 +23,7 @@ function pxToRem(value: number) {
 /**
  * Responsive Font Sizes
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef IResposiveFontSizes
@@ -42,7 +43,8 @@ interface IResposiveFontSizes {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated for
+ * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated to rem
+ * @returns {Object} - calculated rem font sizes
  */
 function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
   return {
@@ -61,7 +63,11 @@ function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
 /**
  * Primary font family
  *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {string}
  */
 const FONT_PRIMARY = 'Poppins, Roboto';
 
@@ -70,6 +76,11 @@ const FONT_PRIMARY = 'Poppins, Roboto';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @see See [more info on MUI typography](https://mui.com/material-ui/customization/typography/)
+ *
+ * @constant
+ * @type {TypographyVariantsOptions}
  */
 const typography: TypographyVariantsOptions = {
   fontFamily: FONT_PRIMARY,

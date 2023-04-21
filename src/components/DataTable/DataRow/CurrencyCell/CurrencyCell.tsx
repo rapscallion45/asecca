@@ -1,46 +1,42 @@
 import { FC, useState, ChangeEvent, memo, useCallback, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import {
-  Input,
-  InputAdornment,
-  FormControl,
-  TableCell,
-  IconButton,
-} from '@mui/material';
-import { tableCellClasses } from '@mui/material/TableCell';
+import { Input, InputAdornment, FormControl, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
+import { IDataTableEditCurrencyCellValueCallback } from '../../types';
+import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
 
-/* table cell stylings */
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  /* table head colors */
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  /* adjust font size */
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
+/**
+ * Data Table Currency Cell Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef ICurrencyCellProps
+ * @prop {string} inputId - ID of the cell input field
+ * @prop {boolean} canEdit - cell is editable flag
+ * @prop {string} value - cell value, can be null
+ * @prop {IDataTableEditCurrencyCellValueCallback} submitCellValue - submit cell value upon update callback
+ * @prop {any} sx - cell styling overrrides
+ */
 interface ICurrencyCellProps {
   inputId: string;
   canEdit: boolean;
   value: string | null;
-  submitCellValue?: (value: string | null) => void;
+  submitCellValue?: IDataTableEditCurrencyCellValueCallback;
   sx?: any;
 }
 
 /**
  * Data Table Currency Cell
  *
+ * Table cell component for displaying a table value as a formatted currency value
+ *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @param props - input ID, is cell editable, cell value string, submit value, style
+ * @component
+ * @param {ICurrencyCellProps} props - component props
  * @returns {FC} - data table row functional component
- * @type {( props : ICurrencyCellProps)}
  */
 const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   const { inputId, canEdit, value, submitCellValue, sx } = props;
@@ -64,9 +60,8 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
-   * @param event - value change trigger event
-   * @returns - none
-   * @type {( event : ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)}
+   * @method
+   * @param {ChangeEvent<HTMLTextAreaElement | HTMLInputElement>} event - value change trigger event
    */
   const handleValueChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -82,7 +77,7 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
-   * @returns - none
+   * @method
    */
   const handleValueReformat = useCallback(() => {
     /* check if cell is null or indicating null */
@@ -113,14 +108,23 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
-   * @returns - none
+   * @method
    */
   const handleClearCell = useCallback(() => {
     setEditValue('--');
     if (submitCellValue) submitCellValue('--');
   }, [submitCellValue]);
 
-  /* listens for enter key hits */
+  /**
+   * Callback for when user has decided to clear input and enter null value
+   * for this cell
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {any} event - value change trigger event
+   */
   const onKeyDown = useCallback(
     (event: any) => {
       if (event.keyCode === 13) handleValueReformat();
@@ -134,7 +138,7 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
-   * @returns - none
+   * @method
    */
   const handleClick = useCallback(() => {
     if (!clicked && editValue === '--')
@@ -149,7 +153,7 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
-   * @returns - none
+   * @method
    */
   const handleClickAway = useCallback(() => {
     if (clicked) handleValueReformat();
