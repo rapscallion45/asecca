@@ -8,6 +8,7 @@ import createCache from '@emotion/cache';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Utils
  */
 const createEmotionCache = () => createCache({ key: 'css', prepend: true });
 

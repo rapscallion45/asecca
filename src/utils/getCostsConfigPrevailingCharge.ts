@@ -1,19 +1,20 @@
 import { ICostsConfigData } from '@/lib/api/api-types';
-import { IUserPermissionLevelState } from '@/redux/types';
+import { UserPermissionLevel } from '@/redux/types';
 
 /**
  * Helper function for getting the Prevailing charge of a Costs Config scope
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Utils
  *
  * @param {ICostsConfigData} tableRow - table row to be processed for 'Prevailing'
- * @param {IUserPermissionLevelState} permissionLevel - permission level to process
+ * @param {UserPermissionLevel} permissionLevel - permission level to process
  * @returns {string | null | undefined} - resulting value string, null or undefined
  */
 const getCostsConfigPrevailingCharge = (
   tableRow: ICostsConfigData,
-  permissionLevel: IUserPermissionLevelState
+  permissionLevel: UserPermissionLevel
 ): string | null | undefined => {
   /**
    * the 'Prevailing' column of a costs config table row is always equal
@@ -29,7 +30,7 @@ const getCostsConfigPrevailingCharge = (
   if (!tableRow || !permissionLevel) return null;
 
   /* firstly, if editable col is not null or undefined, return edit col value */
-  const editCellKey = `${permissionLevel.level.toLowerCase()}_charge`;
+  const editCellKey = `${(permissionLevel as string).toLowerCase()}_charge`;
   if (
     tableRow[editCellKey as keyof ICostsConfigData] !== null &&
     tableRow[editCellKey as keyof ICostsConfigData] !== undefined
@@ -48,7 +49,7 @@ const getCostsConfigPrevailingCharge = (
    * @returns {string | null | undefined} - charge value, can be null or undefined
    */
   const getCharge = (): string | null | undefined => {
-    switch (permissionLevel.level) {
+    switch (permissionLevel) {
       case 'Collection':
         /* if Collection, run through all other columns */
         if (

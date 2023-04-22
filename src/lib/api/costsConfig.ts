@@ -18,6 +18,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof AseccaAPI
  *
  * @param {Partial<ICostsConfigSaveDataSelection>} query - request query
  * @returns {Promise<any>} - resulting Promise of the fetch request
@@ -25,7 +26,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
 export async function getCostsConfig(
   query: Partial<ICostsConfigSaveDataSelection>
 ) {
-  /** setup GET request options with basic auth */
+  /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',
     headers: new Headers({
@@ -36,10 +37,10 @@ export async function getCostsConfig(
     }),
   };
 
-  /** construct query param string from passed query object */
+  /* construct query param string from passed query object */
   const queryParamString = queryString.stringify(query);
 
-  /** fetch the costs config */
+  /* fetch the costs config */
   return fetch(
     `${STAGING_DB_REST_API_URL}/api/costs_config?${queryParamString}`,
     requestOptions
@@ -51,12 +52,13 @@ export async function getCostsConfig(
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof AseccaAPI
  *
  * @param {ICostsConfigSaveDataPayload} body - source and data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
 export async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
-  /** setup POST request options with basic auth */
+  /* setup POST request options with basic auth */
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -68,6 +70,6 @@ export async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
     body: JSON.stringify(body),
   };
 
-  /** send the costs config */
+  /* send the costs config */
   return fetch(`${STAGING_DB_REST_API_URL}/api/costs_config`, requestOptions);
 }

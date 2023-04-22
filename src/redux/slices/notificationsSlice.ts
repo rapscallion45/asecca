@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  INotificationState,
+  INotification,
+  INotificationsState,
   IAddNotificationPayload,
   ICloseNotificationPayload,
   IRemoveNotificationPayload,
@@ -18,28 +19,16 @@ import {
  */
 
 /**
- * Initial Notifications State
+ * Initialises notification state to empty array
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
- *
- * @typedef IInitialNotificationsState
- * @prop {Array<INotificationState>} data - notification state data
- */
-interface IInitialNotificationsState {
-  data: Array<INotificationState>;
-}
-
-/**
- * Initialise notification state to empty array
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
+ * @memberof NotificationsReduxSlice
  *
  * @constant
- * @type {IInitialNotificationsState}
+ * @type {INotificationsState}
  */
-const initialNotificationsState: IInitialNotificationsState = {
+const initialNotificationsState: INotificationsState = {
   data: [],
 };
 
@@ -48,6 +37,7 @@ const initialNotificationsState: IInitialNotificationsState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof NotificationsReduxSlice
  *
  * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
  *
@@ -80,7 +70,7 @@ const notificationsSlice = createSlice({
       action: PayloadAction<ICloseNotificationPayload>
     ) => ({
       ...state,
-      data: state.data.map((notification: INotificationState) =>
+      data: state.data.map((notification: INotification) =>
         notification.options.key === action.payload.key
           ? { ...notification, dismissed: true }
           : { ...notification }
@@ -92,18 +82,14 @@ const notificationsSlice = createSlice({
     ) => ({
       ...state,
       data: state.data.filter(
-        (notification: INotificationState) =>
+        (notification: INotification) =>
           notification.options.key !== action.payload.key
       ),
     }),
   },
 });
 
-/**
- * Notification actions for adding, closing and removing a notifications
- *
- * @since 0.0.0
- */
+/* Notification actions for adding, closing and removing a notifications */
 export const { addNotification, closeNotification, removeNotification } =
   notificationsSlice.actions;
 

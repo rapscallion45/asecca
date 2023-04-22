@@ -5,6 +5,7 @@ import { CostsConfigCostSource } from '@/lib/api/api-types';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Utils
  *
  * @param {CostsConfigCostSource} source - costs config source, i.e. 'Project'
  * @param {string | Array<string | null>} dataId - ID number of the costs config

@@ -5,8 +5,11 @@ import {
 } from '@mui/material/styles';
 import { IExtendedColorPartial } from '../types';
 
-/*
+/**
  * ASECCA SPA dark theme style definitions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
@@ -14,6 +17,7 @@ import { IExtendedColorPartial } from '../types';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -45,6 +49,7 @@ const DARKTHEME_GREY: IExtendedColorPartial = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -63,6 +68,7 @@ const DARKTHEME_PRIMARY: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -81,6 +87,7 @@ const DARKTHEME_SECONDARY: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -99,6 +106,7 @@ const DARKTHEME_INFO: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -117,6 +125,7 @@ const DARKTHEME_SUCCESS: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -135,6 +144,7 @@ const DARKTHEME_WARNING: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *
@@ -153,6 +163,7 @@ const DARKTHEME_ERROR: PaletteColorOptions = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *

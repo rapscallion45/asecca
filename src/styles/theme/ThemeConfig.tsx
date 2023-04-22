@@ -47,9 +47,7 @@ const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
 
   /* grab global theme state */
-  const { theme: themeSelection } = useSelector(
-    (state: AppState) => state.theme
-  );
+  const { type: themeType } = useSelector((state: AppState) => state.theme);
 
   /* check if user has dark mode preference */
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -58,12 +56,12 @@ const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const themeOptions: ThemeOptions = useMemo(
     () => ({
       palette:
-        themeSelection.type === 'light' && !prefersDarkMode
+        themeType === 'light' && !prefersDarkMode
           ? lightThemePalette
           : darkThemePalette,
       typography,
     }),
-    [themeSelection, prefersDarkMode]
+    [themeType, prefersDarkMode]
   );
   const theme: Theme = createTheme(themeOptions);
 

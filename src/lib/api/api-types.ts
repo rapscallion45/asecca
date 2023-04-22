@@ -13,6 +13,7 @@
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof CostsConfigReduxSlice
  *
  * @typedef CostsConfigApplication
  */
@@ -30,6 +31,7 @@ export type CostsConfigApplication =
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof CostsConfigReduxSlice
  *
  * @typedef CostsConfigLineType
  */
@@ -42,6 +44,7 @@ export type CostsConfigLineType = 'Typical' | 'Custom';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof CostsConfigReduxSlice
  *
  * @typedef CostsConfigCostSource
  */

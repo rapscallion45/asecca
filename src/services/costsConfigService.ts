@@ -4,8 +4,11 @@ import {
 } from '@/lib/api/api-types';
 import { getCostsConfigSourceQueryString } from '../utils';
 
-/*
+/**
  * API services for client application
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
@@ -13,6 +16,7 @@ import { getCostsConfigSourceQueryString } from '../utils';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Services
  *
  * @param {CostsConfigCostSource} source - costs config source, i.e "Project"
  * @param {string | Array<(string | null)>} dataId - ID of the costs configuration
@@ -43,6 +47,7 @@ async function getCostsConfig(
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Services
  *
  * @param {ICostsConfigSaveDataPayload} body - Costs Config data to be saved
  * @returns {Promise<any>} - resulting Promise of the fetch request

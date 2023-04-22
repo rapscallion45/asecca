@@ -27,7 +27,9 @@ const CostsConfigPage: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get user permission level held in redux state */
-  const { permission } = useSelector((state: AppState) => state.userPermission);
+  const { level: userPermissionLevel } = useSelector(
+    (state: AppState) => state.userPermission
+  );
 
   /* copy of page query param held in local page state */
   const [query, setQuery] = useState<string | (string | null)[]>('');
@@ -81,11 +83,14 @@ const CostsConfigPage: NextPageWithLayout = () => {
     <>
       <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4" color="common.white">
-          Costing Configuration - Lloyds Bank - {permission.level} {query}
+          Costing Configuration - Lloyds Bank - {userPermissionLevel} {query}
         </Typography>
       </Box>
       {/* load table with fetched data and permission level */}
-      <CostsConfigTable permission={permission} query={query as string} />
+      <CostsConfigTable
+        permission={userPermissionLevel}
+        query={query as string}
+      />
     </>
   );
 };

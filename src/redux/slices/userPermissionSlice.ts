@@ -14,29 +14,17 @@ import { IUserPermissionLevelState } from '../types';
  */
 
 /**
- * Initial User Permission State
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- *
- * @typedef InitialNotificationsState
- * @prop {Array<INotificationState>} data - notification state data
- */
-interface IInitialUserPermissionState {
-  permission: IUserPermissionLevelState;
-}
-
-/**
  * Initialise user permission level state to lowest level, 'Global'
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof UserPermissionReduxSlice
  *
  * @constant
- * @type {IInitialUserPermissionState}
+ * @type {IUserPermissionLevelState}
  */
-const initialUserPermissionState: IInitialUserPermissionState = {
-  permission: { level: 'Global' },
+const initialUserPermissionState: IUserPermissionLevelState = {
+  level: 'Global',
 };
 
 /**
@@ -44,6 +32,7 @@ const initialUserPermissionState: IInitialUserPermissionState = {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof UserPermissionReduxSlice
  *
  * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
  *
@@ -58,16 +47,12 @@ const userPermissionSlice = createSlice({
       state,
       action: PayloadAction<IUserPermissionLevelState>
     ) => {
-      state.permission = action.payload;
+      state.level = action.payload.level;
     },
   },
 });
 
-/**
- * Costs Config actions for changing the user permission level
- *
- * @since 0.0.0
- */
+/* Costs Config actions for changing the user permission level */
 export const { setPermissionLevel } = userPermissionSlice.actions;
 
 export default userPermissionSlice.reducer;

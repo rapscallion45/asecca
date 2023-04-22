@@ -16,7 +16,7 @@ import {
   editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
 import { IDataTableColumn } from '@/components/DataTable/types';
-import { IUserPermissionLevelState } from '@/redux/types';
+import { UserPermissionLevel } from '@/redux/types';
 import columns from './costsConfigTableColumns';
 
 /**
@@ -26,11 +26,11 @@ import columns from './costsConfigTableColumns';
  * @since 0.0.0
  *
  * @typedef ICostsConfigTableProps
- * @prop {IUserPermissionLevelState} permission - permission level of table
+ * @prop {UserPermissionLevel} permission - permission level of table
  * @prop {string} query - query string of fetch table data API call
  */
 interface ICostsConfigTableProps {
-  permission: IUserPermissionLevelState;
+  permission: UserPermissionLevel;
   query: string;
 }
 
@@ -68,7 +68,7 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
    * @constant
    */
   const [colFilterList, setColFilterList] = useState<Array<string | null>>(
-    getCostsConfigColFilterList(permission.level)
+    getCostsConfigColFilterList(permission)
   );
 
   /**
@@ -78,8 +78,8 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
    * @since 0.0.0
    */
   useEffect(() => {
-    setColFilterList(getCostsConfigColFilterList(permission.level));
-  }, [permission.level]);
+    setColFilterList(getCostsConfigColFilterList(permission));
+  }, [permission]);
 
   /**
    * Handles the saving of the table data
@@ -92,10 +92,10 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
   const handleSave = useCallback(() => {
     dispatch(
       saveCostsConfigBySourceId({
-        data: getCostsConfigPostData(permission.level, query, data?.costs),
+        data: getCostsConfigPostData(permission, query, data?.costs),
       })
     );
-  }, [permission.level, query, data?.costs, dispatch]);
+  }, [permission, query, data?.costs, dispatch]);
 
   /**
    * Handles the resetting of the table data
@@ -162,7 +162,7 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
           (col: IDataTableColumn) => !colFilterList.includes(col.label)
         )}
         /* table editable cell(s) defined by user permission level */
-        editableColLabels={[permission.level]}
+        editableColLabels={[permission]}
         /* build table row props from costs config data */
         rows={data?.costs.map((cost: ICostsConfigData) => ({
           label: cost.name,

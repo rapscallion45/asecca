@@ -4,7 +4,7 @@ import { SnackbarProvider, SnackbarKey } from 'notistack';
 import { Alert } from '@mui/material';
 import { closeNotification } from '../../redux/slices/notificationsSlice';
 import { AppDispatch, AppState } from '../../redux/store';
-import { INotificationState } from '../../redux/types';
+import { INotification } from '../../redux/types';
 
 /**
  * Alert Notification Props
@@ -52,7 +52,7 @@ const AlertNotification = forwardRef<Ref, IAlertNotificationProps>(
       (state: AppState) => state.notifications
     );
     const successNotification = notifications.find(
-      (notification: INotificationState) => notification.options.key === id
+      (notification: INotification) => notification.options.key === id
     );
 
     /**
