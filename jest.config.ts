@@ -56,6 +56,8 @@ const jestConfig = {
     '<rootDir>/jest.setup.ts',
     '<rootDir>/next.config.js',
     '<rootDir>/docs/',
+    '<rootDir>/src/pages/_app.tsx',
+    '<rootDir>/src/pages/_document.tsx',
   ],
 
   /**
