@@ -7,30 +7,22 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { AppDispatch, AppState } from '@/redux/store';
-import { UserPermissionLevel } from '@/redux/types';
+import { permissions, UserPermissionLevel } from '@/redux/types';
 
-const permissions = [
-  {
-    value: 'Global',
-    label: 'Global',
-  },
-  {
-    value: 'Customer',
-    label: 'Customer',
-  },
-  {
-    value: 'Project',
-    label: 'Project',
-  },
-  {
-    value: 'Collection',
-    label: 'Collection',
-  },
-];
-
-/* Admin Test Panel */
-/* ================ */
+/**
+ * Admin Test Panel
+ *
+ * Administration interface used only for testing purposes. Allows user to change
+ * global user permission level
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @returns {FC} - admin test panel functional component
+ */
 const AdminTestPanel: FC = () => {
+  /* shorthand redux action dispatcher */
   const dispatch = useDispatch<AppDispatch>();
 
   /* get user permission level held in redux state */
@@ -38,7 +30,15 @@ const AdminTestPanel: FC = () => {
     (state: AppState) => state.userPermission
   );
 
-  /* change user permission level state when dropdown changed */
+  /**
+   * Change user permission level state when dropdown changed
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} event - trigger event DOM element
+   */
   const handlePermissionChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -66,8 +66,8 @@ const AdminTestPanel: FC = () => {
             sx={{ minWidth: 170 }}
           >
             {permissions.map((permission) => (
-              <option key={permission.value} value={permission.value}>
-                {permission.label}
+              <option key={permission} value={permission}>
+                {permission}
               </option>
             ))}
           </TextField>

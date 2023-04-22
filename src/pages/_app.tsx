@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { NextLayoutComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -14,17 +15,44 @@ import DefaultLayout from '@/layouts/default/DefaultLayout';
 import AlertProvider from '@/components/AlertProvider/AlertProvider';
 import ThemeConfig from '@/styles/theme/ThemeConfig';
 
-/* initialise client MUI styles cache */
+/**
+ * initialise client MUI styles cache
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ */
 const clientSideEmotionCache = createEmotionCache();
 
-interface AseccaAppProps extends AppProps {
+/**
+ * Asecca SPA Entry Point Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IAseccaAppProps
+ * @extends AppProps
+ * @prop {NextLayoutComponentType} Component - intial component for app to render
+ * @prop {EmotionCache} emotionCache - emotion styling engine cache
+ */
+interface IAseccaAppProps extends AppProps {
   Component: NextLayoutComponentType;
   emotionCache?: EmotionCache;
 }
 
-/* Asecca SPA entry point */
-/* ====================== */
-const AseccaApp: React.FunctionComponent<AseccaAppProps> = (props) => {
+/**
+ * Asecca SPA Entry Point
+ *
+ * Entry point of the application. Sets up all state and theme providers, layout,
+ * and renders requested page.
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IAseccaAppProps} props - app props
+ * @returns {FC} - application entry point functional component
+ */
+const AseccaApp: FC<IAseccaAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   /* the page layout is defined in each page's definition, else default */

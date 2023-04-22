@@ -1,8 +1,11 @@
-/*
- ** mock file for handling browser API calls
+/**
+ * mock file for handling browser API calls during tests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 const localStorageMock = (function localStorageMock() {
-  /* mock local storage object */
+  /** mock local storage object */
   let store: any = {};
 
   return {

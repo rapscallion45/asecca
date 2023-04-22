@@ -6,27 +6,57 @@ import {
   IRemoveNotificationPayload,
 } from '../types';
 
-/*
- ** Global application state slice definition for Notifications
- **
- ** Notifications are the alert popups seen by the user on specific action
- ** results, such as errors with API requests, login failures, etc. This state
- ** is manipulated from multiple places in the application.
+/**
+ * Global application state slice definition for Notifications
+ *
+ * Notifications are the alert popups seen by the user on specific action
+ * results, such as errors with API requests, login failures, etc. This state
+ * is manipulated from multiple places in the application.
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
-interface InitialNotificationsState {
+/**
+ * Initial Notifications State
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IInitialNotificationsState
+ * @prop {Array<INotificationState>} data - notification state data
+ */
+interface IInitialNotificationsState {
   data: Array<INotificationState>;
 }
 
-/* initialise notification state to empty array */
-const initialState: InitialNotificationsState = {
+/**
+ * Initialise notification state to empty array
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @constant
+ * @type {IInitialNotificationsState}
+ */
+const initialNotificationsState: IInitialNotificationsState = {
   data: [],
 };
 
-/* create the redux slice for interacting with the notifications state */
+/**
+ * Create the redux slice for interacting with the notifications state
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
+ *
+ * @constant
+ * @type {Slice<Object>}
+ */
 const notificationsSlice = createSlice({
   name: 'notifications',
-  initialState,
+  initialState: initialNotificationsState,
   reducers: {
     addNotification: (
       state,
@@ -69,7 +99,11 @@ const notificationsSlice = createSlice({
   },
 });
 
-/* the redux actions for adding, closing and removing a notification */
+/**
+ * Notification actions for adding, closing and removing a notifications
+ *
+ * @since 0.0.0
+ */
 export const { addNotification, closeNotification, removeNotification } =
   notificationsSlice.actions;
 

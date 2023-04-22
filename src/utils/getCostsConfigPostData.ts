@@ -1,16 +1,27 @@
 import {
+  CostsConfigCostSource,
   ICostsConfigData,
   ICostsConfigSaveDataCosts,
   ICostsConfigSaveDataPayload,
   ICostsConfigSaveDataSelection,
 } from '@/lib/api/api-types';
 
-/*
- ** returns formatted data for saving Costs Config to API
+/**
+ * Returns formatted data for saving Costs Config to API, from passed Costs Config
+ * data block. The passed data is cycled, pulling the required fields for
+ * the POST request.
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @param {CostsConfigCostSource} source - costs config source, i.e. 'Project'
+ * @param {string | Array<string | null>} dataId - ID number of the costs config
+ * @param {Array<ICostsConfigData> | undefined} data - costs config data to process
+ * @returns {ICostsConfigSaveDataPayload} - resulting payload data
  */
 const getCostsConfigPostData = (
-  source: string,
-  dataId: string | (string | null)[],
+  source: CostsConfigCostSource,
+  dataId: string | Array<string | null>,
   data: Array<ICostsConfigData> | undefined
 ): ICostsConfigSaveDataPayload => {
   /* sanity check input, return empties if incorrect */

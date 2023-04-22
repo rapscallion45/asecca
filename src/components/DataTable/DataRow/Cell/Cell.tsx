@@ -1,34 +1,38 @@
 import { FC, memo } from 'react';
-import { styled } from '@mui/material/styles';
-import { TableCell } from '@mui/material';
-import { tableCellClasses } from '@mui/material/TableCell';
+import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
 
-/* table cell stylings */
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  /* table head colors */
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  /* adjust font size */
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
+/**
+ * Data Table Cell Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef ICellProps
+ * @prop {string | Null} value - cell value, can be null
+ * @prop {any} sx - cell styling overrrides
+ */
 interface ICellProps {
   value: string | null;
   sx?: any;
 }
 
-/* Data Table Cell helper component */
-/* ================================ */
+/**
+ * Data Table Cell
+ *
+ * Generic table cell component for displaying a table value as a string
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {ICellProps} props - component props
+ * @returns {FC} - data table row functional component
+ */
 const Cell: FC<ICellProps> = (props) => {
   const { value, sx } = props;
 
   return (
     <StyledTableCell align="left" sx={sx}>
-      {/* render passed value */}
       {value}
     </StyledTableCell>
   );

@@ -3,8 +3,18 @@ import { styled } from '@mui/material/styles';
 import NavBar from '@/components/NavBar/NavBar';
 import useNotifier from '@/hooks/useNotifier';
 
-/* background image styling */
-const BackgroundStyle = styled('div')(({ theme }) => ({
+/**
+ * Home Background Style
+ *
+ * Application home layout background component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled home layout background component
+ */
+const HomeBackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
   zIndex: 0,
@@ -13,8 +23,18 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[400],
 }));
 
-/* root style for the dashboard page content */
-const RootStyle = styled('section')({
+/**
+ * Home Root Style
+ *
+ * Home page root styling for page content
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled home layout root component
+ */
+const HomeRootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
   minHeight: '100vh',
@@ -23,13 +43,32 @@ const RootStyle = styled('section')({
   paddingTop: '100px',
 });
 
-interface DashboardLayoutProps {
+/**
+ * Home Page Layout Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IHomeLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IHomeLayoutProps {
   children?: ReactNode;
 }
 
-/* Base Dashboard Page Layout  */
-/* =========================== */
-const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
+/**
+ * Home Page Layout
+ *
+ * Home Page layout styling and functionality
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IHomeLayoutProps} props - component props
+ * @returns {FC} - home page layout functional component
+ */
+const HomeLayout: FC<IHomeLayoutProps> = (props) => {
   const { children } = props;
 
   /* initialise alert notifications */
@@ -37,11 +76,11 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
 
   return (
     <main id="home-page">
-      <BackgroundStyle id="background" />
+      <HomeBackgroundStyle id="background" />
       <NavBar />
-      <RootStyle id="page-content">{children}</RootStyle>
+      <HomeRootStyle id="page-content">{children}</HomeRootStyle>
     </main>
   );
 };
 
-export default DashboardLayout;
+export default HomeLayout;

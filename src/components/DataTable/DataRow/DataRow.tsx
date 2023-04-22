@@ -9,18 +9,20 @@ import {
   IDataTableGetCellValueCallback,
 } from '../types';
 
-/* table row stylings */
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  /* alternate row background colors */
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  /* hide last border */
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
+/**
+ * Data Table Row Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IDataRowProps
+ * @prop {string} rowName - row name identifier
+ * @prop {number} rowIdx - row index number within data table
+ * @prop {Array<IDataTableColumn>} columns - data table columns
+ * @prop {Array<string>} editableColLabels - editable column label list
+ * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when user updates cell value
+ * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when row cell rendered
+ */
 interface IDataRowProps {
   rowName: string;
   rowIdx: number;
@@ -30,8 +32,18 @@ interface IDataRowProps {
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
-/* Data Table Row component */
-/* ======================== */
+/**
+ * Data Table Row
+ *
+ * Table row component for handling row styling and row functionality
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IDataRowProps} props - component props
+ * @returns {FC} - data table row functional component
+ */
 const DataRow: FC<IDataRowProps> = (props) => {
   const {
     rowName,
@@ -42,18 +54,57 @@ const DataRow: FC<IDataRowProps> = (props) => {
     getCellValueCallback,
   } = props;
 
-  /* submit the updated cell value */
+  /**
+   * Styled Data table Row
+   *
+   * Application specifc styling of table row component
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @component
+   * @returns {Component} - styled table row component
+   */
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    /* alternate row background colors */
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    /* hide last border */
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
+  /**
+   * Submit the updated cell value
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {string | null} value - updated value string, can be null
+   */
   const submitCellValue = useCallback(
-    (value: string | null, colKey: string) => {
+    (value: string | null, colKey: string): void => {
       if (editCellValueCallback)
         editCellValueCallback(value !== '--' ? value : null, colKey, rowIdx);
     },
     [rowIdx, editCellValueCallback]
   );
 
-  /* retrieve cell value for passed table column and row index */
+  /**
+   * Retrieve cell value for passed table column and row index
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {IDataTableColumn} column - column to get cell value for from row
+   * @returns {string | null | undefined} - cell value, can be null or undefined
+   */
   const getCellValueByColumn = useCallback(
-    (column: IDataTableColumn) =>
+    (column: IDataTableColumn): string | null | undefined =>
       /* apply any logic required for this column (such as 'Prevailing') */
       getCellValueCallback(rowIdx, column),
     [rowIdx, getCellValueCallback]

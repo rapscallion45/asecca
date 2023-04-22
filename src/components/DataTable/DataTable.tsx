@@ -16,6 +16,22 @@ import {
   IDataTableGetCellValueCallback,
 } from './types';
 
+/**
+ * Data Table Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IDataTableProps
+ * @prop {string} name - data table name identifier
+ * @prop {Array<IDataTableColumn>} columns - data table columns to be presented
+ * @prop {Array<string>} editableColLabels - column labels that will be editable
+ * @prop {Array<IDataTableRow>} rows - data table rows to be presented
+ * @prop {boolean} isLoading - data table loading data flag
+ * @prop {string} error - data table error message string
+ * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when cell updated
+ * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when rendering cell
+ */
 interface IDataTableProps {
   name: string;
   columns: Array<IDataTableColumn>;
@@ -27,8 +43,20 @@ interface IDataTableProps {
   getCellValueCallback: IDataTableGetCellValueCallback;
 }
 
-/* Data Table */
-/* ========== */
+/**
+ * Data Table
+ *
+ * Application data table component designed to allow for various use cases
+ * by implementing get and edit cell value callbacks, editable columns list,
+ * loading and error condition flags, and dynamic row and column definitions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IDataTableProps} props - component props
+ * @returns {FC} - data table functional component
+ */
 const DataTable: FC<IDataTableProps> = (props) => {
   const {
     name,

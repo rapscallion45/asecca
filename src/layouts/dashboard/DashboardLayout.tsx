@@ -5,8 +5,18 @@ import NavBar from '@/components/NavBar/NavBar';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
 
-/* background image styling */
-const BackgroundStyle = styled('div')(({ theme }) => ({
+/**
+ * Dashboard Background Style
+ *
+ * Application dashboard layout background component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled dashboard layout background component
+ */
+const DashboardBackgroundStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   position: 'fixed',
   zIndex: 0,
@@ -15,8 +25,18 @@ const BackgroundStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[400],
 }));
 
-/* root style for the dashboard page content */
-const RootStyle = styled('section')({
+/**
+ * Dashboard Root Style
+ *
+ * Dashboard page root styling for page content
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @return {Component} - styled dashboard layout root component
+ */
+const DashboardRootStyle = styled('section')({
   display: 'flex',
   position: 'relative',
   minHeight: '100vh',
@@ -25,13 +45,32 @@ const RootStyle = styled('section')({
   paddingTop: '100px',
 });
 
-interface DashboardLayoutProps {
+/**
+ * Base Dashboard Page Layout Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IDashboardLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IDashboardLayoutProps {
   children?: ReactNode;
 }
 
-/* Base Dashboard Page Layout  */
-/* =========================== */
-const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
+/**
+ * Base Dashboard Page Layout
+ *
+ * Dashboard base layout styling and functionality
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IDashboardLayoutProps} props - component props
+ * @returns {FC} - dashboard layout functional component
+ */
+const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
   /* initialise alert notifications */
@@ -39,14 +78,14 @@ const DashboardLayout: FC<DashboardLayoutProps> = (props) => {
 
   return (
     <main id="dashboard-page">
-      <BackgroundStyle id="background" />
+      <DashboardBackgroundStyle id="background" />
       <NavBar showLogin />
-      <RootStyle id="page-content">
+      <DashboardRootStyle id="page-content">
         <Container maxWidth="lg">
           <AdminTestPanel />
           {children}
         </Container>
-      </RootStyle>
+      </DashboardRootStyle>
     </main>
   );
 };

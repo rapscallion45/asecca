@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StyledCellWrapper Renders correctly 1`] = `
+<td
+  aria-sort={null}
+  className="MuiTableCell-root MuiTableCell-sizeMedium css-1xspv29-MuiTableCell-root"
+/>
+`;

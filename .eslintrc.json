@@ -14,20 +14,20 @@
     "project": "./tsconfig.json"
   },
   "globals": {
-    /* Next.js assumes React is global */
+    /** Next.js assumes React is global */
     "React": "writable"
   },
   "rules": {
-    /* Next.js does not require us to import React in all components */
+    /** Next.js does not require us to import React in all components */
     "react/react-in-jsx-scope": "off",
-    /* Not required as we are not using Prop Types with TypeScript */
+    /** Not required as we are not using Prop Types with TypeScript */
     "react/prop-types": "off",
     "react/require-default-props": "off",
-    /* Ignore React function definition requirement */
+    /** Ignore React function definition requirement */
     "react/function-component-definition": "off",
-    /* Allow prop spreading */
+    /** Allow prop spreading */
     "react/jsx-props-no-spreading": "off",
-    /* Allow param reassign for redux reducer functions */
+    /** Allow param reassign for redux reducer functions */
     "no-param-reassign": "off"
   }
 }

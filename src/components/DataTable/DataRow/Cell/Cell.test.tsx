@@ -10,11 +10,15 @@ const testValue = 'Device Processing';
 /* test style */
 const testSx = { fontWeight: 'bold' };
 
-/* Data Table Cell Unit Tests */
-/* ========================== */
+/**
+ * Data Table Cell Unit Tests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ */
 describe('Data Table Cell', () => {
   it('Renders correctly', async () => {
-    /* perform snapshot test */
+    /** perform snapshot test */
     const tree = renderer
       .create(
         <Table>
@@ -31,8 +35,8 @@ describe('Data Table Cell', () => {
 
   describe('Value', () => {
     it('Should render passed value', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -43,15 +47,15 @@ describe('Data Table Cell', () => {
         </Table>
       );
 
-      /* Assert */
+      /** Assert */
       expect(screen.getByText(testValue)).toBeInTheDocument();
     });
   });
 
   describe('Styling', () => {
     it('Should render passed styling props', async () => {
-      /* Arrange */
-      /* Act */
+      /** Arrange */
+      /** Act */
       render(
         <Table>
           <TableBody>
@@ -62,7 +66,7 @@ describe('Data Table Cell', () => {
         </Table>
       );
 
-      /* Assert */
+      /** Assert */
       expect(screen.getByText(testValue)).toBeInTheDocument();
     });
   });

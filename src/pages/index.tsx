@@ -8,8 +8,17 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import HomeLayout from '@/layouts/home/HomeLayout';
 
-/* Placeholder Home Page */
-/* ===================== */
+/**
+ * Home Page
+ *
+ * Home page of the Asecca front end client application.
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @returns {NextPageWithLayout} - application homepage
+ */
 const Home: NextPageWithLayout = () => (
   <Container maxWidth="xs">
     <Box
@@ -40,7 +49,7 @@ const Home: NextPageWithLayout = () => (
   </Container>
 );
 
-/* home layout used for Home page */
+/** home layout used for Home page */
 Home.Layout = HomeLayout;
 
 export default Home;

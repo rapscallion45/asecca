@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import { Box, Button } from '@mui/material';
@@ -19,14 +19,35 @@ import { IDataTableColumn } from '@/components/DataTable/types';
 import { IUserPermissionLevelState } from '@/redux/types';
 import columns from './costsConfigTableColumns';
 
-interface CostsConfigTableProps {
+/**
+ * Costs Config Data Table Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef ICostsConfigTableProps
+ * @prop {IUserPermissionLevelState} permission - permission level of table
+ * @prop {string} query - query string of fetch table data API call
+ */
+interface ICostsConfigTableProps {
   permission: IUserPermissionLevelState;
   query: string;
 }
 
-/* Costs Config Data Table */
-/* ======================= */
-const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
+/**
+ * Costs Config Data Table
+ *
+ * Presents the Costs Configuration table to the user, populated with data
+ * fetched from API: /api/costs_config
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {ICostsConfigTableProps} props - component props
+ * @returns {FC} - costs config table functional component
+ */
+const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
   const { permission, query } = props;
 
   /* shorthand helper for dispatching redux actions */
@@ -37,52 +58,100 @@ const CostsConfigTable: FC<CostsConfigTableProps> = (props) => {
     (state: AppState) => state.costsConfig
   );
 
-  /* filter the data table columns for current permission level */
-  const [colFilterList, setColFilterList] = useState<Array<string>>(
+  /**
+   * Table column filter list
+   *
+   * Local state of filtered columns list for current permission level
+   *
+   * @since 0.0.0
+   *
+   * @constant
+   */
+  const [colFilterList, setColFilterList] = useState<Array<string | null>>(
     getCostsConfigColFilterList(permission.level)
   );
 
-  /* whenever the user permission global state is updated, re-filter cols */
+  /**
+   * Whenever the user permission global state is updated, re-filter cols
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   */
   useEffect(() => {
     setColFilterList(getCostsConfigColFilterList(permission.level));
   }, [permission.level]);
 
-  /* handle the saving of the table data */
-  const handleSave = () => {
+  /**
+   * Handles the saving of the table data
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   */
+  const handleSave = useCallback(() => {
     dispatch(
       saveCostsConfigBySourceId({
         data: getCostsConfigPostData(permission.level, query, data?.costs),
       })
     );
-  };
+  }, [permission.level, query, data?.costs, dispatch]);
 
-  /* handle the resetting of the table data */
-  const handleCancel = () => {
+  /**
+   * Handles the resetting of the table data
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   */
+  const handleCancel = useCallback(() => {
     dispatch(resetCostsConfig());
-  };
+  }, [dispatch]);
 
-  /* handle the update of the table data */
-  const handleEditCellValue = (
-    value: string | null,
-    colKey: string,
-    rowIdx: number
-  ) => {
-    dispatch(
-      editCostsConfig({
-        value: value !== '--' ? value : null,
-        colKey: colKey as keyof ICostsConfigData,
-        rowIdx,
-      })
-    );
-  };
+  /**
+   * Handles the update of the table data
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {string | null} value - value to be used in update
+   * @param {string} colKey - column key to be updated
+   * @param {number} rowIdx - table row index to be updated
+   */
+  const handleEditCellValue = useCallback(
+    (value: string | null, colKey: string, rowIdx: number) => {
+      dispatch(
+        editCostsConfig({
+          value: value !== '--' ? value : null,
+          colKey: colKey as keyof ICostsConfigData,
+          rowIdx,
+        })
+      );
+    },
+    [dispatch]
+  );
 
-  /* handle any required logic when determining a cell's display value */
-  const handleGetCellValue = (rowIdx: number, column: IDataTableColumn) => {
-    /* apply Prevailing column logic or simply return value */
-    if (column.label === 'Prevailing')
-      return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
-    return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
-  };
+  /**
+   * Handles any required logic when determining a cell's display value
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.0
+   *
+   * @method
+   * @param {number} rowIdx - table row index to get value from
+   * @param {IDataTableColumn} column - column to get value from
+   */
+  const handleGetCellValue = useCallback(
+    (rowIdx: number, column: IDataTableColumn) => {
+      /* apply Prevailing column logic or simply return value */
+      if (column.label === 'Prevailing')
+        return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
+      return data?.costs[rowIdx][column.key as keyof ICostsConfigData];
+    },
+    [data?.costs, permission]
+  );
 
   return (
     <>

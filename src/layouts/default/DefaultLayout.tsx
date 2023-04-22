@@ -1,13 +1,31 @@
 import { FC, ReactNode } from 'react';
 import useNotifier from '@/hooks/useNotifier';
 
-interface DefaultLayoutProps {
+/**
+ * Default Page Layout Props
+ *
+ * @since 0.0.0
+ *
+ * @typedef IDefaultLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IDefaultLayoutProps {
   children?: ReactNode;
 }
 
-/* Default Fallback Page Layout */
-/* ============================ */
-const DefaultLayout: FC<DefaultLayoutProps> = (props) => {
+/**
+ * Default Page Layout
+ *
+ * Default layout styling and functionality
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IDefaultLayoutProps} props - component props
+ * @returns {FC} - default layout functional component
+ */
+const DefaultLayout: FC<IDefaultLayoutProps> = (props) => {
   const { children } = props;
 
   /* initialise alert notifications */

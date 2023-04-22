@@ -1,10 +1,15 @@
-/* costs config data table column defintions */
 import { IDataTableColumn } from '@/components/DataTable/types';
 
-/*
- ** Costs Config data table column defintions
+/**
+ * Costs Config data table column defintions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @constant
+ * @type {Array<IDataTableColumn>}
  */
-const columns: Array<IDataTableColumn> = [
+const costsConfigTableColumns: Array<IDataTableColumn> = [
   { label: 'Product', key: 'name', type: 'string' },
   { label: 'Application', key: 'application', type: 'string' },
   { label: 'Global', key: 'global_charge', type: 'currency' },
@@ -14,4 +19,4 @@ const columns: Array<IDataTableColumn> = [
   { label: 'Prevailing', key: 'effective_charge', type: 'currency' },
 ];
 
-export default columns;
+export default costsConfigTableColumns;

@@ -7,7 +7,6 @@ import {
   createTheme,
   Theme,
   ThemeOptions,
-  PaletteOptions,
 } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AppState } from '@/redux/store';
@@ -15,14 +14,36 @@ import lightThemePalette from './lightTheme/lightThemePalette';
 import darkThemePalette from './darkTheme/darkThemePalette';
 import typography from './typography';
 
-interface ThemeConfigProps {
+/**
+ * Theme Config Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @see See [more info on creating emotion styling engine cache](https://emotion.sh/docs/introduction)
+ *
+ * @typedef IThemeConfigProps
+ * @prop {EmotionCache} emotionCache - emotion styling engine cache
+ * @prop {ReactNode} children - component child node
+ */
+interface IThemeConfigProps {
   emotionCache: EmotionCache;
   children?: ReactNode;
 }
 
-/* Theme Config */
-/* ============ */
-const ThemeConfig: FC<ThemeConfigProps> = (props) => {
+/**
+ * Theme Config
+ *
+ * Global application theme definitions and setup
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IThemeConfigProps} props - component props
+ * @returns {FC} - theme config functional component
+ */
+const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
 
   /* grab global theme state */
@@ -38,8 +59,8 @@ const ThemeConfig: FC<ThemeConfigProps> = (props) => {
     () => ({
       palette:
         themeSelection.type === 'light' && !prefersDarkMode
-          ? (lightThemePalette as PaletteOptions)
-          : (darkThemePalette as PaletteOptions),
+          ? lightThemePalette
+          : darkThemePalette,
       typography,
     }),
     [themeSelection, prefersDarkMode]

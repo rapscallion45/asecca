@@ -1,9 +1,20 @@
 import { FC } from 'react';
 import { useTheme } from '@mui/material';
 
-/* App Meta - App Name, Description, SEO, favicon, etc */
-/* =================================================== */
+/**
+ * Meta
+ *
+ * Applications meta data component for filling page Head element,
+ * with app name, description, SEO, favicon, etc
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @returns {FC} - meta functional component
+ */
 const Meta: FC = () => {
+  /* shorthand theme helper */
   const theme = useTheme();
 
   return (

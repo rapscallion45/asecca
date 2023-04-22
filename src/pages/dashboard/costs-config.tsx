@@ -8,10 +8,21 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
 import CostsConfigTable from '@/components/CostsConfigTable/CostsConfigTable';
+import { CostsConfigCostSource } from '@/lib/api/api-types';
 
-/* Costs Config Test Page */
-/* ====================== */
-const CostsConfigTestPage: NextPageWithLayout = () => {
+/**
+ * Costs Config Page
+ *
+ * Presents user with costs configuration table, with data fetched from Asecca
+ * API, based on passed page query params
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @returns {NextPageWithLayout} - Costs Configuration page component
+ */
+const CostsConfigPage: NextPageWithLayout = () => {
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
@@ -23,7 +34,8 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
 
   /* *** THIS IS A TEST PARAM - USER WILL NOT BE ABLE TO CHANGE PERMISSION *** */
   /* keep a copy of the original API request permission level in local state */
-  const [apiPermission, setApiPermission] = useState<string>('');
+  const [apiPermission, setApiPermission] =
+    useState<CostsConfigCostSource>('Global');
 
   /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
@@ -72,12 +84,13 @@ const CostsConfigTestPage: NextPageWithLayout = () => {
           Costing Configuration - Lloyds Bank - {permission.level} {query}
         </Typography>
       </Box>
+      {/* load table with fetched data and permission level */}
       <CostsConfigTable permission={permission} query={query as string} />
     </>
   );
 };
 
-/* dashboard layout used for Costs Config page */
-CostsConfigTestPage.Layout = DashboardLayout;
+/** dashboard layout used for Costs Config page */
+CostsConfigPage.Layout = DashboardLayout;
 
-export default CostsConfigTestPage;
+export default CostsConfigPage;

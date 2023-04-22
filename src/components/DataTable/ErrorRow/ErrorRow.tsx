@@ -6,13 +6,33 @@ import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Error';
 import { IDataTableColumn } from '@/components/DataTable/types';
 
+/**
+ * Data Table Error Row Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IErrorRowProps
+ * @prop {Array<IDataTableColumn>} columns - data table columns
+ * @prop {string} message - error message string to display
+ */
 interface IErrorRowProps {
   columns: Array<IDataTableColumn>;
   message?: string;
 }
 
-/* Data Table Error Row helper */
-/* =========================== */
+/**
+ * Data Table Error Row
+ *
+ * Table row component for handling row error styling and functionality
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @component
+ * @param {IErrorRowProps} props - component props
+ * @returns {FC} - data table error row functional component
+ */
 const ErrorRow: FC<IErrorRowProps> = (props) => {
   const { columns, message } = props;
 
