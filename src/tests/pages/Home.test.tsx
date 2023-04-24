@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import HomePage from '../../pages/index';
+import HomePage from '@/pages/index';
 
 /**
  * Home Page Unit Tests
