@@ -9,7 +9,13 @@ jest.mock('query-string', () => ({
 
 /* eslint-disable no-underscore-dangle */
 
-describe('API Routes', () => {
+/**
+ * Costs Config API Unit Tests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ */
+describe('Costs Config API Routes', () => {
   describe('GET /api/costs_config', () => {
     it('returns expected data', async () => {
       /** Arrange */
