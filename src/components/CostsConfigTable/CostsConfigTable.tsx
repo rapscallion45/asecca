@@ -142,9 +142,10 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
    * @method
    * @param {number} rowIdx - table row index to get value from
    * @param {IDataTableColumn} column - column to get value from
+   * @return {string | null | undefined} - cell value, can be null or undefined
    */
   const handleGetCellValue = useCallback(
-    (rowIdx: number, column: IDataTableColumn) => {
+    (rowIdx: number, column: IDataTableColumn): string | null | undefined => {
       /* apply Prevailing column logic or simply return value */
       if (column.label === 'Prevailing')
         return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);
