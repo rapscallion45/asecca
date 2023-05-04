@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import { Box, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import DataTable from '@/components/DataTable/DataTable';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import {
   getCostsConfigColFilterList,
@@ -15,6 +14,7 @@ import {
   resetCostsConfig,
   editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
+import DataTable from '@/components/DataTable/DataTable';
 import { IDataTableColumn } from '@/components/DataTable/types';
 import { UserPermissionLevel } from '@/redux/types';
 import columns from './costsConfigTableColumns';
