@@ -36,7 +36,7 @@ Clone down this repository. You will need Node.JS and npm installed globally on 
 
 Installation:
 
-        npm install
+        npm install --legacy-peer-deps
 
 To Run Test Suite:
 
