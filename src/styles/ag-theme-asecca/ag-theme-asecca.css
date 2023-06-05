@@ -1,0 +1,32 @@
+/**
+ * Asecca AG Grid custom theme
+ *
+ * author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * since 0.0.1
+ */
+.ag-theme-asecca {
+  /* colours */
+  --ag-header-foreground-color: #fff;
+  --ag-header-background-color: #544dff;
+
+  /* typography */
+  --ag-font-size: 1rem;
+  --ag-font-family: Poppins, Roboto;
+
+  /* spacing */
+  --ag-grid-size: 8px;
+  --ag-list-item-height: 20px;
+
+  border-radius: 5px;
+}
+
+.ag-theme-asecca .ag-root-wrapper {
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+.ag-theme-asecca .ag-header-cell {
+  font-size: 16px;
+  font-weight: 400;
+}

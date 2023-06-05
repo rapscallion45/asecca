@@ -15,6 +15,7 @@
     "docs": "jsdoc -c jsdoc.conf.json"
   },
   "dependencies": {
+    "@ag-grid-community/react": "^29.3.5",
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
@@ -25,6 +26,8 @@
     "@mui/lab": "^5.0.0-alpha.124",
     "@mui/material": "^5.11.14",
     "@reduxjs/toolkit": "^1.9.3",
+    "ag-grid-community": "^29.3.5",
+    "ag-grid-react": "^29.3.5",
     "base-64": "^1.0.0",
     "better-docs": "^2.7.2",
     "dotenv": "^16.0.3",
