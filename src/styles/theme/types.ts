@@ -7,6 +7,7 @@ import { ColorPartial } from '@mui/material/styles/createPalette';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI palette](https://mui.com/material-ui/customization/palette/)
  *

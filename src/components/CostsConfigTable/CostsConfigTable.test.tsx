@@ -42,7 +42,7 @@ describe('Costs Config Table', () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <CostsConfigTable permission={{ level: permission }} query={query} />
+          <CostsConfigTable permission={permission} query={query} />
         </Provider>
       )
       .toJSON();
@@ -84,7 +84,7 @@ describe('Costs Config Table', () => {
       render(
         <Provider store={store}>
           <CostsConfigTable
-            permission={store.getState().userPermission.permission}
+            permission={store.getState().userPermission.level}
             query={query}
           />
         </Provider>
@@ -187,7 +187,7 @@ describe('Costs Config Table', () => {
       render(
         <Provider store={store}>
           <CostsConfigTable
-            permission={store.getState().userPermission.permission}
+            permission={store.getState().userPermission.level}
             query={query}
           />
         </Provider>
@@ -276,7 +276,7 @@ describe('Costs Config Table', () => {
       render(
         <Provider store={store}>
           <CostsConfigTable
-            permission={store.getState().userPermission.permission}
+            permission={store.getState().userPermission.level}
             query={query}
           />
         </Provider>

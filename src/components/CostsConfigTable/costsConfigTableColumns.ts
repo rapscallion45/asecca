@@ -5,6 +5,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof CostsConfigTable
  *
  * @constant
  * @type {Array<IDataTableColumn>}

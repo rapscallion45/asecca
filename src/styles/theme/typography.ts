@@ -12,6 +12,7 @@ import { TypographyVariantsOptions } from '@mui/material/styles';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @param {number} value - pixel value to convert to REM units
  * @returns {string} - REM value string from passed pixel units
@@ -25,6 +26,7 @@ function pxToRem(value: number) {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @typedef IResposiveFontSizes
  * @prop {number} sm - small font pixel size
@@ -42,6 +44,7 @@ interface IResposiveFontSizes {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated to rem
  * @returns {Object} - calculated rem font sizes
@@ -65,6 +68,7 @@ function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @constant
  * @type {string}
@@ -76,6 +80,7 @@ const FONT_PRIMARY = 'Poppins, Roboto';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Theme
  *
  * @see See [more info on MUI typography](https://mui.com/material-ui/customization/typography/)
  *

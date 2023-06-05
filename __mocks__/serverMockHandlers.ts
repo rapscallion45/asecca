@@ -47,7 +47,7 @@ type CostsConfigPostResponseBody = IProxyErrorPayload | null;
  */
 export const mockHandlers = [
   /**
-   * Test/mock GET Costs Config
+   * Test/mock GET Costs Config NextJS PROXY
    *
    * @since 0.0.0
    */
@@ -61,7 +61,23 @@ export const mockHandlers = [
   ),
 
   /**
-   * Test/mock POST Costs Config
+   * Test/mock GET Costs Config ASECCA
+   *
+   * @since 0.0.0
+   */
+  rest.get<
+    CostsConfigGetRequestBody,
+    CostsConfigGetRequestParams,
+    CostsConfigGetResponseBody
+  >(
+    `${process.env.STAGING_DB_REST_API_URL}/api/costs_config`,
+    async (req, res, ctx) =>
+      /** return mock costs config data */
+      res(ctx.status(200), ctx.json({ costs: costsConfigDataMock.costs }))
+  ),
+
+  /**
+   * Test/mock POST Costs Config NextJS PROXY
    *
    * @since 0.0.0
    */
@@ -72,6 +88,22 @@ export const mockHandlers = [
   >('/api/costs_config', async (req, res, ctx) =>
     /** return ok message indicating successfull save */
     res(ctx.status(200), ctx.json({ message: 'Ok' }))
+  ),
+
+  /**
+   * Test/mock POST Costs Config ASECCA
+   *
+   * @since 0.0.0
+   */
+  rest.post<
+    CostsConfigPostRequestBody,
+    CostsConfigPostRequestParams,
+    CostsConfigPostResponseBody
+  >(
+    `${process.env.STAGING_DB_REST_API_URL}/api/costs_config`,
+    async (req, res, ctx) =>
+      /** return 200, no payload */
+      res(ctx.status(200))
   ),
 ];
 

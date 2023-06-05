@@ -26,7 +26,7 @@ const AdminTestPanel: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get user permission level held in redux state */
-  const { permission: userPermission } = useSelector(
+  const { level: userPermissionLevel } = useSelector(
     (state: AppState) => state.userPermission
   );
 
@@ -58,7 +58,7 @@ const AdminTestPanel: FC = () => {
             id="user-permission-level-select"
             select
             label="User Permission"
-            value={userPermission.level}
+            value={userPermissionLevel}
             onChange={handlePermissionChange}
             SelectProps={{
               native: true,

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { NextPageWithLayout } from 'next';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
-import queryString from 'query-string';
 import { Box, Typography } from '@mui/material';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
@@ -26,8 +26,13 @@ const CostsConfigPage: NextPageWithLayout = () => {
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
+  /* shorthand helper for the next router */
+  const router = useRouter();
+
   /* get user permission level held in redux state */
-  const { permission } = useSelector((state: AppState) => state.userPermission);
+  const { level: userPermissionLevel } = useSelector(
+    (state: AppState) => state.userPermission
+  );
 
   /* copy of page query param held in local page state */
   const [query, setQuery] = useState<string | (string | null)[]>('');
@@ -39,10 +44,8 @@ const CostsConfigPage: NextPageWithLayout = () => {
 
   /* get page query params from URL on first load, and set orig permission */
   useEffect(() => {
-    /* check for customer, project or collection data query */
-    const { customer, project, collection } = queryString.parse(
-      window.location.search
-    );
+    /* check for customer, project or collection data query in page uri */
+    const { customer, project, collection } = router.query;
 
     /* test for which type of query this is and set state accordingly */
     if (customer !== undefined && customer !== null && customer !== '') {
@@ -63,7 +66,7 @@ const CostsConfigPage: NextPageWithLayout = () => {
       setQuery(collection);
       setApiPermission('Collection');
     }
-  }, [dispatch]);
+  }, [router, dispatch]);
 
   /* whenever the page query is updated, fetch new data from API */
   useEffect(() => {
@@ -81,11 +84,14 @@ const CostsConfigPage: NextPageWithLayout = () => {
     <>
       <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4" color="common.white">
-          Costing Configuration - Lloyds Bank - {permission.level} {query}
+          Costing Configuration - Lloyds Bank - {userPermissionLevel} {query}
         </Typography>
       </Box>
       {/* load table with fetched data and permission level */}
-      <CostsConfigTable permission={permission} query={query as string} />
+      <CostsConfigTable
+        permission={userPermissionLevel}
+        query={query as string}
+      />
     </>
   );
 };

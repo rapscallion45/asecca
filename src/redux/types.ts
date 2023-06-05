@@ -8,6 +8,9 @@ import {
 
 /**
  * Type and interface definitions for Redux actions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
  */
 
 /**
@@ -15,6 +18,7 @@ import {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof ThemeReduxSlice
  *
  * @typedef ThemeType - theme can either be 'light' or 'dark' mode
  */
@@ -71,14 +75,20 @@ export interface ICostsConfigEditCostsPayload {
  * @since 0.0.0
  *
  * @typedef ICostsConfigState
- * @prop {ICostsConfigDataPayload | null} data - costs config data held in state
- * @prop {string} error - costs config error message
- * @prop {boolean} loading - costs config data loading flag
+ * @prop {boolean} loading - costs config loading state
+ * @prop {ICostsConfigDataPayload} data - currently loaded costs config data
+ * @prop {ICostsConfigDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of costs config
+ * @prop {boolean} saving - saving state flag of costs config data
+ * @prop {boolean} edited - costs config data has been edited flag
  */
 export interface ICostsConfigState {
-  data?: ICostsConfigDataPayload | null;
+  loading: boolean;
+  data: ICostsConfigDataPayload;
+  dataShadow: ICostsConfigDataPayload;
   error?: string;
-  loading?: boolean;
+  saving: boolean;
+  edited: boolean;
 }
 
 /**
@@ -88,6 +98,7 @@ export interface ICostsConfigState {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof UserPermissionReduxSlice
  *
  * @type {Array<string>}
  */
@@ -103,6 +114,7 @@ export const permissions = [
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof UserPermissionReduxSlice
  *
  * @typedef UserPermissionLevel
  */
@@ -139,20 +151,33 @@ export interface INotificationOptions {
 }
 
 /**
+ * Notification definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef INotification
+ * @prop {string} message - notification message text
+ * @prop {boolean} dismissed - has notification been dismissed by user and/or system
+ * @prop {INotificationOptions} options - notification options
+ */
+export interface INotification {
+  message: string;
+  dismissed: boolean;
+  options: INotificationOptions;
+}
+
+/**
  * Notification state definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @typedef INotificationState
- * @prop {string} message - notification message text
- * @prop {boolean} dismissed - has notification been dismissed by user and/or system
- * @prop {INotificationOptions} options - notification options
+ * @prop {Array<INotification>} data - list of current notifications held in state
  */
-export interface INotificationState {
-  message: string;
-  dismissed: boolean;
-  options: INotificationOptions;
+export interface INotificationsState {
+  data: Array<INotification>;
 }
 
 /**

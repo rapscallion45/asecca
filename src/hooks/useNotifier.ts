@@ -9,6 +9,7 @@ import { removeNotification } from '../redux/slices/notificationsSlice';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Notifier
  *
  * @constant
  * @type {Array<SnackbarKey>}
@@ -21,6 +22,9 @@ let notifierDisplayedIds: Array<SnackbarKey> = [];
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ * @memberof Hooks
+ *
+ * @function
  */
 const useNotifier = () => {
   /** app dispatch shorthand helper */
@@ -39,6 +43,8 @@ const useNotifier = () => {
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
+   *
+   * @param {SnackbarKey} id - ID of the notification to be stored in list
    */
   const storeDisplayed = (id: SnackbarKey) => {
     notifierDisplayedIds = [...notifierDisplayedIds, id];
@@ -49,6 +55,8 @@ const useNotifier = () => {
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
+   *
+   * @param {SnackbarKey} id - ID of the notification to be removed from list
    */
   const removeDisplayed = (id: SnackbarKey) => {
     notifierDisplayedIds = [
@@ -56,19 +64,19 @@ const useNotifier = () => {
     ];
   };
 
-  /** whenever notifications state changes, update displayed/removed list */
+  /* whenever notifications state changes, update displayed/removed list */
   useEffect(() => {
     notifications.forEach(({ message, options, dismissed = false }) => {
       if (dismissed) {
-        /** dismiss snackbar using notistack */
+        /* dismiss snackbar using notistack */
         closeSnackbar(options.key);
         return;
       }
 
-      /** do nothing if snackbar is already displayed */
+      /* do nothing if snackbar is already displayed */
       if (notifierDisplayedIds.includes(options.key)) return;
 
-      /** display snackbar using notistack */
+      /* display snackbar using notistack */
       enqueueSnackbar(message, {
         ...options,
         onClose: (event, reason, myKey) => {
@@ -76,13 +84,13 @@ const useNotifier = () => {
           if (options.onClose) options.onClose(event, reason, myKey);
         },
         onExited: (event, myKey) => {
-          /** remove this snackbar from redux store */
+          /* remove this snackbar from redux store */
           dispatch(removeNotification({ key: myKey }));
           removeDisplayed(myKey);
         },
       });
 
-      /** keep track of snackbars that we've displayed */
+      /* keep track of snackbars that we've displayed */
       storeDisplayed(options.key);
     });
   }, [notifications, closeSnackbar, enqueueSnackbar, dispatch]);

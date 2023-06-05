@@ -22,10 +22,13 @@ import '@testing-library/jest-dom';
 /** get rid of useLayoutEffect warning when running tests */
 React.useLayoutEffect = React.useEffect;
 
+/** setup mock of next router */
+jest.mock('next/router', () => require('next-router-mock'));
+
 /** start test msw server */
 beforeAll(() => {
   server.listen({
-    /** everything should be mocked, error if an API is unhandled */
+    /** every API should be mocked, error if an API is unhandled */
     onUnhandledRequest: 'error',
   });
 });
