@@ -5,30 +5,7 @@ import NavBar from '@/components/NavBar/NavBar';
 import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
-
-/**
- * App Bar top padding mobile
- *
- * Application dashboard layout app bar top padding values for mobile
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @constant
- */
-const APP_BAR_MOBILE = 64;
-
-/**
- * App Bar top padding desktop
- *
- * Application dashboard layout app bar top padding values for desktop
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @constant
- */
-const APP_BAR_DESKTOP = 92;
+import { APP_BAR_DESKTOP, APP_BAR_MOBILE } from '@/constants/constants';
 
 /**
  * Dashboard Layout Root Style

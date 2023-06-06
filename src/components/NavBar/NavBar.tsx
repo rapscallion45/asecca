@@ -13,10 +13,12 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MHidden from '@/components/@MUI-Extended/MHidden';
-
-const DRAWER_WIDTH = 280;
-const APPBAR_MOBILE = 64;
-const APPBAR_DESKTOP = 92;
+import {
+  APP_BAR_DESKTOP,
+  APP_BAR_MOBILE,
+  SIDEBAR_DRAWER_WIDTH,
+} from '@/constants/constants';
+import { INavBarOnSidebarOpenCallback } from './types';
 
 /**
  * Theme Mode Switch
@@ -82,13 +84,15 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @typedef IErrorRowProps
- * @prop {boolean} showLogin - flag to show or hide login button
+ * @typedef INavBarProps
+ * @prop {boolean} showLogo - flag to show or hide logo
+ * @prop {boolean} fullWidth - flag to show if navbar is screen fullwidth
+ * @prop {INavBarOnSidebarOpenCallback} onOpenSidebar - callback handler for when sidebar is opened
  */
 interface INavBarProps {
   showLogo?: boolean;
   fullWidth?: boolean;
-  onOpenSidebar?: () => void;
+  onOpenSidebar?: INavBarOnSidebarOpenCallback;
 }
 
 /**
@@ -112,14 +116,14 @@ const NavBar: FC<INavBarProps> = (props) => {
     WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
     backgroundColor: theme.palette.common.white,
     [theme.breakpoints.up('lg')]: {
-      width: fullWidth ? `100%` : `calc(100% - ${DRAWER_WIDTH + 1}px)`,
+      width: fullWidth ? `100%` : `calc(100% - ${SIDEBAR_DRAWER_WIDTH + 1}px)`,
     },
   }));
 
   const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
-    minHeight: APPBAR_MOBILE,
+    minHeight: APP_BAR_MOBILE,
     [theme.breakpoints.up('lg')]: {
-      minHeight: APPBAR_DESKTOP,
+      minHeight: APP_BAR_DESKTOP,
       padding: theme.spacing(0, 5),
     },
   }));

@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import { Box, Drawer } from '@mui/material';
+import { SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 import ScrollBar from '../ScrollBar/ScrollBar';
 import NavSection from '../NavSection/NavSection';
 import MHidden from '../@MUI-Extended/MHidden';
 import sideBarConfig from './dashboardSideBarItems';
-
-const DRAWER_WIDTH = 280;
+import { IDashboardSidebarOnCloseCallback } from './types';
 
 /**
  * Dashboard Sidebar Root Style
@@ -24,7 +24,7 @@ const DRAWER_WIDTH = 280;
 const RootStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     flexShrink: 0,
-    width: DRAWER_WIDTH,
+    width: SIDEBAR_DRAWER_WIDTH,
   },
 }));
 
@@ -36,11 +36,11 @@ const RootStyle = styled('div')(({ theme }) => ({
  *
  * @typedef IDashboardSideBarProps
  * @prop {boolean} isOpenSidebar - sidebar open flag
- * @prop {() => void} onCloseSidebar - sidebar close callback
+ * @prop {IDashboardSidebarOnCloseCallback} onCloseSidebar - sidebar close callback
  */
 interface IDashboardSideBarProps {
   isOpenSidebar?: boolean;
-  onCloseSidebar?: () => void;
+  onCloseSidebar?: IDashboardSidebarOnCloseCallback;
 }
 
 /**
@@ -96,7 +96,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
           open={isOpenSidebar}
           onClose={onCloseSidebar}
           PaperProps={{
-            sx: { width: DRAWER_WIDTH },
+            sx: { width: SIDEBAR_DRAWER_WIDTH },
           }}
         >
           {renderContent}
@@ -109,7 +109,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
           variant="persistent"
           PaperProps={{
             sx: {
-              width: DRAWER_WIDTH,
+              width: SIDEBAR_DRAWER_WIDTH,
               bgcolor: 'background.default',
             },
           }}
