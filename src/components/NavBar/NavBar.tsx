@@ -110,6 +110,17 @@ interface INavBarProps {
 const NavBar: FC<INavBarProps> = (props) => {
   const { fullWidth, showLogo = false, onOpenSidebar } = props;
 
+  /**
+   * Nav Bar Root Style
+   *
+   * Application nav bar parent component styling
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @component
+   * @return {Component} - styled nav bar root component
+   */
   const RootStyle = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     backdropFilter: 'blur(6px)',
@@ -120,6 +131,17 @@ const NavBar: FC<INavBarProps> = (props) => {
     },
   }));
 
+  /**
+   * Nav Bar Toolbar Style
+   *
+   * Application nav bar toolbar component styling
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @component
+   * @return {Component} - styled nav bar toolbar component
+   */
   const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     minHeight: APP_BAR_MOBILE,
     [theme.breakpoints.up('lg')]: {
