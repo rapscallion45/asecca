@@ -1,57 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar Renders correctly 1`] = `
-<div
-  className="MuiBox-root css-i9gxme"
+<header
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1sg4a3m-MuiPaper-root-MuiAppBar-root"
 >
-  <header
-    className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionFixed mui-fixed css-rur83c-MuiPaper-root-MuiAppBar-root"
+  <div
+    className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1tfylnl-MuiToolbar-root"
   >
-    <div
-      className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+    <button
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-68dm4j-MuiButtonBase-root-MuiIconButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        color="black"
+        data-testid="MenuIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+        />
+      </svg>
+    </button>
+    <a
+      href="/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
     >
       <img
         alt="Asecca logo"
         data-nimg="1"
         decoding="async"
-        height={40}
+        height={30}
         loading="lazy"
         onError={[Function]}
         onLoad={[Function]}
-        src="/_next/image?url=%2Flogowhite-02.webp&w=828&q=75"
-        srcSet="/_next/image?url=%2Flogowhite-02.webp&w=640&q=75 1x, /_next/image?url=%2Flogowhite-02.webp&w=828&q=75 2x"
+        src="/_next/image?url=%2Flogoblack.webp&w=384&q=75"
+        srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=384&q=75 2x"
         style={
           {
             "color": "transparent",
+            "marginTop": "5px",
           }
         }
-        width={395}
+        width={150}
       />
-      <div
-        className="MuiBox-root css-i9gxme"
-      />
-      <a
-        className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
-        href="/"
-        onBlur={[Function]}
-        onClick={[Function]}
-        onContextMenu={[Function]}
-        onDragLeave={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex={0}
+    </a>
+    <div
+      className="MuiBox-root css-i9gxme"
+    />
+    <div
+      className="MuiStack-root css-d4yjqk-MuiStack-root"
+    >
+      <label
+        className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1vbggne-MuiFormControlLabel-root"
+        data-testid="light-dark-btn"
       >
-        Logout
-      </a>
+        <span
+          className="MuiSwitch-root MuiSwitch-sizeMedium css-end58r-MuiSwitch-root"
+        >
+          <span
+            className="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-z8z5yk-MuiButtonBase-root-MuiSwitch-switchBase"
+            onBlur={[Function]}
+            onContextMenu={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={null}
+          >
+            <input
+              className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+              onChange={[Function]}
+              required={false}
+              type="checkbox"
+            />
+            <span
+              className="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+            />
+          </span>
+          <span
+            className="MuiSwitch-track css-j4fnnk-MuiSwitch-track"
+          />
+        </span>
+        <span
+          className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1lyi4-MuiTypography-root"
+        />
+      </label>
     </div>
-  </header>
-</div>
+  </div>
+</header>
 `;

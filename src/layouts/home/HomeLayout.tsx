@@ -77,7 +77,7 @@ const HomeLayout: FC<IHomeLayoutProps> = (props) => {
   return (
     <main id="home-page">
       <HomeBackgroundStyle id="background" />
-      <NavBar />
+      <NavBar fullWidth showLogo />
       <HomeRootStyle id="page-content">{children}</HomeRootStyle>
     </main>
   );

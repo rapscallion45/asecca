@@ -52,7 +52,7 @@ describe('Dashboard Layout', () => {
 
       /** Assert - expect admin test panel and navbar rendered */
       expect(screen.getByText('Admin Test Panel')).toBeInTheDocument();
-      expect(screen.getByText('Logout')).toBeInTheDocument();
+      expect(screen.queryByTestId('light-dark-btn')).toBeInTheDocument();
       expect(screen.getByText(testMessage)).toBeInTheDocument();
     });
   });

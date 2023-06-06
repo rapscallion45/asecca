@@ -129,7 +129,7 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   return (
     <RootStyle id="dashboard-page">
       <DashboardBackgroundStyle id="background" />
-      <NavBar showLogin />
+      <NavBar onOpenSidebar={() => setOpen(true)} />
       <DashboardSideBar
         isOpenSidebar={open}
         onCloseSidebar={() => setOpen(false)}

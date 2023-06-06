@@ -60,7 +60,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const { pathname } = useRouter();
 
   useEffect(() => {
-    if (isOpenSidebar && onCloseSidebar) {
+    if (!isOpenSidebar && onCloseSidebar) {
       onCloseSidebar();
     }
   }, [pathname, isOpenSidebar, onCloseSidebar]);
@@ -75,11 +75,14 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
           display: 'flex',
           flexDirection: 'column',
         },
+        '& .simplebar-placeholder': {
+          display: 'none',
+        },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={Link} href="/" sx={{ display: 'inline-flex' }}>
-          <Box width={100} component="img" src="/logoblack.webp" />
+      <Box sx={{ mt: 1, px: 2.5, py: 3 }}>
+        <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
+          <Box width={150} component="img" src="/logoblack.webp" />
         </Box>
       </Box>
       <NavSection navConfig={sideBarConfig} />
