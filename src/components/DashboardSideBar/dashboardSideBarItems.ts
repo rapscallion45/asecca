@@ -1,0 +1,64 @@
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import TableViewIcon from '@mui/icons-material/TableView';
+import { INavItemConfig } from '../NavItem/types';
+
+/**
+ * Dashboard Sidebar navigation menu item definitions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ * @memberof DashboardSideBar
+ *
+ * @constant
+ * @type {Array<Partial<INavItemConfig>>}
+ */
+const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
+  {
+    title: 'general',
+  },
+  {
+    title: 'home',
+    path: '/',
+    icon: HomeIcon,
+  },
+  {
+    title: 'my account',
+    path: '/dashboard/account',
+    icon: AccountCircleIcon,
+  },
+  {
+    title: 'Configurators',
+  },
+  {
+    title: 'Cost Configurator',
+    path: '/dashboard/costs-config',
+    icon: MonetizationOnIcon,
+  },
+  {
+    title: 'Tables',
+  },
+  {
+    title: 'Table 1',
+    path: '/dashboard/db-table-1',
+    icon: TableViewIcon,
+  },
+  {
+    title: 'Table 2',
+    path: '/dashboard/db-table-2',
+    icon: TableViewIcon,
+  },
+  {
+    title: 'Table 3',
+    path: '/dashboard/db-table-3',
+    icon: TableViewIcon,
+  },
+  {
+    title: 'Table 4',
+    path: '/dashboard/db-table-4',
+    icon: TableViewIcon,
+  },
+];
+
+export default dashboardSideBarItems;

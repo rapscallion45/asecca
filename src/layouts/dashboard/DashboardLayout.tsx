@@ -1,9 +1,51 @@
-import { FC, ReactNode } from 'react';
+import { FC, useState, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
+import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
 import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import useNotifier from '@/hooks/useNotifier';
+
+/**
+ * App Bar top padding mobile
+ *
+ * Application dashboard layout app bar top padding values for mobile
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @constant
+ */
+const APP_BAR_MOBILE = 64;
+
+/**
+ * App Bar top padding desktop
+ *
+ * Application dashboard layout app bar top padding values for desktop
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @constant
+ */
+const APP_BAR_DESKTOP = 92;
+
+/**
+ * Dashboard Layout Root Style
+ *
+ * Application dashboard layout root component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @component
+ * @return {Component} - styled dashboard layout root component
+ */
+const RootStyle = styled('main')({
+  display: 'flex',
+  minHeight: '100%',
+  overflow: 'hidden',
+});
 
 /**
  * Dashboard Background Style
@@ -36,14 +78,19 @@ const DashboardBackgroundStyle = styled('div')(({ theme }) => ({
  * @component
  * @return {Component} - styled dashboard layout root component
  */
-const DashboardRootStyle = styled('section')({
-  display: 'flex',
+const DashboardRootStyle = styled('section')(({ theme }) => ({
+  flexGrow: 1,
   position: 'relative',
-  minHeight: '100vh',
-  minWidth: '100%',
-  overflow: 'hidden',
-  paddingTop: '100px',
-});
+  overflow: 'auto',
+  minHeight: '100%',
+  paddingTop: APP_BAR_MOBILE + 24,
+  paddingBottom: theme.spacing(12),
+  [theme.breakpoints.up('lg')]: {
+    paddingTop: APP_BAR_DESKTOP + 24,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+}));
 
 /**
  * Base Dashboard Page Layout Props
@@ -73,20 +120,27 @@ interface IDashboardLayoutProps {
 const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
+  /* dashboard sidebar open flag */
+  const [open, setOpen] = useState<boolean>(false);
+
   /* initialise alert notifications */
   useNotifier();
 
   return (
-    <main id="dashboard-page">
+    <RootStyle id="dashboard-page">
       <DashboardBackgroundStyle id="background" />
       <NavBar showLogin />
+      <DashboardSideBar
+        isOpenSidebar={open}
+        onCloseSidebar={() => setOpen(false)}
+      />
       <DashboardRootStyle id="page-content">
         <Container maxWidth="lg">
           <AdminTestPanel />
           {children}
         </Container>
       </DashboardRootStyle>
-    </main>
+    </RootStyle>
   );
 };
 
