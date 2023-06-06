@@ -135,7 +135,7 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
         onCloseSidebar={() => setOpen(false)}
       />
       <DashboardRootStyle id="page-content">
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <AdminTestPanel />
           {children}
         </Container>
