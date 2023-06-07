@@ -20,7 +20,10 @@ const HomeBackgroundStyle = styled('div')(({ theme }) => ({
   zIndex: 0,
   minHeight: '100vh',
   minWidth: '100%',
-  backgroundColor: theme.palette.grey[400],
+  backgroundColor:
+    theme.palette.mode === 'light'
+      ? theme.palette.grey[400]
+      : theme.palette.common.black,
 }));
 
 /**
@@ -77,7 +80,7 @@ const HomeLayout: FC<IHomeLayoutProps> = (props) => {
   return (
     <main id="home-page">
       <HomeBackgroundStyle id="background" />
-      <NavBar />
+      <NavBar fullWidth showLogo />
       <HomeRootStyle id="page-content">{children}</HomeRootStyle>
     </main>
   );

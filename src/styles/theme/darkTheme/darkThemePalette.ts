@@ -182,12 +182,12 @@ const darkThemePalette: PaletteOptions = {
   grey: DARKTHEME_GREY,
   divider: DARKTHEME_GREY.alpha24_500,
   text: {
-    primary: DARKTHEME_GREY[800],
-    secondary: DARKTHEME_GREY[600],
+    primary: DARKTHEME_GREY[200],
+    secondary: DARKTHEME_GREY[400],
     disabled: DARKTHEME_GREY[500],
   },
   action: {
-    active: DARKTHEME_GREY[600],
+    active: DARKTHEME_GREY[400],
     hover: DARKTHEME_GREY.alpha8_500,
     selected: DARKTHEME_GREY.alpha16_500,
     disabled: DARKTHEME_GREY.alpha80_500,
