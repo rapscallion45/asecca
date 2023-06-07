@@ -130,12 +130,10 @@ const NavBar: FC<INavBarProps> = (props) => {
    */
   const RootStyle = styled(AppBar)(({ theme: MUITheme }) => ({
     boxShadow: 'none',
-    backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)',
     backgroundColor:
       MUITheme.palette.mode === 'light'
         ? MUITheme.palette.grey[400]
-        : 'background.default',
+        : MUITheme.palette.common.black,
     [MUITheme.breakpoints.up('lg')]: {
       width: fullWidth ? `100%` : `calc(100% - ${SIDEBAR_DRAWER_WIDTH + 1}px)`,
     },
@@ -173,7 +171,9 @@ const NavBar: FC<INavBarProps> = (props) => {
               onClick={onOpenSidebar}
               sx={{ mr: 1, mt: '3px', color: 'text.primary' }}
             >
-              <MenuIcon htmlColor="black" />
+              <MenuIcon
+                htmlColor={theme.palette.mode === 'dark' ? 'white' : 'black'}
+              />
             </IconButton>
             <Link href="/">
               {theme.palette.mode === 'dark' && (

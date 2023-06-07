@@ -8,7 +8,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
     className="MuiDrawer-root MuiDrawer-docked css-7ik032-MuiDrawer-docked"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-12e0cwx-MuiPaper-root-MuiDrawer-paper"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-sl5t6j-MuiPaper-root-MuiDrawer-paper"
       style={
         {
           "visibility": undefined,
@@ -71,7 +71,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                         className="MuiList-root css-1mk9mw3-MuiList-root"
                       >
                         <li
-                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
+                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
                         >
                           general
                         </li>
@@ -150,7 +150,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                           </div>
                         </a>
                         <li
-                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
+                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
                         >
                           Configurators
                         </li>
@@ -192,7 +192,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                           </div>
                         </a>
                         <li
-                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
+                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
                         >
                           Tables
                         </li>

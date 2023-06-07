@@ -87,12 +87,9 @@ const NavItemSubheaderStyle = styled(ListSubheader)(({ theme }) => ({
   fontSize: '0.75rem',
   letterSpacing: '1.1px',
   color: theme.palette.text.primary,
+  backgroundColor: 'transparent',
   marginTop: '24px',
   marginBottom: '16px',
-  backgroundColor:
-    theme.palette.mode === 'light'
-      ? 'background.default'
-      : theme.palette.primary.dark,
 }));
 
 /**

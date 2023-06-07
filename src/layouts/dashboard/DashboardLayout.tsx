@@ -44,7 +44,7 @@ const DashboardBackgroundStyle = styled('div')(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'light'
       ? theme.palette.grey[400]
-      : 'background.default',
+      : theme.palette.common.black,
 }));
 
 /**

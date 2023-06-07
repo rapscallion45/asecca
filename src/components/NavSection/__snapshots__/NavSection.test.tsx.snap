@@ -8,7 +8,7 @@ exports[`NavSection Renders correctly 1`] = `
     className="MuiList-root css-1mk9mw3-MuiList-root"
   >
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xb1uxq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
     >
       general
     </li>
@@ -87,7 +87,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xb1uxq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
     >
       Configurators
     </li>
@@ -129,7 +129,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xb1uxq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
     >
       Tables
     </li>

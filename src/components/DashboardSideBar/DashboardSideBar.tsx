@@ -114,13 +114,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
           open
           variant="persistent"
           PaperProps={{
-            sx: {
-              width: SIDEBAR_DRAWER_WIDTH,
-              bgcolor:
-                theme.palette.mode === 'light'
-                  ? 'background.default'
-                  : theme.palette.primary.dark,
-            },
+            sx: { width: SIDEBAR_DRAWER_WIDTH },
           }}
         >
           {renderContent}
