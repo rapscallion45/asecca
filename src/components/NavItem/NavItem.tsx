@@ -86,10 +86,7 @@ const NavItemSubheaderStyle = styled(ListSubheader)(({ theme }) => ({
   lineHeight: 1.5,
   fontSize: '0.75rem',
   letterSpacing: '1.1px',
-  color:
-    theme.palette.mode === 'light'
-      ? theme.palette.common.black
-      : theme.palette.grey[400],
+  color: theme.palette.text.primary,
   marginTop: '24px',
   marginBottom: '16px',
   backgroundColor:
@@ -141,7 +138,7 @@ const NavItem: FC<INavItemProps> = (props) => {
    * @constant
    */
   const activeRootStyle = {
-    color: theme.palette.mode === 'light' ? 'black' : 'white',
+    color: theme.palette.text.primary,
     fontWeight: 'fontWeightMedium',
     bgcolor: alpha(
       theme.palette.mode === 'light'

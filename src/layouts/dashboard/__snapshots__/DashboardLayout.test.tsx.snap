@@ -193,7 +193,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           className="MuiList-root css-1mk9mw3-MuiList-root"
                         >
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
                           >
                             general
                           </li>
@@ -272,7 +272,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             </div>
                           </a>
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
                           >
                             Configurators
                           </li>
@@ -314,7 +314,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             </div>
                           </a>
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18oaaf4-MuiListSubheader-root"
                           >
                             Tables
                           </li>
