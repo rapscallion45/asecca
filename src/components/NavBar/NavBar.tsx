@@ -21,7 +21,7 @@ import {
 import { INavBarOnSidebarOpenCallback } from './types';
 
 /**
- * Theme Mode Switch
+ * Theme Mode Switch Style
  *
  * Application light/dark mode toggle switch
  *
@@ -31,7 +31,7 @@ import { INavBarOnSidebarOpenCallback } from './types';
  * @component
  * @return {Component} - styled theme mode switch
  */
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const ThemeModeSwitchStyle = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -124,8 +124,11 @@ const NavBar: FC<INavBarProps> = (props) => {
   const RootStyle = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
-    backgroundColor: theme.palette.common.white,
+    WebkitBackdropFilter: 'blur(6px)',
+    backgroundColor:
+      theme.palette.mode === 'light'
+        ? theme.palette.grey[400]
+        : theme.palette.primary.dark,
     [theme.breakpoints.up('lg')]: {
       width: fullWidth ? `100%` : `calc(100% - ${SIDEBAR_DRAWER_WIDTH + 1}px)`,
     },
@@ -192,7 +195,7 @@ const NavBar: FC<INavBarProps> = (props) => {
         >
           <FormControlLabel
             data-testid="light-dark-btn"
-            control={<MaterialUISwitch sx={{ m: 1 }} color="primary" />}
+            control={<ThemeModeSwitchStyle sx={{ m: 1 }} color="primary" />}
             label=""
           />
         </Stack>
