@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavItem Renders correctly 1`] = `
+<a
+  className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-vawyb7-MuiButtonBase-root-MuiListItemButton-root"
+  href="/"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onContextMenu={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  target=""
+>
+  <svg
+    aria-hidden={true}
+    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+    data-testid="HomeIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+    />
+  </svg>
+  <div
+    className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+  >
+    home
+  </div>
+</a>
+`;
