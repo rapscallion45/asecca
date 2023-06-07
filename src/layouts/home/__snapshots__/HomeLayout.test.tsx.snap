@@ -24,18 +24,19 @@ exports[`Home Layout Renders correctly 1`] = `
           alt="Asecca logo"
           data-nimg="1"
           decoding="async"
-          height={40}
+          height={30}
           loading="lazy"
           onError={[Function]}
           onLoad={[Function]}
-          src="/_next/image?url=%2Flogoblack.webp&w=640&q=75"
-          srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=640&q=75 2x"
+          src="/_next/image?url=%2Flogoblack.webp&w=384&q=75"
+          srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=384&q=75 2x"
           style={
             {
               "color": "transparent",
+              "marginTop": "5px",
             }
           }
-          width={195}
+          width={150}
         />
       </a>
       <div
@@ -69,6 +70,7 @@ exports[`Home Layout Renders correctly 1`] = `
             >
               <input
                 className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                defaultChecked={false}
                 onChange={[Function]}
                 required={false}
                 type="checkbox"

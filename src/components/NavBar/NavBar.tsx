@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
@@ -10,6 +11,7 @@ import {
   FormControlLabel,
   IconButton,
   Switch,
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MHidden from '@/components/@MUI-Extended/MHidden';
@@ -18,6 +20,8 @@ import {
   APP_BAR_MOBILE,
   SIDEBAR_DRAWER_WIDTH,
 } from '@/constants/constants';
+import { AppState } from '@/redux/store';
+import { setTheme } from '@/redux/slices/themeSlice';
 import { INavBarOnSidebarOpenCallback } from './types';
 
 /**
@@ -109,6 +113,9 @@ interface INavBarProps {
  */
 const NavBar: FC<INavBarProps> = (props) => {
   const { fullWidth, showLogo = false, onOpenSidebar } = props;
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const { type: themeType } = useSelector((state: AppState) => state.theme);
 
   /**
    * Nav Bar Root Style
@@ -121,15 +128,15 @@ const NavBar: FC<INavBarProps> = (props) => {
    * @component
    * @return {Component} - styled nav bar root component
    */
-  const RootStyle = styled(AppBar)(({ theme }) => ({
+  const RootStyle = styled(AppBar)(({ theme: MUITheme }) => ({
     boxShadow: 'none',
     backdropFilter: 'blur(6px)',
     WebkitBackdropFilter: 'blur(6px)',
     backgroundColor:
-      theme.palette.mode === 'light'
-        ? theme.palette.grey[400]
-        : theme.palette.primary.dark,
-    [theme.breakpoints.up('lg')]: {
+      MUITheme.palette.mode === 'light'
+        ? MUITheme.palette.grey[400]
+        : 'background.default',
+    [MUITheme.breakpoints.up('lg')]: {
       width: fullWidth ? `100%` : `calc(100% - ${SIDEBAR_DRAWER_WIDTH + 1}px)`,
     },
   }));
@@ -145,13 +152,17 @@ const NavBar: FC<INavBarProps> = (props) => {
    * @component
    * @return {Component} - styled nav bar toolbar component
    */
-  const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
+  const ToolbarStyle = styled(Toolbar)(({ theme: MUITheme }) => ({
     minHeight: APP_BAR_MOBILE,
-    [theme.breakpoints.up('lg')]: {
+    [MUITheme.breakpoints.up('lg')]: {
       minHeight: APP_BAR_DESKTOP,
-      padding: theme.spacing(0, 5),
+      padding: MUITheme.spacing(0, 5),
     },
   }));
+
+  const toggleTheme = () => {
+    dispatch(setTheme(themeType === 'dark' ? 'light' : 'dark'));
+  };
 
   return (
     <RootStyle>
@@ -165,6 +176,39 @@ const NavBar: FC<INavBarProps> = (props) => {
               <MenuIcon htmlColor="black" />
             </IconButton>
             <Link href="/">
+              {theme.palette.mode === 'dark' && (
+                <Image
+                  src="/logowhite.webp"
+                  alt="Asecca logo"
+                  width={150}
+                  height={30}
+                  style={{ marginTop: '5px' }}
+                />
+              )}
+              {theme.palette.mode === 'light' && (
+                <Image
+                  src="/logoblack.webp"
+                  alt="Asecca logo"
+                  width={150}
+                  height={30}
+                  style={{ marginTop: '5px' }}
+                />
+              )}
+            </Link>
+          </MHidden>
+        )}
+        {showLogo && (
+          <Link href="/">
+            {theme.palette.mode === 'dark' && (
+              <Image
+                src="/logowhite.webp"
+                alt="Asecca logo"
+                width={150}
+                height={30}
+                style={{ marginTop: '5px' }}
+              />
+            )}
+            {theme.palette.mode === 'light' && (
               <Image
                 src="/logoblack.webp"
                 alt="Asecca logo"
@@ -172,17 +216,7 @@ const NavBar: FC<INavBarProps> = (props) => {
                 height={30}
                 style={{ marginTop: '5px' }}
               />
-            </Link>
-          </MHidden>
-        )}
-        {showLogo && (
-          <Link href="/">
-            <Image
-              src="/logoblack.webp"
-              alt="Asecca logo"
-              width={195}
-              height={40}
-            />
+            )}
           </Link>
         )}
 
@@ -195,7 +229,15 @@ const NavBar: FC<INavBarProps> = (props) => {
         >
           <FormControlLabel
             data-testid="light-dark-btn"
-            control={<ThemeModeSwitchStyle sx={{ m: 1 }} color="primary" />}
+            control={
+              <ThemeModeSwitchStyle
+                defaultChecked={themeType === 'dark'}
+                // value={themeType === 'dark'}
+                onChange={toggleTheme}
+                sx={{ m: 1 }}
+                color="primary"
+              />
+            }
             label=""
           />
         </Stack>

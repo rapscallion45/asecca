@@ -94,6 +94,7 @@ exports[`NavBar Renders correctly 1`] = `
           >
             <input
               className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+              defaultChecked={false}
               onChange={[Function]}
               required={false}
               type="checkbox"

@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
-import { Box, Drawer } from '@mui/material';
+import { Box, Drawer, useTheme } from '@mui/material';
 import { SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 import ScrollBar from '../ScrollBar/ScrollBar';
 import NavSection from '../NavSection/NavSection';
@@ -58,6 +58,7 @@ interface IDashboardSideBarProps {
 const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const { isOpenSidebar, onCloseSidebar } = props;
   const { pathname } = useRouter();
+  const theme = useTheme();
 
   useEffect(() => {
     if (!isOpenSidebar && onCloseSidebar) {
@@ -82,7 +83,12 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
     >
       <Box sx={{ mt: 1, px: 2.5, py: 3 }}>
         <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
-          <Box width={150} component="img" src="/logoblack.webp" />
+          {theme.palette.mode === 'dark' && (
+            <Box width={150} component="img" src="/logowhite.webp" />
+          )}
+          {theme.palette.mode === 'light' && (
+            <Box width={150} component="img" src="/logoblack.webp" />
+          )}
         </Box>
       </Box>
       <NavSection navConfig={sideBarConfig} />
@@ -110,7 +116,10 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
           PaperProps={{
             sx: {
               width: SIDEBAR_DRAWER_WIDTH,
-              bgcolor: 'background.default',
+              bgcolor:
+                theme.palette.mode === 'light'
+                  ? 'background.default'
+                  : theme.palette.primary.dark,
             },
           }}
         >

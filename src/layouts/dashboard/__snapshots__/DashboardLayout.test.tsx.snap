@@ -103,6 +103,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
             >
               <input
                 className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                defaultChecked={false}
                 onChange={[Function]}
                 required={false}
                 type="checkbox"
@@ -192,7 +193,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           className="MuiList-root css-1mk9mw3-MuiList-root"
                         >
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1mm4ml0-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
                           >
                             general
                           </li>
@@ -271,7 +272,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             </div>
                           </a>
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1mm4ml0-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
                           >
                             Configurators
                           </li>
@@ -313,7 +314,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             </div>
                           </a>
                           <li
-                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1mm4ml0-MuiListSubheader-root"
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-xtuwkt-MuiListSubheader-root"
                           >
                             Tables
                           </li>

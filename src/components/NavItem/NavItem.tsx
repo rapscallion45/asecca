@@ -77,7 +77,7 @@ const NavItemIconStyle = styled(ListItemIcon)({
  * @component
  * @return {Component} - styled menu nav item submenu header component
  */
-const NavItemSubheaderStyle = styled(ListSubheader)({
+const NavItemSubheaderStyle = styled(ListSubheader)(({ theme }) => ({
   paddingLeft: '40px',
   textTransform: 'uppercase',
   boxSizing: 'border-box',
@@ -86,10 +86,17 @@ const NavItemSubheaderStyle = styled(ListSubheader)({
   lineHeight: 1.5,
   fontSize: '0.75rem',
   letterSpacing: '1.1px',
-  color: 'rgb(33, 43, 54)',
+  color:
+    theme.palette.mode === 'light'
+      ? theme.palette.common.black
+      : theme.palette.grey[400],
   marginTop: '24px',
   marginBottom: '16px',
-});
+  backgroundColor:
+    theme.palette.mode === 'light'
+      ? 'background.default'
+      : theme.palette.primary.dark,
+}));
 
 /**
  * Nav Item Props
@@ -134,10 +141,12 @@ const NavItem: FC<INavItemProps> = (props) => {
    * @constant
    */
   const activeRootStyle = {
-    color: 'black',
+    color: theme.palette.mode === 'light' ? 'black' : 'white',
     fontWeight: 'fontWeightMedium',
     bgcolor: alpha(
-      theme.palette.primary.main,
+      theme.palette.mode === 'light'
+        ? theme.palette.primary.main
+        : theme.palette.common.white,
       theme.palette.action.selectedOpacity
     ),
     '&:before': { display: 'block' },

@@ -41,7 +41,10 @@ const DashboardBackgroundStyle = styled('div')(({ theme }) => ({
   zIndex: 0,
   minHeight: '100vh',
   minWidth: '100%',
-  backgroundColor: theme.palette.grey[400],
+  backgroundColor:
+    theme.palette.mode === 'light'
+      ? theme.palette.grey[400]
+      : 'background.default',
 }));
 
 /**
