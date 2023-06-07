@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { NextPageWithLayout } from 'next';
 import { AgGridReact } from 'ag-grid-react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 
@@ -17,6 +17,7 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
  * @returns {NextPageWithLayout} - AG Grid test page component
  */
 const AGGridTestPage: NextPageWithLayout = () => {
+  const theme = useTheme();
   const [rowData] = useState([
     { make: 'Toyota', model: 'Celica', price: 35000 },
     { make: 'Ford', model: 'Mondeo', price: 32000 },
@@ -34,11 +35,15 @@ const AGGridTestPage: NextPageWithLayout = () => {
       <Box my={5}>
         <Box my={2}>
           <Typography variant="h4" color="common.white">
-            AG-Grid Test Page
+            AG-Grid Test Page 1
           </Typography>
         </Box>
         <div
-          className="ag-theme-alpine ag-theme-asecca"
+          className={`ag-theme-alpine ${
+            theme.palette.mode === 'light'
+              ? 'ag-theme-asecca'
+              : 'ag-theme-asecca-dark'
+          }`}
           style={{ height: 400, width: '100%' }}
         >
           <AgGridReact rowData={rowData} columnDefs={columnDefs} />
