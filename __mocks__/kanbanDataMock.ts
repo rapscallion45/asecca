@@ -13,6 +13,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
       isActive: false,
       columns: [
         {
+          id: '1f8d6180-6465-4790-8d9c-66106f57970f',
           name: 'Todo',
           tasks: [
             {
@@ -79,6 +80,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
           ],
         },
         {
+          id: 'b80b1cc7-1b00-494e-a3fe-4ad132945998',
           name: 'Doing',
           tasks: [
             {
@@ -193,6 +195,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
           ],
         },
         {
+          id: '80be6aa2-a403-4e27-a7e5-2ce880f21355',
           name: 'Done',
           tasks: [
             {
@@ -308,6 +311,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
       isActive: false,
       columns: [
         {
+          id: 'b7a16b3d-b846-476b-9042-2cfa0b87c39b',
           name: 'Todo',
           tasks: [
             {
@@ -386,10 +390,12 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
           ],
         },
         {
+          id: '7cb68845-5d08-458a-b537-ff9e777ab978',
           name: 'Doing',
           tasks: [],
         },
         {
+          id: 'ea0d899c-fefd-4ec5-9aaf-b52b3d45f8f4',
           name: 'Done',
           tasks: [],
         },
@@ -400,6 +406,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
       isActive: false,
       columns: [
         {
+          id: '3eca7f48-7b86-4149-b960-e1109cf7cd00',
           name: 'Now',
           tasks: [
             {
@@ -440,10 +447,12 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
           ],
         },
         {
+          id: '477937ce-6e7a-48cc-b6b1-9dc8a36d8919',
           name: 'Next',
           tasks: [],
         },
         {
+          id: '2751ca40-104e-4499-af8f-0bc0a72f80ac',
           name: 'Later',
           tasks: [],
         },

@@ -206,10 +206,12 @@ export interface IKanbanBoardTask {
  * @typedef IKanbanBoardColumn
  * @prop {string} name - column name
  * @prop {Array<IKanbanBoardTask>} tasks - column tasks
+ * @prop {string} id - column ID
  */
 export interface IKanbanBoardColumn {
   name: string;
   tasks: Array<IKanbanBoardTask>;
+  id: string;
 }
 
 /**

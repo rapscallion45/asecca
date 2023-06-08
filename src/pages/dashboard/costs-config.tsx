@@ -83,7 +83,7 @@ const CostsConfigPage: NextPageWithLayout = () => {
   return (
     <>
       <Box my={5} sx={{ maxWidth: 500 }}>
-        <Typography variant="h4" color="common.white">
+        <Typography variant="h4">
           Costing Configuration - Lloyds Bank - {userPermissionLevel} {query}
         </Typography>
       </Box>
