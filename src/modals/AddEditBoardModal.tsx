@@ -53,7 +53,7 @@ const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
   const { type, open, setIsBoardModalOpen } = props;
   const dispatch = useDispatch();
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>('New Board');
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>([
     { name: 'Todo', tasks: [], id: uuidv4() },
     { name: 'In Progress', tasks: [], id: uuidv4() },
@@ -170,6 +170,8 @@ const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
           variant="standard"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          error={!name.length}
+          helperText={!name.length ? 'Board name is required' : ''}
         />
         <Box mt={2}>
           <Typography>Board Columns</Typography>
@@ -225,7 +227,12 @@ const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
         >
           Cancel
         </Button>
-        <Button variant="contained" color="secondary" onClick={handleSubmit}>
+        <Button
+          disabled={!name.length}
+          variant="contained"
+          color="secondary"
+          onClick={handleSubmit}
+        >
           Create Board
         </Button>
       </DialogActions>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { NextPageWithLayout } from 'next';
 import { Box } from '@mui/material';
@@ -23,8 +24,12 @@ const KanbanPage: NextPageWithLayout = () => {
   const dispatch = useDispatch();
   const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
   const activeBoard = kanbanData.boards?.find((board) => board.isActive);
-  if (!activeBoard && kanbanData.boards?.length > 0)
-    dispatch(setBoardActive({ index: 0 }));
+
+  /* check for the active board each time update occurs to Kanban state */
+  useEffect(() => {
+    if (!activeBoard && kanbanData.boards?.length > 0)
+      dispatch(setBoardActive({ index: 0 }));
+  }, [activeBoard, kanbanData.boards, dispatch]);
 
   return (
     <ClientOnly>
