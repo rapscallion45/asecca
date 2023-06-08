@@ -61,11 +61,22 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const theme = useTheme();
 
   useEffect(() => {
-    if (!isOpenSidebar && onCloseSidebar) {
+    if (onCloseSidebar) {
       onCloseSidebar();
     }
-  }, [pathname, isOpenSidebar, onCloseSidebar]);
+  }, [pathname, onCloseSidebar]);
 
+  /**
+   * Sidebar Content
+   *
+   * Sidebar content area renderer helper component
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @component
+   * @returns {Component} - sidebar content component
+   */
   const renderContent = (
     <ScrollBar
       sx={{

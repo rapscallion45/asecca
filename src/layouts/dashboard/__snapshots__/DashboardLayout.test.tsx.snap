@@ -320,7 +320,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </li>
                           <a
                             className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                            href="/dashboard/db-table-1"
+                            href="/dashboard/aggrid-page-1"
                             onBlur={[Function]}
                             onClick={[Function]}
                             onContextMenu={[Function]}
@@ -357,7 +357,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </a>
                           <a
                             className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                            href="/dashboard/db-table-2"
+                            href="/dashboard/aggrid-page-2"
                             onBlur={[Function]}
                             onClick={[Function]}
                             onContextMenu={[Function]}
@@ -394,7 +394,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </a>
                           <a
                             className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                            href="/dashboard/db-table-3"
+                            href="/dashboard/aggrid-page-3"
                             onBlur={[Function]}
                             onClick={[Function]}
                             onContextMenu={[Function]}
@@ -431,7 +431,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </a>
                           <a
                             className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                            href="/dashboard/db-table-4"
+                            href="/dashboard/aggrid-page-4"
                             onBlur={[Function]}
                             onClick={[Function]}
                             onContextMenu={[Function]}

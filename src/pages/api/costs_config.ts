@@ -54,14 +54,14 @@ const costsConfigHandler = async (
       try {
         /* try proxying request to ASECCA API */
         const response = await getCostsConfig(query);
-        const data = await response.json();
 
         /* send back server response */
         if (response.status === 200) {
+          const data = await response.json();
           return res.status(200).json(data);
         }
-        return res.status(400).json({
-          message: data.message,
+        return res.status(response.status).json({
+          message: `Error fetching data from server: ${response.statusText}`,
         });
       } catch (error) {
         /* in case of exception, generate internal error response */

@@ -9,6 +9,11 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import '@/styles/ag-grid-theme-asecca/ag-theme-asecca.css';
+import '@/styles/ag-grid-theme-asecca/ag-theme-asecca-dark.css';
+
 import { createEmotionCache } from '@/utils';
 import store from '@/redux/store';
 import DefaultLayout from '@/layouts/default/DefaultLayout';
