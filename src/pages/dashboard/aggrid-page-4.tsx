@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import type { NextPageWithLayout } from 'next';
 import { AgGridReact } from 'ag-grid-react';
 import { Box, Typography, useTheme } from '@mui/material';
@@ -18,37 +18,65 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
  */
 const AGGridTestPage: NextPageWithLayout = () => {
   const theme = useTheme();
-  const [rowData] = useState([
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxster', price: 72000 },
-  ]);
-
+  const [rowData, setRowData] = useState();
   const [columnDefs] = useState([
-    { field: 'make' },
-    { field: 'model' },
-    { field: 'price' },
+    { field: 'athlete' },
+    { field: 'age', maxWidth: 120 },
+    { field: 'country' },
+    { field: 'year', maxWidth: 120 },
+    { field: 'sport' },
+    { field: 'gold' },
+    { field: 'silver' },
+    { field: 'bronze' },
+    { field: 'total' },
   ]);
+  const defaultColDef = useMemo(
+    () => ({
+      flex: 1,
+      minWidth: 150,
+      filter: true,
+      resizable: true,
+      sortable: true,
+    }),
+    []
+  );
+
+  /**
+   * AG-Grid Ready callback used to load data from API
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @method
+   */
+  const onGridReady = useCallback(() => {
+    fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+      .then((resp) => resp.json())
+      .then((data) => setRowData(data));
+  }, []);
 
   return (
     <ClientOnly>
       <Box my={5}>
-        <Box my={2}>
-          <Typography variant="h4" color="common.white">
-            AG-Grid Test Page 4
-          </Typography>
-        </Box>
-        <div
-          className={`ag-theme-alpine ${
-            theme.palette.mode === 'light'
-              ? 'ag-theme-asecca'
-              : 'ag-theme-asecca-dark'
-          }`}
-          style={{ height: 400, width: '100%' }}
-        >
-          <AgGridReact rowData={rowData} columnDefs={columnDefs} />
-        </div>
+        <Typography variant="h4" color="common.white">
+          AG-Grid Test Page 4
+        </Typography>
       </Box>
+      <div
+        className={`ag-theme-alpine ${
+          theme.palette.mode === 'light'
+            ? 'ag-theme-asecca'
+            : 'ag-theme-asecca-dark'
+        }`}
+        style={{ height: 400, width: '100%' }}
+      >
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          onGridReady={onGridReady}
+        />
+      </div>
     </ClientOnly>
   );
 };

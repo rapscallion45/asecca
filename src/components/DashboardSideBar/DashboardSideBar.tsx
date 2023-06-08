@@ -61,10 +61,10 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const theme = useTheme();
 
   useEffect(() => {
-    if (!isOpenSidebar && onCloseSidebar) {
+    if (onCloseSidebar) {
       onCloseSidebar();
     }
-  }, [pathname, isOpenSidebar, onCloseSidebar]);
+  }, [pathname, onCloseSidebar]);
 
   const renderContent = (
     <ScrollBar

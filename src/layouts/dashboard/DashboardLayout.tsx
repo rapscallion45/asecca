@@ -1,4 +1,4 @@
-import { FC, useState, ReactNode } from 'react';
+import { FC, useState, useCallback, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
@@ -109,10 +109,10 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   return (
     <RootStyle id="dashboard-page">
       <DashboardBackgroundStyle id="background" />
-      <NavBar onOpenSidebar={() => setOpen(true)} />
+      <NavBar onOpenSidebar={useCallback(() => setOpen(true), [])} />
       <DashboardSideBar
         isOpenSidebar={open}
-        onCloseSidebar={() => setOpen(false)}
+        onCloseSidebar={useCallback(() => setOpen(false), [])}
       />
       <DashboardRootStyle id="page-content">
         <Container maxWidth="xl">
