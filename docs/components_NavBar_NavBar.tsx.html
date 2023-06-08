@@ -27,6 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
@@ -38,6 +39,7 @@ import {
   FormControlLabel,
   IconButton,
   Switch,
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MHidden from '@/components/@MUI-Extended/MHidden';
@@ -46,10 +48,12 @@ import {
   APP_BAR_MOBILE,
   SIDEBAR_DRAWER_WIDTH,
 } from '@/constants/constants';
+import { AppState } from '@/redux/store';
+import { setTheme } from '@/redux/slices/themeSlice';
 import { INavBarOnSidebarOpenCallback } from './types';
 
 /**
- * Theme Mode Switch
+ * Theme Mode Switch Style
  *
  * Application light/dark mode toggle switch
  *
@@ -59,7 +63,7 @@ import { INavBarOnSidebarOpenCallback } from './types';
  * @component
  * @return {Component} - styled theme mode switch
  */
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const ThemeModeSwitchStyle = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -137,6 +141,9 @@ interface INavBarProps {
  */
 const NavBar: FC&lt;INavBarProps> = (props) => {
   const { fullWidth, showLogo = false, onOpenSidebar } = props;
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const { type: themeType } = useSelector((state: AppState) => state.theme);
 
   /**
    * Nav Bar Root Style
@@ -149,12 +156,13 @@ const NavBar: FC&lt;INavBarProps> = (props) => {
    * @component
    * @return {Component} - styled nav bar root component
    */
-  const RootStyle = styled(AppBar)(({ theme }) => ({
+  const RootStyle = styled(AppBar)(({ theme: MUITheme }) => ({
     boxShadow: 'none',
-    backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
-    backgroundColor: theme.palette.common.white,
-    [theme.breakpoints.up('lg')]: {
+    backgroundColor:
+      MUITheme.palette.mode === 'light'
+        ? MUITheme.palette.grey[400]
+        : MUITheme.palette.common.black,
+    [MUITheme.breakpoints.up('lg')]: {
       width: fullWidth ? `100%` : `calc(100% - ${SIDEBAR_DRAWER_WIDTH + 1}px)`,
     },
   }));
@@ -170,13 +178,17 @@ const NavBar: FC&lt;INavBarProps> = (props) => {
    * @component
    * @return {Component} - styled nav bar toolbar component
    */
-  const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
+  const ToolbarStyle = styled(Toolbar)(({ theme: MUITheme }) => ({
     minHeight: APP_BAR_MOBILE,
-    [theme.breakpoints.up('lg')]: {
+    [MUITheme.breakpoints.up('lg')]: {
       minHeight: APP_BAR_DESKTOP,
-      padding: theme.spacing(0, 5),
+      padding: MUITheme.spacing(0, 5),
     },
   }));
+
+  const toggleTheme = () => {
+    dispatch(setTheme(themeType === 'dark' ? 'light' : 'dark'));
+  };
 
   return (
     &lt;RootStyle>
@@ -187,9 +199,44 @@ const NavBar: FC&lt;INavBarProps> = (props) => {
               onClick={onOpenSidebar}
               sx={{ mr: 1, mt: '3px', color: 'text.primary' }}
             >
-              &lt;MenuIcon htmlColor="black" />
+              &lt;MenuIcon
+                htmlColor={theme.palette.mode === 'dark' ? 'white' : 'black'}
+              />
             &lt;/IconButton>
             &lt;Link href="/">
+              {theme.palette.mode === 'dark' &amp;&amp; (
+                &lt;Image
+                  src="/logowhite.webp"
+                  alt="Asecca logo"
+                  width={150}
+                  height={30}
+                  style={{ marginTop: '5px' }}
+                />
+              )}
+              {theme.palette.mode === 'light' &amp;&amp; (
+                &lt;Image
+                  src="/logoblack.webp"
+                  alt="Asecca logo"
+                  width={150}
+                  height={30}
+                  style={{ marginTop: '5px' }}
+                />
+              )}
+            &lt;/Link>
+          &lt;/MHidden>
+        )}
+        {showLogo &amp;&amp; (
+          &lt;Link href="/">
+            {theme.palette.mode === 'dark' &amp;&amp; (
+              &lt;Image
+                src="/logowhite.webp"
+                alt="Asecca logo"
+                width={150}
+                height={30}
+                style={{ marginTop: '5px' }}
+              />
+            )}
+            {theme.palette.mode === 'light' &amp;&amp; (
               &lt;Image
                 src="/logoblack.webp"
                 alt="Asecca logo"
@@ -197,17 +244,7 @@ const NavBar: FC&lt;INavBarProps> = (props) => {
                 height={30}
                 style={{ marginTop: '5px' }}
               />
-            &lt;/Link>
-          &lt;/MHidden>
-        )}
-        {showLogo &amp;&amp; (
-          &lt;Link href="/">
-            &lt;Image
-              src="/logoblack.webp"
-              alt="Asecca logo"
-              width={195}
-              height={40}
-            />
+            )}
           &lt;/Link>
         )}
 
@@ -220,7 +257,15 @@ const NavBar: FC&lt;INavBarProps> = (props) => {
         >
           &lt;FormControlLabel
             data-testid="light-dark-btn"
-            control={&lt;MaterialUISwitch sx={{ m: 1 }} color="primary" />}
+            control={
+              &lt;ThemeModeSwitchStyle
+                defaultChecked={themeType === 'dark'}
+                // value={themeType === 'dark'}
+                onChange={toggleTheme}
+                sx={{ m: 1 }}
+                color="primary"
+              />
+            }
             label=""
           />
         &lt;/Stack>
@@ -240,13 +285,13 @@ export default NavBar;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AseccaAPI.html">AseccaAPI</a></li><li><a href="CostsConfigReduxSlice.html">CostsConfigReduxSlice</a></li><li><a href="Hooks.html">Hooks</a></li><li><a href="NextjsAPI.html">NextjsAPI</a></li><li><a href="NotificationsReduxSlice.html">NotificationsReduxSlice</a></li><li><a href="Services.html">Services</a></li><li><a href="Theme.html">Theme</a></li><li><a href="ThemeReduxSlice.html">ThemeReduxSlice</a></li><li><a href="UserPermissionReduxSlice.html">UserPermissionReduxSlice</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="AdminTestPanel.html">AdminTestPanel</a></li><li><a href="AlertNotification.html">AlertNotification</a></li><li><a href="AlertProvider.html">AlertProvider</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ClientOnly.html">ClientOnly</a></li><li><a href="CostsConfigPage.html">CostsConfigPage</a></li><li><a href="CostsConfigTable.html">CostsConfigTable</a></li><li><a href="CurrencyCell.html">CurrencyCell</a></li><li><a href="DashboardBackgroundStyle.html">DashboardBackgroundStyle</a></li><li><a href="DashboardLayout.html">DashboardLayout</a></li><li><a href="DashboardRootStyle.html">DashboardRootStyle</a></li><li><a href="DashboardSideBar.html">DashboardSideBar</a></li><li><a href="DataRow.html">DataRow</a></li><li><a href="DataRow-StyledTableRow.html">StyledTableRow</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="DefaultLayout.html">DefaultLayout</a></li><li><a href="ErrorRow.html">ErrorRow</a></li><li><a href="HeaderRow.html">HeaderRow</a></li><li><a href="HeaderRow-StyledTableHeadCell.html">StyledTableHeadCell</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeBackgroundStyle.html">HomeBackgroundStyle</a></li><li><a href="HomeLayout.html">HomeLayout</a></li><li><a href="HomeRootStyle.html">HomeRootStyle</a></li><li><a href="LoadingRow.html">LoadingRow</a></li><li><a href="MHidden.html">MHidden</a></li><li><a href="MaterialUISwitch.html">MaterialUISwitch</a></li><li><a href="Meta.html">Meta</a></li><li><a href="NavBar.html">NavBar</a></li><li><a href="NavBar-RootStyle.html">RootStyle</a></li><li><a href="NavBar-ToolbarStyle.html">ToolbarStyle</a></li><li><a href="NavItem.html">NavItem</a></li><li><a href="NavItemIconStyle.html">NavItemIconStyle</a></li><li><a href="NavItemStyle.html">NavItemStyle</a></li><li><a href="NavItemSubheaderStyle.html">NavItemSubheaderStyle</a></li><li><a href="NavSection.html">NavSection</a></li><li><a href="RootStyle.html">RootStyle</a></li><li><a href="ScrollBar.html">ScrollBar</a></li><li><a href="SimpleBarStyle.html">SimpleBarStyle</a></li><li><a href="StyledTableCell.html">StyledTableCell</a></li><li><a href="ThemeConfig.html">ThemeConfig</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddNotificationPayload.html">IAddNotificationPayload</a></li><li><a href="IAlertNotificationProps.html">IAlertNotificationProps</a></li><li><a href="IAlertProviderProps.html">IAlertProviderProps</a></li><li><a href="ICellProps.html">ICellProps</a></li><li><a href="IClientOnlyProps.html">IClientOnlyProps</a></li><li><a href="ICloseNotificationPayload.html">ICloseNotificationPayload</a></li><li><a href="ICostsConfigData.html">ICostsConfigData</a></li><li><a href="ICostsConfigDataPayload.html">ICostsConfigDataPayload</a></li><li><a href="ICostsConfigEditCostsPayload.html">ICostsConfigEditCostsPayload</a></li><li><a href="ICostsConfigSaveDataCosts.html">ICostsConfigSaveDataCosts</a></li><li><a href="ICostsConfigSaveDataPayload.html">ICostsConfigSaveDataPayload</a></li><li><a href="ICostsConfigSaveDataSelection.html">ICostsConfigSaveDataSelection</a></li><li><a href="ICostsConfigState.html">ICostsConfigState</a></li><li><a href="ICostsConfigTableProps.html">ICostsConfigTableProps</a></li><li><a href="ICurrencyCellProps.html">ICurrencyCellProps</a></li><li><a href="IDashboardLayoutProps.html">IDashboardLayoutProps</a></li><li><a href="IDashboardSideBarProps.html">IDashboardSideBarProps</a></li><li><a href="IDashboardSidebarOnCloseCallback.html">IDashboardSidebarOnCloseCallback</a></li><li><a href="IDataRowProps.html">IDataRowProps</a></li><li><a href="IDataTableColumn.html">IDataTableColumn</a></li><li><a href="IDataTableEditCellValueCallback.html">IDataTableEditCellValueCallback</a></li><li><a href="IDataTableEditCurrencyCellValueCallback.html">IDataTableEditCurrencyCellValueCallback</a></li><li><a href="IDataTableGetCellValueCallback.html">IDataTableGetCellValueCallback</a></li><li><a href="IDataTableProps.html">IDataTableProps</a></li><li><a href="IDataTableRow.html">IDataTableRow</a></li><li><a href="IDefaultLayoutProps.html">IDefaultLayoutProps</a></li><li><a href="IErrorRowProps.html">IErrorRowProps</a></li><li><a href="IFetchCostsConfigBySourceIdArgs.html">IFetchCostsConfigBySourceIdArgs</a></li><li><a href="IHeaderRowProps.html">IHeaderRowProps</a></li><li><a href="IHomeLayoutProps.html">IHomeLayoutProps</a></li><li><a href="ILoadingRowProps.html">ILoadingRowProps</a></li><li><a href="IMHiddenProps.html">IMHiddenProps</a></li><li><a href="INavBarOnSidebarOpenCallback.html">INavBarOnSidebarOpenCallback</a></li><li><a href="INavBarProps.html">INavBarProps</a></li><li><a href="INavItemProps.html">INavItemProps</a></li><li><a href="INavSectionProps.html">INavSectionProps</a></li><li><a href="INotification.html">INotification</a></li><li><a href="INotificationOptions.html">INotificationOptions</a></li><li><a href="INotificationsState.html">INotificationsState</a></li><li><a href="IProxyErrorPayload.html">IProxyErrorPayload</a></li><li><a href="IRemoveNotificationPayload.html">IRemoveNotificationPayload</a></li><li><a href="ISaveCostsConfigBySourceIdArgs.html">ISaveCostsConfigBySourceIdArgs</a></li><li><a href="IScrollBarProps.html">IScrollBarProps</a></li><li><a href="IThemeConfigProps.html">IThemeConfigProps</a></li><li><a href="IThemeState.html">IThemeState</a></li><li><a href="IUserPermissionLevelState.html">IUserPermissionLevelState</a></li><li><a href="NavItem.INavItemConfig.html">INavItemConfig</a></li><li><a href="Theme.IExtendedColorPartial.html">IExtendedColorPartial</a></li><li><a href="Theme.IResposiveFontSizes.html">IResposiveFontSizes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#store">store</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AseccaAPI.html">AseccaAPI</a></li><li><a href="CostsConfigReduxSlice.html">CostsConfigReduxSlice</a></li><li><a href="Hooks.html">Hooks</a></li><li><a href="NextjsAPI.html">NextjsAPI</a></li><li><a href="NotificationsReduxSlice.html">NotificationsReduxSlice</a></li><li><a href="Services.html">Services</a></li><li><a href="Theme.html">Theme</a></li><li><a href="ThemeReduxSlice.html">ThemeReduxSlice</a></li><li><a href="UserPermissionReduxSlice.html">UserPermissionReduxSlice</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="AGGridTestPage.html">AGGridTestPage</a></li><li><a href="AdminTestPanel.html">AdminTestPanel</a></li><li><a href="AlertNotification.html">AlertNotification</a></li><li><a href="AlertProvider.html">AlertProvider</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ClientOnly.html">ClientOnly</a></li><li><a href="CostsConfigPage.html">CostsConfigPage</a></li><li><a href="CostsConfigTable.html">CostsConfigTable</a></li><li><a href="CurrencyCell.html">CurrencyCell</a></li><li><a href="DashboardBackgroundStyle.html">DashboardBackgroundStyle</a></li><li><a href="DashboardLayout.html">DashboardLayout</a></li><li><a href="DashboardRootStyle.html">DashboardRootStyle</a></li><li><a href="DashboardSideBar.html">DashboardSideBar</a></li><li><a href="DashboardSideBar-renderContent.html">renderContent</a></li><li><a href="DataRow.html">DataRow</a></li><li><a href="DataRow-StyledTableRow.html">StyledTableRow</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="DefaultLayout.html">DefaultLayout</a></li><li><a href="ErrorRow.html">ErrorRow</a></li><li><a href="HeaderRow.html">HeaderRow</a></li><li><a href="HeaderRow-StyledTableHeadCell.html">StyledTableHeadCell</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeBackgroundStyle.html">HomeBackgroundStyle</a></li><li><a href="HomeLayout.html">HomeLayout</a></li><li><a href="HomeRootStyle.html">HomeRootStyle</a></li><li><a href="LoadingRow.html">LoadingRow</a></li><li><a href="MHidden.html">MHidden</a></li><li><a href="Meta.html">Meta</a></li><li><a href="NavBar.html">NavBar</a></li><li><a href="NavBar-RootStyle.html">RootStyle</a></li><li><a href="NavBar-ToolbarStyle.html">ToolbarStyle</a></li><li><a href="NavItem.html">NavItem</a></li><li><a href="NavItemIconStyle.html">NavItemIconStyle</a></li><li><a href="NavItemStyle.html">NavItemStyle</a></li><li><a href="NavItemSubheaderStyle.html">NavItemSubheaderStyle</a></li><li><a href="NavSection.html">NavSection</a></li><li><a href="RootStyle.html">RootStyle</a></li><li><a href="ScrollBar.html">ScrollBar</a></li><li><a href="SimpleBarStyle.html">SimpleBarStyle</a></li><li><a href="StyledTableCell.html">StyledTableCell</a></li><li><a href="ThemeConfig.html">ThemeConfig</a></li><li><a href="ThemeModeSwitchStyle.html">ThemeModeSwitchStyle</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddNotificationPayload.html">IAddNotificationPayload</a></li><li><a href="IAlertNotificationProps.html">IAlertNotificationProps</a></li><li><a href="IAlertProviderProps.html">IAlertProviderProps</a></li><li><a href="ICellProps.html">ICellProps</a></li><li><a href="IClientOnlyProps.html">IClientOnlyProps</a></li><li><a href="ICloseNotificationPayload.html">ICloseNotificationPayload</a></li><li><a href="ICostsConfigData.html">ICostsConfigData</a></li><li><a href="ICostsConfigDataPayload.html">ICostsConfigDataPayload</a></li><li><a href="ICostsConfigEditCostsPayload.html">ICostsConfigEditCostsPayload</a></li><li><a href="ICostsConfigSaveDataCosts.html">ICostsConfigSaveDataCosts</a></li><li><a href="ICostsConfigSaveDataPayload.html">ICostsConfigSaveDataPayload</a></li><li><a href="ICostsConfigSaveDataSelection.html">ICostsConfigSaveDataSelection</a></li><li><a href="ICostsConfigState.html">ICostsConfigState</a></li><li><a href="ICostsConfigTableProps.html">ICostsConfigTableProps</a></li><li><a href="ICurrencyCellProps.html">ICurrencyCellProps</a></li><li><a href="IDashboardLayoutProps.html">IDashboardLayoutProps</a></li><li><a href="IDashboardSideBarProps.html">IDashboardSideBarProps</a></li><li><a href="IDashboardSidebarOnCloseCallback.html">IDashboardSidebarOnCloseCallback</a></li><li><a href="IDataRowProps.html">IDataRowProps</a></li><li><a href="IDataTableColumn.html">IDataTableColumn</a></li><li><a href="IDataTableEditCellValueCallback.html">IDataTableEditCellValueCallback</a></li><li><a href="IDataTableEditCurrencyCellValueCallback.html">IDataTableEditCurrencyCellValueCallback</a></li><li><a href="IDataTableGetCellValueCallback.html">IDataTableGetCellValueCallback</a></li><li><a href="IDataTableProps.html">IDataTableProps</a></li><li><a href="IDataTableRow.html">IDataTableRow</a></li><li><a href="IDefaultLayoutProps.html">IDefaultLayoutProps</a></li><li><a href="IErrorRowProps.html">IErrorRowProps</a></li><li><a href="IFetchCostsConfigBySourceIdArgs.html">IFetchCostsConfigBySourceIdArgs</a></li><li><a href="IHeaderRowProps.html">IHeaderRowProps</a></li><li><a href="IHomeLayoutProps.html">IHomeLayoutProps</a></li><li><a href="ILoadingRowProps.html">ILoadingRowProps</a></li><li><a href="IMHiddenProps.html">IMHiddenProps</a></li><li><a href="INavBarOnSidebarOpenCallback.html">INavBarOnSidebarOpenCallback</a></li><li><a href="INavBarProps.html">INavBarProps</a></li><li><a href="INavItemProps.html">INavItemProps</a></li><li><a href="INavSectionProps.html">INavSectionProps</a></li><li><a href="INotification.html">INotification</a></li><li><a href="INotificationOptions.html">INotificationOptions</a></li><li><a href="INotificationsState.html">INotificationsState</a></li><li><a href="IProxyErrorPayload.html">IProxyErrorPayload</a></li><li><a href="IRemoveNotificationPayload.html">IRemoveNotificationPayload</a></li><li><a href="ISaveCostsConfigBySourceIdArgs.html">ISaveCostsConfigBySourceIdArgs</a></li><li><a href="IScrollBarProps.html">IScrollBarProps</a></li><li><a href="IThemeConfigProps.html">IThemeConfigProps</a></li><li><a href="IThemeState.html">IThemeState</a></li><li><a href="IUserPermissionLevelState.html">IUserPermissionLevelState</a></li><li><a href="NavItem.INavItemConfig.html">INavItemConfig</a></li><li><a href="Theme.IExtendedColorPartial.html">IExtendedColorPartial</a></li><li><a href="Theme.IResposiveFontSizes.html">IResposiveFontSizes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#store">store</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jun 06 2023 21:01:57 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 08 2023 12:19:18 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
