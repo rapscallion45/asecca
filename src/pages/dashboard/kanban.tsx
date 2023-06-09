@@ -46,7 +46,7 @@ const KanbanPage: NextPageWithLayout = () => {
    * @since 0.0.1
    *
    * @method
-   * @param {() => void} closeModal - closure of modal handler
+   * @param {string} closeModal - closure of modal handler
    */
   const handleDeleteBoard = (closeModal: () => void) => {
     dispatch(deleteBoard());

@@ -64,9 +64,9 @@ export type ModalButtonVariantType = 'outlined' | 'contained' | 'text';
  * @typedef INormalButtonType
  * @prop {string} type - type of button
  * @prop {string} text - display text of button
- * @prop {(props: SvgIconProps) => JSX.Element} icon - button icon element
+ * @prop {string} icon - button icon element
  * @prop {ModalButtonSizeType} size - button size option
- * @prop {{ [name: string]: string } | { [name: string]: number }} style - saving state flag of costs config data
+ * @prop {string} style - saving state flag of costs config data
  * @prop {ModalButtonVariantType} variant - MUI button variant
  * @prop {string} className - MUI icon button class
  * @prop {ModalButtonColourType} color - button color option
@@ -90,9 +90,9 @@ export interface INormalButtonType {
  *
  * @typedef IRoundIconButtonType
  * @prop {string} type - type of button
- * @prop {(props: SvgIconProps) => JSX.Element} icon - button icon element
+ * @prop {string} icon - button icon element
  * @prop {ModalButtonSizeType} size - button size option
- * @prop {{ [name: string]: string } | { [name: string]: number }} style - saving state flag of costs config data
+ * @prop {string} style - saving state flag of costs config data
  * @prop {ModalButtonVariantType} variant - MUI button variant
  * @prop {ModalButtonColourType} color - button color option
  */
@@ -113,9 +113,9 @@ export interface IRoundIconButtonType {
  *
  * @typedef IIconButtonType
  * @prop {string} type - type of button
- * @prop {(props: SvgIconProps) => JSX.Element} icon - button icon element
+ * @prop {string} icon - button icon element
  * @prop {ModalButtonSizeType} size - button size option
- * @prop {{ [name: string]: string } | { [name: string]: number }} style - saving state flag of costs config data
+ * @prop {string} style - saving state flag of costs config data
  * @prop {ModalButtonIconSizeType} iconSize - button icon size option
  * @prop {string} className - MUI icon button class
  * @prop {ModalButtonColourType} color - button color option
@@ -139,9 +139,9 @@ export interface IIconButtonType {
  * @typedef IMenuItemButtonType
  * @prop {string} type - type of button
  * @prop {string} text - display text of button
- * @prop {(props: SvgIconProps) => JSX.Element} icon - button icon element
- * @prop {() => void} closeMenu - callback handler for closing the modal
- * @prop {{ [name: string]: string } | { [name: string]: number }} iconStyle - icon style options
+ * @prop {string} icon - button icon element
+ * @prop {string} closeMenu - callback handler for closing the modal
+ * @prop {string} iconStyle - icon style options
  * @prop {string} className - MUI icon button class
  * @prop {ModalButtonColourType} color - button color option
  */
@@ -163,7 +163,7 @@ export interface IMenuItemButtonType {
  *
  * @typedef IFabButtonType
  * @prop {string} type - type of button
- * @prop {(props: SvgIconProps) => JSX.Element} icon - button icon element
+ * @prop {string} icon - button icon element
  * @prop {ModalButtonSizeType} size - button size option
  * @prop {ModalButtonVariantType} variant - MUI button variant
  * @prop {string} text - display text of button

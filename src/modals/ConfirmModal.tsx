@@ -26,7 +26,7 @@ import { TriggerButtonTypes } from '@/modals/types';
  * @prop {string} actionButtonText - modal action button text
  * @prop {TriggerButtonTypes} triggerBtn - modal trigger button type
  * @prop {boolean} processing - modal action processing
- * @prop {(closeModal: () => void) => void} actionFunc - modal action function
+ * @prop {string} actionFunc - modal action function
  */
 interface IConfirmModalProps {
   title: string;
