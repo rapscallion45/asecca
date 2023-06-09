@@ -81,7 +81,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
         },
         {
           id: 'b80b1cc7-1b00-494e-a3fe-4ad132945998',
-          name: 'Doing',
+          name: 'In Progress',
           tasks: [
             {
               title: 'Design settings and search pages',
@@ -196,7 +196,7 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
         },
         {
           id: '80be6aa2-a403-4e27-a7e5-2ce880f21355',
-          name: 'Done',
+          name: 'Completed',
           tasks: [
             {
               title: 'Conduct 5 wireframe tests',
@@ -391,12 +391,12 @@ const kanbanDataMock: IKanbanBoardDataPayload = {
         },
         {
           id: '7cb68845-5d08-458a-b537-ff9e777ab978',
-          name: 'Doing',
+          name: 'In Progress',
           tasks: [],
         },
         {
           id: 'ea0d899c-fefd-4ec5-9aaf-b52b3d45f8f4',
-          name: 'Done',
+          name: 'Completed',
           tasks: [],
         },
       ],
