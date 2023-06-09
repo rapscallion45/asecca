@@ -13,7 +13,7 @@ const localStorageMock = (function localStorageMock() {
       return store[key] || null;
     },
     setItem(key: string, value: any) {
-      store[key] = value.toString();
+      store[key] = value?.toString();
     },
     removeItem(key: string) {
       store[key] = null;

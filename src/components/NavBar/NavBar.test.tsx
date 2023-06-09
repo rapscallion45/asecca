@@ -1,7 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import NavBar from './NavBar';
+import ThemeConfig from '../../styles/theme/ThemeConfig';
+import createEmotionCache from '../../utils/createEmotionCache';
+import store from '../../redux/store';
 
 /**
  * NavBar Unit Tests
@@ -12,40 +16,51 @@ import NavBar from './NavBar';
 describe('NavBar', () => {
   it('Renders correctly', () => {
     /** perform snapshot test */
-    const tree = renderer.create(<NavBar showLogin />).toJSON();
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <NavBar />
+          </ThemeConfig>
+        </Provider>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  describe('Login Button', () => {
-    it('Should render if showLogin prop set', async () => {
+  describe('Logo Image', () => {
+    it('Should render logo image if prop set', async () => {
       /** Arrange */
-      const showLogin: boolean = true;
+      const showLogo = true;
 
       /** Act */
-      render(<NavBar showLogin={showLogin} />);
+      render(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <NavBar showLogo={showLogo} />
+          </ThemeConfig>
+        </Provider>
+      );
 
-      /** Assert - login button should show */
-      expect(screen.queryByText('Logout')).toBeInTheDocument();
+      /** Assert - light/dark theme button should show */
+      expect(screen.queryByAltText('Asecca logo')).toBeInTheDocument();
     });
+  });
 
-    it('Should not render if showLogin prop not set', async () => {
-      /** Arrange */
-      const showLogin: boolean = false;
-
-      /** Act */
-      render(<NavBar showLogin={showLogin} />);
-
-      /** Assert - login button should show */
-      expect(screen.queryByText('Logout')).toBeNull();
-    });
-
-    it('Should not render by default', async () => {
+  describe('Light/Dark Theme Button', () => {
+    it('Should render theme change button', async () => {
       /** Arrange */
       /** Act */
-      render(<NavBar />);
+      render(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <NavBar />
+          </ThemeConfig>
+        </Provider>
+      );
 
-      /** Assert - login button should show */
-      expect(screen.queryByText('Logout')).toBeNull();
+      /** Assert - light/dark theme button should show */
+      expect(screen.queryByTestId('light-dark-btn')).toBeInTheDocument();
     });
   });
 });

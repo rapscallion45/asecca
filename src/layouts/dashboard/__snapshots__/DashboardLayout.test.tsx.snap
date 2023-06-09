@@ -2,71 +2,505 @@
 
 exports[`Dashboard Layout Renders correctly 1`] = `
 <main
+  className="css-10650aq"
   id="dashboard-page"
 >
   <div
     className="css-sks9iv"
     id="background"
   />
-  <div
-    className="MuiBox-root css-i9gxme"
+  <header
+    className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-1xzpisq-MuiPaper-root-MuiAppBar-root"
   >
-    <header
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorTransparent MuiAppBar-positionFixed mui-fixed css-zlpppg-MuiPaper-root-MuiAppBar-root"
+    <div
+      className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1tfylnl-MuiToolbar-root"
     >
-      <div
-        className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+      <button
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-68dm4j-MuiButtonBase-root-MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          color="black"
+          data-testid="MenuIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+          />
+        </svg>
+      </button>
+      <a
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
       >
         <img
           alt="Asecca logo"
           data-nimg="1"
           decoding="async"
-          height={40}
+          height={30}
           loading="lazy"
           onError={[Function]}
           onLoad={[Function]}
-          src="/_next/image?url=%2Flogowhite-02.webp&w=828&q=75"
-          srcSet="/_next/image?url=%2Flogowhite-02.webp&w=640&q=75 1x, /_next/image?url=%2Flogowhite-02.webp&w=828&q=75 2x"
+          src="/_next/image?url=%2Flogoblack.webp&w=384&q=75"
+          srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=384&q=75 2x"
           style={
             {
               "color": "transparent",
+              "marginTop": "5px",
             }
           }
-          width={395}
+          width={150}
         />
-        <div
-          className="MuiBox-root css-i9gxme"
-        />
-        <a
-          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1844psz-MuiButtonBase-root-MuiButton-root"
-          href="/"
-          onBlur={[Function]}
-          onClick={[Function]}
-          onContextMenu={[Function]}
-          onDragLeave={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          onTouchMove={[Function]}
-          onTouchStart={[Function]}
-          tabIndex={0}
+      </a>
+      <div
+        className="MuiBox-root css-i9gxme"
+      />
+      <div
+        className="MuiStack-root css-d4yjqk-MuiStack-root"
+      >
+        <label
+          className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1vbggne-MuiFormControlLabel-root"
+          data-testid="light-dark-btn"
         >
-          Logout
-        </a>
+          <span
+            className="MuiSwitch-root MuiSwitch-sizeMedium css-end58r-MuiSwitch-root"
+          >
+            <span
+              className="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-z8z5yk-MuiButtonBase-root-MuiSwitch-switchBase"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={null}
+            >
+              <input
+                className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                defaultChecked={false}
+                onChange={[Function]}
+                required={false}
+                type="checkbox"
+              />
+              <span
+                className="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+              />
+            </span>
+            <span
+              className="MuiSwitch-track css-j4fnnk-MuiSwitch-track"
+            />
+          </span>
+          <span
+            className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1lyi4-MuiTypography-root"
+          />
+        </label>
       </div>
-    </header>
+    </div>
+  </header>
+  <div
+    className="css-1y6sui9"
+  >
+    <div
+      className="MuiDrawer-root MuiDrawer-docked css-7ik032-MuiDrawer-docked"
+    >
+      <div
+        className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-sl5t6j-MuiPaper-root-MuiDrawer-paper"
+        style={
+          {
+            "visibility": undefined,
+          }
+        }
+      >
+        <div
+          className="css-jjtu05"
+        >
+          <div
+            className="css-19u2xht"
+            data-simplebar="init"
+            timeout={500}
+          >
+            <div
+              className="simplebar-wrapper"
+            >
+              <div
+                className="simplebar-height-auto-observer-wrapper"
+              >
+                <div
+                  className="simplebar-height-auto-observer"
+                />
+              </div>
+              <div
+                className="simplebar-mask"
+              >
+                <div
+                  className="simplebar-offset"
+                >
+                  <div
+                    aria-label="scrollable content"
+                    className="simplebar-content-wrapper"
+                    role="region"
+                    tabIndex={0}
+                  >
+                    <div
+                      className="simplebar-content"
+                    >
+                      <div
+                        className="MuiBox-root css-sgvqor"
+                      >
+                        <a
+                          className="MuiBox-root css-oudrid"
+                          href="/"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                          onTouchStart={[Function]}
+                        >
+                          <img
+                            className="MuiBox-root css-1nbic85"
+                            src="/logoblack.webp"
+                          />
+                        </a>
+                      </div>
+                      <div
+                        className="MuiBox-root css-0"
+                      >
+                        <ul
+                          className="MuiList-root css-1mk9mw3-MuiList-root"
+                        >
+                          <li
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
+                          >
+                            general
+                          </li>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="HomeIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              home
+                            </div>
+                          </a>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/kanban"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="ViewKanbanIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7V7h2v10zm4-5h-2V7h2v5zm4 3h-2V7h2v8z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              kanban boards
+                            </div>
+                          </a>
+                          <li
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
+                          >
+                            Configurators
+                          </li>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/costs-config"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="MonetizationOnIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              Cost Configurator
+                            </div>
+                          </a>
+                          <li
+                            className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
+                          >
+                            Tables
+                          </li>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/aggrid-page-1"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="TableViewIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M19 7H9c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 2v2H9V9h10zm-6 6v-2h2v2h-2zm2 2v2h-2v-2h2zm-4-2H9v-2h2v2zm6-2h2v2h-2v-2zm-8 4h2v2H9v-2zm8 2v-2h2v2h-2zM6 17H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v1h-2V5H5v10h1v2z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              Table 1
+                            </div>
+                          </a>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/aggrid-page-2"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="TableViewIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M19 7H9c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 2v2H9V9h10zm-6 6v-2h2v2h-2zm2 2v2h-2v-2h2zm-4-2H9v-2h2v2zm6-2h2v2h-2v-2zm-8 4h2v2H9v-2zm8 2v-2h2v2h-2zM6 17H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v1h-2V5H5v10h1v2z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              Table 2
+                            </div>
+                          </a>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/aggrid-page-3"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="TableViewIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M19 7H9c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 2v2H9V9h10zm-6 6v-2h2v2h-2zm2 2v2h-2v-2h2zm-4-2H9v-2h2v2zm6-2h2v2h-2v-2zm-8 4h2v2H9v-2zm8 2v-2h2v2h-2zM6 17H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v1h-2V5H5v10h1v2z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              Table 3
+                            </div>
+                          </a>
+                          <a
+                            className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
+                            href="/dashboard/aggrid-page-4"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseEnter={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            tabIndex={0}
+                            target=""
+                          >
+                            <svg
+                              aria-hidden={true}
+                              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+                              data-testid="TableViewIcon"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M19 7H9c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 2v2H9V9h10zm-6 6v-2h2v2h-2zm2 2v2h-2v-2h2zm-4-2H9v-2h2v2zm6-2h2v2h-2v-2zm-8 4h2v2H9v-2zm8 2v-2h2v2h-2zM6 17H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v1h-2V5H5v10h1v2z"
+                              />
+                            </svg>
+                            <div
+                              className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              Table 4
+                            </div>
+                          </a>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="simplebar-placeholder"
+              />
+            </div>
+            <div
+              className="simplebar-track simplebar-horizontal"
+            >
+              <div
+                className="simplebar-scrollbar"
+              />
+            </div>
+            <div
+              className="simplebar-track simplebar-vertical"
+            >
+              <div
+                className="simplebar-scrollbar"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <section
-    className="css-1jvnjzr"
+    className="css-100gjh2"
     id="page-content"
   >
     <div
-      className="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      className="MuiContainer-root MuiContainer-maxWidthXl css-19r6kue-MuiContainer-root"
     >
       <div
         className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhmbct-MuiPaper-root-MuiCard-root"

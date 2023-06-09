@@ -10,7 +10,6 @@ import {
 import renderer from 'react-test-renderer';
 import createEmotionCache from '../../utils/createEmotionCache';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
-import palette from '../../styles/theme/lightTheme/lightThemePalette';
 import store from '../../redux/store';
 import useNotifier from '../../hooks/useNotifier';
 import AlertProvider from './AlertProvider';
@@ -128,9 +127,7 @@ describe('Alert Provider', () => {
         /** After all state updates have completed */
         expect(screen.getByRole('alert')).toBeInTheDocument();
       });
-      expect(screen.getByRole('alert')).toHaveStyle(
-        `background-color: ${palette.success.main}`
-      );
+      expect(screen.getByRole('alert')).toHaveClass('MuiAlert-filledSuccess');
       expect(screen.getByText(testMessage)).toBeInTheDocument();
 
       /** Act - close the alert notification */
@@ -163,9 +160,7 @@ describe('Alert Provider', () => {
         /** After all state updates have completed */
         expect(screen.getByRole('alert')).toBeInTheDocument();
       });
-      expect(screen.getByRole('alert')).toHaveStyle(
-        `background-color: ${palette.error.main}`
-      );
+      expect(screen.getByRole('alert')).toHaveClass('MuiAlert-filledError');
     });
 
     it('Should close when close button is clicked', async () => {

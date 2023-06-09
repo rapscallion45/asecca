@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import HomeLayout from '@/layouts/home/HomeLayout';
@@ -30,10 +30,10 @@ const Home: NextPageWithLayout = () => (
       }}
     >
       <Avatar sx={{ m: 3, bgcolor: 'secondary.main', p: 4 }}>
-        <LockOutlinedIcon fontSize="large" />
+        <DashboardIcon fontSize="large" />
       </Avatar>
-      <Typography component="h1" variant="h5" color="common.white">
-        Log In
+      <Typography component="h1" variant="h5">
+        Asecca SPA
       </Typography>
       <Button
         component={Link}
@@ -43,7 +43,7 @@ const Home: NextPageWithLayout = () => (
         color="secondary"
         sx={{ mt: 4, mb: 2 }}
       >
-        Log In
+        Go to Dashboard
       </Button>
     </Box>
   </Container>

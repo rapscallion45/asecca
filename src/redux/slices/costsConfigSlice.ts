@@ -1,14 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  ICostsConfigData,
-  ICostsConfigDataPayload,
-} from '../../lib/api/api-types';
+import { ICostsConfigData, ICostsConfigDataPayload } from '@/lib/api/api-types';
 import costsConfigService from '../../services/costsConfigService';
 import {
+  ICostsConfigState,
   IFetchCostsConfigBySourceIdArgs,
   ISaveCostsConfigBySourceIdArgs,
   ICostsConfigEditCostsPayload,
-  ICostsConfigState,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 

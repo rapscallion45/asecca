@@ -1,5 +1,5 @@
-import { FC, useMemo, ReactNode } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useEffect, useMemo, ReactNode } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import {
@@ -10,6 +10,8 @@ import {
 } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { AppState } from '@/redux/store';
+import { setTheme } from '@/redux/slices/themeSlice';
+import { ThemeType } from '@/redux/types';
 import lightThemePalette from './lightTheme/lightThemePalette';
 import darkThemePalette from './darkTheme/darkThemePalette';
 import typography from './typography';
@@ -45,23 +47,28 @@ interface IThemeConfigProps {
  */
 const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
+  const dispatch = useDispatch();
 
   /* grab global theme state */
   const { type: themeType } = useSelector((state: AppState) => state.theme);
 
   /* check if user has dark mode preference */
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  useEffect(() => {
+    /* initially set user's browser's preference */
+    if (prefersDarkMode) dispatch(setTheme('dark'));
+    /* override with user's app specific preference, if exists */
+    if (typeof window !== undefined && localStorage.getItem('themepref'))
+      dispatch(setTheme(localStorage.getItem('themepref') as ThemeType));
+  }, [prefersDarkMode, dispatch]);
 
   /* get options and create theme for current state */
   const themeOptions: ThemeOptions = useMemo(
     () => ({
-      palette:
-        themeType === 'light' && !prefersDarkMode
-          ? lightThemePalette
-          : darkThemePalette,
+      palette: themeType === 'light' ? lightThemePalette : darkThemePalette,
       typography,
     }),
-    [themeType, prefersDarkMode]
+    [themeType]
   );
   const theme: Theme = createTheme(themeOptions);
 

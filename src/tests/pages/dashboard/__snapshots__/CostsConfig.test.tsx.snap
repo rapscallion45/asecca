@@ -6,7 +6,7 @@ exports[`Costs Config Page Renders correctly 1`] = `
     className="MuiBox-root css-78351c"
   >
     <h4
-      className="MuiTypography-root MuiTypography-h4 css-jek6lf-MuiTypography-root"
+      className="MuiTypography-root MuiTypography-h4 css-1qbrrsr-MuiTypography-root"
     >
       Costing Configuration - Lloyds Bank - 
       Global

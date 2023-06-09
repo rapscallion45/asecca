@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScrollBar Renders correctly 1`] = `
+<div
+  className="css-jjtu05"
+>
+  <div
+    className="css-1a0z2gx"
+    data-simplebar="init"
+    timeout={500}
+  >
+    <div
+      className="simplebar-wrapper"
+    >
+      <div
+        className="simplebar-height-auto-observer-wrapper"
+      >
+        <div
+          className="simplebar-height-auto-observer"
+        />
+      </div>
+      <div
+        className="simplebar-mask"
+      >
+        <div
+          className="simplebar-offset"
+        >
+          <div
+            aria-label="scrollable content"
+            className="simplebar-content-wrapper"
+            role="region"
+            tabIndex={0}
+          >
+            <div
+              className="simplebar-content"
+            >
+              <div>
+                Test child
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="simplebar-placeholder"
+      />
+    </div>
+    <div
+      className="simplebar-track simplebar-horizontal"
+    >
+      <div
+        className="simplebar-scrollbar"
+      />
+    </div>
+    <div
+      className="simplebar-track simplebar-vertical"
+    >
+      <div
+        className="simplebar-scrollbar"
+      />
+    </div>
+  </div>
+</div>
+`;
