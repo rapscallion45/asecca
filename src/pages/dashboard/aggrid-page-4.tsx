@@ -58,9 +58,7 @@ const AGGridTestPage: NextPageWithLayout = () => {
   return (
     <ClientOnly>
       <Box my={5}>
-        <Typography variant="h4" color="common.white">
-          AG-Grid Test Page 4
-        </Typography>
+        <Typography variant="h4">AG-Grid Test Page 4</Typography>
       </Box>
       <div
         className={`ag-theme-alpine ${

@@ -161,3 +161,85 @@ export interface ICostsConfigSaveDataPayload {
 export interface IProxyErrorPayload {
   message: string;
 }
+
+/**
+ * Kanban Board Subtask type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoardSubtask
+ * @prop {string} title - subtask title
+ * @prop {boolean} isCompleted - subtask completed flag
+ */
+export interface IKanbanBoardSubtask {
+  title: string;
+  isCompleted: boolean;
+}
+
+/**
+ * Kanban Board Task type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoardTask
+ * @prop {string} title - task title
+ * @prop {string} description - task description
+ * @prop {boolean} isCompleted - task completed flag
+ * @prop {string} status - task status
+ * @prop {Array<IKanbanBoardSubtask>} subtasks - subtasks belonging to task
+ */
+export interface IKanbanBoardTask {
+  title: string;
+  description: string;
+  status: any;
+  subtasks: Array<IKanbanBoardSubtask>;
+}
+
+/**
+ * Kanban Board Column type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoardColumn
+ * @prop {string} name - column name
+ * @prop {Array<IKanbanBoardTask>} tasks - column tasks
+ * @prop {string} id - column ID
+ */
+export interface IKanbanBoardColumn {
+  name: string;
+  tasks: Array<IKanbanBoardTask>;
+  id: string;
+}
+
+/**
+ * Kanban Board type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoard
+ * @prop {boolean} isActive - board active flag
+ * @prop {string} name - board name
+ * @prop {Array<IKanbanBoardColumn>} columns - board columns
+ */
+export interface IKanbanBoard {
+  isActive: boolean;
+  name: string;
+  columns: Array<IKanbanBoardColumn>;
+}
+
+/**
+ * Kanban board data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoardDataPayload
+ * @prop {Array<IKanbanBoard>} boards - kanban board dataset
+ */
+export interface IKanbanBoardDataPayload {
+  boards: Array<IKanbanBoard>;
+}

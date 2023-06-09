@@ -11,3 +11,4 @@
 /** @namespace UserPermissionReduxSlice */
 /** @namespace NotificationsReduxSlice */
 /** @namespace ThemeReduxSlice */
+/** @namespace KanbanReduxSlice */

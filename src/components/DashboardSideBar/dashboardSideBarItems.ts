@@ -1,5 +1,5 @@
 import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import TableViewIcon from '@mui/icons-material/TableView';
 import { INavItemConfig } from '../NavItem/types';
@@ -24,9 +24,9 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
     icon: HomeIcon,
   },
   {
-    title: 'my account',
-    path: '/dashboard/account',
-    icon: AccountCircleIcon,
+    title: 'kanban boards',
+    path: '/dashboard/kanban',
+    icon: ViewKanbanIcon,
   },
   {
     title: 'Configurators',

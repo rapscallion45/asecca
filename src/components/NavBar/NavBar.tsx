@@ -158,6 +158,14 @@ const NavBar: FC<INavBarProps> = (props) => {
     },
   }));
 
+  /**
+   * Callback that toggles global application theme
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @method
+   */
   const toggleTheme = () => {
     dispatch(setTheme(themeType === 'dark' ? 'light' : 'dark'));
   };

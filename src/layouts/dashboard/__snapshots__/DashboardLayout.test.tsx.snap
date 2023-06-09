@@ -236,7 +236,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </a>
                           <a
                             className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                            href="/dashboard/account"
+                            href="/dashboard/kanban"
                             onBlur={[Function]}
                             onClick={[Function]}
                             onContextMenu={[Function]}
@@ -257,18 +257,18 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             <svg
                               aria-hidden={true}
                               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
-                              data-testid="AccountCircleIcon"
+                              data-testid="ViewKanbanIcon"
                               focusable="false"
                               viewBox="0 0 24 24"
                             >
                               <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88C7.55 15.8 9.68 15 12 15s4.45.8 6.14 2.12C16.43 19.18 14.03 20 12 20z"
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7V7h2v10zm4-5h-2V7h2v5zm4 3h-2V7h2v8z"
                               />
                             </svg>
                             <div
                               className="MuiListItemText-root css-tlelie-MuiListItemText-root"
                             >
-                              my account
+                              kanban boards
                             </div>
                           </a>
                           <li
