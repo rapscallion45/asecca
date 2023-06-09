@@ -113,10 +113,11 @@ const KanbanPage: NextPageWithLayout = () => {
               </Box>
             </Box>
             <Divider />
-
-            {activeBoard.columns.map((col: IKanbanBoardColumn, index) => (
-              <Column key={col.id} colIndex={index} />
-            ))}
+            <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+              {activeBoard.columns.map((col: IKanbanBoardColumn, index) => (
+                <Column key={col.id} colIndex={index} />
+              ))}
+            </Box>
             {/* <div
             onClick={() => {
               setIsBoardModalOpen(true);

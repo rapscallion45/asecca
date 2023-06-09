@@ -78,32 +78,19 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
 
   return task ? (
     <>
-      {/* <div
-        onClick={() => {
-          setIsTaskModalOpen(true);
-        }}
-        draggable
-        onDragStart={handleOnDrag}
-        className=" w-[280px] first:my-5 rounded-lg  bg-white  dark:bg-[#2b2c37] shadow-[#364e7e1a] py-6 px-3 shadow-lg hover:text-[#635fc7] dark:text-white dark:hover:text-[#635fc7] cursor-pointer "
-      >
-        <p className=" font-bold tracking-wide ">{task?.title}</p>
-        <p className=" font-bold text-xs tracking-tighter mt-2 text-gray-500">
-          {completed} of {subtasks?.length} completed tasks
-        </p>
-      </div> */}
       <Card
         draggable
         // onClick={() => {
         //   setIsTaskModalOpen(true);
         // }}
         onDragStart={handleOnDrag}
-        sx={{ width: 275 }}
+        sx={{ width: 275, mb: 2 }}
       >
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Task
           </Typography>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" mb={1}>
             {task?.title}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">

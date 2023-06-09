@@ -18,6 +18,8 @@ import {
   IDeleteKanbanBoardTaskPayload,
 } from '../types';
 
+import kanbanDataMock from '../../../__mocks__/kanbanDataMock';
+
 /**
  * State slice definition for application's Kanban Board
  *
@@ -39,8 +41,8 @@ import {
  */
 const initialKanbanState: IKanbanBoardState = {
   loading: false,
-  data: { boards: [] },
-  dataShadow: { boards: [] },
+  data: { boards: kanbanDataMock.boards },
+  dataShadow: { boards: kanbanDataMock.boards },
   saving: false,
   edited: false,
 };

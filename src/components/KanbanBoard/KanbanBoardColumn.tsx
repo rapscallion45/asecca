@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Box, Typography } from '@mui/material';
+import CircleIcon from '@mui/icons-material/Circle';
 import { dragTask } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
@@ -34,6 +36,7 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
   const { colIndex } = props;
   const dispatch = useDispatch();
   const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
+  const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
 
   /* find this column in board state data from passed column index */
   const column = kanbanData.boards
@@ -76,20 +79,19 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
 
   /* if no column found in state datam return null */
   return column ? (
-    <div
-      onDrop={handleOnDrop}
-      onDragOver={handleOnDragOver}
-      className="scrollbar-hide   mx-5 pt-[90px] min-w-[280px] "
-    >
-      <p className=" font-semibold flex  items-center  gap-2 tracking-widest md:tracking-[.2em] text-[#828fa3]">
-        <div className="rounded-full w-4 h-4" />
-        {column.name} ({column.tasks.length})
-      </p>
+    <Box onDrop={handleOnDrop} onDragOver={handleOnDragOver} mr={2}>
+      <Box display="flex" flexDirection="row" my={2}>
+        {/* @ts-ignore */}
+        <CircleIcon fontSize="small" color={colColors[colIndex]} />
+        <Typography sx={{ ml: 1 }}>
+          {column.name} ({column.tasks.length})
+        </Typography>
+      </Box>
 
       {column.tasks.map((task: IKanbanBoardTask, index: number) => (
         <Task key={task.title} taskIndex={index} colIndex={colIndex} />
       ))}
-    </div>
+    </Box>
   ) : null;
 };
 
