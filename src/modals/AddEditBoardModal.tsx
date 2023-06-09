@@ -47,7 +47,7 @@ interface IAddEditBoardModalProps {
  *
  * @component
  * @param {IAddEditBoardModalProps} props - component props
- * @returns {FC} - kanban board add board functional component
+ * @returns {FC} - add edit board modal functional component
  */
 const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
   const { type, open, setIsBoardModalOpen } = props;

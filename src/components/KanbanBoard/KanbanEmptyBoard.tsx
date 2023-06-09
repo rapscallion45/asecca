@@ -3,22 +3,22 @@ import { Box, Button, Typography } from '@mui/material';
 import AddEditBoardModal from '@/modals/AddEditBoardModal';
 
 /**
- * Empty Board Props
+ * Kanban Empty Board Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
  *
- * @typedef IEmptyBoardProps
+ * @typedef IKanbanEmptyBoardProps
  * @prop {string} type - add or edit type to show whether board has content
  */
-interface IEmptyBoardProps {
+interface IKanbanEmptyBoardProps {
   type: string;
 }
 
 /**
- * Empty Board
+ * Kanban Empty Board
  *
- * Empty board interface for when no Kanban board data is loaded
+ * Kanban Empty board interface for when no Kanban board data is loaded
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
@@ -27,9 +27,9 @@ interface IEmptyBoardProps {
  * @param {IEmptyBoardProps} props - component props
  * @returns {FC} - empty board functional component
  */
-const EmptyBoard: FC<IEmptyBoardProps> = (props) => {
+const KanbanEmptyBoard: FC<IKanbanEmptyBoardProps> = (props) => {
   const { type } = props;
-  const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+  const [isBoardModalOpen, setIsBoardModalOpen] = useState<boolean>(false);
 
   return (
     <div className=" bg-white dark:bg-[#2b2c37] h-screen w-screen flex flex-col  items-center justify-center">
@@ -58,4 +58,4 @@ const EmptyBoard: FC<IEmptyBoardProps> = (props) => {
   );
 };
 
-export default EmptyBoard;
+export default KanbanEmptyBoard;
