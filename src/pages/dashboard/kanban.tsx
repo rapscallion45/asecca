@@ -4,10 +4,10 @@ import type { NextPageWithLayout } from 'next';
 import { Box, Typography, Skeleton, Divider } from '@mui/material';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
-import EmptyBoard from '@/components/KanbanBoard/KanbanEmptyBoard';
-import Column from '@/components/KanbanBoard/KanbanBoardColumn';
+import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
+import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ConfirmDialog from '@/modals/ConfirmModal';
+import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
 import { AppState } from '@/redux/store';
 import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn } from '@/lib/api/api-types';
@@ -128,7 +128,7 @@ const KanbanPage: NextPageWithLayout = () => {
           </div> */}
           </>
         ) : (
-          <EmptyBoard type="add" />
+          <KanbanBoardEmpty type="add" />
         )}
       </Box>
     </ClientOnly>

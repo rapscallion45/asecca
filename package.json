@@ -2,7 +2,7 @@
   "name": "asecca",
   "description": "Asecca front end client SPA",
   "author": "Carl Scrivener",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -32,6 +32,7 @@
     "base-64": "^1.0.0",
     "better-docs": "^2.7.2",
     "dotenv": "^16.0.3",
+    "formik": "^2.4.1",
     "jsdoc": "^4.0.2",
     "next": "13.2.4",
     "notistack": "^3.0.1",
@@ -43,7 +44,8 @@
     "redux-thunk": "^2.4.2",
     "simplebar": "^6.2.5",
     "simplebar-react": "^3.2.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

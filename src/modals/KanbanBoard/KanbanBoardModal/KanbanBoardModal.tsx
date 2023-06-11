@@ -21,24 +21,24 @@ import { IKanbanBoardColumn } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
 
 /**
- * Add Edit Board Modal Props
+ * Kanban Board Modal Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
  *
- * @typedef IAddEditBoardModalProps
- * @prop {string} type - flag to show or hide logo
+ * @typedef IKanbanBoardModalProps
+ * @prop {string} type - add or edit board modal
  * @prop {boolean} open - flag to show if modal is currently open
- * @prop {INavBarOnSidebarOpenCallback} setIsBoardModalOpen - callback handler for setting modal open
+ * @prop {any} setIsBoardModalOpen - callback handler for setting modal open
  */
-interface IAddEditBoardModalProps {
+interface IKanbanBoardModalProps {
   type: string;
   open: boolean;
   setIsBoardModalOpen: (open: boolean) => void;
 }
 
 /**
- * Add Edit Board Modal
+ * Kanban Board Modal
  *
  * Kanban Board interface add board modal component
  *
@@ -46,10 +46,10 @@ interface IAddEditBoardModalProps {
  * @since 0.0.1
  *
  * @component
- * @param {IAddEditBoardModalProps} props - component props
- * @returns {FC} - add edit board modal functional component
+ * @param {IKanbanBoardModalProps} props - component props
+ * @returns {FC} - kanban board modal functional component
  */
-const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
+const KanbanBoardModal: FC<IKanbanBoardModalProps> = (props) => {
   const { type, open, setIsBoardModalOpen } = props;
   const dispatch = useDispatch();
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
@@ -240,4 +240,4 @@ const AddEditBoardModal: FC<IAddEditBoardModalProps> = (props) => {
   );
 };
 
-export default AddEditBoardModal;
+export default KanbanBoardModal;

@@ -330,7 +330,7 @@ export interface IAddKanbanBoardTaskPayload {
  * @prop {string} description - task description
  * @prop {sting} status - task status
  * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
- * @prop {number} newColIndex - index of added column
+ * @prop {number} newColIndex - index of added task column
  * @prop {number} prevColIndex - previous index of column
  * @prop {number} taskIndex - index of task
  */

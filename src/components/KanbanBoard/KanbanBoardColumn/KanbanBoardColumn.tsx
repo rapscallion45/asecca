@@ -5,7 +5,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { dragTask } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
-import Task from './KanbanBoardTask';
+import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
 
 /**
  * Kanban Board Column Props
@@ -89,7 +89,11 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
       </Box>
 
       {column.tasks.map((task: IKanbanBoardTask, index: number) => (
-        <Task key={task.title} taskIndex={index} colIndex={colIndex} />
+        <KanbanBoardTask
+          key={task.title}
+          taskIndex={index}
+          colIndex={colIndex}
+        />
       ))}
     </Box>
   ) : null;
