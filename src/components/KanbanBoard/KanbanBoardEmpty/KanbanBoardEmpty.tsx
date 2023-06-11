@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import KanbanBoardModal from '@/modals/KanbanBoard/KanbanBoardModal/KanbanBoardModal';
 

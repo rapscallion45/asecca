@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
