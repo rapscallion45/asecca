@@ -62,7 +62,7 @@ const KanbanBoardModal: FC<IKanbanBoardModalProps> = (props) => {
   const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
   const activeBoard = kanbanData.boards?.find((board) => board.isActive);
 
-  /* on first load, prepare default columns for new board */
+  /* on first load, prepare local state with boards' column data */
   if (type === 'edit' && isFirstLoad) {
     setNewColumns(
       activeBoard?.columns.map((col: IKanbanBoardColumn) => ({
@@ -93,7 +93,7 @@ const KanbanBoardModal: FC<IKanbanBoardModalProps> = (props) => {
   };
 
   /**
-   * Callback handler for user input updates
+   * Callback handler for user input updates to columns
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.1

@@ -23,8 +23,8 @@ import { addTask, editTask } from '@/redux/slices/kanbanSlice';
  */
 const useKanbanBoardTaskFormController = (
   isEditMode: boolean,
-  currentData: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload,
-  closeModal: () => void
+  currentData?: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload,
+  closeModal?: () => void
 ) => {
   const dispatch = useDispatch();
   const { saving } = useSelector((state: AppState) => state.kanban);
@@ -58,10 +58,10 @@ const useKanbanBoardTaskFormController = (
   ) => {
     if (isEditMode) {
       dispatch(editTask(payload as IEditKanbanBoardTaskPayload));
-      closeModal();
+      if (closeModal) closeModal();
     } else {
       dispatch(addTask(payload as IAddKanbanBoardTaskPayload));
-      closeModal();
+      if (closeModal) closeModal();
     }
   };
 
@@ -75,8 +75,8 @@ const useKanbanBoardTaskFormController = (
    */
   const formik = useFormik({
     initialValues: {
-      title: currentData?.title || '',
-      description: currentData?.description || '',
+      title: currentData?.title || 'New Task',
+      description: currentData?.description || 'Enter task description...',
       subtasks: currentData?.subtasks || [],
       status: currentData?.status || 'Todo',
       newColIndex: currentData?.newColIndex || 0,
@@ -87,12 +87,14 @@ const useKanbanBoardTaskFormController = (
       description,
       subtasks,
       status,
+      newColIndex,
     }: IAddKanbanBoardTaskPayload) => {
       handleSubmit({
         title,
         description,
         subtasks,
         status,
+        newColIndex,
       } as IAddKanbanBoardTaskPayload);
     },
   });

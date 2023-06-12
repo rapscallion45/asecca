@@ -4,6 +4,10 @@ import {
   InputAdornment,
   CircularProgress,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import SubjectIcon from '@mui/icons-material/Subject';
@@ -26,8 +30,8 @@ import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
  */
 interface IKanbanBoardTaskFormProps {
   isEditMode: boolean;
-  currentData: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload;
-  closeModal: () => void;
+  currentData?: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload;
+  closeModal?: () => void;
 }
 
 /**
@@ -59,7 +63,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
         margin="normal"
         id="title"
         name="title"
-        label="Bug Title"
+        label="Task Title"
         type="text"
         value={formik.values.title}
         onChange={formik.handleChange}
@@ -96,6 +100,21 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           ),
         }}
       />
+      <FormControl fullWidth sx={{ mt: 2 }}>
+        <InputLabel id="status-label">Current Status</InputLabel>
+        <Select
+          labelId="status-label"
+          id="status"
+          name="status"
+          value={formik.values.status}
+          label="Current Status"
+          onChange={formik.handleChange}
+        >
+          <MenuItem value="Todo">Todo</MenuItem>
+          <MenuItem value="In Progress">In Progress</MenuItem>
+          <MenuItem value="Completed">Completed</MenuItem>
+        </Select>
+      </FormControl>
       {!isEditMode ? (
         <Button
           type="submit"
@@ -105,7 +124,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           disabled={saving}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
-          {!saving && 'Create Bug'}
+          {!saving && 'Add Task'}
           {saving && <CircularProgress size={25} color="inherit" />}
         </Button>
       ) : (

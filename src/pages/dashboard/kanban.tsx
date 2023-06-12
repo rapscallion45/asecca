@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { NextPageWithLayout } from 'next';
 import { Box, Typography, Skeleton, Divider } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
-import DeleteIcon from '@mui/icons-material/Delete';
+import MHidden from '@/components/@MUI-Extended/MHidden';
+import KanbanBoardTaskForm from '@/components/KanbanBoard/KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
 import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
+import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
 import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn } from '@/lib/api/api-types';
@@ -75,6 +79,26 @@ const KanbanPage: NextPageWithLayout = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
+                      <MHidden width="smDown">
+                        <Box
+                          display="flex"
+                          justifyContent="end"
+                          sx={{ flexGrow: 1, mr: 1 }}
+                        >
+                          <FormModal
+                            triggerBtn={{
+                              type: 'normal',
+                              // @ts-ignore
+                              icon: AddIcon,
+                              text: 'Add Task',
+                              color: 'secondary',
+                            }}
+                            title="Add New Task"
+                          >
+                            <KanbanBoardTaskForm isEditMode={false} />
+                          </FormModal>
+                        </Box>
+                      </MHidden>
                       <ConfirmDialog
                         title="Confirm Delete Board"
                         contentText={`Are you sure you want to permanently delete board "${activeBoard?.name}"?`}

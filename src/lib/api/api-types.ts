@@ -171,10 +171,12 @@ export interface IProxyErrorPayload {
  * @typedef IKanbanBoardSubtask
  * @prop {string} title - subtask title
  * @prop {boolean} isCompleted - subtask completed flag
+ * @prop {string} id - subtask ID
  */
 export interface IKanbanBoardSubtask {
   title: string;
   isCompleted: boolean;
+  id: string;
 }
 
 /**
