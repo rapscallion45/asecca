@@ -7,7 +7,7 @@ import {
   IKanbanBoardTask,
 } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
-import { IAddKanbanBoardTaskPayload } from '@/redux/types';
+import { IEditKanbanBoardTaskPayload } from '@/redux/types';
 import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
 // import TaskModal from "../modals/TaskModal";
 
@@ -55,12 +55,14 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
   const subtasks = task?.subtasks;
 
   /* build current data structure for this task */
-  const currentData: IAddKanbanBoardTaskPayload = {
+  const currentData: IEditKanbanBoardTaskPayload = {
     title: task?.title || '',
     description: task?.description || '',
     status: task?.status,
     subtasks: subtasks || [],
     newColIndex: colIndex,
+    taskIndex,
+    prevColIndex: colIndex,
   };
 
   /* calculate completed subtask number for this task */

@@ -1,59 +1,54 @@
 import { FC, useState, MouseEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
-import { AppState } from '@/redux/store';
-import { IEditKanbanBoardTaskPayload } from '@/redux/types';
-import { deleteTask } from '@/redux/slices/kanbanSlice';
+// import { AppState } from '@/redux/store';
+import { IKanbanBoard } from '@/lib/api/api-types';
+import { deleteBoard } from '@/redux/slices/kanbanSlice';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
 import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
 import FormDialog from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
-import { IKanbanBoard } from '@/lib/api/api-types';
-import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
+import KanbanBoardForm from './KanbanBoardForm';
 
 /**
- * Kanban Board Task Menu Props
+ * Kanban Board Menu Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.2
+ * @since 0.0.3
  *
- * @typedef IKanbanBoardTaskMenuProps
- * @prop {number} colIndex - column index of this task
- * @prop {number} taskIndex - index of task
- * @prop {IEditKanbanBoardTaskPayload} currentData - current task data
+ * @typedef IKanbanBoardMenuProps
+ * @prop {IKanbanBoard} currentData - current board data
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
-interface IKanbanBoardTaskMenuProps {
-  colIndex: number;
-  taskIndex: number;
-  currentData: IEditKanbanBoardTaskPayload;
+interface IKanbanBoardMenuProps {
+  currentData: IKanbanBoard;
   iconSize?: ModalButtonIconSizeType;
 }
 
 /**
- * Kanban Board Task Menu
+ * Kanban Board Menu
  *
- * Kanbaord board task menu interface
+ * Kanbaord board menu interface
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.2
+ * @since 0.0.3
  *
  * @component
- * @param {IKanbanBoardTaskMenuProps} props - component props
- * @returns {FC} - kanban board task menu functional component
+ * @param {IKanbanBoardMenuProps} props - component props
+ * @returns {FC} - kanban board menu functional component
  */
-const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
-  const { colIndex, taskIndex, currentData, iconSize } = props;
+const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
+  const { currentData, iconSize } = props;
   const dispatch = useDispatch();
-  const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
+  // const { deleting } = useSelector((state: AppState) => state.bugs);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   /**
-   * Callback listener for opening task menu popover
+   * Callback listener for opening board menu popover
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.2
@@ -66,7 +61,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
   };
 
   /**
-   * Callback listener for closing task menu popover
+   * Callback listener for closing board menu popover
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.2
@@ -78,24 +73,16 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
   };
 
   /**
-   * Callback listener for deleting task
+   * Callback listener for deleting board
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.2
    *
    * @method
-   * @param {number} deleteColIndex - column of task to be deleted
-   * @param {number} deleteTaskIndex - index of task to be deleted
    * @param {any} closeModal - callback for handling closing of modal
    */
-  const handleDelete = (
-    deleteColIndex: number,
-    deleteTaskIndex: number,
-    closeModal: () => void
-  ) => {
-    dispatch(
-      deleteTask({ colIndex: deleteColIndex, taskIndex: deleteTaskIndex })
-    );
+  const handleDelete = (closeModal: () => void) => {
+    dispatch(deleteBoard());
     closeModal();
   };
 
@@ -130,37 +117,31 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             // @ts-ignore
             icon: EditOutlinedIcon,
             iconStyle: { marginRight: '10px' },
-            text: 'Edit Task Info',
+            text: 'Edit Board Info',
             closeMenu: handleCloseMenu,
           }}
-          title="Edit Task Info"
+          title="Edit Board Info"
         >
-          <KanbanBoardTaskForm
+          <KanbanBoardForm
             isEditMode
-            columns={
-              kanbanData.boards.find((item: IKanbanBoard) => item.isActive)
-                ?.columns || []
-            }
             currentData={currentData}
             closeModal={handleCloseMenu}
           />
         </FormDialog>
         <ConfirmDialog
-          title="Confirm Delete Task"
-          contentText="Are you sure you want to permanently delete this task?"
+          title="Confirm Delete Board"
+          contentText="Are you sure you want to permanently delete this board?"
           actionBtnText="Delete"
           triggerBtn={{
             type: 'menu',
-            text: 'Delete Task',
+            text: 'Delete Board',
             // @ts-ignore
             icon: DeleteOutlineIcon,
             iconStyle: { marginRight: '10px' },
             closeMenu: handleCloseMenu,
           }}
           // processing={deleting}
-          actionFunc={(closeDialog) =>
-            handleDelete(colIndex, taskIndex, closeDialog)
-          }
+          actionFunc={(closeModal) => handleDelete(closeModal)}
         />
 
         <Box sx={{ p: 2, pt: 1.5 }}>
@@ -177,4 +158,4 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
     </>
   );
 };
-export default KanbanBoardTaskMenu;
+export default KanbanBoardkMenu;

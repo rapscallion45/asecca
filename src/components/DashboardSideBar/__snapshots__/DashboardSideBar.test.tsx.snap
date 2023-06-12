@@ -198,7 +198,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                         </li>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/aggrid-page-1"
+                          href="/dashboard/tables/devices"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
@@ -230,12 +230,12 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                           <div
                             className="MuiListItemText-root css-tlelie-MuiListItemText-root"
                           >
-                            Table 1
+                            Devices
                           </div>
                         </a>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/aggrid-page-2"
+                          href="/dashboard/tables/aggrid-page-2"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
@@ -272,7 +272,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                         </a>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/aggrid-page-3"
+                          href="/dashboard/tables/aggrid-page-3"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
@@ -309,7 +309,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                         </a>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-39qg4h-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/aggrid-page-4"
+                          href="/dashboard/tables/aggrid-page-4"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
