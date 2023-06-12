@@ -3,7 +3,7 @@ import {
   ICostsConfigData,
   ICostsConfigSaveDataCosts,
   ICostsConfigSaveDataPayload,
-  ICostsConfigSaveDataSelection,
+  ICostsConfigDataSelection,
 } from '@/lib/api/api-types';
 
 /**
@@ -47,9 +47,8 @@ const getCostsConfigPostData = (
     }));
 
   /* get the selection param */
-  const selection: ICostsConfigSaveDataSelection = {
-    [source.toLowerCase() as keyof ICostsConfigSaveDataSelection]:
-      dataId as string,
+  const selection: ICostsConfigDataSelection = {
+    [source.toLowerCase() as keyof ICostsConfigDataSelection]: dataId as string,
   };
 
   return { costs, selection };

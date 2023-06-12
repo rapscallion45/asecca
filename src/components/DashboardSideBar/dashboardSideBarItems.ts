@@ -40,23 +40,23 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
     title: 'Tables',
   },
   {
-    title: 'Table 1',
-    path: '/dashboard/aggrid-page-1',
+    title: 'Devices',
+    path: '/dashboard/tables/devices',
     icon: TableViewIcon,
   },
   {
     title: 'Table 2',
-    path: '/dashboard/aggrid-page-2',
+    path: '/dashboard/tables/aggrid-page-2',
     icon: TableViewIcon,
   },
   {
     title: 'Table 3',
-    path: '/dashboard/aggrid-page-3',
+    path: '/dashboard/tables/aggrid-page-3',
     icon: TableViewIcon,
   },
   {
     title: 'Table 4',
-    path: '/dashboard/aggrid-page-4',
+    path: '/dashboard/tables/aggrid-page-4',
     icon: TableViewIcon,
   },
 ];

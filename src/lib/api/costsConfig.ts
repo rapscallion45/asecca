@@ -2,7 +2,7 @@ import base64 from 'base-64';
 import queryString from 'query-string';
 import {
   ICostsConfigSaveDataPayload,
-  ICostsConfigSaveDataSelection,
+  ICostsConfigDataSelection,
 } from '@/lib/api/api-types';
 
 /**
@@ -14,17 +14,17 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
 
 /**
- * GET request to Asecca API /costs-config
+ * GET request to Asecca API /cost-config/api/const_config
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  * @memberof AseccaAPI
  *
- * @param {Partial<ICostsConfigSaveDataSelection>} query - request query
+ * @param {Partial<ICostsConfigDataSelection>} query - request query selection
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
 export async function getCostsConfig(
-  query: Partial<ICostsConfigSaveDataSelection>
+  query: Partial<ICostsConfigDataSelection>
 ) {
   /* setup GET request options with basic auth */
   const requestOptions = {
@@ -48,7 +48,7 @@ export async function getCostsConfig(
 }
 
 /**
- * POST request to Asecca API /costs-config
+ * POST request to Asecca API /cost-config/api/const_config
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0

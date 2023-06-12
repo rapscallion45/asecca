@@ -116,18 +116,18 @@ export interface ICostsConfigSaveDataCosts {
 }
 
 /**
- * Costs Config POST data Selection type definition
+ * Costs Config data selection type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
- * @typedef ICostsConfigSaveDataSelection
+ * @typedef ICostsConfigDataSelection
  * @prop {string} collection - collection ID to use as selection
  * @prop {string} project - project ID to use as selection
  * @prop {string} customer - customer ID to use as selection
  * @prop {string} global - global ID to use as selection
  */
-export interface ICostsConfigSaveDataSelection {
+export interface ICostsConfigDataSelection {
   collection?: string;
   project?: string;
   customer?: string;
@@ -146,7 +146,7 @@ export interface ICostsConfigSaveDataSelection {
  */
 export interface ICostsConfigSaveDataPayload {
   costs: Array<ICostsConfigSaveDataCosts>;
-  selection: ICostsConfigSaveDataSelection;
+  selection: ICostsConfigDataSelection;
 }
 
 /**
