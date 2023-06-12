@@ -9,6 +9,7 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import MHidden from '@/components/@MUI-Extended/MHidden';
+import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
 import KanbanBoardTaskForm from '@/components/KanbanBoard/KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
 import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
@@ -114,14 +115,7 @@ const KanbanPage: NextPageWithLayout = () => {
                           handleDeleteBoard(closeModal)
                         }
                       />
-                      {/* <KanbanBoardMenu
-                        projectId={projectData?.id}
-                        currentName={projectData?.name}
-                        currentMembers={projectData?.members.map(
-                          (m) => m.member.id
-                        )}
-                        isAdmin={isAdmin}
-                      /> */}
+                      <KanbanBoardMenu currentData={activeBoard} />
                     </Box>
                   </Box>
                 ) : (
