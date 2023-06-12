@@ -6,7 +6,7 @@ import navItems from '../../../__mocks__/dashboardSideBarItemsMock';
 
 /* mock function for checking currently active nav item URI */
 const mockActivePathCheckCallback = (path: string | undefined) =>
-  Boolean(path) ?? false;
+  path === 'home';
 
 /**
  * Nav Item Unit Tests
