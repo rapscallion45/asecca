@@ -42,7 +42,7 @@ export async function getCostsConfig(
 
   /* fetch the costs config */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/api/costs_config?${queryParamString}`,
+    `${STAGING_DB_REST_API_URL}/cost_config/api/cost_config?${queryParamString}`,
     requestOptions
   );
 }
@@ -71,5 +71,8 @@ export async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   };
 
   /* send the costs config */
-  return fetch(`${STAGING_DB_REST_API_URL}/api/costs_config`, requestOptions);
+  return fetch(
+    `${STAGING_DB_REST_API_URL}/cost_config/api/cost_config`,
+    requestOptions
+  );
 }
