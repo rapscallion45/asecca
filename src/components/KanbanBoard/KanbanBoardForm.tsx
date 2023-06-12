@@ -1,12 +1,19 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
+  Box,
+  IconButton,
   Button,
+  TextField,
+  FormControl,
+  Input,
   InputAdornment,
   CircularProgress,
-  TextField,
+  Typography,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { v4 as uuidv4 } from 'uuid';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { IKanbanBoard } from '@/lib/api/api-types';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import useKanbanBoardFormController from './KanbanBoardFormController';
 
 /**
@@ -41,11 +48,51 @@ interface IKanbanBoardFormProps {
  */
 const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
   const { isEditMode, currentData, closeModal } = props;
+  const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
+    currentData?.columns || [
+      { name: 'Todo', tasks: [], id: uuidv4() },
+      { name: 'In Progress', tasks: [], id: uuidv4() },
+      { name: 'Completed', tasks: [], id: uuidv4() },
+    ]
+  );
   const { saving, formik } = useKanbanBoardFormController(
     isEditMode,
+    newColumns,
     currentData,
     closeModal
   );
+
+  /**
+   * Callback handler for user input updates to columns
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @method
+   * @param {string} id - column id that has been updated
+   * @param {string} newValue - updated value for column name
+   */
+  const onChange = (id: string, newValue: string) => {
+    setNewColumns((prevState) => {
+      const newState = [...prevState];
+      const column = newState.find((col) => col.id === id);
+      if (column) column.name = newValue;
+      return newState;
+    });
+  };
+
+  /**
+   * Callback handler for column deletion
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @method
+   * @param {string} id - column ID to be deleted
+   */
+  const onDelete = (id: string) => {
+    setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -70,6 +117,51 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
           ),
         }}
       />
+      <Box mt={2}>
+        <Typography>Board Columns</Typography>
+        {newColumns.map((column: IKanbanBoardColumn) => (
+          <Box key={column.id}>
+            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+              <Input
+                id="board-columns-form"
+                type="text"
+                value={column.name}
+                onChange={(e) => {
+                  onChange(column.id, e.target.value);
+                }}
+                placeholder="Enter column name..."
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        onDelete(column.id);
+                      }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Box>
+        ))}
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              setNewColumns((state) => [
+                ...state,
+                { name: '', tasks: [], id: uuidv4() },
+              ]);
+            }}
+            fullWidth
+          >
+            + Add New Column
+          </Button>
+        </Box>
+      </Box>
       {!isEditMode ? (
         <Button
           type="submit"

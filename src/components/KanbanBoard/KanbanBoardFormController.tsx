@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { IAddKanbanBoardPayload, IEditKanbanBoardPayload } from '@/redux/types';
 import { AppState } from '@/redux/store';
 import { addBoard, editBoard } from '@/redux/slices/kanbanSlice';
-import { IKanbanBoard } from '@/lib/api/api-types';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 
 /**
  * Kanban board form controller hook, used for board form logic,
@@ -17,10 +17,12 @@ import { IKanbanBoard } from '@/lib/api/api-types';
  * @function
  * @param {boolean} isEditMode - is form creating a new board or editing existing task
  * @param {IKanbanBoard} currentData - board data
+ * @param {Array<IKanbanBoardColumn>} newColumns - form column state data
  * @param {any} closeModal - callback for closing the board form modal
  */
 const useKanbanBoardFormController = (
   isEditMode: boolean,
+  newColumns: Array<IKanbanBoardColumn>,
   currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
@@ -71,11 +73,11 @@ const useKanbanBoardFormController = (
   const formik = useFormik({
     initialValues: {
       name: currentData?.name || 'New Board',
-      newColumns: currentData?.columns || [],
+      newColumns: newColumns || [],
     },
     validationSchema,
     onSubmit: (payload: IEditKanbanBoardPayload) => {
-      handleSubmit(payload as IEditKanbanBoardPayload);
+      handleSubmit({ name: payload.name, newColumns });
     },
   });
 
