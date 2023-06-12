@@ -55,7 +55,7 @@ export const mockHandlers = [
     CostsConfigGetRequestBody,
     CostsConfigGetRequestParams,
     CostsConfigGetResponseBody
-  >('/api/cost_config', async (req, res, ctx) =>
+  >('/api/costs_config', async (req, res, ctx) =>
     /** return mock costs config data */
     res(ctx.status(200), ctx.json({ costs: costsConfigDataMock.costs }))
   ),
