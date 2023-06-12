@@ -18,12 +18,12 @@ import { addTask, editTask } from '@/redux/slices/kanbanSlice';
  *
  * @function
  * @param {boolean} isEditMode - is form creating a new task or editing existing task
- * @param {IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload} currentData - task data
+ * @param {IEditKanbanBoardTaskPayload} currentData - task data
  * @param {any} closeModal - callback for closing the task form modal
  */
 const useKanbanBoardTaskFormController = (
   isEditMode: boolean,
-  currentData?: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload,
+  currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
   const dispatch = useDispatch();
@@ -51,11 +51,9 @@ const useKanbanBoardTaskFormController = (
    * @since 0.0.2
    *
    * @method
-   * @param {IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload} payload - data to be submitted
+   * @param {IEditKanbanBoardTaskPayload} payload - data to be submitted
    */
-  const handleSubmit = (
-    payload: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload
-  ) => {
+  const handleSubmit = (payload: IEditKanbanBoardTaskPayload) => {
     if (isEditMode) {
       dispatch(editTask(payload as IEditKanbanBoardTaskPayload));
       if (closeModal) closeModal();
@@ -79,23 +77,13 @@ const useKanbanBoardTaskFormController = (
       description: currentData?.description || 'Enter task description...',
       subtasks: currentData?.subtasks || [],
       status: currentData?.status || 'Todo',
+      taskIndex: currentData?.taskIndex || 0,
       newColIndex: currentData?.newColIndex || 0,
+      prevColIndex: currentData?.prevColIndex || 0,
     },
     validationSchema,
-    onSubmit: ({
-      title,
-      description,
-      subtasks,
-      status,
-      newColIndex,
-    }: IAddKanbanBoardTaskPayload) => {
-      handleSubmit({
-        title,
-        description,
-        subtasks,
-        status,
-        newColIndex,
-      } as IAddKanbanBoardTaskPayload);
+    onSubmit: (payload: IEditKanbanBoardTaskPayload) => {
+      handleSubmit(payload as IEditKanbanBoardTaskPayload);
     },
   });
 

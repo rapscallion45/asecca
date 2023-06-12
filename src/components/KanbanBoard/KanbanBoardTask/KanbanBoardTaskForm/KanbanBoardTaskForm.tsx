@@ -11,10 +11,7 @@ import {
 } from '@mui/material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import SubjectIcon from '@mui/icons-material/Subject';
-import {
-  IAddKanbanBoardTaskPayload,
-  IEditKanbanBoardTaskPayload,
-} from '@/redux/types';
+import { IEditKanbanBoardTaskPayload } from '@/redux/types';
 import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
 
 /**
@@ -25,12 +22,12 @@ import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
  *
  * @typedef IKanbanBoardTaskFormProps
  * @prop {boolean} isEditMode - determines whether this is a new task or editing
- * @prop {IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload} currentData - task data
+ * @prop {IEditKanbanBoardTaskPayload} currentData - task data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardTaskFormProps {
   isEditMode: boolean;
-  currentData?: IAddKanbanBoardTaskPayload | IEditKanbanBoardTaskPayload;
+  currentData?: IEditKanbanBoardTaskPayload;
   closeModal?: () => void;
 }
 
