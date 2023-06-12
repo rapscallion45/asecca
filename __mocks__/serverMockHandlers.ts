@@ -55,7 +55,7 @@ export const mockHandlers = [
     CostsConfigGetRequestBody,
     CostsConfigGetRequestParams,
     CostsConfigGetResponseBody
-  >('/api/costs_config', async (req, res, ctx) =>
+  >('/api/cost_config', async (req, res, ctx) =>
     /** return mock costs config data */
     res(ctx.status(200), ctx.json({ costs: costsConfigDataMock.costs }))
   ),
@@ -70,7 +70,7 @@ export const mockHandlers = [
     CostsConfigGetRequestParams,
     CostsConfigGetResponseBody
   >(
-    `${process.env.STAGING_DB_REST_API_URL}/api/costs_config`,
+    `${process.env.STAGING_DB_REST_API_URL}/cost_config/api/cost_config`,
     async (req, res, ctx) =>
       /** return mock costs config data */
       res(ctx.status(200), ctx.json({ costs: costsConfigDataMock.costs }))
@@ -100,7 +100,7 @@ export const mockHandlers = [
     CostsConfigPostRequestParams,
     CostsConfigPostResponseBody
   >(
-    `${process.env.STAGING_DB_REST_API_URL}/api/costs_config`,
+    `${process.env.STAGING_DB_REST_API_URL}/cost_config/api/cost_config`,
     async (req, res, ctx) =>
       /** return 200, no payload */
       res(ctx.status(200))

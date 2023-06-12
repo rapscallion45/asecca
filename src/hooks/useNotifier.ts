@@ -44,6 +44,7 @@ const useNotifier = () => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
+   * @method
    * @param {SnackbarKey} id - ID of the notification to be stored in list
    */
   const storeDisplayed = (id: SnackbarKey) => {
@@ -56,6 +57,7 @@ const useNotifier = () => {
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.0
    *
+   * @method
    * @param {SnackbarKey} id - ID of the notification to be removed from list
    */
   const removeDisplayed = (id: SnackbarKey) => {

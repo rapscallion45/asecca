@@ -16,7 +16,7 @@ jest.mock('query-string', () => ({
  * @since 0.0.0
  */
 describe('Costs Config API Routes', () => {
-  describe('GET /api/costs_config', () => {
+  describe('GET /cost_config/api/cost_config', () => {
     it('returns expected data', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -55,7 +55,7 @@ describe('Costs Config API Routes', () => {
     });
   });
 
-  describe('POST /api/costs_config', () => {
+  describe('POST /cost_config/api/cost_config', () => {
     it('returns expected response', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -89,7 +89,7 @@ describe('Costs Config API Routes', () => {
     });
   });
 
-  describe('PUT /api/costs_config', () => {
+  describe('PUT /cost_config/api/cost_config', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -104,7 +104,7 @@ describe('Costs Config API Routes', () => {
     });
   });
 
-  describe('DELETE /api/costs_config', () => {
+  describe('DELETE /cost_config/api/cost_config', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({

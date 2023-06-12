@@ -1,24 +1,24 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import AddEditBoardModal from '@/modals/AddEditBoardModal';
+import KanbanBoardModal from '@/modals/KanbanBoard/KanbanBoardModal/KanbanBoardModal';
 
 /**
- * Kanban Empty Board Props
+ * Kanban Board Empty Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
  *
- * @typedef IKanbanEmptyBoardProps
+ * @typedef IKanbanBoardEmptyProps
  * @prop {string} type - add or edit type to show whether board has content
  */
-interface IKanbanEmptyBoardProps {
+interface IKanbanBoardEmptyProps {
   type: string;
 }
 
 /**
- * Kanban Empty Board
+ * Kanban Board Empty
  *
- * Kanban Empty board interface for when no Kanban board data is loaded
+ * Kanban board empty interface for when no Kanban board data is loaded
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
@@ -27,7 +27,7 @@ interface IKanbanEmptyBoardProps {
  * @param {IEmptyBoardProps} props - component props
  * @returns {FC} - empty board functional component
  */
-const KanbanEmptyBoard: FC<IKanbanEmptyBoardProps> = (props) => {
+const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
   const { type } = props;
   const [isBoardModalOpen, setIsBoardModalOpen] = useState<boolean>(false);
 
@@ -49,7 +49,7 @@ const KanbanEmptyBoard: FC<IKanbanEmptyBoardProps> = (props) => {
           {type === 'edit' ? '+ Add New Column' : '+ Add New Board'}
         </Button>
       </Box>
-      <AddEditBoardModal
+      <KanbanBoardModal
         type={type}
         open={isBoardModalOpen}
         setIsBoardModalOpen={setIsBoardModalOpen}
@@ -58,4 +58,4 @@ const KanbanEmptyBoard: FC<IKanbanEmptyBoardProps> = (props) => {
   );
 };
 
-export default KanbanEmptyBoard;
+export default KanbanBoardEmpty;

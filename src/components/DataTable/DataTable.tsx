@@ -82,9 +82,10 @@ const DataTable: FC<IDataTableProps> = (props) => {
               {/* check loading and error states, and if we have data */}
               {!isLoading && !error && rows.length > 0 && (
                 <>
-                  {/* map passed rows */}
+                  {/* map passed rows - use index as there is no ID */}
+                  {/* eslint-disable react/no-array-index-key */}
                   {rows?.map((row: IDataTableRow, index: number) => (
-                    <Fragment key={row.label}>
+                    <Fragment key={`${row.label}-${index}`}>
                       <DataRow
                         rowName={row.label}
                         rowIdx={index}
@@ -95,6 +96,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                       />
                     </Fragment>
                   ))}
+                  {/* eslint-enable react/no-array-index-key */}
                 </>
               )}
               {/* passed error state */}
