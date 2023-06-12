@@ -12,6 +12,7 @@ import {
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import SubjectIcon from '@mui/icons-material/Subject';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
 
 /**
@@ -22,11 +23,13 @@ import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
  *
  * @typedef IKanbanBoardTaskFormProps
  * @prop {boolean} isEditMode - determines whether this is a new task or editing
+ * @prop {Array<IKanbanBoardColumn>} columns - columns for task's board
  * @prop {IEditKanbanBoardTaskPayload} currentData - task data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardTaskFormProps {
   isEditMode: boolean;
+  columns: Array<IKanbanBoardColumn>;
   currentData?: IEditKanbanBoardTaskPayload;
   closeModal?: () => void;
 }
@@ -45,7 +48,7 @@ interface IKanbanBoardTaskFormProps {
  * @returns {FC} - kanaban board task form functional component
  */
 const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
-  const { isEditMode, currentData, closeModal } = props;
+  const { isEditMode, columns, currentData, closeModal } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
     currentData,
@@ -107,9 +110,9 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           label="Current Status"
           onChange={formik.handleChange}
         >
-          <MenuItem value="Todo">Todo</MenuItem>
-          <MenuItem value="In Progress">In Progress</MenuItem>
-          <MenuItem value="Completed">Completed</MenuItem>
+          {columns.map((col: IKanbanBoardColumn) => (
+            <MenuItem value={col.name}>{col.name}</MenuItem>
+          ))}
         </Select>
       </FormControl>
       {!isEditMode ? (

@@ -96,7 +96,10 @@ const KanbanPage: NextPageWithLayout = () => {
                             }}
                             title="Add New Task"
                           >
-                            <KanbanBoardTaskForm isEditMode={false} />
+                            <KanbanBoardTaskForm
+                              isEditMode={false}
+                              columns={activeBoard?.columns}
+                            />
                           </FormModal>
                         </Box>
                       </MHidden>

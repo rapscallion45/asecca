@@ -1,17 +1,18 @@
 import { FC, useState, MouseEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
-// import { AppState } from '@/redux/store';
+import { AppState } from '@/redux/store';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
 import { deleteTask } from '@/redux/slices/kanbanSlice';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
 import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
 import FormDialog from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
+import { IKanbanBoard } from '@/lib/api/api-types';
 import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
 
 /**
@@ -48,7 +49,7 @@ interface IKanbanBoardTaskMenuProps {
 const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
   const { colIndex, taskIndex, currentData, iconSize } = props;
   const dispatch = useDispatch();
-  // const { deleting } = useSelector((state: AppState) => state.bugs);
+  const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   /**
@@ -136,6 +137,10 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
         >
           <KanbanBoardTaskForm
             isEditMode
+            columns={
+              kanbanData.boards.find((item: IKanbanBoard) => item.isActive)
+                ?.columns || []
+            }
             currentData={currentData}
             closeModal={handleCloseMenu}
           />
