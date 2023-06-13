@@ -44,7 +44,7 @@ const DevicesTable: NextPageWithLayout = () => {
   const defaultColDef = useMemo(
     () => ({
       flex: 1,
-      minWidth: 150,
+      minWidth: 100,
       filter: true,
       resizable: true,
       sortable: true,
