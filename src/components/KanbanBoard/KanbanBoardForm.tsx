@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useState, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Box,
   IconButton,
@@ -11,7 +12,6 @@ import {
   Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { v4 as uuidv4 } from 'uuid';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import useKanbanBoardFormController from './KanbanBoardFormController';
@@ -69,17 +69,17 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
    * @since 0.0.3
    *
    * @method
-   * @param {string} id - column id that has been updated
+   * @param {string} id - column ID that has been updated
    * @param {string} newValue - updated value for column name
    */
-  const onChange = (id: string, newValue: string) => {
-    setNewColumns((prevState) => {
+  const onChange = useCallback((id: string, newValue: string) => {
+    setNewColumns((prevState: Array<IKanbanBoardColumn>) => {
       const newState = [...prevState];
-      const column = newState.find((col) => col.id === id);
+      const column = newState.find((col: IKanbanBoardColumn) => col.id === id);
       if (column) column.name = newValue;
       return newState;
     });
-  };
+  }, []);
 
   /**
    * Callback handler for column deletion
@@ -90,9 +90,9 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
    * @method
    * @param {string} id - column ID to be deleted
    */
-  const onDelete = (id: string) => {
+  const onDelete = useCallback((id: string) => {
     setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
-  };
+  }, []);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -133,7 +133,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
-                      aria-label="toggle password visibility"
+                      aria-label="delete column"
                       onClick={() => {
                         onDelete(column.id);
                       }}
@@ -151,7 +151,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
             variant="outlined"
             color="secondary"
             onClick={() => {
-              setNewColumns((state) => [
+              setNewColumns((state: Array<IKanbanBoardColumn>) => [
                 ...state,
                 { name: '', tasks: [], id: uuidv4() },
               ]);

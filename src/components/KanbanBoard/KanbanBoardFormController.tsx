@@ -44,6 +44,18 @@ const useKanbanBoardFormController = (
   });
 
   /**
+   * Checks whether user entries for columns are in the correct format
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   * @returns {boolean} - whether user entry is validated
+   */
+  const validate = () =>
+    !newColumns.some((newColumn: IKanbanBoardColumn) => !newColumn.name.trim());
+
+  /**
    * Data submission handler for board form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -53,6 +65,7 @@ const useKanbanBoardFormController = (
    * @param {IEditKanbanBoardPayload} payload - data to be submitted
    */
   const handleSubmit = (payload: IEditKanbanBoardPayload) => {
+    if (!validate()) return;
     if (isEditMode) {
       dispatch(editBoard(payload as IEditKanbanBoardPayload));
       if (closeModal) closeModal();

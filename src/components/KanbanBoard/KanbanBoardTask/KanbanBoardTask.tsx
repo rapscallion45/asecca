@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import {
@@ -67,11 +67,13 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
 
   /* calculate completed subtask number for this task */
   let completed = 0;
-  subtasks?.forEach((subtask) => {
-    if (subtask.isCompleted) {
-      completed += 1;
-    }
-  });
+  if (subtasks && subtasks?.length > 0) {
+    subtasks.forEach((subtask) => {
+      if (subtask.isCompleted) {
+        completed += 1;
+      }
+    });
+  }
 
   /**
    * Callback listens for drag of task
@@ -82,12 +84,15 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
    * @method
    * @param {any} event - object change event
    */
-  const handleOnDrag = (event: any) => {
-    event.dataTransfer.setData(
-      'text',
-      JSON.stringify({ taskIndex, prevColIndex: colIndex })
-    );
-  };
+  const handleOnDrag = useCallback(
+    (event: any) => {
+      event.dataTransfer.setData(
+        'text',
+        JSON.stringify({ taskIndex, prevColIndex: colIndex })
+      );
+    },
+    [taskIndex, colIndex]
+  );
 
   return task ? (
     <Card
@@ -114,9 +119,11 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
         <Typography variant="h5" component="div" mb={1}>
           {task?.title}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {completed} of {subtasks?.length} tasks complete
-        </Typography>
+        {subtasks && subtasks.length > 0 && (
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            {completed} of {subtasks.length} tasks complete
+          </Typography>
+        )}
         <Typography variant="body2">{task?.description}</Typography>
       </CardContent>
     </Card>

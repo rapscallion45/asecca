@@ -1,18 +1,24 @@
-import { FC } from 'react';
+import { FC, useState, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
+  Box,
   Button,
   InputAdornment,
   CircularProgress,
   TextField,
+  Typography,
   FormControl,
+  Input,
   InputLabel,
+  IconButton,
   Select,
   MenuItem,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import SubjectIcon from '@mui/icons-material/Subject';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
-import { IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoardColumn, IKanbanBoardSubtask } from '@/lib/api/api-types';
 import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
 
 /**
@@ -49,12 +55,50 @@ interface IKanbanBoardTaskFormProps {
  */
 const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
   const { isEditMode, columns, currentData, closeModal } = props;
+  const [newSubtasks, setNewSubtasks] = useState<Array<IKanbanBoardSubtask>>(
+    currentData?.subtasks || []
+  );
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
     columns,
+    newSubtasks,
     currentData,
     closeModal
   );
+
+  /**
+   * Callback handler for user input updates to subtasks
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   * @param {string} id - subtask ID that has been updated
+   * @param {string} newValue - updated value for subtask title
+   */
+  const onChange = useCallback((id: string, newValue: string) => {
+    setNewSubtasks((prevState: Array<IKanbanBoardSubtask>) => {
+      const newState = [...prevState];
+      const subtask = newState.find(
+        (subtaskItem: IKanbanBoardSubtask) => subtaskItem.id === id
+      );
+      if (subtask) subtask.title = newValue;
+      return newState;
+    });
+  }, []);
+
+  /**
+   * Callback handler for subtask deletion
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   * @param {string} id - subtask ID to be deleted
+   */
+  const onDelete = useCallback((id: string) => {
+    setNewSubtasks((prevState) => prevState.filter((el) => el.id !== id));
+  }, []);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -101,6 +145,52 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           ),
         }}
       />
+      <Box my={2}>
+        <Typography>Subtasks</Typography>
+        {newSubtasks.length > 0 &&
+          newSubtasks?.map((subtask: IKanbanBoardSubtask) => (
+            <Box key={subtask.id}>
+              <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                <Input
+                  id="task-subtask-form"
+                  type="text"
+                  value={subtask.title}
+                  onChange={(e) => {
+                    onChange(subtask.id, e.target.value);
+                  }}
+                  placeholder="Enter subtask title..."
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="delete subtask"
+                        onClick={() => {
+                          onDelete(subtask.id);
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Box>
+          ))}
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              setNewSubtasks((state: Array<IKanbanBoardSubtask>) => [
+                ...state,
+                { title: '', isCompleted: false, id: uuidv4() },
+              ]);
+            }}
+            fullWidth
+          >
+            + Add New Subtask
+          </Button>
+        </Box>
+      </Box>
       <FormControl fullWidth sx={{ mt: 2 }}>
         <InputLabel id="status-label">Current Status</InputLabel>
         <Select
