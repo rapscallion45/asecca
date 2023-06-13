@@ -70,7 +70,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
    * Callback handler for user input updates to subtasks
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.4
+   * @since 0.0.2
    *
    * @method
    * @param {string} id - subtask ID that has been updated
@@ -91,7 +91,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
    * Callback handler for subtask deletion
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.4
+   * @since 0.0.2
    *
    * @method
    * @param {string} id - subtask ID to be deleted
@@ -202,7 +202,9 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           onChange={formik.handleChange}
         >
           {columns.map((col: IKanbanBoardColumn) => (
-            <MenuItem value={col.name}>{col.name}</MenuItem>
+            <MenuItem key={col.id} value={col.name}>
+              {col.name}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

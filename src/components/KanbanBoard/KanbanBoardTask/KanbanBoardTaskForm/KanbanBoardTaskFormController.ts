@@ -96,8 +96,12 @@ const useKanbanBoardTaskFormController = (
       subtasks: currentData?.subtasks || [],
       status: currentData?.status || 'Todo',
       taskIndex: currentData?.taskIndex || 0,
-      newColIndex: currentData?.newColIndex || 0,
-      prevColIndex: currentData?.prevColIndex || 0,
+      newColIndex: columns.findIndex(
+        (col: IKanbanBoardColumn) => col.name === currentData?.status
+      ),
+      prevColIndex: columns.findIndex(
+        (col: IKanbanBoardColumn) => col.name === currentData?.status
+      ),
     },
     validationSchema,
     onSubmit: (payload: IEditKanbanBoardTaskPayload) => {
