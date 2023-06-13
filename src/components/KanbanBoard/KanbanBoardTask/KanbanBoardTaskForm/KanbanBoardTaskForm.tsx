@@ -51,6 +51,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
   const { isEditMode, columns, currentData, closeModal } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
+    columns,
     currentData,
     closeModal
   );

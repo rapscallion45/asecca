@@ -7,6 +7,7 @@ import {
 } from '@/redux/types';
 import { AppState } from '@/redux/store';
 import { addTask, editTask } from '@/redux/slices/kanbanSlice';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 
 /**
  * Kanban board task form controller hook, used for task form logic,
@@ -23,6 +24,7 @@ import { addTask, editTask } from '@/redux/slices/kanbanSlice';
  */
 const useKanbanBoardTaskFormController = (
   isEditMode: boolean,
+  columns: Array<IKanbanBoardColumn>,
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
@@ -83,7 +85,12 @@ const useKanbanBoardTaskFormController = (
     },
     validationSchema,
     onSubmit: (payload: IEditKanbanBoardTaskPayload) => {
-      handleSubmit(payload as IEditKanbanBoardTaskPayload);
+      handleSubmit({
+        ...payload,
+        newColIndex: columns
+          .map((col: IKanbanBoardColumn) => col.name)
+          .indexOf(payload.status),
+      });
     },
   });
 
