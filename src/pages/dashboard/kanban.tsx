@@ -59,6 +59,32 @@ const KanbanPage: NextPageWithLayout = () => {
     closeModal();
   };
 
+  /**
+   * Helper component for rendering column skeleton whilst loading board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   */
+  const renderBoardColumnSkeleton = () => (
+    <Box mr={2}>
+      <Skeleton width={190} height={50} sx={{ borderRadius: '4px', mb: 1 }} />
+      <Skeleton
+        variant="rectangular"
+        width={270}
+        height={170}
+        sx={{ borderRadius: '4px', mb: 2 }}
+      />
+      <Skeleton
+        variant="rectangular"
+        width={270}
+        height={170}
+        sx={{ borderRadius: '4px', mb: 2 }}
+      />
+    </Box>
+  );
+
   return (
     <ClientOnly>
       <Box my={5}>
@@ -70,7 +96,12 @@ const KanbanPage: NextPageWithLayout = () => {
                   {!loading && !error ? (
                     activeBoard?.name
                   ) : (
-                    <Skeleton width={200} />
+                    <Skeleton
+                      variant="rectangular"
+                      width={300}
+                      height={40}
+                      sx={{ borderRadius: '4px' }}
+                    />
                   )}
                 </Typography>
                 {!loading && !error ? (
@@ -125,21 +156,29 @@ const KanbanPage: NextPageWithLayout = () => {
                   <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
                     <Skeleton
                       variant="rectangular"
-                      width={80}
-                      height={35}
-                      sx={{ borderRadius: '8px' }}
+                      width={140}
+                      height={40}
+                      sx={{ borderRadius: '4px' }}
+                    />
+                    <Skeleton
+                      variant="rectangular"
+                      width={70}
+                      height={40}
+                      sx={{ borderRadius: '4px', ml: 2 }}
                     />
                   </Box>
                 )}
               </Box>
             </Box>
             <Divider />
-            <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-              {activeBoard.columns.map((col: IKanbanBoardColumn, index) => (
-                <Column key={col.id} colIndex={index} />
-              ))}
-            </Box>
-            {/* <div
+            {!loading && !error ? (
+              <>
+                <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+                  {activeBoard.columns.map((col: IKanbanBoardColumn, index) => (
+                    <Column key={col.id} colIndex={index} />
+                  ))}
+                </Box>
+                {/* <div
             onClick={() => {
               setIsBoardModalOpen(true);
             }}
@@ -147,6 +186,14 @@ const KanbanPage: NextPageWithLayout = () => {
           >
             + New Column
           </div> */}
+              </>
+            ) : (
+              <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+              </Box>
+            )}
           </>
         ) : (
           <KanbanBoardEmpty type="add" />

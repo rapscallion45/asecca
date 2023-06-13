@@ -1,4 +1,4 @@
-import { FC, useState, MouseEvent } from 'react';
+import { FC, useState, useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -56,9 +56,9 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
    * @method
    * @param {MouseEvent<HTMLButtonElement>} event - object change event
    */
-  const handleOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleOpenMenu = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  }, []);
 
   /**
    * Callback listener for closing board menu popover
@@ -68,9 +68,9 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
    *
    * @method
    */
-  const handleCloseMenu = () => {
+  const handleCloseMenu = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
 
   /**
    * Callback listener for deleting board
@@ -81,10 +81,13 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
    * @method
    * @param {any} closeModal - callback for handling closing of modal
    */
-  const handleDelete = (closeModal: () => void) => {
-    dispatch(deleteBoard());
-    closeModal();
-  };
+  const handleDelete = useCallback(
+    (closeModal: () => void) => {
+      dispatch(deleteBoard());
+      closeModal();
+    },
+    [dispatch]
+  );
 
   return (
     <>

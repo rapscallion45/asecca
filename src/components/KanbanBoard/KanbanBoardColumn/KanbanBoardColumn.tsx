@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -54,15 +54,18 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @method
    * @param {any} event - object change event
    */
-  const handleOnDrop = (event: any) => {
-    const { prevColIndex, taskIndex } = JSON.parse(
-      event.dataTransfer.getData('text')
-    );
+  const handleOnDrop = useCallback(
+    (event: any) => {
+      const { prevColIndex, taskIndex } = JSON.parse(
+        event.dataTransfer.getData('text')
+      );
 
-    if (colIndex !== prevColIndex) {
-      dispatch(dragTask({ colIndex, prevColIndex, taskIndex }));
-    }
-  };
+      if (colIndex !== prevColIndex) {
+        dispatch(dragTask({ colIndex, prevColIndex, taskIndex }));
+      }
+    },
+    [colIndex, dispatch]
+  );
 
   /**
    * Callback listens for task drag over column
@@ -73,13 +76,18 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @method
    * @param {any} event - object change event
    */
-  const handleOnDragOver = (event: any) => {
+  const handleOnDragOver = useCallback((event: any) => {
     event.preventDefault();
-  };
+  }, []);
 
   /* if no column found in state datam return null */
   return column ? (
-    <Box onDrop={handleOnDrop} onDragOver={handleOnDragOver} mr={2}>
+    <Box
+      onDrop={handleOnDrop}
+      onDragOver={handleOnDragOver}
+      mr={2}
+      sx={{ minWidth: 275 }}
+    >
       <Box display="flex" flexDirection="row" my={2}>
         {/* @ts-ignore */}
         <CircleIcon fontSize="small" color={colColors[colIndex]} />
