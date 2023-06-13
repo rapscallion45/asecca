@@ -79,7 +79,12 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
 
   /* if no column found in state datam return null */
   return column ? (
-    <Box onDrop={handleOnDrop} onDragOver={handleOnDragOver} mr={2}>
+    <Box
+      onDrop={handleOnDrop}
+      onDragOver={handleOnDragOver}
+      mr={2}
+      sx={{ minWidth: 275 }}
+    >
       <Box display="flex" flexDirection="row" my={2}>
         {/* @ts-ignore */}
         <CircleIcon fontSize="small" color={colColors[colIndex]} />
