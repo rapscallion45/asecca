@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import KanbanBoardModal from '@/modals/KanbanBoard/KanbanBoardModal/KanbanBoardModal';
+import { FC } from 'react';
+import { Box, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import FormModal from '@/modals/FormModal/FormModal';
+import KanbanBoardForm from '../KanbanBoardForm';
 
 /**
  * Kanban Board Empty Props
@@ -29,7 +31,6 @@ interface IKanbanBoardEmptyProps {
  */
 const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
   const { type } = props;
-  const [isBoardModalOpen, setIsBoardModalOpen] = useState<boolean>(false);
 
   return (
     <div className=" bg-white dark:bg-[#2b2c37] h-screen w-screen flex flex-col  items-center justify-center">
@@ -38,22 +39,24 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
           ? 'This board is empty. Create a new column to get started.'
           : 'There are no Kanban boards currently available. Create a new board to get started...'}
       </Typography>
-      <Box my={3}>
-        <Button
-          onClick={() => {
-            setIsBoardModalOpen(true);
+      <Box
+        display="flex"
+        justifyContent="start"
+        sx={{ flexGrow: 1, mr: 1, mt: 2 }}
+      >
+        <FormModal
+          triggerBtn={{
+            type: 'normal',
+            // @ts-ignore
+            icon: AddIcon,
+            text: 'Add New Board',
+            color: 'secondary',
           }}
-          color="secondary"
-          variant="contained"
+          title="Add New Board"
         >
-          {type === 'edit' ? '+ Add New Column' : '+ Add New Board'}
-        </Button>
+          <KanbanBoardForm isEditMode={type === 'edit'} />
+        </FormModal>
       </Box>
-      <KanbanBoardModal
-        type={type}
-        open={isBoardModalOpen}
-        setIsBoardModalOpen={setIsBoardModalOpen}
-      />
     </div>
   );
 };

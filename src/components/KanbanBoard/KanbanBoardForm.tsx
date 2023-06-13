@@ -171,7 +171,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
           disabled={saving}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
-          {!saving && 'Add Task'}
+          {!saving && 'Add Board'}
           {saving && <CircularProgress size={25} color="inherit" />}
         </Button>
       ) : (
