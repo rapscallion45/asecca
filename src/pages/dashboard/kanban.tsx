@@ -59,6 +59,14 @@ const KanbanPage: NextPageWithLayout = () => {
     closeModal();
   };
 
+  /**
+   * Helper component for rendering column skeleton whilst loading board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   */
   const renderBoardColumnSkeleton = () => (
     <Box mr={2}>
       <Skeleton width={190} height={50} sx={{ borderRadius: '4px', mb: 1 }} />
