@@ -40,3 +40,7 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+.ag-theme-asecca .ag-filter-toolpanel-header {
+  color: #544dff;
+}
