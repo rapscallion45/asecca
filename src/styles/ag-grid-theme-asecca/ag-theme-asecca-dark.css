@@ -11,6 +11,14 @@
   --ag-header-foreground-color: #fff;
   --ag-header-background-color: #544dff;
 
+  /* Tool Panel */
+  --ag-control-panel-background-color: #544dff;
+  --ag-side-button-selected-background-color: #544dff;
+  --ag-selected-tab-underline-color: #544dff;
+  --ag-checkbox-checked-color: white;
+  --ag-checkbox-unchecked-color: grey;
+  --ag-side-bar-panel-width: 300px;
+
   /* typography */
   --ag-font-family: Poppins, Roboto;
 
