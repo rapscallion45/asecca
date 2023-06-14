@@ -19,28 +19,46 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
 const DevicesTable: NextPageWithLayout = () => {
   const theme = useTheme();
   const [rowData, setRowData] = useState();
+
+  /**
+   * Device table column configuration
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @constant
+   */
   const [columnDefs] = useState([
-    { field: 'collection_id' },
-    { field: 'collection_name' },
-    { field: 'customer' },
-    { field: 'destroyed' },
-    { field: 'diagnostics_grade' },
-    { field: 'fmip_status' },
-    { field: 'frp_status' },
-    { field: 'imei' },
-    { field: 'in_stock' },
-    { field: 'logged_ts' },
-    { field: 'manufacturer' },
-    { field: 'mdm_status' },
-    { field: 'model' },
-    { field: 'overall_grade' },
-    { field: 'project' },
-    { field: 'quarantined' },
-    { field: 'serial' },
-    { field: 'smash_test_grade' },
-    { field: 'to_be_destroyed' },
-    { field: 'uid' },
+    { field: 'collection_id', headerName: 'Collection ID' },
+    { field: 'collection_name', headerName: 'Collection Name' },
+    { field: 'customer', headerName: 'Customer' },
+    { field: 'destroyed', headerName: 'Destroyed' },
+    { field: 'diagnostics_grade', headerName: 'Diagnostics Grade' },
+    { field: 'fmip_status', headerName: 'FMIP Status' },
+    { field: 'frp_status', headerName: 'FRP Status' },
+    { field: 'imei', headerName: 'IMEI' },
+    { field: 'in_stock', headerName: 'In Stock' },
+    { field: 'logged_ts', headerName: 'Logged TS' },
+    { field: 'manufacturer', headerName: 'Manufacturer' },
+    { field: 'mdm_status', headerName: 'MDM Status' },
+    { field: 'model', headerName: 'Model' },
+    { field: 'overall_grade', headerName: 'Overall Grade' },
+    { field: 'project', headerName: 'Project' },
+    { field: 'quarantined', headerName: 'Quarantined' },
+    { field: 'serial', headerName: 'Serial' },
+    { field: 'smash_test_grade', headerName: 'Smash Test Grade' },
+    { field: 'to_be_destroyed', headerName: 'To Be Destroyed' },
+    { field: 'uid', headerName: 'ID' },
   ]);
+
+  /**
+   * Device table default column configuration
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @constant
+   */
   const defaultColDef = useMemo(
     () => ({
       flex: 1,
@@ -58,6 +76,15 @@ const DevicesTable: NextPageWithLayout = () => {
     }),
     []
   );
+
+  /**
+   * Device table default group column configuration
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @constant
+   */
   const autoGroupColumnDef = useMemo(
     () => ({
       minWidth: 200,
