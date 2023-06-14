@@ -38,7 +38,7 @@ const costsConfigHandler = async (
           return res.status(200).json(data);
         }
         return res.status(response.status).json({
-          message: `Error fetching data from server: ${response.statusText}`,
+          message: `Failed to load Devices data from server: ${response.statusText}`,
         });
       } catch (error) {
         /* in case of exception, generate internal error response */

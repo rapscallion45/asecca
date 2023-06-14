@@ -4,6 +4,8 @@ import { AgGridReact } from 'ag-grid-react';
 import { Box, Typography, useTheme } from '@mui/material';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
+import { useDispatch } from 'react-redux';
+import { addNotification } from '@/redux/slices/notificationsSlice';
 
 /**
  * Devices Table page
@@ -17,6 +19,7 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
  * @returns {NextPageWithLayout} - Devices table page component
  */
 const DevicesTable: NextPageWithLayout = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [rowData, setRowData] = useState();
 
@@ -93,7 +96,7 @@ const DevicesTable: NextPageWithLayout = () => {
   );
 
   /**
-   * AG-Grid Ready callback used to load data from API
+   * AG-Grid ready callback used to load data from API
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.3
@@ -103,7 +106,18 @@ const DevicesTable: NextPageWithLayout = () => {
   const onGridReady = useCallback(() => {
     fetch('/api/devices')
       .then((resp) => resp.json())
-      .then((data) => setRowData(data?.devices));
+      .then((data) => {
+        if (data.message) throw new Error(data.message);
+        setRowData(data?.devices);
+      })
+      .catch((event: any) => {
+        dispatch(
+          addNotification({
+            message: event.message,
+            variant: 'error',
+          })
+        );
+      });
   }, []);
 
   return (
