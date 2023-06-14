@@ -6,6 +6,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import { useDispatch } from 'react-redux';
 import { addNotification } from '@/redux/slices/notificationsSlice';
+import devicesService from '@/services/devicesService';
 
 /**
  * Devices Table page
@@ -103,22 +104,25 @@ const DevicesTable: NextPageWithLayout = () => {
    *
    * @method
    */
-  const onGridReady = useCallback(() => {
-    fetch('/api/devices')
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.message) throw new Error(data.message);
-        setRowData(data?.devices);
-      })
-      .catch((event: any) => {
-        dispatch(
-          addNotification({
-            message: event.message,
-            variant: 'error',
-          })
-        );
-      });
-  }, []);
+  const onGridReady = useCallback(async () => {
+    /* call API */
+    const res = await devicesService.getDevices();
+
+    /* add a notification and reject if bad response from server */
+    if (res.status !== 200) {
+      dispatch(
+        addNotification({
+          message: `Failed to load Devices data from server: ${res.statusText}`,
+          variant: 'error',
+        })
+      );
+      return;
+    }
+
+    /* good response, set table local state data */
+    const data = await res.json();
+    setRowData(data?.devices);
+  }, [dispatch]);
 
   return (
     <ClientOnly>
