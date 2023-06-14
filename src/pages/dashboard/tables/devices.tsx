@@ -50,6 +50,8 @@ const DevicesTable: NextPageWithLayout = () => {
       enableValue: true,
       /* allow every column to be pivoted */
       enablePivot: true,
+      /* allow row grouping */
+      enableRowGroup: true,
       /* allow every column to be sorted and filtered */
       sortable: true,
       filter: true,
