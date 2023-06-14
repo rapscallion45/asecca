@@ -48,16 +48,16 @@ const AdminTestPanel: FC = () => {
   };
 
   return (
-    <Card sx={{ minWidth: 275, minHeight: 200 }}>
-      <CardContent>
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent sx={{ paddingBottom: '12px !important' }}>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Admin Test Panel
         </Typography>
-        <Box mt={4}>
+        <Box mt={2}>
           <TextField
             id="user-permission-level-select"
             select
-            label="User Permission"
+            label="User Permission Level"
             value={userPermissionLevel}
             onChange={handlePermissionChange}
             SelectProps={{
@@ -72,9 +72,6 @@ const AdminTestPanel: FC = () => {
             ))}
           </TextField>
         </Box>
-        <Typography sx={{ my: 1.5 }} color="text.secondary">
-          Selection of simulated user permission level
-        </Typography>
       </CardContent>
     </Card>
   );

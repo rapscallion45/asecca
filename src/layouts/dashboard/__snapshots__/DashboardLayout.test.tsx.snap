@@ -468,6 +468,52 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           </a>
                         </ul>
                       </div>
+                      <div
+                        className="MuiBox-root css-goaoi0"
+                      >
+                        <label
+                          className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1vbggne-MuiFormControlLabel-root"
+                          data-testid="light-dark-btn"
+                        >
+                          <span
+                            className="MuiSwitch-root MuiSwitch-sizeMedium css-end58r-MuiSwitch-root"
+                          >
+                            <span
+                              className="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-z8z5yk-MuiButtonBase-root-MuiSwitch-switchBase"
+                              onBlur={[Function]}
+                              onContextMenu={[Function]}
+                              onDragLeave={[Function]}
+                              onFocus={[Function]}
+                              onKeyDown={[Function]}
+                              onKeyUp={[Function]}
+                              onMouseDown={[Function]}
+                              onMouseLeave={[Function]}
+                              onMouseUp={[Function]}
+                              onTouchEnd={[Function]}
+                              onTouchMove={[Function]}
+                              onTouchStart={[Function]}
+                              tabIndex={null}
+                            >
+                              <input
+                                className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                                defaultChecked={false}
+                                onChange={[Function]}
+                                required={false}
+                                type="checkbox"
+                              />
+                              <span
+                                className="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+                              />
+                            </span>
+                            <span
+                              className="MuiSwitch-track css-j4fnnk-MuiSwitch-track"
+                            />
+                          </span>
+                          <span
+                            className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1lyi4-MuiTypography-root"
+                          />
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -496,17 +542,17 @@ exports[`Dashboard Layout Renders correctly 1`] = `
     </div>
   </div>
   <section
-    className="css-100gjh2"
+    className="css-baxyca"
     id="page-content"
   >
     <div
       className="MuiContainer-root MuiContainer-maxWidthXl css-19r6kue-MuiContainer-root"
     >
       <div
-        className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhmbct-MuiPaper-root-MuiCard-root"
+        className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-2amshd-MuiPaper-root-MuiCard-root"
       >
         <div
-          className="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+          className="MuiCardContent-root css-19z7m71-MuiCardContent-root"
         >
           <p
             className="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-1xbr41s-MuiTypography-root"
@@ -514,7 +560,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
             Admin Test Panel
           </p>
           <div
-            className="MuiBox-root css-h5fkc8"
+            className="MuiBox-root css-1yuhvjn"
           >
             <div
               className="MuiFormControl-root MuiTextField-root css-j1gnhe-MuiFormControl-root-MuiTextField-root"
@@ -525,7 +571,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                 htmlFor="user-permission-level-select"
                 id="user-permission-level-select-label"
               >
-                User Permission
+                User Permission Level
               </label>
               <div
                 className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-rs3fbt-MuiInputBase-root-MuiOutlinedInput-root"
@@ -585,18 +631,13 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                     className="css-14lo706"
                   >
                     <span>
-                      User Permission
+                      User Permission Level
                     </span>
                   </legend>
                 </fieldset>
               </div>
             </div>
           </div>
-          <p
-            className="MuiTypography-root MuiTypography-body1 css-xsmv6n-MuiTypography-root"
-          >
-            Selection of simulated user permission level
-          </p>
         </div>
       </div>
       <div>
