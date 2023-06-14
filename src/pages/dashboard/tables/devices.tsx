@@ -85,10 +85,10 @@ const DevicesTable: NextPageWithLayout = () => {
         <Typography variant="h4">Devices</Typography>
       </Box>
       <div
-        className={`ag-theme-alpine ${
+        className={`${
           theme.palette.mode === 'light'
-            ? 'ag-theme-asecca'
-            : 'ag-theme-asecca-dark'
+            ? 'ag-theme-balham ag-theme-asecca'
+            : 'ag-theme-balham-dark ag-theme-asecca-dark'
         }`}
         style={{ height: '100vh', width: '100%' }}
       >
