@@ -13,6 +13,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import '@/styles/ag-grid-theme-asecca/ag-theme-asecca.css';
 import '@/styles/ag-grid-theme-asecca/ag-theme-asecca-dark.css';
+import 'ag-grid-enterprise';
 
 import { createEmotionCache } from '@/utils';
 import store from '@/redux/store';

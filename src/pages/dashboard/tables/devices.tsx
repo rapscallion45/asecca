@@ -45,9 +45,20 @@ const DevicesTable: NextPageWithLayout = () => {
     () => ({
       flex: 1,
       minWidth: 100,
-      filter: true,
       resizable: true,
+      /* allow every column to be aggregated */
+      enableValue: true,
+      /* allow every column to be pivoted */
+      enablePivot: true,
+      /* allow every column to be sorted and filtered */
       sortable: true,
+      filter: true,
+    }),
+    []
+  );
+  const autoGroupColumnDef = useMemo(
+    () => ({
+      minWidth: 200,
     }),
     []
   );
@@ -83,6 +94,9 @@ const DevicesTable: NextPageWithLayout = () => {
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
+          autoGroupColumnDef={autoGroupColumnDef}
+          sideBar
+          enableRangeSelection
           onGridReady={onGridReady}
         />
       </div>
