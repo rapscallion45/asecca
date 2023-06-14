@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import { Box, Drawer, useTheme } from '@mui/material';
 import { SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
-import ScrollBar from '../ScrollBar/ScrollBar';
-import NavSection from '../NavSection/NavSection';
-import MHidden from '../@MUI-Extended/MHidden';
+import ScrollBar from '@/components/ScrollBar/ScrollBar';
+import NavSection from '@/components/NavSection/NavSection';
+import ThemeModeSwitch from '@/components/ThemeModeSwitch/ThemeModeSwitch';
+import MHidden from '@/components/@MUI-Extended/MHidden';
 import sideBarConfig from './dashboardSideBarItems';
 import { IDashboardSidebarOnCloseCallback } from './types';
 
@@ -103,6 +104,9 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
         </Box>
       </Box>
       <NavSection navConfig={sideBarConfig} />
+      <Box mt={2}>
+        <ThemeModeSwitch />
+      </Box>
     </ScrollBar>
   );
 

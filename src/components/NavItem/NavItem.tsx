@@ -43,7 +43,7 @@ const NavItemStyle = styled(ListItemButton)(({ theme }) => ({
     position: 'absolute',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 

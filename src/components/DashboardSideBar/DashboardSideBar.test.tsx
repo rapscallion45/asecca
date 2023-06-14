@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
+import { render, screen } from '@testing-library/react';
 import DashboardSideBar from './DashboardSideBar';
 import ThemeConfig from '../../styles/theme/ThemeConfig';
 import createEmotionCache from '../../utils/createEmotionCache';
@@ -25,5 +26,22 @@ describe('Dashboard SideBar', () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  describe('Light/Dark Theme Button', () => {
+    it('Should render theme change button', async () => {
+      /** Arrange */
+      /** Act */
+      render(
+        <Provider store={store}>
+          <ThemeConfig emotionCache={createEmotionCache()}>
+            <DashboardSideBar />
+          </ThemeConfig>
+        </Provider>
+      );
+
+      /** Assert - light/dark theme button should show */
+      expect(screen.queryByTestId('light-dark-btn')).toBeInTheDocument();
+    });
   });
 });
