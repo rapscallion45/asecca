@@ -104,7 +104,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
         </Box>
       </Box>
       <NavSection navConfig={sideBarConfig} />
-      <Box display="flex" p={5}>
+      <Box mt={2}>
         <ThemeModeSwitch />
       </Box>
     </ScrollBar>

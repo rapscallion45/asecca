@@ -46,21 +46,4 @@ describe('NavBar', () => {
       expect(screen.queryByAltText('Asecca logo')).toBeInTheDocument();
     });
   });
-
-  describe('Light/Dark Theme Button', () => {
-    it('Should render theme change button', async () => {
-      /** Arrange */
-      /** Act */
-      render(
-        <Provider store={store}>
-          <ThemeConfig emotionCache={createEmotionCache()}>
-            <NavBar />
-          </ThemeConfig>
-        </Provider>
-      );
-
-      /** Assert - light/dark theme button should show */
-      expect(screen.queryByTestId('light-dark-btn')).toBeInTheDocument();
-    });
-  });
 });

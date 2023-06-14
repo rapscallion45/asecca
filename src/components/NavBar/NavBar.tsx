@@ -2,17 +2,9 @@ import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
-import {
-  Box,
-  Stack,
-  AppBar,
-  Toolbar,
-  IconButton,
-  useTheme,
-} from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MHidden from '@/components/@MUI-Extended/MHidden';
-import ThemeModeSwitch from '@/components/ThemeModeSwitch/ThemeModeSwitch';
 import {
   APP_BAR_DESKTOP,
   APP_BAR_MOBILE,
@@ -153,14 +145,6 @@ const NavBar: FC<INavBarProps> = (props) => {
         )}
 
         <Box sx={{ flexGrow: 1 }} />
-
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={{ xs: 0.5, sm: 1.5 }}
-        >
-          <ThemeModeSwitch />
-        </Stack>
       </ToolbarStyle>
     </RootStyle>
   );

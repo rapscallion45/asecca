@@ -13,7 +13,7 @@ exports[`NavSection Renders correctly 1`] = `
       general
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/"
       onBlur={[Function]}
       onClick={[Function]}
@@ -50,7 +50,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/kanban"
       onBlur={[Function]}
       onClick={[Function]}
@@ -92,7 +92,7 @@ exports[`NavSection Renders correctly 1`] = `
       Configurators
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/costs-config"
       onBlur={[Function]}
       onClick={[Function]}
@@ -134,7 +134,7 @@ exports[`NavSection Renders correctly 1`] = `
       Tables
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/devices"
       onBlur={[Function]}
       onClick={[Function]}
@@ -171,7 +171,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-2"
       onBlur={[Function]}
       onClick={[Function]}
@@ -208,7 +208,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-3"
       onBlur={[Function]}
       onClick={[Function]}
@@ -245,7 +245,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-4"
       onBlur={[Function]}
       onClick={[Function]}

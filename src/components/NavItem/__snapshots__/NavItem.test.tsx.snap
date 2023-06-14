@@ -2,7 +2,7 @@
 
 exports[`NavItem Renders correctly 1`] = `
 <a
-  className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-j0nhjc-MuiButtonBase-root-MuiListItemButton-root"
+  className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
   href="/"
   onBlur={[Function]}
   onClick={[Function]}
