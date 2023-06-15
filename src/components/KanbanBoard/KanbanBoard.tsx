@@ -1,11 +1,21 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Skeleton, Button } from '@mui/material';
+import {
+  Box,
+  Skeleton,
+  Card,
+  Button,
+  CardContent,
+  useTheme,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import { AppState } from '@/redux/store';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import FormModal from '@/modals/FormModal/FormModal';
+import KanbanBoardForm from './KanbanBoardForm';
 
 /**
  * Kanban Board Props
@@ -33,6 +43,7 @@ interface IKanbanBoardProps {
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
   const { currentData } = props;
+  const theme = useTheme();
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const { loading, error, saving, edited } = useSelector(
     (state: AppState) => state.kanban
@@ -93,6 +104,37 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
               {currentData.columns.map((col: IKanbanBoardColumn, index) => (
                 <Column key={col.id} colIndex={index} />
               ))}
+              <Card
+                sx={{
+                  mt: 7,
+                  minWidth: 275,
+                  minHeight: 300,
+                  maxHeight: 500,
+                  backgroundColor: 'transparent',
+                  borderColor: theme.palette.text.secondary,
+                  border: 'solid 1px',
+                }}
+              >
+                <CardContent sx={{ padding: '50% 40px' }}>
+                  <FormModal
+                    triggerBtn={{
+                      type: 'menu',
+                      // @ts-ignore
+                      icon: ViewColumnIcon,
+                      iconStyle: { marginRight: '10px' },
+                      text: '+ Add Column',
+                      closeMenu: () => {},
+                    }}
+                    title="Add Column"
+                  >
+                    <KanbanBoardForm
+                      isEditMode
+                      currentData={currentData}
+                      closeModal={() => {}}
+                    />
+                  </FormModal>
+                </CardContent>
+              </Card>
             </>
           ) : (
             <>
