@@ -2,10 +2,13 @@ import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
+import TaskIcon from '@mui/icons-material/Task';
 import { dragTask } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
+import FormModal from '@/modals/FormModal/FormModal';
 import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
+import KanbanBoardTaskForm from '../KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
 
 /**
  * Kanban Board Column Props
@@ -103,6 +106,28 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
           colIndex={colIndex}
         />
       ))}
+      {column.tasks.length <= 0 && (
+        <Box py={3}>
+          <FormModal
+            triggerBtn={{
+              type: 'normal',
+              // @ts-ignore
+              icon: TaskIcon,
+              text: '+ Add Task',
+              color: 'secondary',
+            }}
+            title="Add New Task"
+          >
+            <KanbanBoardTaskForm
+              isEditMode={false}
+              columns={
+                kanbanData.boards.find((board) => board.isActive === true)
+                  ?.columns || []
+              }
+            />
+          </FormModal>
+        </Box>
+      )}
     </Box>
   ) : null;
 };
