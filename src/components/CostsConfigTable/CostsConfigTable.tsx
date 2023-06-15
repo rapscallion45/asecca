@@ -182,24 +182,25 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
           justifyContent: 'center',
         }}
       >
+        <Button
+          color="secondary"
+          variant="outlined"
+          onClick={handleCancel}
+          disabled={saving || loading || !edited}
+          sx={{ backgroundColor: 'common.white' }}
+        >
+          Cancel
+        </Button>
         <LoadingButton
           color="secondary"
           variant="contained"
           onClick={handleSave}
           disabled={saving || loading || !edited}
           loading={saving}
+          sx={{ ml: 2 }}
         >
           Save
         </LoadingButton>
-        <Button
-          color="secondary"
-          variant="outlined"
-          onClick={handleCancel}
-          disabled={saving || loading || !edited}
-          sx={{ backgroundColor: 'common.white', ml: 2 }}
-        >
-          Cancel
-        </Button>
       </Box>
     </>
   );

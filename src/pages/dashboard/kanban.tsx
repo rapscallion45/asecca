@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { NextPageWithLayout } from 'next';
-import { Box, Typography, Skeleton, Divider } from '@mui/material';
+import { Box, Typography, Skeleton, Divider, Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
@@ -35,6 +36,8 @@ const KanbanPage: NextPageWithLayout = () => {
     data: kanbanData,
     loading,
     error,
+    saving,
+    edited,
   } = useSelector((state: AppState) => state.kanban);
   const activeBoard = kanbanData.boards?.find((board) => board.isActive);
 
@@ -58,6 +61,9 @@ const KanbanPage: NextPageWithLayout = () => {
     dispatch(setBoardActive({ index: 0 }));
     closeModal();
   };
+
+  const handleCancel = () => {};
+  const handleSave = () => {};
 
   /**
    * Helper component for rendering column skeleton whilst loading board
@@ -88,7 +94,7 @@ const KanbanPage: NextPageWithLayout = () => {
   return (
     <ClientOnly>
       <Box my={5}>
-        {activeBoard && activeBoard.columns.length > 0 ? (
+        {activeBoard ? (
           <>
             <Box display="flex" flexDirection="column" sx={{ pt: 2, pb: 1 }}>
               <Box display="flex" pb={1}>
@@ -111,29 +117,31 @@ const KanbanPage: NextPageWithLayout = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <MHidden width="smDown">
-                        <Box
-                          display="flex"
-                          justifyContent="end"
-                          sx={{ flexGrow: 1, mr: 1 }}
-                        >
-                          <FormModal
-                            triggerBtn={{
-                              type: 'normal',
-                              // @ts-ignore
-                              icon: AddIcon,
-                              text: 'Add Task',
-                              color: 'secondary',
-                            }}
-                            title="Add New Task"
+                      {activeBoard.columns.length > 0 && (
+                        <MHidden width="smDown">
+                          <Box
+                            display="flex"
+                            justifyContent="end"
+                            sx={{ flexGrow: 1, mr: 1 }}
                           >
-                            <KanbanBoardTaskForm
-                              isEditMode={false}
-                              columns={activeBoard?.columns}
-                            />
-                          </FormModal>
-                        </Box>
-                      </MHidden>
+                            <FormModal
+                              triggerBtn={{
+                                type: 'normal',
+                                // @ts-ignore
+                                icon: AddIcon,
+                                text: 'Add Task',
+                                color: 'secondary',
+                              }}
+                              title="Add New Task"
+                            >
+                              <KanbanBoardTaskForm
+                                isEditMode={false}
+                                columns={activeBoard?.columns}
+                              />
+                            </FormModal>
+                          </Box>
+                        </MHidden>
+                      )}
                       <ConfirmDialog
                         title="Confirm Delete Board"
                         contentText={`Are you sure you want to permanently delete board "${activeBoard?.name}"?`}
@@ -171,29 +179,58 @@ const KanbanPage: NextPageWithLayout = () => {
               </Box>
             </Box>
             <Divider />
-            {!loading && !error ? (
-              <>
-                <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-                  {activeBoard.columns.map((col: IKanbanBoardColumn, index) => (
-                    <Column key={col.id} colIndex={index} />
-                  ))}
-                </Box>
-                {/* <div
-            onClick={() => {
-              setIsBoardModalOpen(true);
-            }}
-            className=" h-screen dark:bg-[#2b2c3740] flex justify-center items-center font-bold text-2xl hover:text-[#635FC7] transition duration-300 cursor-pointer bg-[#E9EFFA] scrollbar-hide mb-2   mx-5 pt-[90px] min-w-[280px] text-[#828FA3] mt-[135px] rounded-lg "
-          >
-            + New Column
-          </div> */}
-              </>
-            ) : (
+            {activeBoard.columns.length > 0 ? (
               <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-                {renderBoardColumnSkeleton()}
-                {renderBoardColumnSkeleton()}
-                {renderBoardColumnSkeleton()}
+                {!loading && !error ? (
+                  <>
+                    {activeBoard.columns.map(
+                      (col: IKanbanBoardColumn, index) => (
+                        <Column key={col.id} colIndex={index} />
+                      )
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {renderBoardColumnSkeleton()}
+                    {renderBoardColumnSkeleton()}
+                    {renderBoardColumnSkeleton()}
+                  </>
+                )}
+              </Box>
+            ) : (
+              <Box mt={2}>
+                <KanbanBoardEmpty type="edit" currentData={activeBoard} />
               </Box>
             )}
+            <Box
+              sx={{
+                marginTop: 10,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Button
+                color="secondary"
+                variant="outlined"
+                onClick={handleCancel}
+                disabled={saving || loading || !edited}
+                sx={{ backgroundColor: 'common.white' }}
+              >
+                Reset Board
+              </Button>
+              <LoadingButton
+                color="secondary"
+                variant="contained"
+                onClick={handleSave}
+                disabled={saving || loading || !edited}
+                loading={saving}
+                sx={{ ml: 2 }}
+              >
+                Save
+              </LoadingButton>
+            </Box>
           </>
         ) : (
           <KanbanBoardEmpty type="add" />
