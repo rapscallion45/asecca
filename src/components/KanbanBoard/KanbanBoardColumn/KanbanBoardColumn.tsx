@@ -1,9 +1,11 @@
-import { FC, useCallback, DragEvent } from 'react';
+import { FC, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
+import { dragTask } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
+import { AppState } from '@/redux/store';
 import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
-import { IKanbanBoardColumnOnDropCallback } from '../types';
 
 /**
  * Kanban Board Column Props
@@ -13,12 +15,9 @@ import { IKanbanBoardColumnOnDropCallback } from '../types';
  *
  * @typedef IKanbanBoardColumnProps
  * @prop {number} colIndex - column index
- * @prop {IKanbanBoardColumn} colData - column data
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
-  colData: IKanbanBoardColumn;
-  onDrop: IKanbanBoardColumnOnDropCallback;
 }
 
 /**
@@ -34,8 +33,17 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex, colData: column, onDrop } = props;
+  const { colIndex } = props;
+  const dispatch = useDispatch();
+  const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
+
+  /* find this column in board state data from passed column index */
+  const column = kanbanData.boards
+    .find((board) => board.isActive === true)
+    ?.columns.find(
+      (col: IKanbanBoardColumn, index: number) => index === colIndex
+    );
 
   /**
    * Callback listens for drop of task into column after drag
@@ -44,19 +52,19 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {DragEvent} event - object change event
+   * @param {any} event - object change event
    */
   const handleOnDrop = useCallback(
-    (event: DragEvent) => {
+    (event: any) => {
       const { prevColIndex, taskIndex } = JSON.parse(
         event.dataTransfer.getData('text')
       );
 
       if (colIndex !== prevColIndex) {
-        onDrop(colIndex, prevColIndex, taskIndex);
+        dispatch(dragTask({ colIndex, prevColIndex, taskIndex }));
       }
     },
-    [colIndex, onDrop]
+    [colIndex, dispatch]
   );
 
   /**
@@ -66,9 +74,9 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {DragEvent} event - object change event
+   * @param {any} event - object change event
    */
-  const handleOnDragOver = useCallback((event: DragEvent) => {
+  const handleOnDragOver = useCallback((event: any) => {
     event.preventDefault();
   }, []);
 

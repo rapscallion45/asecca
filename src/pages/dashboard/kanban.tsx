@@ -14,12 +14,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
-import {
-  deleteBoard,
-  dragTask,
-  setBoardActive,
-} from '@/redux/slices/kanbanSlice';
-import { IKanbanBoardColumnOnDropCallback } from '@/components/KanbanBoard/types';
+import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
 
 /**
  * Kanban Page
@@ -49,25 +44,6 @@ const KanbanPage: NextPageWithLayout = () => {
     if (!activeBoard && kanbanData.boards?.length > 0)
       dispatch(setBoardActive({ index: 0 }));
   }, [activeBoard, kanbanData.boards, dispatch]);
-
-  /**
-   * Callback handler for dropping task into new column
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.7
-   *
-   * @method
-   * @param {number} colIndex  - column index of task
-   * @param {number} prevColIndex - previous column index of task
-   * @param {number} taskIndex - index of task
-   */
-  const handleOnDrop: IKanbanBoardColumnOnDropCallback = (
-    colIndex: number,
-    prevColIndex: number,
-    taskIndex: number
-  ) => {
-    dispatch(dragTask({ colIndex, prevColIndex, taskIndex }));
-  };
 
   /**
    * Callback handler for deletion of board
@@ -171,7 +147,6 @@ const KanbanPage: NextPageWithLayout = () => {
             <KanbanBoard
               currentData={activeBoard}
               stateData={{ loading, saving, error, edited }}
-              handleOnDrop={handleOnDrop}
             />
           </>
         ) : (
