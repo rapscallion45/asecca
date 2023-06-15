@@ -60,7 +60,7 @@ const initialKanbanState: IKanbanBoardState = {
  * @type {Slice<Object>}
  */
 const kanbanSlice = createSlice({
-  name: 'boards',
+  name: 'kanban',
   initialState: initialKanbanState,
   reducers: {
     /* reducer used for when user adds board to kanban */

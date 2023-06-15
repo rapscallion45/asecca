@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Typography, IconButton, Box } from '@mui/material';
+import { IconButton, Box } from '@mui/material';
 import MuiDialogTitle from '@mui/material/DialogTitle';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -35,7 +35,7 @@ const FormModalCustomTitle: FC<IFormModalCustomTitleProps> = (props) => {
   return (
     <MuiDialogTitle {...other}>
       <Box display="flex" alignItems="center">
-        <Typography variant="h6">{children}</Typography>
+        {children}
         <Box display="flex" justifyContent="right" sx={{ flexGrow: 1 }}>
           {onClose && (
             <IconButton aria-label="close" onClick={onClose}>
