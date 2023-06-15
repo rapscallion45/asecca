@@ -12,7 +12,7 @@ import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn
 import MHidden from '@/components/@MUI-Extended/MHidden';
 import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
 import KanbanBoardTaskForm from '@/components/KanbanBoard/KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
-import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
+import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
 import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
@@ -142,7 +142,7 @@ const KanbanPage: NextPageWithLayout = () => {
                           </Box>
                         </MHidden>
                       )}
-                      <ConfirmDialog
+                      <ConfirmModal
                         title="Confirm Delete Board"
                         contentText={`Are you sure you want to permanently delete board "${activeBoard?.name}"?`}
                         actionBtnText="Delete"

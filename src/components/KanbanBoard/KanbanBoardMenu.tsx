@@ -9,8 +9,8 @@ import { Button, Box, IconButton } from '@mui/material';
 import { IKanbanBoard } from '@/lib/api/api-types';
 import { deleteBoard } from '@/redux/slices/kanbanSlice';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
-import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
-import FormDialog from '@/modals/FormModal/FormModal';
+import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
+import FormModal from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
 import KanbanBoardForm from './KanbanBoardForm';
 
@@ -114,7 +114,7 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
         anchorEl={anchorEl}
         sx={{ width: 220 }}
       >
-        <FormDialog
+        <FormModal
           triggerBtn={{
             type: 'menu',
             // @ts-ignore
@@ -130,8 +130,8 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
             currentData={currentData}
             closeModal={handleCloseMenu}
           />
-        </FormDialog>
-        <ConfirmDialog
+        </FormModal>
+        <ConfirmModal
           title="Confirm Delete Board"
           contentText="Are you sure you want to permanently delete this board?"
           actionBtnText="Delete"
