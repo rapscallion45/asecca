@@ -27,4 +27,5 @@ const getCostsConfigColFilterList = (
       return ['Customer', 'Project', 'Collection'];
   }
 };
+
 export default getCostsConfigColFilterList;
