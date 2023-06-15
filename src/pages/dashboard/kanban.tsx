@@ -34,8 +34,6 @@ const KanbanPage: NextPageWithLayout = () => {
     data: kanbanData,
     loading,
     error,
-    saving,
-    edited,
   } = useSelector((state: AppState) => state.kanban);
   const activeBoard = kanbanData.boards?.find((board) => board.isActive);
 
@@ -144,10 +142,7 @@ const KanbanPage: NextPageWithLayout = () => {
               )}
             </Box>
             <Divider />
-            <KanbanBoard
-              currentData={activeBoard}
-              stateData={{ loading, saving, error, edited }}
-            />
+            <KanbanBoard currentData={activeBoard} />
           </>
         ) : (
           <KanbanBoardEmpty type="add" />

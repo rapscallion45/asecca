@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Skeleton, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
+import { AppState } from '@/redux/store';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
-import { IKanbanBoardState } from '@/redux/types';
 
 /**
  * Kanban Board Props
@@ -14,11 +15,9 @@ import { IKanbanBoardState } from '@/redux/types';
  *
  * @typedef IKanbanBoardProps
  * @prop {IKanbanBoard} currentData - passed board data
- * @prop {Partial<IKanbanBoardState>} stateData - board loading, error and edited state
  */
 interface IKanbanBoardProps {
   currentData: IKanbanBoard;
-  stateData: Partial<IKanbanBoardState>;
 }
 
 /**
@@ -33,8 +32,11 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const { currentData, stateData } = props;
+  const { currentData } = props;
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+  const { loading, error, saving, edited } = useSelector(
+    (state: AppState) => state.kanban
+  );
 
   /**
    * Callback handler for cancelling changes to board
@@ -86,19 +88,11 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
     <>
       {currentData.columns.length > 0 ? (
         <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-          {!stateData.loading && !stateData.error ? (
+          {!loading && !error ? (
             <>
               {currentData.columns.map((col: IKanbanBoardColumn, index) => (
                 <Column key={col.id} colIndex={index} />
               ))}
-              {/* <Box
-                onClick={() => {
-                  setIsBoardModalOpen(true);
-                }}
-                className=" h-screen dark:bg-[#2b2c3740] flex justify-center items-center font-bold text-2xl hover:text-[#635FC7] transition duration-300 cursor-pointer bg-[#E9EFFA] scrollbar-hide mb-2   mx-5 pt-[90px] min-w-[280px] text-[#828FA3] mt-[135px] rounded-lg "
-              >
-                + New Column
-              </Box> */}
             </>
           ) : (
             <>
@@ -126,7 +120,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           color="secondary"
           variant="outlined"
           onClick={handleCancel}
-          disabled={stateData.saving || stateData.loading || !stateData.edited}
+          disabled={saving || loading || !edited}
           sx={{ backgroundColor: 'common.white' }}
         >
           Reset Board
@@ -135,8 +129,8 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={stateData.saving || stateData.loading || !stateData.edited}
-          loading={stateData.saving}
+          disabled={saving || loading || !edited}
+          loading={saving}
           sx={{ ml: 2 }}
         >
           Save
