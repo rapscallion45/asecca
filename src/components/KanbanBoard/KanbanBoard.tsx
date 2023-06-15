@@ -5,6 +5,7 @@ import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBo
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import { IKanbanBoardState } from '@/redux/types';
+import { IKanbanBoardColumnOnDropCallback } from './types';
 
 /**
  * Kanban Board Props
@@ -14,11 +15,13 @@ import { IKanbanBoardState } from '@/redux/types';
  *
  * @typedef IKanbanBoardProps
  * @prop {IKanbanBoard} currentData - passed board data
- * @prop {Partial<IKanbanBoardState>} stateData - board loading, error and edited state
+ * @prop {Partial<IKanbanBoardState>} stateData - board loading, saving, error and edited state
+ * @prop {IKanbanBoardColumnOnDropCallback} handleOnDrop - handling of dropping task in column
  */
 interface IKanbanBoardProps {
   currentData: IKanbanBoard;
   stateData: Partial<IKanbanBoardState>;
+  handleOnDrop: IKanbanBoardColumnOnDropCallback;
 }
 
 /**
@@ -33,7 +36,7 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const { currentData, stateData } = props;
+  const { currentData, stateData, handleOnDrop } = props;
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
 
   /**
@@ -89,7 +92,12 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           {!stateData.loading && !stateData.error ? (
             <>
               {currentData.columns.map((col: IKanbanBoardColumn, index) => (
-                <Column key={col.id} colIndex={index} />
+                <Column
+                  key={col.id}
+                  colIndex={index}
+                  colData={col}
+                  onDrop={handleOnDrop}
+                />
               ))}
               {/* <Box
                 onClick={() => {
