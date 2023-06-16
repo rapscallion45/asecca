@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, DragEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import {
@@ -20,10 +20,12 @@ import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
  * @typedef IKanbanBoardTaskProps
  * @prop {number} colIndex - column index that task is in
  * @prop {number} taskIndex - index of task
+ * @prop {boolean} dragEnabled - task drag enabled flag
  */
 interface IKanbanBoardTaskProps {
   colIndex: number;
   taskIndex: number;
+  dragEnabled?: boolean;
 }
 
 /**
@@ -39,7 +41,7 @@ interface IKanbanBoardTaskProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
-  const { colIndex, taskIndex } = props;
+  const { colIndex, taskIndex, dragEnabled = false } = props;
   // const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
   const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
 
@@ -82,10 +84,10 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {any} event - object change event
+   * @param {DragEvent} event - object change event
    */
   const handleOnDrag = useCallback(
-    (event: any) => {
+    (event: DragEvent) => {
       event.dataTransfer.setData(
         'text',
         JSON.stringify({ taskIndex, prevColIndex: colIndex })
@@ -96,7 +98,7 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
 
   return task ? (
     <Card
-      draggable
+      draggable={dragEnabled}
       // onClick={() => {
       //   setIsTaskModalOpen(true);
       // }}

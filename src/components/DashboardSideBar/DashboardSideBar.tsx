@@ -79,20 +79,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
    * @returns {Component} - sidebar content component
    */
   const renderContent = (
-    <ScrollBar
-      sx={{
-        height: '100%',
-        overflowY: 'auto',
-        '& .simplebar-content': {
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        },
-        '& .simplebar-placeholder': {
-          display: 'none',
-        },
-      }}
-    >
+    <ScrollBar>
       <Box sx={{ mt: 1, px: 2.5, py: 3 }}>
         <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
           {theme.palette.mode === 'dark' && (
@@ -104,7 +91,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
         </Box>
       </Box>
       <NavSection navConfig={sideBarConfig} />
-      <Box mt={2}>
+      <Box mt={2} mb={1}>
         <ThemeModeSwitch />
       </Box>
     </ScrollBar>

@@ -1,4 +1,12 @@
-import { FC, useState, ChangeEvent, memo, useCallback, useEffect } from 'react';
+import {
+  FC,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  memo,
+  useCallback,
+  useEffect,
+} from 'react';
 import { Input, InputAdornment, FormControl, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
@@ -123,11 +131,11 @@ const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
    * @since 0.0.0
    *
    * @method
-   * @param {any} event - value change trigger event
+   * @param {KeyboardEvent} event - value change trigger event
    */
   const onKeyDown = useCallback(
-    (event: any) => {
-      if (event.keyCode === 13) handleValueReformat();
+    (event: KeyboardEvent) => {
+      if (event.key === 'Enter') handleValueReformat();
     },
     [handleValueReformat]
   );

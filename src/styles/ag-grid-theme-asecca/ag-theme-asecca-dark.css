@@ -22,10 +22,6 @@
   /* typography */
   --ag-font-family: Poppins, Roboto;
 
-  /* spacing */
-  --ag-grid-size: 3px;
-  --ag-list-item-height: 20px;
-
   /* header */
   --ag-header-cell-moving-background-color: #544dff;
 
@@ -39,11 +35,6 @@
   border: none;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
     rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-}
-
-.ag-theme-asecca-dark .ag-header-cell {
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .ag-theme-asecca-dark .ag-filter-toolpanel-header {

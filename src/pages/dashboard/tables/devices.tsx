@@ -7,6 +7,7 @@ import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import { useDispatch } from 'react-redux';
 import { addNotification } from '@/redux/slices/notificationsSlice';
 import devicesService from '@/services/devicesService';
+import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
 
 /**
  * Devices Table page
@@ -33,25 +34,61 @@ const DevicesTable: NextPageWithLayout = () => {
    * @constant
    */
   const [columnDefs] = useState([
-    { field: 'collection_id', headerName: 'Collection ID' },
-    { field: 'collection_name', headerName: 'Collection Name' },
+    {
+      field: 'collection_id',
+      headerName: 'Collection ID',
+    },
+    {
+      field: 'collection_name',
+      headerName: 'Collection Name',
+    },
     { field: 'customer', headerName: 'Customer' },
-    { field: 'destroyed', headerName: 'Destroyed' },
-    { field: 'diagnostics_grade', headerName: 'Diagnostics Grade' },
+    {
+      field: 'destroyed',
+      headerName: 'Destroyed',
+
+      valueFormatter: formatBooleanAGGrid,
+    },
+    {
+      field: 'diagnostics_grade',
+      headerName: 'Diagnostics Grade',
+    },
     { field: 'fmip_status', headerName: 'FMIP Status' },
     { field: 'frp_status', headerName: 'FRP Status' },
     { field: 'imei', headerName: 'IMEI' },
-    { field: 'in_stock', headerName: 'In Stock' },
-    { field: 'logged_ts', headerName: 'Logged TS' },
+    {
+      field: 'in_stock',
+      headerName: 'In Stock',
+      valueFormatter: formatBooleanAGGrid,
+    },
+    {
+      field: 'logged_ts',
+      headerName: 'Logged TS',
+      valueFormatter: formatDateTimeAGGrid,
+    },
     { field: 'manufacturer', headerName: 'Manufacturer' },
     { field: 'mdm_status', headerName: 'MDM Status' },
     { field: 'model', headerName: 'Model' },
-    { field: 'overall_grade', headerName: 'Overall Grade' },
+    {
+      field: 'overall_grade',
+      headerName: 'Overall Grade',
+    },
     { field: 'project', headerName: 'Project' },
-    { field: 'quarantined', headerName: 'Quarantined' },
+    {
+      field: 'quarantined',
+      headerName: 'Quarantined',
+      valueFormatter: formatBooleanAGGrid,
+    },
     { field: 'serial', headerName: 'Serial' },
-    { field: 'smash_test_grade', headerName: 'Smash Test Grade' },
-    { field: 'to_be_destroyed', headerName: 'To Be Destroyed' },
+    {
+      field: 'smash_test_grade',
+      headerName: 'Smash Test Grade',
+    },
+    {
+      field: 'to_be_destroyed',
+      headerName: 'To Be Destroyed',
+      valueFormatter: formatBooleanAGGrid,
+    },
     { field: 'uid', headerName: 'ID' },
   ]);
 
@@ -68,6 +105,8 @@ const DevicesTable: NextPageWithLayout = () => {
       flex: 1,
       minWidth: 100,
       resizable: true,
+      floatingFilter: true,
+      editable: false,
       /* allow every column to be aggregated */
       enableValue: true,
       /* allow every column to be pivoted */

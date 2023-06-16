@@ -9,8 +9,8 @@ import { AppState } from '@/redux/store';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
 import { deleteTask } from '@/redux/slices/kanbanSlice';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
-import ConfirmDialog from '@/modals/ConfirmModal/ConfirmModal';
-import FormDialog from '@/modals/FormModal/FormModal';
+import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
+import FormModal from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
 import { IKanbanBoard } from '@/lib/api/api-types';
 import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
@@ -124,7 +124,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
         anchorEl={anchorEl}
         sx={{ width: 220 }}
       >
-        <FormDialog
+        <FormModal
           triggerBtn={{
             type: 'menu',
             // @ts-ignore
@@ -144,8 +144,8 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             currentData={currentData}
             closeModal={handleCloseMenu}
           />
-        </FormDialog>
-        <ConfirmDialog
+        </FormModal>
+        <ConfirmModal
           title="Confirm Delete Task"
           contentText="Are you sure you want to permanently delete this task?"
           actionBtnText="Delete"
@@ -158,8 +158,8 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             closeMenu: handleCloseMenu,
           }}
           // processing={deleting}
-          actionFunc={(closeDialog) =>
-            handleDelete(colIndex, taskIndex, closeDialog)
+          actionFunc={(closeModal) =>
+            handleDelete(colIndex, taskIndex, closeModal)
           }
         />
 

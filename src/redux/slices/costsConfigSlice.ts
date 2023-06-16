@@ -43,7 +43,7 @@ export const fetchBySourceId = createAsyncThunk(
     if (res.status !== 200) {
       thunkAPI.dispatch(
         addNotification({
-          message: 'Failed to load Costs Configuration from server.',
+          message: `Failed to load Costs Configuration from server: ${res.statusText}`,
           variant: 'error',
         })
       );
@@ -75,7 +75,7 @@ export const saveBySourceId = createAsyncThunk(
     if (res.status !== 200) {
       thunkAPI.dispatch(
         addNotification({
-          message: 'Failed to save Costs Configuration to server.',
+          message: `Failed to save Costs Configuration to server: ${res.statusText}`,
           variant: 'error',
         })
       );

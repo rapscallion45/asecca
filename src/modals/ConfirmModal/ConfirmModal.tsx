@@ -177,11 +177,7 @@ const ConfirmModal: FC<IConfirmModalProps> = (props) => {
     <div style={{ display: 'inline' }}>
       {triggerButton()}
       <Dialog open={modalOpen} onClose={handleModalOpen}>
-        <DialogTitle>
-          <Typography color="text.primary" variant="h6">
-            {title}
-          </Typography>
-        </DialogTitle>
+        <DialogTitle variant="h6">{title}</DialogTitle>
         <DialogContent dividers sx={{ p: 3 }}>
           <Typography>{contentText}</Typography>
         </DialogContent>
