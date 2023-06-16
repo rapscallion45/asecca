@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, DragEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -57,10 +57,10 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {any} event - object change event
+   * @param {DragEvent} event - object change event
    */
   const handleOnDrop = useCallback(
-    (event: any) => {
+    (event: DragEvent) => {
       if (!dragEnabled) return;
 
       const { prevColIndex, taskIndex } = JSON.parse(
@@ -71,7 +71,7 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
         dispatch(dragTask({ colIndex, prevColIndex, taskIndex }));
       }
     },
-    [colIndex, dispatch]
+    [colIndex, dragEnabled, dragTask, dispatch]
   );
 
   /**
@@ -81,9 +81,9 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {any} event - object change event
+   * @param {DragEvent} event - object change event
    */
-  const handleOnDragOver = useCallback((event: any) => {
+  const handleOnDragOver = useCallback((event: DragEvent) => {
     event.preventDefault();
   }, []);
 

@@ -2,61 +2,57 @@
 
 exports[`ScrollBar Renders correctly 1`] = `
 <div
-  className="css-jjtu05"
+  data-simplebar="init"
 >
   <div
-    data-simplebar="init"
+    className="simplebar-wrapper"
   >
     <div
-      className="simplebar-wrapper"
+      className="simplebar-height-auto-observer-wrapper"
     >
       <div
-        className="simplebar-height-auto-observer-wrapper"
-      >
-        <div
-          className="simplebar-height-auto-observer"
-        />
-      </div>
+        className="simplebar-height-auto-observer"
+      />
+    </div>
+    <div
+      className="simplebar-mask"
+    >
       <div
-        className="simplebar-mask"
+        className="simplebar-offset"
       >
         <div
-          className="simplebar-offset"
+          aria-label="scrollable content"
+          className="simplebar-content-wrapper"
+          role="region"
+          tabIndex={0}
         >
           <div
-            aria-label="scrollable content"
-            className="simplebar-content-wrapper"
-            role="region"
-            tabIndex={0}
+            className="simplebar-content"
           >
-            <div
-              className="simplebar-content"
-            >
-              <div>
-                Test child
-              </div>
+            <div>
+              Test child
             </div>
           </div>
         </div>
       </div>
-      <div
-        className="simplebar-placeholder"
-      />
     </div>
     <div
-      className="simplebar-track simplebar-horizontal"
-    >
-      <div
-        className="simplebar-scrollbar"
-      />
-    </div>
+      className="simplebar-placeholder"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-horizontal"
+  >
     <div
-      className="simplebar-track simplebar-vertical"
-    >
-      <div
-        className="simplebar-scrollbar"
-      />
-    </div>
+      className="simplebar-scrollbar"
+    />
+  </div>
+  <div
+    className="simplebar-track simplebar-vertical"
+  >
+    <div
+      className="simplebar-scrollbar"
+    />
   </div>
 </div>
 `;

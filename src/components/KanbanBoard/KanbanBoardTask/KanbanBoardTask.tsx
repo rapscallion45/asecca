@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, DragEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import {
@@ -84,10 +84,10 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
    * @since 0.0.1
    *
    * @method
-   * @param {any} event - object change event
+   * @param {DragEvent} event - object change event
    */
   const handleOnDrag = useCallback(
-    (event: any) => {
+    (event: DragEvent) => {
       event.dataTransfer.setData(
         'text',
         JSON.stringify({ taskIndex, prevColIndex: colIndex })
