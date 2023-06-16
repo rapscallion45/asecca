@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/theme/typography.ts</title>
+    <title>JSDoc: Source: components/KanbanBoard/KanbanBoard.tsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/theme/typography.ts</h1>
+    <h1 class="page-title">Source: components/KanbanBoard/KanbanBoard.tsx</h1>
 
     
 
@@ -26,172 +26,194 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { TypographyVariantsOptions } from '@mui/material/styles';
+            <pre class="prettyprint source linenums"><code>import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  Box,
+  Skeleton,
+  Button,
+  Card,
+  CardContent,
+  useTheme,
+} from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
+import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
+import ScrollBar from '@/components/ScrollBar/ScrollBar';
+import { AppState } from '@/redux/store';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import FormModal from '@/modals/FormModal/FormModal';
+import KanbanBoardForm from './KanbanBoardForm';
 
 /**
- * ASECCA SPA typography definitions
+ * Kanban Board Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- */
-
-/**
- * Pixel value to REM conversion helper
+ * @since 0.0.7
  *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @param {number} value - pixel value to convert to REM units
- * @returns {string} - REM value string from passed pixel units
+ * @typedef IKanbanBoardProps
+ * @prop {IKanbanBoard} currentData - passed board data
  */
-function pxToRem(value: number) {
-  return `${value / 16}rem`;
+interface IKanbanBoardProps {
+  currentData: IKanbanBoard;
 }
 
 /**
- * Responsive Font Sizes
+ * Kanban Board
+ *
+ * Presents columns and task data for passed kanban board
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
+ * @since 0.0.7
  *
- * @typedef IResposiveFontSizes
- * @prop {number} sm - small font pixel size
- * @prop {number} md - medium font pixel size
- * @prop {number} lg - large font pixel size
+ * @component
+ * @returns {FC} - Kanban Board interface functional component
  */
-interface IResposiveFontSizes {
-  sm: number;
-  md: number;
-  lg: number;
-}
+const KanbanBoard: FC&lt;IKanbanBoardProps> = (props) => {
+  const { currentData } = props;
+  const theme = useTheme();
+  //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+  const { loading, error, saving, edited } = useSelector(
+    (state: AppState) => state.kanban
+  );
 
-/**
- * Responsive font size calculation helper
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated to rem
- * @returns {Object} - calculated rem font sizes
- */
-function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
-  return {
-    '@media (min-width:600px)': {
-      fontSize: pxToRem(fontSizes.sm),
-    },
-    '@media (min-width:900px)': {
-      fontSize: pxToRem(fontSizes.md),
-    },
-    '@media (min-width:1200px)': {
-      fontSize: pxToRem(fontSizes.lg),
-    },
-  };
-}
+  /**
+   * Callback handler for cancelling changes to board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.7
+   *
+   * @method
+   */
+  const handleCancel = () => {};
 
-/**
- * Primary font family
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @constant
- * @type {string}
- */
-const FONT_PRIMARY = 'Poppins, Roboto';
+  /**
+   * Callback handler for saving changes to board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.7
+   *
+   * @method
+   */
+  const handleSave = () => {};
 
-/**
- * Typography theme option defintions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @see See [more info on MUI typography](https://mui.com/material-ui/customization/typography/)
- *
- * @constant
- * @type {TypographyVariantsOptions}
- */
-const typography: TypographyVariantsOptions = {
-  fontFamily: FONT_PRIMARY,
-  fontWeightRegular: 400,
-  fontWeightMedium: 600,
-  fontWeightBold: 700,
-  h1: {
-    fontWeight: 700,
-    lineHeight: 80 / 64,
-    fontSize: pxToRem(40),
-    ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
-  },
-  h2: {
-    fontWeight: 700,
-    lineHeight: 64 / 48,
-    fontSize: pxToRem(32),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
-  },
-  h3: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(24),
-    ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
-  },
-  h4: {
-    fontWeight: 500,
-    lineHeight: 1.5,
-    fontSize: pxToRem(20),
-    ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
-  },
-  h5: {
-    fontWeight: 500,
-    lineHeight: 1.5,
-    fontSize: pxToRem(18),
-    ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
-  },
-  h6: {
-    fontWeight: 500,
-    lineHeight: 28 / 18,
-    fontSize: pxToRem(17),
-    ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
-  },
-  subtitle1: {
-    fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: pxToRem(16),
-  },
-  subtitle2: {
-    fontWeight: 600,
-    lineHeight: 22 / 14,
-    fontSize: pxToRem(14),
-  },
-  body1: {
-    lineHeight: 1.5,
-    fontSize: pxToRem(16),
-  },
-  body2: {
-    lineHeight: 22 / 14,
-    fontSize: pxToRem(12),
-  },
-  caption: {
-    lineHeight: 1.5,
-    fontSize: pxToRem(12),
-  },
-  overline: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(12),
-    letterSpacing: 1.1,
-  },
-  button: {
-    fontWeight: 400,
-    lineHeight: 24 / 14,
-    fontSize: pxToRem(16),
-  },
+  /**
+   * Helper component for rendering column skeleton whilst loading board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.7
+   *
+   * @method
+   */
+  const renderBoardColumnSkeleton = () => (
+    &lt;Box mr={2}>
+      &lt;Skeleton width={190} height={50} sx={{ borderRadius: '4px', mb: 1 }} />
+      &lt;Skeleton
+        variant="rectangular"
+        width={270}
+        height={170}
+        sx={{ borderRadius: '4px', mb: 2 }}
+      />
+      &lt;Skeleton
+        variant="rectangular"
+        width={270}
+        height={170}
+        sx={{ borderRadius: '4px', mb: 2 }}
+      />
+    &lt;/Box>
+  );
+
+  return (
+    &lt;>
+      &lt;ScrollBar>
+        {currentData.columns.length > 0 ? (
+          &lt;Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+            {!loading &amp;&amp; !error ? (
+              &lt;>
+                {currentData.columns.map((col: IKanbanBoardColumn, index) => (
+                  &lt;Column key={col.id} colIndex={index} />
+                ))}
+                &lt;Card
+                  sx={{
+                    mt: 7,
+                    minWidth: 275,
+                    minHeight: 300,
+                    maxHeight: 500,
+                    backgroundColor: 'transparent',
+                    borderColor: theme.palette.text.secondary,
+                    border: 'solid 1px',
+                  }}
+                >
+                  &lt;CardContent sx={{ padding: '50% 40px' }}>
+                    &lt;FormModal
+                      triggerBtn={{
+                        type: 'menu',
+                        // @ts-ignore
+                        icon: ViewColumnIcon,
+                        iconStyle: { marginRight: '10px' },
+                        text: '+ Add Column',
+                        closeMenu: () => {},
+                      }}
+                      title="Add Column"
+                    >
+                      &lt;KanbanBoardForm
+                        isEditMode
+                        currentData={currentData}
+                        closeModal={() => {}}
+                      />
+                    &lt;/FormModal>
+                  &lt;/CardContent>
+                &lt;/Card>
+              &lt;/>
+            ) : (
+              &lt;>
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+              &lt;/>
+            )}
+          &lt;/Box>
+        ) : (
+          &lt;Box mt={2}>
+            &lt;KanbanBoardEmpty type="edit" currentData={currentData} />
+          &lt;/Box>
+        )}
+      &lt;/ScrollBar>
+      &lt;Box
+        sx={{
+          marginTop: 4,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        &lt;Button
+          color="secondary"
+          variant="outlined"
+          onClick={handleCancel}
+          disabled={saving || loading || !edited}
+          sx={{ backgroundColor: 'common.white' }}
+        >
+          Reset Board
+        &lt;/Button>
+        &lt;LoadingButton
+          color="secondary"
+          variant="contained"
+          onClick={handleSave}
+          disabled={saving || loading || !edited}
+          loading={saving}
+          sx={{ ml: 2 }}
+        >
+          Save
+        &lt;/LoadingButton>
+      &lt;/Box>
+    &lt;/>
+  );
 };
 
-export default typography;
+export default KanbanBoard;
 </code></pre>
         </article>
     </section>
