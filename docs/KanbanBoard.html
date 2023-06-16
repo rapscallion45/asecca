@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: styles/theme/typography.ts</title>
+    <title>JSDoc: Class: KanbanBoard</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,184 +17,470 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: styles/theme/typography.ts</h1>
+    <h1 class="page-title">Class: KanbanBoard</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { TypographyVariantsOptions } from '@mui/material/styles';
+        <h2><span class="attribs"><span class="type-signature"></span></span>KanbanBoard<span class="signature">()</span><span class="type-signature"> &rarr; {FC}</span></h2>
+        
+    
+</header>
 
-/**
- * ASECCA SPA typography definitions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- */
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * Pixel value to REM conversion helper
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @param {number} value - pixel value to convert to REM units
- * @returns {string} - REM value string from passed pixel units
- */
-function pxToRem(value: number) {
-  return `${value / 16}rem`;
-}
+    
 
-/**
- * Responsive Font Sizes
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @typedef IResposiveFontSizes
- * @prop {number} sm - small font pixel size
- * @prop {number} md - medium font pixel size
- * @prop {number} lg - large font pixel size
- */
-interface IResposiveFontSizes {
-  sm: number;
-  md: number;
-  lg: number;
-}
+    
+    <h4 class="name" id="KanbanBoard"><span class="type-signature"></span>new KanbanBoard<span class="signature">()</span><span class="type-signature"> &rarr; {FC}</span></h4>
+    
 
-/**
- * Responsive font size calculation helper
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @param {IResposiveFontSizes} fontSizes - font sizes to be calculated to rem
- * @returns {Object} - calculated rem font sizes
- */
-function responsiveFontSizes(fontSizes: IResposiveFontSizes) {
-  return {
-    '@media (min-width:600px)': {
-      fontSize: pxToRem(fontSizes.sm),
-    },
-    '@media (min-width:900px)': {
-      fontSize: pxToRem(fontSizes.md),
-    },
-    '@media (min-width:1200px)': {
-      fontSize: pxToRem(fontSizes.lg),
-    },
-  };
-}
+    
 
-/**
- * Primary font family
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @constant
- * @type {string}
- */
-const FONT_PRIMARY = 'Poppins, Roboto';
 
-/**
- * Typography theme option defintions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof Theme
- *
- * @see See [more info on MUI typography](https://mui.com/material-ui/customization/typography/)
- *
- * @constant
- * @type {TypographyVariantsOptions}
- */
-const typography: TypographyVariantsOptions = {
-  fontFamily: FONT_PRIMARY,
-  fontWeightRegular: 400,
-  fontWeightMedium: 600,
-  fontWeightBold: 700,
-  h1: {
-    fontWeight: 700,
-    lineHeight: 80 / 64,
-    fontSize: pxToRem(40),
-    ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
-  },
-  h2: {
-    fontWeight: 700,
-    lineHeight: 64 / 48,
-    fontSize: pxToRem(32),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
-  },
-  h3: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(24),
-    ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
-  },
-  h4: {
-    fontWeight: 500,
-    lineHeight: 1.5,
-    fontSize: pxToRem(20),
-    ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
-  },
-  h5: {
-    fontWeight: 500,
-    lineHeight: 1.5,
-    fontSize: pxToRem(18),
-    ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
-  },
-  h6: {
-    fontWeight: 500,
-    lineHeight: 28 / 18,
-    fontSize: pxToRem(17),
-    ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
-  },
-  subtitle1: {
-    fontWeight: 600,
-    lineHeight: 1.5,
-    fontSize: pxToRem(16),
-  },
-  subtitle2: {
-    fontWeight: 600,
-    lineHeight: 22 / 14,
-    fontSize: pxToRem(14),
-  },
-  body1: {
-    lineHeight: 1.5,
-    fontSize: pxToRem(16),
-  },
-  body2: {
-    lineHeight: 22 / 14,
-    fontSize: pxToRem(12),
-  },
-  caption: {
-    lineHeight: 1.5,
-    fontSize: pxToRem(12),
-  },
-  overline: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(12),
-    letterSpacing: 1.1,
-  },
-  button: {
-    fontWeight: 400,
-    lineHeight: 24 / 14,
-    fontSize: pxToRem(16),
-  },
-};
 
-export default typography;
-</code></pre>
-        </article>
-    </section>
+<div class="description">
+    <p>Kanban Board</p>
+<p>Presents columns and task data for passed kanban board</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Carl Scrivener <a href="https://github.com/rapscallion45">GitHub</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_KanbanBoard_KanbanBoard.tsx.html">components/KanbanBoard/KanbanBoard.tsx</a>, <a href="components_KanbanBoard_KanbanBoard.tsx.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Kanban Board interface functional component</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">FC</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~handleCancel"><span class="type-signature">(inner) </span>handleCancel<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Callback handler for cancelling changes to board</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Carl Scrivener <a href="https://github.com/rapscallion45">GitHub</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_KanbanBoard_KanbanBoard.tsx.html">components/KanbanBoard/KanbanBoard.tsx</a>, <a href="components_KanbanBoard_KanbanBoard.tsx.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~handleSave"><span class="type-signature">(inner) </span>handleSave<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Callback handler for saving changes to board</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Carl Scrivener <a href="https://github.com/rapscallion45">GitHub</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_KanbanBoard_KanbanBoard.tsx.html">components/KanbanBoard/KanbanBoard.tsx</a>, <a href="components_KanbanBoard_KanbanBoard.tsx.html#line44">line 44</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~renderBoardColumnSkeleton"><span class="type-signature">(inner) </span>renderBoardColumnSkeleton<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Helper component for rendering column skeleton whilst loading board</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>0.0.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Carl Scrivener <a href="https://github.com/rapscallion45">GitHub</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_KanbanBoard_KanbanBoard.tsx.html">components/KanbanBoard/KanbanBoard.tsx</a>, <a href="components_KanbanBoard_KanbanBoard.tsx.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -208,7 +494,7 @@ export default typography;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 16 2023 12:06:29 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 16 2023 12:06:30 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
