@@ -5,9 +5,7 @@ exports[`ScrollBar Renders correctly 1`] = `
   className="css-jjtu05"
 >
   <div
-    className="css-1a0z2gx"
     data-simplebar="init"
-    timeout={500}
   >
     <div
       className="simplebar-wrapper"

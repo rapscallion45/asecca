@@ -95,9 +95,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
           className="css-jjtu05"
         >
           <div
-            className="css-19u2xht"
             data-simplebar="init"
-            timeout={500}
           >
             <div
               className="simplebar-wrapper"

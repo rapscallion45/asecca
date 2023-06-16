@@ -12,6 +12,7 @@ import { LoadingButton } from '@mui/lab';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
+import ScrollBar from '@/components/ScrollBar/ScrollBar';
 import { AppState } from '@/redux/store';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
@@ -97,61 +98,63 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
 
   return (
     <>
-      {currentData.columns.length > 0 ? (
-        <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-          {!loading && !error ? (
-            <>
-              {currentData.columns.map((col: IKanbanBoardColumn, index) => (
-                <Column key={col.id} colIndex={index} />
-              ))}
-              <Card
-                sx={{
-                  mt: 7,
-                  minWidth: 275,
-                  minHeight: 300,
-                  maxHeight: 500,
-                  backgroundColor: 'transparent',
-                  borderColor: theme.palette.text.secondary,
-                  border: 'solid 1px',
-                }}
-              >
-                <CardContent sx={{ padding: '50% 40px' }}>
-                  <FormModal
-                    triggerBtn={{
-                      type: 'menu',
-                      // @ts-ignore
-                      icon: ViewColumnIcon,
-                      iconStyle: { marginRight: '10px' },
-                      text: '+ Add Column',
-                      closeMenu: () => {},
-                    }}
-                    title="Add Column"
-                  >
-                    <KanbanBoardForm
-                      isEditMode
-                      currentData={currentData}
-                      closeModal={() => {}}
-                    />
-                  </FormModal>
-                </CardContent>
-              </Card>
-            </>
-          ) : (
-            <>
-              {renderBoardColumnSkeleton()}
-              {renderBoardColumnSkeleton()}
-              {renderBoardColumnSkeleton()}
-            </>
-          )}
-        </Box>
-      ) : (
-        <Box mt={2}>
-          <KanbanBoardEmpty type="edit" currentData={currentData} />
-        </Box>
-      )}
+      <ScrollBar>
+        {currentData.columns.length > 0 ? (
+          <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+            {!loading && !error ? (
+              <>
+                {currentData.columns.map((col: IKanbanBoardColumn, index) => (
+                  <Column key={col.id} colIndex={index} />
+                ))}
+                <Card
+                  sx={{
+                    mt: 7,
+                    minWidth: 275,
+                    minHeight: 300,
+                    maxHeight: 500,
+                    backgroundColor: 'transparent',
+                    borderColor: theme.palette.text.secondary,
+                    border: 'solid 1px',
+                  }}
+                >
+                  <CardContent sx={{ padding: '50% 40px' }}>
+                    <FormModal
+                      triggerBtn={{
+                        type: 'menu',
+                        // @ts-ignore
+                        icon: ViewColumnIcon,
+                        iconStyle: { marginRight: '10px' },
+                        text: '+ Add Column',
+                        closeMenu: () => {},
+                      }}
+                      title="Add Column"
+                    >
+                      <KanbanBoardForm
+                        isEditMode
+                        currentData={currentData}
+                        closeModal={() => {}}
+                      />
+                    </FormModal>
+                  </CardContent>
+                </Card>
+              </>
+            ) : (
+              <>
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+                {renderBoardColumnSkeleton()}
+              </>
+            )}
+          </Box>
+        ) : (
+          <Box mt={2}>
+            <KanbanBoardEmpty type="edit" currentData={currentData} />
+          </Box>
+        )}
+      </ScrollBar>
       <Box
         sx={{
-          marginTop: 10,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',

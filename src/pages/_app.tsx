@@ -15,6 +15,8 @@ import '@/styles/ag-grid-theme-asecca/ag-theme-asecca.css';
 import '@/styles/ag-grid-theme-asecca/ag-theme-asecca-dark.css';
 import 'ag-grid-enterprise';
 
+import 'simplebar-react/dist/simplebar.min.css';
+
 import { createEmotionCache } from '@/utils';
 import store from '@/redux/store';
 import DefaultLayout from '@/layouts/default/DefaultLayout';
