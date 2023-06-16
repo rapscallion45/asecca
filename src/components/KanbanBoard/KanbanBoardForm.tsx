@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoard, IKanbanBoardColumn } from './types';
 import useKanbanBoardFormController from './KanbanBoardFormController';
 
 /**
@@ -50,9 +50,9 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
   const { isEditMode, currentData, closeModal } = props;
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
     currentData?.columns || [
-      { name: 'Todo', tasks: [], id: uuidv4() },
-      { name: 'In Progress', tasks: [], id: uuidv4() },
-      { name: 'Completed', tasks: [], id: uuidv4() },
+      { name: 'Todo', id: uuidv4() },
+      { name: 'In Progress', id: uuidv4() },
+      { name: 'Completed', id: uuidv4() },
     ]
   );
   const { saving, formik } = useKanbanBoardFormController(

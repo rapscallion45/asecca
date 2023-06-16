@@ -4,9 +4,8 @@ import {
   CostsConfigCostSource,
   ICostsConfigDataPayload,
   ICostsConfigSaveDataPayload,
-  IKanbanBoardDataPayload,
-  IKanbanBoardColumn,
-  IKanbanBoardSubtask,
+  IKanbanBoardTask,
+  KanbanCollectionTaskStatus,
 } from '@/lib/api/api-types';
 
 /**
@@ -244,58 +243,20 @@ export interface IThemeState {
  * @since 0.0.1
  *
  * @typedef IKanbanBoardState
- * @prop {Array<IKanbanBoard>} data - Kanban board datasets
+ * @prop {boolean} loading - task data loading flag
+ * @prop {Array<IKanbanBoardTask>} data - Kanban board task dataset
+ * @prop {Array<IKanbanBoardTask>} dataShadow - original copy of task dataset
+ * @prop {string} error - kanban board error message
+ * @prop {boolean} saving - save in progress flag
+ * @prop {boolean} edited - task data has been changed by user
  */
 export interface IKanbanBoardState {
   loading: boolean;
-  data: IKanbanBoardDataPayload;
-  dataShadow: IKanbanBoardDataPayload;
+  data: Array<IKanbanBoardTask>;
+  dataShadow: Array<IKanbanBoardTask>;
   error?: string;
   saving: boolean;
   edited: boolean;
-}
-
-/**
- * Add Kanban Board action payload
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @typedef IAddKanbanBoardPayload
- * @prop {string} name - board name
- * @prop {Array<IKanbanBoardColumn>} newColumns - columns to be added to board
- */
-export interface IAddKanbanBoardPayload {
-  name: string;
-  newColumns: Array<IKanbanBoardColumn>;
-}
-
-/**
- * Edit Kanban Board action payload
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @typedef IEditKanbanBoardPayload
- * @prop {string} name - board name
- * @prop {Array<IKanbanBoardColumn>} newColumns - columns to be updated
- */
-export interface IEditKanbanBoardPayload {
-  name: string;
-  newColumns: Array<IKanbanBoardColumn>;
-}
-
-/**
- * Set Kanban Board active payload
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @typedef ISetKanbanBoardActivePayload
- * @prop {number} index - board index to be set active
- */
-export interface ISetKanbanBoardActivePayload {
-  index: number;
 }
 
 /**
@@ -305,18 +266,14 @@ export interface ISetKanbanBoardActivePayload {
  * @since 0.0.1
  *
  * @typedef IAddKanbanBoardTaskPayload
- * @prop {string} title - task title
- * @prop {string} description - task description
- * @prop {sting} status - task status
- * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
- * @prop {number} newColIndex - index of added column
+ * @prop {string} id - task ID of task to be added
+ * @prop {string} name - task name
+ * @prop {KanbanCollectionTaskStatus} status - task status
  */
 export interface IAddKanbanBoardTaskPayload {
-  title: string;
-  description: string;
-  status: string;
-  subtasks: Array<IKanbanBoardSubtask>;
-  newColIndex: number;
+  id: string;
+  name: string;
+  status: KanbanCollectionTaskStatus;
 }
 
 /**
@@ -326,56 +283,14 @@ export interface IAddKanbanBoardTaskPayload {
  * @since 0.0.1
  *
  * @typedef IEditKanbanBoardTaskPayload
- * @prop {string} title - task title
- * @prop {string} description - task description
- * @prop {sting} status - task status
- * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
- * @prop {number} newColIndex - index of added task column
- * @prop {number} prevColIndex - previous index of column
- * @prop {number} taskIndex - index of task
+ * @prop {string} name - task name
+ * @prop {KanbanCollectionTaskStatus} status - task status
+ * @prop {string} id - task ID of task to be edited
  */
 export interface IEditKanbanBoardTaskPayload {
-  title: string;
-  description: string;
-  status: string;
-  subtasks: Array<IKanbanBoardSubtask>;
-  newColIndex: number;
-  prevColIndex: number;
-  taskIndex: number;
-}
-
-/**
- * Drag Kanban Board task payload
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @typedef IDragKanbanBoardTaskPayload
- * @prop {number} colIndex - original index of column
- * @prop {number} prevColIndex - previous index of column
- * @prop {number} taskIndex - index of task
- */
-export interface IDragKanbanBoardTaskPayload {
-  colIndex: number;
-  prevColIndex: number;
-  taskIndex: number;
-}
-
-/**
- * Set Kanban Board subtask completed payload
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @typedef ISetKanbanBoardSubtaskCompletedPayload
- * @prop {number} index - index of subtask
- * @prop {number} colIndex - previous index of column
- * @prop {number} taskIndex - index of parent task
- */
-export interface ISetKanbanBoardSubtaskCompletedPayload {
-  index: number;
-  colIndex: number;
-  taskIndex: number;
+  id: string;
+  name: string;
+  status: KanbanCollectionTaskStatus;
 }
 
 /**
@@ -385,29 +300,23 @@ export interface ISetKanbanBoardSubtaskCompletedPayload {
  * @since 0.0.1
  *
  * @typedef ISetKanbanBoardTaskStatusPayload
- * @prop {string} status - new status of task
- * @prop {number} colIndex - index of subtask
- * @prop {number} newColIndex - previous index of column
- * @prop {number} taskIndex - index of parent task
+ * @prop {KanbanCollectionTaskStatus} status - new status of task
+ * @prop {string} id - task ID of task to be updated
  */
 export interface ISetKanbanBoardTaskStatusPayload {
-  status: string;
-  colIndex: number;
-  newColIndex: number;
-  taskIndex: number;
+  status: KanbanCollectionTaskStatus;
+  id: string;
 }
 
 /**
- * Set Kanban Board task status payload
+ * Delete Kanban Board task payload
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.1
  *
  * @typedef IDeleteKanbanBoardTaskPayload
- * @prop {number} colIndex - index of task column
- * @prop {number} taskIndex - index of task to be deleted
+ * @prop {string} id - task ID to be deleted
  */
 export interface IDeleteKanbanBoardTaskPayload {
-  colIndex: number;
-  taskIndex: number;
+  id: string;
 }

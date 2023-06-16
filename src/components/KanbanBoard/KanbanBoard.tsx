@@ -14,9 +14,9 @@ import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBo
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import ScrollBar from '@/components/ScrollBar/ScrollBar';
 import { AppState } from '@/redux/store';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import KanbanBoardForm from './KanbanBoardForm';
+import { IKanbanBoard, IKanbanBoardColumn } from './types';
 
 /**
  * Kanban Board Props
@@ -104,7 +104,11 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
             {!loading && !error ? (
               <>
                 {currentData.columns.map((col: IKanbanBoardColumn, index) => (
-                  <Column key={col.id} colIndex={index} />
+                  <Column
+                    key={col.id}
+                    colIndex={index}
+                    columns={currentData.columns}
+                  />
                 ))}
                 <Card
                   sx={{

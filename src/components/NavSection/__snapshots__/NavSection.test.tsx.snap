@@ -49,9 +49,14 @@ exports[`NavSection Renders correctly 1`] = `
         home
       </div>
     </a>
+    <li
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
+    >
+      kanban boards
+    </li>
     <a
       className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
-      href="/dashboard/kanban"
+      href="/dashboard/kanban/collections"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -83,7 +88,7 @@ exports[`NavSection Renders correctly 1`] = `
       <div
         className="MuiListItemText-root css-tlelie-MuiListItemText-root"
       >
-        kanban boards
+        Collections
       </div>
     </a>
     <li
@@ -93,7 +98,7 @@ exports[`NavSection Renders correctly 1`] = `
     </li>
     <a
       className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
-      href="/dashboard/costs-config"
+      href="/dashboard/configurators/costs-config"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}

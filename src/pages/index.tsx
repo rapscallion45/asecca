@@ -37,7 +37,7 @@ const Home: NextPageWithLayout = () => (
       </Typography>
       <Button
         component={Link}
-        href="/dashboard/costs-config"
+        href="/dashboard/configurators/costs-config"
         fullWidth
         variant="contained"
         color="secondary"

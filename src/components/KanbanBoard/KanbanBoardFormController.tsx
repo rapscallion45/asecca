@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IAddKanbanBoardPayload, IEditKanbanBoardPayload } from '@/redux/types';
 import { AppState } from '@/redux/store';
-import { addBoard, editBoard } from '@/redux/slices/kanbanSlice';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoard, IKanbanBoardColumn } from './types';
 
 /**
  * Kanban board form controller hook, used for board form logic,
@@ -26,7 +24,6 @@ const useKanbanBoardFormController = (
   currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
-  const dispatch = useDispatch();
   const { saving } = useSelector((state: AppState) => state.kanban);
 
   /**
@@ -44,38 +41,6 @@ const useKanbanBoardFormController = (
   });
 
   /**
-   * Checks whether user entries for columns are in the correct format
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.4
-   *
-   * @method
-   * @returns {boolean} - whether user entry is validated
-   */
-  const validate = () =>
-    !newColumns.some((newColumn: IKanbanBoardColumn) => !newColumn.name.trim());
-
-  /**
-   * Data submission handler for board form
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.3
-   *
-   * @method
-   * @param {IEditKanbanBoardPayload} payload - data to be submitted
-   */
-  const handleSubmit = (payload: IEditKanbanBoardPayload) => {
-    if (!validate()) return;
-    if (isEditMode) {
-      dispatch(editBoard(payload as IEditKanbanBoardPayload));
-      if (closeModal) closeModal();
-    } else {
-      dispatch(addBoard(payload as IAddKanbanBoardPayload));
-      if (closeModal) closeModal();
-    }
-  };
-
-  /**
    * Formik configuration for board form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -89,8 +54,8 @@ const useKanbanBoardFormController = (
       newColumns: newColumns || [],
     },
     validationSchema,
-    onSubmit: (payload: IEditKanbanBoardPayload) => {
-      handleSubmit({ name: payload.name, newColumns });
+    onSubmit: () => {
+      if (closeModal && isEditMode) closeModal();
     },
   });
 

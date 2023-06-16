@@ -1,14 +1,11 @@
-import { FC, useCallback, DragEvent } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Card, CardContent, Typography } from '@mui/material';
-import {
-  IKanbanBoard,
-  IKanbanBoardColumn,
-  IKanbanBoardTask,
-} from '@/lib/api/api-types';
+import { IKanbanBoardTask } from '@/lib/api/api-types';
 import { AppState } from '@/redux/store';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
 import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
+import { IKanbanBoardColumn } from '../types';
 // import TaskModal from "../modals/TaskModal";
 
 /**
@@ -18,14 +15,12 @@ import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
  * @since 0.0.1
  *
  * @typedef IKanbanBoardTaskProps
- * @prop {number} colIndex - column index that task is in
- * @prop {number} taskIndex - index of task
- * @prop {boolean} dragEnabled - task drag enabled flag
+ * @prop {string} taskId - ID of task
+ * @prop {Array<IKanbanBoardColumn>} columns - columns for board on which task is from
  */
 interface IKanbanBoardTaskProps {
-  colIndex: number;
-  taskIndex: number;
-  dragEnabled?: boolean;
+  taskId: string;
+  columns: Array<IKanbanBoardColumn>;
 }
 
 /**
@@ -41,68 +36,29 @@ interface IKanbanBoardTaskProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
-  const { colIndex, taskIndex, dragEnabled = false } = props;
+  const { taskId, columns } = props;
   // const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
-  const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
+  const { data: kanbanTaskData } = useSelector(
+    (state: AppState) => state.kanban
+  );
 
   /* find this task and subtasks from passed board column and task indicies */
-  const task = kanbanData.boards
-    ?.find((board: IKanbanBoard) => board.isActive === true)
-    ?.columns.find(
-      (col: IKanbanBoardColumn, index: number) => index === colIndex
-    )
-    ?.tasks.find(
-      (taskItem: IKanbanBoardTask, index: number) => index === taskIndex
-    );
-  const subtasks = task?.subtasks;
+  const task = kanbanTaskData.find(
+    (taskItem: IKanbanBoardTask) => taskItem.id === taskId
+  );
 
   /* build current data structure for this task */
   const currentData: IEditKanbanBoardTaskPayload = {
-    title: task?.title || '',
-    description: task?.description || '',
-    status: task?.status,
-    subtasks: subtasks || [],
-    newColIndex: colIndex,
-    taskIndex,
-    prevColIndex: colIndex,
+    name: task?.name || '',
+    status: task?.status || 'Reported',
+    id: taskId,
   };
-
-  /* calculate completed subtask number for this task */
-  let completed = 0;
-  if (subtasks && subtasks?.length > 0) {
-    subtasks.forEach((subtask) => {
-      if (subtask.isCompleted) {
-        completed += 1;
-      }
-    });
-  }
-
-  /**
-   * Callback listens for drag of task
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.1
-   *
-   * @method
-   * @param {DragEvent} event - object change event
-   */
-  const handleOnDrag = useCallback(
-    (event: DragEvent) => {
-      event.dataTransfer.setData(
-        'text',
-        JSON.stringify({ taskIndex, prevColIndex: colIndex })
-      );
-    },
-    [taskIndex, colIndex]
-  );
 
   return task ? (
     <Card
-      draggable={dragEnabled}
       // onClick={() => {
       //   setIsTaskModalOpen(true);
       // }}
-      onDragStart={handleOnDrag}
       sx={{ width: 275, mb: 2 }}
     >
       <CardContent>
@@ -112,21 +68,15 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
           </Typography>
           <Box display="flex" justifyContent="end" flexGrow={1}>
             <KanbanBoardTaskMenu
-              colIndex={colIndex}
-              taskIndex={taskIndex}
+              taskId={taskId}
+              columns={columns}
               currentData={currentData}
             />
           </Box>
         </Box>
         <Typography variant="h5" component="div" mb={1}>
-          {task?.title}
+          {task.name}
         </Typography>
-        {subtasks && subtasks.length > 0 && (
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {completed} of {subtasks.length} tasks complete
-          </Typography>
-        )}
-        <Typography variant="body2">{task?.description}</Typography>
       </CardContent>
     </Card>
   ) : null;

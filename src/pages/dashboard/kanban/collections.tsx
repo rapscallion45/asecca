@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
+import { v4 as uuidv4 } from 'uuid';
 import { Box, Typography, Skeleton, Divider } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import MHidden from '@/components/@MUI-Extended/MHidden';
 import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
@@ -11,10 +10,12 @@ import KanbanBoardTaskForm from '@/components/KanbanBoard/KanbanBoardTask/Kanban
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
-import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
+import {
+  IKanbanBoard,
+  IKanbanBoardColumn,
+} from '@/components/KanbanBoard/types';
 
 /**
  * Kanban Page
@@ -27,46 +28,78 @@ import { deleteBoard, setBoardActive } from '@/redux/slices/kanbanSlice';
  * @component
  * @returns {NextPageWithLayout} - Kanban Board interface page component
  */
-const KanbanPage: NextPageWithLayout = () => {
-  //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
-  const dispatch = useDispatch();
-  const {
-    data: kanbanData,
-    loading,
-    error,
-  } = useSelector((state: AppState) => state.kanban);
-  const activeBoard = kanbanData.boards?.find((board) => board.isActive);
-
-  /* check for the active board each time update occurs to Kanban state */
-  useEffect(() => {
-    if (!activeBoard && kanbanData.boards?.length > 0)
-      dispatch(setBoardActive({ index: 0 }));
-  }, [activeBoard, kanbanData.boards, dispatch]);
+const KanbanCollectionsPage: NextPageWithLayout = () => {
+  const { loading, error } = useSelector((state: AppState) => state.kanban);
 
   /**
-   * Callback handler for deletion of board
+   * Collections board column data definition
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.8
+   *
+   * @constant
+   */
+  const collectionsColDefs: Array<IKanbanBoardColumn> = [
+    {
+      id: uuidv4(),
+      name: 'InboundOrderCreated',
+    },
+    {
+      id: uuidv4(),
+      name: 'InboundOrderRequested',
+    },
+    {
+      id: uuidv4(),
+      name: 'SOWDefined',
+    },
+    {
+      id: uuidv4(),
+      name: 'SOWApproved',
+    },
+    {
+      id: uuidv4(),
+      name: 'Booked',
+    },
+    {
+      id: uuidv4(),
+      name: 'Collected',
+    },
+    {
+      id: uuidv4(),
+      name: 'Delivered',
+    },
+    {
+      id: uuidv4(),
+      name: 'DevicesBookedIn',
+    },
+    {
+      id: uuidv4(),
+      name: 'Reported',
+    },
+  ];
+
+  /**
+   * Collections board data definition
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.1
    *
-   * @method
-   * @param {string} closeModal - closure of modal handler
+   * @constant
    */
-  const handleDeleteBoard = (closeModal: () => void) => {
-    dispatch(deleteBoard());
-    dispatch(setBoardActive({ index: 0 }));
-    closeModal();
+  const collectionsBoard: IKanbanBoard = {
+    name: 'Collections',
+    columns: collectionsColDefs,
   };
 
   return (
     <ClientOnly>
       <Box my={5}>
-        {activeBoard ? (
+        {collectionsBoard ? (
           <>
             <Box display="flex" pb={1}>
               <Typography variant="h4">
                 {!loading && !error ? (
-                  activeBoard?.name
+                  collectionsBoard?.name
                 ) : (
                   <Skeleton
                     variant="rectangular"
@@ -83,7 +116,7 @@ const KanbanPage: NextPageWithLayout = () => {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    {activeBoard.columns.length > 0 && (
+                    {collectionsBoard.columns.length > 0 && (
                       <MHidden width="smDown">
                         <Box
                           display="flex"
@@ -102,26 +135,13 @@ const KanbanPage: NextPageWithLayout = () => {
                           >
                             <KanbanBoardTaskForm
                               isEditMode={false}
-                              columns={activeBoard?.columns}
+                              columns={collectionsBoard?.columns}
                             />
                           </FormModal>
                         </Box>
                       </MHidden>
                     )}
-                    <ConfirmModal
-                      title="Confirm Delete Board"
-                      contentText={`Are you sure you want to permanently delete board "${activeBoard?.name}"?`}
-                      actionBtnText="Delete"
-                      triggerBtn={{
-                        type: 'icon',
-                        // @ts-ignore
-                        icon: DeleteIcon,
-                        color: 'inherit',
-                      }}
-                      // processing={deleting}
-                      actionFunc={(closeModal) => handleDeleteBoard(closeModal)}
-                    />
-                    <KanbanBoardMenu currentData={activeBoard} />
+                    <KanbanBoardMenu currentData={collectionsBoard} />
                   </Box>
                 </Box>
               ) : (
@@ -142,7 +162,7 @@ const KanbanPage: NextPageWithLayout = () => {
               )}
             </Box>
             <Divider />
-            <KanbanBoard currentData={activeBoard} />
+            <KanbanBoard currentData={collectionsBoard} />
           </>
         ) : (
           <KanbanBoardEmpty type="add" />
@@ -152,7 +172,7 @@ const KanbanPage: NextPageWithLayout = () => {
   );
 };
 
-/** dashboard layout used for Kanban page */
-KanbanPage.Layout = DashboardLayout;
+/** dashboard layout used for Kanban Collections page */
+KanbanCollectionsPage.Layout = DashboardLayout;
 
-export default KanbanPage;
+export default KanbanCollectionsPage;
