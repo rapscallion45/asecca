@@ -18,9 +18,11 @@ import KanbanBoardTaskForm from '../KanbanBoardTask/KanbanBoardTaskForm/KanbanBo
  *
  * @typedef IKanbanBoardColumnProps
  * @prop {number} colIndex - column index
+ * @prop {boolean} dragEnabled - column drag enabled flag
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
+  dragEnabled?: boolean;
 }
 
 /**
@@ -36,7 +38,7 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex } = props;
+  const { colIndex, dragEnabled = false } = props;
   const dispatch = useDispatch();
   const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
@@ -59,6 +61,8 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
    */
   const handleOnDrop = useCallback(
     (event: any) => {
+      if (!dragEnabled) return;
+
       const { prevColIndex, taskIndex } = JSON.parse(
         event.dataTransfer.getData('text')
       );
@@ -104,6 +108,7 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
           key={task.title}
           taskIndex={index}
           colIndex={colIndex}
+          dragEnabled={dragEnabled}
         />
       ))}
       {column.tasks.length <= 0 && (
