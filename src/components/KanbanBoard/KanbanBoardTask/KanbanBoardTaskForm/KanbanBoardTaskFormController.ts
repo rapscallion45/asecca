@@ -1,8 +1,6 @@
-import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
-import { AppState } from '@/redux/store';
 
 /**
  * Kanban board task form controller hook, used for task form logic,
@@ -23,8 +21,6 @@ const useKanbanBoardTaskFormController = (
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
-  const { saving } = useSelector((state: AppState) => state.kanban);
-
   /**
    * Yup input validation configuration for task form
    *
@@ -60,6 +56,6 @@ const useKanbanBoardTaskFormController = (
     },
   });
 
-  return { saving, formik };
+  return { formik };
 };
 export default useKanbanBoardTaskFormController;

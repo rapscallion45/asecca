@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
 import { IKanbanBoardTask } from '@/lib/api/api-types';
-import { AppState } from '@/redux/store';
 import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
 import { IKanbanBoardColumn } from '../types';
 
@@ -15,11 +13,15 @@ import { IKanbanBoardColumn } from '../types';
  *
  * @typedef IKanbanBoardColumnProps
  * @prop {number} colIndex - column index
+ * @prop {boolean} saving - saving state of baord flag
  * @prop {Array<IKanbanBoardColumn>} columns - column data for board on which this column is on
+ * @prop {Array<IKanbanBoardTask>} tasks - task data for column's board
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
+  saving: boolean;
   columns: Array<IKanbanBoardColumn>;
+  tasks: Array<IKanbanBoardTask>;
 }
 
 /**
@@ -35,9 +37,8 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex, columns } = props;
+  const { colIndex, columns, saving, tasks } = props;
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
-  const { data: tasks } = useSelector((state: AppState) => state.kanban);
 
   /* find this column in board state data from passed column index */
   const column = columns.find(
@@ -63,7 +64,13 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
       {tasks
         .filter((task: IKanbanBoardTask) => task.status === column.name)
         .map((task: IKanbanBoardTask) => (
-          <KanbanBoardTask key={task.id} taskId={task.id} columns={columns} />
+          <KanbanBoardTask
+            key={task.id}
+            taskId={task.id}
+            saving={saving}
+            columns={columns}
+            data={task}
+          />
         ))}
     </Box>
   ) : null;

@@ -24,11 +24,13 @@ import useKanbanBoardFormController from './KanbanBoardFormController';
  *
  * @typedef IKanbanBoardFormProps
  * @prop {boolean} isEditMode - determines whether this is a new board or editing
+ * @prop {boolean} saving - board saving flag
  * @prop {IKanbanBoard} currentData - current board data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardFormProps {
   isEditMode: boolean;
+  saving: boolean;
   currentData?: IKanbanBoard;
   closeModal?: () => void;
 }
@@ -47,7 +49,7 @@ interface IKanbanBoardFormProps {
  * @returns {FC} - kanaban board form functional component
  */
 const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
-  const { isEditMode, currentData, closeModal } = props;
+  const { isEditMode, saving, currentData, closeModal } = props;
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
     currentData?.columns || [
       { name: 'Todo', id: uuidv4() },
@@ -55,7 +57,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
       { name: 'Completed', id: uuidv4() },
     ]
   );
-  const { saving, formik } = useKanbanBoardFormController(
+  const { formik } = useKanbanBoardFormController(
     isEditMode,
     newColumns,
     currentData,

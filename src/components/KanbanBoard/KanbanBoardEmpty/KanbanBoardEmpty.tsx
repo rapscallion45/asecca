@@ -14,10 +14,12 @@ import { IKanbanBoard } from '../types';
  *
  * @typedef IKanbanBoardEmptyProps
  * @prop {string} type - add or edit type to show whether board has content
+ * @prop {boolean} saving - board data saving flag
  * @prop {IKanbanBoard} currentData - passed board data
  */
 interface IKanbanBoardEmptyProps {
   type: string;
+  saving: boolean;
   currentData?: IKanbanBoard;
 }
 
@@ -34,7 +36,7 @@ interface IKanbanBoardEmptyProps {
  * @returns {FC} - empty board functional component
  */
 const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
-  const { type, currentData } = props;
+  const { type, saving, currentData } = props;
   const theme = useTheme();
 
   return (
@@ -60,7 +62,11 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
             }}
             title="Add New Board"
           >
-            <KanbanBoardForm isEditMode={false} currentData={currentData} />
+            <KanbanBoardForm
+              isEditMode={false}
+              saving={saving}
+              currentData={currentData}
+            />
           </FormModal>
         ) : (
           <Card
@@ -88,6 +94,7 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
               >
                 <KanbanBoardForm
                   isEditMode
+                  saving={saving}
                   currentData={currentData}
                   closeModal={() => {}}
                 />

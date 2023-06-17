@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { AppState } from '@/redux/store';
 import { IKanbanBoard, IKanbanBoardColumn } from './types';
 
 /**
@@ -24,8 +22,6 @@ const useKanbanBoardFormController = (
   currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
-  const { saving } = useSelector((state: AppState) => state.kanban);
-
   /**
    * Yup input validation configuration for board form
    *
@@ -59,6 +55,6 @@ const useKanbanBoardFormController = (
     },
   });
 
-  return { saving, formik };
+  return { formik };
 };
 export default useKanbanBoardFormController;

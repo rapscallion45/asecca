@@ -29,7 +29,13 @@ import {
  * @returns {NextPageWithLayout} - Kanban Board interface page component
  */
 const KanbanCollectionsPage: NextPageWithLayout = () => {
-  const { loading, error } = useSelector((state: AppState) => state.kanban);
+  const {
+    data: tasks,
+    loading,
+    error,
+    saving,
+    edited,
+  } = useSelector((state: AppState) => state.collectionsKanban);
 
   /**
    * Collections board column data definition
@@ -135,13 +141,17 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
                           >
                             <KanbanBoardTaskForm
                               isEditMode={false}
+                              saving={saving}
                               columns={collectionsBoard?.columns}
                             />
                           </FormModal>
                         </Box>
                       </MHidden>
                     )}
-                    <KanbanBoardMenu currentData={collectionsBoard} />
+                    <KanbanBoardMenu
+                      saving={saving}
+                      currentData={collectionsBoard}
+                    />
                   </Box>
                 </Box>
               ) : (
@@ -162,10 +172,17 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
               )}
             </Box>
             <Divider />
-            <KanbanBoard currentData={collectionsBoard} />
+            <KanbanBoard
+              currentData={collectionsBoard}
+              tasks={tasks}
+              loading={loading}
+              error={error}
+              saving={saving}
+              edited={edited}
+            />
           </>
         ) : (
-          <KanbanBoardEmpty type="add" />
+          <KanbanBoardEmpty type="add" saving={saving} />
         )}
       </Box>
     </ClientOnly>
