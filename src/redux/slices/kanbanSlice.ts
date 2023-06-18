@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IKanbanBoardTask } from '@/lib/api/api-types';
-import { IKanbanBoard } from '@/components/KanbanBoard/types';
 import {
   IKanbanBoardState,
   IAddKanbanBoardTaskPayload,
@@ -9,22 +8,21 @@ import {
   IDeleteKanbanBoardTaskPayload,
 } from '../types';
 
-import kanbanCollectionsDataMock from '../../../__mocks__/kanbanCollectionsDataMock';
-
 /**
  * State slice definition for application's Kanban Board
  *
- * All state updates to the dashboard Kanban Board are managed here.
+ * This is the base Kanban Board state slice logic, that is reused across all of
+ * the applications Kanban Boards.
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.8
  */
 
 /**
  * Initialises Kanban board state to empty board
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.8
  * @memberof KanbanReduxSlice
  *
  * @constant
@@ -32,8 +30,8 @@ import kanbanCollectionsDataMock from '../../../__mocks__/kanbanCollectionsDataM
  */
 const initialKanbanState: IKanbanBoardState = {
   loading: false,
-  data: kanbanCollectionsDataMock.collections,
-  dataShadow: kanbanCollectionsDataMock.collections,
+  data: [],
+  dataShadow: [],
   saving: false,
   edited: false,
 };
@@ -49,14 +47,14 @@ const initialKanbanState: IKanbanBoardState = {
  *
  * @method
  * @param {string} name - name of kanban board slice to create
- * @param {IKanbanBoard} initialState - any specific initialisation that this board requires
+ * @param {Partial<IKanbanBoardState>} initialState - any specific initialisation that this board requires
  * @param {any} reducers - any specific reducers that this board needs
  * @param {any} extraReducers - any specific extra reducers that this board needs
  * @returns {Slice<Object>} - redux slice for specific kanban board
  */
 const createKanbanSlice = (
   name: string,
-  initialState?: IKanbanBoard,
+  initialState?: Partial<IKanbanBoardState>,
   reducers?: any,
   extraReducers?: any
 ) =>
@@ -119,20 +117,4 @@ const createKanbanSlice = (
     },
   });
 
-/**
- * Collections redux slice for Collections Kanban board state interactions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.8
- * @memberof KanbanReduxSlice
- *
- * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
- *
- * @constant
- * @type {Slice<Object>}
- */
-export const collectionsKanbanSlice = createKanbanSlice('collectionsKanban');
-
-/* Collection kanban actions */
-export const { addTask, editTask, setTaskStatus, deleteTask } =
-  collectionsKanbanSlice.actions;
+export default createKanbanSlice;

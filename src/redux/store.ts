@@ -5,7 +5,7 @@ import userPermissionReducer from './slices/userPermissionSlice';
 import costsConfigReducer from './slices/costsConfigSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import themeReducer from './slices/themeSlice';
-import { collectionsKanbanSlice } from './slices/kanbanSlice';
+import collectionsKanbanReducer from './slices/collectionsKanbanSlice';
 
 /**
  * Configuration of the redux store to manage the global application state
@@ -24,7 +24,7 @@ const store = configureStore({
     costsConfig: costsConfigReducer,
     notifications: notificationsReducer,
     theme: themeReducer,
-    collectionsKanban: collectionsKanbanSlice.reducer,
+    collectionsKanban: collectionsKanbanReducer,
   },
   // @ts-ignore
   middleware:
