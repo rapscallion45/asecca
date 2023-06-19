@@ -1,9 +1,18 @@
 import { FC, ReactNode, createContext, useContext } from 'react';
 import { useSelector } from 'react-redux';
+import { Slice } from '@reduxjs/toolkit';
 import { AppState } from '@/redux/store';
-import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
 
-const SliceContext = createContext(collectionsKanbanSlice);
+/**
+ * Default value for the slice context
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.8
+ *
+ * @constant
+ * @type {Slice<Object>}
+ */
+const SliceContext = createContext<Slice>({} as Slice);
 
 /**
  * Slice Provider Props
@@ -12,11 +21,11 @@ const SliceContext = createContext(collectionsKanbanSlice);
  * @since 0.0.8
  *
  * @typedef ISliceProviderProps
- * @prop {any} slice - context slice to provide down to child nodes
+ * @prop {Slice} slice - context slice to provide down to child nodes
  * @prop {ReactNode} children - child nodes
  */
 interface ISliceProviderProps {
-  slice: any;
+  slice: Slice;
   children: ReactNode;
 }
 
@@ -67,7 +76,7 @@ export const useSliceActions = () => useContext(SliceContext).actions;
  * @type {AppState}
  */
 export const useSliceSelector = () => {
-  const { name } = useContext(SliceContext);
+  const { name } = useContext<Slice>(SliceContext);
   return useSelector((state: AppState) => state[name as keyof AppState]);
 };
 
