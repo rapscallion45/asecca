@@ -1,15 +1,11 @@
 import { useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
 import { Box, Typography, Skeleton, Divider } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
-import MHidden from '@/components/@MUI-Extended/MHidden';
 import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
-import KanbanBoardTaskForm from '@/components/KanbanBoard/KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
 import SliceProvider from '@/components/SliceProvider/SliceProvider';
 import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
@@ -58,31 +54,6 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      {collectionsBoard.columns.length > 0 && (
-                        <MHidden width="smDown">
-                          <Box
-                            display="flex"
-                            justifyContent="end"
-                            sx={{ flexGrow: 1, mr: 1 }}
-                          >
-                            <FormModal
-                              triggerBtn={{
-                                type: 'normal',
-                                // @ts-ignore
-                                icon: AddIcon,
-                                text: 'Add Task',
-                                color: 'secondary',
-                              }}
-                              title="Add New Task"
-                            >
-                              <KanbanBoardTaskForm
-                                isEditMode={false}
-                                columns={collectionsBoard?.columns}
-                              />
-                            </FormModal>
-                          </Box>
-                        </MHidden>
-                      )}
                       <KanbanBoardMenu currentData={collectionsBoard} />
                     </Box>
                   </Box>

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
+import TaskIcon from '@mui/icons-material/Task';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import FormModal from '@/modals/FormModal/FormModal';
@@ -17,10 +18,12 @@ import KanbanBoardTaskForm from '../KanbanBoardTask/KanbanBoardTaskForm/KanbanBo
  * @typedef IKanbanBoardColumnProps
  * @prop {number} colIndex - column index
  * @prop {boolean} dragEnabled - column drag enabled flag
+ * @prop {boolean} canEdit - column data is editable
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
   dragEnabled?: boolean;
+  canEdit?: boolean;
 }
 
 /**
@@ -36,7 +39,7 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex, dragEnabled = false } = props;
+  const { colIndex, dragEnabled = false, canEdit = false } = props;
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
 
@@ -65,22 +68,28 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
         />
       ))}
       {column.tasks.length <= 0 && (
-        <Box py={3}>
-          <FormModal
-            triggerBtn={{
-              type: 'normal',
-              // @ts-ignore
-              icon: TaskIcon,
-              text: '+ Add Task',
-              color: 'secondary',
-            }}
-            title="Add New Task"
-          >
-            <KanbanBoardTaskForm
-              isEditMode={false}
-              columns={kanbanData.columns}
-            />
-          </FormModal>
+        <Box py={1}>
+          {canEdit ? (
+            <FormModal
+              triggerBtn={{
+                type: 'normal',
+                // @ts-ignore
+                icon: TaskIcon,
+                text: '+ Add Task',
+                color: 'secondary',
+              }}
+              title="Add New Task"
+            >
+              <KanbanBoardTaskForm
+                isEditMode={false}
+                columns={kanbanData.columns}
+              />
+            </FormModal>
+          ) : (
+            <Box display="flex" justifyContent="center" width="100%">
+              <Typography variant="body2">No {kanbanData.name}s</Typography>
+            </Box>
+          )}
         </Box>
       )}
     </Box>

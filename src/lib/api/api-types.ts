@@ -191,12 +191,12 @@ export type KanbanCollectionTaskStatus =
  * @since 0.0.1
  *
  * @typedef IKanbanBoardTask
- * @prop {string} name - task name
+ * @prop {string | null} name - task name
  * @prop {string} id - task ID
  * @prop {string} status - task status
  */
 export interface IKanbanBoardTask {
-  name: string;
+  name: string | null;
   id: string;
   status: string;
 }
