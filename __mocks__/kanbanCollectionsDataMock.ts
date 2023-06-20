@@ -8,7 +8,7 @@ import { IKanbanBoardCollectionsDataPayload } from '@/lib/api/api-types';
  */
 const kanbanCollectionsDataMock: IKanbanBoardCollectionsDataPayload = {
   collections: {
-    name: 'Collections',
+    name: 'Collection',
     columns: [
       {
         name: 'InboundOrderCreated',

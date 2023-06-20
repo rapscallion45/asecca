@@ -26,9 +26,11 @@ import { useSliceSelector } from '../SliceProvider/SliceProvider';
  *
  * @typedef IKanbanBoardProps
  * @prop {IKanbanBoard} currentData - passed board data
+ * @prop {boolean} canEdit - can edit board data
  */
 interface IKanbanBoardProps {
   currentData: IKanbanBoard;
+  canEdit?: boolean;
 }
 
 /**
@@ -43,7 +45,7 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const { currentData } = props;
+  const { currentData, canEdit = false } = props;
   const theme = useTheme();
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const { loading, error, saving, edited } =
@@ -107,37 +109,39 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                     <Column key={col.name} colIndex={index} />
                   )
                 )}
-                <Card
-                  sx={{
-                    mt: 7,
-                    minWidth: 275,
-                    minHeight: 300,
-                    maxHeight: 500,
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.text.secondary,
-                    border: 'solid 1px',
-                  }}
-                >
-                  <CardContent sx={{ padding: '50% 40px' }}>
-                    <FormModal
-                      triggerBtn={{
-                        type: 'menu',
-                        // @ts-ignore
-                        icon: ViewColumnIcon,
-                        iconStyle: { marginRight: '10px' },
-                        text: '+ Add Column',
-                        closeMenu: () => {},
-                      }}
-                      title="Add Column"
-                    >
-                      <KanbanBoardForm
-                        isEditMode
-                        currentData={currentData}
-                        closeModal={() => {}}
-                      />
-                    </FormModal>
-                  </CardContent>
-                </Card>
+                {canEdit && (
+                  <Card
+                    sx={{
+                      mt: 7,
+                      minWidth: 275,
+                      minHeight: 300,
+                      maxHeight: 500,
+                      backgroundColor: 'transparent',
+                      borderColor: theme.palette.text.secondary,
+                      border: 'solid 1px',
+                    }}
+                  >
+                    <CardContent sx={{ padding: '50% 40px' }}>
+                      <FormModal
+                        triggerBtn={{
+                          type: 'menu',
+                          // @ts-ignore
+                          icon: ViewColumnIcon,
+                          iconStyle: { marginRight: '10px' },
+                          text: '+ Add Column',
+                          closeMenu: () => {},
+                        }}
+                        title="Add Column"
+                      >
+                        <KanbanBoardForm
+                          isEditMode
+                          currentData={currentData}
+                          closeModal={() => {}}
+                        />
+                      </FormModal>
+                    </CardContent>
+                  </Card>
+                )}
               </>
             ) : (
               <>
