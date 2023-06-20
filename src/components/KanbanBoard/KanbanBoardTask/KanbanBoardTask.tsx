@@ -84,9 +84,9 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
       onDragStart={handleOnDrag}
       sx={{ width: 275, mb: 2 }}
     >
-      <CardContent>
+      <CardContent sx={{ py: '5px !important' }}>
         <Box display="flex" flexDirection="row" alignItems="center">
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ fontSize: 11 }} color="text.secondary" gutterBottom>
             Task
           </Typography>
           <Box display="flex" justifyContent="end" flexGrow={1}>
@@ -94,10 +94,11 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
               colIndex={colIndex}
               taskIndex={taskIndex}
               currentData={currentData}
+              iconSize="small"
             />
           </Box>
         </Box>
-        <Typography variant="h5" component="div" mb={1}>
+        <Typography variant="body2" component="div" mb={1}>
           {task?.name}
         </Typography>
       </CardContent>
