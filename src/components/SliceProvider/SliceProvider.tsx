@@ -1,6 +1,6 @@
 import { FC, ReactNode, createContext, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { Slice } from '@reduxjs/toolkit';
+import { Slice, CaseReducerActions } from '@reduxjs/toolkit';
 import { AppState } from '@/redux/store';
 
 /**
@@ -61,7 +61,8 @@ const SliceProvider: FC<ISliceProviderProps> = (props) => {
  * @constant
  * @type {CaseReducerActions<any, string>}
  */
-export const useSliceActions = () => useContext(SliceContext).actions;
+export const useSliceActions = (): CaseReducerActions<any, string> =>
+  useContext<Slice>(SliceContext).actions;
 
 /**
  * Provider specific selector interface for passed slice

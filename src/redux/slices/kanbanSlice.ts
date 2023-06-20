@@ -61,7 +61,10 @@ const createKanbanSlice = (
   createSlice({
     name,
     /* setup board with default initial state and any passed initialisations */
-    initialState: { ...initialKanbanState, ...initialState },
+    initialState: {
+      ...initialKanbanState,
+      ...initialState,
+    } as IKanbanBoardState,
     reducers: {
       /* reducer used for when user adds a task to kanban board */
       addTask: (
