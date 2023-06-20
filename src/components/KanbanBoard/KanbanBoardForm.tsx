@@ -24,11 +24,13 @@ import useKanbanBoardFormController from './KanbanBoardFormController';
  *
  * @typedef IKanbanBoardFormProps
  * @prop {boolean} isEditMode - determines whether this is a new board or editing
+ * @prop {boolean} canEdit - board data can be edited
  * @prop {IKanbanBoard} currentData - current board data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardFormProps {
   isEditMode: boolean;
+  canEdit?: boolean;
   currentData?: IKanbanBoard;
   closeModal?: () => void;
 }
@@ -47,7 +49,7 @@ interface IKanbanBoardFormProps {
  * @returns {FC} - kanaban board form functional component
  */
 const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
-  const { isEditMode, currentData, closeModal } = props;
+  const { isEditMode, canEdit = false, currentData, closeModal } = props;
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
     currentData?.columns || [
       { name: 'Todo', tasks: [] },
@@ -110,6 +112,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
         name="name"
         label="Board Name"
         type="text"
+        disabled={!canEdit}
         value={formik.values.name}
         onChange={formik.handleChange}
         error={formik.touched.name && Boolean(formik.errors.name)}
@@ -135,38 +138,43 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
                 onChange={(e) => {
                   onChange(index, e.target.value);
                 }}
+                disabled={!canEdit}
                 placeholder="Enter column name..."
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="delete column"
-                      onClick={() => {
-                        onDelete(index);
-                      }}
-                    >
-                      <CloseIcon />
-                    </IconButton>
+                    {canEdit && (
+                      <IconButton
+                        aria-label="delete column"
+                        onClick={() => {
+                          onDelete(index);
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    )}
                   </InputAdornment>
                 }
               />
             </FormControl>
           </Box>
         ))}
-        <Box mt={2}>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => {
-              setNewColumns((state: Array<IKanbanBoardColumn>) => [
-                ...state,
-                { name: '', tasks: [], id: uuidv4() },
-              ]);
-            }}
-            fullWidth
-          >
-            + Add New Column
-          </Button>
-        </Box>
+        {canEdit && (
+          <Box mt={2}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={() => {
+                setNewColumns((state: Array<IKanbanBoardColumn>) => [
+                  ...state,
+                  { name: '', tasks: [], id: uuidv4() },
+                ]);
+              }}
+              fullWidth
+            >
+              + Add New Column
+            </Button>
+          </Box>
+        )}
       </Box>
       {!isEditMode ? (
         <Button
@@ -174,7 +182,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={saving}
+          disabled={saving || !canEdit}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
           {!saving && 'Add Board'}
@@ -186,7 +194,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={saving}
+          disabled={saving || !canEdit}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
           {!saving && 'Update'}
