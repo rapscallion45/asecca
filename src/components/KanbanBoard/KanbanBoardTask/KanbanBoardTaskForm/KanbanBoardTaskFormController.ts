@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IEditKanbanBoardTaskPayload } from '@/redux/types';
+import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
+import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 
 /**
  * Kanban board task form controller hook, used for task form logic,
@@ -21,6 +22,8 @@ const useKanbanBoardTaskFormController = (
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
+  const { saving } = useSliceSelector() as IKanbanBoardState;
+
   /**
    * Yup input validation configuration for task form
    *
@@ -56,6 +59,6 @@ const useKanbanBoardTaskFormController = (
     },
   });
 
-  return { formik };
+  return { saving, formik };
 };
 export default useKanbanBoardTaskFormController;

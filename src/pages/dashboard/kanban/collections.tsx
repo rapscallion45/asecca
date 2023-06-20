@@ -16,6 +16,8 @@ import {
   IKanbanBoard,
   IKanbanBoardColumn,
 } from '@/components/KanbanBoard/types';
+import SliceProvider from '@/components/SliceProvider/SliceProvider';
+import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
 
 /**
  * Kanban Page
@@ -29,13 +31,9 @@ import {
  * @returns {NextPageWithLayout} - Kanban Board interface page component
  */
 const KanbanCollectionsPage: NextPageWithLayout = () => {
-  const {
-    data: tasks,
-    loading,
-    error,
-    saving,
-    edited,
-  } = useSelector((state: AppState) => state.collectionsKanban);
+  const { loading, error } = useSelector(
+    (state: AppState) => state.collectionsKanban
+  );
 
   /**
    * Collections board column data definition
@@ -100,90 +98,81 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
   return (
     <ClientOnly>
       <Box my={5}>
-        {collectionsBoard ? (
-          <>
-            <Box display="flex" pb={1}>
-              <Typography variant="h4">
+        <SliceProvider slice={collectionsKanbanSlice}>
+          {collectionsBoard ? (
+            <>
+              <Box display="flex" pb={1}>
+                <Typography variant="h4">
+                  {!loading && !error ? (
+                    collectionsBoard?.name
+                  ) : (
+                    <Skeleton
+                      variant="rectangular"
+                      width={300}
+                      height={40}
+                      sx={{ borderRadius: '4px' }}
+                    />
+                  )}
+                </Typography>
                 {!loading && !error ? (
-                  collectionsBoard?.name
-                ) : (
-                  <Skeleton
-                    variant="rectangular"
-                    width={300}
-                    height={40}
-                    sx={{ borderRadius: '4px' }}
-                  />
-                )}
-              </Typography>
-              {!loading && !error ? (
-                <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    {collectionsBoard.columns.length > 0 && (
-                      <MHidden width="smDown">
-                        <Box
-                          display="flex"
-                          justifyContent="end"
-                          sx={{ flexGrow: 1, mr: 1 }}
-                        >
-                          <FormModal
-                            triggerBtn={{
-                              type: 'normal',
-                              // @ts-ignore
-                              icon: AddIcon,
-                              text: 'Add Task',
-                              color: 'secondary',
-                            }}
-                            title="Add New Task"
+                  <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      {collectionsBoard.columns.length > 0 && (
+                        <MHidden width="smDown">
+                          <Box
+                            display="flex"
+                            justifyContent="end"
+                            sx={{ flexGrow: 1, mr: 1 }}
                           >
-                            <KanbanBoardTaskForm
-                              isEditMode={false}
-                              saving={saving}
-                              columns={collectionsBoard?.columns}
-                            />
-                          </FormModal>
-                        </Box>
-                      </MHidden>
-                    )}
-                    <KanbanBoardMenu
-                      saving={saving}
-                      currentData={collectionsBoard}
+                            <FormModal
+                              triggerBtn={{
+                                type: 'normal',
+                                // @ts-ignore
+                                icon: AddIcon,
+                                text: 'Add Task',
+                                color: 'secondary',
+                              }}
+                              title="Add New Task"
+                            >
+                              <KanbanBoardTaskForm
+                                isEditMode={false}
+                                columns={collectionsBoard?.columns}
+                              />
+                            </FormModal>
+                          </Box>
+                        </MHidden>
+                      )}
+                      <KanbanBoardMenu currentData={collectionsBoard} />
+                    </Box>
+                  </Box>
+                ) : (
+                  <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
+                    <Skeleton
+                      variant="rectangular"
+                      width={140}
+                      height={40}
+                      sx={{ borderRadius: '4px' }}
+                    />
+                    <Skeleton
+                      variant="rectangular"
+                      width={70}
+                      height={40}
+                      sx={{ borderRadius: '4px', ml: 2 }}
                     />
                   </Box>
-                </Box>
-              ) : (
-                <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
-                  <Skeleton
-                    variant="rectangular"
-                    width={140}
-                    height={40}
-                    sx={{ borderRadius: '4px' }}
-                  />
-                  <Skeleton
-                    variant="rectangular"
-                    width={70}
-                    height={40}
-                    sx={{ borderRadius: '4px', ml: 2 }}
-                  />
-                </Box>
-              )}
-            </Box>
-            <Divider />
-            <KanbanBoard
-              currentData={collectionsBoard}
-              tasks={tasks}
-              loading={loading}
-              error={error}
-              saving={saving}
-              edited={edited}
-            />
-          </>
-        ) : (
-          <KanbanBoardEmpty type="add" saving={saving} />
-        )}
+                )}
+              </Box>
+              <Divider />
+              <KanbanBoard currentData={collectionsBoard} />
+            </>
+          ) : (
+            <KanbanBoardEmpty type="add" />
+          )}
+        </SliceProvider>
       </Box>
     </ClientOnly>
   );

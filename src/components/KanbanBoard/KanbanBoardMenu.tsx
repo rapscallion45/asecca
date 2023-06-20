@@ -19,12 +19,10 @@ import { IKanbanBoard } from './types';
  *
  * @typedef IKanbanBoardMenuProps
  * @prop {IKanbanBoard} currentData - current board data
- * @prop {boolean} saving - board saving flag
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardMenuProps {
   currentData: IKanbanBoard;
-  saving: boolean;
   iconSize?: ModalButtonIconSizeType;
 }
 
@@ -41,7 +39,7 @@ interface IKanbanBoardMenuProps {
  * @returns {FC} - kanban board menu functional component
  */
 const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
-  const { currentData, saving, iconSize } = props;
+  const { currentData, iconSize } = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   /**
@@ -120,7 +118,6 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
         >
           <KanbanBoardForm
             isEditMode
-            saving={saving}
             currentData={currentData}
             closeModal={handleCloseMenu}
           />

@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { IKanbanBoardState } from '@/redux/types';
 import { IKanbanBoard, IKanbanBoardColumn } from './types';
+import { useSliceSelector } from '../SliceProvider/SliceProvider';
 
 /**
  * Kanban board form controller hook, used for board form logic,
@@ -22,6 +24,8 @@ const useKanbanBoardFormController = (
   currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
+  const { saving } = useSliceSelector() as IKanbanBoardState;
+
   /**
    * Yup input validation configuration for board form
    *
@@ -55,6 +59,6 @@ const useKanbanBoardFormController = (
     },
   });
 
-  return { formik };
+  return { saving, formik };
 };
 export default useKanbanBoardFormController;

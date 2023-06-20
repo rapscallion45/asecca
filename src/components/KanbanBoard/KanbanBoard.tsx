@@ -13,9 +13,10 @@ import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBo
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import ScrollBar from '@/components/ScrollBar/ScrollBar';
 import FormModal from '@/modals/FormModal/FormModal';
-import { IKanbanBoardTask } from '@/lib/api/api-types';
+import { IKanbanBoardState } from '@/redux/types';
 import KanbanBoardForm from './KanbanBoardForm';
 import { IKanbanBoard, IKanbanBoardColumn } from './types';
+import { useSliceSelector } from '../SliceProvider/SliceProvider';
 
 /**
  * Kanban Board Props
@@ -25,19 +26,9 @@ import { IKanbanBoard, IKanbanBoardColumn } from './types';
  *
  * @typedef IKanbanBoardProps
  * @prop {IKanbanBoard} currentData - passed board data
- * @prop {Array<IKanbanBoardTask>} tasks - board task dataset
- * @prop {boolean} loading - board data loading flag
- * @prop {string | undefined} error - board data error message
- * @prop {boolean} saving - board data saving flag
- * @prop {boolean} edited - board date edited flag
  */
 interface IKanbanBoardProps {
   currentData: IKanbanBoard;
-  tasks: Array<IKanbanBoardTask>;
-  loading: boolean;
-  error: string | undefined;
-  saving: boolean;
-  edited: boolean;
 }
 
 /**
@@ -52,9 +43,11 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const { currentData, tasks, loading, error, saving, edited } = props;
+  const { currentData } = props;
   const theme = useTheme();
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+  const { loading, error, saving, edited } =
+    useSliceSelector() as IKanbanBoardState;
 
   /**
    * Callback handler for cancelling changes to board
@@ -113,9 +106,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                   <Column
                     key={col.id}
                     colIndex={index}
-                    saving={saving}
                     columns={currentData.columns}
-                    tasks={tasks}
                   />
                 ))}
                 <Card
@@ -143,7 +134,6 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                     >
                       <KanbanBoardForm
                         isEditMode
-                        saving={saving}
                         currentData={currentData}
                         closeModal={() => {}}
                       />
@@ -161,11 +151,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           </Box>
         ) : (
           <Box mt={2}>
-            <KanbanBoardEmpty
-              type="edit"
-              saving={saving}
-              currentData={currentData}
-            />
+            <KanbanBoardEmpty type="edit" currentData={currentData} />
           </Box>
         )}
       </ScrollBar>
