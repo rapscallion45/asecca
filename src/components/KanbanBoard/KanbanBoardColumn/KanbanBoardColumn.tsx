@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
-import { IKanbanBoardTask } from '@/lib/api/api-types';
+import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
+import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
 import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
-import { IKanbanBoardColumn } from '../types';
+import KanbanBoardTaskForm from '../KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
 
 /**
  * Kanban Board Column Props
@@ -15,11 +16,11 @@ import { IKanbanBoardColumn } from '../types';
  *
  * @typedef IKanbanBoardColumnProps
  * @prop {number} colIndex - column index
- * @prop {Array<IKanbanBoardColumn>} columns - column data for board on which this column is on
+ * @prop {boolean} dragEnabled - column drag enabled flag
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
-  columns: Array<IKanbanBoardColumn>;
+  dragEnabled?: boolean;
 }
 
 /**
@@ -35,12 +36,12 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex, columns } = props;
+  const { colIndex, dragEnabled = false } = props;
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
-  const { data: tasks } = useSliceSelector() as IKanbanBoardState;
+  const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
 
   /* find this column in board state data from passed column index */
-  const column = columns.find(
+  const column = kanbanData.columns.find(
     (col: IKanbanBoardColumn, index: number) => index === colIndex
   );
 
@@ -51,20 +52,37 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
         {/* @ts-ignore */}
         <CircleIcon fontSize="small" color={colColors[colIndex]} />
         <Typography sx={{ ml: 1 }}>
-          {column.name} (
-          {
-            tasks.filter(
-              (task: IKanbanBoardTask) => task.status === column.name
-            ).length
-          }
-          )
+          {column.name} ({column.tasks.length})
         </Typography>
       </Box>
-      {tasks
-        .filter((task: IKanbanBoardTask) => task.status === column.name)
-        .map((task: IKanbanBoardTask) => (
-          <KanbanBoardTask key={task.id} taskId={task.id} columns={columns} />
-        ))}
+
+      {column.tasks.map((task: IKanbanBoardTask, index: number) => (
+        <KanbanBoardTask
+          key={task.id}
+          taskIndex={index}
+          colIndex={colIndex}
+          dragEnabled={dragEnabled}
+        />
+      ))}
+      {column.tasks.length <= 0 && (
+        <Box py={3}>
+          <FormModal
+            triggerBtn={{
+              type: 'normal',
+              // @ts-ignore
+              icon: TaskIcon,
+              text: '+ Add Task',
+              color: 'secondary',
+            }}
+            title="Add New Task"
+          >
+            <KanbanBoardTaskForm
+              isEditMode={false}
+              columns={kanbanData.columns}
+            />
+          </FormModal>
+        </Box>
+      )}
     </Box>
   ) : null;
 };

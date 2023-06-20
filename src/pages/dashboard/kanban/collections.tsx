@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
-import { v4 as uuidv4 } from 'uuid';
 import { Box, Typography, Skeleton, Divider } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
@@ -12,10 +11,6 @@ import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import FormModal from '@/modals/FormModal/FormModal';
 import { AppState } from '@/redux/store';
-import {
-  IKanbanBoard,
-  IKanbanBoardColumn,
-} from '@/components/KanbanBoard/types';
 import SliceProvider from '@/components/SliceProvider/SliceProvider';
 import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
 
@@ -31,69 +26,11 @@ import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
  * @returns {NextPageWithLayout} - Kanban Board interface page component
  */
 const KanbanCollectionsPage: NextPageWithLayout = () => {
-  const { loading, error } = useSelector(
-    (state: AppState) => state.collectionsKanban
-  );
-
-  /**
-   * Collections board column data definition
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.8
-   *
-   * @constant
-   */
-  const collectionsColDefs: Array<IKanbanBoardColumn> = [
-    {
-      id: uuidv4(),
-      name: 'InboundOrderCreated',
-    },
-    {
-      id: uuidv4(),
-      name: 'InboundOrderRequested',
-    },
-    {
-      id: uuidv4(),
-      name: 'SOWDefined',
-    },
-    {
-      id: uuidv4(),
-      name: 'SOWApproved',
-    },
-    {
-      id: uuidv4(),
-      name: 'Booked',
-    },
-    {
-      id: uuidv4(),
-      name: 'Collected',
-    },
-    {
-      id: uuidv4(),
-      name: 'Delivered',
-    },
-    {
-      id: uuidv4(),
-      name: 'DevicesBookedIn',
-    },
-    {
-      id: uuidv4(),
-      name: 'Reported',
-    },
-  ];
-
-  /**
-   * Collections board data definition
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.1
-   *
-   * @constant
-   */
-  const collectionsBoard: IKanbanBoard = {
-    name: 'Collections',
-    columns: collectionsColDefs,
-  };
+  const {
+    data: collectionsBoard,
+    loading,
+    error,
+  } = useSelector((state: AppState) => state.collectionsKanban);
 
   return (
     <ClientOnly>

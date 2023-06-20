@@ -188,28 +188,60 @@ export type KanbanCollectionTaskStatus =
  * Kanban Board Task type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.8
+ * @since 0.0.1
  *
  * @typedef IKanbanBoardTask
- * @prop {id} id - task ID
  * @prop {string} name - task name
- * @prop {KanbanCollectionTaskStatus} status - task status
+ * @prop {string} id - task ID
+ * @prop {string} status - task status
  */
 export interface IKanbanBoardTask {
+  name: string;
   id: string;
-  name: string | null;
-  status: KanbanCollectionTaskStatus;
+  status: string;
 }
 
 /**
- * Kanban board Collections data payload type definition
+ * Kanban Board Column type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoardColumn
+ * @prop {string} name - column name
+ * @prop {Array<IKanbanBoardTask>} tasks - column tasks
+ * @prop {string} id - column ID
+ */
+export interface IKanbanBoardColumn {
+  name: string;
+  tasks: Array<IKanbanBoardTask>;
+}
+
+/**
+ * Kanban Board type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.1
+ *
+ * @typedef IKanbanBoard
+ * @prop {boolean} isActive - board active flag
+ * @prop {string} name - board name
+ * @prop {Array<IKanbanBoardColumn>} columns - board columns
+ */
+export interface IKanbanBoard {
+  name: string;
+  columns: Array<IKanbanBoardColumn>;
+}
+
+/**
+ * Collections Kanban Board data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.8
  *
  * @typedef IKanbanBoardCollectionsDataPayload
- * @prop {Array<IKanbanBoardTask>} boards - kanban board Collections dataset
+ * @prop {Array<IKanbanBoard>} boards - kanban board dataset
  */
 export interface IKanbanBoardCollectionsDataPayload {
-  collections: Array<IKanbanBoardTask>;
+  collections: IKanbanBoard;
 }

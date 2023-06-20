@@ -1,10 +1,9 @@
-import { FC } from 'react';
+import { FC, useCallback, DragEvent } from 'react';
 import { Box, Card, CardContent, Typography } from '@mui/material';
-import { IKanbanBoardTask } from '@/lib/api/api-types';
+import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
-import { IKanbanBoardColumn } from '../types';
 // import TaskModal from "../modals/TaskModal";
 
 /**
@@ -14,12 +13,14 @@ import { IKanbanBoardColumn } from '../types';
  * @since 0.0.1
  *
  * @typedef IKanbanBoardTaskProps
- * @prop {string} taskId - ID of task
- * @prop {Array<IKanbanBoardColumn>} columns - columns for board on which task is from
+ * @prop {number} colIndex - column index that task is in
+ * @prop {number} taskIndex - index of task
+ * @prop {boolean} dragEnabled - task drag enabled flag
  */
 interface IKanbanBoardTaskProps {
-  taskId: string;
-  columns: Array<IKanbanBoardColumn>;
+  colIndex: number;
+  taskIndex: number;
+  dragEnabled?: boolean;
 }
 
 /**
@@ -35,27 +36,52 @@ interface IKanbanBoardTaskProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
-  const { taskId, columns } = props;
+  const { colIndex, taskIndex, dragEnabled = false } = props;
   // const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
-  const { data: kanbanTaskData } = useSliceSelector() as IKanbanBoardState;
+  const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
 
   /* find this task and subtasks from passed board column and task indicies */
-  const task = kanbanTaskData.find(
-    (taskItem: IKanbanBoardTask) => taskItem.id === taskId
-  );
+  const task = kanbanData.columns
+    .find((col: IKanbanBoardColumn, index: number) => index === colIndex)
+    ?.tasks.find(
+      (taskItem: IKanbanBoardTask, index: number) => index === taskIndex
+    );
 
   /* build current data structure for this task */
   const currentData: IEditKanbanBoardTaskPayload = {
     name: task?.name || '',
-    status: task?.status || 'Reported',
-    id: taskId,
+    status: task?.status || '',
+    newColIndex: colIndex,
+    taskIndex,
+    prevColIndex: colIndex,
   };
+
+  /**
+   * Callback listens for drag of task
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.1
+   *
+   * @method
+   * @param {DragEvent} event - object change event
+   */
+  const handleOnDrag = useCallback(
+    (event: DragEvent) => {
+      event.dataTransfer.setData(
+        'text',
+        JSON.stringify({ taskIndex, prevColIndex: colIndex })
+      );
+    },
+    [taskIndex, colIndex]
+  );
 
   return task ? (
     <Card
+      draggable={dragEnabled}
       // onClick={() => {
       //   setIsTaskModalOpen(true);
       // }}
+      onDragStart={handleOnDrag}
       sx={{ width: 275, mb: 2 }}
     >
       <CardContent>
@@ -65,14 +91,14 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
           </Typography>
           <Box display="flex" justifyContent="end" flexGrow={1}>
             <KanbanBoardTaskMenu
-              taskId={taskId}
-              columns={columns}
+              colIndex={colIndex}
+              taskIndex={taskIndex}
               currentData={currentData}
             />
           </Box>
         </Box>
         <Typography variant="h5" component="div" mb={1}>
-          {task.name}
+          {task?.name}
         </Typography>
       </CardContent>
     </Card>

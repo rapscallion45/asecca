@@ -5,14 +5,16 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
-import { IEditKanbanBoardTaskPayload } from '@/redux/types';
+import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
-import { useSliceActions } from '@/components/SliceProvider/SliceProvider';
+import {
+  useSliceActions,
+  useSliceSelector,
+} from '@/components/SliceProvider/SliceProvider';
 import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
 import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
-import { IKanbanBoardColumn } from '../../types';
 
 /**
  * Kanban Board Task Menu Props
@@ -21,14 +23,14 @@ import { IKanbanBoardColumn } from '../../types';
  * @since 0.0.2
  *
  * @typedef IKanbanBoardTaskMenuProps
- * @prop {number} taskId - ID of task
- * @prop {Array<IKanbanBoardColumn>} columns - board columns on which task is on
+ * @prop {number} colIndex - column index of this task
+ * @prop {number} taskIndex - index of task
  * @prop {IEditKanbanBoardTaskPayload} currentData - current task data
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardTaskMenuProps {
-  taskId: string;
-  columns: Array<IKanbanBoardColumn>;
+  colIndex: number;
+  taskIndex: number;
   currentData: IEditKanbanBoardTaskPayload;
   iconSize?: ModalButtonIconSizeType;
 }
@@ -46,10 +48,11 @@ interface IKanbanBoardTaskMenuProps {
  * @returns {FC} - kanban board task menu functional component
  */
 const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
-  const { taskId, columns, currentData, iconSize } = props;
+  const { colIndex, taskIndex, currentData, iconSize } = props;
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   /**
    * Callback listener for opening task menu popover
@@ -83,12 +86,19 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
    * @since 0.0.2
    *
    * @method
-   * @param {string} deleteTaskId - ID of task to be deleted
+   * @param {number} deleteColIndex - column of task to be deleted
+   * @param {number} deleteTaskIndex - index of task to be deleted
    * @param {any} closeModal - callback for handling closing of modal
    */
-  const handleDelete = (deleteTaskId: string, closeModal: () => void) => {
-    // @ts-ignore - type void is not callable, we know its not void though!
-    dispatch(deleteTask({ id: deleteTaskId }));
+  const handleDelete = (
+    deleteColIndex: number,
+    deleteTaskIndex: number,
+    closeModal: () => void
+  ) => {
+    dispatch(
+      // @ts-ignore
+      deleteTask({ colIndex: deleteColIndex, taskIndex: deleteTaskIndex })
+    );
     closeModal();
   };
 
@@ -130,7 +140,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
         >
           <KanbanBoardTaskForm
             isEditMode
-            columns={columns}
+            columns={kanbanData.columns}
             currentData={currentData}
             closeModal={handleCloseMenu}
           />
@@ -148,7 +158,9 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             closeMenu: handleCloseMenu,
           }}
           // processing={deleting}
-          actionFunc={(closeModal) => handleDelete(taskId, closeModal)}
+          actionFunc={(closeModal) =>
+            handleDelete(colIndex, taskIndex, closeModal)
+          }
         />
 
         <Box sx={{ p: 2, pt: 1.5 }}>

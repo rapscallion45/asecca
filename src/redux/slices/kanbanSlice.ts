@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IKanbanBoardTask } from '@/lib/api/api-types';
+import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import {
   IKanbanBoardState,
   IAddKanbanBoardTaskPayload,
   IEditKanbanBoardTaskPayload,
+  IDragKanbanBoardTaskPayload,
   ISetKanbanBoardTaskStatusPayload,
   IDeleteKanbanBoardTaskPayload,
 } from '../types';
@@ -30,8 +31,8 @@ import {
  */
 const initialKanbanState: IKanbanBoardState = {
   loading: false,
-  data: [],
-  dataShadow: [],
+  data: { name: '', columns: [] },
+  dataShadow: { name: '', columns: [] },
   saving: false,
   edited: false,
 };
@@ -71,45 +72,102 @@ const createKanbanSlice = (
         state: IKanbanBoardState,
         action: PayloadAction<IAddKanbanBoardTaskPayload>
       ) => {
-        state.data.push(action.payload as IKanbanBoardTask);
+        const { name: taskName, status, newColIndex } = action.payload;
+        const task = { name: taskName, status };
+        const column = state.data.columns.find(
+          (col: IKanbanBoardColumn, index: number) => index === newColIndex
+        );
+        column?.tasks.push(task as IKanbanBoardTask);
       },
       /* reducer used for when user edits a task on kanban board */
       editTask: (
         state: IKanbanBoardState,
         action: PayloadAction<IEditKanbanBoardTaskPayload>
       ) => {
-        state.data = state.data.map((task: IKanbanBoardTask) => {
-          if (task.id === action.payload.id)
-            return {
-              ...task,
-              name: action.payload.name,
-              status: action.payload.status,
-            };
-          return task;
-        });
+        const {
+          name: taskName,
+          status,
+          prevColIndex,
+          newColIndex,
+          taskIndex,
+        } = action.payload;
+        const column = state.data.columns.find(
+          (col: IKanbanBoardColumn, index: number) => index === prevColIndex
+        );
+        const editTask = column?.tasks.find(
+          (task: IKanbanBoardTask, index: number) => index === taskIndex
+        );
+        if (editTask && column) {
+          editTask.name = taskName;
+          editTask.status = status;
+          if (prevColIndex === newColIndex) return;
+          column.tasks = column?.tasks.filter(
+            (task: IKanbanBoardTask, index: number) => index !== taskIndex
+          );
+          const newCol = state.data.columns.find(
+            (col: IKanbanBoardColumn, index: number) => index === newColIndex
+          );
+          newCol?.tasks.push(editTask);
+        }
+      },
+      /* reducer used for when user drags a task on kanban board */
+      dragTask: (
+        state: IKanbanBoardState,
+        action: PayloadAction<IDragKanbanBoardTaskPayload>
+      ) => {
+        const { colIndex, prevColIndex, taskIndex } = action.payload;
+        const prevCol = state.data.columns.find(
+          (col: IKanbanBoardColumn, index: number) => index === prevColIndex
+        );
+        const dragTask = prevCol?.tasks.splice(taskIndex, 1)[0];
+        if (dragTask)
+          state.data.columns
+            ?.find(
+              (col: IKanbanBoardColumn, index: number) => index === colIndex
+            )
+            ?.tasks.push(dragTask);
       },
       /* reducer used for when user updates a task status on kanban board */
       setTaskStatus: (
         state: IKanbanBoardState,
         action: PayloadAction<ISetKanbanBoardTaskStatusPayload>
       ) => {
-        state.data = state.data.map((task: IKanbanBoardTask) => {
-          if (task.id === action.payload.id)
-            return {
-              ...task,
-              status: action.payload.status,
-            };
-          return task;
-        });
+        const { payload } = action;
+        const { columns } = state.data;
+        const setTaskCol = columns?.find(
+          (col: IKanbanBoardColumn, index: number) => index === payload.colIndex
+        );
+        if (payload.colIndex === payload.newColIndex) return;
+        const setStatusTask = setTaskCol?.tasks.find(
+          (task: IKanbanBoardTask, index: number) => index === payload.taskIndex
+        );
+        if (setStatusTask && setTaskCol) {
+          setStatusTask.status = payload.status;
+          setTaskCol.tasks = setTaskCol.tasks.filter(
+            (task: IKanbanBoardTask, index: number) =>
+              index !== payload.taskIndex
+          );
+          const newCol = columns?.find(
+            (col: IKanbanBoardColumn, index: number) =>
+              index === payload.newColIndex
+          );
+          newCol?.tasks.push(setStatusTask);
+        }
       },
       /* reducer used for when user deletes a task from kanban board */
       deleteTask: (
         state: IKanbanBoardState,
         action: PayloadAction<IDeleteKanbanBoardTaskPayload>
       ) => {
-        state.data = state.data.filter(
-          (task: IKanbanBoardTask) => task.id !== action.payload.id
+        const { payload } = action;
+        const deleteTaskCol = state.data.columns.find(
+          (col: IKanbanBoardColumn, index: number) => index === payload.colIndex
         );
+        if (deleteTaskCol)
+          deleteTaskCol.tasks = deleteTaskCol.tasks.filter(
+            (task: IKanbanBoardTask, index: number) =>
+              index !== payload.taskIndex
+          );
       },
       /* include any passed reducers */
       ...reducers,

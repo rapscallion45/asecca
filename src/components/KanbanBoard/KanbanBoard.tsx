@@ -12,10 +12,10 @@ import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import ScrollBar from '@/components/ScrollBar/ScrollBar';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
 import KanbanBoardForm from './KanbanBoardForm';
-import { IKanbanBoard, IKanbanBoardColumn } from './types';
 import { useSliceSelector } from '../SliceProvider/SliceProvider';
 
 /**
@@ -103,11 +103,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
             {!loading && !error ? (
               <>
                 {currentData.columns.map((col: IKanbanBoardColumn, index) => (
-                  <Column
-                    key={col.id}
-                    colIndex={index}
-                    columns={currentData.columns}
-                  />
+                  <Column key={col.name} colIndex={index} />
                 ))}
                 <Card
                   sx={{

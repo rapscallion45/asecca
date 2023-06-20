@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { IEditKanbanBoardTaskPayload } from '@/redux/types';
-import { IKanbanBoardColumn } from '../../types';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
 
 /**
@@ -50,6 +50,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
   const { isEditMode, columns, currentData, closeModal } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
+    columns,
     currentData,
     closeModal
   );
@@ -88,7 +89,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           onChange={formik.handleChange}
         >
           {columns.map((col: IKanbanBoardColumn) => (
-            <MenuItem key={col.id} value={col.name}>
+            <MenuItem key={col.name} value={col.name}>
               {col.name}
             </MenuItem>
           ))}

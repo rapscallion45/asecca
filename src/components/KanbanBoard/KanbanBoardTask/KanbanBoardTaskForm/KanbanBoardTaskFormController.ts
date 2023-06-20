@@ -1,7 +1,16 @@
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
-import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
+import {
+  IAddKanbanBoardTaskPayload,
+  IEditKanbanBoardTaskPayload,
+  IKanbanBoardState,
+} from '@/redux/types';
+import {
+  useSliceActions,
+  useSliceSelector,
+} from '@/components/SliceProvider/SliceProvider';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 
 /**
  * Kanban board task form controller hook, used for task form logic,
@@ -19,10 +28,13 @@ import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
  */
 const useKanbanBoardTaskFormController = (
   isEditMode: boolean,
+  columns: Array<IKanbanBoardColumn>,
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
+  const dispatch = useDispatch();
   const { saving } = useSliceSelector() as IKanbanBoardState;
+  const { addTask, editTask } = useSliceActions();
 
   /**
    * Yup input validation configuration for task form
@@ -40,6 +52,27 @@ const useKanbanBoardTaskFormController = (
   });
 
   /**
+   * Data submission handler for task form
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.2
+   *
+   * @method
+   * @param {IEditKanbanBoardTaskPayload} payload - data to be submitted
+   */
+  const handleSubmit = (payload: IEditKanbanBoardTaskPayload) => {
+    if (isEditMode) {
+      // @ts-ignore
+      dispatch(editTask(payload as IEditKanbanBoardTaskPayload));
+      if (closeModal) closeModal();
+    } else {
+      // @ts-ignore
+      dispatch(addTask(payload as IAddKanbanBoardTaskPayload));
+      if (closeModal) closeModal();
+    }
+  };
+
+  /**
    * Formik configuration for task form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -50,12 +83,23 @@ const useKanbanBoardTaskFormController = (
   const formik = useFormik({
     initialValues: {
       name: currentData?.name || 'New Task',
-      status: currentData?.status || 'Booked',
-      id: currentData?.id || '0',
+      status: currentData?.status || 'Todo',
+      taskIndex: currentData?.taskIndex || 0,
+      newColIndex: columns.findIndex(
+        (col: IKanbanBoardColumn) => col.name === currentData?.status
+      ),
+      prevColIndex: columns.findIndex(
+        (col: IKanbanBoardColumn) => col.name === currentData?.status
+      ),
     },
     validationSchema,
-    onSubmit: () => {
-      if (closeModal && isEditMode) closeModal();
+    onSubmit: (payload: IEditKanbanBoardTaskPayload) => {
+      handleSubmit({
+        ...payload,
+        newColIndex: columns
+          .map((col: IKanbanBoardColumn) => col.name)
+          .indexOf(payload.status),
+      });
     },
   });
 

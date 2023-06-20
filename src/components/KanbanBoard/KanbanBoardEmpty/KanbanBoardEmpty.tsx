@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Box, Typography, Card, CardContent, useTheme } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import { IKanbanBoard } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import KanbanBoardForm from '../KanbanBoardForm';
-import { IKanbanBoard } from '../types';
 
 /**
  * Kanban Board Empty Props

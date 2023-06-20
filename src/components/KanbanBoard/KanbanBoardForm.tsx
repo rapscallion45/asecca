@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { IKanbanBoard, IKanbanBoardColumn } from './types';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import useKanbanBoardFormController from './KanbanBoardFormController';
 
 /**
@@ -50,9 +50,9 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
   const { isEditMode, currentData, closeModal } = props;
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
     currentData?.columns || [
-      { name: 'Todo', id: uuidv4() },
-      { name: 'In Progress', id: uuidv4() },
-      { name: 'Completed', id: uuidv4() },
+      { name: 'Todo', tasks: [] },
+      { name: 'In Progress', tasks: [] },
+      { name: 'Completed', tasks: [] },
     ]
   );
   const { saving, formik } = useKanbanBoardFormController(
@@ -69,13 +69,15 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
    * @since 0.0.3
    *
    * @method
-   * @param {string} id - column ID that has been updated
+   * @param {string} colIdx - column index that has been updated
    * @param {string} newValue - updated value for column name
    */
-  const onChange = useCallback((id: string, newValue: string) => {
+  const onChange = useCallback((colIdx: number, newValue: string) => {
     setNewColumns((prevState: Array<IKanbanBoardColumn>) => {
       const newState = [...prevState];
-      const column = newState.find((col: IKanbanBoardColumn) => col.id === id);
+      const column = newState.find(
+        (col: IKanbanBoardColumn, index: number) => index === colIdx
+      );
       if (column) column.name = newValue;
       return newState;
     });
@@ -88,10 +90,14 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
    * @since 0.0.3
    *
    * @method
-   * @param {string} id - column ID to be deleted
+   * @param {number} id - column ID to be deleted
    */
-  const onDelete = useCallback((id: string) => {
-    setNewColumns((prevState) => prevState.filter((el) => el.id !== id));
+  const onDelete = useCallback((colIdx: number) => {
+    setNewColumns((prevState) =>
+      prevState.filter(
+        (el: IKanbanBoardColumn, index: number) => index !== colIdx
+      )
+    );
   }, []);
 
   return (
@@ -119,15 +125,15 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
       />
       <Box mt={2}>
         <Typography>Board Columns</Typography>
-        {newColumns.map((column: IKanbanBoardColumn) => (
-          <Box key={column.id}>
+        {newColumns.map((column: IKanbanBoardColumn, index: number) => (
+          <Box key={column.name}>
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
               <Input
                 id="board-columns-form"
                 type="text"
                 value={column.name}
                 onChange={(e) => {
-                  onChange(column.id, e.target.value);
+                  onChange(index, e.target.value);
                 }}
                 placeholder="Enter column name..."
                 endAdornment={
@@ -135,7 +141,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
                     <IconButton
                       aria-label="delete column"
                       onClick={() => {
-                        onDelete(column.id);
+                        onDelete(index);
                       }}
                     >
                       <CloseIcon />

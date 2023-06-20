@@ -1,8 +1,16 @@
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IKanbanBoardState } from '@/redux/types';
-import { IKanbanBoard, IKanbanBoardColumn } from './types';
-import { useSliceSelector } from '../SliceProvider/SliceProvider';
+import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import {
+  IKanbanBoardState,
+  IAddKanbanBoardPayload,
+  IEditKanbanBoardPayload,
+} from '@/redux/types';
+import {
+  useSliceActions,
+  useSliceSelector,
+} from '../SliceProvider/SliceProvider';
 
 /**
  * Kanban board form controller hook, used for board form logic,
@@ -24,7 +32,9 @@ const useKanbanBoardFormController = (
   currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
+  const dispatch = useDispatch();
   const { saving } = useSliceSelector() as IKanbanBoardState;
+  const { addBoard, editBoard } = useSliceActions();
 
   /**
    * Yup input validation configuration for board form
@@ -41,6 +51,40 @@ const useKanbanBoardFormController = (
   });
 
   /**
+   * Checks whether user entries for columns are in the correct format
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.4
+   *
+   * @method
+   * @returns {boolean} - whether user entry is validated
+   */
+  const validate = () =>
+    !newColumns.some((newColumn: IKanbanBoardColumn) => !newColumn.name.trim());
+
+  /**
+   * Data submission handler for board form
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.3
+   *
+   * @method
+   * @param {IEditKanbanBoardPayload} payload - data to be submitted
+   */
+  const handleSubmit = (payload: IEditKanbanBoardPayload) => {
+    if (!validate()) return;
+    if (isEditMode) {
+      // @ts-ignore
+      dispatch(editBoard(payload as IEditKanbanBoardPayload));
+      if (closeModal) closeModal();
+    } else {
+      // @ts-ignore
+      dispatch(addBoard(payload as IAddKanbanBoardPayload));
+      if (closeModal) closeModal();
+    }
+  };
+
+  /**
    * Formik configuration for board form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -54,8 +98,8 @@ const useKanbanBoardFormController = (
       newColumns: newColumns || [],
     },
     validationSchema,
-    onSubmit: () => {
-      if (closeModal && isEditMode) closeModal();
+    onSubmit: (payload: IEditKanbanBoardPayload) => {
+      handleSubmit({ name: payload.name, newColumns });
     },
   });
 
