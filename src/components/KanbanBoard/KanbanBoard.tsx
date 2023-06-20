@@ -102,9 +102,11 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
             {!loading && !error ? (
               <>
-                {currentData.columns.map((col: IKanbanBoardColumn, index) => (
-                  <Column key={col.name} colIndex={index} />
-                ))}
+                {currentData.columns.map(
+                  (col: IKanbanBoardColumn, index: number) => (
+                    <Column key={col.name} colIndex={index} />
+                  )
+                )}
                 <Card
                   sx={{
                     mt: 7,
