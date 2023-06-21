@@ -1,18 +1,19 @@
 import { FC, useState, useCallback, MouseEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
-import { AppState } from '@/redux/store';
-import { IEditKanbanBoardTaskPayload } from '@/redux/types';
-import { deleteTask } from '@/redux/slices/kanbanSlice';
+import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
+import {
+  useSliceActions,
+  useSliceSelector,
+} from '@/components/SliceProvider/SliceProvider';
 import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
 import FormModal from '@/modals/FormModal/FormModal';
 import { ModalButtonIconSizeType } from '@/modals/types';
-import { IKanbanBoard } from '@/lib/api/api-types';
 import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
 
 /**
@@ -49,7 +50,8 @@ interface IKanbanBoardTaskMenuProps {
 const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
   const { colIndex, taskIndex, currentData, iconSize } = props;
   const dispatch = useDispatch();
-  const { data: kanbanData } = useSelector((state: AppState) => state.kanban);
+  const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
+  const { deleteTask } = useSliceActions();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   /**
@@ -94,6 +96,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
     closeModal: () => void
   ) => {
     dispatch(
+      // @ts-ignore
       deleteTask({ colIndex: deleteColIndex, taskIndex: deleteTaskIndex })
     );
     closeModal();
@@ -137,10 +140,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
         >
           <KanbanBoardTaskForm
             isEditMode
-            columns={
-              kanbanData.boards.find((item: IKanbanBoard) => item.isActive)
-                ?.columns || []
-            }
+            columns={kanbanData.columns}
             currentData={currentData}
             closeModal={handleCloseMenu}
           />

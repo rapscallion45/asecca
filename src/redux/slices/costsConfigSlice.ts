@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  ActionReducerMapBuilder,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { ICostsConfigData, ICostsConfigDataPayload } from '@/lib/api/api-types';
 import costsConfigService from '../../services/costsConfigService';
 import {
@@ -157,7 +162,7 @@ const costsConfigSlice = createSlice({
       state.edited = false;
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder: ActionReducerMapBuilder<ICostsConfigState>) => {
     /*
      * `extraReducers` used to handle actions that were generated
      * outside of the Costs Config slice, such as the async thunks
@@ -165,7 +170,7 @@ const costsConfigSlice = createSlice({
      */
     builder
       /* Fetch Costs Config extra reducers */
-      .addCase(fetchBySourceId.pending, (state) => {
+      .addCase(fetchBySourceId.pending, (state: ICostsConfigState) => {
         state.loading = true;
         state.data = { costs: [] };
         state.dataShadow = { costs: [] };
@@ -174,28 +179,31 @@ const costsConfigSlice = createSlice({
       })
       .addCase(
         fetchBySourceId.fulfilled,
-        (state, action: PayloadAction<ICostsConfigDataPayload>) => {
+        (
+          state: ICostsConfigState,
+          action: PayloadAction<ICostsConfigDataPayload>
+        ) => {
           state.loading = false;
           state.data = action.payload;
           state.dataShadow = action.payload;
           state.error = undefined;
         }
       )
-      .addCase(fetchBySourceId.rejected, (state) => {
+      .addCase(fetchBySourceId.rejected, (state: ICostsConfigState) => {
         state.loading = false;
         state.data = { costs: [] };
         state.dataShadow = { costs: [] };
         state.error = 'Failed to load Costs Config data from server.';
       })
       /* Save Costs Config extra reducers */
-      .addCase(saveBySourceId.pending, (state) => {
+      .addCase(saveBySourceId.pending, (state: ICostsConfigState) => {
         state.saving = true;
       })
-      .addCase(saveBySourceId.fulfilled, (state) => {
+      .addCase(saveBySourceId.fulfilled, (state: ICostsConfigState) => {
         state.saving = false;
         state.edited = false;
       })
-      .addCase(saveBySourceId.rejected, (state) => {
+      .addCase(saveBySourceId.rejected, (state: ICostsConfigState) => {
         state.saving = false;
       });
   },

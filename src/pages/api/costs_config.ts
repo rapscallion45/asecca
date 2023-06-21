@@ -3,7 +3,7 @@ import type {
   ICostsConfigDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
-import { getCostsConfig, setCostsConfig } from '../../lib/api';
+import { getCostsConfig, setCostsConfig } from '@/lib/api';
 
 /**
  * Proxy for handling requests to ASECCA 'costs_config' API.

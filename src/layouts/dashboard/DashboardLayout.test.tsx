@@ -36,7 +36,7 @@ describe('Dashboard Layout', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  describe('Admin Test Panel & NavBar', () => {
+  describe('Child Components', () => {
     it('Should be rendered', async () => {
       /** Arrange */
       /** Act */
@@ -50,8 +50,7 @@ describe('Dashboard Layout', () => {
         </Provider>
       );
 
-      /** Assert - expect admin test panel and navbar rendered */
-      expect(screen.getByText('Admin Test Panel')).toBeInTheDocument();
+      /** Assert - expect test child to be rendered */
       expect(screen.getByText(testMessage)).toBeInTheDocument();
     });
   });

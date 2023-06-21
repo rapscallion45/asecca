@@ -183,9 +183,14 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                             home
                           </div>
                         </a>
+                        <li
+                          className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-1n80s42-MuiListSubheader-root"
+                        >
+                          kanban boards
+                        </li>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-7bcvvd-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/kanban"
+                          href="/dashboard/kanban/collections"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
@@ -217,7 +222,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                           <div
                             className="MuiListItemText-root css-tlelie-MuiListItemText-root"
                           >
-                            kanban boards
+                            Collections
                           </div>
                         </a>
                         <li
@@ -227,7 +232,7 @@ exports[`Dashboard Layout Renders correctly 1`] = `
                         </li>
                         <a
                           className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-7bcvvd-MuiButtonBase-root-MuiListItemButton-root"
-                          href="/dashboard/costs-config"
+                          href="/dashboard/configurators/costs-config"
                           onBlur={[Function]}
                           onClick={[Function]}
                           onContextMenu={[Function]}
@@ -522,98 +527,6 @@ exports[`Dashboard Layout Renders correctly 1`] = `
     <div
       className="MuiContainer-root MuiContainer-maxWidthXl css-19r6kue-MuiContainer-root"
     >
-      <div
-        className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-2amshd-MuiPaper-root-MuiCard-root"
-      >
-        <div
-          className="MuiCardContent-root css-19z7m71-MuiCardContent-root"
-        >
-          <p
-            className="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-1xbr41s-MuiTypography-root"
-          >
-            Admin Test Panel
-          </p>
-          <div
-            className="MuiBox-root css-1yuhvjn"
-          >
-            <div
-              className="MuiFormControl-root MuiTextField-root css-j1gnhe-MuiFormControl-root-MuiTextField-root"
-            >
-              <label
-                className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1fz07n4-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink={true}
-                htmlFor="user-permission-level-select"
-                id="user-permission-level-select-label"
-              >
-                User Permission Level
-              </label>
-              <div
-                className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-rs3fbt-MuiInputBase-root-MuiOutlinedInput-root"
-                onClick={[Function]}
-              >
-                <select
-                  aria-invalid={false}
-                  autoFocus={false}
-                  className="MuiNativeSelect-select MuiNativeSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-tgau9p-MuiNativeSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-                  disabled={false}
-                  id="user-permission-level-select"
-                  multiple={false}
-                  onAnimationStart={[Function]}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  required={false}
-                  value="Global"
-                >
-                  <option
-                    value="Global"
-                  >
-                    Global
-                  </option>
-                  <option
-                    value="Customer"
-                  >
-                    Customer
-                  </option>
-                  <option
-                    value="Project"
-                  >
-                    Project
-                  </option>
-                  <option
-                    value="Collection"
-                  >
-                    Collection
-                  </option>
-                </select>
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiNativeSelect-icon MuiNativeSelect-iconOutlined css-1o9beye-MuiSvgIcon-root-MuiNativeSelect-icon"
-                  data-testid="ArrowDropDownIcon"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M7 10l5 5 5-5z"
-                  />
-                </svg>
-                <fieldset
-                  aria-hidden={true}
-                  className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    className="css-14lo706"
-                  >
-                    <span>
-                      User Permission Level
-                    </span>
-                  </legend>
-                </fieldset>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div>
         Test render message
       </div>

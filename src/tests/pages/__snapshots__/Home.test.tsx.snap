@@ -29,7 +29,7 @@ exports[`Home Page Renders correctly 1`] = `
     </h1>
     <a
       className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-sui5fj-MuiButtonBase-root-MuiButton-root"
-      href="/dashboard/costs-config"
+      href="/dashboard/configurators/costs-config"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}

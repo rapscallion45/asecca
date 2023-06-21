@@ -13,7 +13,7 @@
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
- * @memberof CostsConfigReduxSlice
+ * @memberof AseccaAPI
  *
  * @typedef CostsConfigApplication
  */
@@ -31,7 +31,7 @@ export type CostsConfigApplication =
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
- * @memberof CostsConfigReduxSlice
+ * @memberof AseccaAPI
  *
  * @typedef CostsConfigLineType
  */
@@ -44,7 +44,7 @@ export type CostsConfigLineType = 'Typical' | 'Custom';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
- * @memberof CostsConfigReduxSlice
+ * @memberof AseccaAPI
  *
  * @typedef CostsConfigCostSource
  */
@@ -163,21 +163,26 @@ export interface IProxyErrorPayload {
 }
 
 /**
- * Kanban Board Subtask type definition
+ * Kanban Collection Task Status values
+ *
+ * Please refer to Asecca API documentation for more info
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.8
+ * @memberof AseccaAPI
  *
- * @typedef IKanbanBoardSubtask
- * @prop {string} title - subtask title
- * @prop {boolean} isCompleted - subtask completed flag
- * @prop {string} id - subtask ID
+ * @typedef KanbanCollectionTaskStatus
  */
-export interface IKanbanBoardSubtask {
-  title: string;
-  isCompleted: boolean;
-  id: string;
-}
+export type KanbanCollectionTaskStatus =
+  | 'InboundOrderCreated'
+  | 'InboundOrderRequested'
+  | 'SOWDefined'
+  | 'SOWApproved'
+  | 'Booked'
+  | 'Collected'
+  | 'Delivered'
+  | 'DevicesBookedIn'
+  | 'Reported';
 
 /**
  * Kanban Board Task type definition
@@ -186,17 +191,33 @@ export interface IKanbanBoardSubtask {
  * @since 0.0.1
  *
  * @typedef IKanbanBoardTask
- * @prop {string} title - task title
- * @prop {string} description - task description
- * @prop {boolean} isCompleted - task completed flag
+ * @prop {string | null} name - task name
+ * @prop {string} id - task ID
  * @prop {string} status - task status
- * @prop {Array<IKanbanBoardSubtask>} subtasks - subtasks belonging to task
  */
 export interface IKanbanBoardTask {
-  title: string;
-  description: string;
-  status: any;
-  subtasks: Array<IKanbanBoardSubtask>;
+  name: string | null;
+  id: string;
+  status: string;
+}
+
+/**
+ * Kanban Board Group type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.8
+ *
+ * @typedef IKanbanBoardGroup
+ * @prop {string | null} name - group name
+ * @prop {string} id - group ID
+ * @prop {string} status - group status
+ * @prop {number} total_tasks - number of tasks in group
+ */
+export interface IKanbanBoardGroup {
+  name: string | null;
+  id: string;
+  status: string;
+  total_tasks: number;
 }
 
 /**
@@ -208,12 +229,12 @@ export interface IKanbanBoardTask {
  * @typedef IKanbanBoardColumn
  * @prop {string} name - column name
  * @prop {Array<IKanbanBoardTask>} tasks - column tasks
- * @prop {string} id - column ID
+ * @prop {Array<IKanbanBoardGroup>} groups - column groups
  */
 export interface IKanbanBoardColumn {
   name: string;
   tasks: Array<IKanbanBoardTask>;
-  id: string;
+  groups?: Array<IKanbanBoardGroup>;
 }
 
 /**
@@ -228,20 +249,19 @@ export interface IKanbanBoardColumn {
  * @prop {Array<IKanbanBoardColumn>} columns - board columns
  */
 export interface IKanbanBoard {
-  isActive: boolean;
   name: string;
   columns: Array<IKanbanBoardColumn>;
 }
 
 /**
- * Kanban board data payload type definition
+ * Collections Kanban Board data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.8
  *
- * @typedef IKanbanBoardDataPayload
+ * @typedef IKanbanBoardCollectionsDataPayload
  * @prop {Array<IKanbanBoard>} boards - kanban board dataset
  */
-export interface IKanbanBoardDataPayload {
-  boards: Array<IKanbanBoard>;
+export interface IKanbanBoardCollectionsDataPayload {
+  collections: IKanbanBoard;
 }

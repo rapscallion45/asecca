@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
 import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
-import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import MHidden from '@/components/@MUI-Extended/MHidden';
 import useNotifier from '@/hooks/useNotifier';
 import { APP_BAR_MOBILE } from '@/constants/constants';
@@ -118,10 +117,7 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
         onCloseSidebar={useCallback(() => setOpen(false), [])}
       />
       <DashboardRootStyle id="page-content">
-        <Container maxWidth="xl">
-          <AdminTestPanel />
-          {children}
-        </Container>
+        <Container maxWidth="xl">{children}</Container>
       </DashboardRootStyle>
     </RootStyle>
   );

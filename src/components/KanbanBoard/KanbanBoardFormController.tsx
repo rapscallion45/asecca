@@ -1,10 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IAddKanbanBoardPayload, IEditKanbanBoardPayload } from '@/redux/types';
-import { AppState } from '@/redux/store';
-import { addBoard, editBoard } from '@/redux/slices/kanbanSlice';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import {
+  IKanbanBoardState,
+  IAddKanbanBoardPayload,
+  IEditKanbanBoardPayload,
+} from '@/redux/types';
+import {
+  useSliceActions,
+  useSliceSelector,
+} from '../SliceProvider/SliceProvider';
 
 /**
  * Kanban board form controller hook, used for board form logic,
@@ -27,7 +33,8 @@ const useKanbanBoardFormController = (
   closeModal?: () => void
 ) => {
   const dispatch = useDispatch();
-  const { saving } = useSelector((state: AppState) => state.kanban);
+  const { saving } = useSliceSelector() as IKanbanBoardState;
+  const { addBoard, editBoard } = useSliceActions();
 
   /**
    * Yup input validation configuration for board form
@@ -67,9 +74,11 @@ const useKanbanBoardFormController = (
   const handleSubmit = (payload: IEditKanbanBoardPayload) => {
     if (!validate()) return;
     if (isEditMode) {
+      // @ts-ignore
       dispatch(editBoard(payload as IEditKanbanBoardPayload));
       if (closeModal) closeModal();
     } else {
+      // @ts-ignore
       dispatch(addBoard(payload as IAddKanbanBoardPayload));
       if (closeModal) closeModal();
     }
