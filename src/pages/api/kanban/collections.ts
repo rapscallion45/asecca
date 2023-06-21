@@ -1,28 +1,31 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type {
-  ICostsConfigDataPayload,
+  IKanbanBoardCollectionsDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
-import { getDevices } from '@/lib/api';
+import { getCollectionsKanban } from '@/lib/api';
 
 /**
- * Proxy for handling requests to ASECCA '/tables/api/devices' API.
+ * Proxy for handling requests to ASECCA '/collection_kanban/api/collections' API.
  *
  * @see See [Next.js API route support](https://nextjs.org/docs/api-routes/introduction)
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.3
+ * @since 0.0.8
  * @memberof NextjsAPI
  *
  * @param {NextApiRequest} req - the request data
- * @param {NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>} res - the response data
+ * @param {NextApiResponse<IKanbanBoardCollectionsDataPayload | IProxyErrorPayload | null>} res - the response data
  * @returns {NextApiResponse} - handler response
  */
-const costsConfigHandler = async (
+const collectionsKanbanHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>
+  res: NextApiResponse<
+    IKanbanBoardCollectionsDataPayload | IProxyErrorPayload | null
+  >
 ) => {
-  const { method } = req;
+  const { method, body } = req;
+  const { params } = body;
 
   /* determine which request type this is */
   switch (method) {
@@ -30,7 +33,7 @@ const costsConfigHandler = async (
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await getDevices();
+        const response = await getCollectionsKanban(params);
 
         /* send back server response */
         if (response.status === 200) {
@@ -50,4 +53,4 @@ const costsConfigHandler = async (
   }
 };
 
-export default costsConfigHandler;
+export default collectionsKanbanHandler;

@@ -1,12 +1,5 @@
 import { FC } from 'react';
-import {
-  Box,
-  Skeleton,
-  Button,
-  Card,
-  CardContent,
-  useTheme,
-} from '@mui/material';
+import { Box, Button, Card, CardContent, useTheme } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
@@ -71,38 +64,12 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
    */
   const handleSave = () => {};
 
-  /**
-   * Helper component for rendering column skeleton whilst loading board
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.7
-   *
-   * @method
-   */
-  const renderBoardColumnSkeleton = () => (
-    <Box mr={2}>
-      <Skeleton width={190} height={50} sx={{ borderRadius: '4px', mb: 1 }} />
-      <Skeleton
-        variant="rectangular"
-        width={270}
-        height={170}
-        sx={{ borderRadius: '4px', mb: 2 }}
-      />
-      <Skeleton
-        variant="rectangular"
-        width={270}
-        height={170}
-        sx={{ borderRadius: '4px', mb: 2 }}
-      />
-    </Box>
-  );
-
   return (
     <>
       <ScrollBar>
         {currentData.columns.length > 0 ? (
           <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
-            {!loading && !error ? (
+            {!error && (
               <>
                 {currentData.columns.map(
                   (col: IKanbanBoardColumn, index: number) => (
@@ -143,12 +110,6 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                   </Card>
                 )}
               </>
-            ) : (
-              <>
-                {renderBoardColumnSkeleton()}
-                {renderBoardColumnSkeleton()}
-                {renderBoardColumnSkeleton()}
-              </>
             )}
           </Box>
         ) : (
@@ -157,35 +118,37 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           </Box>
         )}
       </ScrollBar>
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Button
-          color="secondary"
-          variant="outlined"
-          onClick={handleCancel}
-          disabled={saving || loading || !edited}
-          sx={{ backgroundColor: 'common.white' }}
+      {canEdit && (
+        <Box
+          sx={{
+            marginTop: 4,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
-          Reset Board
-        </Button>
-        <LoadingButton
-          color="secondary"
-          variant="contained"
-          onClick={handleSave}
-          disabled={saving || loading || !edited}
-          loading={saving}
-          sx={{ ml: 2 }}
-        >
-          Save
-        </LoadingButton>
-      </Box>
+          <Button
+            color="secondary"
+            variant="outlined"
+            onClick={handleCancel}
+            disabled={saving || loading || !edited}
+            sx={{ backgroundColor: 'common.white' }}
+          >
+            Reset Board
+          </Button>
+          <LoadingButton
+            color="secondary"
+            variant="contained"
+            onClick={handleSave}
+            disabled={saving || loading || !edited}
+            loading={saving}
+            sx={{ ml: 2 }}
+          >
+            Save
+          </LoadingButton>
+        </Box>
+      )}
     </>
   );
 };

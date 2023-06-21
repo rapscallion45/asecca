@@ -172,10 +172,8 @@ const createKanbanSlice = (
       /* include any passed reducers */
       ...reducers,
     },
-    extraReducers: {
-      /* include any passed extra reducers */
-      ...extraReducers,
-    },
+    /* include any passed extra reducers */
+    extraReducers,
   });
 
 export default createKanbanSlice;

@@ -404,3 +404,16 @@ export interface IDeleteKanbanBoardTaskPayload {
   colIndex: number;
   taskIndex: number;
 }
+
+/**
+ * Fetch Collections Kanban Board args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.8
+ *
+ * @typedef IFetchCollectionsKanbanBoardByProjectIdArgs
+ * @prop {string | (string | null)[]} projectId - Collections project ID (optional)
+ */
+export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
+  projectId?: string | (string | null)[];
+}

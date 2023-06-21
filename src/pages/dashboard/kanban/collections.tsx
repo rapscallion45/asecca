@@ -1,6 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
-import { Box, Typography, Skeleton, Divider } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Skeleton,
+  Divider,
+  LinearProgress,
+} from '@mui/material';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
@@ -8,7 +15,10 @@ import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { AppState } from '@/redux/store';
 import SliceProvider from '@/components/SliceProvider/SliceProvider';
-import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
+import {
+  collectionsKanbanSlice,
+  fetchByProjectId as fetchKanbanBoardByProjectId,
+} from '@/redux/slices/collectionsKanbanSlice';
 
 /**
  * Kanban Page
@@ -22,11 +32,19 @@ import { collectionsKanbanSlice } from '@/redux/slices/collectionsKanbanSlice';
  * @returns {NextPageWithLayout} - Kanban Board interface page component
  */
 const KanbanCollectionsPage: NextPageWithLayout = () => {
+  const dispatch = useDispatch();
   const {
     data: collectionsBoard,
-    loading,
     error,
+    loading,
   } = useSelector((state: AppState) => state.collectionsKanban);
+
+  /* whenever the page query is updated, fetch new data from API */
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(fetchKanbanBoardByProjectId({ projectId: '66135000002534169' }));
+    console.log('Hardcoded fetch to collections kanban!!!');
+  }, [dispatch]);
 
   return (
     <ClientOnly>
@@ -37,14 +55,13 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
               <Box display="flex" pb={1}>
                 <Typography variant="h4">
                   {!loading && !error ? (
-                    collectionsBoard?.name
+                    collectionsBoard?.name || 'Collection'
                   ) : (
-                    <Skeleton
-                      variant="rectangular"
-                      width={300}
-                      height={40}
-                      sx={{ borderRadius: '4px' }}
-                    />
+                    <Box display="flex">
+                      <Typography mr={1} variant="h4">
+                        Loading board...
+                      </Typography>
+                    </Box>
                   )}
                 </Typography>
                 {!loading && !error ? (
@@ -74,7 +91,11 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
                   </Box>
                 )}
               </Box>
-              <Divider />
+              {!loading ? (
+                <Divider />
+              ) : (
+                <LinearProgress color="secondary" sx={{ borderRadius: 1 }} />
+              )}
               <KanbanBoard currentData={collectionsBoard} />
             </>
           ) : (
