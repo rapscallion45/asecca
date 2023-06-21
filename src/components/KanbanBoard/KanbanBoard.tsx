@@ -68,7 +68,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
     <>
       <ScrollDrag>
         {currentData.columns.length > 0 ? (
-          <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+          <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1, mb: 3 }}>
             {!error && (
               <>
                 {currentData.columns.map(

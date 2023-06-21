@@ -63,13 +63,13 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
       <Skeleton
         variant="rectangular"
         width={270}
-        height={170}
+        height={100}
         sx={{ borderRadius: '4px', mb: 2 }}
       />
       <Skeleton
         variant="rectangular"
         width={270}
-        height={170}
+        height={100}
         sx={{ borderRadius: '4px', mb: 2 }}
       />
     </Box>
