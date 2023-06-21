@@ -2,12 +2,17 @@ import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
 import TaskIcon from '@mui/icons-material/Task';
-import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
+import {
+  IKanbanBoardColumn,
+  IKanbanBoardGroup,
+  IKanbanBoardTask,
+} from '@/lib/api/api-types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
 import KanbanBoardTask from '../KanbanBoardTask/KanbanBoardTask';
 import KanbanBoardTaskForm from '../KanbanBoardTask/KanbanBoardTaskForm/KanbanBoardTaskForm';
+import KanbanBoardGroup from '../KanbanBoardGroup/KanbanBoardGroup';
 
 /**
  * Kanban Board Column Props
@@ -58,7 +63,13 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
           {column.name} ({column.tasks.length})
         </Typography>
       </Box>
-
+      {column.groups?.map((group: IKanbanBoardGroup, index: number) => (
+        <KanbanBoardGroup
+          key={group.id}
+          groupIndex={index}
+          colIndex={colIndex}
+        />
+      ))}
       {column.tasks.map((task: IKanbanBoardTask, index: number) => (
         <KanbanBoardTask
           key={task.id}

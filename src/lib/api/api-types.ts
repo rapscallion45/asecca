@@ -202,6 +202,25 @@ export interface IKanbanBoardTask {
 }
 
 /**
+ * Kanban Board Group type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.8
+ *
+ * @typedef IKanbanBoardGroup
+ * @prop {string | null} name - group name
+ * @prop {string} id - group ID
+ * @prop {string} status - group status
+ * @prop {number} total_tasks - number of tasks in group
+ */
+export interface IKanbanBoardGroup {
+  name: string | null;
+  id: string;
+  status: string;
+  total_tasks: number;
+}
+
+/**
  * Kanban Board Column type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -210,11 +229,12 @@ export interface IKanbanBoardTask {
  * @typedef IKanbanBoardColumn
  * @prop {string} name - column name
  * @prop {Array<IKanbanBoardTask>} tasks - column tasks
- * @prop {string} id - column ID
+ * @prop {Array<IKanbanBoardGroup>} groups - column groups
  */
 export interface IKanbanBoardColumn {
   name: string;
   tasks: Array<IKanbanBoardTask>;
+  groups?: Array<IKanbanBoardGroup>;
 }
 
 /**
