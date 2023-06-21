@@ -12,7 +12,7 @@
  * @since 0.0.8
  * @memberof Services
  *
- * @param {string | (string | null)[]} projectId - ID of project board to fetch
+ * @param {string | null} projectId - ID of project board to fetch
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
 async function getKanbanBoardByProjectId(

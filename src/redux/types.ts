@@ -412,7 +412,7 @@ export interface IDeleteKanbanBoardTaskPayload {
  * @since 0.0.8
  *
  * @typedef IFetchCollectionsKanbanBoardByProjectIdArgs
- * @prop {string | (string | null)[]} projectId - Collections project ID (optional)
+ * @prop {string | null} projectId - Collections project ID (optional)
  */
 export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
   projectId?: string | (string | null)[];
