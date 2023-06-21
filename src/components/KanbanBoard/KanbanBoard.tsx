@@ -4,7 +4,7 @@ import { LoadingButton } from '@mui/lab';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
-import ScrollBar from '@/components/ScrollBar/ScrollBar';
+import ScrollDrag from '@/components/ScrollDrag/ScrollDrag';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
@@ -66,7 +66,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
 
   return (
     <>
-      <ScrollBar>
+      <ScrollDrag>
         {currentData.columns.length > 0 ? (
           <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
             {!error && (
@@ -117,7 +117,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
             <KanbanBoardEmpty type="edit" currentData={currentData} />
           </Box>
         )}
-      </ScrollBar>
+      </ScrollDrag>
       {canEdit && (
         <Box
           sx={{
