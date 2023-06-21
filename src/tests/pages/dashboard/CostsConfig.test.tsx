@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 import createEmotionCache from '@/utils/createEmotionCache';
 import ThemeConfig from '@/styles/theme/ThemeConfig';
 import store from '@/redux/store';
-import CostsConfigPage from '@/pages/dashboard/costs-config';
+import CostsConfigPage from '@/pages/dashboard/configurators/costs-config';
 import mockRouter from 'next-router-mock';
 import { UserPermissionLevel } from '@/redux/types';
 

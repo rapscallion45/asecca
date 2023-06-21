@@ -8,6 +8,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import { setPermissionLevel } from '@/redux/slices/userPermissionSlice';
 import { fetchBySourceId as fetchCostsConfigBySourceId } from '@/redux/slices/costsConfigSlice';
 import CostsConfigTable from '@/components/CostsConfigTable/CostsConfigTable';
+import AdminTestPanel from '@/components/AdminTestPanel/AdminTestPanel';
 import { CostsConfigCostSource } from '@/lib/api/api-types';
 
 /**
@@ -82,6 +83,7 @@ const CostsConfigPage: NextPageWithLayout = () => {
 
   return (
     <>
+      <AdminTestPanel />
       <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4">
           Costing Configuration - Lloyds Bank - {userPermissionLevel} {query}

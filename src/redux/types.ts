@@ -4,9 +4,8 @@ import {
   CostsConfigCostSource,
   ICostsConfigDataPayload,
   ICostsConfigSaveDataPayload,
-  IKanbanBoardDataPayload,
   IKanbanBoardColumn,
-  IKanbanBoardSubtask,
+  IKanbanBoard,
 } from '@/lib/api/api-types';
 
 /**
@@ -248,8 +247,8 @@ export interface IThemeState {
  */
 export interface IKanbanBoardState {
   loading: boolean;
-  data: IKanbanBoardDataPayload;
-  dataShadow: IKanbanBoardDataPayload;
+  data: IKanbanBoard;
+  dataShadow: IKanbanBoard;
   error?: string;
   saving: boolean;
   edited: boolean;
@@ -312,10 +311,8 @@ export interface ISetKanbanBoardActivePayload {
  * @prop {number} newColIndex - index of added column
  */
 export interface IAddKanbanBoardTaskPayload {
-  title: string;
-  description: string;
+  name: string;
   status: string;
-  subtasks: Array<IKanbanBoardSubtask>;
   newColIndex: number;
 }
 
@@ -326,19 +323,15 @@ export interface IAddKanbanBoardTaskPayload {
  * @since 0.0.1
  *
  * @typedef IEditKanbanBoardTaskPayload
- * @prop {string} title - task title
- * @prop {string} description - task description
+ * @prop {string} name - task name
  * @prop {sting} status - task status
- * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
  * @prop {number} newColIndex - index of added task column
  * @prop {number} prevColIndex - previous index of column
  * @prop {number} taskIndex - index of task
  */
 export interface IEditKanbanBoardTaskPayload {
-  title: string;
-  description: string;
+  name: string;
   status: string;
-  subtasks: Array<IKanbanBoardSubtask>;
   newColIndex: number;
   prevColIndex: number;
   taskIndex: number;
@@ -410,4 +403,17 @@ export interface ISetKanbanBoardTaskStatusPayload {
 export interface IDeleteKanbanBoardTaskPayload {
   colIndex: number;
   taskIndex: number;
+}
+
+/**
+ * Fetch Collections Kanban Board args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.8
+ *
+ * @typedef IFetchCollectionsKanbanBoardByProjectIdArgs
+ * @prop {string | null} projectId - Collections project ID (optional)
+ */
+export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
+  projectId?: string | (string | null)[];
 }

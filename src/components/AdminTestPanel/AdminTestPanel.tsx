@@ -55,9 +55,9 @@ const AdminTestPanel: FC = () => {
         </Typography>
         <Box mt={2}>
           <TextField
-            id="user-permission-level-select"
+            id="configurator-permission-level-select"
             select
-            label="User Permission Level"
+            label="Config Permission Level"
             value={userPermissionLevel}
             onChange={handlePermissionChange}
             SelectProps={{

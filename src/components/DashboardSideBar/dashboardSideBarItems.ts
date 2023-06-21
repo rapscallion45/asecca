@@ -25,7 +25,10 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
   },
   {
     title: 'kanban boards',
-    path: '/dashboard/kanban',
+  },
+  {
+    title: 'Collections',
+    path: '/dashboard/kanban/collections',
     icon: ViewKanbanIcon,
   },
   {
@@ -33,7 +36,7 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
   },
   {
     title: 'Cost Configurator',
-    path: '/dashboard/costs-config',
+    path: '/dashboard/configurators/costs-config',
     icon: MonetizationOnIcon,
   },
   {
