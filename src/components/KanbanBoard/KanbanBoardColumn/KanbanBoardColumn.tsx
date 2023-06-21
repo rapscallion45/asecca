@@ -98,7 +98,7 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
             </FormModal>
           ) : (
             <Box display="flex" justifyContent="center" width="100%">
-              <Typography variant="body2">No {kanbanData.name}s</Typography>
+              <Typography variant="body2">No Tasks.</Typography>
             </Box>
           )}
         </Box>

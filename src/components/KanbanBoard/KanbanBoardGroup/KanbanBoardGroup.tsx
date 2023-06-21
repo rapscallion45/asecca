@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { IKanbanBoardColumn, IKanbanBoardGroup } from '@/lib/api/api-types';
 import { IKanbanBoardState } from '@/redux/types';
@@ -34,6 +36,8 @@ interface IKanbanBoardGroupProps {
  */
 const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
   const { colIndex, groupIndex } = props;
+  const pathname = usePathname();
+  const router = useRouter();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
 
   /* find this group from passed board column and group indicies */
@@ -52,8 +56,21 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
   //   prevColIndex: colIndex,
   // };
 
+  /**
+   * Callback to handle click on group item to navigate to specific
+   * project kanban board
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   */
+  const handleClick = () => {
+    router.push(`${pathname}/${group?.id}`);
+  };
+
   return group ? (
-    <Card sx={{ width: 275, mb: 1 }}>
+    <Card onClick={handleClick} sx={{ width: 275, mb: 1, cursor: 'pointer' }}>
       <CardContent sx={{ pt: 1, pb: '2px !important', minHeight: 100 }}>
         <Box display="flex" flexDirection="row" alignItems="center">
           <Typography sx={{ fontSize: 11 }} color="text.secondary" gutterBottom>

@@ -26,7 +26,9 @@ async function getKanbanBoardByProjectId(
 
   /* send request and catch any errors */
   return fetch(
-    `/api/kanban/collections${projectId ? `?project_id=${projectId}` : null}`,
+    `/api/kanban/collections${
+      projectId !== null ? `?project_id=${projectId}` : ''
+    }`,
     requestOptions
   );
 }

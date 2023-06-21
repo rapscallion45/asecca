@@ -17,7 +17,9 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  *
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function getCollectionsKanban(query: string) {
+export async function getCollectionsKanban(
+  projectId: string | string[] | undefined
+) {
   /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',
@@ -31,7 +33,9 @@ export async function getCollectionsKanban(query: string) {
 
   /* fetch the kanban data */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection_kanban_staging/api/collections?${query}`,
+    `${STAGING_DB_REST_API_URL}/collection_kanban_staging/api/collections${
+      projectId !== undefined ? `?project_id=${projectId}` : ''
+    }`,
     requestOptions
   );
 }

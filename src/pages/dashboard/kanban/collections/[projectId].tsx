@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
+import { useRouter } from 'next/router';
 import {
   Box,
   Typography,
@@ -21,29 +22,31 @@ import {
 } from '@/redux/slices/collectionsKanbanSlice';
 
 /**
- * Collection Kanban Page
+ * Collections Project Kanban Page
  *
- * Application Collection Kanban Board interface
+ * Application Kanban Board interface for displaying a specific Collection project
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.9
  *
  * @component
- * @returns {NextPageWithLayout} - Collection Kanban Board interface page component
+ * @returns {NextPageWithLayout} - Collection Project Kanban Board page component
  */
-const CollectionsKanbanPage: NextPageWithLayout = () => {
+const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { projectId } = router.query;
   const {
     data: collectionsBoard,
     error,
     loading,
   } = useSelector((state: AppState) => state.collectionsKanban);
 
-  /* whenever the page query is updated, fetch new data from API */
+  /* whenever the page query is updated, fetch new kanban data from API */
   useEffect(() => {
     // @ts-ignore
-    dispatch(fetchKanbanBoardByProjectId({ projectId: null }));
-  }, [dispatch]);
+    dispatch(fetchKanbanBoardByProjectId({ projectId }));
+  }, [projectId, dispatch]);
 
   return (
     <ClientOnly>
@@ -111,6 +114,6 @@ const CollectionsKanbanPage: NextPageWithLayout = () => {
 };
 
 /** dashboard layout used for Kanban Collections page */
-CollectionsKanbanPage.Layout = DashboardLayout;
+KanbanCollectionsProjectPage.Layout = DashboardLayout;
 
-export default CollectionsKanbanPage;
+export default KanbanCollectionsProjectPage;
