@@ -60,7 +60,7 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
         {/* @ts-ignore */}
         <CircleIcon fontSize="small" color={colColors[colIndex]} />
         <Typography sx={{ ml: 1 }}>
-          {column.name} ({column.tasks.length})
+          {column.name} ({column.tasks.length + (column.groups?.length || 0)})
         </Typography>
       </Box>
       {column.groups?.map((group: IKanbanBoardGroup, index: number) => (
