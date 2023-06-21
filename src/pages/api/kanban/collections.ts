@@ -41,7 +41,7 @@ const collectionsKanbanHandler = async (
           return res.status(200).json(data);
         }
         return res.status(response.status).json({
-          message: `Failed to load Devices data from server: ${response.statusText}`,
+          message: `Failed to load Collection Kanban data from server: ${response.statusText}`,
         });
       } catch (error) {
         /* in case of exception, generate internal error response */

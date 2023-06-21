@@ -94,7 +94,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IKanbanBoardState>) => {
       state.loading = false;
       state.data = { name: '', columns: [] };
       state.dataShadow = { name: '', columns: [] };
-      state.error = 'Failed to load Costs Config data from server.';
+      state.error = 'Failed to load Kanban data from server.';
     });
 };
 

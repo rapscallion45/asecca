@@ -58,8 +58,8 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
                     collectionsBoard?.name || 'Collection'
                   ) : (
                     <Box display="flex">
-                      <Typography mr={1} variant="h4">
-                        Loading board...
+                      <Typography variant="h4">
+                        {error ?? 'Loading board...'}
                       </Typography>
                     </Box>
                   )}
@@ -76,18 +76,22 @@ const KanbanCollectionsPage: NextPageWithLayout = () => {
                   </Box>
                 ) : (
                   <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
-                    <Skeleton
-                      variant="rectangular"
-                      width={140}
-                      height={40}
-                      sx={{ borderRadius: '4px' }}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={70}
-                      height={40}
-                      sx={{ borderRadius: '4px', ml: 2 }}
-                    />
+                    {!error && (
+                      <>
+                        <Skeleton
+                          variant="rectangular"
+                          width={140}
+                          height={40}
+                          sx={{ borderRadius: '4px' }}
+                        />
+                        <Skeleton
+                          variant="rectangular"
+                          width={70}
+                          height={40}
+                          sx={{ borderRadius: '4px', ml: 2 }}
+                        />
+                      </>
+                    )}
                   </Box>
                 )}
               </Box>

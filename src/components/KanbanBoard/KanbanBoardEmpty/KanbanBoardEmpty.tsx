@@ -84,7 +84,6 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
               ? 'This board is empty. Create a new column to get started.'
               : 'There is no data available for the selected Kanban Board.'}
           </Typography>
-
           <Box
             display="flex"
             justifyContent="start"
