@@ -83,7 +83,7 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
             flexGrow={1}
           >
             <Typography
-              sx={{ fontSize: 11 }}
+              sx={{ fontSize: 11, mr: 1 }}
               color="text.secondary"
               gutterBottom
             >
