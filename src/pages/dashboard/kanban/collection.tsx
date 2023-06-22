@@ -59,7 +59,7 @@ const CollectionKanbanPage: NextPageWithLayout = () => {
   );
 };
 
-/** dashboard layout used for Kanban Collections page */
+/** dashboard layout used for Kanban Collection page */
 CollectionKanbanPage.Layout = DashboardLayout;
 
 export default CollectionKanbanPage;
