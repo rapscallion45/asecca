@@ -6,7 +6,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import { useDispatch } from 'react-redux';
 import { addNotification } from '@/redux/slices/notificationsSlice';
-import devicesService from '@/services/devicesService';
+import devicesService from '@/services/tables/devicesService';
 import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
 
 /**

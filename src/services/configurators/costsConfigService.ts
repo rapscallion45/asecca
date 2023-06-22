@@ -2,7 +2,7 @@ import {
   CostsConfigCostSource,
   ICostsConfigSaveDataPayload,
 } from '@/lib/api/api-types';
-import { getCostsConfigSourceQueryString } from '../utils';
+import { getCostsConfigSourceQueryString } from '../../utils';
 
 /**
  * API services for Cost Config
