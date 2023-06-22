@@ -390,8 +390,9 @@ function useDraggable(
 
     ref.current.style.cursor = cursorStyleOfWrapperElement; // eslint-disable-line no-param-reassign
     (ref.current?.childNodes as NodeListOf<HTMLOptionElement>).forEach(
-      (child: HTMLElement, i) => {
-        child.style.cursor = cursorStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
+      (child: HTMLElement) => {
+        // child.style.cursor = cursorStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
+        child.style.cursor = 'auto'; // eslint-disable-line no-param-reassign
       }
     );
 
