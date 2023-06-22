@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
 import { IEditKanbanBoardGroupPayload, IKanbanBoardState } from '@/redux/types';
+import { AppDispatch } from '@/redux/store';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
 import {
   useSliceActions,
@@ -57,7 +58,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
     currentData,
     iconSize,
   } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

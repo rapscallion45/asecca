@@ -455,5 +455,5 @@ export interface IDeleteKanbanBoardTaskPayload {
  * @prop {string | null} projectId - Collections project ID (optional)
  */
 export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
-  projectId?: string | (string | null)[];
+  projectId?: string | (string | null)[] | null;
 }

@@ -7,7 +7,7 @@ import KanbanBoardHeader from '@/components/KanbanBoard/KanbanBoardHeader';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import SliceProvider from '@/components/SliceProvider/SliceProvider';
 import {
   collectionsKanbanSlice,
@@ -26,14 +26,13 @@ import {
  * @returns {NextPageWithLayout} - Collection Kanban Board interface page component
  */
 const CollectionsKanbanPage: NextPageWithLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { data: collectionsBoard, loading } = useSelector(
     (state: AppState) => state.collectionsKanban
   );
 
   /* whenever the page query is updated, fetch new data from API */
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchKanbanBoardByProjectId({ projectId: null }));
   }, [dispatch]);
 

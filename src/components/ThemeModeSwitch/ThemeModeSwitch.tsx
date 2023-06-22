@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormControlLabel, Switch, Box, useTheme, styled } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import { setTheme } from '@/redux/slices/themeSlice';
 
 /**
@@ -77,7 +77,7 @@ const ThemeModeSwitchStyle = styled(Switch)(({ theme }) => ({
  * @returns {FC} - theme mode switch functional component
  */
 const ThemeModeSwitch: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
   const { type: themeType } = useSelector((state: AppState) => state.theme);
 

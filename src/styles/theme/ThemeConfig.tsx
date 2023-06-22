@@ -9,7 +9,7 @@ import {
   ThemeOptions,
 } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import { setTheme } from '@/redux/slices/themeSlice';
 import { ThemeType } from '@/redux/types';
 import lightThemePalette from './lightTheme/lightThemePalette';
@@ -47,7 +47,7 @@ interface IThemeConfigProps {
  */
 const ThemeConfig: FC<IThemeConfigProps> = (props) => {
   const { emotionCache, children } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   /* grab global theme state */
   const { type: themeType } = useSelector((state: AppState) => state.theme);

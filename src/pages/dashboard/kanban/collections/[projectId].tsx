@@ -7,7 +7,7 @@ import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBo
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
-import { AppState } from '@/redux/store';
+import { AppDispatch, AppState } from '@/redux/store';
 import SliceProvider from '@/components/SliceProvider/SliceProvider';
 import {
   collectionsKanbanSlice,
@@ -27,7 +27,7 @@ import KanbanBoardHeader from '@/components/KanbanBoard/KanbanBoardHeader';
  * @returns {NextPageWithLayout} - Collection Project Kanban Board page component
  */
 const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const { projectId } = router.query;
   const { data: collectionsBoard, loading } = useSelector(
@@ -36,7 +36,6 @@ const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
 
   /* whenever the page query is updated, fetch new kanban data from API */
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchKanbanBoardByProjectId({ projectId }));
   }, [projectId, dispatch]);
 

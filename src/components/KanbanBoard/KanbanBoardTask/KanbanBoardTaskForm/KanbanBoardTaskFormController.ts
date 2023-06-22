@@ -6,6 +6,7 @@ import {
   IEditKanbanBoardTaskPayload,
   IKanbanBoardState,
 } from '@/redux/types';
+import { AppDispatch } from '@/redux/store';
 import {
   useSliceActions,
   useSliceSelector,
@@ -32,7 +33,7 @@ const useKanbanBoardTaskFormController = (
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { saving } = useSliceSelector() as IKanbanBoardState;
   const { addTask, editTask } = useSliceActions();
 

@@ -1,10 +1,11 @@
 import { useState, useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import type { NextPageWithLayout } from 'next';
 import { AgGridReact } from 'ag-grid-react';
 import { Box, Typography, useTheme } from '@mui/material';
+import { AppDispatch } from '@/redux/store';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
-import { useDispatch } from 'react-redux';
 import { addNotification } from '@/redux/slices/notificationsSlice';
 import devicesService from '@/services/tables/devicesService';
 import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
@@ -21,7 +22,7 @@ import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
  * @returns {NextPageWithLayout} - Devices table page component
  */
 const DevicesTable: NextPageWithLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
   const [rowData, setRowData] = useState();
 
