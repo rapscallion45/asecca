@@ -70,7 +70,10 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
         {/* @ts-ignore */}
         <CircleIcon fontSize="small" color={colColors[colIndex]} />
         <Typography sx={{ ml: 1 }}>
-          {column.name} ({column.tasks.length + (column.groups?.length || 0)})
+          {column.name} (
+          {(!hideTasks ? column.tasks.length : 0) +
+            (!hideGroups ? column.groups?.length || 0 : 0)}
+          )
         </Typography>
       </Box>
       {!hideGroups &&
