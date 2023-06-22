@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
-  IAddKanbanBoardTaskPayload,
-  IEditKanbanBoardTaskPayload,
+  IAddKanbanBoardGroupPayload,
+  IEditKanbanBoardGroupPayload,
   IKanbanBoardState,
 } from '@/redux/types';
 import {
@@ -13,23 +13,23 @@ import {
 import { IKanbanBoardColumn } from '@/lib/api/api-types';
 
 /**
- * Kanban board task form controller hook, used for task form logic,
+ * Kanban board group form controller hook, used for group form logic,
  * input handling and form submission
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.2
- * @memberof KanbanBoardTaskForm
+ * @since 0.0.9
+ * @memberof KanbanBoardGroupForm
  *
  * @function
- * @param {boolean} isEditMode - is form creating a new task or editing existing task
- * @param {Array<IKanbanBoardColumn>} columns - column list for task's board
- * @param {IEditKanbanBoardTaskPayload} currentData - task data
- * @param {any} closeModal - callback for closing the task form modal
+ * @param {boolean} isEditMode - is form creating a new group or editing existing
+ * @param {Array<IKanbanBoardColumn>} columns - column list for groups's board
+ * @param {IEditKanbanBoardGroupPayload} currentData - group data
+ * @param {any} closeModal - callback for closing the group form modal
  */
-const useKanbanBoardTaskFormController = (
+const useKanbanBoardGroupFormController = (
   isEditMode: boolean,
   columns: Array<IKanbanBoardColumn>,
-  currentData?: IEditKanbanBoardTaskPayload,
+  currentData?: IEditKanbanBoardGroupPayload,
   closeModal?: () => void
 ) => {
   const dispatch = useDispatch();
@@ -37,53 +37,53 @@ const useKanbanBoardTaskFormController = (
   const { addTask, editTask } = useSliceActions();
 
   /**
-   * Yup input validation configuration for task form
+   * Yup input validation configuration for group form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.2
+   * @since 0.0.9
    *
    * @constant
    */
   const validationSchema = Yup.object().shape({
     title: Yup.string()
-      .required('Task title is required')
-      .max(100, 'Task title must not exceed 100 characters'),
+      .required('Group name is required')
+      .max(100, 'Group name must not exceed 100 characters'),
   });
 
   /**
-   * Data submission handler for task form
+   * Data submission handler for group form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.2
+   * @since 0.0.9
    *
    * @method
-   * @param {IEditKanbanBoardTaskPayload} payload - data to be submitted
+   * @param {IEditKanbanBoardGroupPayload} payload - data to be submitted
    */
-  const handleSubmit = (payload: IEditKanbanBoardTaskPayload) => {
+  const handleSubmit = (payload: IEditKanbanBoardGroupPayload) => {
     if (isEditMode) {
       // @ts-ignore
-      dispatch(editTask(payload as IEditKanbanBoardTaskPayload));
+      dispatch(editTask(payload as IEditKanbanBoardGroupPayload));
       if (closeModal) closeModal();
     } else {
       // @ts-ignore
-      dispatch(addTask(payload as IAddKanbanBoardTaskPayload));
+      dispatch(addTask(payload as IAddKanbanBoardGroupPayload));
       if (closeModal) closeModal();
     }
   };
 
   /**
-   * Formik configuration for task form
+   * Formik configuration for group form
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.2
+   * @since 0.0.9
    *
    * @constant
    */
   const formik = useFormik({
     initialValues: {
-      name: currentData?.name || 'New Task',
+      name: currentData?.name || 'New Group',
       status: currentData?.status || '',
-      taskIndex: currentData?.taskIndex || 0,
+      groupIndex: currentData?.groupIndex || 0,
       newColIndex: columns.findIndex(
         (col: IKanbanBoardColumn) => col.name === currentData?.status
       ),
@@ -92,7 +92,7 @@ const useKanbanBoardTaskFormController = (
       ),
     },
     validationSchema,
-    onSubmit: (payload: IEditKanbanBoardTaskPayload) => {
+    onSubmit: (payload: IEditKanbanBoardGroupPayload) => {
       handleSubmit({
         ...payload,
         newColIndex: columns
@@ -104,4 +104,4 @@ const useKanbanBoardTaskFormController = (
 
   return { saving, formik };
 };
-export default useKanbanBoardTaskFormController;
+export default useKanbanBoardGroupFormController;

@@ -1,9 +1,9 @@
 import { FC, useCallback, DragEvent } from 'react';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
-import { IKanbanBoardState } from '@/redux/types';
+import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
-// import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
+import KanbanBoardTaskMenu from './KanbanBoardTaskMenu/KanbanBoardTaskMenu';
 // import TaskModal from "../modals/TaskModal";
 
 /**
@@ -48,13 +48,13 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
     );
 
   /* build current data structure for this task */
-  // const currentData: IEditKanbanBoardTaskPayload = {
-  //   name: task?.name || '',
-  //   status: task?.status || '',
-  //   newColIndex: colIndex,
-  //   taskIndex,
-  //   prevColIndex: colIndex,
-  // };
+  const currentData: IEditKanbanBoardTaskPayload = {
+    name: task?.name || '',
+    status: task?.status || '',
+    newColIndex: colIndex,
+    taskIndex,
+    prevColIndex: colIndex,
+  };
 
   /**
    * Callback listens for drag of task
@@ -89,14 +89,14 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
           <Typography sx={{ fontSize: 11 }} color="text.secondary" gutterBottom>
             {kanbanData.name} - {task.id}
           </Typography>
-          {/* <Box display="flex" justifyContent="end" flexGrow={1}>
+          <Box display="flex" justifyContent="end" flexGrow={1}>
             <KanbanBoardTaskMenu
               colIndex={colIndex}
               taskIndex={taskIndex}
               currentData={currentData}
               iconSize="small"
             />
-          </Box> */}
+          </Box>
         </Box>
         <Typography variant="body2" component="div" mb={1}>
           {task?.name}

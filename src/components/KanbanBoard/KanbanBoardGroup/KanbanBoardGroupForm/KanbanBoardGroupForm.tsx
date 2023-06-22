@@ -4,51 +4,47 @@ import {
   InputAdornment,
   CircularProgress,
   TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@mui/material';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { IEditKanbanBoardTaskPayload } from '@/redux/types';
+import { IEditKanbanBoardGroupPayload } from '@/redux/types';
 import { IKanbanBoardColumn } from '@/lib/api/api-types';
-import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
+import useKanbanBoardTaskFormController from './KanbanBoardGroupFormController';
 
 /**
- * Kanban Board Task Form Props
+ * Kanban Board Group Form Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.2
+ * @since 0.0.9
  *
- * @typedef IKanbanBoardTaskFormProps
- * @prop {boolean} isEditMode - determines whether this is a new task or editing
- * @prop {boolean} canEdit - task can be edited
- * @prop {Array<IKanbanBoardColumn>} columns - columns for task's board
- * @prop {IEditKanbanBoardTaskPayload} currentData - task data
+ * @typedef IKanbanBoardGroupFormProps
+ * @prop {boolean} isEditMode - determines whether this is a new group or editing
+ * @prop {boolean} canEdit - group can be edited
+ * @prop {Array<IKanbanBoardColumn>} columns - columns for group's board
+ * @prop {IEditKanbanBoardGroupPayload} currentData - group data
  * @prop {any} closeModal - on close modal callback handler
  */
-interface IKanbanBoardTaskFormProps {
+interface IKanbanBoardGroupFormProps {
   isEditMode: boolean;
   canEdit?: boolean;
   columns: Array<IKanbanBoardColumn>;
-  currentData?: IEditKanbanBoardTaskPayload;
+  currentData?: IEditKanbanBoardGroupPayload;
   closeModal?: () => void;
 }
 
 /**
- * Kanban Board Task Form
+ * Kanban Board Group Form
  *
- * Kanban board task form interface for collecting user input when creating
- * or editing a task's details
+ * Kanban board group form interface for collecting user input when creating
+ * or editing a group's details
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.2
+ * @since 0.0.9
  *
  * @component
- * @param {IKanbanBoardTaskFormProps} props - component props
- * @returns {FC} - kanaban board task form functional component
+ * @param {IKanbanBoardGroupFormProps} props - component props
+ * @returns {FC} - kanaban board group form functional component
  */
-const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
+const KanbanBoardTaskForm: FC<IKanbanBoardGroupFormProps> = (props) => {
   const {
     isEditMode,
     canEdit = false,
@@ -71,7 +67,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
         margin="normal"
         id="name"
         name="name"
-        label="Task Name"
+        label="Group Name"
         type="text"
         value={formik.values.name}
         onChange={formik.handleChange}
@@ -86,23 +82,6 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           ),
         }}
       />
-      <FormControl fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="status-label">Current Status</InputLabel>
-        <Select
-          labelId="status-label"
-          id="status"
-          name="status"
-          value={formik.values.status}
-          label="Current Status"
-          onChange={formik.handleChange}
-        >
-          {columns.map((col: IKanbanBoardColumn) => (
-            <MenuItem key={col.name} value={col.name}>
-              {col.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
       {!isEditMode ? (
         <Button
           type="submit"
@@ -112,7 +91,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           disabled={saving || !canEdit}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
-          {!saving && 'Add Task'}
+          {!saving && 'Add Group'}
           {saving && <CircularProgress size={25} color="inherit" />}
         </Button>
       ) : (

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { usePathname } from 'next/navigation';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { IKanbanBoardColumn, IKanbanBoardGroup } from '@/lib/api/api-types';
-import { IKanbanBoardState } from '@/redux/types';
+import { IEditKanbanBoardGroupPayload, IKanbanBoardState } from '@/redux/types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
-// import KanbanBoardGroupMenu from './KanbanBoardTaskMenu/KanbanBoardGroupMenu';
+import KanbanBoardGroupMenu from './KanbanBoardGroupMenu/KanbanBoardGroupMenu';
 
 /**
  * Kanban Board Group Props
@@ -48,13 +48,13 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
     );
 
   /* build current data structure for this group */
-  // const currentData: IEditKanbanBoardGroupPayload = {
-  //   name: group?.name || '',
-  //   status: group?.status || '',
-  //   newColIndex: colIndex,
-  //   groupIndex,
-  //   prevColIndex: colIndex,
-  // };
+  const currentData: IEditKanbanBoardGroupPayload = {
+    name: group?.name || '',
+    status: group?.status || '',
+    newColIndex: colIndex,
+    groupIndex,
+    prevColIndex: colIndex,
+  };
 
   /**
    * Callback to handle click on group item to navigate to specific
@@ -70,13 +70,18 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
   };
 
   return group ? (
-    <Card onClick={handleClick} sx={{ width: 275, mb: 1, cursor: 'pointer' }}>
+    <Card sx={{ width: 275, mb: 1 }}>
       <CardContent sx={{ pt: 1, pb: '2px !important', minHeight: 100 }}>
         <Box display="flex" flexDirection="row" alignItems="center">
           <Typography sx={{ fontSize: 11 }} color="text.secondary" gutterBottom>
             Project
           </Typography>
-          <Box display="flex" justifyContent="end" flexGrow={1}>
+          <Box
+            display="flex"
+            justifyContent="end"
+            alignItems="center"
+            flexGrow={1}
+          >
             <Typography
               sx={{ fontSize: 11 }}
               color="text.secondary"
@@ -84,18 +89,28 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
             >
               {kanbanData.name}s - {group.total_tasks}
             </Typography>
-            {/* <KanbanBoardGroupMenu
+            <KanbanBoardGroupMenu
               colIndex={colIndex}
               groupIndex={groupIndex}
               currentData={currentData}
               iconSize="small"
-            /> */}
+            />
           </Box>
         </Box>
-        <Typography variant="body1" component="div">
+        <Typography
+          onClick={handleClick}
+          variant="body1"
+          component="div"
+          sx={{ cursor: 'pointer' }}
+        >
           {group?.name}
         </Typography>
-        <Typography sx={{ fontSize: 9 }} color="text.secondary" gutterBottom>
+        <Typography
+          onClick={handleClick}
+          sx={{ fontSize: 9, cursor: 'pointer' }}
+          color="text.secondary"
+          gutterBottom
+        >
           ID - {group.id}
         </Typography>
       </CardContent>
