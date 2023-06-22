@@ -72,7 +72,7 @@ describe('Costs Config Table', () => {
         expect(window.fetch).toHaveBeenCalledTimes(1);
       });
       expect(window.fetch).toHaveBeenCalledWith(
-        `/api/costs_config?${permission.toLowerCase()}=${query}`,
+        `/api/configurators/costs_config?${permission.toLowerCase()}=${query}`,
         expect.objectContaining({
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -143,7 +143,7 @@ describe('Costs Config Table', () => {
         expect(window.fetch).toHaveBeenCalledTimes(2);
       });
       expect(window.fetch).toHaveBeenCalledWith(
-        '/api/costs_config',
+        '/api/configurators/costs_config',
         expect.objectContaining({
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

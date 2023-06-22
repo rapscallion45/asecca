@@ -389,7 +389,7 @@ function useDraggable(
     internalState.current.lastMouseY = 0;
 
     ref.current.style.cursor = cursorStyleOfWrapperElement; // eslint-disable-line no-param-reassign
-    (ref.current.childNodes as NodeListOf<HTMLOptionElement>).forEach(
+    (ref.current?.childNodes as NodeListOf<HTMLOptionElement>).forEach(
       (child: HTMLElement, i) => {
         child.style.cursor = cursorStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
       }

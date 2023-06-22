@@ -12,7 +12,7 @@ import { getCostsConfigSourceQueryString } from '../utils';
  */
 
 /**
- * GET request to /api/costs_config
+ * GET request to /api/configurators/costs_config
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
@@ -39,11 +39,14 @@ async function getCostsConfig(
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/costs_config?${queryString}`, requestOptions);
+  return fetch(
+    `/api/configurators/costs_config?${queryString}`,
+    requestOptions
+  );
 }
 
 /**
- * POST request to /api/costs_config
+ * POST request to /api/configurators/costs_config
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
@@ -61,7 +64,7 @@ async function setCostsConfig(body: ICostsConfigSaveDataPayload) {
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/costs_config`, requestOptions);
+  return fetch(`/api/configurators/costs_config`, requestOptions);
 }
 
 const costsConfigService = {

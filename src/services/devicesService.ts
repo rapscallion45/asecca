@@ -6,7 +6,7 @@
  */
 
 /**
- * GET request to /api/devices
+ * GET request to /api/tables/devices
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.6
@@ -22,7 +22,7 @@ async function getDevices() {
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/devices`, requestOptions);
+  return fetch(`/api/tables/devices`, requestOptions);
 }
 
 const devicesService = {

@@ -55,7 +55,7 @@ export const mockHandlers = [
     CostsConfigGetRequestBody,
     CostsConfigGetRequestParams,
     CostsConfigGetResponseBody
-  >('/api/costs_config', async (req, res, ctx) =>
+  >('/api/configurators/costs_config', async (req, res, ctx) =>
     /** return mock costs config data */
     res(ctx.status(200), ctx.json({ costs: costsConfigDataMock.costs }))
   ),
@@ -85,7 +85,7 @@ export const mockHandlers = [
     CostsConfigPostRequestBody,
     CostsConfigPostRequestParams,
     CostsConfigPostResponseBody
-  >('/api/costs_config', async (req, res, ctx) =>
+  >('/api/configurators/costs_config', async (req, res, ctx) =>
     /** return ok message indicating successfull save */
     res(ctx.status(200), ctx.json({ message: 'Ok' }))
   ),
