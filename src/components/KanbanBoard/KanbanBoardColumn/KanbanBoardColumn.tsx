@@ -24,11 +24,15 @@ import KanbanBoardGroup from '../KanbanBoardGroup/KanbanBoardGroup';
  * @prop {number} colIndex - column index
  * @prop {boolean} dragEnabled - column drag enabled flag
  * @prop {boolean} canEdit - column data is editable
+ * @prop {boolean} hideTasks - column will not display tasks
+ * @prop {boolean} hideGroups - column will not display groups
  */
 interface IKanbanBoardColumnProps {
   colIndex: number;
   dragEnabled?: boolean;
   canEdit?: boolean;
+  hideTasks?: boolean;
+  hideGroups?: boolean;
 }
 
 /**
@@ -44,7 +48,13 @@ interface IKanbanBoardColumnProps {
  * @returns {FC} - data table functional component
  */
 const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
-  const { colIndex, dragEnabled = false, canEdit = false } = props;
+  const {
+    colIndex,
+    dragEnabled = false,
+    canEdit = false,
+    hideTasks = false,
+    hideGroups = false,
+  } = props;
   const colColors = ['secondary', 'warning', 'error', 'info', 'primary'];
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
 
@@ -63,21 +73,23 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
           {column.name} ({column.tasks.length + (column.groups?.length || 0)})
         </Typography>
       </Box>
-      {column.groups?.map((group: IKanbanBoardGroup, index: number) => (
-        <KanbanBoardGroup
-          key={group.id}
-          groupIndex={index}
-          colIndex={colIndex}
-        />
-      ))}
-      {column.tasks.map((task: IKanbanBoardTask, index: number) => (
-        <KanbanBoardTask
-          key={task.id}
-          taskIndex={index}
-          colIndex={colIndex}
-          dragEnabled={dragEnabled}
-        />
-      ))}
+      {!hideGroups &&
+        column.groups?.map((group: IKanbanBoardGroup, index: number) => (
+          <KanbanBoardGroup
+            key={group.id}
+            groupIndex={index}
+            colIndex={colIndex}
+          />
+        ))}
+      {!hideTasks &&
+        column.tasks.map((task: IKanbanBoardTask, index: number) => (
+          <KanbanBoardTask
+            key={task.id}
+            taskIndex={index}
+            colIndex={colIndex}
+            dragEnabled={dragEnabled}
+          />
+        ))}
       {column.tasks.length <= 0 && (
         <Box py={1}>
           {canEdit ? (
