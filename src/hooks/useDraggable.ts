@@ -94,6 +94,7 @@ function useDraggable(
 
   const timing = (1 / 60) * 1000; // period of most monitors (60fps)
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useLayoutEffect(() => {
     if (isMounted) {
       isScrollableAlongX =
@@ -479,7 +480,7 @@ function useDraggable(
       clearInterval(keepMovingY);
       clearTimeout(rubberBandAnimationTimer);
     };
-  }, [isMounted]);
+  }, [isMounted, handleResize, onMouseMove, onMouseUp]);
 
   return {
     events: {
