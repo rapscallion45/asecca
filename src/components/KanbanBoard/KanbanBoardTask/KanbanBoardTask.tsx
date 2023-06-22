@@ -1,4 +1,4 @@
-import { FC, useCallback, DragEvent } from 'react';
+import { FC, useCallback, DragEvent, memo } from 'react';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { IKanbanBoardColumn, IKanbanBoardTask } from '@/lib/api/api-types';
 import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
@@ -106,4 +106,4 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
   ) : null;
 };
 
-export default KanbanBoardTask;
+export default memo(KanbanBoardTask);

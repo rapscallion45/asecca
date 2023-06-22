@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useRouter } from 'next/router';
 import { usePathname } from 'next/navigation';
 import { Box, Card, CardContent, Typography } from '@mui/material';
@@ -118,4 +118,4 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
   ) : null;
 };
 
-export default KanbanBoardGroup;
+export default memo(KanbanBoardGroup);
