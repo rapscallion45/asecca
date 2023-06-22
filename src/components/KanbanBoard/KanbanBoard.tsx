@@ -5,6 +5,7 @@ import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import ScrollDrag from '@/components/ScrollDrag/ScrollDrag';
+import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
@@ -65,10 +66,10 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
   const handleSave = () => {};
 
   return (
-    <>
+    <ClientOnly>
       <ScrollDrag>
         {currentData.columns.length > 0 ? (
-          <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1 }}>
+          <Box display="flex" flexDirection="row" sx={{ pt: 2, pb: 1, mb: 3 }}>
             {!error && (
               <>
                 {currentData.columns.map(
@@ -149,7 +150,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           </LoadingButton>
         </Box>
       )}
-    </>
+    </ClientOnly>
   );
 };
 

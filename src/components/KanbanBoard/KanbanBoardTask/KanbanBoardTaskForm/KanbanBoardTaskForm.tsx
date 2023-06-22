@@ -22,12 +22,14 @@ import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
  *
  * @typedef IKanbanBoardTaskFormProps
  * @prop {boolean} isEditMode - determines whether this is a new task or editing
+ * @prop {boolean} canEdit - task can be edited
  * @prop {Array<IKanbanBoardColumn>} columns - columns for task's board
  * @prop {IEditKanbanBoardTaskPayload} currentData - task data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardTaskFormProps {
   isEditMode: boolean;
+  canEdit?: boolean;
   columns: Array<IKanbanBoardColumn>;
   currentData?: IEditKanbanBoardTaskPayload;
   closeModal?: () => void;
@@ -47,7 +49,13 @@ interface IKanbanBoardTaskFormProps {
  * @returns {FC} - kanaban board task form functional component
  */
 const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
-  const { isEditMode, columns, currentData, closeModal } = props;
+  const {
+    isEditMode,
+    canEdit = false,
+    columns,
+    currentData,
+    closeModal,
+  } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
     columns,
@@ -70,6 +78,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
         error={formik.touched.name && Boolean(formik.errors.name)}
         helperText={formik.touched.name && formik.errors.name}
         autoComplete="on"
+        disabled={!canEdit}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -87,6 +96,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           value={formik.values.status}
           label="Current Status"
           onChange={formik.handleChange}
+          disabled={!canEdit}
         >
           {columns.map((col: IKanbanBoardColumn) => (
             <MenuItem key={col.name} value={col.name}>
@@ -101,7 +111,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={saving}
+          disabled={saving || !canEdit}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
           {!saving && 'Add Task'}
@@ -113,7 +123,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={saving}
+          disabled={saving || !canEdit}
           sx={{ padding: '10px 0', marginTop: '20px' }}
         >
           {!saving && 'Update'}

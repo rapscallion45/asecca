@@ -3,7 +3,7 @@ import {
   PayloadAction,
   createAsyncThunk,
 } from '@reduxjs/toolkit';
-import collectionsKanbanService from '@/services/collectionsKanbanService';
+import collectionsKanbanService from '@/services/kanban/collectionsKanbanService';
 import { IKanbanBoardCollectionsDataPayload } from '@/lib/api/api-types';
 import { addNotification } from './notificationsSlice';
 import createKanbanSlice from './kanbanSlice';

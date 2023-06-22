@@ -24,8 +24,9 @@ const collectionsKanbanHandler = async (
     IKanbanBoardCollectionsDataPayload | IProxyErrorPayload | null
   >
 ) => {
-  const { method, body } = req;
-  const { params } = body;
+  const { method, query } = req;
+  /* eslint-disable @typescript-eslint/naming-convention */
+  const { project_id } = query;
 
   /* determine which request type this is */
   switch (method) {
@@ -33,7 +34,7 @@ const collectionsKanbanHandler = async (
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await getCollectionsKanban(params);
+        const response = await getCollectionsKanban(project_id);
 
         /* send back server response */
         if (response.status === 200) {

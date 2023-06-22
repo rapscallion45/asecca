@@ -16,7 +16,7 @@
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
 async function getKanbanBoardByProjectId(
-  projectId?: string | (string | null)[]
+  projectId?: string | (string | null)[] | null
 ) {
   /* configure GET header options */
   const requestOptions = {
@@ -26,7 +26,9 @@ async function getKanbanBoardByProjectId(
 
   /* send request and catch any errors */
   return fetch(
-    `/api/kanban/collections${projectId ? `?project_id=${projectId}` : null}`,
+    `/api/kanban/collections${
+      projectId !== null ? `?project_id=${projectId}` : ''
+    }`,
     requestOptions
   );
 }

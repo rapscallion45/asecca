@@ -28,8 +28,11 @@ import ThemeConfig from '@/styles/theme/ThemeConfig';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
+ *
+ * @constant
+ * @type {EmotionCache}
  */
-const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache: EmotionCache = createEmotionCache();
 
 /**
  * Asecca SPA Entry Point Props

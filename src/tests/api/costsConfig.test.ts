@@ -1,5 +1,5 @@
 import { createMocks } from 'node-mocks-http';
-import costsConfigHandler from '@/pages/api/costs_config';
+import costsConfigHandler from '@/pages/api/configurators/costs_config';
 import costsConfigDataMock from '../../../__mocks__/costsConfigDataMock';
 
 /* mock query string as causes Jest error */

@@ -298,6 +298,46 @@ export interface ISetKanbanBoardActivePayload {
 }
 
 /**
+ * Add Kanban Board group payload
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.9
+ *
+ * @typedef IAddKanbanBoardGroupPayload
+ * @prop {string} title - task title
+ * @prop {string} description - task description
+ * @prop {sting} status - task status
+ * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
+ * @prop {number} newColIndex - index of added column
+ */
+export interface IAddKanbanBoardGroupPayload {
+  name: string;
+  status: string;
+  newColIndex: number;
+}
+
+/**
+ * Edit Kanban Board group payload
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.9
+ *
+ * @typedef IEditKanbanBoardGroupPayload
+ * @prop {string} name - group name
+ * @prop {sting} status - group status
+ * @prop {number} newColIndex - index of added group column
+ * @prop {number} prevColIndex - previous index of column
+ * @prop {number} groupIndex - index of group
+ */
+export interface IEditKanbanBoardGroupPayload {
+  name: string;
+  status: string;
+  newColIndex: number;
+  prevColIndex: number;
+  groupIndex: number;
+}
+
+/**
  * Add Kanban Board task payload
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -415,5 +455,5 @@ export interface IDeleteKanbanBoardTaskPayload {
  * @prop {string | null} projectId - Collections project ID (optional)
  */
 export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
-  projectId?: string | (string | null)[];
+  projectId?: string | (string | null)[] | null;
 }

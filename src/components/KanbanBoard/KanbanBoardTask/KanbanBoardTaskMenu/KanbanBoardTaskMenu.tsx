@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { alpha } from '@mui/material/styles';
 import { Button, Box, IconButton } from '@mui/material';
 import { IEditKanbanBoardTaskPayload, IKanbanBoardState } from '@/redux/types';
+import { AppDispatch } from '@/redux/store';
 import MenuPopover from '@/components/MenuPopover/MenuPopover';
 import {
   useSliceActions,
@@ -23,12 +24,14 @@ import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
  * @since 0.0.2
  *
  * @typedef IKanbanBoardTaskMenuProps
+ * @prop {boolean} canEdit - task can be edited
  * @prop {number} colIndex - column index of this task
  * @prop {number} taskIndex - index of task
  * @prop {IEditKanbanBoardTaskPayload} currentData - current task data
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardTaskMenuProps {
+  canEdit?: boolean;
   colIndex: number;
   taskIndex: number;
   currentData: IEditKanbanBoardTaskPayload;
@@ -48,8 +51,8 @@ interface IKanbanBoardTaskMenuProps {
  * @returns {FC} - kanban board task menu functional component
  */
 const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
-  const { colIndex, taskIndex, currentData, iconSize } = props;
-  const dispatch = useDispatch();
+  const { canEdit, colIndex, taskIndex, currentData, iconSize } = props;
+  const dispatch = useDispatch<AppDispatch>();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -145,24 +148,25 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             closeModal={handleCloseMenu}
           />
         </FormModal>
-        <ConfirmModal
-          title="Confirm Delete Task"
-          contentText="Are you sure you want to permanently delete this task?"
-          actionBtnText="Delete"
-          triggerBtn={{
-            type: 'menu',
-            text: 'Delete Task',
-            // @ts-ignore
-            icon: DeleteOutlineIcon,
-            iconStyle: { marginRight: '10px' },
-            closeMenu: handleCloseMenu,
-          }}
-          // processing={deleting}
-          actionFunc={(closeModal) =>
-            handleDelete(colIndex, taskIndex, closeModal)
-          }
-        />
-
+        {canEdit && (
+          <ConfirmModal
+            title="Confirm Delete Task"
+            contentText="Are you sure you want to permanently delete this task?"
+            actionBtnText="Delete"
+            triggerBtn={{
+              type: 'menu',
+              text: 'Delete Task',
+              // @ts-ignore
+              icon: DeleteOutlineIcon,
+              iconStyle: { marginRight: '10px' },
+              closeMenu: handleCloseMenu,
+            }}
+            // processing={deleting}
+            actionFunc={(closeModal) =>
+              handleDelete(colIndex, taskIndex, closeModal)
+            }
+          />
+        )}
         <Box sx={{ p: 2, pt: 1.5 }}>
           <Button
             fullWidth

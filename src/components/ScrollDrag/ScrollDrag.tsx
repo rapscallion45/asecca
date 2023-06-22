@@ -1,5 +1,12 @@
-import { FC, useRef, ReactNode, MutableRefObject } from 'react';
-import { useDraggable } from 'react-use-draggable-scroll';
+import {
+  FC,
+  useRef,
+  ReactNode,
+  MutableRefObject,
+  useEffect,
+  useState,
+} from 'react';
+import useDraggable from '@/hooks/useDraggable';
 import SimpleBarReact from 'simplebar-react';
 
 /**
@@ -31,12 +38,21 @@ interface IScrollDragProps {
  */
 const ScrollDrag: FC<IScrollDragProps> = (props) => {
   const { children, other } = props;
-  const ref = useRef<HTMLDivElement>() as MutableRefObject<HTMLInputElement>;
-  const { events } = useDraggable(ref);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const ref =
+    useRef<HTMLDivElement>() as MutableRefObject<HTMLInputElement | null>;
+  const { events } = useDraggable(ref as MutableRefObject<HTMLInputElement>, {
+    isMounted,
+  });
+
+  /* on first load, set isMounted flag */
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <SimpleBarReact
-      scrollableNodeProps={{ ref }}
+      scrollableNodeProps={{ ref: isMounted ? ref : null }}
       {...events}
       autoHide={false}
       {...other}

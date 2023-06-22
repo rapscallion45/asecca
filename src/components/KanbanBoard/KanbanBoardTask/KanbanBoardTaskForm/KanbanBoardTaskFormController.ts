@@ -6,6 +6,7 @@ import {
   IEditKanbanBoardTaskPayload,
   IKanbanBoardState,
 } from '@/redux/types';
+import { AppDispatch } from '@/redux/store';
 import {
   useSliceActions,
   useSliceSelector,
@@ -32,7 +33,7 @@ const useKanbanBoardTaskFormController = (
   currentData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { saving } = useSliceSelector() as IKanbanBoardState;
   const { addTask, editTask } = useSliceActions();
 
@@ -48,7 +49,6 @@ const useKanbanBoardTaskFormController = (
     title: Yup.string()
       .required('Task title is required')
       .max(100, 'Task title must not exceed 100 characters'),
-    description: Yup.string().required('Task description is required'),
   });
 
   /**
@@ -83,7 +83,7 @@ const useKanbanBoardTaskFormController = (
   const formik = useFormik({
     initialValues: {
       name: currentData?.name || 'New Task',
-      status: currentData?.status || 'Todo',
+      status: currentData?.status || '',
       taskIndex: currentData?.taskIndex || 0,
       newColIndex: columns.findIndex(
         (col: IKanbanBoardColumn) => col.name === currentData?.status
