@@ -74,6 +74,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardGroupFormProps> = (props) => {
         error={formik.touched.name && Boolean(formik.errors.name)}
         helperText={formik.touched.name && formik.errors.name}
         autoComplete="on"
+        disabled={!canEdit}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

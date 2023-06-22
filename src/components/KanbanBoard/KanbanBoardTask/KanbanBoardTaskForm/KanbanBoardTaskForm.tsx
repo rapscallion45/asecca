@@ -78,6 +78,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
         error={formik.touched.name && Boolean(formik.errors.name)}
         helperText={formik.touched.name && formik.errors.name}
         autoComplete="on"
+        disabled={!canEdit}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -95,6 +96,7 @@ const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
           value={formik.values.status}
           label="Current Status"
           onChange={formik.handleChange}
+          disabled={!canEdit}
         >
           {columns.map((col: IKanbanBoardColumn) => (
             <MenuItem key={col.name} value={col.name}>

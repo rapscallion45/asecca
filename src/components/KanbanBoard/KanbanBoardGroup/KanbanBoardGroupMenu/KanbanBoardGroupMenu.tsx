@@ -23,12 +23,14 @@ import KanbanBoardGroupForm from '../KanbanBoardGroupForm/KanbanBoardGroupForm';
  * @since 0.0.9
  *
  * @typedef IKanbanBoardGroupMenuProps
+ * @prop {boolean} canEdit - group can be edited
  * @prop {number} colIndex - column index of this group
  * @prop {number} groupIndex - index of group
  * @prop {IEditKanbanBoardGroupPayload} currentData - current group data
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardGroupMenuProps {
+  canEdit?: boolean;
   colIndex: number;
   groupIndex: number;
   currentData: IEditKanbanBoardGroupPayload;
@@ -48,7 +50,13 @@ interface IKanbanBoardGroupMenuProps {
  * @returns {FC} - kanban board group menu functional component
  */
 const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
-  const { colIndex, groupIndex, currentData, iconSize } = props;
+  const {
+    canEdit = false,
+    colIndex,
+    groupIndex,
+    currentData,
+    iconSize,
+  } = props;
   const dispatch = useDispatch();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
@@ -145,23 +153,24 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
             closeModal={handleCloseMenu}
           />
         </FormModal>
-        <ConfirmModal
-          title="Confirm Delete Group"
-          contentText="Are you sure you want to permanently delete this group?"
-          actionBtnText="Delete"
-          triggerBtn={{
-            type: 'menu',
-            text: 'Delete Group',
-            // @ts-ignore
-            icon: DeleteOutlineIcon,
-            iconStyle: { marginRight: '10px' },
-            closeMenu: handleCloseMenu,
-          }}
-          actionFunc={(closeModal) =>
-            handleDelete(colIndex, groupIndex, closeModal)
-          }
-        />
-
+        {canEdit && (
+          <ConfirmModal
+            title="Confirm Delete Group"
+            contentText="Are you sure you want to permanently delete this group?"
+            actionBtnText="Delete"
+            triggerBtn={{
+              type: 'menu',
+              text: 'Delete Group',
+              // @ts-ignore
+              icon: DeleteOutlineIcon,
+              iconStyle: { marginRight: '10px' },
+              closeMenu: handleCloseMenu,
+            }}
+            actionFunc={(closeModal) =>
+              handleDelete(colIndex, groupIndex, closeModal)
+            }
+          />
+        )}
         <Box sx={{ p: 2, pt: 1.5 }}>
           <Button
             fullWidth
