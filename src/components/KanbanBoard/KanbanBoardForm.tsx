@@ -1,5 +1,4 @@
 import { FC, useState, useCallback } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import {
   Box,
   IconButton,
@@ -166,7 +165,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
               onClick={() => {
                 setNewColumns((state: Array<IKanbanBoardColumn>) => [
                   ...state,
-                  { name: '', tasks: [], id: uuidv4() },
+                  { name: '', tasks: [], groups: [] },
                 ]);
               }}
               fullWidth
