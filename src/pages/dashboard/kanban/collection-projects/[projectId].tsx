@@ -16,7 +16,7 @@ import {
 import KanbanBoardHeader from '@/components/KanbanBoard/KanbanBoardHeader';
 
 /**
- * Collections Project Kanban Page
+ * Collection Project Kanban Page
  *
  * Application Kanban Board interface for displaying a specific Collection project
  *
@@ -26,7 +26,7 @@ import KanbanBoardHeader from '@/components/KanbanBoard/KanbanBoardHeader';
  * @component
  * @returns {NextPageWithLayout} - Collection Project Kanban Board page component
  */
-const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
+const KanbanCollectionProjectPage: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const { projectId } = router.query;
@@ -63,6 +63,6 @@ const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
 };
 
 /** dashboard layout used for Kanban Collections Project page */
-KanbanCollectionsProjectPage.Layout = DashboardLayout;
+KanbanCollectionProjectPage.Layout = DashboardLayout;
 
-export default KanbanCollectionsProjectPage;
+export default KanbanCollectionProjectPage;

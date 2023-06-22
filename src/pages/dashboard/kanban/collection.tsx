@@ -25,7 +25,7 @@ import {
  * @component
  * @returns {NextPageWithLayout} - Collection Kanban Board interface page component
  */
-const CollectionsKanbanPage: NextPageWithLayout = () => {
+const CollectionKanbanPage: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { data: collectionsBoard, loading } = useSelector(
     (state: AppState) => state.collectionsKanban
@@ -60,6 +60,6 @@ const CollectionsKanbanPage: NextPageWithLayout = () => {
 };
 
 /** dashboard layout used for Kanban Collections page */
-CollectionsKanbanPage.Layout = DashboardLayout;
+CollectionKanbanPage.Layout = DashboardLayout;
 
-export default CollectionsKanbanPage;
+export default CollectionKanbanPage;

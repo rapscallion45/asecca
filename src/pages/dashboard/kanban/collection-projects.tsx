@@ -15,17 +15,17 @@ import {
 } from '@/redux/slices/collectionsKanbanSlice';
 
 /**
- * Collection Kanban Page
+ * Collection Projects Kanban Page
  *
- * Application Collection Kanban Board interface
+ * Application Collection Projects Kanban Board interface
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
+ * @since 0.0.10
  *
  * @component
- * @returns {NextPageWithLayout} - Collection Kanban Board interface page component
+ * @returns {NextPageWithLayout} - Collection Projects Kanban Board page component
  */
-const CollectionsKanbanPage: NextPageWithLayout = () => {
+const CollectionProjectsKanbanPage: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { data: collectionsBoard, loading } = useSelector(
     (state: AppState) => state.collectionsKanban
@@ -60,6 +60,6 @@ const CollectionsKanbanPage: NextPageWithLayout = () => {
 };
 
 /** dashboard layout used for Kanban Collections page */
-CollectionsKanbanPage.Layout = DashboardLayout;
+CollectionProjectsKanbanPage.Layout = DashboardLayout;
 
-export default CollectionsKanbanPage;
+export default CollectionProjectsKanbanPage;
