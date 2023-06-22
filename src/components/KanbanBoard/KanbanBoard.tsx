@@ -21,10 +21,14 @@ import { useSliceSelector } from '../SliceProvider/SliceProvider';
  * @typedef IKanbanBoardProps
  * @prop {IKanbanBoard} currentData - passed board data
  * @prop {boolean} canEdit - can edit board data
+ * @prop {boolean} hideTasks - board will not display tasks
+ * @prop {boolean} hideGroups - board will not display groups
  */
 interface IKanbanBoardProps {
   currentData: IKanbanBoard;
   canEdit?: boolean;
+  hideTasks?: boolean;
+  hideGroups?: boolean;
 }
 
 /**
@@ -39,7 +43,12 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const { currentData, canEdit = false } = props;
+  const {
+    currentData,
+    canEdit = false,
+    hideTasks = false,
+    hideGroups = false,
+  } = props;
   const theme = useTheme();
   //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const { loading, error, saving, edited } =
@@ -74,7 +83,12 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
               <>
                 {currentData.columns.map(
                   (col: IKanbanBoardColumn, index: number) => (
-                    <Column key={col.name} colIndex={index} />
+                    <Column
+                      key={col.name}
+                      colIndex={index}
+                      hideTasks={hideTasks}
+                      hideGroups={hideGroups}
+                    />
                   )
                 )}
                 {canEdit && (

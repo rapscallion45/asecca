@@ -56,7 +56,7 @@ exports[`NavSection Renders correctly 1`] = `
     </li>
     <a
       className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
-      href="/dashboard/kanban/collections"
+      href="/dashboard/kanban/collection"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -88,7 +88,44 @@ exports[`NavSection Renders correctly 1`] = `
       <div
         className="MuiListItemText-root css-tlelie-MuiListItemText-root"
       >
-        Collections
+        Collection
+      </div>
+    </a>
+    <a
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      href="/dashboard/kanban/collection-projects"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      target=""
+    >
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        data-testid="ViewKanbanIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7V7h2v10zm4-5h-2V7h2v5zm4 3h-2V7h2v8z"
+        />
+      </svg>
+      <div
+        className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+      >
+        Collection Projects
       </div>
     </a>
     <li

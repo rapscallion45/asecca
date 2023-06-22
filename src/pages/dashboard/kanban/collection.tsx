@@ -48,7 +48,7 @@ const CollectionsKanbanPage: NextPageWithLayout = () => {
               ) : (
                 <LinearProgress color="secondary" sx={{ borderRadius: 1 }} />
               )}
-              <KanbanBoard currentData={collectionsBoard} />
+              <KanbanBoard currentData={collectionsBoard} hideGroups />
             </>
           ) : (
             <KanbanBoardEmpty type="add" />
