@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: hooks/useDraggable.ts</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: hooks/useDraggable.ts</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This is a modified version of the npm library "react-use-draggable-scroll"
+ * The original author is:
+ * @author Renato Fuzaro Miotto {@link https://github.com/rfmiotto GitHub}
+ *
+ * This file has been modified by:
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ *
+ * @see See [the original npm library here](https://www.npmjs.com/package/react-use-draggable-scroll)
+ * @see See [the original GitHub repo here](https://github.com/rfmiotto/react-use-draggable-scroll)
+ */
+
+import { MutableRefObject, useEffect, useRef } from 'react';
+import useLayoutEffect from './useIsomorphicLayoutEffect';
+
+/**
+ * Draggable Options
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.9
+ * @memberof Draggable
+ *
+ * @typedef TOptionsType - theme can either be 'light' or 'dark' mode
+ * @prop {number} decayRate - decay rate of drag movement
+ * @prop {number} safeDisplacement - displacement away from current scroll position
+ * @prop {boolean} applyRubberBandEffect - apply rubber effect flag
+ * @prop {string} activeMouseButton - mouse button to use for drag effect
+ * @prop {boolean} isMounted - is draggable component mounted flag
+ */
+type TOptionsType = {
+  decayRate?: number;
+  safeDisplacement?: number;
+  applyRubberBandEffect?: boolean;
+  activeMouseButton?: 'Left' | 'Middle' | 'Right';
+  isMounted?: boolean;
+};
+
+/**
+ * Draggable Return type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.9
+ * @memberof Draggable
+ *
+ * @typedef TReturnType
+ */
+type TReturnType = {
+  events: {
+    onMouseDown: (e: React.MouseEvent&lt;HTMLElement>) => void;
+  };
+};
+
+/**
+ * Draggable hook for adding mouse drag capability to child components.
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.9
+ * @memberof Hooks
+ *
+ * @function
+ */
+function useDraggable(
+  ref: MutableRefObject&lt;HTMLElement>,
+  {
+    decayRate = 0.95,
+    safeDisplacement = 10,
+    applyRubberBandEffect = false,
+    activeMouseButton = 'Left',
+    isMounted = true,
+  }: TOptionsType = {}
+): TReturnType {
+  const internalState = useRef({
+    isMouseDown: false,
+    isDraggingX: false,
+    isDraggingY: false,
+    initialMouseX: 0,
+    initialMouseY: 0,
+    lastMouseX: 0,
+    lastMouseY: 0,
+    scrollSpeedX: 0,
+    scrollSpeedY: 0,
+    lastScrollX: 0,
+    lastScrollY: 0,
+  });
+
+  let isScrollableAlongX = false;
+  let isScrollableAlongY = false;
+  let maxHorizontalScroll = 0;
+  let maxVerticalScroll = 0;
+  let cursorStyleOfWrapperElement: string;
+  let cursorStyleOfChildElements: string[];
+  let transformStyleOfChildElements: string[];
+  let transitionStyleOfChildElements: string[];
+
+  const timing = (1 / 60) * 1000; // period of most monitors (60fps)
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useLayoutEffect(() => {
+    if (isMounted) {
+      isScrollableAlongX =
+        window.getComputedStyle(ref.current).overflowX === 'scroll';
+      isScrollableAlongY =
+        window.getComputedStyle(ref.current).overflowY === 'scroll';
+
+      maxHorizontalScroll =
+        (ref.current?.scrollWidth || 0) - (ref.current?.clientWidth || 0);
+      maxVerticalScroll =
+        (ref.current?.scrollHeight || 0) - (ref.current?.clientHeight || 0);
+
+      cursorStyleOfWrapperElement = window.getComputedStyle(ref.current).cursor;
+
+      cursorStyleOfChildElements = [];
+      transformStyleOfChildElements = [];
+      transitionStyleOfChildElements = [];
+
+      (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+        (child: HTMLElement) => {
+          cursorStyleOfChildElements.push(
+            window.getComputedStyle(child).cursor
+          );
+
+          transformStyleOfChildElements.push(
+            window.getComputedStyle(child).transform === 'none'
+              ? ''
+              : window.getComputedStyle(child).transform
+          );
+
+          transitionStyleOfChildElements.push(
+            window.getComputedStyle(child).transition === 'none'
+              ? ''
+              : window.getComputedStyle(child).transition
+          );
+        }
+      );
+    }
+  }, [isMounted]);
+
+  /**
+   * Run scroll effect
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   */
+  const runScroll = () => {
+    if (ref.current === null) return;
+
+    const dx = internalState.current.scrollSpeedX * timing;
+    const dy = internalState.current.scrollSpeedY * timing;
+    const offsetX = ref.current.scrollLeft + dx;
+    const offsetY = ref.current.scrollTop + dy;
+
+    ref.current.scrollLeft = offsetX; // eslint-disable-line no-param-reassign
+    ref.current.scrollTop = offsetY; // eslint-disable-line no-param-reassign
+    internalState.current.lastScrollX = offsetX;
+    internalState.current.lastScrollY = offsetY;
+  };
+
+  /**
+   * Callback handler for applying rubber band effect
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {MouseEvent} e - mouse event
+   */
+  const rubberBandCallback = (e: MouseEvent) => {
+    const dx = e.clientX - internalState.current.initialMouseX;
+    const dy = e.clientY - internalState.current.initialMouseY;
+
+    const { clientWidth, clientHeight } = ref.current;
+
+    let displacementX = 0;
+    let displacementY = 0;
+
+    if (isScrollableAlongX &amp;&amp; isScrollableAlongY) {
+      displacementX =
+        0.3 *
+        clientWidth *
+        Math.sign(dx) *
+        Math.log10(1.0 + (0.5 * Math.abs(dx)) / clientWidth);
+      displacementY =
+        0.3 *
+        clientHeight *
+        Math.sign(dy) *
+        Math.log10(1.0 + (0.5 * Math.abs(dy)) / clientHeight);
+    } else if (isScrollableAlongX) {
+      displacementX =
+        0.3 *
+        clientWidth *
+        Math.sign(dx) *
+        Math.log10(1.0 + (0.5 * Math.abs(dx)) / clientWidth);
+    } else if (isScrollableAlongY) {
+      displacementY =
+        0.3 *
+        clientHeight *
+        Math.sign(dy) *
+        Math.log10(1.0 + (0.5 * Math.abs(dy)) / clientHeight);
+    }
+
+    (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+      (child: HTMLElement) => {
+        child.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0px)`; // eslint-disable-line no-param-reassign
+        child.style.transition = 'transform 0ms'; // eslint-disable-line no-param-reassign
+      }
+    );
+  };
+
+  /**
+   * Callback handler for recovering child styles
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   */
+  const recoverChildStyle = () => {
+    (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+      (child: HTMLElement, i) => {
+        child.style.transform = transformStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
+        child.style.transition = transitionStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
+      }
+    );
+  };
+
+  let rubberBandAnimationTimer: NodeJS.Timeout;
+  let keepMovingX: NodeJS.Timer;
+  let keepMovingY: NodeJS.Timer;
+
+  /**
+   * Callback handler for momentum effect
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   */
+  const callbackMomentum = () => {
+    const minimumSpeedToTriggerMomentum = 0.05;
+
+    keepMovingX = setInterval(() => {
+      const lastScrollSpeedX = internalState.current.scrollSpeedX;
+      const newScrollSpeedX = lastScrollSpeedX * decayRate;
+      internalState.current.scrollSpeedX = newScrollSpeedX;
+
+      const isAtLeft = ref.current?.scrollLeft &lt;= 0;
+      const isAtRight = ref.current?.scrollLeft >= maxHorizontalScroll;
+      const hasReachedHorizontalEdges = isAtLeft || isAtRight;
+
+      runScroll();
+
+      if (
+        Math.abs(newScrollSpeedX) &lt; minimumSpeedToTriggerMomentum ||
+        internalState.current.isMouseDown ||
+        hasReachedHorizontalEdges
+      ) {
+        internalState.current.scrollSpeedX = 0;
+        clearInterval(keepMovingX);
+      }
+    }, timing);
+
+    keepMovingY = setInterval(() => {
+      const lastScrollSpeedY = internalState.current.scrollSpeedY;
+      const newScrollSpeedY = lastScrollSpeedY * decayRate;
+      internalState.current.scrollSpeedY = newScrollSpeedY;
+
+      const isAtTop = ref.current?.scrollTop &lt;= 0;
+      const isAtBottom = ref.current?.scrollTop >= maxVerticalScroll;
+      const hasReachedVerticalEdges = isAtTop || isAtBottom;
+
+      runScroll();
+
+      if (
+        Math.abs(newScrollSpeedY) &lt; minimumSpeedToTriggerMomentum ||
+        internalState.current.isMouseDown ||
+        hasReachedVerticalEdges
+      ) {
+        internalState.current.scrollSpeedY = 0;
+        clearInterval(keepMovingY);
+      }
+    }, timing);
+
+    internalState.current.isDraggingX = false;
+    internalState.current.isDraggingY = false;
+
+    if (applyRubberBandEffect) {
+      const transitionDurationInMilliseconds = 250;
+
+      (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+        (child: HTMLElement) => {
+          child.style.transform = `translate3d(0px, 0px, 0px)`; // eslint-disable-line no-param-reassign
+          child.style.transition = `transform ${transitionDurationInMilliseconds}ms`; // eslint-disable-line no-param-reassign
+        }
+      );
+
+      rubberBandAnimationTimer = setTimeout(
+        recoverChildStyle,
+        transitionDurationInMilliseconds
+      );
+    }
+  };
+
+  /**
+   * Callback handler preventing default click behaviour
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {Event} e - default event
+   */
+  const preventClick = (e: Event) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    // e.stopPropagation();
+  };
+
+  /**
+   * Callback handler for determining mouse button click source
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {number} buttonsCode - pressed mouse button code
+   */
+  const getIsMousePressActive = (buttonsCode: number) =>
+    (activeMouseButton === 'Left' &amp;&amp; buttonsCode === 1) ||
+    (activeMouseButton === 'Middle' &amp;&amp; buttonsCode === 4) ||
+    (activeMouseButton === 'Right' &amp;&amp; buttonsCode === 2);
+
+  /**
+   * Callback handler for mouse click and hold
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {MouseEvent&lt;HTMLElement>} e - mouse event
+   */
+  const onMouseDown = (e: React.MouseEvent&lt;HTMLElement>) => {
+    const isMouseActive = getIsMousePressActive(e.buttons);
+    if (!isMouseActive) {
+      return;
+    }
+
+    internalState.current.isMouseDown = true;
+    internalState.current.lastMouseX = e.clientX;
+    internalState.current.lastMouseY = e.clientY;
+    internalState.current.initialMouseX = e.clientX;
+    internalState.current.initialMouseY = e.clientY;
+  };
+
+  /**
+   * Callback handler for mouse click release
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {MouseEvent} e - mouse event
+   */
+  const onMouseUp = (e: MouseEvent) => {
+    const isDragging =
+      internalState.current.isDraggingX || internalState.current.isDraggingY;
+
+    const dx = internalState.current.initialMouseX - e.clientX;
+    const dy = internalState.current.initialMouseY - e.clientY;
+
+    const isMotionIntentional =
+      Math.abs(dx) > safeDisplacement || Math.abs(dy) > safeDisplacement;
+
+    const isDraggingConfirmed = isDragging &amp;&amp; isMotionIntentional;
+
+    if (isDraggingConfirmed) {
+      ref.current?.childNodes.forEach((child) => {
+        child.addEventListener('click', preventClick);
+      });
+    } else {
+      ref.current?.childNodes.forEach((child) => {
+        child.removeEventListener('click', preventClick);
+      });
+    }
+
+    internalState.current.isMouseDown = false;
+    internalState.current.lastMouseX = 0;
+    internalState.current.lastMouseY = 0;
+
+    ref.current.style.cursor = cursorStyleOfWrapperElement; // eslint-disable-line no-param-reassign
+    (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+      (child: HTMLElement) => {
+        // child.style.cursor = cursorStyleOfChildElements[i]; // eslint-disable-line no-param-reassign
+        child.style.cursor = 'auto'; // eslint-disable-line no-param-reassign
+      }
+    );
+
+    if (isDraggingConfirmed) {
+      callbackMomentum();
+    }
+  };
+
+  /**
+   * Callback handler for mouse click release
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   * @prop {MouseEvent} e - mouse event
+   */
+  const onMouseMove = (e: MouseEvent) => {
+    if (!internalState.current.isMouseDown) {
+      return;
+    }
+
+    e.preventDefault();
+
+    const dx = internalState.current.lastMouseX - e.clientX;
+    internalState.current.lastMouseX = e.clientX;
+
+    internalState.current.scrollSpeedX = dx / timing;
+    internalState.current.isDraggingX = true;
+
+    const dy = internalState.current.lastMouseY - e.clientY;
+    internalState.current.lastMouseY = e.clientY;
+
+    internalState.current.scrollSpeedY = dy / timing;
+    internalState.current.isDraggingY = true;
+
+    ref.current.style.cursor = 'grabbing'; // eslint-disable-line no-param-reassign
+    (ref.current?.childNodes as NodeListOf&lt;HTMLOptionElement>).forEach(
+      (child: HTMLElement) => {
+        child.style.cursor = 'grabbing'; // eslint-disable-line no-param-reassign
+      }
+    );
+
+    const isAtLeft = ref.current?.scrollLeft &lt;= 0 &amp;&amp; isScrollableAlongX;
+    const isAtRight =
+      ref.current?.scrollLeft >= maxHorizontalScroll &amp;&amp; isScrollableAlongX;
+    const isAtTop = ref.current?.scrollTop &lt;= 0 &amp;&amp; isScrollableAlongY;
+    const isAtBottom =
+      ref.current?.scrollTop >= maxVerticalScroll &amp;&amp; isScrollableAlongY;
+    const isAtAnEdge = isAtLeft || isAtRight || isAtTop || isAtBottom;
+
+    if (isAtAnEdge &amp;&amp; applyRubberBandEffect) {
+      rubberBandCallback(e);
+    }
+
+    runScroll();
+  };
+
+  /**
+   * Callback handler for window resize events
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.9
+   *
+   * @method
+   */
+  const handleResize = () => {
+    maxHorizontalScroll =
+      (ref.current?.scrollWidth || 0) - (ref.current?.clientWidth || 0);
+    maxVerticalScroll =
+      (ref.current?.scrollHeight || 0) - (ref.current?.clientHeight || 0);
+  };
+
+  useEffect(() => {
+    if (isMounted) {
+      window.addEventListener('mouseup', onMouseUp);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('resize', handleResize);
+    }
+    return () => {
+      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', handleResize);
+
+      clearInterval(keepMovingX);
+      clearInterval(keepMovingY);
+      clearTimeout(rubberBandAnimationTimer);
+    };
+  }, [isMounted, handleResize, onMouseMove, onMouseUp]);
+
+  return {
+    events: {
+      onMouseDown,
+    },
+  };
+}
+
+export default useDraggable;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AseccaAPI.html">AseccaAPI</a></li><li><a href="CostsConfigReduxSlice.html">CostsConfigReduxSlice</a></li><li><a href="Hooks.html">Hooks</a></li><li><a href="KanbanReduxSlice.html">KanbanReduxSlice</a></li><li><a href="NextjsAPI.html">NextjsAPI</a></li><li><a href="NotificationsReduxSlice.html">NotificationsReduxSlice</a></li><li><a href="Services.html">Services</a></li><li><a href="Theme.html">Theme</a></li><li><a href="ThemeReduxSlice.html">ThemeReduxSlice</a></li><li><a href="UserPermissionReduxSlice.html">UserPermissionReduxSlice</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="AGGridTestPage.html">AGGridTestPage</a></li><li><a href="AdminTestPanel.html">AdminTestPanel</a></li><li><a href="AlertNotification.html">AlertNotification</a></li><li><a href="AlertProvider.html">AlertProvider</a></li><li><a href="ArrowStyle.html">ArrowStyle</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ClientOnly.html">ClientOnly</a></li><li><a href="CollectionsKanbanPage.html">CollectionsKanbanPage</a></li><li><a href="ConfirmModal.html">ConfirmModal</a></li><li><a href="ConfirmModal-triggerButton.html">triggerButton</a></li><li><a href="CostsConfigPage.html">CostsConfigPage</a></li><li><a href="CostsConfigTable.html">CostsConfigTable</a></li><li><a href="CurrencyCell.html">CurrencyCell</a></li><li><a href="DashboardBackgroundStyle.html">DashboardBackgroundStyle</a></li><li><a href="DashboardLayout.html">DashboardLayout</a></li><li><a href="DashboardRootStyle.html">DashboardRootStyle</a></li><li><a href="DashboardSideBar.html">DashboardSideBar</a></li><li><a href="DashboardSideBar-renderContent.html">renderContent</a></li><li><a href="DataRow.html">DataRow</a></li><li><a href="DataRow-StyledTableRow.html">StyledTableRow</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="DefaultLayout.html">DefaultLayout</a></li><li><a href="DevicesTable.html">DevicesTable</a></li><li><a href="ErrorRow.html">ErrorRow</a></li><li><a href="FormModal.html">FormModal</a></li><li><a href="FormModalCustomTitle.html">FormModalCustomTitle</a></li><li><a href="HeaderRow.html">HeaderRow</a></li><li><a href="HeaderRow-StyledTableHeadCell.html">StyledTableHeadCell</a></li><li><a href="HideOnScroll.html">HideOnScroll</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeBackgroundStyle.html">HomeBackgroundStyle</a></li><li><a href="HomeLayout.html">HomeLayout</a></li><li><a href="HomeRootStyle.html">HomeRootStyle</a></li><li><a href="KanbanBoard.html">KanbanBoard</a></li><li><a href="KanbanBoardColumn.html">KanbanBoardColumn</a></li><li><a href="KanbanBoardEmpty.html">KanbanBoardEmpty</a></li><li><a href="KanbanBoardForm.html">KanbanBoardForm</a></li><li><a href="KanbanBoardGroup.html">KanbanBoardGroup</a></li><li><a href="KanbanBoardHeader.html">KanbanBoardHeader</a></li><li><a href="KanbanBoardTask.html">KanbanBoardTask</a></li><li><a href="KanbanBoardTaskForm.html">KanbanBoardTaskForm</a></li><li><a href="KanbanBoardTaskMenu.html">KanbanBoardTaskMenu</a></li><li><a href="KanbanBoardkMenu.html">KanbanBoardkMenu</a></li><li><a href="KanbanCollectionsProjectPage.html">KanbanCollectionsProjectPage</a></li><li><a href="LoadingRow.html">LoadingRow</a></li><li><a href="MHidden.html">MHidden</a></li><li><a href="MenuPopover.html">MenuPopover</a></li><li><a href="Meta.html">Meta</a></li><li><a href="NavBar.html">NavBar</a></li><li><a href="NavBar-RootStyle.html">RootStyle</a></li><li><a href="NavBar-ToolbarStyle.html">ToolbarStyle</a></li><li><a href="NavItem.html">NavItem</a></li><li><a href="NavItemIconStyle.html">NavItemIconStyle</a></li><li><a href="NavItemStyle.html">NavItemStyle</a></li><li><a href="NavItemSubheaderStyle.html">NavItemSubheaderStyle</a></li><li><a href="NavSection.html">NavSection</a></li><li><a href="RootStyle.html">RootStyle</a></li><li><a href="ScrollBar.html">ScrollBar</a></li><li><a href="ScrollDrag.html">ScrollDrag</a></li><li><a href="SliceProvider.html">SliceProvider</a></li><li><a href="StyledTableCell.html">StyledTableCell</a></li><li><a href="ThemeConfig.html">ThemeConfig</a></li><li><a href="ThemeModeSwitch.html">ThemeModeSwitch</a></li><li><a href="ThemeModeSwitchStyle.html">ThemeModeSwitchStyle</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddKanbanBoardPayload.html">IAddKanbanBoardPayload</a></li><li><a href="IAddKanbanBoardTaskPayload.html">IAddKanbanBoardTaskPayload</a></li><li><a href="IAddNotificationPayload.html">IAddNotificationPayload</a></li><li><a href="IAlertNotificationProps.html">IAlertNotificationProps</a></li><li><a href="IAlertProviderProps.html">IAlertProviderProps</a></li><li><a href="ICellProps.html">ICellProps</a></li><li><a href="IClientOnlyProps.html">IClientOnlyProps</a></li><li><a href="ICloseNotificationPayload.html">ICloseNotificationPayload</a></li><li><a href="IConfirmModalProps.html">IConfirmModalProps</a></li><li><a href="ICostsConfigData.html">ICostsConfigData</a></li><li><a href="ICostsConfigDataPayload.html">ICostsConfigDataPayload</a></li><li><a href="ICostsConfigDataSelection.html">ICostsConfigDataSelection</a></li><li><a href="ICostsConfigEditCostsPayload.html">ICostsConfigEditCostsPayload</a></li><li><a href="ICostsConfigSaveDataCosts.html">ICostsConfigSaveDataCosts</a></li><li><a href="ICostsConfigSaveDataPayload.html">ICostsConfigSaveDataPayload</a></li><li><a href="ICostsConfigState.html">ICostsConfigState</a></li><li><a href="ICostsConfigTableProps.html">ICostsConfigTableProps</a></li><li><a href="ICurrencyCellProps.html">ICurrencyCellProps</a></li><li><a href="IDashboardLayoutProps.html">IDashboardLayoutProps</a></li><li><a href="IDashboardSideBarProps.html">IDashboardSideBarProps</a></li><li><a href="IDashboardSidebarOnCloseCallback.html">IDashboardSidebarOnCloseCallback</a></li><li><a href="IDataRowProps.html">IDataRowProps</a></li><li><a href="IDataTableColumn.html">IDataTableColumn</a></li><li><a href="IDataTableEditCellValueCallback.html">IDataTableEditCellValueCallback</a></li><li><a href="IDataTableEditCurrencyCellValueCallback.html">IDataTableEditCurrencyCellValueCallback</a></li><li><a href="IDataTableGetCellValueCallback.html">IDataTableGetCellValueCallback</a></li><li><a href="IDataTableProps.html">IDataTableProps</a></li><li><a href="IDataTableRow.html">IDataTableRow</a></li><li><a href="IDefaultLayoutProps.html">IDefaultLayoutProps</a></li><li><a href="IDeleteKanbanBoardTaskPayload.html">IDeleteKanbanBoardTaskPayload</a></li><li><a href="IDragKanbanBoardTaskPayload.html">IDragKanbanBoardTaskPayload</a></li><li><a href="IEditKanbanBoardPayload.html">IEditKanbanBoardPayload</a></li><li><a href="IEditKanbanBoardTaskPayload.html">IEditKanbanBoardTaskPayload</a></li><li><a href="IErrorRowProps.html">IErrorRowProps</a></li><li><a href="IFabButtonType.html">IFabButtonType</a></li><li><a href="IFetchCollectionsKanbanBoardByProjectIdArgs.html">IFetchCollectionsKanbanBoardByProjectIdArgs</a></li><li><a href="IFetchCostsConfigBySourceIdArgs.html">IFetchCostsConfigBySourceIdArgs</a></li><li><a href="IFormModalCustomTitleProps.html">IFormModalCustomTitleProps</a></li><li><a href="IFormModalProps.html">IFormModalProps</a></li><li><a href="IHeaderRowProps.html">IHeaderRowProps</a></li><li><a href="IHideOnScrollProps.html">IHideOnScrollProps</a></li><li><a href="IHomeLayoutProps.html">IHomeLayoutProps</a></li><li><a href="IIconButtonType.html">IIconButtonType</a></li><li><a href="IKanbanBoard.html">IKanbanBoard</a></li><li><a href="IKanbanBoardCollectionsDataPayload.html">IKanbanBoardCollectionsDataPayload</a></li><li><a href="IKanbanBoardColumn.html">IKanbanBoardColumn</a></li><li><a href="IKanbanBoardColumnProps.html">IKanbanBoardColumnProps</a></li><li><a href="IKanbanBoardEmptyProps.html">IKanbanBoardEmptyProps</a></li><li><a href="IKanbanBoardFormProps.html">IKanbanBoardFormProps</a></li><li><a href="IKanbanBoardGroup.html">IKanbanBoardGroup</a></li><li><a href="IKanbanBoardGroupProps.html">IKanbanBoardGroupProps</a></li><li><a href="IKanbanBoardMenuProps.html">IKanbanBoardMenuProps</a></li><li><a href="IKanbanBoardProps.html">IKanbanBoardProps</a></li><li><a href="IKanbanBoardState.html">IKanbanBoardState</a></li><li><a href="IKanbanBoardTask.html">IKanbanBoardTask</a></li><li><a href="IKanbanBoardTaskFormProps.html">IKanbanBoardTaskFormProps</a></li><li><a href="IKanbanBoardTaskMenuProps.html">IKanbanBoardTaskMenuProps</a></li><li><a href="IKanbanBoardTaskProps.html">IKanbanBoardTaskProps</a></li><li><a href="ILoadingRowProps.html">ILoadingRowProps</a></li><li><a href="IMHiddenProps.html">IMHiddenProps</a></li><li><a href="IMenuItemButtonType.html">IMenuItemButtonType</a></li><li><a href="IMenuPopoverProps.html">IMenuPopoverProps</a></li><li><a href="INavBarOnSidebarOpenCallback.html">INavBarOnSidebarOpenCallback</a></li><li><a href="INavBarProps.html">INavBarProps</a></li><li><a href="INavItemProps.html">INavItemProps</a></li><li><a href="INavSectionProps.html">INavSectionProps</a></li><li><a href="INormalButtonType.html">INormalButtonType</a></li><li><a href="INotification.html">INotification</a></li><li><a href="INotificationOptions.html">INotificationOptions</a></li><li><a href="INotificationsState.html">INotificationsState</a></li><li><a href="IProxyErrorPayload.html">IProxyErrorPayload</a></li><li><a href="IRemoveNotificationPayload.html">IRemoveNotificationPayload</a></li><li><a href="IRoundIconButtonType.html">IRoundIconButtonType</a></li><li><a href="ISaveCostsConfigBySourceIdArgs.html">ISaveCostsConfigBySourceIdArgs</a></li><li><a href="IScrollBarProps.html">IScrollBarProps</a></li><li><a href="IScrollDragProps.html">IScrollDragProps</a></li><li><a href="ISetKanbanBoardActivePayload.html">ISetKanbanBoardActivePayload</a></li><li><a href="ISetKanbanBoardSubtaskCompletedPayload.html">ISetKanbanBoardSubtaskCompletedPayload</a></li><li><a href="ISetKanbanBoardTaskStatusPayload.html">ISetKanbanBoardTaskStatusPayload</a></li><li><a href="ISliceProviderProps.html">ISliceProviderProps</a></li><li><a href="IThemeConfigProps.html">IThemeConfigProps</a></li><li><a href="IThemeState.html">IThemeState</a></li><li><a href="IUserPermissionLevelState.html">IUserPermissionLevelState</a></li><li><a href="NavItem.INavItemConfig.html">INavItemConfig</a></li><li><a href="Theme.IExtendedColorPartial.html">IExtendedColorPartial</a></li><li><a href="Theme.IResposiveFontSizes.html">IResposiveFontSizes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SliceContext">SliceContext</a></li><li><a href="global.html#store">store</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 22 2023 12:38:58 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
