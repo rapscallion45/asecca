@@ -2,15 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NextPageWithLayout } from 'next';
 import { useRouter } from 'next/router';
-import {
-  Box,
-  Typography,
-  Skeleton,
-  Divider,
-  LinearProgress,
-} from '@mui/material';
+import { Box, Divider, LinearProgress } from '@mui/material';
 import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBoardEmpty';
-import KanbanBoardMenu from '@/components/KanbanBoard/KanbanBoardMenu';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import KanbanBoard from '@/components/KanbanBoard/KanbanBoard';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
@@ -20,6 +13,7 @@ import {
   collectionsKanbanSlice,
   fetchByProjectId as fetchKanbanBoardByProjectId,
 } from '@/redux/slices/collectionsKanbanSlice';
+import KanbanBoardHeader from '@/components/KanbanBoard/KanbanBoardHeader';
 
 /**
  * Collections Project Kanban Page
@@ -36,11 +30,9 @@ const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { projectId } = router.query;
-  const {
-    data: collectionsBoard,
-    error,
-    loading,
-  } = useSelector((state: AppState) => state.collectionsKanban);
+  const { data: collectionsBoard, loading } = useSelector(
+    (state: AppState) => state.collectionsKanban
+  );
 
   /* whenever the page query is updated, fetch new kanban data from API */
   useEffect(() => {
@@ -54,49 +46,7 @@ const KanbanCollectionsProjectPage: NextPageWithLayout = () => {
         <SliceProvider slice={collectionsKanbanSlice}>
           {collectionsBoard ? (
             <>
-              <Box display="flex" pb={1}>
-                <Typography variant="h4">
-                  {!loading && !error ? (
-                    collectionsBoard?.name || 'Collection'
-                  ) : (
-                    <Box display="flex">
-                      <Typography variant="h4">
-                        {error ?? 'Loading board...'}
-                      </Typography>
-                    </Box>
-                  )}
-                </Typography>
-                {!loading && !error ? (
-                  <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <KanbanBoardMenu currentData={collectionsBoard} />
-                    </Box>
-                  </Box>
-                ) : (
-                  <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
-                    {!error && (
-                      <>
-                        <Skeleton
-                          variant="rectangular"
-                          width={140}
-                          height={40}
-                          sx={{ borderRadius: '4px' }}
-                        />
-                        <Skeleton
-                          variant="rectangular"
-                          width={70}
-                          height={40}
-                          sx={{ borderRadius: '4px', ml: 2 }}
-                        />
-                      </>
-                    )}
-                  </Box>
-                )}
-              </Box>
+              <KanbanBoardHeader />
               {!loading ? (
                 <Divider />
               ) : (
