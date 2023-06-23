@@ -1,8 +1,18 @@
-import { FC, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
-import { Box, Drawer, useTheme } from '@mui/material';
+import {
+  Box,
+  Toolbar,
+  IconButton,
+  Drawer,
+  Divider,
+  List,
+  useTheme,
+} from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import MenuIcon from '@mui/icons-material/Menu';
 import { SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 import ScrollBar from '@/components/ScrollBar/ScrollBar';
 import NavSection from '@/components/NavSection/NavSection';
@@ -22,10 +32,46 @@ import { IDashboardSidebarOnCloseCallback } from './types';
  * @component
  * @return {Component} - styled dashboard layout root component
  */
-const RootStyle = styled('div')(({ theme }) => ({
+const RootStyle = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     flexShrink: 0,
+  },
+}));
+
+/**
+ * Dashboard Sidebar Styled Drawer
+ *
+ * Application dashboard sidebar drawer component styling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.12
+ *
+ * @component
+ * @return {Component} - styled dashboard sidebar component
+ */
+const StyledDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  '& .MuiDrawer-paper': {
+    position: 'fixed',
+    whiteSpace: 'nowrap',
     width: SIDEBAR_DRAWER_WIDTH,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: 'border-box',
+    ...(!open && {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(7),
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9),
+      },
+    }),
   },
 }));
 
@@ -60,12 +106,28 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const { isOpenSidebar, onCloseSidebar } = props;
   const { pathname } = useRouter();
   const theme = useTheme();
+  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] =
+    useState<boolean>(false);
 
+  /* close sidebar if change of URL */
   useEffect(() => {
     if (onCloseSidebar) {
       onCloseSidebar();
     }
+    setIsDesktopSidebarOpen(false);
   }, [pathname, onCloseSidebar]);
+
+  /**
+   * Callback to handle click on sidebar toggle open button
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.12
+   *
+   * @method
+   */
+  const toggleDrawer = () => {
+    setIsDesktopSidebarOpen(!isDesktopSidebarOpen);
+  };
 
   /**
    * Sidebar Content
@@ -79,8 +141,8 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
    * @returns {Component} - sidebar content component
    */
   const renderContent = (
-    <ScrollBar>
-      <Box sx={{ mt: 1, px: 2.5, py: 3 }}>
+    <>
+      <Box sx={{ mt: 1, py: 3, pr: 3, pl: 7 }}>
         <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
           {theme.palette.mode === 'dark' && (
             <Box width={150} component="img" src="/logowhite.webp" />
@@ -92,35 +154,51 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
       </Box>
       <NavSection navConfig={sideBarConfig} />
       <Box mt={2} mb={1}>
-        <ThemeModeSwitch />
+        <ThemeModeSwitch collapsed={!isDesktopSidebarOpen} />
       </Box>
-    </ScrollBar>
+    </>
   );
 
   return (
-    <RootStyle>
+    <RootStyle
+      sx={{
+        width: isDesktopSidebarOpen ? SIDEBAR_DRAWER_WIDTH : theme.spacing(7),
+      }}
+    >
       <MHidden width="lgUp">
-        <Drawer
-          open={isOpenSidebar}
-          onClose={onCloseSidebar}
-          PaperProps={{
-            sx: { width: SIDEBAR_DRAWER_WIDTH },
-          }}
-        >
-          {renderContent}
-        </Drawer>
+        <ScrollBar>
+          <Drawer
+            open={isOpenSidebar}
+            onClose={onCloseSidebar}
+            PaperProps={{
+              sx: { width: SIDEBAR_DRAWER_WIDTH },
+            }}
+          >
+            {renderContent}
+          </Drawer>
+        </ScrollBar>
       </MHidden>
 
       <MHidden width="lgDown">
-        <Drawer
-          open
-          variant="persistent"
-          PaperProps={{
-            sx: { width: SIDEBAR_DRAWER_WIDTH },
-          }}
-        >
-          {renderContent}
-        </Drawer>
+        <ScrollBar>
+          <StyledDrawer variant="permanent" open={isDesktopSidebarOpen}>
+            <Toolbar
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                px: [1],
+                mr: 1,
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                {isDesktopSidebarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <List component="nav">{renderContent}</List>
+          </StyledDrawer>
+        </ScrollBar>
       </MHidden>
     </RootStyle>
   );

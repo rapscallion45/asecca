@@ -65,6 +65,20 @@ const ThemeModeSwitchStyle = styled(Switch)(({ theme }) => ({
     }),
   },
 }));
+
+/**
+ * Theme Mode Switch Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.12
+ *
+ * @typedef IThemeModeSwitchProps
+ * @prop {boolean} collapsed - collapsed mode flag
+ */
+interface IThemeModeSwitchProps {
+  collapsed?: boolean;
+}
+
 /**
  * Theme Mode Switch
  *
@@ -76,7 +90,8 @@ const ThemeModeSwitchStyle = styled(Switch)(({ theme }) => ({
  * @component
  * @returns {FC} - theme mode switch functional component
  */
-const ThemeModeSwitch: FC = () => {
+const ThemeModeSwitch: FC<IThemeModeSwitchProps> = (props) => {
+  const { collapsed = false } = props;
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
   const { type: themeType } = useSelector((state: AppState) => state.theme);
@@ -101,16 +116,18 @@ const ThemeModeSwitch: FC = () => {
       sx={{
         backgroundColor:
           theme.palette.mode === 'dark' ? '#272727' : theme.palette.grey[200],
-        px: 5,
+        px: collapsed ? 0.5 : 5,
         py: 2,
         mx: 1,
         mt: 3,
         borderRadius: 1,
       }}
     >
-      <LightModeIcon
-        color={theme.palette.mode === 'dark' ? 'disabled' : 'secondary'}
-      />
+      {!collapsed && (
+        <LightModeIcon
+          color={theme.palette.mode === 'dark' ? 'disabled' : 'secondary'}
+        />
+      )}
       <FormControlLabel
         data-testid="light-dark-btn"
         control={
@@ -125,9 +142,11 @@ const ThemeModeSwitch: FC = () => {
         }
         label=""
       />
-      <DarkModeIcon
-        color={theme.palette.mode === 'light' ? 'disabled' : 'secondary'}
-      />
+      {!collapsed && (
+        <DarkModeIcon
+          color={theme.palette.mode === 'light' ? 'disabled' : 'secondary'}
+        />
+      )}
     </Box>
   );
 };

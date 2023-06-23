@@ -18,11 +18,15 @@ import { APP_BAR_MOBILE } from '@/constants/constants';
  * @component
  * @return {Component} - styled dashboard layout root component
  */
-const RootStyle = styled('main')({
+const RootStyle = styled('main')(({ theme }) => ({
   display: 'flex',
   minHeight: '100%',
   overflow: 'hidden',
-});
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.easeIn,
+    duration: theme.transitions.duration.standard,
+  }),
+}));
 
 /**
  * Dashboard Background Style
@@ -65,6 +69,10 @@ const DashboardRootStyle = styled('section')(({ theme }) => ({
   minHeight: '100%',
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(12),
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
   [theme.breakpoints.up('lg')]: {
     paddingTop: 40,
     paddingLeft: theme.spacing(2),
