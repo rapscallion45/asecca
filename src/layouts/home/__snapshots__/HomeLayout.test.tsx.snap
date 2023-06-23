@@ -12,7 +12,7 @@ exports[`Home Layout Renders correctly 1`] = `
     className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionFixed mui-fixed css-15mll9a-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1lg7r32-MuiToolbar-root"
+      className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1tfylnl-MuiToolbar-root"
     >
       <a
         href="/"

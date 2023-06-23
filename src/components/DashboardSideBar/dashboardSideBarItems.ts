@@ -27,12 +27,12 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
     title: 'kanban boards',
   },
   {
-    title: 'Collections',
+    title: 'Collection',
     path: '/dashboard/kanban/collection',
     icon: ViewKanbanIcon,
   },
   {
-    title: 'Projects',
+    title: 'Collection Projects',
     path: '/dashboard/kanban/collection-projects',
     icon: ViewKanbanIcon,
   },
