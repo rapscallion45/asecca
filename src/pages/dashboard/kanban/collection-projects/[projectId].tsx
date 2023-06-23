@@ -45,7 +45,9 @@ const KanbanCollectionProjectPage: NextPageWithLayout = () => {
         <SliceProvider slice={collectionsKanbanSlice}>
           {collectionsBoard ? (
             <>
-              <KanbanBoardHeader />
+              <KanbanBoardHeader
+                name={collectionsBoard?.name || `Collection - Unnamed`}
+              />
               {!loading ? (
                 <Divider />
               ) : (

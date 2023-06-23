@@ -11,6 +11,19 @@ import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import { IKanbanBoardState } from '@/redux/types';
 
 /**
+ * Kanban Board Header Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.10
+ *
+ * @typedef IKanbanBoardHeaderProps
+ * @prop {string} name - Kanban board name
+ */
+interface IKanbanBoardHeaderProps {
+  name: string;
+}
+
+/**
  * Kanban Board Header
  *
  * Application Kanban Board Header interface
@@ -21,7 +34,8 @@ import { IKanbanBoardState } from '@/redux/types';
  * @component
  * @returns {FC} - Kanban Board Header functional component
  */
-const KanbanBoardHeader: FC = () => {
+const KanbanBoardHeader: FC<IKanbanBoardHeaderProps> = (props) => {
+  const { name } = props;
   const {
     data: boardData,
     error,
@@ -33,7 +47,7 @@ const KanbanBoardHeader: FC = () => {
       <Box display="flex" pb={1}>
         <Typography variant="h4">
           {!loading && !error ? (
-            boardData?.name || 'Collection'
+            name
           ) : (
             <Box display="flex">
               <Typography variant="h4">
