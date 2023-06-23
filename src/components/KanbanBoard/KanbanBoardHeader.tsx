@@ -14,7 +14,7 @@ import { IKanbanBoardState } from '@/redux/types';
  * Kanban Board Header Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.10
+ * @since 0.0.11
  *
  * @typedef IKanbanBoardHeaderProps
  * @prop {string} name - Kanban board name
