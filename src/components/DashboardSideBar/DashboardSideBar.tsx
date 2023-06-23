@@ -1,33 +1,13 @@
 import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { styled } from '@mui/material/styles';
 import { Box, Drawer, useTheme } from '@mui/material';
 import { SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 import ScrollBar from '@/components/ScrollBar/ScrollBar';
 import NavSection from '@/components/NavSection/NavSection';
 import ThemeModeSwitch from '@/components/ThemeModeSwitch/ThemeModeSwitch';
-import MHidden from '@/components/@MUI-Extended/MHidden';
 import sideBarConfig from './dashboardSideBarItems';
 import { IDashboardSidebarOnCloseCallback } from './types';
-
-/**
- * Dashboard Sidebar Root Style
- *
- * Application dashboard layout root component styling
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.1
- *
- * @component
- * @return {Component} - styled dashboard layout root component
- */
-const RootStyle = styled('div')(({ theme }) => ({
-  [theme.breakpoints.up('lg')]: {
-    flexShrink: 0,
-    width: SIDEBAR_DRAWER_WIDTH,
-  },
-}));
 
 /**
  * Dashboard Sidebar Props
@@ -81,7 +61,11 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const renderContent = (
     <ScrollBar>
       <Box sx={{ mt: 1, px: 2.5, py: 3 }}>
-        <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
+        <Box
+          component={Link}
+          href="/"
+          sx={{ px: 2, display: 'flex', justifyContent: 'center' }}
+        >
           {theme.palette.mode === 'dark' && (
             <Box width={150} component="img" src="/logowhite.webp" />
           )}
@@ -98,31 +82,15 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   );
 
   return (
-    <RootStyle>
-      <MHidden width="lgUp">
-        <Drawer
-          open={isOpenSidebar}
-          onClose={onCloseSidebar}
-          PaperProps={{
-            sx: { width: SIDEBAR_DRAWER_WIDTH },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      </MHidden>
-
-      <MHidden width="lgDown">
-        <Drawer
-          open
-          variant="persistent"
-          PaperProps={{
-            sx: { width: SIDEBAR_DRAWER_WIDTH },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      </MHidden>
-    </RootStyle>
+    <Drawer
+      open={isOpenSidebar}
+      onClose={onCloseSidebar}
+      PaperProps={{
+        sx: { width: SIDEBAR_DRAWER_WIDTH },
+      }}
+    >
+      {renderContent}
+    </Drawer>
   );
 };
 
