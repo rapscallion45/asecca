@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 import { Container } from '@mui/material';
 import NavBar from '@/components/NavBar/NavBar';
 import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
-import MHidden from '@/components/@MUI-Extended/MHidden';
 import useNotifier from '@/hooks/useNotifier';
 import { APP_BAR_MOBILE } from '@/constants/constants';
 
@@ -66,7 +65,6 @@ const DashboardRootStyle = styled('section')(({ theme }) => ({
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(12),
   [theme.breakpoints.up('lg')]: {
-    paddingTop: 40,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
@@ -109,9 +107,7 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
   return (
     <RootStyle id="dashboard-page">
       <DashboardBackgroundStyle id="background" />
-      <MHidden width="lgUp">
-        <NavBar onOpenSidebar={useCallback(() => setOpen(true), [])} />
-      </MHidden>
+      <NavBar fullWidth onOpenSidebar={useCallback(() => setOpen(true), [])} />
       <DashboardSideBar
         isOpenSidebar={open}
         onCloseSidebar={useCallback(() => setOpen(false), [])}

@@ -4,12 +4,7 @@ import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import { Box, AppBar, Toolbar, IconButton, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import MHidden from '@/components/@MUI-Extended/MHidden';
-import {
-  APP_BAR_DESKTOP,
-  APP_BAR_MOBILE,
-  SIDEBAR_DRAWER_WIDTH,
-} from '@/constants/constants';
+import { APP_BAR_MOBILE, SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 import { INavBarOnSidebarOpenCallback } from './types';
 
 /**
@@ -81,7 +76,6 @@ const NavBar: FC<INavBarProps> = (props) => {
   const ToolbarStyle = styled(Toolbar)(({ theme: MUITheme }) => ({
     minHeight: APP_BAR_MOBILE,
     [MUITheme.breakpoints.up('lg')]: {
-      minHeight: APP_BAR_DESKTOP,
       padding: MUITheme.spacing(0, 5),
     },
   }));
@@ -90,7 +84,7 @@ const NavBar: FC<INavBarProps> = (props) => {
     <RootStyle>
       <ToolbarStyle>
         {!showLogo && (
-          <MHidden width="lgUp">
+          <>
             <IconButton
               onClick={onOpenSidebar}
               sx={{ mr: 1, mt: '3px', color: 'text.primary' }}
@@ -119,7 +113,7 @@ const NavBar: FC<INavBarProps> = (props) => {
                 />
               )}
             </Link>
-          </MHidden>
+          </>
         )}
         {showLogo && (
           <Link href="/">

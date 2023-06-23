@@ -88,7 +88,7 @@ exports[`NavSection Renders correctly 1`] = `
       <div
         className="MuiListItemText-root css-tlelie-MuiListItemText-root"
       >
-        Collection
+        Collections
       </div>
     </a>
     <a
@@ -125,7 +125,7 @@ exports[`NavSection Renders correctly 1`] = `
       <div
         className="MuiListItemText-root css-tlelie-MuiListItemText-root"
       >
-        Collection Projects
+        Projects
       </div>
     </a>
     <li
