@@ -2,7 +2,7 @@
 
 exports[`Dashboard SideBar Renders correctly 1`] = `
 <div
-  className="MuiBox-root css-1j019pi"
+  className="MuiBox-root css-1dstx2o"
 >
   <div
     data-simplebar="init"

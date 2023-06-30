@@ -82,7 +82,7 @@ const CostsConfigPage: NextPageWithLayout = () => {
   }, [query, apiPermission, dispatch]);
 
   return (
-    <>
+    <Box my={5}>
       <AdminTestPanel />
       <Box my={5} sx={{ maxWidth: 500 }}>
         <Typography variant="h4">
@@ -94,7 +94,7 @@ const CostsConfigPage: NextPageWithLayout = () => {
         permission={userPermissionLevel}
         query={query as string}
       />
-    </>
+    </Box>
   );
 };
 

@@ -160,11 +160,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   );
 
   return (
-    <RootStyle
-      sx={{
-        width: isDesktopSidebarOpen ? SIDEBAR_DRAWER_WIDTH : theme.spacing(7),
-      }}
-    >
+    <RootStyle>
       <MHidden width="lgUp">
         <ScrollBar>
           <Drawer
