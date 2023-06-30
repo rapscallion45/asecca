@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
@@ -106,28 +106,13 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
   const { isOpenSidebar, onCloseSidebar } = props;
   const { pathname } = useRouter();
   const theme = useTheme();
-  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] =
-    useState<boolean>(false);
 
   /* close sidebar if change of URL */
   useEffect(() => {
     if (onCloseSidebar) {
       onCloseSidebar();
     }
-    setIsDesktopSidebarOpen(false);
   }, [pathname, onCloseSidebar]);
-
-  /**
-   * Callback to handle click on sidebar toggle open button
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.12
-   *
-   * @method
-   */
-  const toggleDrawer = () => {
-    setIsDesktopSidebarOpen(!isDesktopSidebarOpen);
-  };
 
   /**
    * Sidebar Content
@@ -142,19 +127,21 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
    */
   const renderContent = (
     <>
-      <Box sx={{ mt: 1, py: 3, pr: 3, pl: 7 }}>
-        <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
-          {theme.palette.mode === 'dark' && (
-            <Box width={150} component="img" src="/logowhite.webp" />
-          )}
-          {theme.palette.mode === 'light' && (
-            <Box width={150} component="img" src="/logoblack.webp" />
-          )}
+      <MHidden width="lgUp">
+        <Box sx={{ mt: 1, py: 3, pr: 3, pl: 7 }}>
+          <Box component={Link} href="/" sx={{ px: 2, display: 'inline-flex' }}>
+            {theme.palette.mode === 'dark' && (
+              <Box width={150} component="img" src="/logowhite.webp" />
+            )}
+            {theme.palette.mode === 'light' && (
+              <Box width={150} component="img" src="/logoblack.webp" />
+            )}
+          </Box>
         </Box>
-      </Box>
+      </MHidden>
       <NavSection navConfig={sideBarConfig} />
       <Box mt={2} mb={1}>
-        <ThemeModeSwitch collapsed={!isDesktopSidebarOpen} />
+        <ThemeModeSwitch collapsed={!isOpenSidebar} />
       </Box>
     </>
   );
@@ -177,7 +164,7 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
 
       <MHidden width="lgDown">
         <ScrollBar>
-          <StyledDrawer variant="permanent" open={isDesktopSidebarOpen}>
+          <StyledDrawer variant="permanent" open={isOpenSidebar}>
             <Toolbar
               sx={{
                 display: 'flex',
@@ -187,8 +174,8 @@ const DashboardSideBar: FC<IDashboardSideBarProps> = (props) => {
                 mr: 1,
               }}
             >
-              <IconButton onClick={toggleDrawer}>
-                {isDesktopSidebarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+              <IconButton onClick={onCloseSidebar}>
+                {isOpenSidebar ? <ChevronLeftIcon /> : <MenuIcon />}
               </IconButton>
             </Toolbar>
             <Divider />

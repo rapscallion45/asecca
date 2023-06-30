@@ -2,20 +2,22 @@ import { FC, useState, useCallback, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
-import { Container, useMediaQuery, useTheme } from '@mui/material';
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
+import {
+  Container,
+  IconButton,
+  Divider,
+  Toolbar,
+  AppBar as MuiAppBar,
+  AppBarProps as MuiAppBarProps,
+  Drawer as MuiDrawer,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NavBar from '@/components/NavBar/NavBar';
 import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
 import MHidden from '@/components/@MUI-Extended/MHidden';
-import NavSection from '@/components/NavSection/NavSection';
-import sideBarConfig from '@/components/DashboardSideBar/dashboardSideBarItems';
-import ThemeModeSwitch from '@/components/ThemeModeSwitch/ThemeModeSwitch';
 import useNotifier from '@/hooks/useNotifier';
 import { APP_BAR_MOBILE, SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 
@@ -243,13 +245,15 @@ const DashboardLayout: FC<IDashboardLayoutProps> = (props) => {
               px: [1],
             }}
           >
-            <IconButton onClick={() => setOpen(!open)}>
+            <IconButton onClick={useCallback(() => setOpen(false), [])}>
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
-          <NavSection navConfig={sideBarConfig} />
-          <ThemeModeSwitch collapsed={!open} />
+          <DashboardSideBar
+            isOpenSidebar={open}
+            onCloseSidebar={useCallback(() => setOpen(false), [])}
+          />
         </Drawer>
       </MHidden>
       <DashboardRootStyle
