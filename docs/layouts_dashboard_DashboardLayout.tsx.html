@@ -27,13 +27,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { FC, useState, useCallback, ReactNode } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { styled } from '@mui/material/styles';
-import { Container } from '@mui/material';
+import {
+  Container,
+  IconButton,
+  Divider,
+  Toolbar,
+  AppBar as MuiAppBar,
+  AppBarProps as MuiAppBarProps,
+  Drawer as MuiDrawer,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NavBar from '@/components/NavBar/NavBar';
 import DashboardSideBar from '@/components/DashboardSideBar/DashboardSideBar';
 import MHidden from '@/components/@MUI-Extended/MHidden';
 import useNotifier from '@/hooks/useNotifier';
-import { APP_BAR_MOBILE } from '@/constants/constants';
+import { APP_BAR_MOBILE, SIDEBAR_DRAWER_WIDTH } from '@/constants/constants';
 
 /**
  * Dashboard Layout Root Style
@@ -46,11 +60,11 @@ import { APP_BAR_MOBILE } from '@/constants/constants';
  * @component
  * @return {Component} - styled dashboard layout root component
  */
-const RootStyle = styled('main')({
+const RootStyle = styled('main')(() => ({
   display: 'flex',
   minHeight: '100%',
   overflow: 'hidden',
-});
+}));
 
 /**
  * Dashboard Background Style
@@ -93,11 +107,45 @@ const DashboardRootStyle = styled('section')(({ theme }) => ({
   minHeight: '100%',
   paddingTop: APP_BAR_MOBILE + 24,
   paddingBottom: theme.spacing(12),
+  transition: theme.transitions.create('margin-left', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
   [theme.breakpoints.up('lg')]: {
     paddingTop: 40,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
+}));
+
+/**
+ * Dashboard App Bar Style
+ *
+ * Dashboard App Bar styling for dashboard layout
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.12
+ *
+ * @component
+ * @return {Component} - styled dashboard layout app bar component
+ */
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+  // @ts-ignore
+})&lt;MuiAppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open &amp;&amp; {
+    marginLeft: SIDEBAR_DRAWER_WIDTH,
+    width: `calc(100% - ${SIDEBAR_DRAWER_WIDTH}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
 }));
 
 /**
@@ -114,6 +162,44 @@ interface IDashboardLayoutProps {
 }
 
 /**
+ * Dashboard Drawer Style
+ *
+ * Dashboard Drawer styling for dashboard layout desktop side drawer
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.12
+ *
+ * @component
+ * @return {Component} - styled dashboard layout drawer component
+ */
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  '&amp; .MuiDrawer-paper': {
+    position: 'fixed',
+    whiteSpace: 'nowrap',
+    height: '100vh',
+    width: SIDEBAR_DRAWER_WIDTH,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: 'border-box',
+    ...(!open &amp;&amp; {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(7),
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
+
+/**
  * Base Dashboard Page Layout
  *
  * Dashboard base layout styling and functionality
@@ -127,6 +213,8 @@ interface IDashboardLayoutProps {
  */
 const DashboardLayout: FC&lt;IDashboardLayoutProps> = (props) => {
   const { children } = props;
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   /* dashboard sidebar open flag */
   const [open, setOpen] = useState&lt;boolean>(false);
@@ -139,13 +227,70 @@ const DashboardLayout: FC&lt;IDashboardLayoutProps> = (props) => {
       &lt;DashboardBackgroundStyle id="background" />
       &lt;MHidden width="lgUp">
         &lt;NavBar onOpenSidebar={useCallback(() => setOpen(true), [])} />
+        &lt;DashboardSideBar
+          isOpenSidebar={open}
+          onCloseSidebar={useCallback(() => setOpen(false), [])}
+        />
       &lt;/MHidden>
-      &lt;DashboardSideBar
-        isOpenSidebar={open}
-        onCloseSidebar={useCallback(() => setOpen(false), [])}
-      />
-      &lt;DashboardRootStyle id="page-content">
-        &lt;Container maxWidth="xl">{children}&lt;/Container>
+      &lt;MHidden width="lgDown">
+        {/* @ts-ignore */}
+        &lt;AppBar position="fixed" open={open} color="secondary">
+          &lt;Toolbar
+            sx={{
+              pr: '24px',
+            }}
+          >
+            &lt;IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => setOpen(!open)}
+              sx={{
+                marginLeft: '-8px',
+                marginRight: '36px',
+                ...(open &amp;&amp; { display: 'none' }),
+              }}
+            >
+              &lt;MenuIcon />
+            &lt;/IconButton>
+            &lt;Link href="/">
+              &lt;Image
+                src="/logowhite.webp"
+                alt="Asecca logo"
+                width={150}
+                height={30}
+                style={{ marginTop: '5px' }}
+              />
+            &lt;/Link>
+          &lt;/Toolbar>
+        &lt;/AppBar>
+        &lt;Drawer variant="permanent" open={open}>
+          &lt;Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+            }}
+          >
+            &lt;IconButton onClick={useCallback(() => setOpen(false), [])}>
+              &lt;ChevronLeftIcon />
+            &lt;/IconButton>
+          &lt;/Toolbar>
+          &lt;Divider />
+          &lt;DashboardSideBar
+            isOpenSidebar={open}
+            onCloseSidebar={useCallback(() => setOpen(false), [])}
+          />
+        &lt;/Drawer>
+      &lt;/MHidden>
+      &lt;DashboardRootStyle
+        id="page-content"
+        /* eslint-disable no-nested-ternary */
+        sx={{ ml: open &amp;&amp; isDesktop ? 34 : isDesktop ? 7 : 0 }}
+        /* eslint-enable no-nested-ternary */
+      >
+        &lt;Container maxWidth={false}>{children}&lt;/Container>
       &lt;/DashboardRootStyle>
     &lt;/RootStyle>
   );
@@ -162,13 +307,13 @@ export default DashboardLayout;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AseccaAPI.html">AseccaAPI</a></li><li><a href="CostsConfigReduxSlice.html">CostsConfigReduxSlice</a></li><li><a href="Hooks.html">Hooks</a></li><li><a href="KanbanReduxSlice.html">KanbanReduxSlice</a></li><li><a href="NextjsAPI.html">NextjsAPI</a></li><li><a href="NotificationsReduxSlice.html">NotificationsReduxSlice</a></li><li><a href="Services.html">Services</a></li><li><a href="Theme.html">Theme</a></li><li><a href="ThemeReduxSlice.html">ThemeReduxSlice</a></li><li><a href="UserPermissionReduxSlice.html">UserPermissionReduxSlice</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="AGGridTestPage.html">AGGridTestPage</a></li><li><a href="AdminTestPanel.html">AdminTestPanel</a></li><li><a href="AlertNotification.html">AlertNotification</a></li><li><a href="AlertProvider.html">AlertProvider</a></li><li><a href="ArrowStyle.html">ArrowStyle</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ClientOnly.html">ClientOnly</a></li><li><a href="CollectionKanbanPage.html">CollectionKanbanPage</a></li><li><a href="CollectionProjectsKanbanPage.html">CollectionProjectsKanbanPage</a></li><li><a href="ConfirmModal.html">ConfirmModal</a></li><li><a href="ConfirmModal-triggerButton.html">triggerButton</a></li><li><a href="CostsConfigPage.html">CostsConfigPage</a></li><li><a href="CostsConfigTable.html">CostsConfigTable</a></li><li><a href="CurrencyCell.html">CurrencyCell</a></li><li><a href="DashboardBackgroundStyle.html">DashboardBackgroundStyle</a></li><li><a href="DashboardLayout.html">DashboardLayout</a></li><li><a href="DashboardRootStyle.html">DashboardRootStyle</a></li><li><a href="DashboardSideBar.html">DashboardSideBar</a></li><li><a href="DashboardSideBar-renderContent.html">renderContent</a></li><li><a href="DataRow.html">DataRow</a></li><li><a href="DataRow-StyledTableRow.html">StyledTableRow</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="DefaultLayout.html">DefaultLayout</a></li><li><a href="DevicesTable.html">DevicesTable</a></li><li><a href="ErrorRow.html">ErrorRow</a></li><li><a href="FormModal.html">FormModal</a></li><li><a href="FormModalCustomTitle.html">FormModalCustomTitle</a></li><li><a href="HeaderRow.html">HeaderRow</a></li><li><a href="HeaderRow-StyledTableHeadCell.html">StyledTableHeadCell</a></li><li><a href="HideOnScroll.html">HideOnScroll</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeBackgroundStyle.html">HomeBackgroundStyle</a></li><li><a href="HomeLayout.html">HomeLayout</a></li><li><a href="HomeRootStyle.html">HomeRootStyle</a></li><li><a href="KanbanBoard.html">KanbanBoard</a></li><li><a href="KanbanBoardColumn.html">KanbanBoardColumn</a></li><li><a href="KanbanBoardEmpty.html">KanbanBoardEmpty</a></li><li><a href="KanbanBoardForm.html">KanbanBoardForm</a></li><li><a href="KanbanBoardGroup.html">KanbanBoardGroup</a></li><li><a href="KanbanBoardHeader.html">KanbanBoardHeader</a></li><li><a href="KanbanBoardTask.html">KanbanBoardTask</a></li><li><a href="KanbanBoardTaskForm.html">KanbanBoardTaskForm</a></li><li><a href="KanbanBoardTaskMenu.html">KanbanBoardTaskMenu</a></li><li><a href="KanbanBoardkMenu.html">KanbanBoardkMenu</a></li><li><a href="KanbanCollectionProjectPage.html">KanbanCollectionProjectPage</a></li><li><a href="LoadingRow.html">LoadingRow</a></li><li><a href="MHidden.html">MHidden</a></li><li><a href="MenuPopover.html">MenuPopover</a></li><li><a href="Meta.html">Meta</a></li><li><a href="NavBar.html">NavBar</a></li><li><a href="NavBar-RootStyle.html">RootStyle</a></li><li><a href="NavBar-ToolbarStyle.html">ToolbarStyle</a></li><li><a href="NavItem.html">NavItem</a></li><li><a href="NavItemIconStyle.html">NavItemIconStyle</a></li><li><a href="NavItemStyle.html">NavItemStyle</a></li><li><a href="NavItemSubheaderStyle.html">NavItemSubheaderStyle</a></li><li><a href="NavSection.html">NavSection</a></li><li><a href="RootStyle.html">RootStyle</a></li><li><a href="ScrollBar.html">ScrollBar</a></li><li><a href="ScrollDrag.html">ScrollDrag</a></li><li><a href="SliceProvider.html">SliceProvider</a></li><li><a href="StyledTableCell.html">StyledTableCell</a></li><li><a href="ThemeConfig.html">ThemeConfig</a></li><li><a href="ThemeModeSwitch.html">ThemeModeSwitch</a></li><li><a href="ThemeModeSwitchStyle.html">ThemeModeSwitchStyle</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddKanbanBoardGroupPayload.html">IAddKanbanBoardGroupPayload</a></li><li><a href="IAddKanbanBoardPayload.html">IAddKanbanBoardPayload</a></li><li><a href="IAddKanbanBoardTaskPayload.html">IAddKanbanBoardTaskPayload</a></li><li><a href="IAddNotificationPayload.html">IAddNotificationPayload</a></li><li><a href="IAlertNotificationProps.html">IAlertNotificationProps</a></li><li><a href="IAlertProviderProps.html">IAlertProviderProps</a></li><li><a href="ICellProps.html">ICellProps</a></li><li><a href="IClientOnlyProps.html">IClientOnlyProps</a></li><li><a href="ICloseNotificationPayload.html">ICloseNotificationPayload</a></li><li><a href="IConfirmModalProps.html">IConfirmModalProps</a></li><li><a href="ICostsConfigData.html">ICostsConfigData</a></li><li><a href="ICostsConfigDataPayload.html">ICostsConfigDataPayload</a></li><li><a href="ICostsConfigDataSelection.html">ICostsConfigDataSelection</a></li><li><a href="ICostsConfigEditCostsPayload.html">ICostsConfigEditCostsPayload</a></li><li><a href="ICostsConfigSaveDataCosts.html">ICostsConfigSaveDataCosts</a></li><li><a href="ICostsConfigSaveDataPayload.html">ICostsConfigSaveDataPayload</a></li><li><a href="ICostsConfigState.html">ICostsConfigState</a></li><li><a href="ICostsConfigTableProps.html">ICostsConfigTableProps</a></li><li><a href="ICurrencyCellProps.html">ICurrencyCellProps</a></li><li><a href="IDashboardLayoutProps.html">IDashboardLayoutProps</a></li><li><a href="IDashboardSideBarProps.html">IDashboardSideBarProps</a></li><li><a href="IDashboardSidebarOnCloseCallback.html">IDashboardSidebarOnCloseCallback</a></li><li><a href="IDataRowProps.html">IDataRowProps</a></li><li><a href="IDataTableColumn.html">IDataTableColumn</a></li><li><a href="IDataTableEditCellValueCallback.html">IDataTableEditCellValueCallback</a></li><li><a href="IDataTableEditCurrencyCellValueCallback.html">IDataTableEditCurrencyCellValueCallback</a></li><li><a href="IDataTableGetCellValueCallback.html">IDataTableGetCellValueCallback</a></li><li><a href="IDataTableProps.html">IDataTableProps</a></li><li><a href="IDataTableRow.html">IDataTableRow</a></li><li><a href="IDefaultLayoutProps.html">IDefaultLayoutProps</a></li><li><a href="IDeleteKanbanBoardTaskPayload.html">IDeleteKanbanBoardTaskPayload</a></li><li><a href="IDragKanbanBoardTaskPayload.html">IDragKanbanBoardTaskPayload</a></li><li><a href="IEditKanbanBoardGroupPayload.html">IEditKanbanBoardGroupPayload</a></li><li><a href="IEditKanbanBoardPayload.html">IEditKanbanBoardPayload</a></li><li><a href="IEditKanbanBoardTaskPayload.html">IEditKanbanBoardTaskPayload</a></li><li><a href="IErrorRowProps.html">IErrorRowProps</a></li><li><a href="IFabButtonType.html">IFabButtonType</a></li><li><a href="IFetchCollectionsKanbanBoardByProjectIdArgs.html">IFetchCollectionsKanbanBoardByProjectIdArgs</a></li><li><a href="IFetchCostsConfigBySourceIdArgs.html">IFetchCostsConfigBySourceIdArgs</a></li><li><a href="IFormModalCustomTitleProps.html">IFormModalCustomTitleProps</a></li><li><a href="IFormModalProps.html">IFormModalProps</a></li><li><a href="IHeaderRowProps.html">IHeaderRowProps</a></li><li><a href="IHideOnScrollProps.html">IHideOnScrollProps</a></li><li><a href="IHomeLayoutProps.html">IHomeLayoutProps</a></li><li><a href="IIconButtonType.html">IIconButtonType</a></li><li><a href="IKanbanBoard.html">IKanbanBoard</a></li><li><a href="IKanbanBoardCollectionsDataPayload.html">IKanbanBoardCollectionsDataPayload</a></li><li><a href="IKanbanBoardColumn.html">IKanbanBoardColumn</a></li><li><a href="IKanbanBoardColumnProps.html">IKanbanBoardColumnProps</a></li><li><a href="IKanbanBoardEmptyProps.html">IKanbanBoardEmptyProps</a></li><li><a href="IKanbanBoardFormProps.html">IKanbanBoardFormProps</a></li><li><a href="IKanbanBoardGroup.html">IKanbanBoardGroup</a></li><li><a href="IKanbanBoardGroupFormProps.html">IKanbanBoardGroupFormProps</a></li><li><a href="IKanbanBoardGroupMenuProps.html">IKanbanBoardGroupMenuProps</a></li><li><a href="IKanbanBoardGroupProps.html">IKanbanBoardGroupProps</a></li><li><a href="IKanbanBoardMenuProps.html">IKanbanBoardMenuProps</a></li><li><a href="IKanbanBoardProps.html">IKanbanBoardProps</a></li><li><a href="IKanbanBoardState.html">IKanbanBoardState</a></li><li><a href="IKanbanBoardTask.html">IKanbanBoardTask</a></li><li><a href="IKanbanBoardTaskFormProps.html">IKanbanBoardTaskFormProps</a></li><li><a href="IKanbanBoardTaskMenuProps.html">IKanbanBoardTaskMenuProps</a></li><li><a href="IKanbanBoardTaskProps.html">IKanbanBoardTaskProps</a></li><li><a href="ILoadingRowProps.html">ILoadingRowProps</a></li><li><a href="IMHiddenProps.html">IMHiddenProps</a></li><li><a href="IMenuItemButtonType.html">IMenuItemButtonType</a></li><li><a href="IMenuPopoverProps.html">IMenuPopoverProps</a></li><li><a href="INavBarOnSidebarOpenCallback.html">INavBarOnSidebarOpenCallback</a></li><li><a href="INavBarProps.html">INavBarProps</a></li><li><a href="INavItemProps.html">INavItemProps</a></li><li><a href="INavSectionProps.html">INavSectionProps</a></li><li><a href="INormalButtonType.html">INormalButtonType</a></li><li><a href="INotification.html">INotification</a></li><li><a href="INotificationOptions.html">INotificationOptions</a></li><li><a href="INotificationsState.html">INotificationsState</a></li><li><a href="IProxyErrorPayload.html">IProxyErrorPayload</a></li><li><a href="IRemoveNotificationPayload.html">IRemoveNotificationPayload</a></li><li><a href="IRoundIconButtonType.html">IRoundIconButtonType</a></li><li><a href="ISaveCostsConfigBySourceIdArgs.html">ISaveCostsConfigBySourceIdArgs</a></li><li><a href="IScrollBarProps.html">IScrollBarProps</a></li><li><a href="IScrollDragProps.html">IScrollDragProps</a></li><li><a href="ISetKanbanBoardActivePayload.html">ISetKanbanBoardActivePayload</a></li><li><a href="ISetKanbanBoardSubtaskCompletedPayload.html">ISetKanbanBoardSubtaskCompletedPayload</a></li><li><a href="ISetKanbanBoardTaskStatusPayload.html">ISetKanbanBoardTaskStatusPayload</a></li><li><a href="ISliceProviderProps.html">ISliceProviderProps</a></li><li><a href="IThemeConfigProps.html">IThemeConfigProps</a></li><li><a href="IThemeState.html">IThemeState</a></li><li><a href="IUserPermissionLevelState.html">IUserPermissionLevelState</a></li><li><a href="NavItem.INavItemConfig.html">INavItemConfig</a></li><li><a href="Theme.IExtendedColorPartial.html">IExtendedColorPartial</a></li><li><a href="Theme.IResposiveFontSizes.html">IResposiveFontSizes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SliceContext">SliceContext</a></li><li><a href="global.html#store">store</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="AseccaAPI.html">AseccaAPI</a></li><li><a href="CostsConfigReduxSlice.html">CostsConfigReduxSlice</a></li><li><a href="Hooks.html">Hooks</a></li><li><a href="KanbanReduxSlice.html">KanbanReduxSlice</a></li><li><a href="NextjsAPI.html">NextjsAPI</a></li><li><a href="NotificationsReduxSlice.html">NotificationsReduxSlice</a></li><li><a href="Services.html">Services</a></li><li><a href="Theme.html">Theme</a></li><li><a href="ThemeReduxSlice.html">ThemeReduxSlice</a></li><li><a href="UserPermissionReduxSlice.html">UserPermissionReduxSlice</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="AGGridTestPage.html">AGGridTestPage</a></li><li><a href="AdminTestPanel.html">AdminTestPanel</a></li><li><a href="AlertNotification.html">AlertNotification</a></li><li><a href="AlertProvider.html">AlertProvider</a></li><li><a href="AppBar.html">AppBar</a></li><li><a href="ArrowStyle.html">ArrowStyle</a></li><li><a href="Cell.html">Cell</a></li><li><a href="ClientOnly.html">ClientOnly</a></li><li><a href="CollectionKanbanPage.html">CollectionKanbanPage</a></li><li><a href="CollectionProjectsKanbanPage.html">CollectionProjectsKanbanPage</a></li><li><a href="ConfirmModal.html">ConfirmModal</a></li><li><a href="ConfirmModal-triggerButton.html">triggerButton</a></li><li><a href="CostsConfigPage.html">CostsConfigPage</a></li><li><a href="CostsConfigTable.html">CostsConfigTable</a></li><li><a href="CurrencyCell.html">CurrencyCell</a></li><li><a href="DashboardBackgroundStyle.html">DashboardBackgroundStyle</a></li><li><a href="DashboardLayout.html">DashboardLayout</a></li><li><a href="DashboardRootStyle.html">DashboardRootStyle</a></li><li><a href="DashboardSideBar.html">DashboardSideBar</a></li><li><a href="DashboardSideBar-renderContent.html">renderContent</a></li><li><a href="DataRow.html">DataRow</a></li><li><a href="DataRow-StyledTableRow.html">StyledTableRow</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="DefaultLayout.html">DefaultLayout</a></li><li><a href="DevicesTable.html">DevicesTable</a></li><li><a href="Drawer.html">Drawer</a></li><li><a href="ErrorRow.html">ErrorRow</a></li><li><a href="FormModal.html">FormModal</a></li><li><a href="FormModalCustomTitle.html">FormModalCustomTitle</a></li><li><a href="HeaderRow.html">HeaderRow</a></li><li><a href="HeaderRow-StyledTableHeadCell.html">StyledTableHeadCell</a></li><li><a href="HideOnScroll.html">HideOnScroll</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeBackgroundStyle.html">HomeBackgroundStyle</a></li><li><a href="HomeLayout.html">HomeLayout</a></li><li><a href="HomeRootStyle.html">HomeRootStyle</a></li><li><a href="KanbanBoard.html">KanbanBoard</a></li><li><a href="KanbanBoardColumn.html">KanbanBoardColumn</a></li><li><a href="KanbanBoardEmpty.html">KanbanBoardEmpty</a></li><li><a href="KanbanBoardForm.html">KanbanBoardForm</a></li><li><a href="KanbanBoardGroup.html">KanbanBoardGroup</a></li><li><a href="KanbanBoardHeader.html">KanbanBoardHeader</a></li><li><a href="KanbanBoardTask.html">KanbanBoardTask</a></li><li><a href="KanbanBoardTaskForm.html">KanbanBoardTaskForm</a></li><li><a href="KanbanBoardTaskMenu.html">KanbanBoardTaskMenu</a></li><li><a href="KanbanBoardkMenu.html">KanbanBoardkMenu</a></li><li><a href="KanbanCollectionProjectPage.html">KanbanCollectionProjectPage</a></li><li><a href="LoadingRow.html">LoadingRow</a></li><li><a href="MHidden.html">MHidden</a></li><li><a href="MenuPopover.html">MenuPopover</a></li><li><a href="Meta.html">Meta</a></li><li><a href="NavBar.html">NavBar</a></li><li><a href="NavBar-RootStyle.html">RootStyle</a></li><li><a href="NavBar-ToolbarStyle.html">ToolbarStyle</a></li><li><a href="NavItem.html">NavItem</a></li><li><a href="NavItemIconStyle.html">NavItemIconStyle</a></li><li><a href="NavItemStyle.html">NavItemStyle</a></li><li><a href="NavItemSubheaderStyle.html">NavItemSubheaderStyle</a></li><li><a href="NavSection.html">NavSection</a></li><li><a href="RootStyle.html">RootStyle</a></li><li><a href="ScrollBar.html">ScrollBar</a></li><li><a href="ScrollDrag.html">ScrollDrag</a></li><li><a href="SliceProvider.html">SliceProvider</a></li><li><a href="StyledDrawer.html">StyledDrawer</a></li><li><a href="StyledTableCell.html">StyledTableCell</a></li><li><a href="ThemeConfig.html">ThemeConfig</a></li><li><a href="ThemeModeSwitch.html">ThemeModeSwitch</a></li><li><a href="ThemeModeSwitchStyle.html">ThemeModeSwitchStyle</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddKanbanBoardGroupPayload.html">IAddKanbanBoardGroupPayload</a></li><li><a href="IAddKanbanBoardPayload.html">IAddKanbanBoardPayload</a></li><li><a href="IAddKanbanBoardTaskPayload.html">IAddKanbanBoardTaskPayload</a></li><li><a href="IAddNotificationPayload.html">IAddNotificationPayload</a></li><li><a href="IAlertNotificationProps.html">IAlertNotificationProps</a></li><li><a href="IAlertProviderProps.html">IAlertProviderProps</a></li><li><a href="ICellProps.html">ICellProps</a></li><li><a href="IClientOnlyProps.html">IClientOnlyProps</a></li><li><a href="ICloseNotificationPayload.html">ICloseNotificationPayload</a></li><li><a href="IConfirmModalProps.html">IConfirmModalProps</a></li><li><a href="ICostsConfigData.html">ICostsConfigData</a></li><li><a href="ICostsConfigDataPayload.html">ICostsConfigDataPayload</a></li><li><a href="ICostsConfigDataSelection.html">ICostsConfigDataSelection</a></li><li><a href="ICostsConfigEditCostsPayload.html">ICostsConfigEditCostsPayload</a></li><li><a href="ICostsConfigSaveDataCosts.html">ICostsConfigSaveDataCosts</a></li><li><a href="ICostsConfigSaveDataPayload.html">ICostsConfigSaveDataPayload</a></li><li><a href="ICostsConfigState.html">ICostsConfigState</a></li><li><a href="ICostsConfigTableProps.html">ICostsConfigTableProps</a></li><li><a href="ICurrencyCellProps.html">ICurrencyCellProps</a></li><li><a href="IDashboardLayoutProps.html">IDashboardLayoutProps</a></li><li><a href="IDashboardSideBarProps.html">IDashboardSideBarProps</a></li><li><a href="IDashboardSidebarOnCloseCallback.html">IDashboardSidebarOnCloseCallback</a></li><li><a href="IDataRowProps.html">IDataRowProps</a></li><li><a href="IDataTableColumn.html">IDataTableColumn</a></li><li><a href="IDataTableEditCellValueCallback.html">IDataTableEditCellValueCallback</a></li><li><a href="IDataTableEditCurrencyCellValueCallback.html">IDataTableEditCurrencyCellValueCallback</a></li><li><a href="IDataTableGetCellValueCallback.html">IDataTableGetCellValueCallback</a></li><li><a href="IDataTableProps.html">IDataTableProps</a></li><li><a href="IDataTableRow.html">IDataTableRow</a></li><li><a href="IDefaultLayoutProps.html">IDefaultLayoutProps</a></li><li><a href="IDeleteKanbanBoardTaskPayload.html">IDeleteKanbanBoardTaskPayload</a></li><li><a href="IDragKanbanBoardTaskPayload.html">IDragKanbanBoardTaskPayload</a></li><li><a href="IEditKanbanBoardGroupPayload.html">IEditKanbanBoardGroupPayload</a></li><li><a href="IEditKanbanBoardPayload.html">IEditKanbanBoardPayload</a></li><li><a href="IEditKanbanBoardTaskPayload.html">IEditKanbanBoardTaskPayload</a></li><li><a href="IErrorRowProps.html">IErrorRowProps</a></li><li><a href="IFabButtonType.html">IFabButtonType</a></li><li><a href="IFetchCollectionsKanbanBoardByProjectIdArgs.html">IFetchCollectionsKanbanBoardByProjectIdArgs</a></li><li><a href="IFetchCostsConfigBySourceIdArgs.html">IFetchCostsConfigBySourceIdArgs</a></li><li><a href="IFormModalCustomTitleProps.html">IFormModalCustomTitleProps</a></li><li><a href="IFormModalProps.html">IFormModalProps</a></li><li><a href="IHeaderRowProps.html">IHeaderRowProps</a></li><li><a href="IHideOnScrollProps.html">IHideOnScrollProps</a></li><li><a href="IHomeLayoutProps.html">IHomeLayoutProps</a></li><li><a href="IIconButtonType.html">IIconButtonType</a></li><li><a href="IKanbanBoard.html">IKanbanBoard</a></li><li><a href="IKanbanBoardCollectionsDataPayload.html">IKanbanBoardCollectionsDataPayload</a></li><li><a href="IKanbanBoardColumn.html">IKanbanBoardColumn</a></li><li><a href="IKanbanBoardColumnProps.html">IKanbanBoardColumnProps</a></li><li><a href="IKanbanBoardEmptyProps.html">IKanbanBoardEmptyProps</a></li><li><a href="IKanbanBoardFormProps.html">IKanbanBoardFormProps</a></li><li><a href="IKanbanBoardGroup.html">IKanbanBoardGroup</a></li><li><a href="IKanbanBoardGroupFormProps.html">IKanbanBoardGroupFormProps</a></li><li><a href="IKanbanBoardGroupMenuProps.html">IKanbanBoardGroupMenuProps</a></li><li><a href="IKanbanBoardGroupProps.html">IKanbanBoardGroupProps</a></li><li><a href="IKanbanBoardHeaderProps.html">IKanbanBoardHeaderProps</a></li><li><a href="IKanbanBoardMenuProps.html">IKanbanBoardMenuProps</a></li><li><a href="IKanbanBoardProps.html">IKanbanBoardProps</a></li><li><a href="IKanbanBoardState.html">IKanbanBoardState</a></li><li><a href="IKanbanBoardTask.html">IKanbanBoardTask</a></li><li><a href="IKanbanBoardTaskFormProps.html">IKanbanBoardTaskFormProps</a></li><li><a href="IKanbanBoardTaskMenuProps.html">IKanbanBoardTaskMenuProps</a></li><li><a href="IKanbanBoardTaskProps.html">IKanbanBoardTaskProps</a></li><li><a href="ILoadingRowProps.html">ILoadingRowProps</a></li><li><a href="IMHiddenProps.html">IMHiddenProps</a></li><li><a href="IMenuItemButtonType.html">IMenuItemButtonType</a></li><li><a href="IMenuPopoverProps.html">IMenuPopoverProps</a></li><li><a href="INavBarOnSidebarOpenCallback.html">INavBarOnSidebarOpenCallback</a></li><li><a href="INavBarProps.html">INavBarProps</a></li><li><a href="INavItemProps.html">INavItemProps</a></li><li><a href="INavSectionProps.html">INavSectionProps</a></li><li><a href="INormalButtonType.html">INormalButtonType</a></li><li><a href="INotification.html">INotification</a></li><li><a href="INotificationOptions.html">INotificationOptions</a></li><li><a href="INotificationsState.html">INotificationsState</a></li><li><a href="IProxyErrorPayload.html">IProxyErrorPayload</a></li><li><a href="IRemoveNotificationPayload.html">IRemoveNotificationPayload</a></li><li><a href="IRoundIconButtonType.html">IRoundIconButtonType</a></li><li><a href="ISaveCostsConfigBySourceIdArgs.html">ISaveCostsConfigBySourceIdArgs</a></li><li><a href="IScrollBarProps.html">IScrollBarProps</a></li><li><a href="IScrollDragProps.html">IScrollDragProps</a></li><li><a href="ISetKanbanBoardActivePayload.html">ISetKanbanBoardActivePayload</a></li><li><a href="ISetKanbanBoardSubtaskCompletedPayload.html">ISetKanbanBoardSubtaskCompletedPayload</a></li><li><a href="ISetKanbanBoardTaskStatusPayload.html">ISetKanbanBoardTaskStatusPayload</a></li><li><a href="ISliceProviderProps.html">ISliceProviderProps</a></li><li><a href="IThemeConfigProps.html">IThemeConfigProps</a></li><li><a href="IThemeModeSwitchProps.html">IThemeModeSwitchProps</a></li><li><a href="IThemeState.html">IThemeState</a></li><li><a href="IUserPermissionLevelState.html">IUserPermissionLevelState</a></li><li><a href="NavItem.INavItemConfig.html">INavItemConfig</a></li><li><a href="Theme.IExtendedColorPartial.html">IExtendedColorPartial</a></li><li><a href="Theme.IResposiveFontSizes.html">IResposiveFontSizes</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SliceContext">SliceContext</a></li><li><a href="global.html#store">store</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jun 22 2023 17:15:07 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 30 2023 12:15:45 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
