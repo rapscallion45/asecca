@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Costs Config Page Renders correctly 1`] = `
-[
+<div
+  className="MuiBox-root css-rm9e7r"
+>
   <div
     className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-2amshd-MuiPaper-root-MuiCard-root"
   >
@@ -93,7 +95,7 @@ exports[`Costs Config Page Renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
     className="MuiBox-root css-78351c"
   >
@@ -104,7 +106,7 @@ exports[`Costs Config Page Renders correctly 1`] = `
       Global
        
     </h4>
-  </div>,
+  </div>
   <div
     className="MuiBox-root css-15edkaw"
   >
@@ -151,6 +153,6 @@ exports[`Costs Config Page Renders correctly 1`] = `
     >
       Save
     </button>
-  </div>,
-]
+  </div>
+</div>
 `;

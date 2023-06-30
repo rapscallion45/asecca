@@ -30,7 +30,7 @@ const NavItemStyle = styled(ListItemButton)(({ theme }) => ({
   height: 48,
   position: 'relative',
   textTransform: 'capitalize',
-  paddingLeft: theme.spacing(5),
+  paddingLeft: theme.spacing(3),
   paddingRight: theme.spacing(2.5),
   color: theme.palette.text.secondary,
   '&:before': {
@@ -78,7 +78,7 @@ const NavItemIconStyle = styled(ListItemIcon)({
  * @return {Component} - styled menu nav item submenu header component
  */
 const NavItemSubheaderStyle = styled(ListSubheader)(({ theme }) => ({
-  paddingLeft: '40px',
+  paddingLeft: '75px',
   textTransform: 'uppercase',
   boxSizing: 'border-box',
   listStyle: 'none',
@@ -182,7 +182,7 @@ const NavItem: FC<INavItemProps> = (props) => {
           }}
           {...props}
         >
-          {icon && <item.icon sx={{ marginRight: '15px' }} />}
+          {icon && <item.icon sx={{ marginRight: '25px' }} />}
           <ListItemText disableTypography primary={title} />
           {open && <KeyboardArrowDownIcon />}
           {!open && (
@@ -244,7 +244,7 @@ const NavItem: FC<INavItemProps> = (props) => {
         ...(isActiveRoot && activeRootStyle),
       }}
     >
-      {icon && <item.icon sx={{ marginRight: '15px' }} />}
+      {icon && <item.icon sx={{ marginRight: '25px' }} />}
       <ListItemText disableTypography primary={title} />
       {item.newTab && <OpenInNewIcon />}
     </NavItemStyle>

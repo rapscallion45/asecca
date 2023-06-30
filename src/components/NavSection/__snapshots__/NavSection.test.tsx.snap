@@ -8,12 +8,12 @@ exports[`NavSection Renders correctly 1`] = `
     className="MuiList-root css-1mk9mw3-MuiList-root"
   >
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18xpj3s-MuiListSubheader-root"
     >
       general
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/"
       onBlur={[Function]}
       onClick={[Function]}
@@ -34,7 +34,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="HomeIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -50,12 +50,12 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18xpj3s-MuiListSubheader-root"
     >
       kanban boards
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/kanban/collection"
       onBlur={[Function]}
       onClick={[Function]}
@@ -76,7 +76,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="ViewKanbanIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/kanban/collection-projects"
       onBlur={[Function]}
       onClick={[Function]}
@@ -113,7 +113,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="ViewKanbanIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -129,12 +129,12 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18xpj3s-MuiListSubheader-root"
     >
       Configurators
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/configurators/costs-config"
       onBlur={[Function]}
       onClick={[Function]}
@@ -155,7 +155,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="MonetizationOnIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -171,12 +171,12 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <li
-      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-w2i9tq-MuiListSubheader-root"
+      className="MuiListSubheader-root MuiListSubheader-gutters MuiListSubheader-sticky css-18xpj3s-MuiListSubheader-root"
     >
       Tables
     </li>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/devices"
       onBlur={[Function]}
       onClick={[Function]}
@@ -197,7 +197,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="TableViewIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -213,7 +213,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-2"
       onBlur={[Function]}
       onClick={[Function]}
@@ -234,7 +234,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="TableViewIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -250,7 +250,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-3"
       onBlur={[Function]}
       onClick={[Function]}
@@ -271,7 +271,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="TableViewIcon"
         focusable="false"
         viewBox="0 0 24 24"
@@ -287,7 +287,7 @@ exports[`NavSection Renders correctly 1`] = `
       </div>
     </a>
     <a
-      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1dk8a12-MuiButtonBase-root-MuiListItemButton-root"
+      className="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-1bsqmso-MuiButtonBase-root-MuiListItemButton-root"
       href="/dashboard/tables/aggrid-page-4"
       onBlur={[Function]}
       onClick={[Function]}
@@ -308,7 +308,7 @@ exports[`NavSection Renders correctly 1`] = `
     >
       <svg
         aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1veko3i-MuiSvgIcon-root"
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1yxzc5o-MuiSvgIcon-root"
         data-testid="TableViewIcon"
         focusable="false"
         viewBox="0 0 24 24"

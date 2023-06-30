@@ -20,7 +20,7 @@ describe('Dashboard SideBar', () => {
       .create(
         <Provider store={store}>
           <ThemeConfig emotionCache={createEmotionCache()}>
-            <DashboardSideBar isOpenSidebar />
+            <DashboardSideBar />
           </ThemeConfig>
         </Provider>
       )
@@ -35,7 +35,7 @@ describe('Dashboard SideBar', () => {
       render(
         <Provider store={store}>
           <ThemeConfig emotionCache={createEmotionCache()}>
-            <DashboardSideBar isOpenSidebar />
+            <DashboardSideBar />
           </ThemeConfig>
         </Provider>
       );
