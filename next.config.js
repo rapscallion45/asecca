@@ -6,6 +6,7 @@ const nextConfig = {
     NEXT_PUBLIC_APP_NAME: `Asecca`,
     NEXT_PUBLIC_APP_DESCRIPTION: `Asecca front end client SPA`,
   },
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
