@@ -1,6 +1,7 @@
 import HomeIcon from '@mui/icons-material/Home';
 import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import TableViewIcon from '@mui/icons-material/TableView';
 import { INavItemConfig } from '../NavItem/types';
 
@@ -43,6 +44,14 @@ const dashboardSideBarItems: Array<Partial<INavItemConfig>> = [
     title: 'Cost Configurator',
     path: '/dashboard/configurators/costs-config',
     icon: MonetizationOnIcon,
+  },
+  {
+    title: 'Forms',
+  },
+  {
+    title: 'Collection Form',
+    path: '/dashboard/forms/collection-form',
+    icon: ListAltIcon,
   },
   {
     title: 'Tables',

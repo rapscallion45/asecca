@@ -265,3 +265,67 @@ export interface IKanbanBoard {
 export interface IKanbanBoardCollectionsDataPayload {
   collections: IKanbanBoard;
 }
+
+/**
+ * Collection Form Costs data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsData
+ * @prop {string} chargeable - name of this costs row
+ * @prop {string | null} global_charge - global charge currency value
+ * @prop {string | null} customer_charge - customer charge currency value
+ * @prop {string | null} project_charge - project charge currency value
+ * @prop {string | null} collection_charge - collection charge currency value
+ * @prop {string | null} effective_charge - effective charge currency value
+ */
+export interface ICollectionFormCostsData {
+  chargeable: string;
+  global_charge?: string | null;
+  customer_charge?: string | null;
+  project_charge?: string | null;
+  collection_charge?: string | null;
+  effective_charge: string | null;
+}
+
+/**
+ * Collection Form Costs GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsDataPayload
+ * @prop {Array<ICollectionFormCostsData>} costs - costs data for API request
+ */
+export interface ICollectionFormCostsDataPayload {
+  rows: Array<ICollectionFormCostsData>;
+}
+
+/**
+ * Collection Form Costs POST data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsSaveDataCosts
+ * @prop {string} chargeable - Charge name
+ * @prop {string | null} charge - charge currency amount to save to API
+ */
+export interface ICollectionFormCostsSaveDataCosts {
+  chargeable: string;
+  charge: string | null;
+}
+
+/**
+ * Collection Form Costs POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsSaveDataPayload
+ * @prop {Array<ICostsConfigSaveDataCosts>} rows - costs data to save to API
+ */
+export interface ICollectionFormCostsSaveDataPayload {
+  rows: Array<ICollectionFormCostsSaveDataCosts>;
+}

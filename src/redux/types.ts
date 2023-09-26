@@ -6,6 +6,8 @@ import {
   ICostsConfigSaveDataPayload,
   IKanbanBoardColumn,
   IKanbanBoard,
+  ICollectionFormCostsDataPayload,
+  ICollectionFormCostsSaveDataPayload,
 } from '@/lib/api/api-types';
 
 /**
@@ -88,6 +90,71 @@ export interface ICostsConfigState {
   loading: boolean;
   data: ICostsConfigDataPayload;
   dataShadow: ICostsConfigDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+}
+
+/**
+ * Fetch Collection Form Costs args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef IFetchCollectionFormCostsByCollectionIdArgs
+ */
+export interface IFetchCollectionFormCostsByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Costs args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ISaveCollectionFormCostsByCollectionIdArgs
+ * @prop {ICollectionFormCostsSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormCostsByCollectionIdArgs {
+  data: ICollectionFormCostsSaveDataPayload;
+}
+
+/**
+ * Collection Form Costs edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsEditCostsPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {string | null} value - updated column value
+ */
+export interface ICollectionFormCostsEditCostsPayload {
+  colKey: string;
+  rowIdx: number;
+  value: string | null;
+}
+
+/**
+ * Collection Form Costs state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsState
+ * @prop {boolean} loading - costs loading state
+ * @prop {ICostsConfigDataPayload} data - currently loaded costs data
+ * @prop {ICostsConfigDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of costs
+ * @prop {boolean} saving - saving state flag of costs data
+ * @prop {boolean} edited - costs data has been edited flag
+ */
+export interface ICollectionFormCostsState {
+  loading: boolean;
+  data: ICollectionFormCostsDataPayload;
+  dataShadow: ICollectionFormCostsDataPayload;
   error?: string;
   saving: boolean;
   edited: boolean;
