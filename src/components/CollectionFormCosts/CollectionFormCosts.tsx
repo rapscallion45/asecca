@@ -152,8 +152,8 @@ const CostsConfigTable: FC<ICollectionFormCostsTableProps> = (props) => {
           columns={columns.filter(
             (col: IDataTableColumn) => !colFilterList.includes(col.label)
           )}
-          /* table editable cell(s) defined by user permission level */
-          editableColLabels={['Collection' as UserPermissionLevel]}
+          /* table editable cell(s) is the collection charge column */
+          editableColLabels={['Collection Charge']}
           /* build table row props from costs config data */
           rows={data?.rows.map((cost: ICollectionFormCostsData) => ({
             label: cost.chargeable,

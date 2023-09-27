@@ -27,7 +27,8 @@ const getCollectionFormCostsPrevailingCharge = (
    * Get Charge
    *
    * If collection column value has been entered, return collection value,
-   * else, return effective charge value
+   * else, the next value available in the row according to permission hierachy:
+   * Project -> Customer > Global (lowest)
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.13
@@ -40,7 +41,18 @@ const getCollectionFormCostsPrevailingCharge = (
       tableRow.collection_charge !== undefined
     )
       return tableRow.collection_charge;
-    return tableRow.effective_charge;
+    if (
+      tableRow.project_charge !== null &&
+      tableRow.project_charge !== undefined
+    )
+      return tableRow.project_charge;
+    if (
+      tableRow.customer_charge !== null &&
+      tableRow.customer_charge !== undefined
+    )
+      return tableRow.customer_charge;
+    if (tableRow.global_charge !== null) return tableRow.global_charge;
+    return null;
   };
 
   return getCharge();
