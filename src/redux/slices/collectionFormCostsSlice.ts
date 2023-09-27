@@ -200,7 +200,8 @@ const collectionFormCostsSlice = createSlice({
           state.loading = false;
           state.data = collectionFormCostsDataMock;
           state.dataShadow = collectionFormCostsDataMock;
-          state.error = 'Failed to load Costs Config data from server.';
+          state.error =
+            'Failed to load Collection Form Costs data from server.';
         }
       )
       /* Save Collection Form Costs extra reducers */
