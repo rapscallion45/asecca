@@ -7,6 +7,22 @@
  */
 
 /**
+ * Data Table Row Cell Value types
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ * @memberof DataTable
+ *
+ * @typedef DataTableRowCellValue
+ */
+export type DataTableRowCellValue =
+  | string
+  | Array<string>
+  | boolean
+  | null
+  | undefined;
+
+/**
  * Data Table Column types
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -15,7 +31,7 @@
  *
  * @typedef DataTableColumnType
  */
-export type DataTableColumnType = 'string' | 'currency';
+export type DataTableColumnType = 'string' | 'currency' | 'select' | 'check';
 
 /**
  * Data Table Column properties
@@ -54,13 +70,13 @@ export interface IDataTableRow {
  * @since 0.0.0
  *
  * @callback IDataTableEditCellValueCallback
- * @param {string | null} value - updated cell value, can be null
+ * @param {DataTableRowCellValue} value - updated cell value, can be null
  * @param {string} colKey - cell column data identifier
  * @param {number} rowIdx - cell row index in data table
  * @returns {void} - no return value
  */
 export interface IDataTableEditCellValueCallback {
-  (value: string | null, colKey: string, rowIdx: number): void;
+  (value: DataTableRowCellValue, colKey: string, rowIdx: number): void;
 }
 
 /**
@@ -72,10 +88,10 @@ export interface IDataTableEditCellValueCallback {
  * @callback IDataTableGetCellValueCallback
  * @param {number} rowIdx - cell row index in data table
  * @param {IDataTableColumn} column - cell column in data table
- * @returns {string | null | undefined} - cell value, can be null or undefined
+ * @returns {DataTableRowCellValue} - cell value, can be null or undefined
  */
 export interface IDataTableGetCellValueCallback {
-  (rowIdx: number, column: IDataTableColumn): string | null | undefined;
+  (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue;
 }
 
 /**
@@ -90,4 +106,18 @@ export interface IDataTableGetCellValueCallback {
  */
 export interface IDataTableEditCurrencyCellValueCallback {
   (value: string | null): void;
+}
+
+/**
+ * Data Table Checkbox Cell Value Edit callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @callback IDataTableEditCheckboxCellValueCallback
+ * @param {boolean | null} value - updated cell boolean value
+ * @returns {void} - no return value
+ */
+export interface IDataTableEditCheckboxCellValueCallback {
+  (value: boolean | null): void;
 }

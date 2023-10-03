@@ -324,8 +324,81 @@ export interface ICollectionFormCostsSaveDataCosts {
  * @since 0.0.13
  *
  * @typedef ICollectionFormCostsSaveDataPayload
- * @prop {Array<ICostsConfigSaveDataCosts>} rows - costs data to save to API
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormCostsSaveDataCosts>} rows - costs data to save to API
  */
 export interface ICollectionFormCostsSaveDataPayload {
+  collection: string;
   rows: Array<ICollectionFormCostsSaveDataCosts>;
+}
+
+/**
+ * Collection Form Logistics data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsData
+ * @prop {string} logistics_type - name of this logistics type
+ * @prop {Array<string>} visiting_facilities - array of facility names for type
+ */
+export interface ICollectionFormLogisticsData {
+  logistics_type: string;
+  visiting_facilities: Array<string>;
+}
+
+/**
+ * Collection Form Logistics GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsDataPayload
+ * @prop {Array<ICollectionFormLogisticsData>} costs - logistics data for API request
+ */
+export interface ICollectionFormLogisticsDataPayload {
+  rows: Array<ICollectionFormLogisticsData>;
+}
+
+/**
+ * Collection Form Logistics POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormLogisticsSaveDataCosts>} rows - costs data to save to API
+ */
+export interface ICollectionFormLogisticsSaveDataPayload {
+  collection: string;
+  rows: Array<ICollectionFormLogisticsData>;
+}
+
+/**
+ * Collection Form Logistics Types data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsTypesData
+ * @prop {string} logistics_type - name of this logistics type
+ * @prop {Array<string>} compatible_facilities - array of facility names for type
+ */
+export interface ICollectionFormLogisticsTypesData {
+  logistics_type: string;
+  compatible_facilities: Array<string>;
+}
+
+/**
+ * Collection Form Logistics GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsTypesDataPayload
+ * @prop {Array<ICollectionFormLogisticsTypesData>} logistics_types - logistics types data
+ */
+export interface ICollectionFormLogisticsTypesDataPayload {
+  logistics_types: Array<ICollectionFormLogisticsTypesData>;
 }

@@ -10,7 +10,7 @@ import { IDataTableColumn } from '@/components/DataTable/types';
  * @constant
  * @type {Array<IDataTableColumn>}
  */
-const costsConfigTableColumns: Array<IDataTableColumn> = [
+const collectionFormCostsTableColumns: Array<IDataTableColumn> = [
   { label: 'Chargeable', key: 'chargeable', type: 'string' },
   { label: 'Global Charge', key: 'global_charge', type: 'currency' },
   { label: 'Customer Charge', key: 'customer_charge', type: 'currency' },
@@ -19,4 +19,4 @@ const costsConfigTableColumns: Array<IDataTableColumn> = [
   { label: 'Effective Charge', key: 'effective_charge', type: 'currency' },
 ];
 
-export default costsConfigTableColumns;
+export default collectionFormCostsTableColumns;

@@ -37,14 +37,15 @@ interface ICurrencyCellProps {
 /**
  * Data Table Currency Cell
  *
- * Table cell component for displaying a table value as a formatted currency value
+ * Table cell component for displaying a table value as a
+ * formatted currency value
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  *
  * @component
  * @param {ICurrencyCellProps} props - component props
- * @returns {FC} - data table row functional component
+ * @returns {FC} - data table currency cell functional component
  */
 const CurrencyCell: FC<ICurrencyCellProps> = (props) => {
   const { inputId, canEdit, value, submitCellValue, sx } = props;

@@ -1,76 +1,87 @@
-import { FC, useState, useCallback } from 'react';
+import { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import { Card, CardHeader, CardContent, Box, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { ICollectionFormCostsData } from '@/lib/api/api-types';
+import { ICollectionFormLogisticsData } from '@/lib/api/api-types';
 import {
-  getCostsConfigColFilterList,
-  getCollectionFormCostsPostData,
-  getCollectionFormCostsPrevailingCharge,
+  getCollectionFormLogisticsCellValue,
+  getCollectionFormLogisticsEditCellValue,
+  getCollectionFormLogisticsTableColsList,
 } from '@/utils';
 import {
-  saveByCollectionId as saveCostsByCollectionId,
-  resetCosts,
-  editCosts,
-} from '@/redux/slices/collectionFormCostsSlice';
+  saveByCollectionId as saveLogisticsByCollectionId,
+  resetLogistics,
+  editLogistics,
+} from '@/redux/slices/collectionFormLogisticsSlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
   DataTableRowCellValue,
   IDataTableColumn,
 } from '@/components/DataTable/types';
-import { UserPermissionLevel } from '@/redux/types';
-import columns from './collectionFormCostsTableColumns';
+import columns from './collectionFormLogisticsTableColumns';
 
 /**
- * Collection Form Costs Data Table Props
+ * Collection Form Logistics Data Table Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
  *
- * @typedef ICollectionFormCostsTableProps
+ * @typedef ICollectionFormLogisticsTableProps
  * @prop {string} collectionId - ID string of Collection for table data API call
  */
-interface ICollectionFormCostsTableProps {
+interface ICollectionFormLogisticsTableProps {
   collectionId: string;
 }
 
 /**
- * Collection Form Costs  Data Table
+ * Collection Form Logistics Data Table
  *
- * Presents the Collection Form Costs table to the user, populated with data
- * fetched from API: /api/collection/costs/api/costs
+ * Presents the Collection Form Logisitcs table to the user, populated with data
+ * fetched from API: /api/collection/logistics/api/logistics
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
  *
  * @component
- * @param {ICollectionFormCostsTableProps} props - component props
+ * @param {ICollectionFormLogisticsTableProps} props - component props
  * @returns {FC} - costs config table functional component
  */
-const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
+const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
+  props
+) => {
   const { collectionId } = props;
 
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get collection form costs data held in redux state */
-  const { data, loading, error, saving, edited } = useSelector(
-    (state: AppState) => state.collectionFormCosts
-  );
+  /* get collection form logisitcs data held in redux state */
+  const {
+    data,
+    loading,
+    error,
+    saving,
+    edited,
+    types: logisticsTypes,
+  } = useSelector((state: AppState) => state.collectionFormLogistics);
 
   /**
-   * Table column filter list
+   * Table column list
    *
-   * Local state of filtered columns list for Collection permission level
+   * Local state of columns list for available logistics and facilities
    *
    * @since 0.0.13
    *
    * @constant
    */
-  const [colFilterList] = useState<Array<string | null>>(
-    getCostsConfigColFilterList('Collection' as UserPermissionLevel)
-  );
+  const [colList, setColList] = useState<Array<IDataTableColumn>>([]);
+
+  /* Whenever Logisitcs data updates, update column list */
+  useEffect(() => {
+    setColList(
+      getCollectionFormLogisticsTableColsList(columns, data, logisticsTypes)
+    );
+  }, [data, logisticsTypes]);
 
   /**
    * Handles the saving of the table data
@@ -82,8 +93,11 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
    */
   const handleSave = useCallback(() => {
     dispatch(
-      saveCostsByCollectionId({
-        data: getCollectionFormCostsPostData(collectionId, data?.rows),
+      saveLogisticsByCollectionId({
+        data: {
+          collection: collectionId,
+          rows: data?.rows,
+        },
       })
     );
   }, [collectionId, data?.rows, dispatch]);
@@ -97,7 +111,7 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
    * @method
    */
   const handleReset = useCallback(() => {
-    dispatch(resetCosts());
+    dispatch(resetLogistics());
   }, [dispatch]);
 
   /**
@@ -114,14 +128,19 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
   const handleEditCellValue = useCallback(
     (value: DataTableRowCellValue, colKey: string, rowIdx: number) => {
       dispatch(
-        editCosts({
-          value: value !== '--' ? value : null,
-          colKey: colKey as keyof ICollectionFormCostsData,
-          rowIdx,
-        })
+        editLogistics(
+          getCollectionFormLogisticsEditCellValue(
+            data,
+            value,
+            colKey,
+            rowIdx,
+            logisticsTypes.logistics_types,
+            colList
+          )
+        )
       );
     },
-    [dispatch]
+    [data, colList, logisticsTypes, dispatch]
   );
 
   /**
@@ -133,33 +152,34 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
    * @method
    * @param {number} rowIdx - table row index to get value from
    * @param {IDataTableColumn} column - column to get value from
-   * @return {DataTableRowCellValue} - cell value, can be null or undefined
+   * @return {string | Array<string> | boolean | null} - cell value, can be null or undefined
    */
   const handleGetCellValue = useCallback(
-    (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue => {
-      /* apply Prevailing column logic or simply return value */
-      if (column.key === 'effective_charge')
-        return getCollectionFormCostsPrevailingCharge(data?.rows[rowIdx]);
-      return data?.rows[rowIdx][column.key as keyof ICollectionFormCostsData];
-    },
-    [data?.rows]
+    (
+      rowIdx: number,
+      column: IDataTableColumn
+    ): string | Array<string> | boolean | null =>
+      getCollectionFormLogisticsCellValue(
+        data?.rows[rowIdx],
+        column,
+        logisticsTypes.logistics_types
+      ),
+    [data?.rows, logisticsTypes.logistics_types]
   );
 
   return (
     <Card>
-      <CardHeader title="Costs" />
+      <CardHeader title="Logistics" />
       <CardContent sx={{ pt: 0 }}>
         <DataTable
-          name="collection form costs"
-          /* filter table columns by current permission level */
-          columns={columns.filter(
-            (col: IDataTableColumn) => !colFilterList.includes(col.label)
-          )}
-          /* table editable cell(s) is the collection charge column */
-          editableColLabels={['Collection Charge']}
-          /* build table row props from costs data */
-          rows={data?.rows.map((cost: ICollectionFormCostsData) => ({
-            label: cost.chargeable,
+          name="collection form logistics"
+          /* filter table columns by current logistics type */
+          columns={colList}
+          /* can edit all cells in logistics table */
+          editableColLabels={colList.map((col) => col.label)}
+          /* build table row props from logistics data */
+          rows={data?.rows.map((logistic: ICollectionFormLogisticsData) => ({
+            label: logistic.logistics_type,
           }))}
           isLoading={loading}
           error={error}
@@ -192,7 +212,7 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
             loading={saving}
             sx={{ ml: 2 }}
           >
-            Commit
+            Save
           </LoadingButton>
         </Box>
       </CardContent>
@@ -200,4 +220,4 @@ const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
   );
 };
 
-export default CollectionFormCosts;
+export default CollectionFormLogistics;

@@ -2,8 +2,10 @@ import { FC, useCallback, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
+import CheckboxCell from './CheckboxCell/CheckboxCell';
 import Cell from './Cell/Cell';
 import {
+  DataTableRowCellValue,
   IDataTableColumn,
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
@@ -83,12 +85,15 @@ const DataRow: FC<IDataRowProps> = (props) => {
    * @since 0.0.0
    *
    * @method
-   * @param {string | null} value - updated value string, can be null
+   * @param {DataTableRowCellValue} value - updated value string, can be null
    */
   const submitCellValue = useCallback(
-    (value: string | null, colKey: string): void => {
-      if (editCellValueCallback)
+    (value: DataTableRowCellValue, colKey: string): void => {
+      if (editCellValueCallback) {
+        if (typeof value === 'boolean')
+          editCellValueCallback(value, colKey, rowIdx);
         editCellValueCallback(value !== '--' ? value : null, colKey, rowIdx);
+      }
     },
     [rowIdx, editCellValueCallback]
   );
@@ -101,10 +106,10 @@ const DataRow: FC<IDataRowProps> = (props) => {
    *
    * @method
    * @param {IDataTableColumn} column - column to get cell value for from row
-   * @returns {string | null | undefined} - cell value, can be null or undefined
+   * @returns {DataTableRowCellValue} - cell value, can be null or undefined
    */
   const getCellValueByColumn = useCallback(
-    (column: IDataTableColumn): string | null | undefined =>
+    (column: IDataTableColumn): DataTableRowCellValue =>
       /* apply any logic required for this column (such as 'Prevailing') */
       getCellValueCallback(rowIdx, column),
     [rowIdx, getCellValueCallback]
@@ -113,31 +118,45 @@ const DataRow: FC<IDataRowProps> = (props) => {
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
-      {columns.map((column: IDataTableColumn) =>
-        column.type === 'currency' ? (
-          <CurrencyCell
-            key={`${rowName}-${column.key}`}
-            inputId={`${rowName}-${column.key}-input`}
-            canEdit={editableColLabels.some(
-              (editCol) => editCol === column.label
-            )}
-            value={getCellValueByColumn(column) || null}
-            submitCellValue={(value) => submitCellValue(value, column.key)}
-            /* specific requirement for 'Prevailing' columns */
-            sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
-          />
-        ) : (
-          <Cell
-            key={`${rowName}-${column.key}`}
-            value={getCellValueByColumn(column) || null}
-            /* specific requirement for 'Application' columns */
-            sx={{
-              fontSize:
-                column.key !== 'application' ? 'inherit' : '12px !important',
-            }}
-          />
-        )
-      )}
+      {columns.map((column: IDataTableColumn) => (
+        <>
+          {column.type === 'currency' && (
+            <CurrencyCell
+              key={`${rowName}-${column.key}`}
+              inputId={`${rowName}-${column.key}-input`}
+              canEdit={editableColLabels.some(
+                (editCol) => editCol === column.label
+              )}
+              value={(getCellValueByColumn(column) as string) || null}
+              submitCellValue={(value) => submitCellValue(value, column.key)}
+              /* specific requirement for 'Prevailing' columns */
+              sx={{ fontWeight: column.label === 'Prevailing' ? 'bold' : '' }}
+            />
+          )}
+          {column.type === 'check' && (
+            <CheckboxCell
+              key={`${rowName}-${column.key}`}
+              inputId={`${rowName}-${column.key}-input`}
+              canEdit={editableColLabels.some(
+                (editCol) => editCol === column.label
+              )}
+              value={(getCellValueByColumn(column) as boolean) || null}
+              submitCellValue={(value) => submitCellValue(value, column.key)}
+            />
+          )}
+          {column.type === 'string' && (
+            <Cell
+              key={`${rowName}-${column.key}`}
+              value={(getCellValueByColumn(column) as string) || null}
+              /* specific requirement for 'Application' columns */
+              sx={{
+                fontSize:
+                  column.key !== 'application' ? 'inherit' : '12px !important',
+              }}
+            />
+          )}
+        </>
+      ))}
     </StyledTableRow>
   );
 };

@@ -8,7 +8,11 @@ import {
   IKanbanBoard,
   ICollectionFormCostsDataPayload,
   ICollectionFormCostsSaveDataPayload,
+  ICollectionFormLogisticsDataPayload,
+  ICollectionFormLogisticsSaveDataPayload,
+  ICollectionFormLogisticsTypesDataPayload,
 } from '@/lib/api/api-types';
+import { DataTableRowCellValue } from '@/components/DataTable/types';
 
 /**
  * Type and interface definitions for Redux actions
@@ -64,12 +68,12 @@ export interface ISaveCostsConfigBySourceIdArgs {
  * @typedef ICostsConfigEditCostsPayload
  * @prop {string} colKey - table column key to be edited
  * @prop {number} rowIdx - table row index of the edited cost
- * @prop {string | null} value - updated column value
+ * @prop {DataTableRowCellValue} value - updated column value
  */
 export interface ICostsConfigEditCostsPayload {
   colKey: string;
   rowIdx: number;
-  value: string | null;
+  value: DataTableRowCellValue;
 }
 
 /**
@@ -129,12 +133,12 @@ export interface ISaveCollectionFormCostsByCollectionIdArgs {
  * @typedef ICollectionFormCostsEditCostsPayload
  * @prop {string} colKey - table column key to be edited
  * @prop {number} rowIdx - table row index of the edited cost
- * @prop {string | null} value - updated column value
+ * @prop {DataTableRowCellValue} value - updated column value
  */
 export interface ICollectionFormCostsEditCostsPayload {
   colKey: string;
   rowIdx: number;
-  value: string | null;
+  value: DataTableRowCellValue;
 }
 
 /**
@@ -145,8 +149,8 @@ export interface ICollectionFormCostsEditCostsPayload {
  *
  * @typedef ICollectionFormCostsState
  * @prop {boolean} loading - costs loading state
- * @prop {ICostsConfigDataPayload} data - currently loaded costs data
- * @prop {ICostsConfigDataPayload} dataShadow - shadow copy of original data
+ * @prop {ICollectionFormCostsDataPayload} data - currently loaded costs data
+ * @prop {ICollectionFormCostsDataPayload} dataShadow - shadow copy of original data
  * @prop {string} error - current error message state of costs
  * @prop {boolean} saving - saving state flag of costs data
  * @prop {boolean} edited - costs data has been edited flag
@@ -158,6 +162,73 @@ export interface ICollectionFormCostsState {
   error?: string;
   saving: boolean;
   edited: boolean;
+}
+
+/**
+ * Fetch Collection Form Logistics args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef IFetchCollectionFormLogisticsByCollectionIdArgs
+ */
+export interface IFetchCollectionFormLogisticsByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Logistics args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ISaveCollectionFormLogisticsByCollectionIdArgs
+ * @prop {ICollectionFormLogisticsSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormLogisticsByCollectionIdArgs {
+  data: ICollectionFormLogisticsSaveDataPayload;
+}
+
+/**
+ * Collection Form Logistics edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsEditCostsPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormLogisticsEditLogisticsPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Logistics state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsState
+ * @prop {boolean} loading - logistics loading state
+ * @prop {ICollectionFormLogisticsDataPayload} data - currently loaded logistics data
+ * @prop {ICollectionFormLogisticsDataPayload} dataShadow - shadow copy of original datahttp://localhost:3000/
+ * @prop {string} error - current error message state of costs
+ * @prop {boolean} saving - saving state flag of costs data
+ * @prop {boolean} edited - costs data has been edited flag
+ */
+export interface ICollectionFormLogisticsState {
+  loading: boolean;
+  data: ICollectionFormLogisticsDataPayload;
+  dataShadow: ICollectionFormLogisticsDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+  loadingTypes: boolean;
+  types: ICollectionFormLogisticsTypesDataPayload;
 }
 
 /**

@@ -1,3 +1,4 @@
+import { DataTableRowCellValue } from '@/components/DataTable/types';
 import { ICollectionFormCostsData } from '@/lib/api/api-types';
 
 /**
@@ -9,11 +10,11 @@ import { ICollectionFormCostsData } from '@/lib/api/api-types';
  * @memberof Utils
  *
  * @param {ICollectionFormCostsData} tableRow - row to be processed for 'Prevailing'
- * @returns {string | null | undefined} - resulting value string, null or undefined
+ * @returns {DataTableRowCellValue} - resulting value string, null or undefined
  */
 const getCollectionFormCostsPrevailingCharge = (
   tableRow: ICollectionFormCostsData
-): string | null | undefined => {
+): DataTableRowCellValue => {
   /**
    * the 'Prevailing' column of a collection form costs table row is always equal
    * to the collection column, unless collection column is null.
@@ -33,9 +34,9 @@ const getCollectionFormCostsPrevailingCharge = (
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.13
    *
-   * @returns {string | null | undefined} - charge value, can be null or undefined
+   * @returns {string | Array<string> | boolean | null | undefined} - charge value, can be null or undefined
    */
-  const getCharge = (): string | null | undefined => {
+  const getCharge = (): string | Array<string> | boolean | null | undefined => {
     if (
       tableRow.collection_charge !== null &&
       tableRow.collection_charge !== undefined

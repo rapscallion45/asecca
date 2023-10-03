@@ -2,6 +2,7 @@ import type { NextPageWithLayout } from 'next';
 import { Box, Typography } from '@mui/material';
 import CollectionFormCosts from '@/components/CollectionFormCosts/CollectionFormCosts';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
+import CollectionFormLogistics from '@/components/CollectionFormLogistics/CollectionFormLogistics';
 
 /**
  * Collection Form Page
@@ -24,7 +25,12 @@ const CollectionFormPage: NextPageWithLayout = () => (
       </Typography>
     </Box>
     {/* load collection form with fetched data */}
-    <CollectionFormCosts collectionId="123456" />
+    <Box>
+      <CollectionFormCosts collectionId="123456" />
+    </Box>
+    <Box mt={2}>
+      <CollectionFormLogistics collectionId="123456" />
+    </Box>
   </Box>
 );
 

@@ -23,7 +23,7 @@ const getCollectionFormCostsPostData = (
   data: Array<ICollectionFormCostsData> | undefined
 ): ICollectionFormCostsSaveDataPayload => {
   /* sanity check input, return empties if incorrect */
-  if (!dataId || !data) return { rows: [] };
+  if (!dataId || !data) return { collection: dataId as string, rows: [] };
 
   /* get costs requests - cycle through data and pull out required cols */
   const rows: Array<ICollectionFormCostsSaveDataCosts> = data
@@ -39,7 +39,7 @@ const getCollectionFormCostsPostData = (
         dataRow[`collection_charge` as keyof ICollectionFormCostsData] || null,
     }));
 
-  return { rows };
+  return { collection: dataId as string, rows };
 };
 
 export default getCollectionFormCostsPostData;
