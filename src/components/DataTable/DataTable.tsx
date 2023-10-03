@@ -14,6 +14,7 @@ import {
   IDataTableRow,
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
+  IDataTableCanEditCellCallback,
 } from './types';
 
 /**
@@ -31,6 +32,7 @@ import {
  * @prop {string} error - data table error message string
  * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when cell updated
  * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when rendering cell
+ * @prop {IDataTableCanEditCellCallback} canEditCellValueCallback - can edit cell value callback
  */
 interface IDataTableProps {
   name: string;
@@ -41,6 +43,7 @@ interface IDataTableProps {
   error?: string;
   editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
+  canEditCellValueCallback?: IDataTableCanEditCellCallback;
 }
 
 /**
@@ -67,6 +70,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     error = '',
     editCellValueCallback,
     getCellValueCallback,
+    canEditCellValueCallback,
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -93,6 +97,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         editableColLabels={editableColLabels}
                         editCellValueCallback={editCellValueCallback}
                         getCellValueCallback={getCellValueCallback}
+                        canEditCellValueCallback={canEditCellValueCallback}
                       />
                     </Fragment>
                   ))}

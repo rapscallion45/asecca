@@ -11,7 +11,7 @@ const collectionFormLogisticsTypesDataMock: ICollectionFormLogisticsTypesDataPay
     logistics_types: [
       {
         logistics_type: 'Luton Van',
-        compatible_facilities: ['ASECCA', 'Techsel'],
+        compatible_facilities: ['Techsel'],
       },
       {
         logistics_type: 'LWB Transit',

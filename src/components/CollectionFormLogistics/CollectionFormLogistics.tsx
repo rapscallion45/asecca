@@ -1,5 +1,6 @@
 import { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import lodash from 'lodash';
 import { AppState, AppDispatch } from '@/redux/store';
 import { Card, CardHeader, CardContent, Box, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -167,6 +168,34 @@ const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
     [data?.rows, logisticsTypes.logistics_types]
   );
 
+  /**
+   * Determines whether specific table cell can be edited
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.13
+   *
+   * @method
+   * @param {string} colKey - column key to be updated
+   * @param {number} rowIdx - table row index to be updated
+   * @returns {boolean} - whether cell is editable
+   */
+  const canEditCellValue = useCallback(
+    (colKey: string, rowIdx: number): boolean => {
+      /* logistics type can always be changed */
+      if (colKey === 'logistics_type') return true;
+      return (
+        logisticsTypes.logistics_types
+          .find(
+            (type) => type.logistics_type === data.rows[rowIdx].logistics_type
+          )
+          ?.compatible_facilities.some(
+            (facility) => lodash.snakeCase(facility) === colKey
+          ) || false
+      );
+    },
+    [data, colList, logisticsTypes.logistics_types]
+  );
+
   return (
     <Card>
       <CardHeader title="Logistics" />
@@ -185,6 +214,7 @@ const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
           error={error}
           editCellValueCallback={handleEditCellValue}
           getCellValueCallback={handleGetCellValue}
+          canEditCellValueCallback={canEditCellValue}
         />
         <Box
           sx={{

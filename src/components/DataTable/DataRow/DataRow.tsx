@@ -9,6 +9,7 @@ import {
   IDataTableColumn,
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
+  IDataTableCanEditCellCallback,
 } from '../types';
 import SelectCell from './SelectCell/SelectCell';
 
@@ -25,6 +26,7 @@ import SelectCell from './SelectCell/SelectCell';
  * @prop {Array<string>} editableColLabels - editable column label list
  * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when user updates cell value
  * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when row cell rendered
+ * @prop {IDataTableCanEditCellCallback} canEditCellValueCallback - can specific cell be edited
  */
 interface IDataRowProps {
   rowName: string;
@@ -33,6 +35,7 @@ interface IDataRowProps {
   editableColLabels: Array<string>;
   editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
+  canEditCellValueCallback?: IDataTableCanEditCellCallback;
 }
 
 /**
@@ -55,6 +58,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
     editableColLabels,
     editCellValueCallback,
     getCellValueCallback,
+    canEditCellValueCallback,
   } = props;
 
   /**
@@ -114,6 +118,26 @@ const DataRow: FC<IDataRowProps> = (props) => {
     [rowIdx, getCellValueCallback]
   );
 
+  /**
+   * Determine whether cell in this specific column and row can be edited
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.13
+   *
+   * @method
+   * @param {string} colKey - cell column to get edit privileges for
+   * @param {number} rowIndex - cell row to get edit privileges for
+   * @returns {boolean} - cell is editable or not
+   */
+  const isCellEditable = useCallback(
+    (colKey: string, rowIndex: number): boolean =>
+      /* if no callback present, assume cell can be edited */
+      canEditCellValueCallback
+        ? canEditCellValueCallback(colKey, rowIndex)
+        : true,
+    [rowIdx, canEditCellValueCallback]
+  );
+
   return (
     <StyledTableRow>
       {/* map passed column data for current row */}
@@ -123,9 +147,10 @@ const DataRow: FC<IDataRowProps> = (props) => {
             <CurrencyCell
               key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
-              canEdit={editableColLabels.some(
-                (editCol) => editCol === column.label
-              )}
+              canEdit={
+                editableColLabels.some((editCol) => editCol === column.label) &&
+                isCellEditable(column.key, rowIdx)
+              }
               value={(getCellValueByColumn(column) as string) || null}
               submitCellValue={(value) => submitCellValue(value, column.key)}
               /* specific requirement for 'Prevailing' columns */
@@ -136,9 +161,10 @@ const DataRow: FC<IDataRowProps> = (props) => {
             <CheckboxCell
               key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
-              canEdit={editableColLabels.some(
-                (editCol) => editCol === column.label
-              )}
+              canEdit={
+                editableColLabels.some((editCol) => editCol === column.label) &&
+                isCellEditable(column.key, rowIdx)
+              }
               value={(getCellValueByColumn(column) as boolean) || null}
               submitCellValue={(value) => submitCellValue(value, column.key)}
             />
@@ -147,9 +173,10 @@ const DataRow: FC<IDataRowProps> = (props) => {
             <SelectCell
               key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
-              canEdit={editableColLabels.some(
-                (editCol) => editCol === column.label
-              )}
+              canEdit={
+                editableColLabels.some((editCol) => editCol === column.label) &&
+                isCellEditable(column.key, rowIdx)
+              }
               value={(getCellValueByColumn(column) as string) || undefined}
               options={column.selectOptions}
               submitCellValue={(value) => submitCellValue(value, column.key)}

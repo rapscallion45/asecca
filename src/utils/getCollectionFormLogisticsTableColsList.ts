@@ -34,21 +34,21 @@ const getCollectionFormLogisticsTableColsList = (
    */
   const facilityList = data.rows
     .filter((row) =>
-      /* only process rows that are inlcuded in compatible types list */
+      /* only process rows that are included in compatible types list */
       types.logistics_types.some(
         (type) => type.logistics_type === row.logistics_type
       )
     )
     .map(
       (logisitc: ICollectionFormLogisticsData) =>
-        /* map rows with supported logistics type name and return compatible facilities */
+        /* map rows with supported logistics type and return compatible facilities */
         types.logistics_types.find(
           (type) => type.logistics_type === logisitc.logistics_type
         )?.compatible_facilities
     )
     .flat(1);
 
-  /* remove 'visiting_facilities' column from orignal cols and */
+  /* remove 'visiting_facilities' column from orignal cols */
   const filteredOrigCols = columns.filter(
     (col) => col.key !== 'visiting_facilities'
   );
@@ -63,15 +63,18 @@ const getCollectionFormLogisticsTableColsList = (
     return col;
   });
 
-  /* return col list including original cols plus col for each unique facility */
+  /* return sorted col list including col for each unique facility */
   return newCols.concat(
-    lodash.uniq(facilityList).map(
-      (facility) =>
-        ({
-          label: facility,
-          key: lodash.snakeCase(facility),
-          type: 'check' as DataTableColumnType,
-        } as IDataTableColumn)
+    lodash.sortBy(
+      lodash.uniq(facilityList).map(
+        (facility) =>
+          ({
+            label: facility,
+            key: lodash.snakeCase(facility),
+            type: 'check' as DataTableColumnType,
+          } as IDataTableColumn)
+      ),
+      (item: IDataTableColumn) => item.key
     )
   );
 };

@@ -108,6 +108,21 @@ export interface IDataTableGetCellValueCallback {
 }
 
 /**
+ * Data Table Cell Can Edit callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @callback IDataTableCanEditCellCallback
+ * @param {string} colKey - cell column data identifier
+ * @param {number} rowIdx - cell row index in data table
+ * @returns {boolean} - whether the specific table cell can be edited
+ */
+export interface IDataTableCanEditCellCallback {
+  (colKey: string, rowIdx: number): boolean;
+}
+
+/**
  * Data Table Currency Cell Value Edit callback function typedef
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
