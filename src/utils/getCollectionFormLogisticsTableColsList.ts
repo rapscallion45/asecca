@@ -41,20 +41,30 @@ const getCollectionFormLogisticsTableColsList = (
     )
     .map(
       (logisitc: ICollectionFormLogisticsData) =>
-        /* map rows with supported logisitcs type name and return compatible facilities */
+        /* map rows with supported logistics type name and return compatible facilities */
         types.logistics_types.find(
           (type) => type.logistics_type === logisitc.logistics_type
         )?.compatible_facilities
     )
     .flat(1);
 
-  /* remove 'visiting_facilities' column from orignal cols */
+  /* remove 'visiting_facilities' column from orignal cols and */
   const filteredOrigCols = columns.filter(
     (col) => col.key !== 'visiting_facilities'
   );
 
+  /* add logistic type select options */
+  const newCols = filteredOrigCols.map((col) => {
+    if (col.key === 'logistics_type')
+      return {
+        ...col,
+        selectOptions: types.logistics_types.map((type) => type.logistics_type),
+      };
+    return col;
+  });
+
   /* return col list including original cols plus col for each unique facility */
-  return filteredOrigCols.concat(
+  return newCols.concat(
     lodash.uniq(facilityList).map(
       (facility) =>
         ({

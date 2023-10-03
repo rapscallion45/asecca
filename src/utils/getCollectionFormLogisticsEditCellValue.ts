@@ -32,7 +32,8 @@ const getCollectionFormLogisticsEditCellValue = (
   colList: Array<IDataTableColumn>
 ): ICollectionFormLogisticsEditLogisticsPayload => {
   /* sanity check input */
-  if (colKey === '' || !rowIdx) return { value: null, colKey: '', rowIdx: -1 };
+  if (colKey === '' || rowIdx < 0)
+    return { value: null, colKey: '', rowIdx: -1 };
 
   /**
    * Get Value

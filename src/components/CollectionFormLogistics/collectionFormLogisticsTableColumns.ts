@@ -11,7 +11,12 @@ import { IDataTableColumn } from '@/components/DataTable/types';
  * @type {Array<IDataTableColumn>}
  */
 const collectionFormLogisticsTableColumns: Array<IDataTableColumn> = [
-  { label: 'Logistics Type', key: 'logistics_type', type: 'string' },
+  {
+    label: 'Logistics Type',
+    key: 'logistics_type',
+    type: 'select',
+    selectOptions: [] /* select options retreived from API at runtime */,
+  },
 ];
 
 export default collectionFormLogisticsTableColumns;

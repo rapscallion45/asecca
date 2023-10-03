@@ -34,6 +34,17 @@ export type DataTableRowCellValue =
 export type DataTableColumnType = 'string' | 'currency' | 'select' | 'check';
 
 /**
+ * Data Table Column Select Value types
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ * @memberof DataTable
+ *
+ * @typedef DataTableColumnSelectValueType
+ */
+export type DataTableColumnSelectValueType = Array<string> | undefined;
+
+/**
  * Data Table Column properties
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -43,11 +54,13 @@ export type DataTableColumnType = 'string' | 'currency' | 'select' | 'check';
  * @prop {string} label - data table column name
  * @prop {string} key - data table column data identifier
  * @prop {DataTableColumnType} type - data table column type
+ * @prop {selectOptions} selectOptions - options for dropdown column type
  */
 export interface IDataTableColumn {
   label: string;
   key: string;
   type: DataTableColumnType;
+  selectOptions?: DataTableColumnSelectValueType;
 }
 
 /**
@@ -120,4 +133,18 @@ export interface IDataTableEditCurrencyCellValueCallback {
  */
 export interface IDataTableEditCheckboxCellValueCallback {
   (value: boolean | null): void;
+}
+
+/**
+ * Data Table Select Cell Value Edit callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @callback IDataTableEditSelectCellValueCallback
+ * @param {boolean | null} value - updated cell boolean value
+ * @returns {void} - no return value
+ */
+export interface IDataTableEditSelectCellValueCallback {
+  (value: string | undefined): void;
 }

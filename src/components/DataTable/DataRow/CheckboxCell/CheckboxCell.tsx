@@ -14,7 +14,6 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  * @prop {boolean} canEdit - cell is editable flag
  * @prop {boolean | null} value - cell boolean value, can be null
  * @prop {IDataTableEditCheckboxCellValueCallback} submitCellValue - submit cell value
-
  * @prop {any} sx - cell styling overrrides
  */
 interface ICheckboxCellProps {
@@ -37,7 +36,7 @@ interface ICheckboxCellProps {
  * @param {ICheckboxCellProps} props - component props
  * @returns {FC} - data table checkbox cell functional component
  */
-const Cell: FC<ICheckboxCellProps> = (props) => {
+const CheckboxCell: FC<ICheckboxCellProps> = (props) => {
   const { inputId, canEdit, value, submitCellValue, sx } = props;
 
   /**
@@ -63,9 +62,10 @@ const Cell: FC<ICheckboxCellProps> = (props) => {
         onChange={handleValueChange}
         disabled={!canEdit}
         inputProps={{ 'aria-label': inputId }}
+        color="secondary"
       />
     </StyledTableCell>
   );
 };
 
-export default memo(Cell);
+export default memo(CheckboxCell);

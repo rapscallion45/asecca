@@ -10,6 +10,7 @@ import {
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
 } from '../types';
+import SelectCell from './SelectCell/SelectCell';
 
 /**
  * Data Table Row Props
@@ -90,8 +91,6 @@ const DataRow: FC<IDataRowProps> = (props) => {
   const submitCellValue = useCallback(
     (value: DataTableRowCellValue, colKey: string): void => {
       if (editCellValueCallback) {
-        if (typeof value === 'boolean')
-          editCellValueCallback(value, colKey, rowIdx);
         editCellValueCallback(value !== '--' ? value : null, colKey, rowIdx);
       }
     },
@@ -141,6 +140,18 @@ const DataRow: FC<IDataRowProps> = (props) => {
                 (editCol) => editCol === column.label
               )}
               value={(getCellValueByColumn(column) as boolean) || null}
+              submitCellValue={(value) => submitCellValue(value, column.key)}
+            />
+          )}
+          {column.type === 'select' && (
+            <SelectCell
+              key={`${rowName}-${column.key}`}
+              inputId={`${rowName}-${column.key}-input`}
+              canEdit={editableColLabels.some(
+                (editCol) => editCol === column.label
+              )}
+              value={(getCellValueByColumn(column) as string) || undefined}
+              options={column.selectOptions}
               submitCellValue={(value) => submitCellValue(value, column.key)}
             />
           )}
