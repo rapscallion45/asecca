@@ -6,6 +6,8 @@
  * Data Table component(s)
  */
 
+import { ReactNode } from 'react';
+
 /**
  * Data Table Row Cell Value types
  *
@@ -31,7 +33,12 @@ export type DataTableRowCellValue =
  *
  * @typedef DataTableColumnType
  */
-export type DataTableColumnType = 'string' | 'currency' | 'select' | 'check';
+export type DataTableColumnType =
+  | 'string'
+  | 'currency'
+  | 'select'
+  | 'check'
+  | 'action';
 
 /**
  * Data Table Column Select Value types
@@ -162,4 +169,19 @@ export interface IDataTableEditCheckboxCellValueCallback {
  */
 export interface IDataTableEditSelectCellValueCallback {
   (value: string | undefined): void;
+}
+
+/**
+ * Data Table Action Cell Get Component callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @callback IDataTableGetActionComponentCallback
+ * @param {string} colKey - table column key of the action cell
+ * @param {number} rowIdx - table row index of the action cell
+ * @returns {ReactNode} - action component to present
+ */
+export interface IDataTableGetActionComponentCallback {
+  (colKey: string, rowIdx: number): ReactNode | undefined;
 }

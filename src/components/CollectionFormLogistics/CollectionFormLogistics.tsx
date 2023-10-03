@@ -2,8 +2,16 @@ import { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import lodash from 'lodash';
 import { AppState, AppDispatch } from '@/redux/store';
-import { Card, CardHeader, CardContent, Box, Button } from '@mui/material';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Box,
+  Button,
+  IconButton,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { ICollectionFormLogisticsData } from '@/lib/api/api-types';
 import {
   getCollectionFormLogisticsCellValue,
@@ -14,6 +22,8 @@ import {
   saveByCollectionId as saveLogisticsByCollectionId,
   resetLogistics,
   editLogistics,
+  addLogistics,
+  deleteLogistics,
 } from '@/redux/slices/collectionFormLogisticsSlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -153,13 +163,10 @@ const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
    * @method
    * @param {number} rowIdx - table row index to get value from
    * @param {IDataTableColumn} column - column to get value from
-   * @return {string | Array<string> | boolean | null} - cell value, can be null or undefined
+   * @return {DataTableRowCellValue} - cell value, can be null or undefined
    */
   const handleGetCellValue = useCallback(
-    (
-      rowIdx: number,
-      column: IDataTableColumn
-    ): string | Array<string> | boolean | null =>
+    (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue =>
       getCollectionFormLogisticsCellValue(
         data?.rows[rowIdx],
         column,
@@ -193,7 +200,48 @@ const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
           ) || false
       );
     },
-    [data, colList, logisticsTypes.logistics_types]
+    [data, logisticsTypes.logistics_types]
+  );
+
+  /**
+   * Handles addition of table row for new Logistics type
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.13
+   *
+   * @method
+   */
+  const handleAddRow = useCallback(() => dispatch(addLogistics()), [dispatch]);
+
+  /**
+   * Handles deletion of table row for passed row index
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.13
+   *
+   * @method
+   * @param {number} rowIdx - table row index to be deleted
+   */
+  const handleDeleteRow = useCallback(
+    (rowIdx: number) => dispatch(deleteLogistics({ rowIdx })),
+    [dispatch]
+  );
+
+  /**
+   * Handles requests for the action component for specific column
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.13
+   *
+   * @method
+   * @param {string} colKey - table column key of the action cell
+   * @param {number} rowIdx - table row index of the action cell
+   * @returns {ReactNode} - action component to present
+   */
+  const getActionComponent = (colKey: string, rowIdx: number) => (
+    <IconButton aria-label="delete" onClick={() => handleDeleteRow(rowIdx)}>
+      <DeleteIcon />
+    </IconButton>
   );
 
   return (
@@ -215,7 +263,26 @@ const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
           editCellValueCallback={handleEditCellValue}
           getCellValueCallback={handleGetCellValue}
           canEditCellValueCallback={canEditCellValue}
+          getActionComponent={getActionComponent}
         />
+        <Box
+          sx={{
+            marginTop: 2,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'left',
+          }}
+        >
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleAddRow}
+            disabled={saving || loading}
+          >
+            Add +
+          </Button>
+        </Box>
         <Box
           sx={{
             marginTop: 2,

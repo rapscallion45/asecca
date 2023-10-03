@@ -207,6 +207,19 @@ export interface ICollectionFormLogisticsEditLogisticsPayload {
 }
 
 /**
+ * Collection Form Logistics delete redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsDeleteLogisticsPayload
+ * @prop {number} rowIdx - table row index to be deleted
+ */
+export interface ICollectionFormLogisticsDeleteLogisticsPayload {
+  rowIdx: number;
+}
+
+/**
  * Collection Form Logistics state definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}

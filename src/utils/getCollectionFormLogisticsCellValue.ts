@@ -1,4 +1,7 @@
-import { IDataTableColumn } from '@/components/DataTable/types';
+import {
+  DataTableRowCellValue,
+  IDataTableColumn,
+} from '@/components/DataTable/types';
 import {
   ICollectionFormLogisticsData,
   ICollectionFormLogisticsTypesData,
@@ -14,13 +17,13 @@ import {
  * @param {ICollectionFormLogisticsData} tableRow - row to be processed
  * @param {IDataTableColumn} column - current column to be processed
  * @param {Array<ICollectionFormLogisticsTypesData>} logisticsTypes - logistics types
- * @returns {string | Array<string> | boolean | null} - resulting value string, null or undefined
+ * @returns {DataTableRowCellValue} - resulting value string, null or undefined
  */
 const getCollectionFormLogisticsCellValue = (
   tableRow: ICollectionFormLogisticsData,
   column: IDataTableColumn,
   logisticsTypes: Array<ICollectionFormLogisticsTypesData>
-): string | Array<string> | boolean | null => {
+): DataTableRowCellValue => {
   /* sanity check input */
   if (!tableRow || !column) return null;
 
@@ -34,9 +37,9 @@ const getCollectionFormLogisticsCellValue = (
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.13
    *
-   * @returns {string | Array<string> | boolean | null} - charge value, can be null or undefined
+   * @returns {DataTableRowCellValue} - charge value, can be null or undefined
    */
-  const getValue = (): string | Array<string> | boolean | null => {
+  const getValue = (): DataTableRowCellValue => {
     /* if logistics type name col, simply return name string */
     if (column.key === 'logistics_type') return tableRow[column.key];
 

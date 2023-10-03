@@ -10,8 +10,10 @@ import {
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
   IDataTableCanEditCellCallback,
+  IDataTableGetActionComponentCallback,
 } from '../types';
 import SelectCell from './SelectCell/SelectCell';
+import ActionCell from './ActionCell/ActionCell';
 
 /**
  * Data Table Row Props
@@ -27,6 +29,7 @@ import SelectCell from './SelectCell/SelectCell';
  * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when user updates cell value
  * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when row cell rendered
  * @prop {IDataTableCanEditCellCallback} canEditCellValueCallback - can specific cell be edited
+ * @prop {IDataTableGetActionComponentCallback} getActionComponent - get action component
  */
 interface IDataRowProps {
   rowName: string;
@@ -36,6 +39,7 @@ interface IDataRowProps {
   editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
   canEditCellValueCallback?: IDataTableCanEditCellCallback;
+  getActionComponent?: IDataTableGetActionComponentCallback;
 }
 
 /**
@@ -59,6 +63,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
     editCellValueCallback,
     getCellValueCallback,
     canEditCellValueCallback,
+    getActionComponent,
   } = props;
 
   /**
@@ -135,7 +140,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
       canEditCellValueCallback
         ? canEditCellValueCallback(colKey, rowIndex)
         : true,
-    [rowIdx, canEditCellValueCallback]
+    [canEditCellValueCallback]
   );
 
   return (
@@ -180,6 +185,14 @@ const DataRow: FC<IDataRowProps> = (props) => {
               value={(getCellValueByColumn(column) as string) || undefined}
               options={column.selectOptions}
               submitCellValue={(value) => submitCellValue(value, column.key)}
+            />
+          )}
+          {column.type === 'action' && (
+            <ActionCell
+              key={`${rowName}-${column.key}`}
+              getActionComponent={() =>
+                getActionComponent && getActionComponent(column.key, rowIdx)
+              }
             />
           )}
           {column.type === 'string' && (

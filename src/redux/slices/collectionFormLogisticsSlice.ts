@@ -15,6 +15,7 @@ import {
   IFetchCollectionFormLogisticsByCollectionIdArgs,
   ISaveCollectionFormLogisticsByCollectionIdArgs,
   ICollectionFormLogisticsEditLogisticsPayload,
+  ICollectionFormLogisticsDeleteLogisticsPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
@@ -192,6 +193,24 @@ const collectionFormLogisticsSlice = createSlice({
       );
       state.edited = true;
     },
+    /* reducer used for when user adds Logistics data */
+    addLogistics: (state) => {
+      /* add row to data */
+      state.data.rows = state.data.rows.concat({
+        logistics_type: '',
+        visiting_facilities: [],
+      });
+      state.edited = true;
+    },
+    /* reducer used for when user deletes Logistics data */
+    deleteLogistics: (
+      state,
+      action: PayloadAction<ICollectionFormLogisticsDeleteLogisticsPayload>
+    ) => {
+      // @ts-ignore
+      state.data.rows = state.data.rows.toSpliced(action.payload.rowIdx, 1);
+      state.edited = true;
+    },
     /* reducer used for when user clears edits to Logistics data */
     resetLogistics: (state) => {
       /* reset the data by simply copying the shadow to working copy */
@@ -285,7 +304,7 @@ const collectionFormLogisticsSlice = createSlice({
 });
 
 /* Collection Form Logistics actions for editing and resetting logistics data */
-export const { editLogistics, resetLogistics } =
+export const { editLogistics, addLogistics, deleteLogistics, resetLogistics } =
   collectionFormLogisticsSlice.actions;
 
 export default collectionFormLogisticsSlice.reducer;

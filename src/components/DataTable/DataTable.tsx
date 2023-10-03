@@ -15,6 +15,7 @@ import {
   IDataTableEditCellValueCallback,
   IDataTableGetCellValueCallback,
   IDataTableCanEditCellCallback,
+  IDataTableGetActionComponentCallback,
 } from './types';
 
 /**
@@ -33,6 +34,7 @@ import {
  * @prop {IDataTableEditCellValueCallback} editCellValueCallback - edit cell value callback, called when cell updated
  * @prop {IDataTableGetCellValueCallback} getCellValueCallback - get cell value callback, called when rendering cell
  * @prop {IDataTableCanEditCellCallback} canEditCellValueCallback - can edit cell value callback
+ * @prop {IDataTableGetActionComponentCallback} getActionComponent - get action component
  */
 interface IDataTableProps {
   name: string;
@@ -44,6 +46,7 @@ interface IDataTableProps {
   editCellValueCallback?: IDataTableEditCellValueCallback;
   getCellValueCallback: IDataTableGetCellValueCallback;
   canEditCellValueCallback?: IDataTableCanEditCellCallback;
+  getActionComponent?: IDataTableGetActionComponentCallback;
 }
 
 /**
@@ -71,6 +74,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
     editCellValueCallback,
     getCellValueCallback,
     canEditCellValueCallback,
+    getActionComponent,
   } = props;
 
   /* ClientOnly used to not allow tables to SSR */
@@ -98,6 +102,7 @@ const DataTable: FC<IDataTableProps> = (props) => {
                         editCellValueCallback={editCellValueCallback}
                         getCellValueCallback={getCellValueCallback}
                         canEditCellValueCallback={canEditCellValueCallback}
+                        getActionComponent={getActionComponent}
                       />
                     </Fragment>
                   ))}

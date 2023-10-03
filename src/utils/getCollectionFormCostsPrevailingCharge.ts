@@ -34,9 +34,9 @@ const getCollectionFormCostsPrevailingCharge = (
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.13
    *
-   * @returns {string | Array<string> | boolean | null | undefined} - charge value, can be null or undefined
+   * @returns {DataTableRowCellValue} - charge value, can be null or undefined
    */
-  const getCharge = (): string | Array<string> | boolean | null | undefined => {
+  const getCharge = (): DataTableRowCellValue => {
     if (
       tableRow.collection_charge !== null &&
       tableRow.collection_charge !== undefined

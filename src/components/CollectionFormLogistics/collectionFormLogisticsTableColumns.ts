@@ -12,6 +12,11 @@ import { IDataTableColumn } from '@/components/DataTable/types';
  */
 const collectionFormLogisticsTableColumns: Array<IDataTableColumn> = [
   {
+    label: '',
+    key: 'delete_row',
+    type: 'action',
+  },
+  {
     label: 'Logistics Type',
     key: 'logistics_type',
     type: 'select',
