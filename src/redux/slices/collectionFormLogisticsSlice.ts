@@ -103,7 +103,7 @@ export const saveByCollectionId = createAsyncThunk(
 );
 
 /**
- * Async thunk for GET /api/collection/logistics/api/logistics API handling
+ * Async thunk for GET /api/collection/logistics/api/compatible_facilities_for_logistics API handling
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13

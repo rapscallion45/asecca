@@ -56,7 +56,7 @@ interface ICollectionFormLogisticsTableProps {
  *
  * @component
  * @param {ICollectionFormLogisticsTableProps} props - component props
- * @returns {FC} - costs config table functional component
+ * @returns {FC} - collection form logistics table functional component
  */
 const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
   props

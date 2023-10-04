@@ -8,6 +8,7 @@ import themeReducer from './slices/themeSlice';
 import collectionsKanbanReducer from './slices/collectionsKanbanSlice';
 import collectionFormCostsReducer from './slices/collectionFormCostsSlice';
 import collectionFormLogisticsReducer from './slices/collectionFormLogisticsSlice';
+import collectionFormScheduleReducer from './slices/collectionFormScheduleSlice';
 
 /**
  * Configuration of the redux store to manage the global application state
@@ -29,6 +30,7 @@ const store = configureStore({
     collectionsKanban: collectionsKanbanReducer,
     collectionFormCosts: collectionFormCostsReducer,
     collectionFormLogistics: collectionFormLogisticsReducer,
+    collectionFormSchedule: collectionFormScheduleReducer,
   },
   // @ts-ignore
   middleware:

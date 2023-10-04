@@ -3,6 +3,8 @@ import { NextLayoutComponentType } from 'next';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { CacheProvider, EmotionCache } from '@emotion/react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -70,17 +72,19 @@ const AseccaApp: FC<IAseccaAppProps> = (props) => {
   const PageLayout = Component.Layout || DefaultLayout;
 
   return (
-    <Provider store={store}>
-      <CacheProvider value={emotionCache}>
-        <ThemeConfig emotionCache={emotionCache}>
-          <AlertProvider>
-            <PageLayout>
-              <Component {...pageProps} />
-            </PageLayout>
-          </AlertProvider>
-        </ThemeConfig>
-      </CacheProvider>
-    </Provider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Provider store={store}>
+        <CacheProvider value={emotionCache}>
+          <ThemeConfig emotionCache={emotionCache}>
+            <AlertProvider>
+              <PageLayout>
+                <Component {...pageProps} />
+              </PageLayout>
+            </AlertProvider>
+          </ThemeConfig>
+        </CacheProvider>
+      </Provider>
+    </LocalizationProvider>
   );
 };
 

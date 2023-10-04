@@ -1,6 +1,7 @@
 import {
   ICollectionFormCostsSaveDataPayload,
   ICollectionFormLogisticsSaveDataPayload,
+  ICollectionFormScheduleSaveDataPayload,
 } from '@/lib/api/api-types';
 
 /**
@@ -125,12 +126,60 @@ async function getLogisticsTypes() {
   );
 }
 
+/**
+ * GET request to /api/collection/schedule/api/get
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getSchedule(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/schedule/api/get?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/schedule/api/set
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ * @memberof Services
+ *
+ * @param {ICollectionFormScheduleSaveDataPayload} body - Schedule data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function setSchedule(body: ICollectionFormScheduleSaveDataPayload) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/schedule/api/set`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
   getLogistics,
   setLogistics,
   getLogisticsTypes,
+  getSchedule,
+  setSchedule,
 };
 
 export default collectionFormService;

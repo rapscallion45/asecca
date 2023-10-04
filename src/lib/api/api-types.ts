@@ -354,7 +354,7 @@ export interface ICollectionFormLogisticsData {
  * @since 0.0.13
  *
  * @typedef ICollectionFormLogisticsDataPayload
- * @prop {Array<ICollectionFormLogisticsData>} costs - logistics data for API request
+ * @prop {Array<ICollectionFormLogisticsData>} rows - logistics data for API request
  */
 export interface ICollectionFormLogisticsDataPayload {
   rows: Array<ICollectionFormLogisticsData>;
@@ -391,7 +391,7 @@ export interface ICollectionFormLogisticsTypesData {
 }
 
 /**
- * Collection Form Logistics GET request data payload type definition
+ * Collection Form Logistics Types GET request data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
@@ -401,4 +401,46 @@ export interface ICollectionFormLogisticsTypesData {
  */
 export interface ICollectionFormLogisticsTypesDataPayload {
   logistics_types: Array<ICollectionFormLogisticsTypesData>;
+}
+
+/**
+ * Collection Form Schedule data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleData
+ * @prop {string | null} preferred_date - date string in YYYY-MM-DD format
+ * @prop {string | null} preferred_time - time string in hh:mm format
+ * @prop {string | null} notes - additional notes string
+ */
+export interface ICollectionFormScheduleData {
+  preferred_date: string | null;
+  preferred_time: string | null;
+  notes: string | null;
+}
+
+/**
+ * Collection Form Schedule GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleDataPayload
+ */
+export interface ICollectionFormScheduleDataPayload
+  extends ICollectionFormScheduleData {}
+
+/**
+ * Collection Form Schedule POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ */
+export interface ICollectionFormScheduleSaveDataPayload
+  extends ICollectionFormScheduleData {
+  collection: string;
 }

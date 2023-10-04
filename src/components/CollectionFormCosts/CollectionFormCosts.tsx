@@ -46,7 +46,7 @@ interface ICollectionFormCostsTableProps {
  *
  * @component
  * @param {ICollectionFormCostsTableProps} props - component props
- * @returns {FC} - costs config table functional component
+ * @returns {FC} - collection form costs table functional component
  */
 const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
   const { collectionId } = props;
