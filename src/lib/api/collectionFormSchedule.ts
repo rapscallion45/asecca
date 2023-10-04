@@ -1,5 +1,5 @@
 import base64 from 'base-64';
-import { ICollectionFormLogisticsSaveDataPayload } from './api-types';
+import { ICollectionFormScheduleSaveDataPayload } from './api-types';
 
 /**
  * configuration param environment variables for staging DB
@@ -10,7 +10,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
 
 /**
- * GET request to Asecca API /collection/logistics/api/logistics
+ * GET request to Asecca API /collection/schedule/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
@@ -19,7 +19,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  * @param {string} collectionId - requested collection ID
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function getLogistics(collectionId: string | string[]) {
+export async function getSchedule(collectionId: string | string[]) {
   /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',
@@ -31,15 +31,15 @@ export async function getLogistics(collectionId: string | string[]) {
     }),
   };
 
-  /* fetch the costs */
+  /* fetch the schedule */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/logistics/api/logistics?collection=${collectionId}`,
+    `${STAGING_DB_REST_API_URL}/collection/schedule/api/get?collection=${collectionId}`,
     requestOptions
   );
 }
 
 /**
- * POST request to Asecca API /collection/logistics/api/logistics
+ * POST request to Asecca API /collection/schedule/api/set
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
@@ -48,8 +48,8 @@ export async function getLogistics(collectionId: string | string[]) {
  * @param {ICollectionFormLogisticsSaveDataPayload} body - data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function setLogistics(
-  body: ICollectionFormLogisticsSaveDataPayload
+export async function setSchedule(
+  body: ICollectionFormScheduleSaveDataPayload
 ) {
   /* setup POST request options with basic auth */
   const requestOptions = {
@@ -65,35 +65,7 @@ export async function setLogistics(
 
   /* send the costs */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/logistics/api/logistics`,
-    requestOptions
-  );
-}
-
-/**
- * GET request to Asecca API /collection/logistics/api/compatible_facilities_for_logistics
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.13
- * @memberof AseccaAPI
- *
- * @returns {Promise<any>} - resulting Promise of the fetch request
- */
-export async function getLogisticsTypes() {
-  /* setup GET request options with basic auth */
-  const requestOptions = {
-    method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${base64.encode(
-        `${STAGING_DB_USERNAME}:${STAGING_DB_PASSWORD}`
-      )}`,
-    }),
-  };
-
-  /* fetch the costs */
-  return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/logistics/api/compatible_facilities_for_logistics`,
+    `${STAGING_DB_REST_API_URL}/collection/schedule/api/set`,
     requestOptions
   );
 }

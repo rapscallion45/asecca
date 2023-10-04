@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { IProxyErrorPayload } from '@/lib/api/api-types';
-import { getLogisticsTypes } from '@/lib/api';
+import { getLogistics, setLogistics } from '@/lib/api';
 
 /**
- * Proxy for handling requests to ASECCA Collection Form
- * Logistics Types API.
+ * Proxy for handling requests to ASECCA Collection Form Logistics API.
  *
  * @see See [Next.js API route support](https://nextjs.org/docs/api-routes/introduction)
  *
@@ -20,15 +19,38 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<IProxyErrorPayload | null>
 ) => {
-  const { method } = req;
+  const { method, query, body } = req;
 
   /* determine which request type this is */
   switch (method) {
+    case 'POST':
+      /* call POST api */
+      try {
+        /* try proxying request to ASECCA API */
+        const response = await setLogistics(body);
+
+        /* send back server response */
+        if (response.status === 200) {
+          return res.status(200).json({ message: 'Ok' });
+        }
+        return res.status(response.status).json({
+          message: response.statusText,
+        });
+      } catch (error) {
+        return res.status(501).json({ message: error as string });
+      }
     case 'GET':
+      /* check if we have correct query param, if not return error */
+      if (!query.collection) {
+        return res.status(422).json({
+          message: 'Unproccesable request, no ID provided.',
+        });
+      }
+
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await getLogisticsTypes();
+        const response = await getLogistics(query.collection);
 
         /* send back server response */
         if (response.status === 200) {
