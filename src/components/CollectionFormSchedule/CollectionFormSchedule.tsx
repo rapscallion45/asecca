@@ -125,7 +125,7 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
               value={dayjs(scheduleData.preferred_date)}
               onChange={(newValue: Dayjs | null) =>
                 handleEdit(
-                  `${newValue?.year()}/${newValue?.month()}/${newValue?.day()}`,
+                  newValue ? newValue.format('YYYY/MM/DD') : '',
                   'preferred_date'
                 )
               }
@@ -140,7 +140,7 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
               // onChange={(newValue) => setValue(newValue)}
               onChange={(newValue: Dayjs | null) =>
                 handleEdit(
-                  `${newValue?.hour()}:${newValue?.minute()}`,
+                  newValue ? newValue.format('hh:mm') : '',
                   'preferred_time'
                 )
               }
