@@ -31,6 +31,13 @@ const collectionsKanbanHandler = async (
   /* determine which request type this is */
   switch (method) {
     case 'GET':
+      /* check if we have correct query param, if not return error */
+      if (!project_id) {
+        return res.status(422).json({
+          message: 'Unproccesable request, no ID provided.',
+        });
+      }
+
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */

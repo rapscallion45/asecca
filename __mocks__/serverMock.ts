@@ -1,5 +1,6 @@
 import { setupServer } from 'msw/node';
 import { costsConfigMockHandlers } from './costsConfigMockServerHandlers';
+import { collectionsKanbanMockHandlers } from './collectionsKanbanMockServerHandler';
 import { collectionFormCostsMockHandlers } from './collectionFormCostsMockServerHandlers';
 import { collectionFormScheduleMockHandlers } from './collectionFormScheduleMockServerHandlers';
 import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMockServerHandler';
@@ -11,8 +12,9 @@ import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMo
  * @since 0.0.0
  */
 const mockHandlers = [
-  ...collectionFormCostsMockHandlers,
   ...costsConfigMockHandlers,
+  ...collectionsKanbanMockHandlers,
+  ...collectionFormCostsMockHandlers,
   ...collectionFormScheduleMockHandlers,
   ...collectionFormLogisticsMockHandlers,
 ];
