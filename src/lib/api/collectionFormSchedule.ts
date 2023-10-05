@@ -63,7 +63,7 @@ export async function setSchedule(
     body: JSON.stringify(body),
   };
 
-  /* send the costs */
+  /* send the schedule */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/schedule/api/set`,
     requestOptions

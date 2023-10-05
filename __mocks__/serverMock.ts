@@ -4,6 +4,8 @@ import { collectionsKanbanMockHandlers } from './collectionsKanbanMockServerHand
 import { collectionFormCostsMockHandlers } from './collectionFormCostsMockServerHandlers';
 import { collectionFormScheduleMockHandlers } from './collectionFormScheduleMockServerHandlers';
 import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMockServerHandler';
+import { collectionFormServicesMockHandlers } from './collectionFormServicesMockServerHandler';
+import { devicesTableMockHandlers } from './devicesTableMockServerHandler';
 
 /**
  * configuration of the mock server for running tests
@@ -17,6 +19,8 @@ const mockHandlers = [
   ...collectionFormCostsMockHandlers,
   ...collectionFormScheduleMockHandlers,
   ...collectionFormLogisticsMockHandlers,
+  ...collectionFormServicesMockHandlers,
+  ...devicesTableMockHandlers,
 ];
 const server = setupServer(...mockHandlers);
 export default server;

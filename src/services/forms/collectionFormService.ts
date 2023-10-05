@@ -2,6 +2,7 @@ import {
   ICollectionFormCostsSaveDataPayload,
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
+  ICollectionFormServicesSaveDataPayload,
 } from '@/lib/api/api-types';
 
 /**
@@ -172,6 +173,52 @@ async function setSchedule(body: ICollectionFormScheduleSaveDataPayload) {
   return fetch(`/api/collection/schedule/api/set`, requestOptions);
 }
 
+/**
+ * GET request to /api/collection/services/api/get
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getServices(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/services/api/get?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/services/api/set
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof Services
+ *
+ * @param {ICollectionFormServicesSaveDataPayload} body - Schedule data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function setServices(body: ICollectionFormServicesSaveDataPayload) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/services/api/set`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -180,6 +227,8 @@ const collectionFormService = {
   getLogisticsTypes,
   getSchedule,
   setSchedule,
+  getServices,
+  setServices,
 };
 
 export default collectionFormService;

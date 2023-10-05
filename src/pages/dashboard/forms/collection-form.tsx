@@ -4,6 +4,7 @@ import CollectionFormCosts from '@/components/CollectionFormCosts/CollectionForm
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import CollectionFormLogistics from '@/components/CollectionFormLogistics/CollectionFormLogistics';
 import CollectionFormSchedule from '@/components/CollectionFormSchedule/CollectionFormSchedule';
+import CollectionFormServices from '@/components/CollectionFormServices/CollectionFormServices';
 
 /**
  * Collection Form Page
@@ -26,15 +27,18 @@ const CollectionFormPage: NextPageWithLayout = () => (
       </Typography>
     </Box>
     {/* load collection form with fetched data */}
-    <Box display="flex" flexWrap="wrap">
-      <Box width="90ch" mr={2} mb={2}>
+    <Box maxWidth={900}>
+      <Box mb={2}>
         <CollectionFormCosts collectionId="123456" />
       </Box>
-      <Box width="75ch" mr={2} mb={2}>
+      <Box mb={2}>
         <CollectionFormLogistics collectionId="123456" />
       </Box>
-      <Box width="28ch" mr={2} mb={2}>
+      <Box mb={2}>
         <CollectionFormSchedule collectionId="123456" />
+      </Box>
+      <Box mb={2}>
+        <CollectionFormServices collectionId="123456" />
       </Box>
     </Box>
   </Box>
