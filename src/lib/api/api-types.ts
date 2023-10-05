@@ -508,3 +508,131 @@ export interface ICollectionFormScheduleSaveDataPayload
   extends ICollectionFormScheduleData {
   collection: string;
 }
+
+/**
+ * Collection Form Services Doesn't Retain Ownership value
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof AseccaAPI
+ *
+ * @typedef CollectionFormServicesDoesntRetainOwnership
+ */
+export type CollectionFormServicesDoesntRetainOwnership =
+  | 'DoesntRetainOwnership';
+
+/**
+ * Collection Form Services Ownership Retention type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesOwnershipRetention
+ * @prop {boolean} redelivery_requested - device redelivery requested flag
+ */
+export interface ICollectionFormServicesOwnershipRetention {
+  redelivery_requested: boolean;
+}
+
+/**
+ * Collection Form Services Recycling data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesRecyclingData
+ * @prop {boolean} decommissioning_requested - device decommission requested flag
+ * @prop {CollectionFormServicesDoesntRetainOwnership | ICollectionFormServicesOwnershipRetention} ownership_retention - device ownership retention state
+ */
+export interface ICollectionFormServicesRecyclingData {
+  decommissioning_requested: boolean;
+  ownership_retention:
+    | CollectionFormServicesDoesntRetainOwnership
+    | ICollectionFormServicesOwnershipRetention;
+}
+
+/**
+ * Collection Form Services Recycling type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesRecyclingData
+ * @prop {boolean} decommissioning_requested - device decommission requested flag
+ * @prop {ICollectionFormServicesRecyclingData} Recycling - recycling data
+ */
+export interface ICollectionFormServicesRecycling {
+  Recycling: ICollectionFormServicesRecyclingData;
+}
+
+/**
+ * Collection Form Services Destruction data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesDestructionData
+ * @prop {boolean} decommissioning_requested - device decommission requested flag
+ */
+export interface ICollectionFormServicesDestructionData {
+  decommissioning_requested: boolean;
+}
+
+/**
+ * Collection Form Services Destruction type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesDestructionData
+ * @prop {ICollectionFormServicesDestructionData} Destruction - destruction data
+ */
+export interface ICollectionFormServicesDestruction {
+  Destruction: ICollectionFormServicesDestructionData;
+}
+
+/**
+ * Collection Form Services data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesData
+ * @prop {string | null} preferred_date - date string in YYYY-MM-DD format
+ * @prop {string | null} preferred_time - time string in hh:mm format
+ * @prop {string | null} notes - additional notes string
+ */
+export interface ICollectionFormServicesData {
+  on_site_processing: boolean;
+  service_type:
+    | string
+    | ICollectionFormServicesRecycling
+    | ICollectionFormServicesDestruction;
+}
+
+/**
+ * Collection Form Services GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesDataPayload
+ */
+export interface ICollectionFormServicesDataPayload
+  extends ICollectionFormServicesData {}
+
+/**
+ * Collection Form Services POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ */
+export interface ICollectionFormServicesSaveDataPayload
+  extends ICollectionFormServicesData {
+  collection: string;
+}

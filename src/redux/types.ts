@@ -13,6 +13,8 @@ import {
   ICollectionFormLogisticsTypesDataPayload,
   ICollectionFormScheduleDataPayload,
   ICollectionFormScheduleSaveDataPayload,
+  ICollectionFormServicesDataPayload,
+  ICollectionFormServicesSaveDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -310,6 +312,70 @@ export interface ICollectionFormScheduleState {
   loading: boolean;
   data: ICollectionFormScheduleDataPayload;
   dataShadow: ICollectionFormScheduleDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+}
+
+/**
+ * Fetch Collection Form Services args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef IFetchCollectionFormServicesByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormServicesByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Services args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ISaveCollectionFormServicesByCollectionIdArgs
+ * @prop {ICollectionFormServicesSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormServicesByCollectionIdArgs {
+  data: ICollectionFormServicesSaveDataPayload;
+}
+
+/**
+ * Collection Form Services edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesEditCostsPayload
+ * @prop {string} itemKey - data item key to be edited
+ * @prop {string | null} value - updated form value
+ */
+export interface ICollectionFormServicesEditSchedulePayload {
+  itemKey: string;
+  value: string | boolean | null;
+}
+
+/**
+ * Collection Form Services state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesState
+ * @prop {boolean} loading - services loading state
+ * @prop {ICollectionFormServicesDataPayload} data - currently loaded services data
+ * @prop {ICollectionFormServicesDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of services
+ * @prop {boolean} saving - saving state flag of services data
+ * @prop {boolean} edited - services data has been edited flag
+ */
+export interface ICollectionFormServicesState {
+  loading: boolean;
+  data: ICollectionFormServicesDataPayload;
+  dataShadow: ICollectionFormServicesDataPayload;
   error?: string;
   saving: boolean;
   edited: boolean;

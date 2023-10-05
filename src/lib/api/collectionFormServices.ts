@@ -1,25 +1,25 @@
 import base64 from 'base-64';
-import { ICollectionFormScheduleSaveDataPayload } from './api-types';
+import { ICollectionFormServicesSaveDataPayload } from './api-types';
 
 /**
  * configuration param environment variables for staging DB
  *
- * @since 0.0.13
+ * @since 0.0.14
  */
 const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
 
 /**
- * GET request to Asecca API /collection/schedule/api/get
+ * GET request to Asecca API /collection/services/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.13
+ * @since 0.0.14
  * @memberof AseccaAPI
  *
  * @param {string} collectionId - requested collection ID
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function getSchedule(collectionId: string | string[]) {
+export async function getServices(collectionId: string | string[]) {
   /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',
@@ -33,23 +33,23 @@ export async function getSchedule(collectionId: string | string[]) {
 
   /* fetch the schedule */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/schedule/api/get?collection=${collectionId}`,
+    `${STAGING_DB_REST_API_URL}/collection/services/api/get?collection=${collectionId}`,
     requestOptions
   );
 }
 
 /**
- * POST request to Asecca API /collection/schedule/api/set
+ * POST request to Asecca API /collection/services/api/set
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.13
+ * @since 0.0.14
  * @memberof AseccaAPI
  *
- * @param {ICollectionFormLogisticsSaveDataPayload} body - data ID for the request
+ * @param {ICollectionFormServicesSaveDataPayload} body - data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function setSchedule(
-  body: ICollectionFormScheduleSaveDataPayload
+export async function setServices(
+  body: ICollectionFormServicesSaveDataPayload
 ) {
   /* setup POST request options with basic auth */
   const requestOptions = {
@@ -63,9 +63,9 @@ export async function setSchedule(
     body: JSON.stringify(body),
   };
 
-  /* send the schedule */
+  /* send the services */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/schedule/api/set`,
+    `${STAGING_DB_REST_API_URL}/collection/services/api/set`,
     requestOptions
   );
 }

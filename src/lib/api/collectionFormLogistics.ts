@@ -91,7 +91,7 @@ export async function getLogisticsTypes() {
     }),
   };
 
-  /* fetch the costs */
+  /* fetch the logistics */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/logistics/api/compatible_facilities_for_logistics`,
     requestOptions
