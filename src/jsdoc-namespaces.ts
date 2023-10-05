@@ -12,3 +12,4 @@
 /** @namespace NotificationsReduxSlice */
 /** @namespace ThemeReduxSlice */
 /** @namespace KanbanReduxSlice */
+/** @namespace CollectionFormReduxSlice */

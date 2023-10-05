@@ -15,7 +15,10 @@ import {
   editCostsConfig,
 } from '@/redux/slices/costsConfigSlice';
 import DataTable from '@/components/DataTable/DataTable';
-import { IDataTableColumn } from '@/components/DataTable/types';
+import {
+  DataTableRowCellValue,
+  IDataTableColumn,
+} from '@/components/DataTable/types';
 import { UserPermissionLevel } from '@/redux/types';
 import columns from './costsConfigTableColumns';
 
@@ -121,10 +124,10 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
    * @param {number} rowIdx - table row index to be updated
    */
   const handleEditCellValue = useCallback(
-    (value: string | null, colKey: string, rowIdx: number) => {
+    (value: DataTableRowCellValue, colKey: string, rowIdx: number) => {
       dispatch(
         editCostsConfig({
-          value: value !== '--' ? value : null,
+          value: value !== '--' ? value : (null as DataTableRowCellValue),
           colKey: colKey as keyof ICostsConfigData,
           rowIdx,
         })
@@ -142,10 +145,10 @@ const CostsConfigTable: FC<ICostsConfigTableProps> = (props) => {
    * @method
    * @param {number} rowIdx - table row index to get value from
    * @param {IDataTableColumn} column - column to get value from
-   * @return {string | null | undefined} - cell value, can be null or undefined
+   * @return {DataTableRowCellValue} - cell value, can be null or undefined
    */
   const handleGetCellValue = useCallback(
-    (rowIdx: number, column: IDataTableColumn): string | null | undefined => {
+    (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue => {
       /* apply Prevailing column logic or simply return value */
       if (column.label === 'Prevailing')
         return getCostsConfigPrevailingCharge(data?.costs[rowIdx], permission);

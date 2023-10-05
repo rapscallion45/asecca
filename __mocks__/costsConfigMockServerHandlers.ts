@@ -6,16 +6,16 @@ import {
 } from '@/lib/api/api-types';
 
 /**
- * mock server API handlers shared between all tests
+ * Costs Config mock server API handlers shared between all tests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
+ * @since 0.0.13
  */
 
 /**
  * GET /costs_config definitions
  *
- * @since 0.0.0
+ * @since 0.0.13
  */
 /** shape of the "req.body"  */
 type CostsConfigGetRequestBody = null;
@@ -29,7 +29,7 @@ type CostsConfigGetResponseBody = ICostsConfigDataPayload;
 /**
  * POST /costs_config definitions
  *
- * @since 0.0.0
+ * @since 0.0.13
  */
 /** shape of the "req.body" */
 type CostsConfigPostRequestBody = null;
@@ -43,9 +43,9 @@ type CostsConfigPostResponseBody = IProxyErrorPayload | null;
 /**
  * list of available test/mock handlers
  *
- * @since 0.0.0
+ * @since 0.0.13
  */
-export const mockHandlers = [
+export const costsConfigMockHandlers = [
   /**
    * Test/mock GET Costs Config NextJS PROXY
    *
@@ -107,7 +107,7 @@ export const mockHandlers = [
   ),
 ];
 
-const serverMockHandlers = {
-  mockHandlers,
+const mockHandlers = {
+  costsConfigMockHandlers,
 };
-export default serverMockHandlers;
+export default mockHandlers;

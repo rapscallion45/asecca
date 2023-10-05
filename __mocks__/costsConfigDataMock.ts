@@ -6,7 +6,7 @@ import { ICostsConfigDataPayload } from '@/lib/api/api-types';
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  */
-const assetDataMock: ICostsConfigDataPayload = {
+const costsConfigDataMock: ICostsConfigDataPayload = {
   costs: [
     {
       application: 'Per Device',
@@ -33,4 +33,4 @@ const assetDataMock: ICostsConfigDataPayload = {
   ],
 };
 
-export default assetDataMock;
+export default costsConfigDataMock;

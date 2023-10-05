@@ -265,3 +265,182 @@ export interface IKanbanBoard {
 export interface IKanbanBoardCollectionsDataPayload {
   collections: IKanbanBoard;
 }
+
+/**
+ * Collection Form Costs data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsData
+ * @prop {string} chargeable - name of this costs row
+ * @prop {string | null} global_charge - global charge currency value
+ * @prop {string | null} customer_charge - customer charge currency value
+ * @prop {string | null} project_charge - project charge currency value
+ * @prop {string | null} collection_charge - collection charge currency value
+ * @prop {string | null} effective_charge - effective charge currency value
+ */
+export interface ICollectionFormCostsData {
+  chargeable: string;
+  global_charge?: string | null;
+  customer_charge?: string | null;
+  project_charge?: string | null;
+  collection_charge?: string | null;
+  effective_charge: string | null;
+}
+
+/**
+ * Collection Form Costs GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsDataPayload
+ * @prop {Array<ICollectionFormCostsData>} costs - costs data for API request
+ */
+export interface ICollectionFormCostsDataPayload {
+  rows: Array<ICollectionFormCostsData>;
+}
+
+/**
+ * Collection Form Costs POST data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsSaveDataCosts
+ * @prop {string} chargeable - Charge name
+ * @prop {string | null} charge - charge currency amount to save to API
+ */
+export interface ICollectionFormCostsSaveDataCosts {
+  chargeable: string;
+  charge: string | null;
+}
+
+/**
+ * Collection Form Costs POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormCostsSaveDataCosts>} rows - costs data to save to API
+ */
+export interface ICollectionFormCostsSaveDataPayload {
+  collection: string;
+  rows: Array<ICollectionFormCostsSaveDataCosts>;
+}
+
+/**
+ * Collection Form Logistics data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsData
+ * @prop {string} logistics_type - name of this logistics type
+ * @prop {Array<string>} visiting_facilities - array of facility names for type
+ */
+export interface ICollectionFormLogisticsData {
+  logistics_type: string;
+  visiting_facilities: Array<string>;
+}
+
+/**
+ * Collection Form Logistics GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsDataPayload
+ * @prop {Array<ICollectionFormLogisticsData>} rows - logistics data for API request
+ */
+export interface ICollectionFormLogisticsDataPayload {
+  rows: Array<ICollectionFormLogisticsData>;
+}
+
+/**
+ * Collection Form Logistics POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormLogisticsSaveDataCosts>} rows - costs data to save to API
+ */
+export interface ICollectionFormLogisticsSaveDataPayload {
+  collection: string;
+  rows: Array<ICollectionFormLogisticsData>;
+}
+
+/**
+ * Collection Form Logistics Types data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsTypesData
+ * @prop {string} logistics_type - name of this logistics type
+ * @prop {Array<string>} compatible_facilities - array of facility names for type
+ */
+export interface ICollectionFormLogisticsTypesData {
+  logistics_type: string;
+  compatible_facilities: Array<string>;
+}
+
+/**
+ * Collection Form Logistics Types GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsTypesDataPayload
+ * @prop {Array<ICollectionFormLogisticsTypesData>} logistics_types - logistics types data
+ */
+export interface ICollectionFormLogisticsTypesDataPayload {
+  logistics_types: Array<ICollectionFormLogisticsTypesData>;
+}
+
+/**
+ * Collection Form Schedule data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleData
+ * @prop {string | null} preferred_date - date string in YYYY-MM-DD format
+ * @prop {string | null} preferred_time - time string in hh:mm format
+ * @prop {string | null} notes - additional notes string
+ */
+export interface ICollectionFormScheduleData {
+  preferred_date: string | null;
+  preferred_time: string | null;
+  notes: string | null;
+}
+
+/**
+ * Collection Form Schedule GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleDataPayload
+ */
+export interface ICollectionFormScheduleDataPayload
+  extends ICollectionFormScheduleData {}
+
+/**
+ * Collection Form Schedule POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleSaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ */
+export interface ICollectionFormScheduleSaveDataPayload
+  extends ICollectionFormScheduleData {
+  collection: string;
+}

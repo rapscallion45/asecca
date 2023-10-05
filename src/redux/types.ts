@@ -6,7 +6,15 @@ import {
   ICostsConfigSaveDataPayload,
   IKanbanBoardColumn,
   IKanbanBoard,
+  ICollectionFormCostsDataPayload,
+  ICollectionFormCostsSaveDataPayload,
+  ICollectionFormLogisticsDataPayload,
+  ICollectionFormLogisticsSaveDataPayload,
+  ICollectionFormLogisticsTypesDataPayload,
+  ICollectionFormScheduleDataPayload,
+  ICollectionFormScheduleSaveDataPayload,
 } from '@/lib/api/api-types';
+import { DataTableRowCellValue } from '@/components/DataTable/types';
 
 /**
  * Type and interface definitions for Redux actions
@@ -34,6 +42,7 @@ export type ThemeType = 'light' | 'dark';
  *
  * @typedef IFetchCostsConfigBySourceIdArgs
  * @prop {CostsConfigCostSource} source - costs config cost source option
+ * @prop {string} dataId - costs config ID to be fetched
  */
 export interface IFetchCostsConfigBySourceIdArgs {
   source: CostsConfigCostSource;
@@ -62,12 +71,12 @@ export interface ISaveCostsConfigBySourceIdArgs {
  * @typedef ICostsConfigEditCostsPayload
  * @prop {string} colKey - table column key to be edited
  * @prop {number} rowIdx - table row index of the edited cost
- * @prop {string | null} value - updated column value
+ * @prop {DataTableRowCellValue} value - updated column value
  */
 export interface ICostsConfigEditCostsPayload {
   colKey: string;
   rowIdx: number;
-  value: string | null;
+  value: DataTableRowCellValue;
 }
 
 /**
@@ -88,6 +97,219 @@ export interface ICostsConfigState {
   loading: boolean;
   data: ICostsConfigDataPayload;
   dataShadow: ICostsConfigDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+}
+
+/**
+ * Fetch Collection Form Costs args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef IFetchCollectionFormCostsByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormCostsByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Costs args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ISaveCollectionFormCostsByCollectionIdArgs
+ * @prop {ICollectionFormCostsSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormCostsByCollectionIdArgs {
+  data: ICollectionFormCostsSaveDataPayload;
+}
+
+/**
+ * Collection Form Costs edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsEditCostsPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormCostsEditCostsPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Costs state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormCostsState
+ * @prop {boolean} loading - costs loading state
+ * @prop {ICollectionFormCostsDataPayload} data - currently loaded costs data
+ * @prop {ICollectionFormCostsDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of costs
+ * @prop {boolean} saving - saving state flag of costs data
+ * @prop {boolean} edited - costs data has been edited flag
+ */
+export interface ICollectionFormCostsState {
+  loading: boolean;
+  data: ICollectionFormCostsDataPayload;
+  dataShadow: ICollectionFormCostsDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+}
+
+/**
+ * Fetch Collection Form Logistics args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef IFetchCollectionFormLogisticsByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormLogisticsByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Logistics args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ISaveCollectionFormLogisticsByCollectionIdArgs
+ * @prop {ICollectionFormLogisticsSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormLogisticsByCollectionIdArgs {
+  data: ICollectionFormLogisticsSaveDataPayload;
+}
+
+/**
+ * Collection Form Logistics edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsEditCostsPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormLogisticsEditLogisticsPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Logistics delete redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsDeleteLogisticsPayload
+ * @prop {number} rowIdx - table row index to be deleted
+ */
+export interface ICollectionFormLogisticsDeleteLogisticsPayload {
+  rowIdx: number;
+}
+
+/**
+ * Collection Form Logistics state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormLogisticsState
+ * @prop {boolean} loading - logistics loading state
+ * @prop {ICollectionFormLogisticsDataPayload} data - currently loaded logistics data
+ * @prop {ICollectionFormLogisticsDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of costs
+ * @prop {boolean} saving - saving state flag of costs data
+ * @prop {boolean} edited - costs data has been edited flag
+ * @prop {boolean} loadingTypes - loading logistics types from API
+ * @prop {ICollectionFormLogisticsTypesDataPayload} types - logistics types from API
+ */
+export interface ICollectionFormLogisticsState {
+  loading: boolean;
+  data: ICollectionFormLogisticsDataPayload;
+  dataShadow: ICollectionFormLogisticsDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+  loadingTypes: boolean;
+  types: ICollectionFormLogisticsTypesDataPayload;
+}
+
+/**
+ * Fetch Collection Form Schedule args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef IFetchCollectionFormScheduleByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormScheduleByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Schedule args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ISaveCollectionFormScheduleByCollectionIdArgs
+ * @prop {ICollectionFormScheduleSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormScheduleByCollectionIdArgs {
+  data: ICollectionFormScheduleSaveDataPayload;
+}
+
+/**
+ * Collection Form Schedule edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleEditCostsPayload
+ * @prop {string} itemKey - data item key to be edited
+ * @prop {string | null} value - updated form value
+ */
+export interface ICollectionFormScheduleEditSchedulePayload {
+  itemKey: string;
+  value: string | null;
+}
+
+/**
+ * Collection Form Schedule state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.13
+ *
+ * @typedef ICollectionFormScheduleState
+ * @prop {boolean} loading - schedule loading state
+ * @prop {ICollectionFormScheduleDataPayload} data - currently loaded schedule data
+ * @prop {ICollectionFormScheduleDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of schedule
+ * @prop {boolean} saving - saving state flag of schedule data
+ * @prop {boolean} edited - schedule data has been edited flag
+ */
+export interface ICollectionFormScheduleState {
+  loading: boolean;
+  data: ICollectionFormScheduleDataPayload;
+  dataShadow: ICollectionFormScheduleDataPayload;
   error?: string;
   saving: boolean;
   edited: boolean;
@@ -243,7 +465,13 @@ export interface IThemeState {
  * @since 0.0.1
  *
  * @typedef IKanbanBoardState
+ *
+ * @prop {boolean} loading - schedule loading state
  * @prop {Array<IKanbanBoard>} data - Kanban board datasets
+ * @prop {Array<IKanbanBoard>} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of kanban
+ * @prop {boolean} saving - saving state flag of kanban data
+ * @prop {boolean} edited - kanban data has been edited flag
  */
 export interface IKanbanBoardState {
   loading: boolean;
@@ -304,10 +532,8 @@ export interface ISetKanbanBoardActivePayload {
  * @since 0.0.9
  *
  * @typedef IAddKanbanBoardGroupPayload
- * @prop {string} title - task title
- * @prop {string} description - task description
- * @prop {sting} status - task status
- * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
+ * @prop {string} name - group name
+ * @prop {sting} status - group status
  * @prop {number} newColIndex - index of added column
  */
 export interface IAddKanbanBoardGroupPayload {
@@ -344,10 +570,8 @@ export interface IEditKanbanBoardGroupPayload {
  * @since 0.0.1
  *
  * @typedef IAddKanbanBoardTaskPayload
- * @prop {string} title - task title
- * @prop {string} description - task description
+ * @prop {string} title - task name
  * @prop {sting} status - task status
- * @prop {Array<IKanbanBoardTask>} subtasks - task's subtasks
  * @prop {number} newColIndex - index of added column
  */
 export interface IAddKanbanBoardTaskPayload {

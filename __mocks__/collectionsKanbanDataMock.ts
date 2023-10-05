@@ -6,7 +6,7 @@ import { IKanbanBoardCollectionsDataPayload } from '@/lib/api/api-types';
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.8
  */
-const kanbanCollectionsDataMock: IKanbanBoardCollectionsDataPayload = {
+const collectionsKanbanDataMock: IKanbanBoardCollectionsDataPayload = {
   collections: {
     name: 'Collection',
     columns: [
@@ -1167,4 +1167,4 @@ const kanbanCollectionsDataMock: IKanbanBoardCollectionsDataPayload = {
   },
 };
 
-export default kanbanCollectionsDataMock;
+export default collectionsKanbanDataMock;

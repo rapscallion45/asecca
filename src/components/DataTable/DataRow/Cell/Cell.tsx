@@ -26,7 +26,7 @@ interface ICellProps {
  *
  * @component
  * @param {ICellProps} props - component props
- * @returns {FC} - data table row functional component
+ * @returns {FC} - data table cell functional component
  */
 const Cell: FC<ICellProps> = (props) => {
   const { value, sx } = props;
