@@ -18,7 +18,7 @@ import { getDevices } from '@/lib/api';
  * @param {NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>} res - the response data
  * @returns {NextApiResponse} - handler response
  */
-const costsConfigHandler = async (
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ICostsConfigDataPayload | IProxyErrorPayload | null>
 ) => {
@@ -50,4 +50,4 @@ const costsConfigHandler = async (
   }
 };
 
-export default costsConfigHandler;
+export default handler;

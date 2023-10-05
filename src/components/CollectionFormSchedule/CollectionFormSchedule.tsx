@@ -114,12 +114,14 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
         <Box
           component="form"
           sx={{
-            '& .MuiTextField-root': { my: 1, width: '25ch' },
+            '& .MuiTextField-root': { my: 1 },
           }}
           noValidate
           autoComplete="off"
+          display="flex"
+          flexDirection="column"
         >
-          <div>
+          <Box display="flex">
             <DatePicker
               label="Preferred Date"
               value={dayjs(scheduleData.preferred_date)}
@@ -129,15 +131,13 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
                   'preferred_date'
                 )
               }
+              sx={{ mr: 2 }}
             />
-          </div>
-          <div>
             <TimeField
               label="Preferred Time"
               value={dayjs(
                 `${scheduleData.preferred_date}T${scheduleData.preferred_time}`
               )}
-              // onChange={(newValue) => setValue(newValue)}
               onChange={(newValue: Dayjs | null) =>
                 handleEdit(
                   newValue ? newValue.format('hh:mm') : '',
@@ -145,20 +145,19 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
                 )
               }
             />
-          </div>
-          <div>
-            <TextField
-              id="schedule-notes-multiline"
-              label="Notes"
-              multiline
-              maxRows={4}
-              variant="standard"
-              value={scheduleData.notes}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                handleEdit(event.target.value, 'notes');
-              }}
-            />
-          </div>
+          </Box>
+          <TextField
+            id="schedule-notes-multiline"
+            label="Notes"
+            multiline
+            maxRows={4}
+            variant="standard"
+            value={scheduleData.notes}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              handleEdit(event.target.value, 'notes');
+            }}
+            color="secondary"
+          />
         </Box>
         <Box
           sx={{

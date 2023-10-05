@@ -150,6 +150,70 @@ export interface ICostsConfigSaveDataPayload {
 }
 
 /**
+ * Devices Table data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef IDevicesTableData
+ * @prop {string} collection_id - ID of the collection
+ * @prop {string} collection_name - name of the the collection
+ * @prop {string} customer - customer name
+ * @prop {boolean} destroyed - device to be destroyed flag
+ * @prop {string} diagnostics_grade - diagnostic grade score
+ * @prop {string} fmip_status - FMIP status
+ * @prop {string} frp_status - FRP status
+ * @prop {string} imei - IMEI
+ * @prop {boolean} in_stock - device is in stock
+ * @prop {string} logged_ts - date device was logged
+ * @prop {string} manufacturer - manufacturer name
+ * @prop {string} mdm_status - MDM status
+ * @prop {string} model - model name
+ * @prop {string} overall_grade - device overall grade score
+ * @prop {string} project - project name
+ * @prop {boolean} quarantined - device quarantined flag
+ * @prop {string} serial - device serial number
+ * @prop {string} smash_test_grade - device smash test grade score
+ * @prop {boolean} to_be_destroyed - device to be destroyed flag
+ * @prop {string} uid - device UID
+ */
+export interface IDevicesTableData {
+  collection_id: string;
+  collection_name: string;
+  customer: string;
+  destroyed: boolean;
+  diagnostics_grade: string;
+  fmip_status: string;
+  frp_status: string;
+  imei: string;
+  in_stock: boolean;
+  logged_ts: string;
+  manufacturer: string;
+  mdm_status: string;
+  model: string;
+  overall_grade: string;
+  project: string;
+  quarantined: boolean;
+  serial: string;
+  smash_test_grade: string;
+  to_be_destroyed: boolean;
+  uid: string;
+}
+
+/**
+ * Devices Table GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef IDevicesTableDataPayload
+ * @prop {Array<IDevicesTableData>} devices - device data for API request
+ */
+export interface IDevicesTableDataPayload {
+  devices: Array<IDevicesTableData>;
+}
+
+/**
  * Proxy server error return data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}

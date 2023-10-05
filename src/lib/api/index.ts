@@ -1,5 +1,5 @@
 export { getCostsConfig, setCostsConfig } from './costsConfig';
-export { getDevices } from './devices';
+export { getDevices } from './devicesTable';
 export { getCollectionsKanban } from './collectionsKanban';
 export { getCosts, setCosts } from './collectionFormCosts';
 export {

@@ -7,8 +7,12 @@ import { AppDispatch } from '@/redux/store';
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
 import { addNotification } from '@/redux/slices/notificationsSlice';
-import devicesService from '@/services/tables/devicesService';
+import devicesService from '@/services/tables/devicesTableService';
 import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
+import {
+  IDevicesTableData,
+  IDevicesTableDataPayload,
+} from '@/lib/api/api-types';
 
 /**
  * Devices Table page
@@ -24,7 +28,7 @@ import { formatBooleanAGGrid, formatDateTimeAGGrid } from '@/utils';
 const DevicesTable: NextPageWithLayout = () => {
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
-  const [rowData, setRowData] = useState();
+  const [rowData, setRowData] = useState<Array<IDevicesTableData>>();
 
   /**
    * Device table column configuration
@@ -160,7 +164,7 @@ const DevicesTable: NextPageWithLayout = () => {
     }
 
     /* good response, set table local state data */
-    const data = await res.json();
+    const data: IDevicesTableDataPayload = await res.json();
     setRowData(data?.devices);
   }, [dispatch]);
 
@@ -178,7 +182,7 @@ const DevicesTable: NextPageWithLayout = () => {
         style={{ height: '100vh', width: '100%' }}
       >
         <AgGridReact
-          rowData={rowData}
+          rowData={rowData as any}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           autoGroupColumnDef={autoGroupColumnDef}
