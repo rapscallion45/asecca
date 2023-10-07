@@ -9,7 +9,7 @@ import {
  * object ('Recycling' or 'Destruction')
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.14
+ * @since 0.0.15
  *
  * @param {ICollectionFormServicesData} serviceData - data from collection form
  * @returns {string | undefined} - service type enum string or undefined

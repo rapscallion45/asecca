@@ -9,7 +9,7 @@ import {
  * can be an enum, or object, depending on the selected dropdown option
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.14
+ * @since 0.0.15
  *
  * @param {CollectionFormServicesType} type - services type value
  * @returns {CollectionFormServicesType | ICollectionFormServicesRecycling | ICollectionFormServicesDestruction} - service type data
