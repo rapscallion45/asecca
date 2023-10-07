@@ -10,3 +10,11 @@ export { default as getCollectionFormCostsPrevailingCharge } from './getCollecti
 export { default as getCollectionFormLogisticsCellValue } from './getCollectionFormLogisticsCellValue';
 export { default as getCollectionFormLogisticsTableColsList } from './getCollectionFormLogisticsTableColsList';
 export { default as getCollectionFormLogisticsEditCellValue } from './getCollectionFormLogisticsEditCellValue';
+export { default as getCollectionFormServicesDecommissionRequestValue } from './getCollectionFormServicesDecommissionRequestValue';
+export { default as getCollectionFormServicesDecommissionRequestEditValue } from './getCollectionFormServicesDecommissionRequestEditValue';
+export { default as getCollectionFormServicesTypeValue } from './getCollectionFormServicesTypeValue';
+export { default as getCollectionFormServicesTypeEnum } from './getCollectionFormServicesTypeEnum';
+export { default as getCollectionFormServicesOwnershipRetentionValue } from './getCollectionFormServicesOwnershipRetentionValue';
+export { default as getCollectionFormServicesOwnershipRetentionEditValue } from './getCollectionFormServicesOwnershipRetentionEditValue';
+export { default as getCollectionFormServicesRedeliveryRequestValue } from './getCollectionFormServicesRedeliveryRequestValue';
+export { default as getCollectionFormServicesRedeliveryRequestEditValue } from './getCollectionFormServicesRedeliveryRequestEditValue';

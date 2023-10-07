@@ -15,6 +15,8 @@ import {
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesDataPayload,
   ICollectionFormServicesSaveDataPayload,
+  ICollectionFormServicesRecycling,
+  ICollectionFormServicesDestruction,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -351,11 +353,15 @@ export interface ISaveCollectionFormServicesByCollectionIdArgs {
  *
  * @typedef ICollectionFormServicesEditCostsPayload
  * @prop {string} itemKey - data item key to be edited
- * @prop {string | null} value - updated form value
+ * @prop {string | boolean | ICollectionFormServicesRecyclingData | ICollectionFormServicesDestructionData} value - updated form value
  */
 export interface ICollectionFormServicesEditSchedulePayload {
   itemKey: string;
-  value: string | boolean | null;
+  value:
+    | string
+    | boolean
+    | ICollectionFormServicesRecycling
+    | ICollectionFormServicesDestruction;
 }
 
 /**

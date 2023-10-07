@@ -510,6 +510,68 @@ export interface ICollectionFormScheduleSaveDataPayload
 }
 
 /**
+ * Collection Form Services On Site Processing values
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof AseccaAPI
+ *
+ * @typedef CollectionFormServicesOnSiteProcessing
+ */
+export type CollectionFormServicesOnSiteProcessing = 'On Site' | 'Off Site';
+
+/**
+ * Collection Form Services Type value array
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof AseccaAPI
+ *
+ * @constant
+ */
+export const collectionFormServicesTypes = [
+  'WarrantyReturn',
+  'StockPurchase',
+  'DecommissioningAndRedelivery',
+  'Recycling',
+  'Destruction',
+];
+
+/**
+ * Collection Form Services Type
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof AseccaAPI
+ *
+ * @typedef CollectionFormServicesType
+ */
+export type CollectionFormServicesType =
+  (typeof collectionFormServicesTypes)[number];
+
+/**
+ * Collection Form Services Doesn't Retain Ownership value array
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ * @memberof AseccaAPI
+ *
+ * @constant
+ */
+export const collectionFormServicesDoesntRetainOwnershipTypes = [
+  'RetainsOwnership',
+  'DoesntRetainOwnership',
+];
+
+/**
  * Collection Form Services Doesn't Retain Ownership value
  *
  * Please refer to Asecca API documentation for more info
@@ -521,7 +583,20 @@ export interface ICollectionFormScheduleSaveDataPayload
  * @typedef CollectionFormServicesDoesntRetainOwnership
  */
 export type CollectionFormServicesDoesntRetainOwnership =
-  | 'DoesntRetainOwnership';
+  (typeof collectionFormServicesDoesntRetainOwnershipTypes)[number];
+
+/**
+ * Collection Form Services Ownership Retention data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.14
+ *
+ * @typedef ICollectionFormServicesOwnershipRetentionData
+ * @prop {boolean} redelivery_requested - device redelivery requested flag
+ */
+export interface ICollectionFormServicesOwnershipRetentionData {
+  redelivery_requested: boolean;
+}
 
 /**
  * Collection Form Services Ownership Retention type definition
@@ -533,7 +608,7 @@ export type CollectionFormServicesDoesntRetainOwnership =
  * @prop {boolean} redelivery_requested - device redelivery requested flag
  */
 export interface ICollectionFormServicesOwnershipRetention {
-  redelivery_requested: boolean;
+  RetainsOwnership: ICollectionFormServicesOwnershipRetentionData;
 }
 
 /**
@@ -600,16 +675,17 @@ export interface ICollectionFormServicesDestruction {
  * @since 0.0.14
  *
  * @typedef ICollectionFormServicesData
- * @prop {string | null} preferred_date - date string in YYYY-MM-DD format
- * @prop {string | null} preferred_time - time string in hh:mm format
- * @prop {string | null} notes - additional notes string
+ * @prop {boolean} on_site_processing - on site processing flag
+ * @prop {CollectionFormServicesType | ICollectionFormServicesRecycling | ICollectionFormServicesDestruction} service_type - type of the service
+ * @prop {string} site_contact - contact for service
  */
 export interface ICollectionFormServicesData {
   on_site_processing: boolean;
   service_type:
-    | string
+    | CollectionFormServicesType
     | ICollectionFormServicesRecycling
     | ICollectionFormServicesDestruction;
+  site_contact: string;
 }
 
 /**
