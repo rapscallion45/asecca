@@ -1,7 +1,9 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormServicesGetHandler from '@/pages/api/collection/services/api/get';
 import collectionFormServicesSetHandler from '@/pages/api/collection/services/api/set';
+import collectionFormServicesContactsHandler from '@/pages/api/collection/services/api/contacts';
 import collectionFormServicesDataMock from '../../../__mocks__/collectionFormServicesDataMock';
+import collectionFormServicesContactsDataMock from '../../../__mocks__/collectionFormServicesContactsDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({
@@ -129,6 +131,54 @@ describe('Collection Form Services API Routes', () => {
 
       /** Act */
       await collectionFormServicesSetHandler(req, res);
+
+      /** Assert */
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
+  describe('GET /collection/service/api/contacts', () => {
+    it('returns expected data', async () => {
+      /** Arrange */
+      const { req, res } = createMocks({
+        method: 'GET',
+      });
+
+      /** Act */
+      await collectionFormServicesContactsHandler(req, res);
+
+      /** Assert */
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(
+        expect.objectContaining(collectionFormServicesContactsDataMock)
+      );
+    });
+  });
+
+  describe('PUT /collection/service/api/contacts', () => {
+    it('returns 404 for unsupported method', async () => {
+      /** Arrange */
+      const { req, res } = createMocks({
+        method: 'PUT',
+      });
+
+      /** Act */
+      await collectionFormServicesContactsHandler(req, res);
+
+      /** Assert */
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
+  describe('DELETE /collection/service/api/contacts', () => {
+    it('returns 404 for unsupported method', async () => {
+      /** Arrange */
+      const { req, res } = createMocks({
+        method: 'DELETE',
+      });
+
+      /** Act */
+      await collectionFormServicesContactsHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);

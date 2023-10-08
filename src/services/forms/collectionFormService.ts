@@ -219,6 +219,26 @@ async function setServices(body: ICollectionFormServicesSaveDataPayload) {
   return fetch(`/api/collection/services/api/set`, requestOptions);
 }
 
+/**
+ * GET request to /api/collection/service/api/contacts
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ * @memberof Services
+ *
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getServicesContacts() {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/service/api/contacts`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -229,6 +249,7 @@ const collectionFormService = {
   setSchedule,
   getServices,
   setServices,
+  getServicesContacts,
 };
 
 export default collectionFormService;

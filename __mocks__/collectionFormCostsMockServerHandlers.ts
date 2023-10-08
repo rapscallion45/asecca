@@ -56,7 +56,7 @@ export const collectionFormCostsMockHandlers = [
     CollectionFormCostsGetRequestParams,
     CollectionFormCostsGetResponseBody
   >('/api/collection/costs/api/costs', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock costs data */
     res(ctx.status(200), ctx.json(collectionFormCostsDataMock))
   ),
 
@@ -72,7 +72,7 @@ export const collectionFormCostsMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/costs/api/costs`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock costs data */
       res(ctx.status(200), ctx.json(collectionFormCostsDataMock))
   ),
 

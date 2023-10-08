@@ -8,4 +8,8 @@ export {
   getLogisticsTypes,
 } from './collectionFormLogistics';
 export { getSchedule, setSchedule } from './collectionFormSchedule';
-export { getServices, setServices } from './collectionFormServices';
+export {
+  getServices,
+  setServices,
+  getServicesContacts,
+} from './collectionFormServices';

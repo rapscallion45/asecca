@@ -712,3 +712,16 @@ export interface ICollectionFormServicesSaveDataPayload
   extends ICollectionFormServicesData {
   collection: string;
 }
+
+/**
+ * Collection Form Services Contacts GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormServicesContactsDataPayload
+ * @prop {Array<string>} contacts_list - contact names list
+ */
+export interface ICollectionFormServicesContactsDataPayload {
+  contacts_list: Array<string>;
+}

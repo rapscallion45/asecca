@@ -2,6 +2,7 @@ import { createMocks } from 'node-mocks-http';
 import collectionFormLogisticsHandler from '@/pages/api/collection/logistics/api/logistics';
 import collectionFormLogisticsTypesHandler from '@/pages/api/collection/logistics/api/compatible_facilities_for_logistics';
 import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from '../../../__mocks__/collectionFormLogisticsTypesDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({
@@ -120,7 +121,7 @@ describe('Collection Form Logistics API Routes', () => {
       /** Assert */
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining(collectionFormLogisticsDataMock)
+        expect.objectContaining(collectionFormLogisticsTypesDataMock)
       );
     });
   });

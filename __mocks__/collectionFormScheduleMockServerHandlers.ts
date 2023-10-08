@@ -56,7 +56,7 @@ export const collectionFormScheduleMockHandlers = [
     CollectionFormScheduleGetRequestParams,
     CollectionFormScheduleGetResponseBody
   >('/api/collection/schedule/api/get', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock schedule data */
     res(ctx.status(200), ctx.json(collectionFormScheduleDataMock))
   ),
 
@@ -72,7 +72,7 @@ export const collectionFormScheduleMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/schedule/api/get`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock schedule data */
       res(ctx.status(200), ctx.json(collectionFormScheduleDataMock))
   ),
 

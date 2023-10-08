@@ -1,7 +1,9 @@
 import { rest } from 'msw';
 import collectionFormServicesDataMock from './collectionFormServicesDataMock';
+import collectionFormServicesContactsDataMock from './collectionFormServicesContactsDataMock';
 import {
   ICollectionFormServicesDataPayload,
+  ICollectionFormServicesContactsDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
 
@@ -24,7 +26,9 @@ type CollectionFormServicesGetRequestBody = null;
 type CollectionFormServicesGetRequestParams = {};
 
 /** shape of the mocked response body */
-type CollectionFormServicesGetResponseBody = ICollectionFormServicesDataPayload;
+type CollectionFormServicesGetResponseBody =
+  | ICollectionFormServicesDataPayload
+  | ICollectionFormServicesContactsDataPayload;
 
 /**
  * POST /collection/services/api/set definitions
@@ -56,7 +60,7 @@ export const collectionFormServicesMockHandlers = [
     CollectionFormServicesGetRequestParams,
     CollectionFormServicesGetResponseBody
   >('/api/collection/services/api/get', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock service data */
     res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
   ),
 
@@ -72,7 +76,7 @@ export const collectionFormServicesMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/services/api/get`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock service data */
       res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
   ),
 
@@ -104,6 +108,36 @@ export const collectionFormServicesMockHandlers = [
     async (req, res, ctx) =>
       /** return 200, no payload */
       res(ctx.status(200))
+  ),
+
+  /**
+   * Test/mock GET Collection Form Services Contacts NextJS PROXY
+   *
+   * @since 0.0.14
+   */
+  rest.get<
+    CollectionFormServicesGetRequestBody,
+    CollectionFormServicesGetRequestParams,
+    CollectionFormServicesGetResponseBody
+  >('/api/collection/services/api/contacts', async (req, res, ctx) =>
+    /** return mock contacts data */
+    res(ctx.status(200), ctx.json(collectionFormServicesContactsDataMock))
+  ),
+
+  /**
+   * Test/mock GET Collection Form Services ASECCA
+   *
+   * @since 0.0.14
+   */
+  rest.get<
+    CollectionFormServicesGetRequestBody,
+    CollectionFormServicesGetRequestParams,
+    CollectionFormServicesGetResponseBody
+  >(
+    `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/contacts`,
+    async (req, res, ctx) =>
+      /** return mock contacts data */
+      res(ctx.status(200), ctx.json(collectionFormServicesContactsDataMock))
   ),
 ];
 

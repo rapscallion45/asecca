@@ -15,6 +15,7 @@ import {
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesDataPayload,
   ICollectionFormServicesSaveDataPayload,
+  ICollectionFormServicesContactsDataPayload,
   ICollectionFormServicesRecycling,
   ICollectionFormServicesDestruction,
 } from '@/lib/api/api-types';
@@ -377,6 +378,8 @@ export interface ICollectionFormServicesEditSchedulePayload {
  * @prop {string} error - current error message state of services
  * @prop {boolean} saving - saving state flag of services data
  * @prop {boolean} edited - services data has been edited flag
+ * @prop {boolean} loadingContacts - loading contacts types from API
+ * @prop {ICollectionFormLogisticsTypesDataPayload} contacts - services contacts from API
  */
 export interface ICollectionFormServicesState {
   loading: boolean;
@@ -385,6 +388,8 @@ export interface ICollectionFormServicesState {
   error?: string;
   saving: boolean;
   edited: boolean;
+  loadingContacts: boolean;
+  contacts: ICollectionFormServicesContactsDataPayload;
 }
 
 /**
