@@ -231,8 +231,18 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryTableProps> = (
             variant="contained"
             onClick={handleAddRow}
             disabled={saving || loading}
+            sx={{ minWidth: '80.61px' }}
           >
             Add +
+          </Button>
+          <Button
+            color="secondary"
+            variant="outlined"
+            onClick={() => {}}
+            disabled={saving || loading}
+            sx={{ ml: 2 }}
+          >
+            New Asset Category +
           </Button>
         </Box>
         <Box
