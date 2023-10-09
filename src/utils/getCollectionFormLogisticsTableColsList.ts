@@ -7,6 +7,7 @@ import {
   ICollectionFormLogisticsDataPayload,
   ICollectionFormLogisticsData,
   ICollectionFormLogisticsTypesDataPayload,
+  ICollectionFormLogisticsTypesData,
 } from '@/lib/api/api-types';
 
 /**
@@ -33,32 +34,36 @@ const getCollectionFormLogisticsTableColsList = (
    * compatible list
    */
   const facilityList = data.rows
-    .filter((row) =>
+    .filter((row: ICollectionFormLogisticsData) =>
       /* only process rows that are included in compatible types list */
       types.logistics_types.some(
-        (type) => type.logistics_type === row.logistics_type
+        (type: ICollectionFormLogisticsTypesData) =>
+          type.logistics_type === row.logistics_type
       )
     )
     .map(
       (logisitc: ICollectionFormLogisticsData) =>
         /* map rows with supported logistics type and return compatible facilities */
         types.logistics_types.find(
-          (type) => type.logistics_type === logisitc.logistics_type
+          (type: ICollectionFormLogisticsTypesData) =>
+            type.logistics_type === logisitc.logistics_type
         )?.compatible_facilities
     )
     .flat(1);
 
   /* remove 'visiting_facilities' column from orignal cols */
   const filteredOrigCols = columns.filter(
-    (col) => col.key !== 'visiting_facilities'
+    (col: IDataTableColumn) => col.key !== 'visiting_facilities'
   );
 
   /* add logistic type select options */
-  const newCols = filteredOrigCols.map((col) => {
+  const newCols = filteredOrigCols.map((col: IDataTableColumn) => {
     if (col.key === 'logistics_type')
       return {
         ...col,
-        selectOptions: types.logistics_types.map((type) => type.logistics_type),
+        selectOptions: types.logistics_types.map(
+          (type: ICollectionFormLogisticsTypesData) => type.logistics_type
+        ),
       };
     return col;
   });
@@ -67,7 +72,7 @@ const getCollectionFormLogisticsTableColsList = (
   return newCols.concat(
     lodash.sortBy(
       lodash.uniq(facilityList).map(
-        (facility) =>
+        (facility: string | undefined) =>
           ({
             label: facility,
             key: lodash.snakeCase(facility),

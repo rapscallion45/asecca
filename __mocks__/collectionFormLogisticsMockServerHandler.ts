@@ -1,7 +1,9 @@
 import { rest } from 'msw';
 import collectionFormLogisticsDataMock from './collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from './collectionFormLogisticsTypesDataMock';
 import {
   ICollectionFormLogisticsDataPayload,
+  ICollectionFormLogisticsTypesDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
 
@@ -25,7 +27,8 @@ type CollectionFormLogisticsGetRequestParams = {};
 
 /** shape of the mocked response body */
 type CollectionFormLogisticsGetResponseBody =
-  ICollectionFormLogisticsDataPayload;
+  | ICollectionFormLogisticsDataPayload
+  | ICollectionFormLogisticsTypesDataPayload;
 
 /**
  * POST /collection/logistics/api/logistics definitions
@@ -57,7 +60,7 @@ export const collectionFormLogisticsMockHandlers = [
     CollectionFormLogisticsGetRequestParams,
     CollectionFormLogisticsGetResponseBody
   >('/api/collection/logistics/api/logistics', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock logistics data */
     res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
   ),
 
@@ -73,7 +76,7 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/logistics/api/logistics`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock logistics data */
       res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
   ),
 
@@ -119,8 +122,8 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     '/api/collection/logistics/api/compatible_facilities_for_logistics',
     async (req, res, ctx) =>
-      /** return mock costs config data */
-      res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
+      /** return mock logistics types data */
+      res(ctx.status(200), ctx.json(collectionFormLogisticsTypesDataMock))
   ),
 
   /**
@@ -135,8 +138,8 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/logistics/api/compatible_facilities_for_logistics`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
-      res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
+      /** return mock logistics types data */
+      res(ctx.status(200), ctx.json(collectionFormLogisticsTypesDataMock))
   ),
 ];
 

@@ -69,3 +69,31 @@ export async function setServices(
     requestOptions
   );
 }
+
+/**
+ * GET request to Asecca API /collection/service/api/contacts
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ * @memberof AseccaAPI
+ *
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+export async function getServicesContacts() {
+  /* setup GET request options with basic auth */
+  const requestOptions = {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${base64.encode(
+        `${STAGING_DB_USERNAME}:${STAGING_DB_PASSWORD}`
+      )}`,
+    }),
+  };
+
+  /* fetch the contacts */
+  return fetch(
+    `${STAGING_DB_REST_API_URL}/collection/service/api/contacts`,
+    requestOptions
+  );
+}

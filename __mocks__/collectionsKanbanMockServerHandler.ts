@@ -56,7 +56,7 @@ export const collectionsKanbanMockHandlers = [
     CollectionsKanbanGetRequestParams,
     CollectionsKanbanGetResponseBody
   >('/api/kanban/collections', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock kanban data */
     res(ctx.status(200), ctx.json(collectionsKanbanDataMock))
   ),
 
@@ -72,7 +72,7 @@ export const collectionsKanbanMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection_kanban_staging/api/collections`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock kanban data */
       res(ctx.status(200), ctx.json(collectionsKanbanDataMock))
   ),
 

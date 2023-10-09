@@ -19,6 +19,7 @@ import { ReactNode } from 'react';
  */
 export type DataTableRowCellValue =
   | string
+  | number
   | Array<string>
   | boolean
   | null
@@ -35,6 +36,8 @@ export type DataTableRowCellValue =
  */
 export type DataTableColumnType =
   | 'string'
+  | 'text'
+  | 'numerical'
   | 'currency'
   | 'select'
   | 'check'
@@ -127,6 +130,34 @@ export interface IDataTableGetCellValueCallback {
  */
 export interface IDataTableCanEditCellCallback {
   (colKey: string, rowIdx: number): boolean;
+}
+
+/**
+ * Data Table Numerical Cell Value Edit callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @callback IDataTableEditNumericalCellValueCallback
+ * @param {number | null} value - updated cell value
+ * @returns {void} - no return value
+ */
+export interface IDataTableEditNumericalCellValueCallback {
+  (value: number | null): void;
+}
+
+/**
+ * Data Table Text Cell Value Edit callback function typedef
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @callback IDataTableEditTextCellValueCallback
+ * @param {string | null} value - updated cell value
+ * @returns {void} - no return value
+ */
+export interface IDataTableEditTextCellValueCallback {
+  (value: string | null): void;
 }
 
 /**

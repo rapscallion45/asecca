@@ -14,6 +14,7 @@ const collectionFormServicesDataMock: ICollectionFormServicesDataPayload = {
       ownership_retention: 'DoesntRetainOwnership',
     },
   },
+  site_contact: 'Contact One',
 };
 
 export default collectionFormServicesDataMock;
