@@ -1,3 +1,4 @@
+export { getEnumerationsAssetCategory } from './enumerations';
 export { getCostsConfig, setCostsConfig } from './costsConfig';
 export { getDevices } from './devicesTable';
 export { getCollectionsKanban } from './collectionsKanban';
@@ -13,3 +14,4 @@ export {
   setServices,
   getServicesContacts,
 } from './collectionFormServices';
+export { getItinerary, setItinerary } from './collectionFormItinerary';

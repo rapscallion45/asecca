@@ -725,3 +725,57 @@ export interface ICollectionFormServicesSaveDataPayload
 export interface ICollectionFormServicesContactsDataPayload {
   contacts_list: Array<string>;
 }
+
+/**
+ * Collection Form Itinerary data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryData
+ * @prop {string} asset_category - name of this itinerary asset category
+ * @prop {string | null} packing_details - packing details of this itinerary item
+ * @prop {number} quantity - quanity of itinerary item
+ */
+export interface ICollectionFormItineraryData {
+  asset_category: string;
+  packing_details: string | null;
+  quantity: number;
+}
+
+/**
+ * Collection Form Itinerary GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryDataPayload
+ */
+export interface ICollectionFormItineraryDataPayload
+  extends Array<ICollectionFormItineraryData> {}
+
+/**
+ * Collection Form Itinerary POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItinerarySaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormItinerarySaveDataCosts>} items - itinerary data to save to API
+ */
+export interface ICollectionFormItinerarySaveDataPayload {
+  collection: string;
+  items: Array<ICollectionFormItineraryData>;
+}
+
+/**
+ * Collection Form Itinerary Asset Category GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryAssetCategoryDataPayload
+ */
+export interface ICollectionFormItineraryAssetCategoryDataPayload
+  extends Array<string> {}

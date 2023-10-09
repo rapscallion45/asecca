@@ -1,5 +1,6 @@
 import {
   ICollectionFormCostsSaveDataPayload,
+  ICollectionFormItinerarySaveDataPayload,
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesSaveDataPayload,
@@ -239,6 +240,75 @@ async function getServicesContacts() {
   return fetch(`/api/collection/service/api/contacts`, requestOptions);
 }
 
+/**
+ * GET request to /api/collection/itinerary/api/itinerary
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getItinerary(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/itinerary/api/itinerary?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/itinerary/api/itinerary
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ * @memberof Services
+ *
+ * @param {ICollectionFormItinerarySaveDataPayload} body - Itinerary data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function setItinerary(body: ICollectionFormItinerarySaveDataPayload) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/itinerary/api/itinerary`, requestOptions);
+}
+
+/**
+ * GET request to /api/collection/enumerations/api/asset_category
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ * @memberof Services
+ *
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getItineraryAssetCategories() {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/enumerations/api/asset_category`,
+    requestOptions
+  );
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -250,6 +320,9 @@ const collectionFormService = {
   getServices,
   setServices,
   getServicesContacts,
+  getItinerary,
+  setItinerary,
+  getItineraryAssetCategories,
 };
 
 export default collectionFormService;

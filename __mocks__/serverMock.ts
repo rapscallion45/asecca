@@ -5,6 +5,7 @@ import { collectionFormCostsMockHandlers } from './collectionFormCostsMockServer
 import { collectionFormScheduleMockHandlers } from './collectionFormScheduleMockServerHandlers';
 import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMockServerHandler';
 import { collectionFormServicesMockHandlers } from './collectionFormServicesMockServerHandler';
+import { collectionFormItineraryMockHandlers } from './collectionFormItineraryMockServerHandler';
 import { devicesTableMockHandlers } from './devicesTableMockServerHandler';
 
 /**
@@ -20,6 +21,7 @@ const mockHandlers = [
   ...collectionFormScheduleMockHandlers,
   ...collectionFormLogisticsMockHandlers,
   ...collectionFormServicesMockHandlers,
+  ...collectionFormItineraryMockHandlers,
   ...devicesTableMockHandlers,
 ];
 const server = setupServer(...mockHandlers);

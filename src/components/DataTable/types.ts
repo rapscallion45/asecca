@@ -19,6 +19,7 @@ import { ReactNode } from 'react';
  */
 export type DataTableRowCellValue =
   | string
+  | number
   | Array<string>
   | boolean
   | null

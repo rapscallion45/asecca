@@ -60,7 +60,7 @@ export const collectionFormLogisticsMockHandlers = [
     CollectionFormLogisticsGetRequestParams,
     CollectionFormLogisticsGetResponseBody
   >('/api/collection/logistics/api/logistics', async (req, res, ctx) =>
-    /** return mock costs config data */
+    /** return mock logistics data */
     res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
   ),
 
@@ -76,7 +76,7 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/logistics/api/logistics`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock logistics data */
       res(ctx.status(200), ctx.json(collectionFormLogisticsDataMock))
   ),
 
@@ -122,7 +122,7 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     '/api/collection/logistics/api/compatible_facilities_for_logistics',
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock logistics types data */
       res(ctx.status(200), ctx.json(collectionFormLogisticsTypesDataMock))
   ),
 
@@ -138,7 +138,7 @@ export const collectionFormLogisticsMockHandlers = [
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/logistics/api/compatible_facilities_for_logistics`,
     async (req, res, ctx) =>
-      /** return mock costs config data */
+      /** return mock logistics types data */
       res(ctx.status(200), ctx.json(collectionFormLogisticsTypesDataMock))
   ),
 ];

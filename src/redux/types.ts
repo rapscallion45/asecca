@@ -16,6 +16,9 @@ import {
   ICollectionFormServicesDataPayload,
   ICollectionFormServicesSaveDataPayload,
   ICollectionFormServicesContactsDataPayload,
+  ICollectionFormItineraryDataPayload,
+  ICollectionFormItinerarySaveDataPayload,
+  ICollectionFormItineraryAssetCategoryDataPayload,
   ICollectionFormServicesRecycling,
   ICollectionFormServicesDestruction,
 } from '@/lib/api/api-types';
@@ -254,6 +257,89 @@ export interface ICollectionFormLogisticsState {
   edited: boolean;
   loadingTypes: boolean;
   types: ICollectionFormLogisticsTypesDataPayload;
+}
+
+/**
+ * Fetch Collection Form Itinerary args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef IFetchCollectionFormItineraryByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormItineraryByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Itinerary args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ISaveCollectionFormItineraryByCollectionIdArgs
+ * @prop {ICollectionFormItinerarySaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormItineraryByCollectionIdArgs {
+  data: ICollectionFormItinerarySaveDataPayload;
+}
+
+/**
+ * Collection Form Itinerary edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryEditItineraryPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited itinerary
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormItineraryEditItineraryPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Itinerary delete redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryDeleteItinerayPayload
+ * @prop {number} rowIdx - table row index to be deleted
+ */
+export interface ICollectionFormItineraryDeleteItineraryPayload {
+  rowIdx: number;
+}
+
+/**
+ * Collection Form Itinerary state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.15
+ *
+ * @typedef ICollectionFormItineraryState
+ * @prop {boolean} loading - itinerary loading state
+ * @prop {ICollectionFormItineraryDataPayload} data - currently loaded itinerary data
+ * @prop {ICollectionFormItineraryDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of itinerary
+ * @prop {boolean} saving - saving state flag of itinerary data
+ * @prop {boolean} edited - itinerary data has been edited flag
+ * @prop {boolean} loadingTypes - loading itinerary asset categories from API
+ * @prop {ICollectionFormItineraryAssetCategoryDataPayload} assetCategories - itinerary asset categories from API
+ */
+export interface ICollectionFormItineraryState {
+  loading: boolean;
+  data: ICollectionFormItineraryDataPayload;
+  dataShadow: ICollectionFormItineraryDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+  loadingAssetCategories: boolean;
+  assetCategories: ICollectionFormItineraryAssetCategoryDataPayload;
 }
 
 /**

@@ -5,6 +5,7 @@ import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import CollectionFormLogistics from '@/components/CollectionFormLogistics/CollectionFormLogistics';
 import CollectionFormSchedule from '@/components/CollectionFormSchedule/CollectionFormSchedule';
 import CollectionFormServices from '@/components/CollectionFormServices/CollectionFormServices';
+import CollectionFormItinerary from '@/components/CollectionFormItinerary/CollectionFormItinerary';
 
 /**
  * Collection Form Page
@@ -39,6 +40,9 @@ const CollectionFormPage: NextPageWithLayout = () => (
       </Box>
       <Box mb={2}>
         <CollectionFormServices collectionId="123456" />
+      </Box>
+      <Box mb={2}>
+        <CollectionFormItinerary collectionId="123456" />
       </Box>
     </Box>
   </Box>
