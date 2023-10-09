@@ -25,12 +25,12 @@ const collectionFormItineraryTableColumns: Array<IDataTableColumn> = [
   {
     label: 'Quantity',
     key: 'quantity',
-    type: 'currency',
+    type: 'numerical',
   },
   {
     label: 'Packing Details',
     key: 'packing_details',
-    type: 'string',
+    type: 'text',
   },
 ];
 

@@ -1,8 +1,11 @@
 import { FC, useCallback, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
+import NumericalCell from './NumericalCell/NumericalCell';
 import CurrencyCell from './CurrencyCell/CurrencyCell';
 import CheckboxCell from './CheckboxCell/CheckboxCell';
+import SelectCell from './SelectCell/SelectCell';
+import ActionCell from './ActionCell/ActionCell';
 import Cell from './Cell/Cell';
 import {
   DataTableRowCellValue,
@@ -12,8 +15,7 @@ import {
   IDataTableCanEditCellCallback,
   IDataTableGetActionComponentCallback,
 } from '../types';
-import SelectCell from './SelectCell/SelectCell';
-import ActionCell from './ActionCell/ActionCell';
+import TextCell from './TextCell/TextCell';
 
 /**
  * Data Table Row Props
@@ -148,6 +150,30 @@ const DataRow: FC<IDataRowProps> = (props) => {
       {/* map passed column data for current row */}
       {columns.map((column: IDataTableColumn) => (
         <>
+          {column.type === 'numerical' && (
+            <NumericalCell
+              key={`${rowName}-${column.key}`}
+              inputId={`${rowName}-${column.key}-input`}
+              canEdit={
+                editableColLabels.some((editCol) => editCol === column.label) &&
+                isCellEditable(column.key, rowIdx)
+              }
+              value={(getCellValueByColumn(column) as number) || null}
+              submitCellValue={(value) => submitCellValue(value, column.key)}
+            />
+          )}
+          {column.type === 'text' && (
+            <TextCell
+              key={`${rowName}-${column.key}`}
+              inputId={`${rowName}-${column.key}-input`}
+              canEdit={
+                editableColLabels.some((editCol) => editCol === column.label) &&
+                isCellEditable(column.key, rowIdx)
+              }
+              value={(getCellValueByColumn(column) as string) || null}
+              submitCellValue={(value) => submitCellValue(value, column.key)}
+            />
+          )}
           {column.type === 'currency' && (
             <CurrencyCell
               key={`${rowName}-${column.key}`}
