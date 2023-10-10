@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CategoryIcon from '@mui/icons-material/Category';
 import { ICollectionFormItineraryData } from '@/lib/api/api-types';
 import {
   saveByCollectionId as saveItineraryByCollectionId,
@@ -18,12 +19,15 @@ import {
   editItinerary,
   addItinerary,
   deleteItinerary,
+  fetchTypes,
 } from '@/redux/slices/collectionFormItinerarySlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
   DataTableRowCellValue,
   IDataTableColumn,
 } from '@/components/DataTable/types';
+import FormModal from '@/modals/FormModal/FormModal';
+import NewAssetCategoryModalModal from '../NewAssetCategoryModal.tsx/NewAssetCategoryModal';
 import columns from './collectionFormItineraryTableColumns';
 
 /**
@@ -64,6 +68,11 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryTableProps> = (
   const { data, loading, error, saving, edited, assetCategories } = useSelector(
     (state: AppState) => state.collectionFormItinerary
   );
+
+  /* on first load, fetch the asset categories */
+  // useEffect(() => {
+  //   dispatch(fetchTypes());
+  // }, [dispatch]);
 
   /**
    * Table column list
@@ -197,6 +206,21 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryTableProps> = (
     </IconButton>
   );
 
+  /**
+   * Handles closure events of the New Asset Category modal
+   *
+   * If new asset category has been added, this should trigger new fetch
+   * of the asset category data
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.16
+   *
+   * @method
+   */
+  const handleCloseNewAssetCategoryModal = (fetchNewTypes: boolean) => {
+    if (fetchNewTypes) fetchTypes();
+  };
+
   return (
     <Card>
       <CardHeader title="Itinerary" />
@@ -231,19 +255,25 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryTableProps> = (
             variant="contained"
             onClick={handleAddRow}
             disabled={saving || loading}
-            sx={{ minWidth: '80.61px' }}
+            sx={{ minWidth: '80.61px', mr: 2 }}
           >
             Add +
           </Button>
-          <Button
-            color="secondary"
-            variant="outlined"
-            onClick={() => {}}
-            disabled={saving || loading}
-            sx={{ ml: 2 }}
+          <FormModal
+            triggerBtn={{
+              type: 'menu',
+              // @ts-ignore
+              icon: CategoryIcon,
+              iconStyle: { marginRight: '10px' },
+              text: 'Add Asset Category +',
+              closeMenu: () => {},
+            }}
+            title="New Asset Category"
           >
-            New Asset Category +
-          </Button>
+            <NewAssetCategoryModalModal
+              closeModal={handleCloseNewAssetCategoryModal}
+            />
+          </FormModal>
         </Box>
         <Box
           sx={{

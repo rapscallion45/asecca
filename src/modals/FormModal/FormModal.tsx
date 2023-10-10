@@ -38,7 +38,7 @@ interface IFormModalProps {
 /**
  * Form Modal
  *
- * Form modal interface wrapper for displaying spcific passed form content
+ * Form modal interface wrapper for displaying specific passed form content
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.2

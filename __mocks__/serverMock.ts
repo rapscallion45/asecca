@@ -7,6 +7,7 @@ import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMo
 import { collectionFormServicesMockHandlers } from './collectionFormServicesMockServerHandler';
 import { collectionFormItineraryMockHandlers } from './collectionFormItineraryMockServerHandler';
 import { devicesTableMockHandlers } from './devicesTableMockServerHandler';
+import { assetCategoryMockHandlers } from './assetCategoryMockServerHandler';
 
 /**
  * configuration of the mock server for running tests
@@ -23,6 +24,7 @@ const mockHandlers = [
   ...collectionFormServicesMockHandlers,
   ...collectionFormItineraryMockHandlers,
   ...devicesTableMockHandlers,
+  ...assetCategoryMockHandlers,
 ];
 const server = setupServer(...mockHandlers);
 export default server;
