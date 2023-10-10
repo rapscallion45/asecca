@@ -392,11 +392,11 @@ const NewAssetCategoryModalModal: FC<INewAssetCategoryModalModalProps> = (
       </Box>
       <Box
         sx={{
-          marginTop: 2,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'left',
+          justifyContent: 'right',
         }}
       >
         <Button
