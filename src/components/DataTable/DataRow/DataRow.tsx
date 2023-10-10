@@ -1,4 +1,4 @@
-import { FC, useCallback, memo } from 'react';
+import { FC, useCallback, memo, Fragment } from 'react';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import NumericalCell from './NumericalCell/NumericalCell';
@@ -149,10 +149,9 @@ const DataRow: FC<IDataRowProps> = (props) => {
     <StyledTableRow>
       {/* map passed column data for current row */}
       {columns.map((column: IDataTableColumn) => (
-        <>
+        <Fragment key={`${rowName}-${column.key}`}>
           {column.type === 'numerical' && (
             <NumericalCell
-              key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
               canEdit={
                 editableColLabels.some((editCol) => editCol === column.label) &&
@@ -160,11 +159,11 @@ const DataRow: FC<IDataRowProps> = (props) => {
               }
               value={(getCellValueByColumn(column) as number) || null}
               submitCellValue={(value) => submitCellValue(value, column.key)}
+              nullDisallowed={column.nullDisallowed}
             />
           )}
           {column.type === 'text' && (
             <TextCell
-              key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
               canEdit={
                 editableColLabels.some((editCol) => editCol === column.label) &&
@@ -176,7 +175,6 @@ const DataRow: FC<IDataRowProps> = (props) => {
           )}
           {column.type === 'currency' && (
             <CurrencyCell
-              key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
               canEdit={
                 editableColLabels.some((editCol) => editCol === column.label) &&
@@ -190,7 +188,6 @@ const DataRow: FC<IDataRowProps> = (props) => {
           )}
           {column.type === 'check' && (
             <CheckboxCell
-              key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
               canEdit={
                 editableColLabels.some((editCol) => editCol === column.label) &&
@@ -202,7 +199,6 @@ const DataRow: FC<IDataRowProps> = (props) => {
           )}
           {column.type === 'select' && (
             <SelectCell
-              key={`${rowName}-${column.key}`}
               inputId={`${rowName}-${column.key}-input`}
               canEdit={
                 editableColLabels.some((editCol) => editCol === column.label) &&
@@ -215,7 +211,6 @@ const DataRow: FC<IDataRowProps> = (props) => {
           )}
           {column.type === 'action' && (
             <ActionCell
-              key={`${rowName}-${column.key}`}
               getActionComponent={() =>
                 getActionComponent && getActionComponent(column.key, rowIdx)
               }
@@ -232,7 +227,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
               }}
             />
           )}
-        </>
+        </Fragment>
       ))}
     </StyledTableRow>
   );

@@ -779,3 +779,46 @@ export interface ICollectionFormItinerarySaveDataPayload {
  */
 export interface ICollectionFormItineraryAssetCategoryDataPayload
   extends Array<string> {}
+
+/**
+ * New Asset Category data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.16
+ *
+ * @typedef INewAssetCategoryData
+ * @prop {string} name - name of the new asset category
+ * @prop {number | null} co2 - co2 of the new asset category
+ * @prop {boolean} data_bearing - is new asset category data bearing
+ * @prop {boolean} removable_storage - does new asset category have removable storage
+ * @prop {boolean} serialized - is new asset category serialized
+ * @prop {Array<string | null>} compatible_facilities - new asset category compatible facilities
+ */
+export interface INewAssetCategoryData {
+  name: string;
+  co2: number | null;
+  data_bearing: boolean;
+  removable_storage: boolean;
+  serialized: boolean;
+  compatible_facilities: Array<string | null>;
+}
+
+/**
+ * New Asset Category data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.16
+ *
+ * @typedef INewAssetCategoryDataPayload
+ */
+export interface INewAssetCategoryDataPayload extends INewAssetCategoryData {}
+
+/**
+ * Asset Category Facilities data payload type defintion
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.16
+ *
+ * @typedef IAssetCategoryFacilitiesDataPayload
+ */
+export interface IAssetCategoryFacilitiesDataPayload extends Array<string> {}

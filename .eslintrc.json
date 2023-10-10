@@ -28,6 +28,8 @@
     /** Allow prop spreading */
     "react/jsx-props-no-spreading": "off",
     /** Allow param reassign for redux reducer functions */
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    /** Allow nested ternaries */
+    "no-nested-ternary": "off"
   }
 }

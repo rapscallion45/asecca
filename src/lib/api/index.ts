@@ -15,3 +15,7 @@ export {
   getServicesContacts,
 } from './collectionFormServices';
 export { getItinerary, setItinerary } from './collectionFormItinerary';
+export {
+  getAssetCategoryFacilities,
+  setNewAssetCategory,
+} from './assetCategory';
