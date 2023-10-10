@@ -159,6 +159,7 @@ const DataRow: FC<IDataRowProps> = (props) => {
               }
               value={(getCellValueByColumn(column) as number) || null}
               submitCellValue={(value) => submitCellValue(value, column.key)}
+              nullDisallowed={column.nullDisallowed}
             />
           )}
           {column.type === 'text' && (

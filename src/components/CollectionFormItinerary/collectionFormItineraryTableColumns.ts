@@ -26,6 +26,7 @@ const collectionFormItineraryTableColumns: Array<IDataTableColumn> = [
     label: 'Quantity',
     key: 'quantity',
     type: 'numerical',
+    nullDisallowed: true,
   },
   {
     label: 'Packing Details',

@@ -65,12 +65,14 @@ export type DataTableColumnSelectValueType = Array<string> | undefined;
  * @prop {string} key - data table column data identifier
  * @prop {DataTableColumnType} type - data table column type
  * @prop {selectOptions} selectOptions - options for dropdown column type
+ * @prop {boolean} nullDisallowed - column values are not allowed to be null
  */
 export interface IDataTableColumn {
   label: string;
   key: string;
   type: DataTableColumnType;
   selectOptions?: DataTableColumnSelectValueType;
+  nullDisallowed?: boolean;
 }
 
 /**

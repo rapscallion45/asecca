@@ -30,6 +30,7 @@ interface INumericalCellProps {
   inputId: string;
   canEdit: boolean;
   value: number | null;
+  nullDisallowed?: boolean;
   submitCellValue?: IDataTableEditNumericalCellValueCallback;
   sx?: any;
 }
@@ -48,20 +49,23 @@ interface INumericalCellProps {
  * @returns {FC} - data table numerical cell functional component
  */
 const NumericalCell: FC<INumericalCellProps> = (props) => {
-  const { inputId, canEdit, value, submitCellValue, sx } = props;
+  const { inputId, canEdit, value, nullDisallowed, submitCellValue, sx } =
+    props;
 
   /** whether or not cell is currently clicked */
   const [clicked, setClicked] = useState<boolean>(false);
 
   /** edited cell value state initialised to passed cell value */
   const [editValue, setEditValue] = useState<string>(
-    value !== null ? value.toString() : '--'
+    value !== null ? value.toString() : nullDisallowed ? '0' : '--'
   );
 
   /** ensure edit value is reset when there is update to passed value */
   useEffect(() => {
-    setEditValue(value !== null ? value.toString() : '--');
-  }, [value]);
+    setEditValue(
+      value !== null ? value.toString() : nullDisallowed ? '0' : '--'
+    );
+  }, [value, nullDisallowed]);
 
   /**
    * Callback for handling user input.
@@ -91,6 +95,11 @@ const NumericalCell: FC<INumericalCellProps> = (props) => {
   const handleValueReformat = useCallback(() => {
     /* check if cell is null or indicating null */
     if (editValue === '' || editValue === '--') {
+      /* if null disallowed flag set, ignore this input */
+      if (nullDisallowed) {
+        setEditValue(value !== null ? value.toString() : '--');
+        return;
+      }
       /* leave cell as null input indication */
       setEditValue('--');
       if (submitCellValue) submitCellValue(null);
@@ -107,7 +116,7 @@ const NumericalCell: FC<INumericalCellProps> = (props) => {
       setEditValue(value !== null ? value.toString() : '--');
       if (submitCellValue) submitCellValue(value);
     }
-  }, [value, editValue, submitCellValue]);
+  }, [value, editValue, nullDisallowed, submitCellValue]);
 
   /**
    * Callback for when user has decided to clear input and enter null value
@@ -180,15 +189,20 @@ const NumericalCell: FC<INumericalCellProps> = (props) => {
             id={inputId}
             endAdornment={
               <InputAdornment position="end">
-                <IconButton
-                  aria-label="clear user entry"
-                  onClick={handleClearCell}
-                  disabled={value === null}
-                >
-                  {value !== null ? (
-                    <CloseIcon fontSize="small" sx={{ position: 'absolute' }} />
-                  ) : null}
-                </IconButton>
+                {!nullDisallowed && (
+                  <IconButton
+                    aria-label="clear user entry"
+                    onClick={handleClearCell}
+                    disabled={value === null}
+                  >
+                    {value !== null ? (
+                      <CloseIcon
+                        fontSize="small"
+                        sx={{ position: 'absolute' }}
+                      />
+                    ) : null}
+                  </IconButton>
+                )}
               </InputAdornment>
             }
             onChange={handleValueChange}
