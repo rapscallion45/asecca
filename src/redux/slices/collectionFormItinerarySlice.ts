@@ -197,7 +197,7 @@ const collectionFormItinerarySlice = createSlice({
     addItinerary: (state) => {
       /* add blank row to data */
       state.data = state.data.concat({
-        asset_category: '',
+        asset_category: state.assetCategories[0],
         packing_details: '',
         quantity: 0,
       });

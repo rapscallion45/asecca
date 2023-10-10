@@ -197,7 +197,7 @@ const collectionFormLogisticsSlice = createSlice({
     addLogistics: (state) => {
       /* add row to data */
       state.data.rows = state.data.rows.concat({
-        logistics_type: '',
+        logistics_type: state.types.logistics_types[0].logistics_type,
         visiting_facilities: [],
       });
       state.edited = true;
