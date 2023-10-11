@@ -33,20 +33,20 @@ import {
 import columns from './collectionFormLogisticsTableColumns';
 
 /**
- * Collection Form Logistics Data Table Props
+ * Collection Form Logistics Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
  *
- * @typedef ICollectionFormLogisticsTableProps
+ * @typedef ICollectionFormLogisticsProps
  * @prop {string} collectionId - ID string of Collection for table data API call
  */
-interface ICollectionFormLogisticsTableProps {
+interface ICollectionFormLogisticsProps {
   collectionId: string;
 }
 
 /**
- * Collection Form Logistics Data Table
+ * Collection Form Logistics
  *
  * Presents the Collection Form Logisitcs table to the user, populated with data
  * fetched from API: /api/collection/logistics/api/logistics
@@ -55,12 +55,10 @@ interface ICollectionFormLogisticsTableProps {
  * @since 0.0.13
  *
  * @component
- * @param {ICollectionFormLogisticsTableProps} props - component props
+ * @param {ICollectionFormLogisticProps} props - component props
  * @returns {FC} - collection form logistics table functional component
  */
-const CollectionFormLogistics: FC<ICollectionFormLogisticsTableProps> = (
-  props
-) => {
+const CollectionFormLogistics: FC<ICollectionFormLogisticsProps> = (props) => {
   const { collectionId } = props;
 
   /* shorthand helper for dispatching redux actions */

@@ -16,6 +16,12 @@ export {
 } from './collectionFormServices';
 export { getItinerary, setItinerary } from './collectionFormItinerary';
 export {
+  getFacility,
+  setFacility,
+  getFacilityAssetCategoryFacilities,
+  getFacilityWorkflows,
+} from './collectionFormFacility';
+export {
   getAssetCategoryFacilities,
   setNewAssetCategory,
 } from './assetCategory';

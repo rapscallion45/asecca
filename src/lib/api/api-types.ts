@@ -781,6 +781,87 @@ export interface ICollectionFormItineraryAssetCategoryDataPayload
   extends Array<string> {}
 
 /**
+ * Collection Form Facility data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityData
+ * @prop {string} asset_category - name of this facility asset category
+ * @prop {string | null} facility - name of facility
+ * @prop {string | null} workflow - name of workflow
+ */
+export interface ICollectionFormFacilityData {
+  asset_category: string;
+  facility: string | null;
+  workflow: string | null;
+}
+
+/**
+ * Collection Form Facility GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityDataPayload
+ */
+export interface ICollectionFormFacilityDataPayload {
+  rows: Array<ICollectionFormFacilityData>;
+}
+
+/**
+ * Collection Form Facility POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilitySaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormFacilityData>} items - facility data to save to API
+ */
+export interface ICollectionFormFacilitySaveDataPayload {
+  collection: string;
+  rows: Array<ICollectionFormFacilityData>;
+}
+
+/**
+ * Collection Form Facility Asset Category Facilities GET request
+ * data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityAssetCategoryFacilitiesDataPayload
+ */
+export interface ICollectionFormFacilityAssetCategoryFacilitiesDataPayload
+  extends Array<string> {}
+
+/**
+ * Collection Form Facility Workflows GET request data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityWorkflowsData
+ */
+export interface ICollectionFormFacilityWorkflowsData {
+  name: string;
+  advanced: boolean;
+}
+
+/**
+ * Collection Form Facility Workflows GET request
+ * data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityWorkflowsDataPayload
+ */
+export interface ICollectionFormFacilityWorkflowsDataPayload
+  extends Array<ICollectionFormFacilityWorkflowsData> {}
+
+/**
  * New Asset Category data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}

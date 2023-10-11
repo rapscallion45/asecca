@@ -6,6 +6,7 @@ import { collectionFormScheduleMockHandlers } from './collectionFormScheduleMock
 import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMockServerHandler';
 import { collectionFormServicesMockHandlers } from './collectionFormServicesMockServerHandler';
 import { collectionFormItineraryMockHandlers } from './collectionFormItineraryMockServerHandler';
+import { collectionFormFacilityMockHandlers } from './collectionFormFacilityMockServerHandlers';
 import { devicesTableMockHandlers } from './devicesTableMockServerHandler';
 import { assetCategoryMockHandlers } from './assetCategoryMockServerHandler';
 
@@ -23,6 +24,7 @@ const mockHandlers = [
   ...collectionFormLogisticsMockHandlers,
   ...collectionFormServicesMockHandlers,
   ...collectionFormItineraryMockHandlers,
+  ...collectionFormFacilityMockHandlers,
   ...devicesTableMockHandlers,
   ...assetCategoryMockHandlers,
 ];

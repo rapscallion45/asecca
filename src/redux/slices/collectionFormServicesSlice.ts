@@ -252,7 +252,7 @@ const collectionFormServicesSlice = createSlice({
           state.saving = false;
         }
       )
-      /* Fetch Collection Form Logistics Types extra reducers */
+      /* Fetch Collection Form Services Types extra reducers */
       .addCase(fetchTypes.pending, (state: ICollectionFormServicesState) => {
         state.loadingContacts = true;
       })

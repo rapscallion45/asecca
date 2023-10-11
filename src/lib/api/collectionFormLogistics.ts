@@ -31,7 +31,7 @@ export async function getLogistics(collectionId: string | string[]) {
     }),
   };
 
-  /* fetch the costs */
+  /* fetch the logistics */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/logistics/api/logistics?collection=${collectionId}`,
     requestOptions
@@ -63,7 +63,7 @@ export async function setLogistics(
     body: JSON.stringify(body),
   };
 
-  /* send the costs */
+  /* send the logistics */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/logistics/api/logistics`,
     requestOptions
@@ -91,7 +91,7 @@ export async function getLogisticsTypes() {
     }),
   };
 
-  /* fetch the logistics */
+  /* fetch the logistics compatible facilities */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/logistics/api/compatible_facilities_for_logistics`,
     requestOptions

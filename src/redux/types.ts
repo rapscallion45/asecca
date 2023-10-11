@@ -16,11 +16,14 @@ import {
   ICollectionFormServicesDataPayload,
   ICollectionFormServicesSaveDataPayload,
   ICollectionFormServicesContactsDataPayload,
+  ICollectionFormServicesRecycling,
+  ICollectionFormServicesDestruction,
   ICollectionFormItineraryDataPayload,
   ICollectionFormItinerarySaveDataPayload,
   ICollectionFormItineraryAssetCategoryDataPayload,
-  ICollectionFormServicesRecycling,
-  ICollectionFormServicesDestruction,
+  ICollectionFormFacilityData,
+  ICollectionFormFacilitySaveDataPayload,
+  ICollectionFormFacilityWorkflowsDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -476,6 +479,137 @@ export interface ICollectionFormServicesState {
   edited: boolean;
   loadingContacts: boolean;
   contacts: ICollectionFormServicesContactsDataPayload;
+}
+
+/**
+ * Fetch Collection Form Facility args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IFetchCollectionFormFacilityByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormFacilityByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Facility args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ISaveCollectionFormFacilityByCollectionIdArgs
+ * @prop {ICollectionFormFacilitySaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormFacilityByCollectionIdArgs {
+  data: ICollectionFormFacilitySaveDataPayload;
+}
+
+/**
+ * Fetch Collection Form Facility Asset Category Facilities args
+ * for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs
+ * @prop {string} assetCategory - asset category to fetch facilities for
+ */
+export interface IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs {
+  assetCategory: string;
+}
+
+/**
+ * Fetch Collection Form Facility Workflows args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IFetchCollectionFormFacilityWorkflowsArgs
+ * @prop {string} assetCategory - asset category to fetch workflows for
+ * @prop {string} facility - facility to fetch workflows for
+ */
+export interface IFetchCollectionFormFacilityWorkflowsArgs {
+  assetCategory: string;
+  facility: string;
+}
+
+/**
+ * Collection Form Facility edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityEditFacilityPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormFacilityEditFacilityPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Facility Data Extended type definition
+ *
+ * Extends the data returned by the API by adding the current Facilities and
+ * Workflows options for table dropdowns
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityDataExtended
+ * @prop {Array<ICollectionFormItineraryAssetCategoryDataPayload>} facilityOptions - facility options for this asset category
+ * @prop {Array<ICollectionFormFacilityWorkflowsDataPayload>} workflowOptions - workflow options for this asset category and facility
+ */
+export interface ICollectionFormFacilityDataExtended
+  extends ICollectionFormFacilityData {
+  facilityOptions?: Array<ICollectionFormItineraryAssetCategoryDataPayload>;
+  workflowOptions?: Array<ICollectionFormFacilityWorkflowsDataPayload>;
+}
+
+/**
+ * Collection Form Facility State Data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityStateData
+ * @prop {Array<ICollectionFormFacilityDataExtended>} rows - data rows held in state
+ */
+export interface ICollectionFormFacilityStateData {
+  rows: Array<ICollectionFormFacilityDataExtended>;
+}
+
+/**
+ * Collection Form Facility state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormServicesState
+ * @prop {boolean} loading - facility loading state
+ * @prop {ICollectionFormFacilityStateData} data - currently loaded facility data
+ * @prop {ICollectionFormFacilityStateData} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of facility
+ * @prop {boolean} saving - saving state flag of facility data
+ * @prop {boolean} edited - facility data has been edited flag
+ * @prop {boolean} loadingAssetCategoryFacilities - loading asset category facilities from API
+ * @prop {boolean} loadingWorkflows - loading workflows from API
+ */
+export interface ICollectionFormFacilityState {
+  loading: boolean;
+  data: ICollectionFormFacilityStateData;
+  dataShadow: ICollectionFormFacilityStateData;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
+  loadingAssetCategoryFacilities: boolean;
+  loadingWorkflows: boolean;
 }
 
 /**

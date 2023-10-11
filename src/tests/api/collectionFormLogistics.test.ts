@@ -126,6 +126,21 @@ describe('Collection Form Logistics API Routes', () => {
     });
   });
 
+  describe('POST /collection/logistics/api/compatible_facilities_for_logistics', () => {
+    it('returns 404 for unsupported method', async () => {
+      /** Arrange */
+      const { req, res } = createMocks({
+        method: 'POST',
+      });
+
+      /** Act */
+      await collectionFormLogisticsTypesHandler(req, res);
+
+      /** Assert */
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
   describe('PUT /collection/logistics/api/compatible_facilities_for_logistics', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
