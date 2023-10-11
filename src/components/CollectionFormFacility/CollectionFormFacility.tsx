@@ -188,15 +188,18 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
   const getActionComponent = (colKey: string, rowIdx: number) => {
     switch (colKey) {
       case 'view_workflow':
-        return (
+        return data.rows[rowIdx].workflow ? (
           <Button
             color="secondary"
             variant="contained"
             onClick={() => handleViewWorkflow(rowIdx)}
             disabled={saving || loading}
+            sx={{ fontSize: 'small' }}
           >
             View Workflow
           </Button>
+        ) : (
+          <Box sx={{ minWidth: '140.5px' }} />
         );
       default:
         return null;
