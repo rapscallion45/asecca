@@ -88,11 +88,11 @@ const CollectionFormNewContact: FC<ICollectionFormNewContactProps> = (
       .email('Please enter a valid email address')
       .required('Contact email is required'),
     mobile: Yup.string().matches(
-      /^[0-9+]+$/,
+      /^[0-9+-]+$/,
       'Mobile number must only contain digits'
     ),
     landline: Yup.string().matches(
-      /^[0-9+]+$/,
+      /^[0-9+-]+$/,
       'Landline must only contain digits'
     ),
   });
