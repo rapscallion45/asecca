@@ -11,6 +11,8 @@ import {
   Card,
   CardHeader,
   CardContent,
+  Checkbox,
+  FormControlLabel,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { addNotification } from '@/redux/slices/notificationsSlice';
@@ -155,6 +157,7 @@ const CollectionFormNewContact: FC<ICollectionFormNewContactProps> = (
       job_title: '',
       landline: '',
       mobile: '',
+      sync_to_crm: false,
     },
     validationSchema,
     onSubmit: (data: IContactData) => {
@@ -289,6 +292,21 @@ const CollectionFormNewContact: FC<ICollectionFormNewContactProps> = (
                 placeholder="New Contact Mobile..."
                 fullWidth
                 color="secondary"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControlLabel
+                id="sync_to_crm"
+                name="sync_to_crm"
+                label="Sync To CRM"
+                control={
+                  <Checkbox
+                    checked={formik.values.sync_to_crm}
+                    color="secondary"
+                  />
+                }
+                onChange={formik.handleChange}
+                labelPlacement="start"
               />
             </Grid>
           </Grid>

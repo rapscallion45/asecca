@@ -934,7 +934,7 @@ export interface IContactNameData {
  * @prop {string | null} landline - landline number of contact
  * @prop {string | null} mobile - mobile number of contact
  * @prop {string | null} crm_link - crm link of contact
- * @prop {boolean | null} sync_to_crm - syn contact to CRM
+ * @prop {boolean} sync_to_crm - syn contact to CRM
  */
 export interface IContactData {
   name: IContactNameData;
@@ -943,7 +943,7 @@ export interface IContactData {
   landline: string | null;
   mobile: string | null;
   crm_link?: string | null;
-  sync_to_crm?: boolean | null;
+  sync_to_crm?: boolean;
 }
 
 /**
