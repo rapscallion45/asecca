@@ -17,8 +17,8 @@ import {
   ICollectionFormServicesEditSchedulePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormServicesDataMock from '../../../__mocks__/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/collectionFormServicesContactsDataMock';
+import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
+import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
 
 /**
  * State slice definition for Collection Form Services
@@ -252,7 +252,7 @@ const collectionFormServicesSlice = createSlice({
           state.saving = false;
         }
       )
-      /* Fetch Collection Form Logistics Types extra reducers */
+      /* Fetch Collection Form Services Types extra reducers */
       .addCase(fetchTypes.pending, (state: ICollectionFormServicesState) => {
         state.loadingContacts = true;
       })

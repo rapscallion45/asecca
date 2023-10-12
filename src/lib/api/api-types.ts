@@ -781,6 +781,87 @@ export interface ICollectionFormItineraryAssetCategoryDataPayload
   extends Array<string> {}
 
 /**
+ * Collection Form Facility data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityData
+ * @prop {string} asset_category - name of this facility asset category
+ * @prop {string | null} facility - name of facility
+ * @prop {string | null} workflow - name of workflow
+ */
+export interface ICollectionFormFacilityData {
+  asset_category: string;
+  facility: string | null;
+  workflow: string | null;
+}
+
+/**
+ * Collection Form Facility GET request data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityDataPayload
+ */
+export interface ICollectionFormFacilityDataPayload {
+  rows: Array<ICollectionFormFacilityData>;
+}
+
+/**
+ * Collection Form Facility POST data payload type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilitySaveDataPayload
+ * @prop {string} collection - ID of the collection to be saved
+ * @prop {Array<ICollectionFormFacilityData>} items - facility data to save to API
+ */
+export interface ICollectionFormFacilitySaveDataPayload {
+  collection: string;
+  rows: Array<ICollectionFormFacilityData>;
+}
+
+/**
+ * Collection Form Facility Asset Category Facilities GET request
+ * data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityAssetCategoryFacilitiesDataPayload
+ */
+export interface ICollectionFormFacilityAssetCategoryFacilitiesDataPayload
+  extends Array<string> {}
+
+/**
+ * Collection Form Facility Workflows GET request data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityWorkflowsData
+ */
+export interface ICollectionFormFacilityWorkflowsData {
+  name: string;
+  advanced: boolean;
+}
+
+/**
+ * Collection Form Facility Workflows GET request
+ * data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef ICollectionFormFacilityWorkflowsDataPayload
+ */
+export interface ICollectionFormFacilityWorkflowsDataPayload
+  extends Array<ICollectionFormFacilityWorkflowsData> {}
+
+/**
  * New Asset Category data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -822,3 +903,58 @@ export interface INewAssetCategoryDataPayload extends INewAssetCategoryData {}
  * @typedef IAssetCategoryFacilitiesDataPayload
  */
 export interface IAssetCategoryFacilitiesDataPayload extends Array<string> {}
+
+/**
+ * Contact Name data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IContactNameData
+ * @prop {string} prefix - contact's prefix
+ * @prop {string} first - contact's first name
+ * @prop {string} last - contact's last name
+ */
+export interface IContactNameData {
+  prefix: string;
+  first: string;
+  last: string;
+}
+
+/**
+ * New Contact data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IContactData
+ * @prop {IContactNameData} name - name details of the contact
+ * @prop {string | null} email - eemail of contact
+ * @prop {string | null} job_title - contact's job title
+ * @prop {string | null} landline - landline number of contact
+ * @prop {string | null} mobile - mobile number of contact
+ * @prop {string | null} crm_link - crm link of contact
+ * @prop {boolean} sync_to_crm - syn contact to CRM
+ */
+export interface IContactData {
+  name: IContactNameData;
+  email: string | null;
+  job_title: string | null;
+  landline: string | null;
+  mobile: string | null;
+  crm_link?: string | null;
+  sync_to_crm?: boolean;
+}
+
+/**
+ * Collection Form New Contact data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef INewContactSaveDataPayload
+ * @prop {string} collectionId - collection ID to add contact to
+ */
+export interface ICollectionFormNewContactSaveDataPayload extends IContactData {
+  collectionId: string;
+}

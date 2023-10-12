@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormCostsHandler from '@/pages/api/collection/costs/api/costs';
-import collectionFormCostsDataMock from '../../../__mocks__/collectionFormCostsDataMock';
+import collectionFormCostsDataMock from '../../../__mocks__/CollectionForm/collectionFormCostsDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

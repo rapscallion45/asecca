@@ -22,6 +22,8 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  * @prop {boolean} canEdit - cell is editable flag
  * @prop {string | undefined} value - cell value, can be null
  * @prop {DataTableColumnSelectValueType} options - select dropdown options
+ * @prop {boolean} allowUnassigned - allow the dropdown to be unassigned
+ * @prop {string} unassignedText - string to display when dropdown unassigned
  * @prop {IDataTableEditSelectCellValueCallback} submitCellValue - submit cell value
  * @prop {any} sx - cell styling overrrides
  */
@@ -30,6 +32,8 @@ interface ISelectCellProps {
   canEdit: boolean;
   value: string | undefined;
   options: DataTableColumnSelectValueType;
+  allowUnassigned?: boolean;
+  unassignedText?: string;
   submitCellValue?: IDataTableEditSelectCellValueCallback;
   sx?: any;
 }
@@ -47,7 +51,16 @@ interface ISelectCellProps {
  * @returns {FC} - data table checkbox cell functional component
  */
 const SelectCell: FC<ISelectCellProps> = (props) => {
-  const { inputId, canEdit, value, options, submitCellValue, sx } = props;
+  const {
+    inputId,
+    canEdit,
+    value,
+    options,
+    allowUnassigned,
+    unassignedText,
+    submitCellValue,
+    sx,
+  } = props;
 
   /**
    * Callback for handling user input.
@@ -71,11 +84,22 @@ const SelectCell: FC<ISelectCellProps> = (props) => {
         <Select
           id={`${inputId}-select`}
           inputProps={{ 'aria-label': inputId }}
-          value={value}
+          value={value || ''}
           onChange={handleValueChange}
+          renderValue={(selectValue: string) =>
+            /* if current value is undefined, display the unassigned text */
+            selectValue === undefined || selectValue === '' ? (
+              <MenuItem value="">{unassignedText}</MenuItem>
+            ) : (
+              /* we have a value, display it */
+              <MenuItem value={selectValue}>{selectValue}</MenuItem>
+            )
+          }
           label={inputId}
           disabled={!canEdit}
+          displayEmpty={allowUnassigned}
         >
+          {allowUnassigned && <MenuItem value="">Unassigned</MenuItem>}
           {options?.map((option) => (
             <MenuItem key={option} value={option}>
               {option}

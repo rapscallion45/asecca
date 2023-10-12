@@ -23,20 +23,20 @@ import { UserPermissionLevel } from '@/redux/types';
 import columns from './collectionFormCostsTableColumns';
 
 /**
- * Collection Form Costs Data Table Props
+ * Collection Form Costs Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.13
  *
- * @typedef ICollectionFormCostsTableProps
+ * @typedef ICollectionFormCostsProps
  * @prop {string} collectionId - ID string of Collection for table data API call
  */
-interface ICollectionFormCostsTableProps {
+interface ICollectionFormCostsProps {
   collectionId: string;
 }
 
 /**
- * Collection Form Costs  Data Table
+ * Collection Form Costs
  *
  * Presents the Collection Form Costs table to the user, populated with data
  * fetched from API: /api/collection/costs/api/costs
@@ -45,10 +45,10 @@ interface ICollectionFormCostsTableProps {
  * @since 0.0.13
  *
  * @component
- * @param {ICollectionFormCostsTableProps} props - component props
+ * @param {ICollectionFormCostsProps} props - component props
  * @returns {FC} - collection form costs table functional component
  */
-const CollectionFormCosts: FC<ICollectionFormCostsTableProps> = (props) => {
+const CollectionFormCosts: FC<ICollectionFormCostsProps> = (props) => {
   const { collectionId } = props;
 
   /* shorthand helper for dispatching redux actions */

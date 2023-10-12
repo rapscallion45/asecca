@@ -206,6 +206,8 @@ const DataRow: FC<IDataRowProps> = (props) => {
               }
               value={(getCellValueByColumn(column) as string) || undefined}
               options={column.selectOptions}
+              allowUnassigned={column.allowUnassigned}
+              unassignedText={column.unassignedText}
               submitCellValue={(value) => submitCellValue(value, column.key)}
             />
           )}

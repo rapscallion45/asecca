@@ -1,8 +1,8 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormLogisticsHandler from '@/pages/api/collection/logistics/api/logistics';
 import collectionFormLogisticsTypesHandler from '@/pages/api/collection/logistics/api/compatible_facilities_for_logistics';
-import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
-import collectionFormLogisticsTypesDataMock from '../../../__mocks__/collectionFormLogisticsTypesDataMock';
+import collectionFormLogisticsDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsTypesDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({
@@ -123,6 +123,21 @@ describe('Collection Form Logistics API Routes', () => {
       expect(JSON.parse(res._getData())).toEqual(
         expect.objectContaining(collectionFormLogisticsTypesDataMock)
       );
+    });
+  });
+
+  describe('POST /collection/logistics/api/compatible_facilities_for_logistics', () => {
+    it('returns 404 for unsupported method', async () => {
+      /** Arrange */
+      const { req, res } = createMocks({
+        method: 'POST',
+      });
+
+      /** Act */
+      await collectionFormLogisticsTypesHandler(req, res);
+
+      /** Assert */
+      expect(res._getStatusCode()).toBe(404);
     });
   });
 

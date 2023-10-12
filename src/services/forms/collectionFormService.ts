@@ -1,10 +1,16 @@
 import {
   ICollectionFormCostsSaveDataPayload,
+  ICollectionFormFacilitySaveDataPayload,
   ICollectionFormItinerarySaveDataPayload,
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesSaveDataPayload,
+  ICollectionFormNewContactSaveDataPayload,
 } from '@/lib/api/api-types';
+import {
+  IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs,
+  IFetchCollectionFormFacilityWorkflowsArgs,
+} from '@/redux/types';
 
 /**
  * API services for Collection Form
@@ -309,6 +315,132 @@ async function getItineraryAssetCategories() {
   );
 }
 
+/**
+ * GET request to /api/collection/facility/api/facility
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getFacility(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/facility/api/facility?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/facility/api/facility
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {ICollectionFormFacilitySaveDataPayload} body - Itinerary data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function setFacility(body: ICollectionFormFacilitySaveDataPayload) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/facility/api/facility`, requestOptions);
+}
+
+/**
+ * GET request to /api/collection/facility/api/facilities_for_asset_category
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs} args - args for the request
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getFacilityAssetCategoryFacilities(
+  args: IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs
+) {
+  const { assetCategory } = args;
+
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/facility/api/facilities_for_asset_category?asset_category=${assetCategory}`,
+    requestOptions
+  );
+}
+
+/**
+ * GET request to /api/collection/facility/api/workflow_for_facility
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {IFetchCollectionFormFacilityWorkflowsArgs} args - args for the request
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getFacilityWorkflows(
+  args: IFetchCollectionFormFacilityWorkflowsArgs
+) {
+  const { assetCategory, facility } = args;
+
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/facility/api/workflow_for_facility?asset_category=${assetCategory}&facility=${facility}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/contact/api/create
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {ICollectionFormNewContactSaveDataPayload} body - Contact data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function createNewContact(
+  body: ICollectionFormNewContactSaveDataPayload
+) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/contact/api/create`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -323,6 +455,11 @@ const collectionFormService = {
   getItinerary,
   setItinerary,
   getItineraryAssetCategories,
+  getFacility,
+  setFacility,
+  getFacilityAssetCategoryFacilities,
+  getFacilityWorkflows,
+  createNewContact,
 };
 
 export default collectionFormService;

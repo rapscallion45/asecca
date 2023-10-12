@@ -1,7 +1,7 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormScheduleGetHandler from '@/pages/api/collection/schedule/api/get';
 import collectionFormScheduleSetHandler from '@/pages/api/collection/schedule/api/set';
-import collectionFormScheduleDataMock from '../../../__mocks__/collectionFormScheduleDataMock';
+import collectionFormScheduleDataMock from '../../../__mocks__/CollectionForm/collectionFormScheduleDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

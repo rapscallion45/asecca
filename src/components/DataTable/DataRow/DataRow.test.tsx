@@ -5,7 +5,7 @@ import { Table, TableBody } from '@mui/material';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import DataRow from './DataRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
-import costsConfigDataMock from '../../../../__mocks__/costsConfigDataMock';
+import costsConfigDataMock from '../../../../__mocks__/Configurators/costsConfigDataMock';
 import { IDataTableColumn } from '../types';
 
 /* mock callbacks for get and edit cell values */

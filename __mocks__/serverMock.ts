@@ -1,13 +1,15 @@
 import { setupServer } from 'msw/node';
-import { costsConfigMockHandlers } from './costsConfigMockServerHandlers';
-import { collectionsKanbanMockHandlers } from './collectionsKanbanMockServerHandler';
-import { collectionFormCostsMockHandlers } from './collectionFormCostsMockServerHandlers';
-import { collectionFormScheduleMockHandlers } from './collectionFormScheduleMockServerHandlers';
-import { collectionFormLogisticsMockHandlers } from './collectionFormLogisticsMockServerHandler';
-import { collectionFormServicesMockHandlers } from './collectionFormServicesMockServerHandler';
-import { collectionFormItineraryMockHandlers } from './collectionFormItineraryMockServerHandler';
-import { devicesTableMockHandlers } from './devicesTableMockServerHandler';
+import { costsConfigMockHandlers } from './Configurators/costsConfigMockServerHandlers';
+import { collectionsKanbanMockHandlers } from './Kanban/collectionsKanbanMockServerHandler';
+import { collectionFormCostsMockHandlers } from './CollectionForm/collectionFormCostsMockServerHandlers';
+import { collectionFormScheduleMockHandlers } from './CollectionForm/collectionFormScheduleMockServerHandlers';
+import { collectionFormLogisticsMockHandlers } from './CollectionForm/collectionFormLogisticsMockServerHandler';
+import { collectionFormServicesMockHandlers } from './CollectionForm/collectionFormServicesMockServerHandler';
+import { collectionFormItineraryMockHandlers } from './CollectionForm/collectionFormItineraryMockServerHandler';
+import { collectionFormFacilityMockHandlers } from './CollectionForm/collectionFormFacilityMockServerHandlers';
+import { devicesTableMockHandlers } from './Tables/devicesTableMockServerHandler';
 import { assetCategoryMockHandlers } from './assetCategoryMockServerHandler';
+import { collectionFormNewContactMockHandlers } from './CollectionForm/collectionFormNewContactMockServerHandlers';
 
 /**
  * configuration of the mock server for running tests
@@ -23,6 +25,8 @@ const mockHandlers = [
   ...collectionFormLogisticsMockHandlers,
   ...collectionFormServicesMockHandlers,
   ...collectionFormItineraryMockHandlers,
+  ...collectionFormFacilityMockHandlers,
+  ...collectionFormNewContactMockHandlers,
   ...devicesTableMockHandlers,
   ...assetCategoryMockHandlers,
 ];

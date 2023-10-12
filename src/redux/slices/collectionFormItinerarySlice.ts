@@ -18,8 +18,8 @@ import {
   ICollectionFormItineraryDeleteItineraryPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormItineraryDataMock from '../../../__mocks__/collectionFormItineraryDataMock';
-import collectionFormItineraryAssetCategoryDataMock from '../../../__mocks__/collectionFormItineraryAssetCategoryDataMock';
+import collectionFormItineraryDataMock from '../../../__mocks__/CollectionForm/collectionFormItineraryDataMock';
+import collectionFormItineraryAssetCategoryDataMock from '../../../__mocks__/CollectionForm/collectionFormItineraryAssetCategoryDataMock';
 
 /**
  * State slice definition for Collection Form Itinerary

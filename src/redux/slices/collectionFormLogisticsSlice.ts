@@ -18,8 +18,8 @@ import {
   ICollectionFormLogisticsDeleteLogisticsPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
-import collectionFormLogisticsTypesDataMock from '../../../__mocks__/collectionFormLogisticsTypesDataMock';
+import collectionFormLogisticsDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsTypesDataMock';
 
 /**
  * State slice definition for Collection Form Logistics
@@ -176,7 +176,7 @@ const collectionFormLogisticsSlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormLogisticsEditLogisticsPayload>
     ) => {
-      /* find and update passed cost */
+      /* find and update passed logistic */
       state.data.rows = state.data.rows.map(
         (logistic: ICollectionFormLogisticsData, index: number) => {
           /* perform update for passed table row number */

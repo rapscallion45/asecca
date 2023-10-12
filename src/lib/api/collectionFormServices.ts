@@ -31,7 +31,7 @@ export async function getServices(collectionId: string | string[]) {
     }),
   };
 
-  /* fetch the schedule */
+  /* fetch the services */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/services/api/get?collection=${collectionId}`,
     requestOptions
@@ -91,7 +91,7 @@ export async function getServicesContacts() {
     }),
   };
 
-  /* fetch the contacts */
+  /* fetch the services contacts */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/service/api/contacts`,
     requestOptions

@@ -31,20 +31,20 @@ import NewAssetCategoryModalModal from '../NewAssetCategoryModal.tsx/NewAssetCat
 import columns from './collectionFormItineraryTableColumns';
 
 /**
- * Collection Form Itinerary Data Table Props
+ * Collection Form Itinerary Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @typedef ICollectionFormItineraryTableProps
+ * @typedef ICollectionFormItineraryProps
  * @prop {string} collectionId - ID string of Collection for table data API call
  */
-interface ICollectionFormItineraryTableProps {
+interface ICollectionFormItineraryProps {
   collectionId: string;
 }
 
 /**
- * Collection Form Itinerary Data Table
+ * Collection Form Itinerary
  *
  * Presents the Collection Form Itinerary table to the user, populated with data
  * fetched from API: /api/collection/itinerary/api/itinerary
@@ -53,18 +53,16 @@ interface ICollectionFormItineraryTableProps {
  * @since 0.0.15
  *
  * @component
- * @param {ICollectionFormItineraryTableProps} props - component props
+ * @param {ICollectionFormItineraryProps} props - component props
  * @returns {FC} - collection form itinerary table functional component
  */
-const CollectionFormItinerary: FC<ICollectionFormItineraryTableProps> = (
-  props
-) => {
+const CollectionFormItinerary: FC<ICollectionFormItineraryProps> = (props) => {
   const { collectionId } = props;
 
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get collection form logisitcs data held in redux state */
+  /* get collection form itinerary data held in redux state */
   const { data, loading, error, saving, edited, assetCategories } = useSelector(
     (state: AppState) => state.collectionFormItinerary
   );

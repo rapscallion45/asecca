@@ -6,6 +6,8 @@ import CollectionFormLogistics from '@/components/CollectionFormLogistics/Collec
 import CollectionFormSchedule from '@/components/CollectionFormSchedule/CollectionFormSchedule';
 import CollectionFormServices from '@/components/CollectionFormServices/CollectionFormServices';
 import CollectionFormItinerary from '@/components/CollectionFormItinerary/CollectionFormItinerary';
+import CollectionFormFacility from '@/components/CollectionFormFacility/CollectionFormFacility';
+import CollectionFormNewContact from '@/components/CollectionFormNewContact/CollectionFormNewContact';
 
 /**
  * Collection Form Page
@@ -43,6 +45,12 @@ const CollectionFormPage: NextPageWithLayout = () => (
       </Box>
       <Box mb={2}>
         <CollectionFormItinerary collectionId="123456" />
+      </Box>
+      <Box mb={2}>
+        <CollectionFormFacility collectionId="123456" />
+      </Box>
+      <Box mb={2}>
+        <CollectionFormNewContact collectionId="123456" />
       </Box>
     </Box>
   </Box>

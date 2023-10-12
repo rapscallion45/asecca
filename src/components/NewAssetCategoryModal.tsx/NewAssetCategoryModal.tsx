@@ -32,10 +32,10 @@ import assetCategoryFacilitiesDataMock from '../../../__mocks__/assetCategoryFac
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.16
  *
- * @typedef INewAssetCategoryModalModalProps
+ * @typedef INewAssetCategoryModalProps
  * @prop {any} closeModal - on close modal callback handler
  */
-interface INewAssetCategoryModalModalProps {
+interface INewAssetCategoryModalProps {
   closeModal?: (fetchNewTypes: boolean) => void;
 }
 
@@ -49,12 +49,10 @@ interface INewAssetCategoryModalModalProps {
  * @since 0.0.16
  *
  * @component
- * @param {INewAssetCategoryModalModalProps} props - component props
+ * @param {INewAssetCategoryModalProps} props - component props
  * @returns {FC} - collection form new asset modal functional component
  */
-const NewAssetCategoryModalModal: FC<INewAssetCategoryModalModalProps> = (
-  props
-) => {
+const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
   const { closeModal } = props;
   const dispatch = useDispatch<AppDispatch>();
 
@@ -79,7 +77,7 @@ const NewAssetCategoryModalModal: FC<INewAssetCategoryModalModalProps> = (
   const [saving, setSaving] = useState<boolean>(false);
 
   /**
-   * Local state data for new asset category saving flag
+   * Local state data for new asset category facilities list
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.16
@@ -437,4 +435,4 @@ const NewAssetCategoryModalModal: FC<INewAssetCategoryModalModalProps> = (
   );
 };
 
-export default NewAssetCategoryModalModal;
+export default NewAssetCategoryModal;

@@ -16,7 +16,7 @@ import {
   ICollectionFormCostsEditCostsPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormCostsDataMock from '../../../__mocks__/collectionFormCostsDataMock';
+import collectionFormCostsDataMock from '../../../__mocks__/CollectionForm/collectionFormCostsDataMock';
 
 /**
  * State slice definition for Collection Form Costs
