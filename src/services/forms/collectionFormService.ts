@@ -5,6 +5,7 @@ import {
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesSaveDataPayload,
+  ICollectionFormNewContactSaveDataPayload,
 } from '@/lib/api/api-types';
 import {
   IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs,
@@ -416,6 +417,30 @@ async function getFacilityWorkflows(
   );
 }
 
+/**
+ * POST request to /api/collection/contact/api/create
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {ICollectionFormNewContactSaveDataPayload} body - Contact data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function createNewContact(
+  body: ICollectionFormNewContactSaveDataPayload
+) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/contact/api/create`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -434,6 +459,7 @@ const collectionFormService = {
   setFacility,
   getFacilityAssetCategoryFacilities,
   getFacilityWorkflows,
+  createNewContact,
 };
 
 export default collectionFormService;

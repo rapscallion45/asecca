@@ -903,3 +903,58 @@ export interface INewAssetCategoryDataPayload extends INewAssetCategoryData {}
  * @typedef IAssetCategoryFacilitiesDataPayload
  */
 export interface IAssetCategoryFacilitiesDataPayload extends Array<string> {}
+
+/**
+ * Contact Name data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IContactNameData
+ * @prop {string} prefix - contact's prefix
+ * @prop {string} first - contact's first name
+ * @prop {string} last - contact's last name
+ */
+export interface IContactNameData {
+  prefix: string;
+  first: string;
+  last: string;
+}
+
+/**
+ * New Contact data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef IContactData
+ * @prop {IContactNameData} name - name details of the contact
+ * @prop {string | null} email - eemail of contact
+ * @prop {string | null} job_title - contact's job title
+ * @prop {string | null} landline - landline number of contact
+ * @prop {string | null} mobile - mobile number of contact
+ * @prop {string | null} crm_link - crm link of contact
+ * @prop {boolean | null} sync_to_crm - syn contact to CRM
+ */
+export interface IContactData {
+  name: IContactNameData;
+  email: string | null;
+  job_title: string | null;
+  landline: string | null;
+  mobile: string | null;
+  crm_link?: string | null;
+  sync_to_crm?: boolean | null;
+}
+
+/**
+ * Collection Form New Contact data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ *
+ * @typedef INewContactSaveDataPayload
+ * @prop {string} collectionId - collection ID to add contact to
+ */
+export interface ICollectionFormNewContactSaveDataPayload extends IContactData {
+  collectionId: string;
+}

@@ -21,6 +21,7 @@ export {
   getFacilityAssetCategoryFacilities,
   getFacilityWorkflows,
 } from './collectionFormFacility';
+export { createNewContact } from './collectionFormNewContact';
 export {
   getAssetCategoryFacilities,
   setNewAssetCategory,
