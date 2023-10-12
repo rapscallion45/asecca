@@ -66,6 +66,8 @@ export type DataTableColumnSelectValueType = Array<string> | undefined;
  * @prop {DataTableColumnType} type - data table column type
  * @prop {selectOptions} selectOptions - options for dropdown column type
  * @prop {boolean} nullDisallowed - column values are not allowed to be null
+ * @prop {boolean} allowUnassigned - allow a select field to be unassigned
+ * @prop {string} unassignedText - string to display when dropdown not selected
  */
 export interface IDataTableColumn {
   label: string;
@@ -73,6 +75,8 @@ export interface IDataTableColumn {
   type: DataTableColumnType;
   selectOptions?: DataTableColumnSelectValueType;
   nullDisallowed?: boolean;
+  allowUnassigned?: boolean;
+  unassignedText?: string;
 }
 
 /**

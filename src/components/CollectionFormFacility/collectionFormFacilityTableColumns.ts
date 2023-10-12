@@ -21,6 +21,8 @@ const collectionFormFacilityTableColumns: Array<IDataTableColumn> = [
     key: 'facility',
     type: 'select',
     selectOptions: [] /* select options retreived from API at runtime */,
+    allowUnassigned: true,
+    unassignedText: 'Unassigned',
   },
   {
     label: 'Workflow',
