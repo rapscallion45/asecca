@@ -1,7 +1,7 @@
 import { IDataTableColumn } from '@/components/DataTable/types';
 import { ICollectionFormFacilityWorkflowsData } from '@/lib/api/api-types';
-import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/collectionFormFacilityWorkflowsDataMock';
-import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/collectionFormFacilityAssetCategoryFacilitiesDataMock';
+import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityWorkflowsDataMock';
+import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityAssetCategoryFacilitiesDataMock';
 
 /**
  * Collection Form Facility table column defintions

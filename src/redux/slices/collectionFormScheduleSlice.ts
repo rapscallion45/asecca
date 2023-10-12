@@ -16,7 +16,7 @@ import {
   ICollectionFormScheduleEditSchedulePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormScheduleDataMock from '../../../__mocks__/collectionFormScheduleDataMock';
+import collectionFormScheduleDataMock from '../../../__mocks__/CollectionForm/collectionFormScheduleDataMock';
 
 /**
  * State slice definition for Collection Form Schedule

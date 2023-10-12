@@ -18,8 +18,8 @@ import {
   ICollectionFormLogisticsDeleteLogisticsPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
-import collectionFormLogisticsTypesDataMock from '../../../__mocks__/collectionFormLogisticsTypesDataMock';
+import collectionFormLogisticsDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsTypesDataMock';
 
 /**
  * State slice definition for Collection Form Logistics

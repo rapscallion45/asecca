@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http';
 import devicesTableHandler from '@/pages/api/tables/api/devices';
-import devicesTableDataMock from '../../../__mocks__/devicesTableDataMock';
+import devicesTableDataMock from '../../../__mocks__/Tables/devicesTableDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

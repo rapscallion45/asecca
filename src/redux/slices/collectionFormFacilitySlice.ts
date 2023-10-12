@@ -19,7 +19,7 @@ import {
   IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormFacilityDataMock from '../../../__mocks__/collectionFormFacilityDataMock';
+import collectionFormFacilityDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityDataMock';
 
 /**
  * State slice definition for Collection Form Facility

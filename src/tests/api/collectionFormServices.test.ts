@@ -2,8 +2,8 @@ import { createMocks } from 'node-mocks-http';
 import collectionFormServicesGetHandler from '@/pages/api/collection/services/api/get';
 import collectionFormServicesSetHandler from '@/pages/api/collection/services/api/set';
 import collectionFormServicesContactsHandler from '@/pages/api/collection/services/api/contacts';
-import collectionFormServicesDataMock from '../../../__mocks__/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/collectionFormServicesContactsDataMock';
+import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
+import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

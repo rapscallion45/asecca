@@ -2,9 +2,9 @@ import { createMocks } from 'node-mocks-http';
 import collectionFormFacilityHandler from '@/pages/api/collection/facility/api/facility';
 import collectionFormFacilityAssetCategoryFacilitiesHandler from '@/pages/api/collection/facility/api/facilities_for_asset_category';
 import collectionFormFacilityWorkflowsHandler from '@/pages/api/collection/facility/api/workflow_for_facility';
-import collectionFormFacilityDataMock from '../../../__mocks__/collectionFormFacilityDataMock';
-import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/collectionFormFacilityAssetCategoryFacilitiesDataMock';
-import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/collectionFormFacilityWorkflowsDataMock';
+import collectionFormFacilityDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityDataMock';
+import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityAssetCategoryFacilitiesDataMock';
+import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityWorkflowsDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

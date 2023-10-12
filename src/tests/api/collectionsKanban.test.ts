@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http';
 import collectionsKanbanHandler from '@/pages/api/kanban/collections';
-import collectionsKanbanDataMock from '../../../__mocks__/collectionsKanbanDataMock';
+import collectionsKanbanDataMock from '../../../__mocks__/Kanban/collectionsKanbanDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

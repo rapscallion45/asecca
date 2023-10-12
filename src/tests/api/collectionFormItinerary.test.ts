@@ -1,8 +1,8 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormItineraryHandler from '@/pages/api/collection/itinerary/api/itinerary';
 import collectionFormItineraryAssetCategoryHandler from '@/pages/api/collection/enumerations/api/asset_category';
-import collectionFormItineraryDataMock from '../../../__mocks__/collectionFormItineraryDataMock';
-import collectionFormItineraryAssetCategoryDataMock from '../../../__mocks__/collectionFormItineraryAssetCategoryDataMock';
+import collectionFormItineraryDataMock from '../../../__mocks__/CollectionForm/collectionFormItineraryDataMock';
+import collectionFormItineraryAssetCategoryDataMock from '../../../__mocks__/CollectionForm/collectionFormItineraryAssetCategoryDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({

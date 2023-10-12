@@ -17,8 +17,8 @@ import {
   ICollectionFormServicesEditSchedulePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormServicesDataMock from '../../../__mocks__/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/collectionFormServicesContactsDataMock';
+import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
+import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
 
 /**
  * State slice definition for Collection Form Services

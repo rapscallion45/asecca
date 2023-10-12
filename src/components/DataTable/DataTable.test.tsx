@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { ICostsConfigData } from '@/lib/api/api-types';
 import DataTable from './DataTable';
 import dataTableColumns from '../CostsConfigTable/costsConfigTableColumns';
-import costsConfigDataMock from '../../../__mocks__/costsConfigDataMock';
+import costsConfigDataMock from '../../../__mocks__/Configurators/costsConfigDataMock';
 import { IDataTableColumn } from './types';
 
 /* mock callback for get cell value */

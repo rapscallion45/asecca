@@ -1,8 +1,8 @@
 import { createMocks } from 'node-mocks-http';
 import collectionFormLogisticsHandler from '@/pages/api/collection/logistics/api/logistics';
 import collectionFormLogisticsTypesHandler from '@/pages/api/collection/logistics/api/compatible_facilities_for_logistics';
-import collectionFormLogisticsDataMock from '../../../__mocks__/collectionFormLogisticsDataMock';
-import collectionFormLogisticsTypesDataMock from '../../../__mocks__/collectionFormLogisticsTypesDataMock';
+import collectionFormLogisticsDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsDataMock';
+import collectionFormLogisticsTypesDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsTypesDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({
