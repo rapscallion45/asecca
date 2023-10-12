@@ -214,12 +214,21 @@ const collectionFormFacilitySlice = createSlice({
       state: ICollectionFormFacilityState,
       action: PayloadAction<ICollectionFormFacilityEditFacilityPayload>
     ) => {
-      /* update facility */
-      state.data = {
-        ...state.data,
-        [action.payload.colKey as keyof ICollectionFormFacilityData]:
-          action.payload.value,
-      };
+      /* find and update passed facility */
+      state.data.rows = state.data.rows.map(
+        (facility: ICollectionFormFacilityData, index: number) => {
+          /* perform update for passed table row number */
+          if (index === action.payload.rowIdx) {
+            return {
+              ...facility,
+              /* update the value of the passed column */
+              [action.payload.colKey as keyof ICollectionFormFacilityData]:
+                action.payload.value,
+            };
+          }
+          return facility;
+        }
+      );
       state.edited = true;
     },
     /* reducer used for when user clears edits to Facility data */

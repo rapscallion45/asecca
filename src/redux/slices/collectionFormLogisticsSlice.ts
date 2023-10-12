@@ -176,7 +176,7 @@ const collectionFormLogisticsSlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormLogisticsEditLogisticsPayload>
     ) => {
-      /* find and update passed cost */
+      /* find and update passed logistic */
       state.data.rows = state.data.rows.map(
         (logistic: ICollectionFormLogisticsData, index: number) => {
           /* perform update for passed table row number */
