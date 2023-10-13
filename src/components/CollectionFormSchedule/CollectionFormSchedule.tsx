@@ -144,6 +144,7 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
                   'preferred_time'
                 )
               }
+              color="secondary"
             />
           </Box>
           <TextField

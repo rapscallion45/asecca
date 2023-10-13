@@ -189,6 +189,7 @@ const TextCell: FC<ITextCellProps> = (props) => {
             onKeyDown={onKeyDown}
             value={editValue}
             required
+            color="secondary"
           />
         </ClickAwayListener>
       </FormControl>

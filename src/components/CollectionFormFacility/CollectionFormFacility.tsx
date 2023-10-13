@@ -1,13 +1,31 @@
-import { FC, useState, useCallback } from 'react';
+import { FC, useState, useCallback, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
-import { Card, CardHeader, CardContent, Box, Button } from '@mui/material';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Box,
+  Button,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  FormControl,
+  Typography,
+  Backdrop,
+  CircularProgress,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { ICollectionFormFacilityData } from '@/lib/api/api-types';
+import {
+  ICollectionFormFacilityData,
+  ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
+  ICollectionFormFacilityWorkflowsDataPayload,
+} from '@/lib/api/api-types';
 import {
   saveByCollectionId as saveFacilityByCollectionId,
   resetFacility,
   editFacility,
+  fetchWorkflows,
 } from '@/redux/slices/collectionFormFacilitySlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -55,8 +73,10 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
     error,
     saving,
     edited,
-    // loadingAssetCategoryFacilities,
-    // loadingWorkflows,
+    loadingAssetCategoryFacilities,
+    assetCategoryFacilities,
+    loadingWorkflows,
+    workflows,
   } = useSelector((state: AppState) => state.collectionFormFacility);
 
   /* on first load, fetch the asset categories */
@@ -171,8 +191,127 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
    * @param {number} rowIdx - table row index of the action cell
    */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const handleViewWorkflow = (rowIdx: number) => {};
+  const handleViewWorkflow = useCallback((rowIdx: number) => {}, []);
   /* eslint-enable @typescript-eslint/no-unused-vars */
+
+  /**
+   * Handles any required logic when a facility select dropdown is changed
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.17
+   *
+   * @method
+   * @param {SelectChangeEvent} event - facility select dropdown change event
+   * @param {IDataTableColumn} column - column to update value for
+   * @param {number} rowIdx - table row index to update value for
+   */
+  const handleFacilityChange = useCallback(
+    (event: SelectChangeEvent, colKey: string, rowIdx: number) => {
+      /* update the global state */
+      handleEditCellValue(event.target.value, colKey, rowIdx);
+
+      /* fetch new workflow options for this facility and asset category combo */
+      dispatch(
+        fetchWorkflows({
+          assetCategory: data.rows[rowIdx].asset_category,
+          facility: data.rows[rowIdx].facility as string,
+        })
+      );
+    },
+    [data.rows, handleEditCellValue, dispatch]
+  );
+
+  /**
+   * Handles any required logic when a workflow select dropdown is changed
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.17
+   *
+   * @method
+   * @param {SelectChangeEvent} event - workflow select dropdown change event
+   * @param {IDataTableColumn} column - column to update value for
+   * @param {number} rowIdx - table row index to update value for
+   */
+  const handleWorkflowChange = useCallback(
+    (event: SelectChangeEvent, colKey: string, rowIdx: number) => {
+      /* update the global state */
+      handleEditCellValue(event.target.value, colKey, rowIdx);
+    },
+    [handleEditCellValue]
+  );
+
+  /**
+   * Helper function for rendering form table select fields
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.17
+   *
+   * @method
+   * @param {string} colKey - table column key of the action cell
+   * @param {number} rowIdx - table row index of the action cell
+   * @param {string} value - current selected value
+   * @param {Array<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload | ICollectionFormFacilityWorkflowsDataPayload>} options - select options present
+   * @param {(SelectChangeEvent, string, number) => void} handleChange - handle select change callback
+   * @returns {ReactNode} - select dropdown component
+   */
+  const getSelectDropdown = useCallback(
+    (
+      colKey: string,
+      rowIdx: number,
+      value: string,
+      options:
+        | ICollectionFormFacilityAssetCategoryFacilitiesDataPayload
+        | ICollectionFormFacilityWorkflowsDataPayload,
+      handleChange: (
+        event: SelectChangeEvent,
+        colKey: string,
+        rowIdx: number
+      ) => void
+    ): ReactNode => (
+      <FormControl variant="standard" sx={{ minWidth: 200 }}>
+        <Select
+          id={`${colKey}-select-input`}
+          value={value}
+          renderValue={(selectValue: string) =>
+            /* if current value is undefined, display the unassigned text */
+            selectValue === undefined || selectValue === '' ? (
+              <MenuItem value="">
+                {columns.find((col: IDataTableColumn) => col.key === colKey)
+                  ?.unassignedText || ''}
+              </MenuItem>
+            ) : (
+              /* we have a value, display it */
+              <MenuItem value={selectValue}>{selectValue}</MenuItem>
+            )
+          }
+          onChange={(event: SelectChangeEvent) =>
+            handleChange(event, colKey, rowIdx)
+          }
+          color="secondary"
+        >
+          {/* check if this dropdown can be unassigned a value */}
+          {columns.find((col: IDataTableColumn) => col.key === colKey)
+            ?.allowUnassigned && <MenuItem value="">Unassigned</MenuItem>}
+          {/* map passed select options */}
+          {options?.map((option: any) => (
+            <MenuItem
+              key={`${data.rows[rowIdx].asset_category}-${option}-option`}
+              value={
+                typeof option === 'object' && 'name' in option
+                  ? option.name
+                  : option
+              }
+            >
+              {typeof option === 'object' && 'name' in option
+                ? option.name
+                : option}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    ),
+    [data.rows]
+  );
 
   /**
    * Handles requests for the action component for specific column
@@ -185,31 +324,69 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
    * @param {number} rowIdx - table row index of the action cell
    * @returns {ReactNode} - action component to present
    */
-  const getActionComponent = (colKey: string, rowIdx: number) => {
-    switch (colKey) {
-      case 'view_workflow':
-        return data.rows[rowIdx].workflow ? (
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() => handleViewWorkflow(rowIdx)}
-            disabled={saving || loading}
-            sx={{ fontSize: 'small' }}
-          >
-            View Workflow
-          </Button>
-        ) : (
-          <Box sx={{ minWidth: '140.5px' }} />
-        );
-      default:
-        return null;
-    }
-  };
+  const getActionComponent = useCallback(
+    (colKey: string, rowIdx: number): ReactNode => {
+      switch (colKey) {
+        case 'facility':
+          return getSelectDropdown(
+            colKey,
+            rowIdx,
+            data.rows[rowIdx].facility || '',
+            assetCategoryFacilities[rowIdx],
+            handleFacilityChange
+          );
+        case 'workflow':
+          return data.rows[rowIdx].facility ? (
+            getSelectDropdown(
+              colKey,
+              rowIdx,
+              data.rows[rowIdx].workflow || '',
+              workflows[rowIdx],
+              handleWorkflowChange
+            )
+          ) : (
+            <Typography>Please select a facility</Typography>
+          );
+        case 'view_workflow':
+          return data.rows[rowIdx].workflow ? (
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => handleViewWorkflow(rowIdx)}
+              disabled={saving || loading}
+              sx={{ fontSize: 'small' }}
+            >
+              View Workflow
+            </Button>
+          ) : (
+            <Box sx={{ minWidth: '140.5px' }} />
+          );
+        default:
+          return null;
+      }
+    },
+    [
+      assetCategoryFacilities,
+      data.rows,
+      loading,
+      saving,
+      workflows,
+      getSelectDropdown,
+      handleFacilityChange,
+      handleWorkflowChange,
+      handleViewWorkflow,
+    ]
+  );
 
   return (
     <Card>
       <CardHeader title="Facility" />
-      <CardContent sx={{ pt: 0 }}>
+      <CardContent sx={{ pt: 0, position: 'relative' }}>
+        {(loadingAssetCategoryFacilities || loadingWorkflows) && (
+          <Backdrop open sx={{ position: 'absolute' }}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
         <DataTable
           name="collection form facility"
           /* filter table columns by current facility type */

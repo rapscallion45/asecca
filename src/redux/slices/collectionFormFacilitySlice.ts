@@ -14,12 +14,13 @@ import {
   IFetchCollectionFormFacilityByCollectionIdArgs,
   ISaveCollectionFormFacilityByCollectionIdArgs,
   ICollectionFormFacilityEditFacilityPayload,
-  ICollectionFormFacilityStateData,
   IFetchCollectionFormFacilityWorkflowsArgs,
   IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormFacilityDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityDataMock';
+import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityWorkflowsDataMock';
+import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityAssetCategoryFacilitiesDataMock';
 
 /**
  * State slice definition for Collection Form Facility
@@ -190,7 +191,15 @@ const initialcollectionFormFacilityState: ICollectionFormFacilityState = {
   saving: false,
   edited: false,
   loadingAssetCategoryFacilities: false,
+  assetCategoryFacilities: [
+    collectionFormFacilityAssetCategoryFacilitiesDataMock,
+    collectionFormFacilityAssetCategoryFacilitiesDataMock,
+  ],
   loadingWorkflows: false,
+  workflows: [
+    collectionFormFacilityWorkflowsDataMock,
+    collectionFormFacilityWorkflowsDataMock,
+  ],
 };
 
 /**
@@ -265,8 +274,8 @@ const collectionFormFacilitySlice = createSlice({
           action: PayloadAction<ICollectionFormFacilityDataPayload>
         ) => {
           state.loading = false;
-          state.data = action.payload as ICollectionFormFacilityStateData;
-          state.dataShadow = action.payload as ICollectionFormFacilityStateData;
+          state.data = action.payload;
+          state.dataShadow = action.payload;
           state.error = undefined;
         }
       )
@@ -321,8 +330,8 @@ const collectionFormFacilitySlice = createSlice({
         fetchAssetCategoryFacilities.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingAssetCategoryFacilities = false;
-          state.error =
-            'Failed to load Collection Form Facility Asset Category Facilities data from server.';
+          // state.error =
+          //   'Failed to load Collection Form Facility Asset Category Facilities data from server.';
         }
       )
       /* Fetch Collection Form Facility Workflows extra reducers */
@@ -346,8 +355,8 @@ const collectionFormFacilitySlice = createSlice({
         fetchWorkflows.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingWorkflows = false;
-          state.error =
-            'Failed to load Collection Form Facility Workflows data from server.';
+          // state.error =
+          //   'Failed to load Collection Form Facility Workflows data from server.';
         }
       );
   },

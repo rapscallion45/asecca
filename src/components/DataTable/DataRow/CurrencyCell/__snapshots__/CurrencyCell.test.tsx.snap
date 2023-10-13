@@ -21,7 +21,7 @@ exports[`Data Table Currency Cell Renders correctly 1`] = `
           className="MuiFormControl-root css-e363es-MuiFormControl-root"
         >
           <div
-            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd css-v4u5dn-MuiInputBase-root-MuiInput-root"
+            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorSecondary MuiInputBase-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd css-vg7q19-MuiInputBase-root-MuiInput-root"
             onClick={[Function]}
             onMouseDown={[Function]}
             onTouchStart={[Function]}

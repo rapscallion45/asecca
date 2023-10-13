@@ -211,6 +211,7 @@ const NumericalCell: FC<INumericalCellProps> = (props) => {
             onKeyDown={onKeyDown}
             value={editValue}
             required
+            color="secondary"
           />
         </ClickAwayListener>
       </FormControl>
