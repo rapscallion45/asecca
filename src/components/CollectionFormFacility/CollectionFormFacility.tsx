@@ -352,7 +352,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
               handleWorkflowChange
             )
           ) : (
-            <Typography>Please select a facility</Typography>
+            <Typography ml={2}>Please select a facility</Typography>
           );
         case 'view_workflow':
           return data.rows[rowIdx].workflow ? (
