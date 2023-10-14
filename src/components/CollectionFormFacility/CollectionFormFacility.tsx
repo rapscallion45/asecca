@@ -214,7 +214,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
       dispatch(
         fetchWorkflows({
           assetCategory: data.rows[rowIdx].asset_category,
-          facility: data.rows[rowIdx].facility as string,
+          facility: event.target.value,
         })
       );
     },
