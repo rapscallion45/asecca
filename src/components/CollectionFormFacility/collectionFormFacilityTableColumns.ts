@@ -27,6 +27,8 @@ const collectionFormFacilityTableColumns: Array<IDataTableColumn> = [
     label: 'Workflow',
     key: 'workflow',
     type: 'action',
+    allowUnassigned: true,
+    unassignedText: 'Unassigned',
   },
   {
     label: '',

@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, ReactNode } from 'react';
+import { FC, useEffect, useCallback, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import {
@@ -26,6 +26,7 @@ import {
   resetFacility,
   editFacility,
   fetchWorkflows,
+  fetchAssetCategoryFacilities,
 } from '@/redux/slices/collectionFormFacilitySlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -69,6 +70,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
   /* get collection form facility data held in redux state */
   const {
     data,
+    dataShadow,
     loading,
     error,
     saving,
@@ -79,41 +81,21 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
     workflows,
   } = useSelector((state: AppState) => state.collectionFormFacility);
 
-  /* on first load, fetch the asset categories */
-  // useEffect(() => {
-  //   dispatch(fetchFacilities());
-  //   dispatch(fetchWorkflows());
-  // }, [dispatch]);
-
-  /**
-   * Table column list
-   *
-   * Local state of columns list for available facility and workflow options
-   *
-   * @since 0.0.17
-   *
-   * @constant
-   */
-  const [colList] = useState<Array<IDataTableColumn>>(columns);
-
-  /* Whenever Facility data updates, update column list */
-  //   useEffect(() => {
-  //     setColList(
-  //       columns.map((col: IDataTableColumn) => {
-  //         if (col.key === 'facility')
-  //           return {
-  //             ...col,
-  //             selectOptions: assetFacilities,
-  //           };
-  //         if (col.key === 'workflow')
-  //           return {
-  //             ...col,
-  //             selectOptions: assetWorkflows,
-  //           };
-  //         return col;
-  //       })
-  //     );
-  //   }, [data]);
+  /* On first load, build facility and initial workflow options for each row */
+  useEffect(() => {
+    dataShadow.rows.forEach((row: ICollectionFormFacilityData) => {
+      dispatch(
+        fetchAssetCategoryFacilities({ assetCategory: row.asset_category })
+      );
+      if (row.facility)
+        dispatch(
+          fetchWorkflows({
+            assetCategory: row.asset_category,
+            facility: row.facility,
+          })
+        );
+    });
+  }, [dataShadow.rows, dispatch]);
 
   /**
    * Handles the saving of the table data
@@ -398,9 +380,9 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
         <DataTable
           name="collection form facility"
           /* filter table columns by current facility type */
-          columns={colList}
+          columns={columns}
           /* can edit all cells in facility table */
-          editableColLabels={colList.map((col: IDataTableColumn) => col.label)}
+          editableColLabels={columns.map((col: IDataTableColumn) => col.label)}
           /* build table row props from facility data */
           rows={data.rows?.map((facility: ICollectionFormFacilityData) => ({
             label: facility.asset_category,
