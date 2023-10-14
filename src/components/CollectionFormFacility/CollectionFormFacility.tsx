@@ -382,11 +382,12 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
     <Card>
       <CardHeader title="Facility" />
       <CardContent sx={{ pt: 0, position: 'relative' }}>
-        {(loadingAssetCategoryFacilities || loadingWorkflows) && (
-          <Backdrop open sx={{ position: 'absolute' }}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        )}
+        <Backdrop
+          open={loadingAssetCategoryFacilities || loadingWorkflows}
+          sx={{ position: 'absolute', zIndex: '999' }}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
         <DataTable
           name="collection form facility"
           /* filter table columns by current facility type */
