@@ -323,7 +323,7 @@ const collectionFormFacilitySlice = createSlice({
           //   action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
         ) => {
           state.loadingAssetCategoryFacilities = false;
-          //   state.contacts = action.payload;
+          // state.assetCategoryFacilities = action.payload;
         }
       )
       .addCase(
@@ -348,7 +348,7 @@ const collectionFormFacilitySlice = createSlice({
           //   action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
         ) => {
           state.loadingWorkflows = false;
-          //   state.contacts = action.payload;
+          // state.workflows = action.payload;
         }
       )
       .addCase(
