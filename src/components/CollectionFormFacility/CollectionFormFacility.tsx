@@ -210,6 +210,13 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
       /* update the global state */
       handleEditCellValue(event.target.value, colKey, rowIdx);
 
+      /* if we have null value, clear workflow and do not dispatch fetch */
+      if (event.target.value === '') {
+        /* update the global state */
+        handleEditCellValue('', 'workflow', rowIdx);
+        return;
+      }
+
       /* fetch new workflow options for this facility and asset category combo */
       dispatch(
         fetchWorkflows({
