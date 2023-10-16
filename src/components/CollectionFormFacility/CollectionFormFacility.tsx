@@ -152,7 +152,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
    * @param {number} rowIdx - table row index to be updated
    */
   const handleEditCellValue = useCallback(
-    (value: DataTableRowCellValue, colKey: string, rowIdx: number) => {
+    (value: DataTableRowCellValue, colKey: string, rowIdx: number): void => {
       dispatch(editFacility({ value, colKey, rowIdx }));
     },
     [dispatch]
@@ -253,7 +253,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
    * @param {number} rowIdx - table row index of the action cell
    * @param {string} value - current selected value
    * @param {Array<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload | ICollectionFormFacilityWorkflowsDataPayload>} options - select options present
-   * @param {(SelectChangeEvent, string, number) => void} handleChange - handle select change callback
+   * @param {function} handleChange - handle select change callback
    * @returns {ReactNode} - select dropdown component
    */
   const getSelectDropdown = useCallback(
