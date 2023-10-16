@@ -1,7 +1,4 @@
 import { IDataTableColumn } from '@/components/DataTable/types';
-import { ICollectionFormFacilityWorkflowsData } from '@/lib/api/api-types';
-import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityWorkflowsDataMock';
-import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityAssetCategoryFacilitiesDataMock';
 
 /**
  * Collection Form Facility table column defintions
@@ -22,18 +19,16 @@ const collectionFormFacilityTableColumns: Array<IDataTableColumn> = [
   {
     label: 'Facility',
     key: 'facility',
-    type: 'select',
-    selectOptions: collectionFormFacilityAssetCategoryFacilitiesDataMock,
+    type: 'action',
     allowUnassigned: true,
     unassignedText: 'Unassigned',
   },
   {
     label: 'Workflow',
     key: 'workflow',
-    type: 'select',
-    selectOptions: collectionFormFacilityWorkflowsDataMock.map(
-      (workflow: ICollectionFormFacilityWorkflowsData) => workflow.name
-    ),
+    type: 'action',
+    allowUnassigned: true,
+    unassignedText: 'Unassigned',
   },
   {
     label: '',

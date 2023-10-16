@@ -25,7 +25,7 @@ const handler = async (
   switch (method) {
     case 'GET':
       /* check if we have correct query param, if not return error */
-      if (!query.assetCategory || !query.facility) {
+      if (!query.asset_category || !query.facility) {
         return res.status(422).json({
           message: 'Unproccesable request, missing params.',
         });
@@ -35,7 +35,7 @@ const handler = async (
       try {
         /* try proxying request to ASECCA API */
         const response = await getFacilityWorkflows({
-          assetCategory: query.assetCategory as string,
+          assetCategory: query.asset_category as string,
           facility: query.facility as string,
         });
 

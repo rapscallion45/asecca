@@ -211,7 +211,7 @@ describe('Collection Form Facility API Routes', () => {
       const { req, res } = createMocks({
         method: 'GET',
         query: {
-          assetCategory: 'Laptop',
+          asset_category: 'Laptop',
           facility: 'Phone',
         },
       });

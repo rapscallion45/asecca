@@ -7,6 +7,8 @@ import {
 import {
   ICollectionFormFacilityData,
   ICollectionFormFacilityDataPayload,
+  ICollectionFormFacilityWorkflowsDataPayload,
+  ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
@@ -14,12 +16,13 @@ import {
   IFetchCollectionFormFacilityByCollectionIdArgs,
   ISaveCollectionFormFacilityByCollectionIdArgs,
   ICollectionFormFacilityEditFacilityPayload,
-  ICollectionFormFacilityStateData,
   IFetchCollectionFormFacilityWorkflowsArgs,
   IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormFacilityDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityDataMock';
+import collectionFormFacilityWorkflowsDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityWorkflowsDataMock';
+import collectionFormFacilityAssetCategoryFacilitiesDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityAssetCategoryFacilitiesDataMock';
 
 /**
  * State slice definition for Collection Form Facility
@@ -190,7 +193,15 @@ const initialcollectionFormFacilityState: ICollectionFormFacilityState = {
   saving: false,
   edited: false,
   loadingAssetCategoryFacilities: false,
+  assetCategoryFacilities: [
+    collectionFormFacilityAssetCategoryFacilitiesDataMock,
+    collectionFormFacilityAssetCategoryFacilitiesDataMock,
+  ],
   loadingWorkflows: false,
+  workflows: [
+    collectionFormFacilityWorkflowsDataMock,
+    collectionFormFacilityWorkflowsDataMock,
+  ],
 };
 
 /**
@@ -265,8 +276,8 @@ const collectionFormFacilitySlice = createSlice({
           action: PayloadAction<ICollectionFormFacilityDataPayload>
         ) => {
           state.loading = false;
-          state.data = action.payload as ICollectionFormFacilityStateData;
-          state.dataShadow = action.payload as ICollectionFormFacilityStateData;
+          state.data = action.payload;
+          state.dataShadow = action.payload;
           state.error = undefined;
         }
       )
@@ -310,19 +321,18 @@ const collectionFormFacilitySlice = createSlice({
       .addCase(
         fetchAssetCategoryFacilities.fulfilled,
         (
-          state: ICollectionFormFacilityState
-          //   action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
+          state: ICollectionFormFacilityState,
+          action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
         ) => {
           state.loadingAssetCategoryFacilities = false;
-          //   state.contacts = action.payload;
+          // @ts-ignore *** solution needed for correct typing for action meta
+          state.assetCategoryFacilities[action.meta.rowIdx] = action.payload;
         }
       )
       .addCase(
         fetchAssetCategoryFacilities.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingAssetCategoryFacilities = false;
-          state.error =
-            'Failed to load Collection Form Facility Asset Category Facilities data from server.';
         }
       )
       /* Fetch Collection Form Facility Workflows extra reducers */
@@ -335,19 +345,18 @@ const collectionFormFacilitySlice = createSlice({
       .addCase(
         fetchWorkflows.fulfilled,
         (
-          state: ICollectionFormFacilityState
-          //   action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
+          state: ICollectionFormFacilityState,
+          action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
         ) => {
           state.loadingWorkflows = false;
-          //   state.contacts = action.payload;
+          // @ts-ignore *** solution needed for correct typing for action meta
+          state.workflows[action.meta.rowIdx] = action.payload;
         }
       )
       .addCase(
         fetchWorkflows.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingWorkflows = false;
-          state.error =
-            'Failed to load Collection Form Facility Workflows data from server.';
         }
       );
   },

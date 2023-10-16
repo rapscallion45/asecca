@@ -98,6 +98,7 @@ const SelectCell: FC<ISelectCellProps> = (props) => {
           label={inputId}
           disabled={!canEdit}
           displayEmpty={allowUnassigned}
+          color="secondary"
         >
           {allowUnassigned && <MenuItem value="">Unassigned</MenuItem>}
           {options?.map((option) => (
