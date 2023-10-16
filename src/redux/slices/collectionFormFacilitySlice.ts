@@ -7,6 +7,8 @@ import {
 import {
   ICollectionFormFacilityData,
   ICollectionFormFacilityDataPayload,
+  ICollectionFormFacilityWorkflowsDataPayload,
+  ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
@@ -319,19 +321,18 @@ const collectionFormFacilitySlice = createSlice({
       .addCase(
         fetchAssetCategoryFacilities.fulfilled,
         (
-          state: ICollectionFormFacilityState
-          //   action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
+          state: ICollectionFormFacilityState,
+          action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
         ) => {
           state.loadingAssetCategoryFacilities = false;
-          // state.assetCategoryFacilities = action.payload;
+          // @ts-ignore *** solution needed for correct typing for action meta
+          state.assetCategoryFacilities[action.meta.rowIdx] = action.payload;
         }
       )
       .addCase(
         fetchAssetCategoryFacilities.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingAssetCategoryFacilities = false;
-          // state.error =
-          //   'Failed to load Collection Form Facility Asset Category Facilities data from server.';
         }
       )
       /* Fetch Collection Form Facility Workflows extra reducers */
@@ -344,19 +345,18 @@ const collectionFormFacilitySlice = createSlice({
       .addCase(
         fetchWorkflows.fulfilled,
         (
-          state: ICollectionFormFacilityState
-          //   action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
+          state: ICollectionFormFacilityState,
+          action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
         ) => {
           state.loadingWorkflows = false;
-          // state.workflows = action.payload;
+          // @ts-ignore *** solution needed for correct typing for action meta
+          state.workflows[action.meta.rowIdx] = action.payload;
         }
       )
       .addCase(
         fetchWorkflows.rejected,
         (state: ICollectionFormFacilityState) => {
           state.loadingWorkflows = false;
-          // state.error =
-          //   'Failed to load Collection Form Facility Workflows data from server.';
         }
       );
   },

@@ -81,20 +81,32 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
     workflows,
   } = useSelector((state: AppState) => state.collectionFormFacility);
 
-  /* On first load, build facility and initial workflow options for each row */
+  /**
+   * On first load, build facility and initial workflow options for each row
+   *
+   * Use data shadow, as this never changes as user manipulates the table. On
+   * new fetch of the entire table data, shadow copy will be updated,
+   * will cause re-trigger of effect
+   */
   useEffect(() => {
-    dataShadow.rows.forEach((row: ICollectionFormFacilityData) => {
-      dispatch(
-        fetchAssetCategoryFacilities({ assetCategory: row.asset_category })
-      );
-      if (row.facility)
+    dataShadow.rows.forEach(
+      (row: ICollectionFormFacilityData, index: number) => {
         dispatch(
-          fetchWorkflows({
+          fetchAssetCategoryFacilities({
             assetCategory: row.asset_category,
-            facility: row.facility,
+            rowIdx: index,
           })
         );
-    });
+        if (row.facility)
+          dispatch(
+            fetchWorkflows({
+              assetCategory: row.asset_category,
+              facility: row.facility,
+              rowIdx: index,
+            })
+          );
+      }
+    );
   }, [dataShadow.rows, dispatch]);
 
   /**
@@ -204,6 +216,7 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
         fetchWorkflows({
           assetCategory: data.rows[rowIdx].asset_category,
           facility: event.target.value,
+          rowIdx,
         })
       );
     },

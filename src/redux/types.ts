@@ -517,9 +517,11 @@ export interface ISaveCollectionFormFacilityByCollectionIdArgs {
  *
  * @typedef IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs
  * @prop {string} assetCategory - asset category to fetch facilities for
+ * @prop {number} rowIdx - index of the row that has been updated
  */
 export interface IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs {
   assetCategory: string;
+  rowIdx?: number;
 }
 
 /**
@@ -531,10 +533,12 @@ export interface IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs {
  * @typedef IFetchCollectionFormFacilityWorkflowsArgs
  * @prop {string} assetCategory - asset category to fetch workflows for
  * @prop {string} facility - facility to fetch workflows for
+ * @prop {number} rowIdx - index of the row that has been updated
  */
 export interface IFetchCollectionFormFacilityWorkflowsArgs {
   assetCategory: string;
   facility: string;
+  rowIdx?: number;
 }
 
 /**
