@@ -12,6 +12,7 @@ import collectionFormScheduleReducer from './slices/collectionFormScheduleSlice'
 import collectionFormServicesReducer from './slices/collectionFormServicesSlice';
 import collectionFormItineraryReducer from './slices/collectionFormItinerarySlice';
 import collectionFormFacilityReducer from './slices/collectionFormFacilitySlice';
+import collectionFormQuoteReducer from './slices/collectionFormQuoteSlice';
 
 /**
  * Configuration of the redux store to manage the global application state
@@ -37,6 +38,7 @@ const store = configureStore({
     collectionFormServices: collectionFormServicesReducer,
     collectionFormItinerary: collectionFormItineraryReducer,
     collectionFormFacility: collectionFormFacilityReducer,
+    collectionFormQuote: collectionFormQuoteReducer,
   },
   // @ts-ignore
   middleware:

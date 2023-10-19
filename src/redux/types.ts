@@ -21,10 +21,12 @@ import {
   ICollectionFormItineraryDataPayload,
   ICollectionFormItinerarySaveDataPayload,
   ICollectionFormItineraryAssetCategoryDataPayload,
+  ICollectionFormFacilityDataPayload,
   ICollectionFormFacilitySaveDataPayload,
   ICollectionFormFacilityWorkflowsDataPayload,
   ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
-  ICollectionFormFacilityDataPayload,
+  ICollectionFormQuoteDataPayload,
+  ICollectionFormQuoteSaveDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -564,7 +566,7 @@ export interface ICollectionFormFacilityEditFacilityPayload {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.17
  *
- * @typedef ICollectionFormServicesState
+ * @typedef ICollectionFormFacilityState
  * @prop {boolean} loading - facility loading state
  * @prop {ICollectionFormFacilityDataPayload} data - currently loaded facility data
  * @prop {ICollectionFormFacilityDataPayload} dataShadow - shadow copy of original data
@@ -587,6 +589,72 @@ export interface ICollectionFormFacilityState {
   assetCategoryFacilities: Array<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>;
   loadingWorkflows: boolean;
   workflows: Array<ICollectionFormFacilityWorkflowsDataPayload>;
+}
+
+/**
+ * Fetch Collection Form Quote args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IFetchCollectionFormQuoteByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormQuoteByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Save Collection Form Quote args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ISaveCollectionFormQuoteByCollectionIdArgs
+ * @prop {ICollectionFormQuoteSaveDataPayload} data - data payload to be sent
+ */
+export interface ISaveCollectionFormQuoteByCollectionIdArgs {
+  data: ICollectionFormQuoteSaveDataPayload;
+}
+
+/**
+ * Collection Form Quote edit redux action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteEditFacilityPayload
+ * @prop {string} colKey - table column key to be edited
+ * @prop {number} rowIdx - table row index of the edited cost
+ * @prop {DataTableRowCellValue} value - updated column value
+ */
+export interface ICollectionFormQuoteEditQuoteConflictPayload {
+  colKey: string;
+  rowIdx: number;
+  value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Quote state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteState
+ * @prop {boolean} loading - quote loading state
+ * @prop {ICollectionFormQuoteDataPayload} data - currently loaded quote data
+ * @prop {ICollectionFormQuoteDataPayload} dataShadow - shadow copy of original data
+ * @prop {string} error - current error message state of quote
+ * @prop {boolean} saving - saving state flag of quote data
+ * @prop {boolean} edited - quote data has been edited flag
+ */
+export interface ICollectionFormQuoteState {
+  loading: boolean;
+  data: ICollectionFormQuoteDataPayload;
+  dataShadow: ICollectionFormQuoteDataPayload;
+  error?: string;
+  saving: boolean;
+  edited: boolean;
 }
 
 /**

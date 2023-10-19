@@ -18,3 +18,4 @@ export { default as getCollectionFormServicesOwnershipRetentionValue } from './g
 export { default as getCollectionFormServicesOwnershipRetentionEditValue } from './getCollectionFormServicesOwnershipRetentionEditValue';
 export { default as getCollectionFormServicesRedeliveryRequestValue } from './getCollectionFormServicesRedeliveryRequestValue';
 export { default as getCollectionFormServicesRedeliveryRequestEditValue } from './getCollectionFormServicesRedeliveryRequestEditValue';
+export { default as getCollectionFormQuotePostData } from './getCollectionFormQuotePostData';
