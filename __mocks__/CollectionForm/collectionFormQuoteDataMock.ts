@@ -36,7 +36,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
       model: {
         model: {
           id: '4538792',
-          display_name: null,
+          display_name: 'Samsung Galaxy A21s',
         },
         prices: {
           fully_working: '80.00',
@@ -76,7 +76,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
       model: {
         model: {
           id: '4538792',
-          display_name: null,
+          display_name: 'Samsung Galaxy s20',
         },
         prices: {
           fully_working: '80.00',

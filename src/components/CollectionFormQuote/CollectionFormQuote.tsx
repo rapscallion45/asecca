@@ -320,6 +320,23 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
     [selectedQuotes, dispatch]
   );
 
+  /**
+   * Handles whether or not passed conflicts tabel cell can be edited
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @method
+   * @param {string} colKey - column key to be updated
+   * @param {number} rowIdx - table row index to be updated
+   * @returns {boolean} - whether cell is editable
+   */
+  const canEditConflictCell = useCallback(
+    (colKey: string, rowIdx: number): boolean =>
+      Boolean((conflictsRows[rowIdx] as IQuotePricedModelData).model),
+    [conflictsRows]
+  );
+
   return (
     <Card>
       <CardHeader title="Quote" />
@@ -370,8 +387,13 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
               <DataTable
                 name="collection form quote conflicts"
                 columns={columns}
-                /* table editable cell(s) is the collection charge column */
-                editableColLabels={[]}
+                /* table editable cell(s) are price cols */
+                editableColLabels={[
+                  'Fully Working',
+                  'Customer Charge',
+                  'Project Charge',
+                  'Collection Charge',
+                ]}
                 /* build table row props from quote preview data */
                 rows={conflictsRows.map(
                   (conflict: IQuotePricedModelData | IQuoteConflictsData) => ({
@@ -386,6 +408,7 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
                 error={error}
                 editCellValueCallback={handleEditCellValue}
                 getCellValueCallback={handleGetConflictsCellValue}
+                canEditCellValueCallback={canEditConflictCell}
               />
             </Box>
           </>

@@ -164,10 +164,14 @@ const collectionFormQuoteSlice = createSlice({
           /* perform update for passed table row number */
           if (index === action.payload.rowIdx) {
             return {
+              /* return rest of conflict price object untouched */
               ...conflict,
-              /* update the value of the passed column */
-              [action.payload.colKey as keyof ICollectionFormQuoteData]:
-                action.payload.value,
+              prices: {
+                ...conflict.prices,
+                /* update the value of the passed column */
+                [action.payload.colKey as keyof ICollectionFormQuoteData]:
+                  action.payload.value,
+              },
             };
           }
           return conflict;
