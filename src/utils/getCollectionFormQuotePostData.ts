@@ -1,7 +1,7 @@
 import {
   IQuoteModelPriceData,
+  IQuoteResolvedConflictData,
   ICollectionFormQuoteData,
-  ICollectionFormQuoteConflictsData,
   ICollectionFormQuoteSaveDataPayload,
 } from '@/lib/api/api-types';
 
@@ -31,7 +31,7 @@ const getCollectionFormQuotePostData = (
   /* get quote conflicts - cycle through data and pull out required cols */
   const models: Array<IQuoteModelPriceData> = data.conflicts
     /* map required fields for post request */
-    .map((conflict: ICollectionFormQuoteConflictsData) => ({
+    .map((conflict: IQuoteResolvedConflictData) => ({
       id: conflict.model.model.id,
       prices: conflict.model.prices,
     }));

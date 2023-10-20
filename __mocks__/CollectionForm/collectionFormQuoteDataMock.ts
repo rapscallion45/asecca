@@ -51,7 +51,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
             id: '420893',
             name: null,
           },
-          price: {
+          prices: {
             fully_working: '80.00',
             minor_technical_faults: '50.00',
             major_technical_faults: '25.00',
@@ -63,7 +63,47 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
             id: '437892',
             name: null,
           },
-          price: {
+          prices: {
+            fully_working: '70.00',
+            minor_technical_faults: '40.00',
+            major_technical_faults: '20.00',
+            does_not_turn_on: '0.00',
+          },
+        },
+      ],
+    },
+    {
+      model: {
+        model: {
+          id: '4538792',
+          display_name: null,
+        },
+        prices: {
+          fully_working: '80.00',
+          minor_technical_faults: '50.00',
+          major_technical_faults: '25.00',
+          does_not_turn_on: '0.00',
+        },
+      },
+      conflicting_quotes: [
+        {
+          quote: {
+            id: '420893',
+            name: null,
+          },
+          prices: {
+            fully_working: '80.00',
+            minor_technical_faults: '50.00',
+            major_technical_faults: '25.00',
+            does_not_turn_on: '0.00',
+          },
+        },
+        {
+          quote: {
+            id: '437892',
+            name: null,
+          },
+          prices: {
             fully_working: '70.00',
             minor_technical_faults: '40.00',
             major_technical_faults: '20.00',

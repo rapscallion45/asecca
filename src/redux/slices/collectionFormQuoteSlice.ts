@@ -5,9 +5,10 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import {
+  IQuoteSummaryData,
+  IQuoteResolvedConflictData,
   ICollectionFormQuoteData,
   ICollectionFormQuoteDataPayload,
-  ICollectionFormQuoteConflictsData,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
@@ -15,6 +16,7 @@ import {
   IFetchCollectionFormQuoteByCollectionIdArgs,
   ISaveCollectionFormQuoteByCollectionIdArgs,
   ICollectionFormQuoteEditQuoteConflictPayload,
+  ICollectionFormQuoteSelectionPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormQuoteDataMock from '../../../__mocks__/CollectionForm/collectionFormQuoteDataMock';
@@ -116,6 +118,11 @@ const initialCollectionFormQuoteState: ICollectionFormQuoteState = {
   dataShadow: collectionFormQuoteDataMock,
   saving: false,
   edited: false,
+  selectedQuotes: [collectionFormQuoteDataMock.quotes[0]],
+  availableQuotes: collectionFormQuoteDataMock.quotes.slice(
+    1,
+    collectionFormQuoteDataMock.quotes.length
+  ),
 };
 
 /**
@@ -141,7 +148,7 @@ const collectionFormQuoteSlice = createSlice({
     ) => {
       /* find and update passed quote conflict */
       state.data.conflicts = state.data.conflicts.map(
-        (conflict: ICollectionFormQuoteConflictsData, index: number) => {
+        (conflict: IQuoteResolvedConflictData, index: number) => {
           /* perform update for passed table row number */
           if (index === action.payload.rowIdx) {
             return {
@@ -155,6 +162,38 @@ const collectionFormQuoteSlice = createSlice({
         }
       );
       state.edited = true;
+    },
+    /* reducer used for adding quote to the Selected Quote data */
+    addSelectedQuote: (
+      state,
+      action: PayloadAction<ICollectionFormQuoteSelectionPayload>
+    ) => {
+      /* add quote to selected list */
+      state.selectedQuotes = state.selectedQuotes.concat(
+        state.data.quotes.filter(
+          (quote: IQuoteSummaryData) => quote.id === action.payload.quoteId
+        )
+      );
+      /* remove quote from available list */
+      state.availableQuotes = state.availableQuotes.filter(
+        (quote: IQuoteSummaryData) => quote.id !== action.payload.quoteId
+      );
+    },
+    /* reducer used for removing quote to the Selected Quote data */
+    removeSelectedQuote: (
+      state,
+      action: PayloadAction<ICollectionFormQuoteSelectionPayload>
+    ) => {
+      /* remove quote from selected list */
+      state.selectedQuotes = state.selectedQuotes.filter(
+        (quote: IQuoteSummaryData) => quote.id !== action.payload.quoteId
+      );
+      /* add quote to available list */
+      state.availableQuotes = state.availableQuotes.concat(
+        state.data.quotes.filter(
+          (quote: IQuoteSummaryData) => quote.id === action.payload.quoteId
+        )
+      );
     },
     /* reducer used for when user clears edits to Quote data */
     resetQuote: (state) => {
@@ -227,7 +266,11 @@ const collectionFormQuoteSlice = createSlice({
 });
 
 /* Collection Form Quote actions for editing and resetting quote data */
-export const { editQuoteConflicts, resetQuote } =
-  collectionFormQuoteSlice.actions;
+export const {
+  editQuoteConflicts,
+  resetQuote,
+  addSelectedQuote,
+  removeSelectedQuote,
+} = collectionFormQuoteSlice.actions;
 
 export default collectionFormQuoteSlice.reducer;

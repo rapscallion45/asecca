@@ -25,6 +25,7 @@ import {
   ICollectionFormFacilitySaveDataPayload,
   ICollectionFormFacilityWorkflowsDataPayload,
   ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
+  IQuoteSummaryData,
   ICollectionFormQuoteDataPayload,
   ICollectionFormQuoteSaveDataPayload,
 } from '@/lib/api/api-types';
@@ -623,7 +624,7 @@ export interface ISaveCollectionFormQuoteByCollectionIdArgs {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.19
  *
- * @typedef ICollectionFormQuoteEditFacilityPayload
+ * @typedef ICollectionFormQuoteEditQuoteConflictPayload
  * @prop {string} colKey - table column key to be edited
  * @prop {number} rowIdx - table row index of the edited cost
  * @prop {DataTableRowCellValue} value - updated column value
@@ -632,6 +633,19 @@ export interface ICollectionFormQuoteEditQuoteConflictPayload {
   colKey: string;
   rowIdx: number;
   value: DataTableRowCellValue;
+}
+
+/**
+ * Collection Form Quote selection action payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteSelectionPayload
+ * @prop {string} quoteId - quote ID to be acted upon
+ */
+export interface ICollectionFormQuoteSelectionPayload {
+  quoteId: string;
 }
 
 /**
@@ -647,6 +661,8 @@ export interface ICollectionFormQuoteEditQuoteConflictPayload {
  * @prop {string} error - current error message state of quote
  * @prop {boolean} saving - saving state flag of quote data
  * @prop {boolean} edited - quote data has been edited flag
+ * @prop {Array<IQuoteSummaryData>} selectedQuotes - user selected quotes list
+ * @prop {Array<IQuoteSummaryData>} availableQuotes - list of available quoites for selection
  */
 export interface ICollectionFormQuoteState {
   loading: boolean;
@@ -655,6 +671,8 @@ export interface ICollectionFormQuoteState {
   error?: string;
   saving: boolean;
   edited: boolean;
+  selectedQuotes: Array<IQuoteSummaryData>;
+  availableQuotes: Array<IQuoteSummaryData>;
 }
 
 /**

@@ -984,11 +984,11 @@ export interface IQuotePricesData {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.19
  *
- * @typedef IQuoteData
+ * @typedef IQuoteSummaryData
  * @prop {string} id - quote ID
  * @prop {string | null} name - quote name
  */
-export interface IQuoteData {
+export interface IQuoteSummaryData {
   id: string;
   name: string | null;
 }
@@ -1033,7 +1033,7 @@ export interface IQuoteModelPriceData {
  * @prop {IQuoteModelData} model - quote model data
  * @prop {IQuotePricesData} prices - quote prices data
  */
-export interface IQuoteModelFullData {
+export interface IQuotePricedModelData {
   model: IQuoteModelData;
   prices: IQuotePricesData;
 }
@@ -1045,12 +1045,12 @@ export interface IQuoteModelFullData {
  * @since 0.0.19
  *
  * @typedef IQuoteConflictsData
- * @prop {IQuoteData} quote - quote data
+ * @prop {IQuoteSummaryData} quote - quote data
  * @prop {IQuotePricesData} prices - quote prices data
  */
 export interface IQuoteConflictsData {
-  quote: IQuoteData;
-  price: IQuotePricesData;
+  quote: IQuoteSummaryData;
+  prices: IQuotePricesData;
 }
 
 /**
@@ -1060,11 +1060,11 @@ export interface IQuoteConflictsData {
  * @since 0.0.19
  *
  * @typedef ICollectionFormQuoteConflictsData
- * @prop {IQuoteModelFullData} model - quote model data
+ * @prop {IQuotePricedModelData} model - quote model data
  * @prop {Array<IQuoteConflictsData>} conflicting_quotes - quote conflicts
  */
-export interface ICollectionFormQuoteConflictsData {
-  model: IQuoteModelFullData;
+export interface IQuoteResolvedConflictData {
+  model: IQuotePricedModelData;
   conflicting_quotes: Array<IQuoteConflictsData>;
 }
 
@@ -1075,14 +1075,14 @@ export interface ICollectionFormQuoteConflictsData {
  * @since 0.0.19
  *
  * @typedef ICollectionFormQuoteData
- * @prop {Array<IQuoteData>} quotes - quote data
- * @prop {Array<IQuoteModelFullData>} preview - quote preview data
- * @prop {Array<ICollectionFormQuoteConflictsData> } conflicts - quote conflicts data
+ * @prop {Array<IQuoteSummaryData>} quotes - quote data
+ * @prop {Array<IQuotePricedModelData>} preview - quote preview data
+ * @prop {Array<IQuoteResolvedConflictData> } conflicts - quote conflicts data
  */
 export interface ICollectionFormQuoteData {
-  quotes: Array<IQuoteData>;
-  preview: Array<IQuoteModelFullData>;
-  conflicts: Array<ICollectionFormQuoteConflictsData>;
+  quotes: Array<IQuoteSummaryData>;
+  preview: Array<IQuotePricedModelData>;
+  conflicts: Array<IQuoteResolvedConflictData>;
 }
 
 /**

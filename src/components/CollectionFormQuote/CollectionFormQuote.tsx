@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import {
@@ -8,19 +8,29 @@ import {
   Box,
   Button,
   Typography,
+  IconButton,
+  Select,
+  FormControl,
+  MenuItem,
+  SelectChangeEvent,
+  InputLabel,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { LoadingButton } from '@mui/lab';
 import {
-  ICollectionFormQuoteConflictsData,
-  ICollectionFormQuoteData,
-  IQuoteModelFullData,
+  IQuoteSummaryData,
   IQuotePricesData,
+  IQuotePricedModelData,
+  IQuoteResolvedConflictData,
+  ICollectionFormQuoteData,
 } from '@/lib/api/api-types';
 import { getCollectionFormQuotePostData } from '@/utils';
 import {
   saveByCollectionId as saveQuoteByCollectionId,
   resetQuote,
   editQuoteConflicts,
+  addSelectedQuote,
+  removeSelectedQuote,
 } from '@/redux/slices/collectionFormQuoteSlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -28,6 +38,7 @@ import {
   IDataTableColumn,
 } from '@/components/DataTable/types';
 import columns from './collectionFormQuoteTableColumns';
+import quoteSelectColumns from './collectionFormQuoteSelectionTableColumns';
 
 /**
  * Collection Form Quote Props
@@ -62,9 +73,47 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get collection form quote data held in redux state */
-  const { data, loading, error, saving, edited } = useSelector(
-    (state: AppState) => state.collectionFormQuote
+  const {
+    data,
+    loading,
+    error,
+    saving,
+    edited,
+    selectedQuotes,
+    availableQuotes,
+  } = useSelector((state: AppState) => state.collectionFormQuote);
+
+  /**
+   * Local state of the conflicts table data rows
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @constant
+   */
+  const [conflictsRows, setConflictsRows] = useState<any>(
+    data.conflicts
+      .reduce((r: any, o: any) => {
+        Object.keys(o).forEach((k) => {
+          r.push(o[k]);
+        });
+        return r;
+      }, [])
+      .flat(1)
   );
+
+  useEffect(() => {
+    setConflictsRows(
+      data.conflicts
+        .reduce((r: any, o: any) => {
+          Object.keys(o).forEach((k) => {
+            r.push(o[k]);
+          });
+          return r;
+        }, [])
+        .flat(1)
+    );
+  }, [data]);
 
   /**
    * Handles the saving of the table data
@@ -123,6 +172,67 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
   );
 
   /**
+   * Helper function for rendering Quoute Select table dropdown menu
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @method
+   * @return {ReactNode} - select quote dropdown menu
+   */
+  const getSelectQuoteDropdown = useCallback(
+    () =>
+      availableQuotes.length > 0 ? (
+        <FormControl variant="standard" fullWidth>
+          <InputLabel id="quote-select-input-label">Quote Select</InputLabel>
+          <Select
+            labelId="quote-select-input-label"
+            id="demo-simple-select"
+            inputProps={{ 'aria-label': `quote-select-input` }}
+            label="Quote Select"
+            color="secondary"
+            onChange={(event: SelectChangeEvent) =>
+              dispatch(addSelectedQuote({ quoteId: event.target.value }))
+            }
+            displayEmpty
+            defaultValue=""
+          >
+            {availableQuotes.map((quote) => (
+              <MenuItem key={`Quote - ${quote.id}`} value={quote.id}>
+                Quote - {quote.id}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ) : (
+        <Typography fontSize={11}>All quotes selected</Typography>
+      ),
+    [availableQuotes, dispatch]
+  );
+
+  /**
+   * Handles any required logic when determining Quote Select table cell value
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @method
+   * @param {number} rowIdx - table row index to get value from
+   * @param {IDataTableColumn} column - column to get value from
+   * @return {DataTableRowCellValue} - cell value, can be null or undefined
+   */
+  const handleGetSelectQuoteCellValue = useCallback(
+    (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue => {
+      /* return null if action button, otherwise grab quote ID value */
+      if (column.key === 'delete') return null;
+      /* return dropdown if last column in table */
+      if (selectedQuotes.length <= rowIdx) return getSelectQuoteDropdown();
+      return `Quote - ${selectedQuotes[rowIdx].id}`;
+    },
+    [selectedQuotes, getSelectQuoteDropdown]
+  );
+
+  /**
    * Handles any required logic when determining Preview table cell value
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -156,12 +266,53 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
    */
   const handleGetConflictsCellValue = useCallback(
     (rowIdx: number, column: IDataTableColumn): DataTableRowCellValue => {
+      if (conflictsRows === null) return null;
       /* return name, otherwise grab passed price col */
-      if (column.key === 'display_name')
-        return data.preview[rowIdx].model.display_name;
-      return data.preview[rowIdx].prices[column.key as keyof IQuotePricesData];
+      if (column.key === 'display_name') {
+        /* name col can either be a model or a quote */
+        if ('model' in conflictsRows[rowIdx]) {
+          return conflictsRows[rowIdx].model.display_name || 'N/A';
+        }
+        if ('quote' in conflictsRows[rowIdx]) {
+          return `Quote - ${conflictsRows[rowIdx].quote.id}`;
+        }
+      }
+      return conflictsRows[rowIdx]?.prices[
+        column.key as keyof IQuotePricesData
+      ];
     },
-    [data]
+    [conflictsRows]
+  );
+
+  /**
+   * Handles requests for the delete action button for quote select table
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @method
+   * @param {string} colKey - table column key of the action cell
+   * @param {number} rowIdx - table row index of the action cell
+   * @returns {ReactNode} - action component to present
+   */
+  const getSelectQuoteActionButton = useCallback(
+    (colKey: string, rowIdx: number) => {
+      /* don't return dropdown if last row in table */
+      if (selectedQuotes.length <= rowIdx) return null;
+      return (
+        <IconButton
+          aria-label="delete"
+          onClick={() =>
+            dispatch(
+              removeSelectedQuote({ quoteId: selectedQuotes[rowIdx].id })
+            )
+          }
+        >
+          <DeleteIcon />
+        </IconButton>
+      );
+    },
+    [selectedQuotes, dispatch]
   );
 
   return (
@@ -169,6 +320,27 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
       <CardHeader title="Quote" />
       <CardContent sx={{ pt: 0 }}>
         <Typography variant="h6" mb={1}>
+          Select Quotes
+        </Typography>
+        <Box maxWidth={300}>
+          <DataTable
+            name="collection form quote selection"
+            columns={quoteSelectColumns}
+            /* table editable cell(s) is the collection charge column */
+            editableColLabels={[]}
+            /* build table row props from quote preview data */
+            rows={selectedQuotes
+              .map((quote: IQuoteSummaryData) => ({
+                label: quote.id,
+              }))
+              .concat({ label: 'quote-select-dropdown' })}
+            isLoading={loading}
+            error={error}
+            getCellValueCallback={handleGetSelectQuoteCellValue}
+            getActionComponent={getSelectQuoteActionButton}
+          />
+        </Box>
+        <Typography variant="h6" mt={2} mb={1}>
           Preview
         </Typography>
         <DataTable
@@ -177,7 +349,7 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
           /* table editable cell(s) is the collection charge column */
           editableColLabels={[]}
           /* build table row props from quote preview data */
-          rows={data?.preview.map((item: IQuoteModelFullData) => ({
+          rows={data?.preview.map((item: IQuotePricedModelData) => ({
             label: item.model.id,
           }))}
           isLoading={loading}
@@ -189,22 +361,25 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
             <Typography variant="h6" mt={2} mb={1}>
               Resolve Conflicts
             </Typography>
-            <DataTable
-              name="collection form quote conflicts"
-              columns={columns}
-              /* table editable cell(s) is the collection charge column */
-              editableColLabels={[]}
-              /* build table row props from quote preview data */
-              rows={data?.conflicts.map(
-                (conflict: ICollectionFormQuoteConflictsData) => ({
-                  label: `${conflict.model.model.id}-model-id`,
-                })
-              )}
-              isLoading={loading}
-              error={error}
-              editCellValueCallback={handleEditCellValue}
-              getCellValueCallback={handleGetConflictsCellValue}
-            />
+
+            <Box mb={0.5}>
+              <DataTable
+                name="collection form quote conflicts"
+                columns={columns}
+                /* table editable cell(s) is the collection charge column */
+                editableColLabels={[]}
+                /* build table row props from quote preview data */
+                rows={conflictsRows.map(
+                  (conflict: IQuoteResolvedConflictData) => ({
+                    label: `${conflict?.model?.model?.id}-model-id`,
+                  })
+                )}
+                isLoading={loading}
+                error={error}
+                editCellValueCallback={handleEditCellValue}
+                getCellValueCallback={handleGetConflictsCellValue}
+              />
+            </Box>
           </>
         )}
         <Box
