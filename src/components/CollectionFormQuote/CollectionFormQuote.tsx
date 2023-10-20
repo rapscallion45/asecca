@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, useEffect } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import {
@@ -21,8 +21,8 @@ import {
   IQuoteSummaryData,
   IQuotePricesData,
   IQuotePricedModelData,
-  IQuoteResolvedConflictData,
   ICollectionFormQuoteData,
+  IQuoteConflictsData,
 } from '@/lib/api/api-types';
 import { getCollectionFormQuotePostData } from '@/utils';
 import {
@@ -31,6 +31,7 @@ import {
   editQuoteConflicts,
   addSelectedQuote,
   removeSelectedQuote,
+  applyConflictingQuote,
 } from '@/redux/slices/collectionFormQuoteSlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -79,41 +80,10 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
     error,
     saving,
     edited,
+    conflictsRows,
     selectedQuotes,
     availableQuotes,
   } = useSelector((state: AppState) => state.collectionFormQuote);
-
-  /**
-   * Local state of the conflicts table data rows
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.19
-   *
-   * @constant
-   */
-  const [conflictsRows, setConflictsRows] = useState<any>(
-    data.conflicts
-      .reduce((r: any, o: any) => {
-        Object.keys(o).forEach((k) => {
-          r.push(o[k]);
-        });
-        return r;
-      }, [])
-      .flat(1)
-  );
-
-  useEffect(() => {
-    setConflictsRows(
-      data.conflicts
-        .reduce((r: any, o: any) => {
-          Object.keys(o).forEach((k) => {
-            r.push(o[k]);
-          });
-          return r;
-        }, [])
-        .flat(1)
-    );
-  }, [data]);
 
   /**
    * Handles the saving of the table data
@@ -172,7 +142,7 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
   );
 
   /**
-   * Helper function for rendering Quoute Select table dropdown menu
+   * Helper function for rendering Quote Select table dropdown menu
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
    * @since 0.0.19
@@ -208,6 +178,33 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
         <Typography fontSize={11}>All quotes selected</Typography>
       ),
     [availableQuotes, dispatch]
+  );
+
+  /**
+   * Helper function for rendering Apply Quote table action button
+   *
+   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+   * @since 0.0.19
+   *
+   * @method
+   * @return {ReactNode} - select quote dropdown menu
+   */
+  const getConflictsApplyButton = useCallback(
+    (text: string, rowIdx: number) => (
+      <Box display="flex" flexDirection="row" alignItems="center">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => dispatch(applyConflictingQuote({ rowIdx }))}
+        >
+          Apply
+        </Button>
+        <Typography width={200} ml={2}>
+          {text}
+        </Typography>
+      </Box>
+    ),
+    [dispatch]
   );
 
   /**
@@ -271,17 +268,25 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
       if (column.key === 'display_name') {
         /* name col can either be a model or a quote */
         if ('model' in conflictsRows[rowIdx]) {
-          return conflictsRows[rowIdx].model.display_name || 'N/A';
+          return (
+            (conflictsRows[rowIdx] as IQuotePricedModelData).model
+              .display_name || 'N/A'
+          );
         }
         if ('quote' in conflictsRows[rowIdx]) {
-          return `Quote - ${conflictsRows[rowIdx].quote.id}`;
+          return getConflictsApplyButton(
+            `Quote - ${
+              (conflictsRows[rowIdx] as IQuoteConflictsData).quote.id
+            }`,
+            rowIdx
+          );
         }
       }
       return conflictsRows[rowIdx]?.prices[
         column.key as keyof IQuotePricesData
       ];
     },
-    [conflictsRows]
+    [conflictsRows, getConflictsApplyButton]
   );
 
   /**
@@ -361,7 +366,6 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
             <Typography variant="h6" mt={2} mb={1}>
               Resolve Conflicts
             </Typography>
-
             <Box mb={0.5}>
               <DataTable
                 name="collection form quote conflicts"
@@ -370,8 +374,12 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
                 editableColLabels={[]}
                 /* build table row props from quote preview data */
                 rows={conflictsRows.map(
-                  (conflict: IQuoteResolvedConflictData) => ({
-                    label: `${conflict?.model?.model?.id}-model-id`,
+                  (conflict: IQuotePricedModelData | IQuoteConflictsData) => ({
+                    label: `${
+                      'model' in conflict
+                        ? conflict?.model?.id
+                        : conflict?.quote.id
+                    }-model-quote-id`,
                   })
                 )}
                 isLoading={loading}

@@ -6,9 +6,10 @@ import {
 } from '@reduxjs/toolkit';
 import {
   IQuoteSummaryData,
-  IQuoteResolvedConflictData,
   ICollectionFormQuoteData,
   ICollectionFormQuoteDataPayload,
+  IQuoteConflictsData,
+  IQuotePricedModelData,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
@@ -17,6 +18,7 @@ import {
   ISaveCollectionFormQuoteByCollectionIdArgs,
   ICollectionFormQuoteEditQuoteConflictPayload,
   ICollectionFormQuoteSelectionPayload,
+  ICollectionFormQuoteApplyConflictingQuotePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormQuoteDataMock from '../../../__mocks__/CollectionForm/collectionFormQuoteDataMock';
@@ -115,9 +117,16 @@ export const saveByCollectionId = createAsyncThunk(
 const initialCollectionFormQuoteState: ICollectionFormQuoteState = {
   loading: false,
   data: collectionFormQuoteDataMock,
-  dataShadow: collectionFormQuoteDataMock,
   saving: false,
   edited: false,
+  conflictsRows: collectionFormQuoteDataMock.conflicts
+    .reduce((r: any, o: any) => {
+      Object.keys(o).forEach((k) => {
+        r.push(o[k]);
+      });
+      return r;
+    }, [])
+    .flat(1),
   selectedQuotes: [collectionFormQuoteDataMock.quotes[0]],
   availableQuotes: collectionFormQuoteDataMock.quotes.slice(
     1,
@@ -147,8 +156,11 @@ const collectionFormQuoteSlice = createSlice({
       action: PayloadAction<ICollectionFormQuoteEditQuoteConflictPayload>
     ) => {
       /* find and update passed quote conflict */
-      state.data.conflicts = state.data.conflicts.map(
-        (conflict: IQuoteResolvedConflictData, index: number) => {
+      state.conflictsRows = state.conflictsRows.map(
+        (
+          conflict: IQuotePricedModelData | IQuoteConflictsData,
+          index: number
+        ) => {
           /* perform update for passed table row number */
           if (index === action.payload.rowIdx) {
             return {
@@ -195,10 +207,38 @@ const collectionFormQuoteSlice = createSlice({
         )
       );
     },
+    /* reducer used for applying conflicting quote price data */
+    applyConflictingQuote: (
+      state,
+      action: PayloadAction<ICollectionFormQuoteApplyConflictingQuotePayload>
+    ) => {
+      /* remove quote from selected list */
+      state.conflictsRows = state.conflictsRows.map(
+        (
+          conflict: IQuotePricedModelData | IQuoteConflictsData,
+          index: number
+        ) => {
+          if (index === 0)
+            return {
+              ...conflict,
+              prices: state.conflictsRows[action.payload.rowIdx].prices,
+            };
+          return conflict;
+        }
+      );
+      state.edited = true;
+    },
     /* reducer used for when user clears edits to Quote data */
     resetQuote: (state) => {
-      /* reset the data by simply copying the shadow to working copy */
-      state.data = state.dataShadow;
+      /* reset the data by returning conflicts table state to original values */
+      collectionFormQuoteDataMock.conflicts
+        .reduce((r: any, o: any) => {
+          Object.keys(o).forEach((k) => {
+            r.push(o[k]);
+          });
+          return r;
+        }, [])
+        .flat(1);
       state.edited = false;
     },
   },
@@ -228,7 +268,6 @@ const collectionFormQuoteSlice = createSlice({
         ) => {
           state.loading = false;
           state.data = action.payload;
-          state.dataShadow = action.payload;
           state.error = undefined;
         }
       )
@@ -237,7 +276,6 @@ const collectionFormQuoteSlice = createSlice({
         (state: ICollectionFormQuoteState) => {
           state.loading = false;
           state.data = collectionFormQuoteDataMock;
-          state.dataShadow = collectionFormQuoteDataMock;
           state.error =
             'Failed to load Collection Form Quote data from server.';
         }
@@ -271,6 +309,7 @@ export const {
   resetQuote,
   addSelectedQuote,
   removeSelectedQuote,
+  applyConflictingQuote,
 } = collectionFormQuoteSlice.actions;
 
 export default collectionFormQuoteSlice.reducer;

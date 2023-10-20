@@ -28,6 +28,8 @@ import {
   IQuoteSummaryData,
   ICollectionFormQuoteDataPayload,
   ICollectionFormQuoteSaveDataPayload,
+  IQuoteConflictsData,
+  IQuotePricedModelData,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -649,6 +651,20 @@ export interface ICollectionFormQuoteSelectionPayload {
 }
 
 /**
+ * Collection Form Quote Apply Conflicting Quote action
+ * payload definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteApplyConflictingQuotePayload
+ * @prop {number} rowIdx - table row index of quote price to be applied
+ */
+export interface ICollectionFormQuoteApplyConflictingQuotePayload {
+  rowIdx: number;
+}
+
+/**
  * Collection Form Quote state definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -656,21 +672,21 @@ export interface ICollectionFormQuoteSelectionPayload {
  *
  * @typedef ICollectionFormQuoteState
  * @prop {boolean} loading - quote loading state
- * @prop {ICollectionFormQuoteDataPayload} data - currently loaded quote data
- * @prop {ICollectionFormQuoteDataPayload} dataShadow - shadow copy of original data
+ * @prop {ICollectionFormQuoteDataPayload} data - original loaded quote data
  * @prop {string} error - current error message state of quote
  * @prop {boolean} saving - saving state flag of quote data
  * @prop {boolean} edited - quote data has been edited flag
+ * @prop {Array<IQuotePricedModelData | IQuoteConflictsData>} conflictsRows - manipulated quote data
  * @prop {Array<IQuoteSummaryData>} selectedQuotes - user selected quotes list
  * @prop {Array<IQuoteSummaryData>} availableQuotes - list of available quoites for selection
  */
 export interface ICollectionFormQuoteState {
   loading: boolean;
   data: ICollectionFormQuoteDataPayload;
-  dataShadow: ICollectionFormQuoteDataPayload;
   error?: string;
   saving: boolean;
   edited: boolean;
+  conflictsRows: Array<IQuotePricedModelData | IQuoteConflictsData>;
   selectedQuotes: Array<IQuoteSummaryData>;
   availableQuotes: Array<IQuoteSummaryData>;
 }
