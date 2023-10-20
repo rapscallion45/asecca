@@ -231,7 +231,7 @@ const collectionFormQuoteSlice = createSlice({
     /* reducer used for when user clears edits to Quote data */
     resetQuote: (state) => {
       /* reset the data by returning conflicts table state to original values */
-      collectionFormQuoteDataMock.conflicts
+      state.conflictsRows = state.data.conflicts
         .reduce((r: any, o: any) => {
           Object.keys(o).forEach((k) => {
             r.push(o[k]);
