@@ -659,9 +659,39 @@ export interface ICollectionFormQuoteSelectionPayload {
  *
  * @typedef ICollectionFormQuoteApplyConflictingQuotePayload
  * @prop {number} rowIdx - table row index of quote price to be applied
+ * @prop {string} modelId - model for which this apply action updates
  */
 export interface ICollectionFormQuoteApplyConflictingQuotePayload {
   rowIdx: number;
+  modelId: string;
+}
+
+/**
+ * Collection Form Quote Conflicts Rows Conflicts data type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteConflictsRowsData
+ * @prop {string} modelId - model for which this apply action updates
+ */
+export interface ICollectionFormQuoteConflictsRowsConflictsData
+  extends IQuoteConflictsData {
+  modelId: string;
+}
+
+/**
+ * Collection Form Quote Conflicts Rows Priced Model data type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteConflictsRowsData
+ * @prop {string} modelId - model for which this apply action updates
+ */
+export interface ICollectionFormQuoteConflictsRowsPricedModelData
+  extends IQuotePricedModelData {
+  modelId: string;
 }
 
 /**
@@ -676,7 +706,7 @@ export interface ICollectionFormQuoteApplyConflictingQuotePayload {
  * @prop {string} error - current error message state of quote
  * @prop {boolean} saving - saving state flag of quote data
  * @prop {boolean} edited - quote data has been edited flag
- * @prop {Array<IQuotePricedModelData | IQuoteConflictsData>} conflictsRows - manipulated quote data
+ * @prop {Array<ICollectionFormQuoteConflictsRowsConflictsData | ICollectionFormQuoteConflictsRowsPricedModelData>} conflictsRows - manipulated quote data
  * @prop {Array<IQuoteSummaryData>} selectedQuotes - user selected quotes list
  * @prop {Array<IQuoteSummaryData>} availableQuotes - list of available quoites for selection
  */
@@ -686,7 +716,10 @@ export interface ICollectionFormQuoteState {
   error?: string;
   saving: boolean;
   edited: boolean;
-  conflictsRows: Array<IQuotePricedModelData | IQuoteConflictsData>;
+  conflictsRows: Array<
+    | ICollectionFormQuoteConflictsRowsConflictsData
+    | ICollectionFormQuoteConflictsRowsPricedModelData
+  >;
   selectedQuotes: Array<IQuoteSummaryData>;
   availableQuotes: Array<IQuoteSummaryData>;
 }

@@ -187,20 +187,23 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
    * @since 0.0.19
    *
    * @method
+   * @prop {string} quoteIdString - quote ID to be rendered next to button
+   * @prop {number} rowIdx - table row index of quote price to be applied
+   * @prop {string} modelId - model for which this apply action updates
    * @return {ReactNode} - select quote dropdown menu
    */
   const getConflictsApplyButton = useCallback(
-    (text: string, rowIdx: number) => (
+    (quoteIdString: string, rowIdx: number, modelId: string) => (
       <Box display="flex" flexDirection="row" alignItems="center">
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => dispatch(applyConflictingQuote({ rowIdx }))}
+          onClick={() => dispatch(applyConflictingQuote({ rowIdx, modelId }))}
         >
           Apply
         </Button>
         <Typography width={200} ml={2}>
-          {text}
+          {quoteIdString}
         </Typography>
       </Box>
     ),
@@ -278,7 +281,8 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
             `Quote - ${
               (conflictsRows[rowIdx] as IQuoteConflictsData).quote.id
             }`,
-            rowIdx
+            rowIdx,
+            conflictsRows[rowIdx].modelId
           );
         }
       }

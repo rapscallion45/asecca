@@ -8,8 +8,7 @@ import {
   IQuoteSummaryData,
   ICollectionFormQuoteData,
   ICollectionFormQuoteDataPayload,
-  IQuoteConflictsData,
-  IQuotePricedModelData,
+  IQuoteResolvedConflictData,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
@@ -19,6 +18,8 @@ import {
   ICollectionFormQuoteEditQuoteConflictPayload,
   ICollectionFormQuoteSelectionPayload,
   ICollectionFormQuoteApplyConflictingQuotePayload,
+  ICollectionFormQuoteConflictsRowsConflictsData,
+  ICollectionFormQuoteConflictsRowsPricedModelData,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormQuoteDataMock from '../../../__mocks__/CollectionForm/collectionFormQuoteDataMock';
@@ -120,6 +121,18 @@ const initialCollectionFormQuoteState: ICollectionFormQuoteState = {
   saving: false,
   edited: false,
   conflictsRows: collectionFormQuoteDataMock.conflicts
+    .map((conflict: IQuoteResolvedConflictData) =>
+      /* add this conflict's model ID to conflict data */
+      ({
+        ...conflict,
+        conflicting_quotes: conflict.conflicting_quotes.map(
+          (conflictingQuote) => ({
+            ...conflictingQuote,
+            modelId: conflict.model.model.id,
+          })
+        ),
+      })
+    )
     .reduce((r: any, o: any) => {
       Object.keys(o).forEach((k) => {
         r.push(o[k]);
@@ -158,7 +171,9 @@ const collectionFormQuoteSlice = createSlice({
       /* find and update passed quote conflict */
       state.conflictsRows = state.conflictsRows.map(
         (
-          conflict: IQuotePricedModelData | IQuoteConflictsData,
+          conflict:
+            | ICollectionFormQuoteConflictsRowsConflictsData
+            | ICollectionFormQuoteConflictsRowsPricedModelData,
           index: number
         ) => {
           /* perform update for passed table row number */
@@ -216,13 +231,17 @@ const collectionFormQuoteSlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormQuoteApplyConflictingQuotePayload>
     ) => {
-      /* remove quote from selected list */
+      /* find the model that matches this update and apply prices */
       state.conflictsRows = state.conflictsRows.map(
         (
-          conflict: IQuotePricedModelData | IQuoteConflictsData,
-          index: number
+          conflict:
+            | ICollectionFormQuoteConflictsRowsConflictsData
+            | ICollectionFormQuoteConflictsRowsPricedModelData
         ) => {
-          if (index === 0)
+          if (
+            'model' in conflict &&
+            conflict.model.id === action.payload.modelId
+          )
             return {
               ...conflict,
               prices: state.conflictsRows[action.payload.rowIdx].prices,
@@ -236,6 +255,18 @@ const collectionFormQuoteSlice = createSlice({
     resetQuote: (state) => {
       /* reset the data by returning conflicts table state to original values */
       state.conflictsRows = state.data.conflicts
+        .map((conflict: IQuoteResolvedConflictData) =>
+          /* add this conflict's model ID to conflict data */
+          ({
+            ...conflict,
+            conflicting_quotes: conflict.conflicting_quotes.map(
+              (conflictingQuote) => ({
+                ...conflictingQuote,
+                modelId: conflict.model.model.id,
+              })
+            ),
+          })
+        )
         .reduce((r: any, o: any) => {
           Object.keys(o).forEach((k) => {
             r.push(o[k]);

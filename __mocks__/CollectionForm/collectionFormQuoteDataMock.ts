@@ -75,7 +75,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
     {
       model: {
         model: {
-          id: '4538792',
+          id: '4538793',
           display_name: 'Samsung Galaxy s20',
         },
         prices: {
@@ -88,7 +88,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
       conflicting_quotes: [
         {
           quote: {
-            id: '420893',
+            id: '420895',
             name: null,
           },
           prices: {
@@ -100,7 +100,7 @@ const collectionFormQuoteDataMock: ICollectionFormQuoteDataPayload = {
         },
         {
           quote: {
-            id: '437892',
+            id: '437894',
             name: null,
           },
           prices: {
