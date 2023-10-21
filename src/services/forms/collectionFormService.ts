@@ -5,6 +5,7 @@ import {
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
   ICollectionFormServicesSaveDataPayload,
+  ICollectionFormQuoteSaveDataPayload,
   ICollectionFormNewContactSaveDataPayload,
 } from '@/lib/api/api-types';
 import {
@@ -441,6 +442,52 @@ async function createNewContact(
   return fetch(`/api/collection/contact/api/create`, requestOptions);
 }
 
+/**
+ * GET request to /api/collection/quote/api/quote
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getQuote(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/quote/api/quote?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/quote/api/quote
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ * @memberof Services
+ *
+ * @param {ICollectionFormFacilitySaveDataPayload} body - Itinerary data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function setQuote(body: ICollectionFormQuoteSaveDataPayload) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/quote/api/quote`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -459,6 +506,8 @@ const collectionFormService = {
   setFacility,
   getFacilityAssetCategoryFacilities,
   getFacilityWorkflows,
+  getQuote,
+  setQuote,
   createNewContact,
 };
 

@@ -10,6 +10,7 @@ import { collectionFormFacilityMockHandlers } from './CollectionForm/collectionF
 import { devicesTableMockHandlers } from './Tables/devicesTableMockServerHandler';
 import { assetCategoryMockHandlers } from './assetCategoryMockServerHandler';
 import { collectionFormNewContactMockHandlers } from './CollectionForm/collectionFormNewContactMockServerHandlers';
+import { collectionFormQuoteMockHandlers } from './CollectionForm/collectionFormQuoteMockServerHandlers';
 
 /**
  * configuration of the mock server for running tests
@@ -26,6 +27,7 @@ const mockHandlers = [
   ...collectionFormServicesMockHandlers,
   ...collectionFormItineraryMockHandlers,
   ...collectionFormFacilityMockHandlers,
+  ...collectionFormQuoteMockHandlers,
   ...collectionFormNewContactMockHandlers,
   ...devicesTableMockHandlers,
   ...assetCategoryMockHandlers,

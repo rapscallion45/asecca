@@ -958,3 +958,157 @@ export interface IContactData {
 export interface ICollectionFormNewContactSaveDataPayload extends IContactData {
   collectionId: string;
 }
+
+/**
+ * Quote Prices data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuotePricesData
+ * @prop {string} fully_working - fully working price
+ * @prop {string} major_technical_faults - major faults price
+ * @prop {string} minor_technical_faults - minor faults price
+ * @prop {string} does_not_turn_on - does not turn on price
+ */
+export interface IQuotePricesData {
+  fully_working: string;
+  major_technical_faults: string;
+  minor_technical_faults: string;
+  does_not_turn_on: string;
+}
+
+/**
+ * Quote data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuoteSummaryData
+ * @prop {string} id - quote ID
+ * @prop {string | null} name - quote name
+ */
+export interface IQuoteSummaryData {
+  id: string;
+  name: string | null;
+}
+
+/**
+ * Quote Model data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuoteModelData
+ * @prop {string} id - quote model ID
+ * @prop {string | null} display_name - quote model display name
+ */
+export interface IQuoteModelData {
+  id: string;
+  display_name: string | null;
+}
+
+/**
+ * Quote Models Price data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuoteModelPriceData
+ * @prop {string} id - model ID to be save
+ * @prop {IQuotePricesData} prices - quote prices data to save
+ */
+export interface IQuoteModelPriceData {
+  id: string;
+  prices: IQuotePricesData;
+}
+
+/**
+ * Quote Model Full data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuoteModelFullData
+ * @prop {IQuoteModelData} model - quote model data
+ * @prop {IQuotePricesData} prices - quote prices data
+ */
+export interface IQuotePricedModelData {
+  model: IQuoteModelData;
+  prices: IQuotePricesData;
+}
+
+/**
+ * Quote Conflicts data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef IQuoteConflictsData
+ * @prop {IQuoteSummaryData} quote - quote data
+ * @prop {IQuotePricesData} prices - quote prices data
+ */
+export interface IQuoteConflictsData {
+  quote: IQuoteSummaryData;
+  prices: IQuotePricesData;
+}
+
+/**
+ * Quote Preview data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteConflictsData
+ * @prop {IQuotePricedModelData} model - quote model data
+ * @prop {Array<IQuoteConflictsData>} conflicting_quotes - quote conflicts
+ */
+export interface IQuoteResolvedConflictData {
+  model: IQuotePricedModelData;
+  conflicting_quotes: Array<IQuoteConflictsData>;
+}
+
+/**
+ * Collection Form Quote data type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteData
+ * @prop {Array<IQuoteSummaryData>} quotes - quote data
+ * @prop {Array<IQuotePricedModelData>} preview - quote preview data
+ * @prop {Array<IQuoteResolvedConflictData> } conflicts - quote conflicts data
+ */
+export interface ICollectionFormQuoteData {
+  quotes: Array<IQuoteSummaryData>;
+  preview: Array<IQuotePricedModelData>;
+  conflicts: Array<IQuoteResolvedConflictData>;
+}
+
+/**
+ * Collection Form Quote data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteDataPayload
+ */
+export interface ICollectionFormQuoteDataPayload
+  extends ICollectionFormQuoteData {}
+
+/**
+ * Collection Form Quote save data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteSaveDataPayload
+ * @prop {string | Array<string | null>} collection - collection ID to save quote for
+ * @prop {string} expires - expiry date of quote
+ * @prop {Array<ICollectionFormQuoteModelsSaveData> } models - quote model data
+ */
+export interface ICollectionFormQuoteSaveDataPayload {
+  collection: string | Array<string | null>;
+  expires: string;
+  models: Array<IQuoteModelPriceData>;
+}

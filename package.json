@@ -2,7 +2,7 @@
   "name": "asecca",
   "description": "Asecca front end client SPA",
   "author": "Carl Scrivener",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "private": true,
   "scripts": {
     "dev": "next dev",

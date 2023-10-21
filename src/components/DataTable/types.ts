@@ -22,6 +22,7 @@ export type DataTableRowCellValue =
   | number
   | Array<string>
   | boolean
+  | ReactNode
   | null
   | undefined;
 
