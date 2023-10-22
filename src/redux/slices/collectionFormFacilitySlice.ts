@@ -322,11 +322,21 @@ const collectionFormFacilitySlice = createSlice({
         fetchAssetCategoryFacilities.fulfilled,
         (
           state: ICollectionFormFacilityState,
-          action: PayloadAction<ICollectionFormFacilityAssetCategoryFacilitiesDataPayload>
+          action: PayloadAction<
+            ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
+            string,
+            {
+              arg: IFetchCollectionFormFacilityAssetCategoryFacilitiesArgs;
+              requestId: string;
+              requestStatus: 'fulfilled';
+            },
+            never
+          >
         ) => {
           state.loadingAssetCategoryFacilities = false;
-          // @ts-ignore *** solution needed for correct typing for action meta
-          state.assetCategoryFacilities[action.meta.rowIdx] = action.payload;
+          if (action.meta.arg.rowIdx)
+            state.assetCategoryFacilities[action.meta.arg.rowIdx] =
+              action.payload;
         }
       )
       .addCase(
@@ -346,11 +356,20 @@ const collectionFormFacilitySlice = createSlice({
         fetchWorkflows.fulfilled,
         (
           state: ICollectionFormFacilityState,
-          action: PayloadAction<ICollectionFormFacilityWorkflowsDataPayload>
+          action: PayloadAction<
+            ICollectionFormFacilityWorkflowsDataPayload,
+            string,
+            {
+              arg: IFetchCollectionFormFacilityWorkflowsArgs;
+              requestId: string;
+              requestStatus: 'fulfilled';
+            },
+            never
+          >
         ) => {
           state.loadingWorkflows = false;
-          // @ts-ignore *** solution needed for correct typing for action meta
-          state.workflows[action.meta.rowIdx] = action.payload;
+          if (action.meta.arg.rowIdx)
+            state.workflows[action.meta.arg.rowIdx] = action.payload;
         }
       )
       .addCase(

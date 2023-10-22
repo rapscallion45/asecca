@@ -30,6 +30,7 @@ import {
   ICollectionFormQuoteSaveDataPayload,
   IQuoteConflictsData,
   IQuotePricedModelData,
+  INewAssetCategoryDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -338,6 +339,8 @@ export interface ICollectionFormItineraryDeleteItineraryPayload {
  * @prop {boolean} saving - saving state flag of itinerary data
  * @prop {boolean} edited - itinerary data has been edited flag
  * @prop {boolean} loadingTypes - loading itinerary asset categories from API
+ * @prop {boolean} savingNewAssetCategory - saving new asset category to API flag
+ * @prop {string} errorNewAssetCategory - saving new asset category error msg
  * @prop {ICollectionFormItineraryAssetCategoryDataPayload} assetCategories - itinerary asset categories from API
  */
 export interface ICollectionFormItineraryState {
@@ -348,6 +351,8 @@ export interface ICollectionFormItineraryState {
   saving: boolean;
   edited: boolean;
   loadingAssetCategories: boolean;
+  savingNewAssetCategory: boolean;
+  errorNewAssetCategory?: string;
   assetCategories: ICollectionFormItineraryAssetCategoryDataPayload;
 }
 
@@ -722,6 +727,19 @@ export interface ICollectionFormQuoteState {
   >;
   selectedQuotes: Array<IQuoteSummaryData>;
   availableQuotes: Array<IQuoteSummaryData>;
+}
+
+/**
+ * Save New Asset Category args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.20
+ *
+ * @typedef ISaveNewAssetCategoryArgs
+ * @prop {INewAssetCategoryDataPayload} data - data payload to be sent
+ */
+export interface ISaveNewAssetCategoryArgs {
+  data: INewAssetCategoryDataPayload;
 }
 
 /**

@@ -9,13 +9,15 @@ import {
   ICollectionFormItineraryDataPayload,
   ICollectionFormItineraryAssetCategoryDataPayload,
 } from '@/lib/api/api-types';
-import collectionFormService from '../../services/forms/collectionFormService';
+import collectionFormService from '@/services/forms/collectionFormService';
+import assetCategoryService from '@/services/assetCategory/assetCategory';
 import {
   ICollectionFormItineraryState,
   IFetchCollectionFormItineraryByCollectionIdArgs,
   ISaveCollectionFormItineraryByCollectionIdArgs,
   ICollectionFormItineraryEditItineraryPayload,
   ICollectionFormItineraryDeleteItineraryPayload,
+  ISaveNewAssetCategoryArgs,
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormItineraryDataMock from '../../../__mocks__/CollectionForm/collectionFormItineraryDataMock';
@@ -103,6 +105,45 @@ export const saveByCollectionId = createAsyncThunk(
 );
 
 /**
+ * Async thunk for POST /api/collection/asset_category/api/new_asset_category API handling
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.20
+ * @memberof CollectionFormItineraryReduxSlice
+ *
+ * @see See [more info on Redux Async Thunks](https://redux-toolkit.js.org/api/createAsyncThunk)
+ *
+ * @function
+ */
+export const saveNewAssetCategory = createAsyncThunk(
+  'collectionFormItinerary/saveNewAssetCategory',
+  async (args: ISaveNewAssetCategoryArgs, thunkAPI) => {
+    const res = await assetCategoryService.setNewAssetCategory(args.data);
+
+    /* add a notification and reject if bad response from server */
+    if (res.status !== 200) {
+      thunkAPI.dispatch(
+        addNotification({
+          message: `Failed to save New Asset Category to server: ${res.statusText}`,
+          variant: 'error',
+        })
+      );
+      throw new Error(res.statusText);
+    } else {
+      thunkAPI.dispatch(
+        addNotification({
+          message: 'Successfully saved New Asset Category to server',
+          variant: 'success',
+        })
+      );
+    }
+
+    /* no error, serialize the data and return */
+    return res.json();
+  }
+);
+
+/**
  * Async thunk for GET /api/collection/enumerations/api/asset_category API handling
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -152,6 +193,7 @@ const initialCollectionFormItineraryState: ICollectionFormItineraryState = {
   saving: false,
   edited: false,
   loadingAssetCategories: false,
+  savingNewAssetCategory: false,
   assetCategories: collectionFormItineraryAssetCategoryDataMock,
 };
 
@@ -300,7 +342,44 @@ const collectionFormItinerarySlice = createSlice({
         state.assetCategories = collectionFormItineraryAssetCategoryDataMock;
         state.error =
           'Failed to load Collection Form Itinerary Asset Category data from server.';
-      });
+      })
+      /* Save New Asset Category extra reducers */
+      .addCase(
+        saveNewAssetCategory.pending,
+        (state: ICollectionFormItineraryState) => {
+          state.savingNewAssetCategory = true;
+        }
+      )
+      .addCase(
+        saveNewAssetCategory.fulfilled,
+        (
+          state: ICollectionFormItineraryState,
+          action: PayloadAction<
+            any,
+            string,
+            {
+              arg: ISaveNewAssetCategoryArgs;
+              requestId: string;
+              requestStatus: 'fulfilled';
+            },
+            never
+          >
+        ) => {
+          state.savingNewAssetCategory = false;
+          /* successful save, add this new asset category name to list */
+          state.assetCategories = state.assetCategories.concat(
+            action.meta.arg.data.name
+          );
+        }
+      )
+      .addCase(
+        saveNewAssetCategory.rejected,
+        (state: ICollectionFormItineraryState) => {
+          state.savingNewAssetCategory = false;
+          state.errorNewAssetCategory =
+            'Failed to save New Asset Category to server';
+        }
+      );
   },
 });
 

@@ -183,6 +183,11 @@ const collectionFormLogisticsSlice = createSlice({
           if (index === action.payload.rowIdx) {
             return {
               ...logistic,
+              /* if user has changed the logisitcs type, clear facilities */
+              visiting_facilities:
+                action.payload.colKey === 'logistics_type'
+                  ? []
+                  : logistic.visiting_facilities,
               /* update the value of the passed column */
               [action.payload.colKey as keyof ICollectionFormLogisticsData]:
                 action.payload.value,

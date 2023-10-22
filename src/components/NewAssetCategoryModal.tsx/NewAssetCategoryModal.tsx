@@ -33,10 +33,14 @@ import assetCategoryFacilitiesDataMock from '../../../__mocks__/assetCategoryFac
  * @since 0.0.16
  *
  * @typedef INewAssetCategoryModalProps
- * @prop {any} closeModal - on close modal callback handler
+ * @prop {boolean} saving - modal saving flag
+ * @prop {function} closeModal - on close modal callback handler
+ * @prop {function} handleSaveCallback - callback to parent for saving of data
  */
 interface INewAssetCategoryModalProps {
+  saving: boolean;
   closeModal?: (fetchNewTypes: boolean) => void;
+  handleSaveCallback: (newAssetData: INewAssetCategoryDataPayload) => void;
 }
 
 /**
@@ -53,7 +57,7 @@ interface INewAssetCategoryModalProps {
  * @returns {FC} - collection form new asset modal functional component
  */
 const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
-  const { closeModal } = props;
+  const { saving, closeModal, handleSaveCallback } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   /**
@@ -65,16 +69,6 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
    * @constant
    */
   const [loading, setLoading] = useState<boolean>(true);
-
-  /**
-   * Local state data for new asset category saving flag
-   *
-   * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.16
-   *
-   * @constant
-   */
-  const [saving, setSaving] = useState<boolean>(false);
 
   /**
    * Local state data for new asset category facilities list
@@ -184,39 +178,9 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
    * @method
    */
   const handleSave = useCallback(async () => {
-    /* indicate save in progress */
-    setSaving(true);
-
-    /* call API */
-    const res = await assetCategoryService.setNewAssetCategory(
-      newAssetData as INewAssetCategoryDataPayload
-    );
-
-    /* clear save in progress flag */
-    setSaving(false);
-
-    /* add a notification and reject if bad response from server */
-    if (res.status !== 200) {
-      dispatch(
-        addNotification({
-          message: `Failed to save New Asset Category: ${res.statusText}`,
-          variant: 'error',
-        })
-      );
-      return;
-    }
-
-    /* indicate successful save of New Asset Category */
-    dispatch(
-      addNotification({
-        message: `Successfully saved New Asset Category: ${res.statusText}`,
-        variant: 'success',
-      })
-    );
-
-    /* good response, close the modal as we're done */
-    if (closeModal) closeModal(true);
-  }, [newAssetData, closeModal, dispatch]);
+    /* callback to parent */
+    handleSaveCallback(newAssetData as INewAssetCategoryDataPayload);
+  }, [newAssetData, handleSaveCallback]);
 
   /**
    * Handles the saving of the form data
@@ -410,7 +374,7 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving}
+          disabled={saving || Boolean(!newAssetData.name)}
           loading={saving}
           sx={{ ml: 2 }}
         >
