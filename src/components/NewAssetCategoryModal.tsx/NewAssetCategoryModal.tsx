@@ -410,7 +410,7 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
           color="secondary"
           variant="contained"
           onClick={handleSave}
-          disabled={saving}
+          disabled={saving || Boolean(!newAssetData.name)}
           loading={saving}
           sx={{ ml: 2 }}
         >
