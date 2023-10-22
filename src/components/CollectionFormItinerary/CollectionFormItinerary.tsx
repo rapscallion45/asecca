@@ -12,14 +12,18 @@ import {
 import { LoadingButton } from '@mui/lab';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CategoryIcon from '@mui/icons-material/Category';
-import { ICollectionFormItineraryData } from '@/lib/api/api-types';
+import {
+  ICollectionFormItineraryData,
+  INewAssetCategoryDataPayload,
+} from '@/lib/api/api-types';
 import {
   saveByCollectionId as saveItineraryByCollectionId,
   resetItinerary,
   editItinerary,
   addItinerary,
   deleteItinerary,
-  fetchTypes,
+  // fetchTypes,
+  saveNewAssetCategory,
 } from '@/redux/slices/collectionFormItinerarySlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -63,9 +67,15 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   /* get collection form itinerary data held in redux state */
-  const { data, loading, error, saving, edited, assetCategories } = useSelector(
-    (state: AppState) => state.collectionFormItinerary
-  );
+  const {
+    data,
+    loading,
+    error,
+    saving,
+    edited,
+    savingNewAssetCategory,
+    assetCategories,
+  } = useSelector((state: AppState) => state.collectionFormItinerary);
 
   /* on first load, fetch the asset categories */
   // useEffect(() => {
@@ -205,18 +215,20 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryProps> = (props) => {
   );
 
   /**
-   * Handles closure events of the New Asset Category modal
+   * Handles save callback of the New Asset Category modal
    *
    * If new asset category has been added, this should trigger new fetch
    * of the asset category data
    *
    * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
-   * @since 0.0.16
+   * @since 0.0.20
    *
    * @method
    */
-  const handleCloseNewAssetCategoryModal = (fetchNewTypes: boolean) => {
-    if (fetchNewTypes) fetchTypes();
+  const handleSaveNewAssetCategory = (
+    newAssetData: INewAssetCategoryDataPayload
+  ) => {
+    dispatch(saveNewAssetCategory({ data: newAssetData }));
   };
 
   return (
@@ -269,7 +281,8 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryProps> = (props) => {
             title="New Asset Category"
           >
             <NewAssetCategoryModalModal
-              closeModal={handleCloseNewAssetCategoryModal}
+              saving={savingNewAssetCategory}
+              handleSaveCallback={handleSaveNewAssetCategory}
             />
           </FormModal>
         </Box>
