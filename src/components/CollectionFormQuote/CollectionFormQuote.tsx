@@ -199,6 +199,7 @@ const CollectionFormQuote: FC<ICollectionFormQuoteProps> = (props) => {
           variant="contained"
           color="secondary"
           onClick={() => dispatch(applyConflictingQuote({ rowIdx, modelId }))}
+          sx={{ fontSize: 'small' }}
         >
           Apply
         </Button>
