@@ -1112,3 +1112,16 @@ export interface ICollectionFormQuoteSaveDataPayload {
   expires: string;
   models: Array<IQuoteModelPriceData>;
 }
+
+/**
+ * Collection Form SOW data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ *
+ * @typedef ICollectionFormSOWDataPayload
+ * @prop {string} pdf - PDF base 64 encoded data
+ */
+export interface ICollectionFormSOWDataPayload {
+  pdf: string;
+}

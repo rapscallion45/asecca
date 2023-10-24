@@ -419,30 +419,6 @@ async function getFacilityWorkflows(
 }
 
 /**
- * POST request to /api/collection/contact/api/create
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.17
- * @memberof Services
- *
- * @param {ICollectionFormNewContactSaveDataPayload} body - Contact data to be saved
- * @returns {Promise<any>} - resulting Promise of the fetch request
- */
-async function createNewContact(
-  body: ICollectionFormNewContactSaveDataPayload
-) {
-  /* configure POST header options */
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  };
-
-  /* send request and catch any errors */
-  return fetch(`/api/collection/contact/api/create`, requestOptions);
-}
-
-/**
  * GET request to /api/collection/quote/api/quote
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -488,6 +464,78 @@ async function setQuote(body: ICollectionFormQuoteSaveDataPayload) {
   return fetch(`/api/collection/quote/api/quote`, requestOptions);
 }
 
+/**
+ * GET request to /api/collection/sow/preview
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getSOW(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/sow/preview?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * GET request to /api/collection/sow/api/download
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function downloadSOW(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/sow/api/download?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
+ * POST request to /api/collection/contact/api/create
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.17
+ * @memberof Services
+ *
+ * @param {ICollectionFormNewContactSaveDataPayload} body - Contact data to be saved
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function createNewContact(
+  body: ICollectionFormNewContactSaveDataPayload
+) {
+  /* configure POST header options */
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+
+  /* send request and catch any errors */
+  return fetch(`/api/collection/contact/api/create`, requestOptions);
+}
+
 const collectionFormService = {
   getCosts,
   setCosts,
@@ -508,6 +556,8 @@ const collectionFormService = {
   getFacilityWorkflows,
   getQuote,
   setQuote,
+  getSOW,
+  downloadSOW,
   createNewContact,
 };
 
