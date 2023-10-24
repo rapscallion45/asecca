@@ -19,9 +19,6 @@ import 'ag-grid-enterprise';
 
 import 'simplebar-react/dist/simplebar.min.css';
 
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-
 import { createEmotionCache } from '@/utils';
 import store from '@/redux/store';
 import DefaultLayout from '@/layouts/default/DefaultLayout';
