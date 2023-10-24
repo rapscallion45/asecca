@@ -2,7 +2,7 @@
   "name": "asecca",
   "description": "Asecca front end client SPA",
   "author": "Carl Scrivener",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -75,6 +75,7 @@
     "next-router-mock": "^0.9.3",
     "node-mocks-http": "^1.12.2",
     "prettier": "^2.8.6",
+    "raw-loader": "^4.0.2",
     "react-test-renderer": "^18.2.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",

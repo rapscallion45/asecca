@@ -1112,3 +1112,45 @@ export interface ICollectionFormQuoteSaveDataPayload {
   expires: string;
   models: Array<IQuoteModelPriceData>;
 }
+
+/**
+ * SOW Valid values
+ *
+ * Please refer to Asecca API documentation for more info
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ * @memberof AseccaAPI
+ *
+ * @typedef SOWValid
+ */
+export type SOWValid =
+  | 'valid - generated'
+  | 'valid - not generated'
+  | 'invalid';
+
+/**
+ * Collection Form SOW data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ *
+ * @typedef ICollectionFormSOWDataPayload
+ * @prop {string} pdf - PDF base 64 encoded data
+ */
+export interface ICollectionFormSOWDataPayload {
+  pdf: string;
+}
+
+/**
+ * Collection Form SOW Valid data payload type definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ *
+ * @typedef ICollectionFormSOWValidDataPayload
+ * @prop {SOWValid} sow_validity - valid state of SOW PDF
+ */
+export interface ICollectionFormSOWValidDataPayload {
+  sow_validity: SOWValid;
+}

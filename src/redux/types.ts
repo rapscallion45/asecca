@@ -31,6 +31,8 @@ import {
   IQuoteConflictsData,
   IQuotePricedModelData,
   INewAssetCategoryDataPayload,
+  ICollectionFormSOWDataPayload,
+  ICollectionFormSOWValidDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -727,6 +729,42 @@ export interface ICollectionFormQuoteState {
   >;
   selectedQuotes: Array<IQuoteSummaryData>;
   availableQuotes: Array<IQuoteSummaryData>;
+}
+
+/**
+ * Fetch Collection Form SOW args for async thunk requests
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ *
+ * @typedef IFetchCollectionFormSOWByCollectionIdArgs
+ * @prop {string} collectionId - collection ID to be fetched
+ */
+export interface IFetchCollectionFormSOWByCollectionIdArgs {
+  collectionId: string | (string | null)[];
+}
+
+/**
+ * Collection Form SOW state definition
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ *
+ * @typedef ICollectionFormSOWState
+ * @prop {boolean} loading - SOW loading state
+ * @prop {ICollectionFormSOWDataPayload} data - original loaded SOW data
+ * @prop {string} error - current error message state of SOW
+ * @prop {boolean} downloading - downloading SOW flag
+ * @prop {string} downloadingError - downloading error state
+ * @prop {ICollectionFormSOWValidDataPayload} valid - SOW PDF is valid state
+ */
+export interface ICollectionFormSOWState {
+  loading: boolean;
+  data: ICollectionFormSOWDataPayload;
+  error?: string;
+  downloading: boolean;
+  downloadingError?: string;
+  valid: ICollectionFormSOWValidDataPayload;
 }
 
 /**
