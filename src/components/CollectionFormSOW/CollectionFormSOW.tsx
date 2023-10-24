@@ -7,7 +7,10 @@ import {
   CardContent,
   Box,
   useMediaQuery,
+  Typography,
 } from '@mui/material';
+import ErrorIcon from '@mui/icons-material/Error';
+import WarningIcon from '@mui/icons-material/Warning';
 import { LoadingButton } from '@mui/lab';
 import { downloadByCollectionId } from '@/redux/slices/collectionFormSOWSlice';
 
@@ -50,6 +53,7 @@ const CollectionFormSOW: FC<ICollectionFormSOWProps> = (props) => {
     loading,
     error,
     downloading,
+    valid,
   } = useSelector((state: AppState) => state.collectionFormSOW);
 
   /**
@@ -77,18 +81,51 @@ const CollectionFormSOW: FC<ICollectionFormSOWProps> = (props) => {
           }}
         >
           <Box mb={2}>
-            <iframe
-              src={`data:application/pdf;base64,${SOWData.pdf}`}
-              title={`SOW PDF Preview - Collection ${collectionId}`}
-              width="100%"
-              height="500px"
-            />
+            {valid.sow_validity === 'valid - generated' && (
+              <iframe
+                src={`data:application/pdf;base64,${SOWData.pdf}`}
+                title={`SOW PDF Preview - Collection ${collectionId}`}
+                width="100%"
+                height="500px"
+              />
+            )}
+            {valid.sow_validity === 'valid - not generated' && (
+              <Box
+                display="flex"
+                flexDirection="column"
+                py={7}
+                alignItems="center"
+              >
+                <WarningIcon color="warning" fontSize="medium" />
+                <Typography variant="body1" mt={2}>
+                  No PDF generated for this SOW.
+                </Typography>
+              </Box>
+            )}
+            {valid.sow_validity === 'invalid' && (
+              <Box
+                display="flex"
+                flexDirection="column"
+                py={7}
+                alignItems="center"
+              >
+                <ErrorIcon color="error" fontSize="medium" />
+                <Typography variant="body1" mt={2}>
+                  SOW Invalid.
+                </Typography>
+              </Box>
+            )}
           </Box>
           <LoadingButton
             color="secondary"
             variant="contained"
             onClick={handleDownload}
-            disabled={downloading || loading || Boolean(error)}
+            disabled={
+              downloading ||
+              loading ||
+              Boolean(error) ||
+              valid.sow_validity !== 'valid - generated'
+            }
             loading={downloading}
             fullWidth={isMobile}
             sx={{ width: isMobile ? '200px' : '100%' }}

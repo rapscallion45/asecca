@@ -489,6 +489,30 @@ async function getSOW(collectionId: string | Array<string | null>) {
 }
 
 /**
+ * GET request to /api/collection/sow/api/valid
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ * @memberof Services
+ *
+ * @param {string | Array<(string | null)>} collectionId - ID of the collection
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+async function getSOWValid(collectionId: string | Array<string | null>) {
+  /* configure GET header options */
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  /* send request and catch any errors */
+  return fetch(
+    `/api/collection/sow/api/valid?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
  * GET request to /api/collection/sow/api/download
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -557,6 +581,7 @@ const collectionFormService = {
   getQuote,
   setQuote,
   getSOW,
+  getSOWValid,
   downloadSOW,
   createNewContact,
 };

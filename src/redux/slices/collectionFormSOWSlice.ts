@@ -12,6 +12,7 @@ import {
 } from '../types';
 import { addNotification } from './notificationsSlice';
 import collectionFormSOWDataMock from '../../../__mocks__/CollectionForm/collectionFormSOWDataMock';
+import collectionFormSOWValidDataMock from '../../../__mocks__/CollectionForm/collectionFormSOWValidDataMock';
 
 /**
  * State slice definition for Collection Form SOW
@@ -102,6 +103,7 @@ const initialCollectionFormSOWState: ICollectionFormSOWState = {
   loading: false,
   data: collectionFormSOWDataMock,
   downloading: false,
+  valid: collectionFormSOWValidDataMock,
 };
 
 /**

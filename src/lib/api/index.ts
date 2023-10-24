@@ -23,7 +23,7 @@ export {
 } from './collectionFormFacility';
 export { getQuote, setQuote } from './collectionFormQuote';
 export { createNewContact } from './collectionFormNewContact';
-export { getSOW, downloadSOW } from './collectionFormSOW';
+export { getSOW, getSOWValid, downloadSOW } from './collectionFormSOW';
 export {
   getAssetCategoryFacilities,
   setNewAssetCategory,

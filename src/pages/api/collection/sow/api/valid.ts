@@ -3,10 +3,10 @@ import type {
   ICollectionFormCostsDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
-import { downloadSOW } from '@/lib/api';
+import { getSOWValid } from '@/lib/api';
 
 /**
- * Proxy for handling requests to ASECCA Collection Form SOW Download API.
+ * Proxy for handling requests to ASECCA Collection Form SOW Valid API.
  *
  * @see See [Next.js API route support](https://nextjs.org/docs/api-routes/introduction)
  *
@@ -39,7 +39,7 @@ const handler = async (
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await downloadSOW(query.collection);
+        const response = await getSOWValid(query.collection);
 
         /* send back server response */
         if (response.status === 200) {

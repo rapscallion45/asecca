@@ -32,6 +32,7 @@ import {
   IQuotePricedModelData,
   INewAssetCategoryDataPayload,
   ICollectionFormSOWDataPayload,
+  ICollectionFormSOWValidDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
 
@@ -755,6 +756,7 @@ export interface IFetchCollectionFormSOWByCollectionIdArgs {
  * @prop {string} error - current error message state of SOW
  * @prop {boolean} downloading - downloading SOW flag
  * @prop {string} downloadingError - downloading error state
+ * @prop {ICollectionFormSOWValidDataPayload} valid - SOW PDF is valid state
  */
 export interface ICollectionFormSOWState {
   loading: boolean;
@@ -762,6 +764,7 @@ export interface ICollectionFormSOWState {
   error?: string;
   downloading: boolean;
   downloadingError?: string;
+  valid: ICollectionFormSOWValidDataPayload;
 }
 
 /**

@@ -38,6 +38,35 @@ export async function getSOW(collectionId: string | string[]) {
 }
 
 /**
+ * GET request to Asecca API /collection/sow/api/valid
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.21
+ * @memberof AseccaAPI
+ *
+ * @param {string} collectionId - requested collection ID
+ * @returns {Promise<any>} - resulting Promise of the fetch request
+ */
+export async function getSOWValid(collectionId: string | string[]) {
+  /* setup GET request options with basic auth */
+  const requestOptions = {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${base64.encode(
+        `${STAGING_DB_USERNAME}:${STAGING_DB_PASSWORD}`
+      )}`,
+    }),
+  };
+
+  /* fetch the SOW PDF Valid flag */
+  return fetch(
+    `${STAGING_DB_REST_API_URL}/collection/sow/api/valid?collection=${collectionId}`,
+    requestOptions
+  );
+}
+
+/**
  * GET request to Asecca API /collection/sow/api/download
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
