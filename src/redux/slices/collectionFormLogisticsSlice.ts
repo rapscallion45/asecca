@@ -213,6 +213,7 @@ const collectionFormLogisticsSlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormLogisticsDeleteLogisticsPayload>
     ) => {
+      /* remove passed row from dataset */
       state.data.rows = lodash.remove(
         state.data.rows,
         (row: ICollectionFormLogisticsData, index: number) =>

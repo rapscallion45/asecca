@@ -31,7 +31,7 @@ import {
   IDataTableColumn,
 } from '@/components/DataTable/types';
 import FormModal from '@/modals/FormModal/FormModal';
-import NewAssetCategoryModalModal from '../NewAssetCategoryModal.tsx/NewAssetCategoryModal';
+import NewAssetCategoryModalModal from '../NewAssetCategoryModal/NewAssetCategoryModal';
 import columns from './collectionFormItineraryTableColumns';
 
 /**
