@@ -15,6 +15,7 @@ import columns from './collectionFormLogisticsTableColumns';
 import CollectionFormLogistics from './CollectionFormLogistics';
 import collectionFormLogisticsDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsDataMock';
 import collectionFormLogisticsTypesDataMock from '../../../__mocks__/CollectionForm/collectionFormLogisticsTypesDataMock';
+import { IDataTableColumn } from '../DataTable/types';
 
 /* default test query ID */
 const query: string = '66135000001760012';
@@ -29,7 +30,7 @@ const testTypeIdx = 0;
  * Collection Form Logistics Unit Tests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.21
+ * @since 0.0.22
  */
 describe('Collection Form Logistics', () => {
   it('Renders correctly', async () => {
@@ -367,7 +368,7 @@ describe('Collection Form Logistics', () => {
       /** Assert - check that table columns have been rendered */
       await waitFor(() => {
         /** After all state updates have completed */
-        columns.forEach((column) => {
+        columns.forEach((column: IDataTableColumn) => {
           if (column.key !== 'delete_row')
             expect(screen.queryByText(column.label)).toBeInTheDocument();
         });
