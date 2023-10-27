@@ -10,7 +10,7 @@ import {
 import renderer from 'react-test-renderer';
 import { fetchByCollectionId as fetchCollectionFormFacilityByCollectionId } from '@/redux/slices/collectionFormFacilitySlice';
 import { ICollectionFormFacilityData } from '@/lib/api/api-types';
-import store from '../../redux/store';
+import store from '@/redux/store';
 import columns from './collectionFormFacilityTableColumns';
 import CollectionFormFacility from './CollectionFormFacility';
 import collectionFormFacilityDataMock from '../../../__mocks__/CollectionForm/collectionFormFacilityDataMock';
