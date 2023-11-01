@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs, { Dayjs } from 'dayjs';
 import { AppState, AppDispatch } from '@/redux/store';
@@ -154,7 +154,7 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
             maxRows={4}
             variant="standard"
             value={scheduleData.notes}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
               handleEdit(event.target.value, 'notes');
             }}
             color="secondary"
