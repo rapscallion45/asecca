@@ -16,7 +16,7 @@ import {
   getCollectionFormServicesRedeliveryRequestValue,
   getCollectionFormServicesTypeEnum,
 } from '@/utils';
-import CollectionFormServicesContact from './CollectionFormServices';
+import CollectionFormServices from './CollectionFormServices';
 import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
 import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
 
@@ -42,7 +42,7 @@ describe('Collection Form Services', () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <CollectionFormServicesContact collectionId={query} />
+          <CollectionFormServices collectionId={query} />
         </Provider>
       )
       .toJSON();
@@ -55,7 +55,7 @@ describe('Collection Form Services', () => {
       /** Act - render the test components */
       render(
         <Provider store={store}>
-          <CollectionFormServicesContact collectionId={query} />
+          <CollectionFormServices collectionId={query} />
         </Provider>
       );
 
@@ -136,7 +136,7 @@ describe('Collection Form Services', () => {
       /** Act - render the test components */
       render(
         <Provider store={store}>
-          <CollectionFormServicesContact collectionId={query} />
+          <CollectionFormServices collectionId={query} />
         </Provider>
       );
       await waitFor(() => {
