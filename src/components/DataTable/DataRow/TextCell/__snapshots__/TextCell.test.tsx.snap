@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Data Table Text Cell Renders correctly 1`] = `
+<table
+  className="MuiTable-root css-rqglhn-MuiTable-root"
+  role={null}
+>
+  <tbody
+    className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+    role={null}
+  >
+    <tr
+      className="MuiTableRow-root css-1q1u3t4-MuiTableRow-root"
+      role={null}
+    >
+      <td
+        aria-sort={null}
+        className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1mlukn3-MuiTableCell-root"
+      >
+        <div
+          className="MuiFormControl-root css-1bc8z7r-MuiFormControl-root"
+        >
+          <div
+            className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorSecondary MuiInputBase-formControl MuiInputBase-adornedEnd css-vg7q19-MuiInputBase-root-MuiInput-root"
+            onClick={[Function]}
+            onMouseDown={[Function]}
+            onTouchStart={[Function]}
+            required={true}
+          >
+            <input
+              aria-invalid={false}
+              className="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1x51dt5-MuiInputBase-input-MuiInput-input"
+              disabled={false}
+              id="testrow-testkey-input"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              required={true}
+              type="text"
+              value="Test string."
+            />
+            <div
+              className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-standard MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+            >
+              <button
+                aria-label="clear user entry"
+                className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onContextMenu={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={0}
+                type="button"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-1gcn2zm-MuiSvgIcon-root"
+                  data-testid="CloseIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
