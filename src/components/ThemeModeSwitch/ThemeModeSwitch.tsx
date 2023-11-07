@@ -129,7 +129,6 @@ const ThemeModeSwitch: FC<IThemeModeSwitchProps> = (props) => {
         />
       )}
       <FormControlLabel
-        data-testid="light-dark-btn"
         control={
           <ThemeModeSwitchStyle
             focusVisibleClassName=".Mui-focusVisible"
@@ -138,6 +137,8 @@ const ThemeModeSwitch: FC<IThemeModeSwitchProps> = (props) => {
             onChange={toggleTheme}
             sx={{ ml: 2.5, mr: -1 }}
             color="secondary"
+            // @ts-ignore
+            inputProps={{ 'data-testid': 'light-dark-btn' }}
           />
         }
         label=""

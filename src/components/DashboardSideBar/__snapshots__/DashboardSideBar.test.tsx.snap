@@ -518,7 +518,6 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                       >
                         <label
                           className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-1vbggne-MuiFormControlLabel-root"
-                          data-testid="light-dark-btn"
                         >
                           <span
                             className="MuiSwitch-root MuiSwitch-sizeMedium css-sj51q3-MuiSwitch-root"
@@ -542,6 +541,7 @@ exports[`Dashboard SideBar Renders correctly 1`] = `
                               <input
                                 checked={false}
                                 className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                                data-testid="light-dark-btn"
                                 onChange={[Function]}
                                 required={false}
                                 type="checkbox"
