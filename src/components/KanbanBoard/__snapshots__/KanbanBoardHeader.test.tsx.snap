@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kanban Board Header Renders correctly 1`] = `
+[
+  <div
+    className="MuiBox-root css-1c18zwa"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
+    >
+      <div
+        className="MuiBox-root css-k008qs"
+      >
+        <h4
+          className="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
+        >
+          Loading board...
+        </h4>
+      </div>
+    </h4>
+    <div
+      className="MuiBox-root css-152fgxh"
+    >
+      <span
+        className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-tqb5fd-MuiSkeleton-root"
+        data-testid="kanban-board-header-loading-skeleton"
+        style={
+          {
+            "height": 40,
+            "width": 140,
+          }
+        }
+      />
+      <span
+        className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-16y9oml-MuiSkeleton-root"
+        style={
+          {
+            "height": 40,
+            "width": 70,
+          }
+        }
+      />
+    </div>
+  </div>,
+  <span
+    className="MuiLinearProgress-root MuiLinearProgress-colorSecondary MuiLinearProgress-indeterminate css-v8mbwy-MuiLinearProgress-root"
+    role="progressbar"
+  >
+    <span
+      className="MuiLinearProgress-bar MuiLinearProgress-barColorSecondary MuiLinearProgress-bar1Indeterminate css-p53mz9-MuiLinearProgress-bar1"
+      style={{}}
+    />
+    <span
+      className="MuiLinearProgress-bar MuiLinearProgress-barColorSecondary MuiLinearProgress-bar2Indeterminate css-xybj4j-MuiLinearProgress-bar2"
+      style={{}}
+    />
+  </span>,
+]
+`;
