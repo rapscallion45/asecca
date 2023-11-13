@@ -16,7 +16,6 @@ import {
   ICollectionFormCostsEditCostsPayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormCostsDataMock from '../../../__mocks__/CollectionForm/collectionFormCostsDataMock';
 
 /**
  * State slice definition for Collection Form Costs
@@ -111,8 +110,8 @@ export const saveByCollectionId = createAsyncThunk(
  */
 const initialCollectionFormCostsState: ICollectionFormCostsState = {
   loading: false,
-  data: collectionFormCostsDataMock,
-  dataShadow: collectionFormCostsDataMock,
+  data: { rows: [] },
+  dataShadow: { rows: [] },
   saving: false,
   edited: false,
 };
@@ -198,8 +197,8 @@ const collectionFormCostsSlice = createSlice({
         fetchByCollectionId.rejected,
         (state: ICollectionFormCostsState) => {
           state.loading = false;
-          state.data = collectionFormCostsDataMock;
-          state.dataShadow = collectionFormCostsDataMock;
+          state.data = { rows: [] };
+          state.dataShadow = { rows: [] };
           state.error =
             'Failed to load Collection Form Costs data from server.';
         }

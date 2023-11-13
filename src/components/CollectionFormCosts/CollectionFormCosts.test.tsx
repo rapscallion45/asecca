@@ -8,7 +8,6 @@ import {
   act,
 } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import { fetchByCollectionId as fetchCollectionFormCostsByCollectionId } from '@/redux/slices/collectionFormCostsSlice';
 import { getCollectionFormCostsPostData } from '@/utils';
 import store from '../../redux/store';
 import columns from './collectionFormCostsTableColumns';
@@ -26,12 +25,6 @@ const query: string = '66135000001760012';
 describe('Collection Form Costs', () => {
   it('Renders correctly', async () => {
     /** Arrange */
-    store.dispatch(
-      fetchCollectionFormCostsByCollectionId({
-        collectionId: query,
-      })
-    );
-
     /** perform snapshot test */
     const tree = renderer
       .create(
@@ -50,14 +43,15 @@ describe('Collection Form Costs', () => {
       /** Arrange */
       const testInput: string = '34.7878';
       const testInputFormatted: string = '34.79';
-      act(() => {
-        store.dispatch(
-          fetchCollectionFormCostsByCollectionId({
-            collectionId: query,
-          })
-        );
-      });
-      /** Assert - get API to have been called */
+
+      /** Act - render the test components */
+      render(
+        <Provider store={store}>
+          <CollectionFormCosts collectionId={query} />
+        </Provider>
+      );
+
+      /** Assert - GET API to have been called */
       await waitFor(() => {
         expect(window.fetch).toHaveBeenCalledTimes(1);
       });
@@ -68,12 +62,7 @@ describe('Collection Form Costs', () => {
           headers: { 'Content-Type': 'application/json' },
         })
       );
-      /** Act - render the test components */
-      render(
-        <Provider store={store}>
-          <CollectionFormCosts collectionId={query} />
-        </Provider>
-      );
+
       /** Assert - check that table columns have been rendered */
       await waitFor(() => {
         /** After all state updates have completed */
@@ -82,6 +71,7 @@ describe('Collection Form Costs', () => {
         });
       });
       expect(screen.getByDisplayValue('12.00')).toBeInTheDocument();
+
       /** Act - click on edit cell, updated value, click Save button */
       act(() => {
         fireEvent(
@@ -95,10 +85,12 @@ describe('Collection Form Costs', () => {
           target: { value: testInput },
         });
       });
+
       /** Assert - wait for input to update */
       await waitFor(() => {
         expect(screen.getByDisplayValue(testInput)).toBeInTheDocument();
       });
+
       /** Act - press enter key */
       act(() => {
         fireEvent.keyDown(screen.getByDisplayValue(testInput), {
@@ -108,6 +100,7 @@ describe('Collection Form Costs', () => {
           charCode: 13,
         });
       });
+
       /** Assert - button and clear icon not rendered, values updated */
       await waitFor(() => {
         /** display value of cell updated to formatted value */
@@ -115,6 +108,7 @@ describe('Collection Form Costs', () => {
           screen.getByDisplayValue(testInputFormatted)
         ).toBeInTheDocument();
       });
+
       /** Act - click Save button */
       act(() => {
         fireEvent(
@@ -125,9 +119,10 @@ describe('Collection Form Costs', () => {
           })
         );
       });
+
       /** Assert - save API to have been called with data from state */
       await waitFor(() => {
-        expect(window.fetch).toHaveBeenCalledTimes(2);
+        expect(window.fetch).toHaveBeenCalledTimes(3);
       });
       expect(window.fetch).toHaveBeenCalledWith(
         '/api/collection/costs/api/costs',
@@ -143,23 +138,19 @@ describe('Collection Form Costs', () => {
         })
       );
     });
+
     it('Should reset table data when cancel button clicked', async () => {
       /** Arrange */
       const testInput: string = '34.7878';
       const testInputFormatted: string = '34.79';
-      act(() => {
-        store.dispatch(
-          fetchCollectionFormCostsByCollectionId({
-            collectionId: query,
-          })
-        );
-      });
+
       /** Act - render the test components */
       render(
         <Provider store={store}>
           <CollectionFormCosts collectionId={query} />
         </Provider>
       );
+
       /** Assert - check that table columns have been rendered */
       await waitFor(() => {
         /** After all state updates have completed */
@@ -168,6 +159,7 @@ describe('Collection Form Costs', () => {
         });
       });
       expect(screen.getByDisplayValue('12.00')).toBeInTheDocument();
+
       /** Act - click on edit cell, updated value, click Save button */
       act(() => {
         fireEvent(
@@ -181,10 +173,12 @@ describe('Collection Form Costs', () => {
           target: { value: testInput },
         });
       });
+
       /** Assert - wait for input to update */
       await waitFor(() => {
         expect(screen.getByDisplayValue(testInput)).toBeInTheDocument();
       });
+
       /** Act - press enter key */
       act(() => {
         fireEvent.keyDown(screen.getByDisplayValue(testInput), {
@@ -194,6 +188,7 @@ describe('Collection Form Costs', () => {
           charCode: 13,
         });
       });
+
       /** Assert - button and clear icon not rendered, values updated */
       await waitFor(() => {
         /** display value of cell updated to formatted value */
@@ -201,6 +196,7 @@ describe('Collection Form Costs', () => {
           screen.getByDisplayValue(testInputFormatted)
         ).toBeInTheDocument();
       });
+
       /** Act - click Cancel button */
       act(() => {
         fireEvent(
@@ -211,6 +207,7 @@ describe('Collection Form Costs', () => {
           })
         );
       });
+
       /** Assert - table data should no longer hold updated values */
       await waitFor(() => {
         expect(screen.queryByDisplayValue(testInputFormatted)).toBeNull();
@@ -221,14 +218,6 @@ describe('Collection Form Costs', () => {
   describe('Table Columns', () => {
     it('Should render correctly for passed permission', async () => {
       /** Arrange */
-      act(() => {
-        store.dispatch(
-          fetchCollectionFormCostsByCollectionId({
-            collectionId: query,
-          })
-        );
-      });
-
       /** Act - render the test components */
       render(
         <Provider store={store}>
