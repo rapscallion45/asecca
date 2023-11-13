@@ -6,7 +6,7 @@ import { ICostsConfigData } from '@/lib/api/api-types';
 import DataRow from './DataRow';
 import dataTableColumns from '../../CostsConfigTable/costsConfigTableColumns';
 import costsConfigDataMock from '../../../../__mocks__/Configurators/costsConfigDataMock';
-import { IDataTableColumn } from '../types';
+import { DataTableRowCellValue, IDataTableColumn } from '../types';
 
 /* mock callbacks for get and edit cell values */
 const mockGetCellValueCallback = jest.fn(
@@ -14,7 +14,7 @@ const mockGetCellValueCallback = jest.fn(
     costsConfigDataMock.costs[rowIdx][column.key as keyof ICostsConfigData]
 );
 const mockEditCellValueCallback = jest.fn(
-  (value: string | null, colKey: string, rowIdx: number) =>
+  (value: DataTableRowCellValue, colKey: string, rowIdx: number) =>
     costsConfigDataMock.costs[rowIdx][colKey as keyof ICostsConfigData]
 );
 
