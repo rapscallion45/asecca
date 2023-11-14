@@ -34,31 +34,31 @@ const CollectionFormPage: NextPageWithLayout = () => (
     {/* load collection form with fetched data */}
     <Box maxWidth={900}>
       <Box mb={2}>
-        <CollectionFormCosts collectionId="123456" />
+        <CollectionFormCosts collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormLogistics collectionId="123456" />
+        <CollectionFormLogistics collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormSchedule collectionId="123456" />
+        <CollectionFormSchedule collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormServices collectionId="123456" />
+        <CollectionFormServices collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormItinerary collectionId="123456" />
+        <CollectionFormItinerary collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormFacility collectionId="123456" />
+        <CollectionFormFacility collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormNewContact collectionId="123456" />
+        <CollectionFormNewContact collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormQuote collectionId="123456" />
+        <CollectionFormQuote collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormSOW collectionId="123456" />
+        <CollectionFormSOW collectionId="66135000015737072" />
       </Box>
     </Box>
   </Box>

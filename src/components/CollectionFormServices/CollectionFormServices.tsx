@@ -78,6 +78,7 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
     error,
     saving,
     edited,
+    contacts,
   } = useSelector((state: AppState) => state.collectionFormServices);
 
   /**
@@ -261,6 +262,8 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                     getCollectionFormServicesTypeEnum(servicesData) !==
                       'Destruction'
                   }
+                  // @ts-ignore
+                  inputProps={{ 'data-testid': 'decomissioning-checkbox' }}
                 />
               </Grid>
             </Grid>
@@ -297,6 +300,8 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                     getCollectionFormServicesTypeEnum(servicesData) !==
                     'Recycling'
                   }
+                  // @ts-ignore
+                  inputProps={{ 'data-testid': 'ownership-checkbox' }}
                 />
               </Grid>
             </Grid>
@@ -336,6 +341,8 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                     getCollectionFormServicesTypeEnum(servicesData) !==
                     'Recycling'
                   }
+                  // @ts-ignore
+                  inputProps={{ 'data-testid': 'redelivery-checkbox' }}
                 />
               </Grid>
             </Grid>
@@ -364,8 +371,11 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                       event: SelectChangeEvent<typeof servicesData.site_contact>
                     ) => handleEdit('site_contact', event.target.value)}
                   >
-                    <MenuItem value="Contact One">Contact One</MenuItem>
-                    <MenuItem value="Contact Two">Contact Two</MenuItem>
+                    {contacts.contacts_list.map((contact: string) => (
+                      <MenuItem key={contact} value={contact}>
+                        {contact}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>

@@ -44,7 +44,7 @@ export const fetchByCollectionId = createAsyncThunk(
   'collectionFormServices/fetchByCollectionId',
   async (args: IFetchCollectionFormServicesByCollectionIdArgs, thunkAPI) => {
     /* await the result from the GET request */
-    const res = await collectionFormService.getServices(args.collectionId);
+    const res = await collectionFormService.getService(args.collectionId);
 
     /* add a notification and reject if bad response from server */
     if (res.status !== 200) {
@@ -76,7 +76,7 @@ export const fetchByCollectionId = createAsyncThunk(
 export const saveByCollectionId = createAsyncThunk(
   'collectionFormServices/saveByCollectionId',
   async (args: ISaveCollectionFormServicesByCollectionIdArgs, thunkAPI) => {
-    const res = await collectionFormService.setServices(args.data);
+    const res = await collectionFormService.setService(args.data);
 
     /* add a notification and reject if bad response from server */
     if (res.status !== 200) {
@@ -116,7 +116,7 @@ export const fetchTypes = createAsyncThunk(
   'collectionFormServices/fetchTypes',
   async (args, thunkAPI) => {
     /* await the result from the GET request */
-    const res = await collectionFormService.getServicesContacts();
+    const res = await collectionFormService.getServiceContacts();
 
     /* add a notification and reject if bad response from server */
     if (res.status !== 200) {

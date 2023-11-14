@@ -67,6 +67,7 @@ const KanbanBoardHeader: FC<IKanbanBoardHeaderProps> = (props) => {
             {!error && (
               <>
                 <Skeleton
+                  data-testid="kanban-board-header-loading-skeleton"
                   variant="rectangular"
                   width={140}
                   height={40}

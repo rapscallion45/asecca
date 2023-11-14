@@ -12,8 +12,6 @@ import {
   SelectChangeEvent,
   FormControl,
   Typography,
-  Backdrop,
-  CircularProgress,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import {
@@ -34,6 +32,7 @@ import {
   IDataTableColumn,
 } from '@/components/DataTable/types';
 import columns from './collectionFormFacilityTableColumns';
+import LoadingPanel from '../LoadingPanel/LoadingPanel';
 
 /**
  * Collection Form Facility Props
@@ -274,12 +273,14 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
         <Select
           id={`${colKey}-select-input`}
           value={value}
-          renderValue={(selectValue: string) =>
-            /* if current value is undefined, display the unassigned text */
-            selectValue === undefined || selectValue === '' ? (
+          renderValue={(selectValue: string | null) =>
+            /* if current value is null, display the unassigned text */
+            selectValue === null || selectValue === '' ? (
               <MenuItem value="">
-                {columns.find((col: IDataTableColumn) => col.key === colKey)
-                  ?.unassignedText || ''}
+                {
+                  columns.find((col: IDataTableColumn) => col.key === colKey)
+                    ?.unassignedText
+                }
               </MenuItem>
             ) : (
               /* we have a value, display it */
@@ -288,6 +289,10 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
           }
           onChange={(event: SelectChangeEvent) =>
             handleChange(event, colKey, rowIdx)
+          }
+          displayEmpty={
+            columns.find((col: IDataTableColumn) => col.key === colKey)
+              ?.allowUnassigned
           }
           color="secondary"
         >
@@ -384,12 +389,9 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
     <Card>
       <CardHeader title="Facility" />
       <CardContent sx={{ pt: 0, position: 'relative' }}>
-        <Backdrop
-          open={loadingAssetCategoryFacilities || loadingWorkflows}
-          sx={{ position: 'absolute', zIndex: '999' }}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <LoadingPanel
+          show={loadingAssetCategoryFacilities || loadingWorkflows}
+        />
         <DataTable
           name="collection form facility"
           /* filter table columns by current facility type */

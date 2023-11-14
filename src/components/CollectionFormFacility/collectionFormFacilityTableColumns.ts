@@ -17,7 +17,7 @@ const collectionFormFacilityTableColumns: Array<IDataTableColumn> = [
     type: 'string',
   },
   {
-    label: 'Facility',
+    label: 'Assigned Facility',
     key: 'facility',
     type: 'action',
     allowUnassigned: true,

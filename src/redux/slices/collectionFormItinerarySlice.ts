@@ -4,6 +4,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
+import lodash from 'lodash';
 import {
   ICollectionFormItineraryData,
   ICollectionFormItineraryDataPayload,
@@ -250,8 +251,12 @@ const collectionFormItinerarySlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormItineraryDeleteItineraryPayload>
     ) => {
-      // @ts-ignore
-      state.data = state.data.toSpliced(action.payload.rowIdx, 1);
+      /* remove passed row from dataset */
+      state.data = lodash.remove(
+        state.data,
+        (row: ICollectionFormItineraryData, index: number) =>
+          index === action.payload.rowIdx
+      );
       state.edited = true;
     },
     /* reducer used for when user clears edits to Itinerary data */

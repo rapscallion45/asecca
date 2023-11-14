@@ -11,7 +11,7 @@ const collectionFormFacilityDataMock: ICollectionFormFacilityDataPayload = {
     {
       asset_category: 'Phone',
       facility: 'ASECCA',
-      workflow: null,
+      workflow: 'Erasure - HMG 5, Lower',
     },
     {
       asset_category: 'Laptop',

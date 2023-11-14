@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import { Card, CardHeader, CardContent, Box, Button } from '@mui/material';
@@ -13,6 +13,7 @@ import {
   saveByCollectionId as saveCostsByCollectionId,
   resetCosts,
   editCosts,
+  fetchByCollectionId,
 } from '@/redux/slices/collectionFormCostsSlice';
 import DataTable from '@/components/DataTable/DataTable';
 import {
@@ -58,6 +59,11 @@ const CollectionFormCosts: FC<ICollectionFormCostsProps> = (props) => {
   const { data, loading, error, saving, edited } = useSelector(
     (state: AppState) => state.collectionFormCosts
   );
+
+  /* on change of Collection ID, fetch data from API */
+  useEffect(() => {
+    dispatch(fetchByCollectionId({ collectionId }));
+  }, [collectionId, dispatch]);
 
   /**
    * Table column filter list

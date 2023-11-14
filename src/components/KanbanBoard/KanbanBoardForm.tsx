@@ -144,6 +144,7 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
                     {canEdit && (
                       <IconButton
                         aria-label="delete column"
+                        data-testid={`delete-column-${column.name}`}
                         onClick={() => {
                           onDelete(index);
                         }}

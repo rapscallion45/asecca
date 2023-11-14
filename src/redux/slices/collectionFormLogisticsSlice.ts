@@ -4,6 +4,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
+import lodash from 'lodash';
 import {
   ICollectionFormLogisticsData,
   ICollectionFormLogisticsDataPayload,
@@ -212,8 +213,12 @@ const collectionFormLogisticsSlice = createSlice({
       state,
       action: PayloadAction<ICollectionFormLogisticsDeleteLogisticsPayload>
     ) => {
-      // @ts-ignore
-      state.data.rows = state.data.rows.toSpliced(action.payload.rowIdx, 1);
+      /* remove passed row from dataset */
+      state.data.rows = lodash.remove(
+        state.data.rows,
+        (row: ICollectionFormLogisticsData, index: number) =>
+          index === action.payload.rowIdx
+      );
       state.edited = true;
     },
     /* reducer used for when user clears edits to Logistics data */

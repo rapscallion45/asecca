@@ -8,7 +8,7 @@ import { ICollectionFormItineraryDataPayload } from '@/lib/api/api-types';
  */
 const collectionFormItineraryDataMock: ICollectionFormItineraryDataPayload = [
   {
-    asset_category: 'Server',
+    asset_category: 'Printer',
     quantity: 15,
     packing_details: null,
   },

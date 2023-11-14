@@ -99,6 +99,7 @@ const SelectCell: FC<ISelectCellProps> = (props) => {
           disabled={!canEdit}
           displayEmpty={allowUnassigned}
           color="secondary"
+          native={false}
         >
           {allowUnassigned && <MenuItem value="">Unassigned</MenuItem>}
           {options?.map((option) => (

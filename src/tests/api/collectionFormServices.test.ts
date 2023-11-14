@@ -1,7 +1,7 @@
 import { createMocks } from 'node-mocks-http';
-import collectionFormServicesGetHandler from '@/pages/api/collection/services/api/get';
-import collectionFormServicesSetHandler from '@/pages/api/collection/services/api/set';
-import collectionFormServicesContactsHandler from '@/pages/api/collection/services/api/contacts';
+import collectionFormServicesGetHandler from '@/pages/api/collection/service/api/get';
+import collectionFormServicesSetHandler from '@/pages/api/collection/service/api/set';
+import collectionFormServicesContactsHandler from '@/pages/api/collection/service/api/contacts';
 import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
 import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
 
@@ -19,7 +19,7 @@ jest.mock('query-string', () => ({
  * @since 0.0.14
  */
 describe('Collection Form Services API Routes', () => {
-  describe('GET /collection/services/api/get', () => {
+  describe('GET /collection/service/api/get', () => {
     it('returns expected data', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -58,7 +58,7 @@ describe('Collection Form Services API Routes', () => {
     });
   });
 
-  describe('POST /collection/services/api/set', () => {
+  describe('POST /collection/service/api/set', () => {
     it('returns expected response', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -77,7 +77,7 @@ describe('Collection Form Services API Routes', () => {
     });
   });
 
-  describe('PUT /collection/services/api/get', () => {
+  describe('PUT /collection/service/api/get', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -92,7 +92,7 @@ describe('Collection Form Services API Routes', () => {
     });
   });
 
-  describe('PUT /collection/services/api/set', () => {
+  describe('PUT /collection/service/api/set', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -107,7 +107,7 @@ describe('Collection Form Services API Routes', () => {
     });
   });
 
-  describe('DELETE /collection/services/api/get', () => {
+  describe('DELETE /collection/service/api/get', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({
@@ -122,7 +122,7 @@ describe('Collection Form Services API Routes', () => {
     });
   });
 
-  describe('DELETE /collection/services/api/set', () => {
+  describe('DELETE /collection/service/api/set', () => {
     it('returns 404 for unsupported method', async () => {
       /** Arrange */
       const { req, res } = createMocks({

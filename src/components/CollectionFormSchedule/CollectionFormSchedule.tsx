@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useEffect, useCallback, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs, { Dayjs } from 'dayjs';
 import { AppState, AppDispatch } from '@/redux/store';
@@ -9,6 +9,8 @@ import {
   Box,
   Button,
   TextField,
+  Stack,
+  Skeleton,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimeField } from '@mui/x-date-pickers/TimeField';
@@ -17,6 +19,7 @@ import {
   saveByCollectionId as saveScheduleByCollectionId,
   editSchedule,
   resetSchedule,
+  fetchByCollectionId,
 } from '@/redux/slices/collectionFormScheduleSlice';
 
 /**
@@ -60,6 +63,11 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
     edited,
   } = useSelector((state: AppState) => state.collectionFormSchedule);
 
+  /* on change of Collection ID, fetch data from API */
+  useEffect(() => {
+    dispatch(fetchByCollectionId({ collectionId }));
+  }, [collectionId, dispatch]);
+
   /**
    * Handles the editing of the form data
    *
@@ -99,9 +107,9 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
       saveScheduleByCollectionId({
         data: {
           collection: collectionId,
-          preferred_date: scheduleData.preferred_date,
-          preferred_time: scheduleData.preferred_time,
-          notes: scheduleData.notes,
+          preferred_date: scheduleData?.preferred_date,
+          preferred_time: scheduleData?.preferred_time,
+          notes: scheduleData?.notes,
         },
       })
     );
@@ -111,55 +119,69 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
     <Card>
       <CardHeader title="Schedule" />
       <CardContent sx={{ pt: 0 }}>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { my: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-          display="flex"
-          flexDirection="column"
-        >
-          <Box display="flex">
-            <DatePicker
-              label="Preferred Date"
-              value={dayjs(scheduleData.preferred_date)}
-              onChange={(newValue: Dayjs | null) =>
-                handleEdit(
-                  newValue ? newValue.format('YYYY/MM/DD') : '',
-                  'preferred_date'
-                )
-              }
-              sx={{ mr: 2 }}
-            />
-            <TimeField
-              label="Preferred Time"
-              value={dayjs(
-                `${scheduleData.preferred_date}T${scheduleData.preferred_time}`
-              )}
-              onChange={(newValue: Dayjs | null) =>
-                handleEdit(
-                  newValue ? newValue.format('hh:mm') : '',
-                  'preferred_time'
-                )
-              }
+        {!loading && (
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { my: 1 },
+            }}
+            noValidate
+            autoComplete="off"
+            display="flex"
+            flexDirection="column"
+          >
+            <Box display="flex">
+              <DatePicker
+                label="Preferred Date"
+                value={dayjs(scheduleData?.preferred_date || '2024/09/08')}
+                onChange={(newValue: Dayjs | null) =>
+                  handleEdit(
+                    newValue ? newValue.format('YYYY/MM/DD') : '',
+                    'preferred_date'
+                  )
+                }
+                sx={{ mr: 2 }}
+              />
+              <TimeField
+                label="Preferred Time"
+                value={dayjs(
+                  `${scheduleData?.preferred_date || '2024/09/08'}T${
+                    scheduleData?.preferred_time || '09:30'
+                  }`
+                )}
+                onChange={(newValue: Dayjs | null) =>
+                  handleEdit(
+                    newValue ? newValue.format('hh:mm') : '',
+                    'preferred_time'
+                  )
+                }
+                color="secondary"
+              />
+            </Box>
+            <TextField
+              id="schedule-notes-multiline"
+              label="Notes"
+              multiline
+              maxRows={4}
+              variant="standard"
+              value={scheduleData?.notes}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                handleEdit(event.target.value, 'notes');
+              }}
               color="secondary"
             />
           </Box>
-          <TextField
-            id="schedule-notes-multiline"
-            label="Notes"
-            multiline
-            maxRows={4}
-            variant="standard"
-            value={scheduleData.notes}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              handleEdit(event.target.value, 'notes');
-            }}
-            color="secondary"
-          />
-        </Box>
+        )}
+        {loading && (
+          <Stack spacing={1}>
+            {/* display loading skeleton */}
+            <Stack spacing={2} direction="row">
+              <Skeleton variant="rectangular" width={310} height={60} />
+              <Skeleton variant="rectangular" width={310} height={60} />
+            </Stack>
+            <Skeleton variant="rectangular" width="100%" height={40} />
+          </Stack>
+        )}
         <Box
           sx={{
             marginTop: 2,

@@ -75,80 +75,80 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
     </Box>
   );
 
-  return (
-    <div className=" bg-white dark:bg-[#2b2c37] h-screen w-screen flex flex-col  items-center justify-center">
-      {!loading ? (
-        <>
-          <Typography variant={type === 'edit' ? 'h6' : 'h4'}>
-            {type === 'edit' && canEdit
-              ? 'This board is empty. Create a new column to get started.'
-              : 'There is no data available for the selected Kanban Board.'}
-          </Typography>
-          <Box
-            display="flex"
-            justifyContent="start"
-            sx={{ flexGrow: 1, mr: 1, mt: 2 }}
+  return !loading ? (
+    <>
+      <Typography variant={type === 'edit' ? 'h6' : 'h4'}>
+        {type === 'edit' && canEdit
+          ? 'This board is empty. Create a new column to get started.'
+          : 'There is no data available for the selected Kanban Board.'}
+      </Typography>
+      <Box
+        display="flex"
+        justifyContent="start"
+        sx={{ flexGrow: 1, mr: 1, mt: 2 }}
+      >
+        {type === 'add' ? (
+          <FormModal
+            triggerBtn={{
+              type: 'normal',
+              // @ts-ignore
+              icon: AddIcon,
+              text: 'Add New Board',
+              color: 'secondary',
+            }}
+            title="Add New Board"
           >
-            {type === 'add' ? (
-              <FormModal
-                triggerBtn={{
-                  type: 'normal',
-                  // @ts-ignore
-                  icon: AddIcon,
-                  text: 'Add New Board',
-                  color: 'secondary',
+            <KanbanBoardForm isEditMode={false} currentData={currentData} />
+          </FormModal>
+        ) : (
+          <div>
+            {canEdit && (
+              <Card
+                sx={{
+                  mt: 2,
+                  minWidth: 275,
+                  minHeight: 300,
+                  maxHeight: 500,
+                  backgroundColor: 'transparent',
+                  borderColor: theme.palette.text.secondary,
+                  border: 'solid 1px',
                 }}
-                title="Add New Board"
               >
-                <KanbanBoardForm isEditMode={false} currentData={currentData} />
-              </FormModal>
-            ) : (
-              <div>
-                {canEdit && (
-                  <Card
-                    sx={{
-                      mt: 2,
-                      minWidth: 275,
-                      minHeight: 300,
-                      maxHeight: 500,
-                      backgroundColor: 'transparent',
-                      borderColor: theme.palette.text.secondary,
-                      border: 'solid 1px',
+                <CardContent sx={{ padding: '50% 40px' }}>
+                  <FormModal
+                    triggerBtn={{
+                      type: 'menu',
+                      // @ts-ignore
+                      icon: ViewColumnIcon,
+                      iconStyle: { marginRight: '10px' },
+                      text: '+ Add Column',
+                      closeMenu: () => {},
                     }}
+                    title="Add Column"
                   >
-                    <CardContent sx={{ padding: '50% 40px' }}>
-                      <FormModal
-                        triggerBtn={{
-                          type: 'menu',
-                          // @ts-ignore
-                          icon: ViewColumnIcon,
-                          iconStyle: { marginRight: '10px' },
-                          text: '+ Add Column',
-                          closeMenu: () => {},
-                        }}
-                        title="Add Column"
-                      >
-                        <KanbanBoardForm
-                          isEditMode
-                          currentData={currentData}
-                          closeModal={() => {}}
-                        />
-                      </FormModal>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
+                    <KanbanBoardForm
+                      isEditMode
+                      currentData={currentData}
+                      closeModal={() => {}}
+                    />
+                  </FormModal>
+                </CardContent>
+              </Card>
             )}
-          </Box>
-        </>
-      ) : (
-        <Box display="flex" flexDirection="row">
-          {renderBoardColumnSkeleton()}
-          {renderBoardColumnSkeleton()}
-          {renderBoardColumnSkeleton()}
-        </Box>
-      )}
-    </div>
+          </div>
+        )}
+      </Box>
+    </>
+  ) : (
+    <Box
+      display="flex"
+      flexDirection="row"
+      data-testid="kanban-board-loading-skeleton"
+    >
+      {renderBoardColumnSkeleton()}
+      {renderBoardColumnSkeleton()}
+      {renderBoardColumnSkeleton()}
+    </Box>
   );
 };
 
