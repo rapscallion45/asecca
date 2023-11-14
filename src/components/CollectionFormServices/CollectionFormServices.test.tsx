@@ -258,7 +258,7 @@ describe('Collection Form Services', () => {
         expect(window.fetch).toHaveBeenCalledTimes(1);
       });
       expect(window.fetch).toHaveBeenCalledWith(
-        '/api/collection/services/api/set',
+        '/api/collection/service/api/set',
         expect.objectContaining({
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

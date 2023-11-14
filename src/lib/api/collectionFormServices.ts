@@ -33,7 +33,7 @@ export async function getServices(collectionId: string | string[]) {
 
   /* fetch the services */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/services/api/get?collection=${collectionId}`,
+    `${STAGING_DB_REST_API_URL}/collection/service/api/get?collection=${collectionId}`,
     requestOptions
   );
 }
@@ -65,7 +65,7 @@ export async function setServices(
 
   /* send the services */
   return fetch(
-    `${STAGING_DB_REST_API_URL}/collection/services/api/set`,
+    `${STAGING_DB_REST_API_URL}/collection/service/api/set`,
     requestOptions
   );
 }

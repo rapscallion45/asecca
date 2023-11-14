@@ -34,7 +34,7 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
           onMouseUp={[Function]}
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink={true}
             htmlFor=":r0:"
             id=":r0:-label"
@@ -42,11 +42,11 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
             Preferred Date
           </label>
           <div
-            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-formControl MuiInputBase-adornedEnd css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root"
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root"
             onClick={[Function]}
           >
             <input
-              aria-invalid={true}
+              aria-invalid={false}
               autoComplete="off"
               autoFocus={false}
               className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
@@ -63,13 +63,13 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
               readOnly={false}
               required={false}
               type="text"
-              value="MM/DD/YYYY"
+              value="09/08/2024"
             />
             <div
               className="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
             >
               <button
-                aria-label="Choose date"
+                aria-label="Choose date, selected date is Sep 8, 2024"
                 className="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
                 disabled={false}
                 onBlur={[Function]}
@@ -121,7 +121,7 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
           onMouseUp={[Function]}
         >
           <label
-            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorSecondary Mui-error MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-179z3gj-MuiFormLabel-root-MuiInputLabel-root"
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorSecondary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-179z3gj-MuiFormLabel-root-MuiInputLabel-root"
             data-shrink={true}
             htmlFor=":r2:"
             id=":r2:-label"
@@ -129,11 +129,11 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
             Preferred Time
           </label>
           <div
-            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorSecondary Mui-error MuiInputBase-formControl css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root"
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorSecondary MuiInputBase-formControl css-hjtp1-MuiInputBase-root-MuiOutlinedInput-root"
             onClick={[Function]}
           >
             <input
-              aria-invalid={true}
+              aria-invalid={false}
               autoComplete="off"
               autoFocus={false}
               className="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
@@ -150,7 +150,7 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
               readOnly={false}
               required={false}
               type="text"
-              value="hh:mm aa"
+              value="09:30 AM"
             />
             <fieldset
               aria-hidden={true}
@@ -199,7 +199,7 @@ exports[`Collection Form Schedule Renders correctly 1`] = `
                 "overflow": undefined,
               }
             }
-            value=""
+            value={null}
           />
           <textarea
             aria-hidden={true}

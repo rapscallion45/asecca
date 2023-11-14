@@ -191,7 +191,7 @@ async function setSchedule(body: ICollectionFormScheduleSaveDataPayload) {
  * @param {string | Array<(string | null)>} collectionId - ID of the collection
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-async function getServices(collectionId: string | Array<string | null>) {
+async function getService(collectionId: string | Array<string | null>) {
   /* configure GET header options */
   const requestOptions = {
     method: 'GET',
@@ -200,7 +200,7 @@ async function getServices(collectionId: string | Array<string | null>) {
 
   /* send request and catch any errors */
   return fetch(
-    `/api/collection/services/api/get?collection=${collectionId}`,
+    `/api/collection/service/api/get?collection=${collectionId}`,
     requestOptions
   );
 }
@@ -215,7 +215,7 @@ async function getServices(collectionId: string | Array<string | null>) {
  * @param {ICollectionFormServicesSaveDataPayload} body - Schedule data to be saved
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-async function setServices(body: ICollectionFormServicesSaveDataPayload) {
+async function setService(body: ICollectionFormServicesSaveDataPayload) {
   /* configure POST header options */
   const requestOptions = {
     method: 'POST',
@@ -224,7 +224,7 @@ async function setServices(body: ICollectionFormServicesSaveDataPayload) {
   };
 
   /* send request and catch any errors */
-  return fetch(`/api/collection/services/api/set`, requestOptions);
+  return fetch(`/api/collection/service/api/set`, requestOptions);
 }
 
 /**
@@ -236,7 +236,7 @@ async function setServices(body: ICollectionFormServicesSaveDataPayload) {
  *
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-async function getServicesContacts() {
+async function getServiceContacts() {
   /* configure GET header options */
   const requestOptions = {
     method: 'GET',
@@ -568,9 +568,9 @@ const collectionFormService = {
   getLogisticsTypes,
   getSchedule,
   setSchedule,
-  getServices,
-  setServices,
-  getServicesContacts,
+  getService,
+  setService,
+  getServiceContacts,
   getItinerary,
   setItinerary,
   getItineraryAssetCategories,

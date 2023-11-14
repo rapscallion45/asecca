@@ -8,41 +8,41 @@ import {
 } from '@/lib/api/api-types';
 
 /**
- * Collection Form Services mock server API handlers shared between all tests
+ * Collection Form Service mock server API handlers shared between all tests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  */
 
 /**
- * GET /collection/services/api/get definitions
+ * GET /collection/service/api/get definitions
  *
  * @since 0.0.14
  */
 /** shape of the "req.body"  */
-type CollectionFormServicesGetRequestBody = null;
+type CollectionFormServiceGetRequestBody = null;
 
 /** shape of the "req.params" */
-type CollectionFormServicesGetRequestParams = {};
+type CollectionFormServiceGetRequestParams = {};
 
 /** shape of the mocked response body */
-type CollectionFormServicesGetResponseBody =
+type CollectionFormServiceGetResponseBody =
   | ICollectionFormServicesDataPayload
   | ICollectionFormServicesContactsDataPayload;
 
 /**
- * POST /collection/services/api/set definitions
+ * POST /collection/service/api/set definitions
  *
  * @since 0.0.14
  */
 /** shape of the "req.body" */
-type CollectionFormServicesPostRequestBody = null;
+type CollectionFormServicePostRequestBody = null;
 
 /** shape of the "req.params" */
-type CollectionFormServicesPostRequestParams = {};
+type CollectionFormServicePostRequestParams = {};
 
 /** shape of the mocked response body */
-type CollectionFormServicesPostResponseBody = IProxyErrorPayload | null;
+type CollectionFormServicePostResponseBody = IProxyErrorPayload | null;
 
 /**
  * list of available test/mock handlers
@@ -56,10 +56,10 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.get<
-    CollectionFormServicesGetRequestBody,
-    CollectionFormServicesGetRequestParams,
-    CollectionFormServicesGetResponseBody
-  >('/api/collection/services/api/get', async (req, res, ctx) =>
+    CollectionFormServiceGetRequestBody,
+    CollectionFormServiceGetRequestParams,
+    CollectionFormServiceGetResponseBody
+  >('/api/collection/service/api/get', async (req, res, ctx) =>
     /** return mock service data */
     res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
   ),
@@ -70,11 +70,11 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.get<
-    CollectionFormServicesGetRequestBody,
-    CollectionFormServicesGetRequestParams,
-    CollectionFormServicesGetResponseBody
+    CollectionFormServiceGetRequestBody,
+    CollectionFormServiceGetRequestParams,
+    CollectionFormServiceGetResponseBody
   >(
-    `${process.env.STAGING_DB_REST_API_URL}/collection/services/api/get`,
+    `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/get`,
     async (req, res, ctx) =>
       /** return mock service data */
       res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
@@ -86,10 +86,10 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.post<
-    CollectionFormServicesPostRequestBody,
-    CollectionFormServicesPostRequestParams,
-    CollectionFormServicesPostResponseBody
-  >('/api/collection/services/api/set', async (req, res, ctx) =>
+    CollectionFormServicePostRequestBody,
+    CollectionFormServicePostRequestParams,
+    CollectionFormServicePostResponseBody
+  >('/api/collection/service/api/set', async (req, res, ctx) =>
     /** return ok message indicating successfull save */
     res(ctx.status(200), ctx.json({ message: 'Ok' }))
   ),
@@ -100,11 +100,11 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.post<
-    CollectionFormServicesPostRequestBody,
-    CollectionFormServicesPostRequestParams,
-    CollectionFormServicesPostResponseBody
+    CollectionFormServicePostRequestBody,
+    CollectionFormServicePostRequestParams,
+    CollectionFormServicePostResponseBody
   >(
-    `${process.env.STAGING_DB_REST_API_URL}/collection/services/api/set`,
+    `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/set`,
     async (req, res, ctx) =>
       /** return 200, no payload */
       res(ctx.status(200))
@@ -116,10 +116,10 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.get<
-    CollectionFormServicesGetRequestBody,
-    CollectionFormServicesGetRequestParams,
-    CollectionFormServicesGetResponseBody
-  >('/api/collection/services/api/contacts', async (req, res, ctx) =>
+    CollectionFormServiceGetRequestBody,
+    CollectionFormServiceGetRequestParams,
+    CollectionFormServiceGetResponseBody
+  >('/api/collection/service/api/contacts', async (req, res, ctx) =>
     /** return mock contacts data */
     res(ctx.status(200), ctx.json(collectionFormServicesContactsDataMock))
   ),
@@ -130,9 +130,9 @@ export const collectionFormServicesMockHandlers = [
    * @since 0.0.14
    */
   rest.get<
-    CollectionFormServicesGetRequestBody,
-    CollectionFormServicesGetRequestParams,
-    CollectionFormServicesGetResponseBody
+    CollectionFormServiceGetRequestBody,
+    CollectionFormServiceGetRequestParams,
+    CollectionFormServiceGetResponseBody
   >(
     `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/contacts`,
     async (req, res, ctx) =>

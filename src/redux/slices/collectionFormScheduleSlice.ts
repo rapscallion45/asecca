@@ -16,7 +16,6 @@ import {
   ICollectionFormScheduleEditSchedulePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormScheduleDataMock from '../../../__mocks__/CollectionForm/collectionFormScheduleDataMock';
 
 /**
  * State slice definition for Collection Form Schedule
@@ -111,8 +110,8 @@ export const saveByCollectionId = createAsyncThunk(
  */
 const initialcollectionFormScheduleState: ICollectionFormScheduleState = {
   loading: false,
-  data: collectionFormScheduleDataMock,
-  dataShadow: collectionFormScheduleDataMock,
+  data: { preferred_date: null, preferred_time: null, notes: null },
+  dataShadow: { preferred_date: null, preferred_time: null, notes: null },
   saving: false,
   edited: false,
 };
@@ -167,11 +166,15 @@ const collectionFormScheduleSlice = createSlice({
         fetchByCollectionId.pending,
         (state: ICollectionFormScheduleState) => {
           state.loading = true;
-          state.data = { preferred_date: '', preferred_time: '', notes: '' };
+          state.data = {
+            preferred_date: null,
+            preferred_time: null,
+            notes: null,
+          };
           state.dataShadow = {
-            preferred_date: '',
-            preferred_time: '',
-            notes: '',
+            preferred_date: null,
+            preferred_time: null,
+            notes: null,
           };
           state.error = undefined;
           state.edited = false;
@@ -193,8 +196,16 @@ const collectionFormScheduleSlice = createSlice({
         fetchByCollectionId.rejected,
         (state: ICollectionFormScheduleState) => {
           state.loading = false;
-          state.data = collectionFormScheduleDataMock;
-          state.dataShadow = collectionFormScheduleDataMock;
+          state.data = {
+            preferred_date: null,
+            preferred_time: null,
+            notes: null,
+          };
+          state.dataShadow = {
+            preferred_date: null,
+            preferred_time: null,
+            notes: null,
+          };
           state.error =
             'Failed to load Collection Form Schedule data from server.';
         }

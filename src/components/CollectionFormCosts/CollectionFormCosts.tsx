@@ -63,7 +63,7 @@ const CollectionFormCosts: FC<ICollectionFormCostsProps> = (props) => {
   /* on change of Collection ID, fetch data from API */
   useEffect(() => {
     dispatch(fetchByCollectionId({ collectionId }));
-  }, [collectionId]);
+  }, [collectionId, dispatch]);
 
   /**
    * Table column filter list
