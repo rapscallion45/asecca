@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection Projects Kanban Page Renders correctly 1`] = `
+<div
+  className="MuiBox-root css-rm9e7r"
+>
+  <div
+    className="MuiBox-root css-1c18zwa"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1qbrrsr-MuiTypography-root"
+    >
+      Projects
+    </h4>
+    <div
+      className="MuiBox-root css-152fgxh"
+    >
+      <div
+        className="MuiBox-root css-1n2mv2k"
+      >
+        <button
+          className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-13fmiiq-MuiButtonBase-root-MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="MoreVertIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr
+    className="MuiDivider-root MuiDivider-fullWidth css-17ac5dh-MuiDivider-root"
+  />
+  <hr
+    className="MuiDivider-root MuiDivider-fullWidth css-17ac5dh-MuiDivider-root"
+  />
+  <div
+    data-simplebar="init"
+    onMouseDown={[Function]}
+  >
+    <div
+      className="simplebar-wrapper"
+    >
+      <div
+        className="simplebar-height-auto-observer-wrapper"
+      >
+        <div
+          className="simplebar-height-auto-observer"
+        />
+      </div>
+      <div
+        className="simplebar-mask"
+      >
+        <div
+          className="simplebar-offset"
+        >
+          <div
+            aria-label="scrollable content"
+            className="simplebar-content-wrapper"
+            role="region"
+            tabIndex={0}
+          >
+            <div
+              className="simplebar-content"
+            >
+              <div
+                className="MuiBox-root css-1yuhvjn"
+              >
+                <h6
+                  className="MuiTypography-root MuiTypography-h6 css-191nh1k-MuiTypography-root"
+                >
+                  There is no data available for the selected Kanban Board.
+                </h6>
+                <div
+                  className="MuiBox-root css-19k0br3"
+                >
+                  <div />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="simplebar-placeholder"
+      />
+    </div>
+    <div
+      className="simplebar-track simplebar-horizontal"
+    >
+      <div
+        className="simplebar-scrollbar"
+      />
+    </div>
+    <div
+      className="simplebar-track simplebar-vertical"
+    >
+      <div
+        className="simplebar-scrollbar"
+      />
+    </div>
+  </div>
+</div>
+`;
