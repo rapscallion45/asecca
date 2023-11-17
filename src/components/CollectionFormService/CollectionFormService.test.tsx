@@ -8,32 +8,32 @@ import {
   act,
 } from '@testing-library/react';
 import renderer from 'react-test-renderer';
-import { fetchByCollectionId as fetchCollectionFormServicesByCollectionId } from '@/redux/slices/collectionFormServicesSlice';
+import { fetchByCollectionId as fetchCollectionFormServiceByCollectionId } from '@/redux/slices/collectionFormServiceSlice';
 import store from '@/redux/store';
 import {
-  getCollectionFormServicesDecommissionRequestValue,
-  getCollectionFormServicesOwnershipRetentionValue,
-  getCollectionFormServicesRedeliveryRequestValue,
-  getCollectionFormServicesTypeEnum,
+  getCollectionFormServiceDecommissionRequestValue,
+  getCollectionFormServiceOwnershipRetentionValue,
+  getCollectionFormServiceRedeliveryRequestValue,
+  getCollectionFormServiceTypeEnum,
 } from '@/utils';
-import CollectionFormServices from './CollectionFormServices';
-import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
+import CollectionFormService from './CollectionFormService';
+import collectionFormServiceDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceDataMock';
+import collectionFormServiceContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceContactsDataMock';
 
 /* default test query ID */
 const query: string = '66135000001760012';
 
 /**
- * Collection Form Services Unit Tests
+ * Collection Form Service Unit Tests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.22
  */
-describe('Collection Form Services', () => {
+describe('Collection Form Service', () => {
   it('Renders correctly', async () => {
     /** Arrange */
     store.dispatch(
-      fetchCollectionFormServicesByCollectionId({
+      fetchCollectionFormServiceByCollectionId({
         collectionId: query,
       })
     );
@@ -42,7 +42,7 @@ describe('Collection Form Services', () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <CollectionFormServices collectionId={query} />
+          <CollectionFormService collectionId={query} />
         </Provider>
       )
       .toJSON();
@@ -55,7 +55,7 @@ describe('Collection Form Services', () => {
       /** Act - render the test components */
       render(
         <Provider store={store}>
-          <CollectionFormServices collectionId={query} />
+          <CollectionFormService collectionId={query} />
         </Provider>
       );
 
@@ -72,21 +72,21 @@ describe('Collection Form Services', () => {
       expect(screen.getByText('Site Contact:')).toBeInTheDocument();
       expect(
         screen.getByDisplayValue(
-          collectionFormServicesDataMock.on_site_processing
+          collectionFormServiceDataMock.on_site_processing
             ? 'On-Site'
             : 'Off-Site'
         )
       ).toBeInTheDocument();
       expect(
         screen.getByDisplayValue(
-          getCollectionFormServicesTypeEnum(
-            collectionFormServicesDataMock
+          getCollectionFormServiceTypeEnum(
+            collectionFormServiceDataMock
           ) as string
         )
       ).toBeInTheDocument();
       if (
-        getCollectionFormServicesDecommissionRequestValue(
-          collectionFormServicesDataMock
+        getCollectionFormServiceDecommissionRequestValue(
+          collectionFormServiceDataMock
         )
       ) {
         expect(screen.getByTestId('decomissioning-checkbox')).toBeChecked();
@@ -94,8 +94,8 @@ describe('Collection Form Services', () => {
         expect(screen.getByTestId('decomissioning-checkbox')).not.toBeChecked();
       }
       if (
-        getCollectionFormServicesOwnershipRetentionValue(
-          collectionFormServicesDataMock
+        getCollectionFormServiceOwnershipRetentionValue(
+          collectionFormServiceDataMock
         )
       ) {
         expect(screen.getByTestId('redelivery-checkbox')).toBeChecked();
@@ -103,10 +103,10 @@ describe('Collection Form Services', () => {
         expect(screen.getByTestId('redelivery-checkbox')).not.toBeChecked();
       }
       if (
-        getCollectionFormServicesRedeliveryRequestValue(
-          collectionFormServicesDataMock,
-          getCollectionFormServicesOwnershipRetentionValue(
-            collectionFormServicesDataMock
+        getCollectionFormServiceRedeliveryRequestValue(
+          collectionFormServiceDataMock,
+          getCollectionFormServiceOwnershipRetentionValue(
+            collectionFormServiceDataMock
           )
         )
       ) {
@@ -115,7 +115,7 @@ describe('Collection Form Services', () => {
         expect(screen.getByTestId('ownership-checkbox')).not.toBeChecked();
       }
       expect(
-        screen.getByDisplayValue(collectionFormServicesDataMock.site_contact)
+        screen.getByDisplayValue(collectionFormServiceDataMock.site_contact)
       ).toBeInTheDocument();
     });
   });
@@ -131,25 +131,25 @@ describe('Collection Form Services', () => {
       const testRetainsOwnership: boolean = true;
       const testRedeliveryRequested: boolean = true;
       const testContact: string =
-        collectionFormServicesContactsDataMock.contacts_list[1];
+        collectionFormServiceContactsDataMock.contacts_list[1];
 
       /** Act - render the test components */
       render(
         <Provider store={store}>
-          <CollectionFormServices collectionId={query} />
+          <CollectionFormService collectionId={query} />
         </Provider>
       );
       await waitFor(() => {
         expect(screen.getByText('Processing:')).toBeInTheDocument();
       });
       expect(
-        screen.getByDisplayValue(collectionFormServicesDataMock.site_contact)
+        screen.getByDisplayValue(collectionFormServiceDataMock.site_contact)
       ).toBeInTheDocument();
       /** Act - update field values and click Save button */
       act(() => {
         fireEvent(
           screen.getByDisplayValue(
-            collectionFormServicesDataMock.on_site_processing
+            collectionFormServiceDataMock.on_site_processing
               ? 'On-Site'
               : 'Off-Site'
           ),
@@ -160,7 +160,7 @@ describe('Collection Form Services', () => {
         );
         fireEvent.change(
           screen.getByDisplayValue(
-            collectionFormServicesDataMock.on_site_processing
+            collectionFormServiceDataMock.on_site_processing
               ? 'On-Site'
               : 'Off-Site'
           ),
@@ -172,8 +172,8 @@ describe('Collection Form Services', () => {
       act(() => {
         fireEvent(
           screen.getByDisplayValue(
-            getCollectionFormServicesTypeEnum(
-              collectionFormServicesDataMock
+            getCollectionFormServiceTypeEnum(
+              collectionFormServiceDataMock
             ) as string
           ),
           new MouseEvent('click', {
@@ -183,8 +183,8 @@ describe('Collection Form Services', () => {
         );
         fireEvent.change(
           screen.getByDisplayValue(
-            getCollectionFormServicesTypeEnum(
-              collectionFormServicesDataMock
+            getCollectionFormServiceTypeEnum(
+              collectionFormServiceDataMock
             ) as string
           ),
           {
@@ -224,14 +224,14 @@ describe('Collection Form Services', () => {
         });
       act(() => {
         fireEvent(
-          screen.getByDisplayValue(collectionFormServicesDataMock.site_contact),
+          screen.getByDisplayValue(collectionFormServiceDataMock.site_contact),
           new MouseEvent('click', {
             bubbles: true,
             cancelable: true,
           })
         );
         fireEvent.change(
-          screen.getByDisplayValue(collectionFormServicesDataMock.site_contact),
+          screen.getByDisplayValue(collectionFormServiceDataMock.site_contact),
           {
             target: { value: testContact },
           }

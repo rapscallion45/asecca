@@ -510,7 +510,7 @@ export interface ICollectionFormScheduleSaveDataPayload
 }
 
 /**
- * Collection Form Services On Site Processing values
+ * Collection Form Service On Site Processing values
  *
  * Please refer to Asecca API documentation for more info
  *
@@ -518,12 +518,12 @@ export interface ICollectionFormScheduleSaveDataPayload
  * @since 0.0.15
  * @memberof AseccaAPI
  *
- * @typedef CollectionFormServicesOnSiteProcessing
+ * @typedef CollectionFormServiceOnSiteProcessing
  */
-export type CollectionFormServicesOnSiteProcessing = 'On Site' | 'Off Site';
+export type CollectionFormServiceOnSiteProcessing = 'On Site' | 'Off Site';
 
 /**
- * Collection Form Services Type value array
+ * Collection Form Service Type value array
  *
  * Please refer to Asecca API documentation for more info
  *
@@ -533,7 +533,7 @@ export type CollectionFormServicesOnSiteProcessing = 'On Site' | 'Off Site';
  *
  * @constant
  */
-export const collectionFormServicesTypes = [
+export const collectionFormServiceTypes = [
   'WarrantyReturn',
   'StockPurchase',
   'DecommissioningAndRedelivery',
@@ -542,7 +542,7 @@ export const collectionFormServicesTypes = [
 ];
 
 /**
- * Collection Form Services Type
+ * Collection Form Service Type
  *
  * Please refer to Asecca API documentation for more info
  *
@@ -550,13 +550,13 @@ export const collectionFormServicesTypes = [
  * @since 0.0.15
  * @memberof AseccaAPI
  *
- * @typedef CollectionFormServicesType
+ * @typedef CollectionFormServiceType
  */
-export type CollectionFormServicesType =
-  (typeof collectionFormServicesTypes)[number];
+export type CollectionFormServiceType =
+  (typeof collectionFormServiceTypes)[number];
 
 /**
- * Collection Form Services Doesn't Retain Ownership value array
+ * Collection Form Service Doesn't Retain Ownership value array
  *
  * Please refer to Asecca API documentation for more info
  *
@@ -566,13 +566,13 @@ export type CollectionFormServicesType =
  *
  * @constant
  */
-export const collectionFormServicesDoesntRetainOwnershipTypes = [
+export const collectionFormServiceDoesntRetainOwnershipTypes = [
   'RetainsOwnership',
   'DoesntRetainOwnership',
 ];
 
 /**
- * Collection Form Services Doesn't Retain Ownership value
+ * Collection Form Service Doesn't Retain Ownership value
  *
  * Please refer to Asecca API documentation for more info
  *
@@ -580,149 +580,149 @@ export const collectionFormServicesDoesntRetainOwnershipTypes = [
  * @since 0.0.14
  * @memberof AseccaAPI
  *
- * @typedef CollectionFormServicesDoesntRetainOwnership
+ * @typedef CollectionFormServiceDoesntRetainOwnership
  */
-export type CollectionFormServicesDoesntRetainOwnership =
-  (typeof collectionFormServicesDoesntRetainOwnershipTypes)[number];
+export type CollectionFormServiceDoesntRetainOwnership =
+  (typeof collectionFormServiceDoesntRetainOwnershipTypes)[number];
 
 /**
- * Collection Form Services Ownership Retention data type definition
+ * Collection Form Service Ownership Retention data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @typedef ICollectionFormServicesOwnershipRetentionData
+ * @typedef ICollectionFormServiceOwnershipRetentionData
  * @prop {boolean} redelivery_requested - device redelivery requested flag
  */
-export interface ICollectionFormServicesOwnershipRetentionData {
+export interface ICollectionFormServiceOwnershipRetentionData {
   redelivery_requested: boolean;
 }
 
 /**
- * Collection Form Services Ownership Retention type definition
+ * Collection Form Service Ownership Retention type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesOwnershipRetention
+ * @typedef ICollectionFormServiceOwnershipRetention
  * @prop {boolean} redelivery_requested - device redelivery requested flag
  */
-export interface ICollectionFormServicesOwnershipRetention {
-  RetainsOwnership: ICollectionFormServicesOwnershipRetentionData;
+export interface ICollectionFormServiceOwnershipRetention {
+  RetainsOwnership: ICollectionFormServiceOwnershipRetentionData;
 }
 
 /**
- * Collection Form Services Recycling data type definition
+ * Collection Form Service Recycling data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesRecyclingData
+ * @typedef ICollectionFormServiceRecyclingData
  * @prop {boolean} decommissioning_requested - device decommission requested flag
- * @prop {CollectionFormServicesDoesntRetainOwnership | ICollectionFormServicesOwnershipRetention} ownership_retention - device ownership retention state
+ * @prop {CollectionFormServiceDoesntRetainOwnership | ICollectionFormServiceOwnershipRetention} ownership_retention - device ownership retention state
  */
-export interface ICollectionFormServicesRecyclingData {
+export interface ICollectionFormServiceRecyclingData {
   decommissioning_requested: boolean;
   ownership_retention:
-    | CollectionFormServicesDoesntRetainOwnership
-    | ICollectionFormServicesOwnershipRetention;
+    | CollectionFormServiceDoesntRetainOwnership
+    | ICollectionFormServiceOwnershipRetention;
 }
 
 /**
- * Collection Form Services Recycling type definition
+ * Collection Form Service Recycling type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesRecyclingData
+ * @typedef ICollectionFormServiceRecyclingData
  * @prop {boolean} decommissioning_requested - device decommission requested flag
- * @prop {ICollectionFormServicesRecyclingData} Recycling - recycling data
+ * @prop {ICollectionFormServiceRecyclingData} Recycling - recycling data
  */
-export interface ICollectionFormServicesRecycling {
-  Recycling: ICollectionFormServicesRecyclingData;
+export interface ICollectionFormServiceRecycling {
+  Recycling: ICollectionFormServiceRecyclingData;
 }
 
 /**
- * Collection Form Services Destruction data type definition
+ * Collection Form Service Destruction data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesDestructionData
+ * @typedef ICollectionFormServiceDestructionData
  * @prop {boolean} decommissioning_requested - device decommission requested flag
  */
-export interface ICollectionFormServicesDestructionData {
+export interface ICollectionFormServiceDestructionData {
   decommissioning_requested: boolean;
 }
 
 /**
- * Collection Form Services Destruction type definition
+ * Collection Form Service Destruction type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesDestructionData
- * @prop {ICollectionFormServicesDestructionData} Destruction - destruction data
+ * @typedef ICollectionFormServiceDestructionData
+ * @prop {ICollectionFormServiceDestructionData} Destruction - destruction data
  */
-export interface ICollectionFormServicesDestruction {
-  Destruction: ICollectionFormServicesDestructionData;
+export interface ICollectionFormServiceDestruction {
+  Destruction: ICollectionFormServiceDestructionData;
 }
 
 /**
- * Collection Form Services data type definition
+ * Collection Form Service data type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesData
+ * @typedef ICollectionFormServiceData
  * @prop {boolean} on_site_processing - on site processing flag
- * @prop {CollectionFormServicesType | ICollectionFormServicesRecycling | ICollectionFormServicesDestruction} service_type - type of the service
+ * @prop {CollectionFormServiceType | ICollectionFormServiceRecycling | ICollectionFormServiceDestruction} service_type - type of the service
  * @prop {string} site_contact - contact for service
  */
-export interface ICollectionFormServicesData {
+export interface ICollectionFormServiceData {
   on_site_processing: boolean;
   service_type:
-    | CollectionFormServicesType
-    | ICollectionFormServicesRecycling
-    | ICollectionFormServicesDestruction;
+    | CollectionFormServiceType
+    | ICollectionFormServiceRecycling
+    | ICollectionFormServiceDestruction;
   site_contact: string;
 }
 
 /**
- * Collection Form Services GET request data payload type definition
+ * Collection Form Service GET request data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesDataPayload
+ * @typedef ICollectionFormServiceDataPayload
  */
-export interface ICollectionFormServicesDataPayload
-  extends ICollectionFormServicesData {}
+export interface ICollectionFormServiceDataPayload
+  extends ICollectionFormServiceData {}
 
 /**
- * Collection Form Services POST data payload type
+ * Collection Form Service POST data payload type
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesSaveDataPayload
+ * @typedef ICollectionFormServiceSaveDataPayload
  * @prop {string} collection - ID of the collection to be saved
  */
-export interface ICollectionFormServicesSaveDataPayload
-  extends ICollectionFormServicesData {
+export interface ICollectionFormServiceSaveDataPayload
+  extends ICollectionFormServiceData {
   collection: string;
 }
 
 /**
- * Collection Form Services Contacts GET request data payload type definition
+ * Collection Form Service Contacts GET request data payload type definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @typedef ICollectionFormServicesContactsDataPayload
+ * @typedef ICollectionFormServiceContactsDataPayload
  * @prop {Array<string>} contacts_list - contact names list
  */
-export interface ICollectionFormServicesContactsDataPayload {
+export interface ICollectionFormServiceContactsDataPayload {
   contacts_list: Array<string>;
 }
 

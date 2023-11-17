@@ -4,7 +4,7 @@ import { collectionsKanbanMockHandlers } from './Kanban/collectionsKanbanMockSer
 import { collectionFormCostsMockHandlers } from './CollectionForm/collectionFormCostsMockServerHandlers';
 import { collectionFormScheduleMockHandlers } from './CollectionForm/collectionFormScheduleMockServerHandlers';
 import { collectionFormLogisticsMockHandlers } from './CollectionForm/collectionFormLogisticsMockServerHandler';
-import { collectionFormServicesMockHandlers } from './CollectionForm/collectionFormServicesMockServerHandler';
+import { collectionFormServiceMockHandlers } from './CollectionForm/collectionFormServiceMockServerHandler';
 import { collectionFormItineraryMockHandlers } from './CollectionForm/collectionFormItineraryMockServerHandler';
 import { collectionFormFacilityMockHandlers } from './CollectionForm/collectionFormFacilityMockServerHandlers';
 import { devicesTableMockHandlers } from './Tables/devicesTableMockServerHandler';
@@ -25,7 +25,7 @@ const mockHandlers = [
   ...collectionFormCostsMockHandlers,
   ...collectionFormScheduleMockHandlers,
   ...collectionFormLogisticsMockHandlers,
-  ...collectionFormServicesMockHandlers,
+  ...collectionFormServiceMockHandlers,
   ...collectionFormItineraryMockHandlers,
   ...collectionFormFacilityMockHandlers,
   ...collectionFormQuoteMockHandlers,

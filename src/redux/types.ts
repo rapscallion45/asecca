@@ -13,11 +13,11 @@ import {
   ICollectionFormLogisticsTypesDataPayload,
   ICollectionFormScheduleDataPayload,
   ICollectionFormScheduleSaveDataPayload,
-  ICollectionFormServicesDataPayload,
-  ICollectionFormServicesSaveDataPayload,
-  ICollectionFormServicesContactsDataPayload,
-  ICollectionFormServicesRecycling,
-  ICollectionFormServicesDestruction,
+  ICollectionFormServiceDataPayload,
+  ICollectionFormServiceSaveDataPayload,
+  ICollectionFormServiceContactsDataPayload,
+  ICollectionFormServiceRecycling,
+  ICollectionFormServiceDestruction,
   ICollectionFormItineraryDataPayload,
   ICollectionFormItinerarySaveDataPayload,
   ICollectionFormItineraryAssetCategoryDataPayload,
@@ -423,75 +423,75 @@ export interface ICollectionFormScheduleState {
 }
 
 /**
- * Fetch Collection Form Services args for async thunk requests
+ * Fetch Collection Form Service args for async thunk requests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef IFetchCollectionFormServicesByCollectionIdArgs
+ * @typedef IFetchCollectionFormServiceByCollectionIdArgs
  * @prop {string} collectionId - collection ID to be fetched
  */
-export interface IFetchCollectionFormServicesByCollectionIdArgs {
+export interface IFetchCollectionFormServiceByCollectionIdArgs {
   collectionId: string | (string | null)[];
 }
 
 /**
- * Save Collection Form Services args for async thunk requests
+ * Save Collection Form Service args for async thunk requests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ISaveCollectionFormServicesByCollectionIdArgs
- * @prop {ICollectionFormServicesSaveDataPayload} data - data payload to be sent
+ * @typedef ISaveCollectionFormServiceByCollectionIdArgs
+ * @prop {ICollectionFormServiceSaveDataPayload} data - data payload to be sent
  */
-export interface ISaveCollectionFormServicesByCollectionIdArgs {
-  data: ICollectionFormServicesSaveDataPayload;
+export interface ISaveCollectionFormServiceByCollectionIdArgs {
+  data: ICollectionFormServiceSaveDataPayload;
 }
 
 /**
- * Collection Form Services edit redux action payload definition
+ * Collection Form Service edit redux action payload definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesEditCostsPayload
+ * @typedef ICollectionFormServiceEditServicePayload
  * @prop {string} itemKey - data item key to be edited
- * @prop {string | boolean | ICollectionFormServicesRecyclingData | ICollectionFormServicesDestructionData} value - updated form value
+ * @prop {string | boolean | ICollectionFormServiceRecyclingData | ICollectionFormServiceDestructionData} value - updated form value
  */
-export interface ICollectionFormServicesEditSchedulePayload {
+export interface ICollectionFormServiceEditServicePayload {
   itemKey: string;
   value:
     | string
     | boolean
-    | ICollectionFormServicesRecycling
-    | ICollectionFormServicesDestruction;
+    | ICollectionFormServiceRecycling
+    | ICollectionFormServiceDestruction;
 }
 
 /**
- * Collection Form Services state definition
+ * Collection Form Service state definition
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesState
+ * @typedef ICollectionFormServiceState
  * @prop {boolean} loading - services loading state
- * @prop {ICollectionFormServicesDataPayload} data - currently loaded services data
- * @prop {ICollectionFormServicesDataPayload} dataShadow - shadow copy of original data
+ * @prop {ICollectionFormServiceDataPayload} data - currently loaded services data
+ * @prop {ICollectionFormServiceDataPayload} dataShadow - shadow copy of original data
  * @prop {string} error - current error message state of services
  * @prop {boolean} saving - saving state flag of services data
  * @prop {boolean} edited - services data has been edited flag
  * @prop {boolean} loadingContacts - loading contacts types from API
  * @prop {ICollectionFormLogisticsTypesDataPayload} contacts - services contacts from API
  */
-export interface ICollectionFormServicesState {
+export interface ICollectionFormServiceState {
   loading: boolean;
-  data: ICollectionFormServicesDataPayload;
-  dataShadow: ICollectionFormServicesDataPayload;
+  data: ICollectionFormServiceDataPayload;
+  dataShadow: ICollectionFormServiceDataPayload;
   error?: string;
   saving: boolean;
   edited: boolean;
   loadingContacts: boolean;
-  contacts: ICollectionFormServicesContactsDataPayload;
+  contacts: ICollectionFormServiceContactsDataPayload;
 }
 
 /**

@@ -1,5 +1,5 @@
 import base64 from 'base-64';
-import { ICollectionFormServicesSaveDataPayload } from './api-types';
+import { ICollectionFormServiceSaveDataPayload } from './api-types';
 
 /**
  * configuration param environment variables for staging DB
@@ -10,7 +10,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
   process.env;
 
 /**
- * GET request to Asecca API /collection/services/api/get
+ * GET request to Asecca API /collection/service/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
@@ -19,7 +19,7 @@ const { STAGING_DB_USERNAME, STAGING_DB_PASSWORD, STAGING_DB_REST_API_URL } =
  * @param {string} collectionId - requested collection ID
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function getServices(collectionId: string | string[]) {
+export async function getService(collectionId: string | string[]) {
   /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',
@@ -31,7 +31,7 @@ export async function getServices(collectionId: string | string[]) {
     }),
   };
 
-  /* fetch the services */
+  /* fetch the service */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/service/api/get?collection=${collectionId}`,
     requestOptions
@@ -39,18 +39,16 @@ export async function getServices(collectionId: string | string[]) {
 }
 
 /**
- * POST request to Asecca API /collection/services/api/set
+ * POST request to Asecca API /collection/service/api/set
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  * @memberof AseccaAPI
  *
- * @param {ICollectionFormServicesSaveDataPayload} body - data ID for the request
+ * @param {ICollectionFormServiceSaveDataPayload} body - data ID for the request
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function setServices(
-  body: ICollectionFormServicesSaveDataPayload
-) {
+export async function setService(body: ICollectionFormServiceSaveDataPayload) {
   /* setup POST request options with basic auth */
   const requestOptions = {
     method: 'POST',
@@ -63,7 +61,7 @@ export async function setServices(
     body: JSON.stringify(body),
   };
 
-  /* send the services */
+  /* send the service */
   return fetch(
     `${STAGING_DB_REST_API_URL}/collection/service/api/set`,
     requestOptions
@@ -79,7 +77,7 @@ export async function setServices(
  *
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-export async function getServicesContacts() {
+export async function getServiceContacts() {
   /* setup GET request options with basic auth */
   const requestOptions = {
     method: 'GET',

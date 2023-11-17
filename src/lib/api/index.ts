@@ -10,10 +10,10 @@ export {
 } from './collectionFormLogistics';
 export { getSchedule, setSchedule } from './collectionFormSchedule';
 export {
-  getServices,
-  setServices,
-  getServicesContacts,
-} from './collectionFormServices';
+  getService,
+  setService,
+  getServiceContacts,
+} from './collectionFormService';
 export { getItinerary, setItinerary } from './collectionFormItinerary';
 export {
   getFacility,

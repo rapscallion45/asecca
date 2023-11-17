@@ -1,6 +1,6 @@
 import {
-  ICollectionFormServicesData,
-  ICollectionFormServicesRecycling,
+  ICollectionFormServiceData,
+  ICollectionFormServiceRecycling,
 } from '@/lib/api/api-types';
 
 /**
@@ -10,25 +10,25 @@ import {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @param {ICollectionFormServicesData} serviceData - data from collection form
+ * @param {ICollectionFormServiceData} serviceData - data from collection form
  * @param {boolean} ownershipRetentionFlag - decommission value to be updated
- * @returns {ICollectionFormServicesOwnershipRetention | CollectionFormServicesDoesntRetainOwnership} - data structure with updated flag
+ * @returns {string | ICollectionFormServiceRecycling} - data structure or string
  */
-const getCollectionFormServicesOwnershipRetentionEditValue = (
-  servicesData: ICollectionFormServicesData,
+const getCollectionFormServiceOwnershipRetentionEditValue = (
+  serviceData: ICollectionFormServiceData,
   ownershipRetentionFlag: boolean
-): string | ICollectionFormServicesRecycling => {
+): string | ICollectionFormServiceRecycling => {
   /* if the service type is an object, then we have a value to check */
-  if (typeof servicesData.service_type === 'object') {
+  if (typeof serviceData.service_type === 'object') {
     /* Recycling object processing */
-    if ('Recycling' in servicesData.service_type) {
+    if ('Recycling' in serviceData.service_type) {
       return {
         Recycling: {
           ownership_retention: ownershipRetentionFlag
             ? { RetainsOwnership: { redelivery_requested: false } }
             : 'DoesntRetainOwnership',
           decommissioning_requested:
-            servicesData.service_type.Recycling.decommissioning_requested,
+            serviceData.service_type.Recycling.decommissioning_requested,
         },
       };
     }
@@ -38,4 +38,4 @@ const getCollectionFormServicesOwnershipRetentionEditValue = (
   return 'DoesntRetainOwnership';
 };
 
-export default getCollectionFormServicesOwnershipRetentionEditValue;
+export default getCollectionFormServiceOwnershipRetentionEditValue;

@@ -1,9 +1,9 @@
 import { createMocks } from 'node-mocks-http';
-import collectionFormServicesGetHandler from '@/pages/api/collection/service/api/get';
-import collectionFormServicesSetHandler from '@/pages/api/collection/service/api/set';
-import collectionFormServicesContactsHandler from '@/pages/api/collection/service/api/contacts';
-import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
+import collectionFormServiceGetHandler from '@/pages/api/collection/service/api/get';
+import collectionFormServiceSetHandler from '@/pages/api/collection/service/api/set';
+import collectionFormServiceContactsHandler from '@/pages/api/collection/service/api/contacts';
+import collectionFormServiceDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceDataMock';
+import collectionFormServiceContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceContactsDataMock';
 
 /* mock query string as causes Jest error */
 jest.mock('query-string', () => ({
@@ -13,12 +13,12 @@ jest.mock('query-string', () => ({
 /* eslint-disable no-underscore-dangle */
 
 /**
- * Collection Form Services API Unit Tests
+ * Collection Form Service API Unit Tests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  */
-describe('Collection Form Services API Routes', () => {
+describe('Collection Form Service API Routes', () => {
   describe('GET /collection/service/api/get', () => {
     it('returns expected data', async () => {
       /** Arrange */
@@ -30,12 +30,12 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesGetHandler(req, res);
+      await collectionFormServiceGetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining(collectionFormServicesDataMock)
+        expect.objectContaining(collectionFormServiceDataMock)
       );
     });
 
@@ -46,7 +46,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesGetHandler(req, res);
+      await collectionFormServiceGetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(422);
@@ -65,12 +65,12 @@ describe('Collection Form Services API Routes', () => {
         method: 'POST',
         query: {
           collection: 1235434213,
-          ...collectionFormServicesDataMock,
+          ...collectionFormServiceDataMock,
         },
       });
 
       /** Act */
-      await collectionFormServicesSetHandler(req, res);
+      await collectionFormServiceSetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(200);
@@ -85,7 +85,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesGetHandler(req, res);
+      await collectionFormServiceGetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);
@@ -100,7 +100,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesSetHandler(req, res);
+      await collectionFormServiceSetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);
@@ -115,7 +115,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesGetHandler(req, res);
+      await collectionFormServiceGetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);
@@ -130,7 +130,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesSetHandler(req, res);
+      await collectionFormServiceSetHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);
@@ -145,12 +145,12 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesContactsHandler(req, res);
+      await collectionFormServiceContactsHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(
-        expect.objectContaining(collectionFormServicesContactsDataMock)
+        expect.objectContaining(collectionFormServiceContactsDataMock)
       );
     });
   });
@@ -163,7 +163,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesContactsHandler(req, res);
+      await collectionFormServiceContactsHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);
@@ -178,7 +178,7 @@ describe('Collection Form Services API Routes', () => {
       });
 
       /** Act */
-      await collectionFormServicesContactsHandler(req, res);
+      await collectionFormServiceContactsHandler(req, res);
 
       /** Assert */
       expect(res._getStatusCode()).toBe(404);

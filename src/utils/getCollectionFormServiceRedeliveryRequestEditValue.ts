@@ -1,25 +1,25 @@
 import {
-  ICollectionFormServicesData,
-  ICollectionFormServicesRecycling,
+  ICollectionFormServiceData,
+  ICollectionFormServiceRecycling,
 } from '@/lib/api/api-types';
 
 /**
  * Return the correct Service Type value with updated Redelivery Request
- * flag for Recycling Services types
+ * flag for Recycling Service types
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @param {ICollectionFormServicesData} serviceData - data from collection form
+ * @param {ICollectionFormServiceData} serviceData - data from collection form
  * @param {boolean} redeliveryRequestFlag - redelivery value to be updated
- * @returns {ICollectionFormServicesRecycling} - data structure with updated flag
+ * @returns {ICollectionFormServiceRecycling} - data structure with updated flag
  */
-const getCollectionFormServicesRedeliveryRequestEditValue = (
-  servicesData: ICollectionFormServicesData,
+const getCollectionFormServiceRedeliveryRequestEditValue = (
+  serviceData: ICollectionFormServiceData,
   redeliveryRequestFlag: boolean
-): ICollectionFormServicesRecycling => {
+): ICollectionFormServiceRecycling => {
   const recyclingData =
-    servicesData.service_type as ICollectionFormServicesRecycling;
+    serviceData.service_type as ICollectionFormServiceRecycling;
 
   return {
     Recycling: {
@@ -32,4 +32,4 @@ const getCollectionFormServicesRedeliveryRequestEditValue = (
   };
 };
 
-export default getCollectionFormServicesRedeliveryRequestEditValue;
+export default getCollectionFormServiceRedeliveryRequestEditValue;

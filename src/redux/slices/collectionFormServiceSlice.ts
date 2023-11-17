@@ -5,44 +5,44 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import {
-  ICollectionFormServicesContactsDataPayload,
-  ICollectionFormServicesData,
-  ICollectionFormServicesDataPayload,
+  ICollectionFormServiceContactsDataPayload,
+  ICollectionFormServiceData,
+  ICollectionFormServiceDataPayload,
 } from '@/lib/api/api-types';
 import collectionFormService from '../../services/forms/collectionFormService';
 import {
-  ICollectionFormServicesState,
-  IFetchCollectionFormServicesByCollectionIdArgs,
-  ISaveCollectionFormServicesByCollectionIdArgs,
-  ICollectionFormServicesEditSchedulePayload,
+  ICollectionFormServiceState,
+  IFetchCollectionFormServiceByCollectionIdArgs,
+  ISaveCollectionFormServiceByCollectionIdArgs,
+  ICollectionFormServiceEditServicePayload,
 } from '../types';
 import { addNotification } from './notificationsSlice';
-import collectionFormServicesDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServicesContactsDataMock';
+import collectionFormServiceDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceDataMock';
+import collectionFormServiceContactsDataMock from '../../../__mocks__/CollectionForm/collectionFormServiceContactsDataMock';
 
 /**
- * State slice definition for Collection Form Services
+ * State slice definition for Collection Form Service
  *
- * All state updates to the Collection Form Services are managed here.
+ * All state updates to the Collection Form Service are managed here.
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  */
 
 /**
- * Async thunk for GET /api/collection/services/api/get API handling
+ * Async thunk for GET /api/collection/service/api/get API handling
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
- * @memberof collectionFormServicesReduxSlice
+ * @memberof collectionFormServiceReduxSlice
  *
  * @see See [more info on Redux Async Thunks](https://redux-toolkit.js.org/api/createAsyncThunk)
  *
  * @function
  */
 export const fetchByCollectionId = createAsyncThunk(
-  'collectionFormServices/fetchByCollectionId',
-  async (args: IFetchCollectionFormServicesByCollectionIdArgs, thunkAPI) => {
+  'collectionFormService/fetchByCollectionId',
+  async (args: IFetchCollectionFormServiceByCollectionIdArgs, thunkAPI) => {
     /* await the result from the GET request */
     const res = await collectionFormService.getService(args.collectionId);
 
@@ -50,7 +50,7 @@ export const fetchByCollectionId = createAsyncThunk(
     if (res.status !== 200) {
       thunkAPI.dispatch(
         addNotification({
-          message: `Failed to load Collection Form Services from server: ${res.statusText}`,
+          message: `Failed to load Collection Form Service from server: ${res.statusText}`,
           variant: 'error',
         })
       );
@@ -63,26 +63,26 @@ export const fetchByCollectionId = createAsyncThunk(
 );
 
 /**
- * Async thunk for POST /api/collection/services/api/set API handling
+ * Async thunk for POST /api/collection/service/api/set API handling
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
- * @memberof collectionFormServicesReduxSlice
+ * @memberof collectionFormServiceReduxSlice
  *
  * @see See [more info on Redux Async Thunks](https://redux-toolkit.js.org/api/createAsyncThunk)
  *
  * @function
  */
 export const saveByCollectionId = createAsyncThunk(
-  'collectionFormServices/saveByCollectionId',
-  async (args: ISaveCollectionFormServicesByCollectionIdArgs, thunkAPI) => {
+  'collectionFormService/saveByCollectionId',
+  async (args: ISaveCollectionFormServiceByCollectionIdArgs, thunkAPI) => {
     const res = await collectionFormService.setService(args.data);
 
     /* add a notification and reject if bad response from server */
     if (res.status !== 200) {
       thunkAPI.dispatch(
         addNotification({
-          message: `Failed to save Collection Form Services to server: ${res.statusText}`,
+          message: `Failed to save Collection Form Service to server: ${res.statusText}`,
           variant: 'error',
         })
       );
@@ -90,7 +90,7 @@ export const saveByCollectionId = createAsyncThunk(
     } else {
       thunkAPI.dispatch(
         addNotification({
-          message: 'Successfully saved Collection Form Services to server',
+          message: 'Successfully saved Collection Form Service to server',
           variant: 'success',
         })
       );
@@ -106,14 +106,14 @@ export const saveByCollectionId = createAsyncThunk(
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
- * @memberof CollectionFormServicesReduxSlice
+ * @memberof CollectionFormServiceReduxSlice
  *
  * @see See [more info on Redux Async Thunks](https://redux-toolkit.js.org/api/createAsyncThunk)
  *
  * @function
  */
 export const fetchTypes = createAsyncThunk(
-  'collectionFormServices/fetchTypes',
+  'collectionFormService/fetchTypes',
   async (args, thunkAPI) => {
     /* await the result from the GET request */
     const res = await collectionFormService.getServiceContacts();
@@ -135,77 +135,77 @@ export const fetchTypes = createAsyncThunk(
 );
 
 /**
- * Initialises Collection Form Services state to empty array
+ * Initialises Collection Form Service state to empty array
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
- * @memberof collectionFormServicesReduxSlice
+ * @memberof collectionFormServiceReduxSlice
  *
  * @constant
- * @type {IcollectionFormServicesState}
+ * @type {IcollectionFormServiceState}
  */
-const initialcollectionFormServicesState: ICollectionFormServicesState = {
+const initialcollectionFormServiceState: ICollectionFormServiceState = {
   loading: false,
-  data: collectionFormServicesDataMock,
-  dataShadow: collectionFormServicesDataMock,
+  data: collectionFormServiceDataMock,
+  dataShadow: collectionFormServiceDataMock,
   saving: false,
   edited: false,
   loadingContacts: false,
-  contacts: collectionFormServicesContactsDataMock,
+  contacts: collectionFormServiceContactsDataMock,
 };
 
 /**
- * Create the redux slice for interacting with the Collection Form Services state
+ * Create the redux slice for interacting with the Collection Form Service state
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
- * @memberof collectionFormServicesReduxSlice
+ * @memberof collectionFormServiceReduxSlice
  *
  * @see See [more info on Redux Slice creation](https://redux-toolkit.js.org/api/createSlice)
  *
  * @constant
  * @type {Slice<Object>}
  */
-const collectionFormServicesSlice = createSlice({
-  name: 'collectionFormServices',
-  initialState: initialcollectionFormServicesState,
+const collectionFormServiceSlice = createSlice({
+  name: 'collectionFormService',
+  initialState: initialcollectionFormServiceState,
   reducers: {
     /* reducer used for user input changes to the Services data */
     editServices: (
-      state,
-      action: PayloadAction<ICollectionFormServicesEditSchedulePayload>
+      state: ICollectionFormServiceState,
+      action: PayloadAction<ICollectionFormServiceEditServicePayload>
     ) => {
       /* update schedule */
       state.data = {
         ...state.data,
-        [action.payload.itemKey as keyof ICollectionFormServicesData]:
+        [action.payload.itemKey as keyof ICollectionFormServiceData]:
           action.payload.value,
       };
       state.edited = true;
     },
     /* reducer used for when user clears edits to Services data */
-    resetServices: (state) => {
+    resetServices: (state: ICollectionFormServiceState) => {
       /* reset the data by simply copying the shadow to working copy */
       state.data = state.dataShadow;
       state.edited = false;
     },
   },
   extraReducers: (
-    builder: ActionReducerMapBuilder<ICollectionFormServicesState>
+    builder: ActionReducerMapBuilder<ICollectionFormServiceState>
   ) => {
     /*
      * `extraReducers` used to handle actions that were generated
-     * outside of the Collection Form Services slice, such as the async thunks
+     * outside of the Collection Form Service slice, such as the async thunks
      * for the API requests, defined at the top of this file.
      */
     builder
-      /* Fetch Collection Form Services extra reducers */
+      /* Fetch Collection Form Service extra reducers */
       .addCase(
         fetchByCollectionId.pending,
-        (state: ICollectionFormServicesState) => {
+        (state: ICollectionFormServiceState) => {
           state.loading = true;
-          state.data = collectionFormServicesDataMock;
-          state.dataShadow = collectionFormServicesDataMock;
+          state.data = collectionFormServiceDataMock;
+          state.dataShadow = collectionFormServiceDataMock;
           state.error = undefined;
           state.edited = false;
         }
@@ -213,8 +213,8 @@ const collectionFormServicesSlice = createSlice({
       .addCase(
         fetchByCollectionId.fulfilled,
         (
-          state: ICollectionFormServicesState,
-          action: PayloadAction<ICollectionFormServicesDataPayload>
+          state: ICollectionFormServiceState,
+          action: PayloadAction<ICollectionFormServiceDataPayload>
         ) => {
           state.loading = false;
           state.data = action.payload;
@@ -224,59 +224,59 @@ const collectionFormServicesSlice = createSlice({
       )
       .addCase(
         fetchByCollectionId.rejected,
-        (state: ICollectionFormServicesState) => {
+        (state: ICollectionFormServiceState) => {
           state.loading = false;
-          state.data = collectionFormServicesDataMock;
-          state.dataShadow = collectionFormServicesDataMock;
+          state.data = collectionFormServiceDataMock;
+          state.dataShadow = collectionFormServiceDataMock;
           state.error =
-            'Failed to load Collection Form Services data from server.';
+            'Failed to load Collection Form Service data from server.';
         }
       )
-      /* Save Collection Form Services extra reducers */
+      /* Save Collection Form Service extra reducers */
       .addCase(
         saveByCollectionId.pending,
-        (state: ICollectionFormServicesState) => {
+        (state: ICollectionFormServiceState) => {
           state.saving = true;
         }
       )
       .addCase(
         saveByCollectionId.fulfilled,
-        (state: ICollectionFormServicesState) => {
+        (state: ICollectionFormServiceState) => {
           state.saving = false;
           state.edited = false;
         }
       )
       .addCase(
         saveByCollectionId.rejected,
-        (state: ICollectionFormServicesState) => {
+        (state: ICollectionFormServiceState) => {
           state.saving = false;
         }
       )
-      /* Fetch Collection Form Services Types extra reducers */
-      .addCase(fetchTypes.pending, (state: ICollectionFormServicesState) => {
+      /* Fetch Collection Form Service Types extra reducers */
+      .addCase(fetchTypes.pending, (state: ICollectionFormServiceState) => {
         state.loadingContacts = true;
       })
       .addCase(
         fetchTypes.fulfilled,
         (
-          state: ICollectionFormServicesState,
-          action: PayloadAction<ICollectionFormServicesContactsDataPayload>
+          state: ICollectionFormServiceState,
+          action: PayloadAction<ICollectionFormServiceContactsDataPayload>
         ) => {
           state.loadingContacts = false;
           state.contacts = action.payload;
         }
       )
-      .addCase(fetchTypes.rejected, (state: ICollectionFormServicesState) => {
+      .addCase(fetchTypes.rejected, (state: ICollectionFormServiceState) => {
         state.loadingContacts = false;
-        state.contacts = collectionFormServicesContactsDataMock;
+        state.contacts = collectionFormServiceContactsDataMock;
         state.error =
-          'Failed to load Collection Form Services Contacts data from server.';
+          'Failed to load Collection Form Service Contacts data from server.';
       });
   },
 });
 
-/* Collection Form Services actions for editing and resetting schedule data */
+/* Collection Form Service actions for editing and resetting schedule data */
 export const { editServices, resetServices } =
-  collectionFormServicesSlice.actions;
+  collectionFormServiceSlice.actions;
 
-export default collectionFormServicesSlice.reducer;
+export default collectionFormServiceSlice.reducer;

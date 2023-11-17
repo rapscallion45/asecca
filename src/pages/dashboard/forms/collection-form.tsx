@@ -4,7 +4,7 @@ import CollectionFormCosts from '@/components/CollectionFormCosts/CollectionForm
 import DashboardLayout from '@/layouts/dashboard/DashboardLayout';
 import CollectionFormLogistics from '@/components/CollectionFormLogistics/CollectionFormLogistics';
 import CollectionFormSchedule from '@/components/CollectionFormSchedule/CollectionFormSchedule';
-import CollectionFormServices from '@/components/CollectionFormServices/CollectionFormServices';
+import CollectionFormService from '@/components/CollectionFormService/CollectionFormService';
 import CollectionFormItinerary from '@/components/CollectionFormItinerary/CollectionFormItinerary';
 import CollectionFormFacility from '@/components/CollectionFormFacility/CollectionFormFacility';
 import CollectionFormNewContact from '@/components/CollectionFormNewContact/CollectionFormNewContact';
@@ -43,7 +43,7 @@ const CollectionFormPage: NextPageWithLayout = () => (
         <CollectionFormSchedule collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
-        <CollectionFormServices collectionId="66135000015737072" />
+        <CollectionFormService collectionId="66135000015737072" />
       </Box>
       <Box mb={2}>
         <CollectionFormItinerary collectionId="66135000015737072" />

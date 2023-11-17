@@ -164,7 +164,7 @@ const CollectionFormSchedule: FC<ICollectionFormScheduleProps> = (props) => {
               multiline
               maxRows={4}
               variant="standard"
-              value={scheduleData?.notes}
+              value={scheduleData?.notes || ''}
               onChange={(event: ChangeEvent<HTMLInputElement>) => {
                 handleEdit(event.target.value, 'notes');
               }}

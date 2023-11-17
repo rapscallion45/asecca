@@ -9,7 +9,7 @@ import collectionsKanbanReducer from './slices/collectionsKanbanSlice';
 import collectionFormCostsReducer from './slices/collectionFormCostsSlice';
 import collectionFormLogisticsReducer from './slices/collectionFormLogisticsSlice';
 import collectionFormScheduleReducer from './slices/collectionFormScheduleSlice';
-import collectionFormServicesReducer from './slices/collectionFormServicesSlice';
+import collectionFormServiceReducer from './slices/collectionFormServiceSlice';
 import collectionFormItineraryReducer from './slices/collectionFormItinerarySlice';
 import collectionFormFacilityReducer from './slices/collectionFormFacilitySlice';
 import collectionFormQuoteReducer from './slices/collectionFormQuoteSlice';
@@ -36,7 +36,7 @@ const store = configureStore({
     collectionFormCosts: collectionFormCostsReducer,
     collectionFormLogistics: collectionFormLogisticsReducer,
     collectionFormSchedule: collectionFormScheduleReducer,
-    collectionFormServices: collectionFormServicesReducer,
+    collectionFormService: collectionFormServiceReducer,
     collectionFormItinerary: collectionFormItineraryReducer,
     collectionFormFacility: collectionFormFacilityReducer,
     collectionFormQuote: collectionFormQuoteReducer,

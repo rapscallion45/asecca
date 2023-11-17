@@ -1,7 +1,7 @@
 import {
-  CollectionFormServicesType,
-  ICollectionFormServicesRecycling,
-  ICollectionFormServicesDestruction,
+  CollectionFormServiceType,
+  ICollectionFormServiceRecycling,
+  ICollectionFormServiceDestruction,
 } from '@/lib/api/api-types';
 
 /**
@@ -11,15 +11,15 @@ import {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @param {CollectionFormServicesType} type - services type value
- * @returns {CollectionFormServicesType | ICollectionFormServicesRecycling | ICollectionFormServicesDestruction} - service type data
+ * @param {CollectionFormServiceType} type - services type value
+ * @returns {CollectionFormServiceType | ICollectionFormServiceRecycling | ICollectionFormServiceDestruction} - service type data
  */
-const getCollectionFormServicesTypeValue = (
-  type: CollectionFormServicesType
+const getCollectionFormServiceTypeValue = (
+  type: CollectionFormServiceType
 ):
-  | CollectionFormServicesType
-  | ICollectionFormServicesRecycling
-  | ICollectionFormServicesDestruction => {
+  | CollectionFormServiceType
+  | ICollectionFormServiceRecycling
+  | ICollectionFormServiceDestruction => {
   /* if the service type is one of the objects, then check which type */
   if (type === 'Recycling') {
     return {
@@ -27,17 +27,17 @@ const getCollectionFormServicesTypeValue = (
         decommissioning_requested: false,
         ownership_retention: 'DoesntRetainOwnership',
       },
-    } as ICollectionFormServicesRecycling;
+    } as ICollectionFormServiceRecycling;
   }
   if (type === 'Destruction') {
     return {
       Destruction: {
         decommissioning_requested: false,
       },
-    } as ICollectionFormServicesDestruction;
+    } as ICollectionFormServiceDestruction;
   }
   /* service type is one of the enums */
   return type;
 };
 
-export default getCollectionFormServicesTypeValue;
+export default getCollectionFormServiceTypeValue;

@@ -20,66 +20,66 @@ import {
   saveByCollectionId as saveServicesByCollectionId,
   editServices,
   resetServices,
-} from '@/redux/slices/collectionFormServicesSlice';
+} from '@/redux/slices/collectionFormServiceSlice';
 import {
-  CollectionFormServicesOnSiteProcessing,
-  CollectionFormServicesType,
-  ICollectionFormServicesDestruction,
-  ICollectionFormServicesRecycling,
-  collectionFormServicesTypes,
+  CollectionFormServiceOnSiteProcessing,
+  CollectionFormServiceType,
+  ICollectionFormServiceDestruction,
+  ICollectionFormServiceRecycling,
+  collectionFormServiceTypes,
 } from '@/lib/api/api-types';
 import {
-  getCollectionFormServicesDecommissionRequestValue,
-  getCollectionFormServicesTypeValue,
-  getCollectionFormServicesTypeEnum,
-  getCollectionFormServicesDecommissionRequestEditValue,
-  getCollectionFormServicesOwnershipRetentionValue,
-  getCollectionFormServicesOwnershipRetentionEditValue,
-  getCollectionFormServicesRedeliveryRequestValue,
-  getCollectionFormServicesRedeliveryRequestEditValue,
+  getCollectionFormServiceDecommissionRequestValue,
+  getCollectionFormServiceTypeValue,
+  getCollectionFormServiceTypeEnum,
+  getCollectionFormServiceDecommissionRequestEditValue,
+  getCollectionFormServiceOwnershipRetentionValue,
+  getCollectionFormServiceOwnershipRetentionEditValue,
+  getCollectionFormServiceRedeliveryRequestValue,
+  getCollectionFormServiceRedeliveryRequestEditValue,
 } from '@/utils';
 
 /**
- * Collection Form Services Props
+ * Collection Form Service Props
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
- * @typedef ICollectionFormServicesProps
+ * @typedef ICollectionFormServiceProps
  * @prop {string} collectionId - ID string of Collection for data API call
  */
-interface ICollectionFormServicesProps {
+interface ICollectionFormServiceProps {
   collectionId: string;
 }
 
 /**
- * Collection Form Services
+ * Collection Form Service
  *
- * Presents the Collection Form Services form to the user, populated with data
+ * Presents the Collection Form Service form to the user, populated with data
  * fetched from API: /api/collection/service/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  *
  * @component
- * @param {ICollectionFormServicesProps} props - component props
- * @returns {FC} - collection form services form functional component
+ * @param {ICollectionFormServiceProps} props - component props
+ * @returns {FC} - collection form service form functional component
  */
-const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
+const CollectionFormService: FC<ICollectionFormServiceProps> = (props) => {
   const { collectionId } = props;
 
   /* shorthand helper for dispatching redux actions */
   const dispatch = useDispatch<AppDispatch>();
 
-  /* get collection form services data held in redux state */
+  /* get collection form service data held in redux state */
   const {
-    data: servicesData,
+    data: serviceData,
     loading,
     error,
     saving,
     edited,
     contacts,
-  } = useSelector((state: AppState) => state.collectionFormServices);
+  } = useSelector((state: AppState) => state.collectionFormService);
 
   /**
    * Handles the editing of the form data
@@ -89,15 +89,15 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
    *
    * @method
    * @param {string} itemKey - form item key to be updated
-   * @param {string | boolean | ICollectionFormServicesRecycling | ICollectionFormServicesDestruction} value - form value to be updated
+   * @param {string | boolean | ICollectionFormServiceRecycling | ICollectionFormServiceDestruction} value - form value to be updated
    */
   const handleEdit = (
     itemKey: string,
     value:
       | string
       | boolean
-      | ICollectionFormServicesRecycling
-      | ICollectionFormServicesDestruction
+      | ICollectionFormServiceRecycling
+      | ICollectionFormServiceDestruction
   ) => {
     dispatch(editServices({ itemKey, value }));
   };
@@ -127,13 +127,13 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
       saveServicesByCollectionId({
         data: {
           collection: collectionId,
-          on_site_processing: servicesData.on_site_processing,
-          service_type: servicesData.service_type,
-          site_contact: servicesData.site_contact,
+          on_site_processing: serviceData.on_site_processing,
+          service_type: serviceData.service_type,
+          site_contact: serviceData.site_contact,
         },
       })
     );
-  }, [collectionId, servicesData, dispatch]);
+  }, [collectionId, serviceData, dispatch]);
 
   return (
     <Card>
@@ -162,19 +162,19 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               <Grid item xs={6}>
                 <FormControl variant="standard" sx={{ minWidth: 130 }}>
                   <Select
-                    id="collection-form-services-select"
+                    id="collection-form-service-select"
                     inputProps={{
-                      'aria-label': 'collection-form-services-select',
+                      'aria-label': 'collection-form-service-select',
                     }}
                     variant="outlined"
                     color="secondary"
                     value={
-                      servicesData.on_site_processing
-                        ? ('On-Site' as CollectionFormServicesOnSiteProcessing)
-                        : ('Off-Site' as CollectionFormServicesOnSiteProcessing)
+                      serviceData.on_site_processing
+                        ? ('On-Site' as CollectionFormServiceOnSiteProcessing)
+                        : ('Off-Site' as CollectionFormServiceOnSiteProcessing)
                     }
                     onChange={(
-                      event: SelectChangeEvent<CollectionFormServicesOnSiteProcessing>
+                      event: SelectChangeEvent<CollectionFormServiceOnSiteProcessing>
                     ) =>
                       handleEdit(
                         'on_site_processing',
@@ -202,23 +202,23 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               <Grid item xs={6}>
                 <FormControl variant="standard" sx={{ minWidth: 130 }}>
                   <Select
-                    id="collection-form-services-select"
+                    id="collection-form-service-select"
                     inputProps={{
-                      'aria-label': 'collection-form-services-select',
+                      'aria-label': 'collection-form-service-select',
                     }}
                     variant="outlined"
                     color="secondary"
-                    value={getCollectionFormServicesTypeEnum(servicesData)}
+                    value={getCollectionFormServiceTypeEnum(serviceData)}
                     onChange={(
-                      event: SelectChangeEvent<CollectionFormServicesType>
+                      event: SelectChangeEvent<CollectionFormServiceType>
                     ) =>
                       handleEdit(
                         'service_type',
-                        getCollectionFormServicesTypeValue(event.target.value)
+                        getCollectionFormServiceTypeValue(event.target.value)
                       )
                     }
                   >
-                    {collectionFormServicesTypes.map((type: string) => (
+                    {collectionFormServiceTypes.map((type: string) => (
                       <MenuItem key={type} value={type}>
                         {type.replace(/([A-Z])/g, ' $&')}
                       </MenuItem>
@@ -240,8 +240,8 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               </Grid>
               <Grid item xs={6}>
                 <Checkbox
-                  checked={getCollectionFormServicesDecommissionRequestValue(
-                    servicesData
+                  checked={getCollectionFormServiceDecommissionRequestValue(
+                    serviceData
                   )}
                   onChange={(
                     event: ChangeEvent<HTMLInputElement>,
@@ -249,17 +249,17 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                   ) =>
                     handleEdit(
                       'service_type',
-                      getCollectionFormServicesDecommissionRequestEditValue(
-                        servicesData,
+                      getCollectionFormServiceDecommissionRequestEditValue(
+                        serviceData,
                         checked
                       )
                     )
                   }
                   color="secondary"
                   disabled={
-                    getCollectionFormServicesTypeEnum(servicesData) !==
+                    getCollectionFormServiceTypeEnum(serviceData) !==
                       'Recycling' &&
-                    getCollectionFormServicesTypeEnum(servicesData) !==
+                    getCollectionFormServiceTypeEnum(serviceData) !==
                       'Destruction'
                   }
                   // @ts-ignore
@@ -280,8 +280,8 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               </Grid>
               <Grid item xs={6}>
                 <Checkbox
-                  checked={getCollectionFormServicesOwnershipRetentionValue(
-                    servicesData
+                  checked={getCollectionFormServiceOwnershipRetentionValue(
+                    serviceData
                   )}
                   onChange={(
                     event: ChangeEvent<HTMLInputElement>,
@@ -289,15 +289,15 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                   ) =>
                     handleEdit(
                       'service_type',
-                      getCollectionFormServicesOwnershipRetentionEditValue(
-                        servicesData,
+                      getCollectionFormServiceOwnershipRetentionEditValue(
+                        serviceData,
                         checked
                       )
                     )
                   }
                   color="secondary"
                   disabled={
-                    getCollectionFormServicesTypeEnum(servicesData) !==
+                    getCollectionFormServiceTypeEnum(serviceData) !==
                     'Recycling'
                   }
                   // @ts-ignore
@@ -318,11 +318,9 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               </Grid>
               <Grid item xs={6}>
                 <Checkbox
-                  checked={getCollectionFormServicesRedeliveryRequestValue(
-                    servicesData,
-                    getCollectionFormServicesOwnershipRetentionValue(
-                      servicesData
-                    )
+                  checked={getCollectionFormServiceRedeliveryRequestValue(
+                    serviceData,
+                    getCollectionFormServiceOwnershipRetentionValue(serviceData)
                   )}
                   onChange={(
                     event: ChangeEvent<HTMLInputElement>,
@@ -330,15 +328,15 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
                   ) =>
                     handleEdit(
                       'service_type',
-                      getCollectionFormServicesRedeliveryRequestEditValue(
-                        servicesData,
+                      getCollectionFormServiceRedeliveryRequestEditValue(
+                        serviceData,
                         checked
                       )
                     )
                   }
                   color="secondary"
                   disabled={
-                    getCollectionFormServicesTypeEnum(servicesData) !==
+                    getCollectionFormServiceTypeEnum(serviceData) !==
                     'Recycling'
                   }
                   // @ts-ignore
@@ -360,15 +358,15 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
               <Grid item xs={6}>
                 <FormControl variant="standard" sx={{ minWidth: 130 }}>
                   <Select
-                    id="collection-form-services-select"
+                    id="collection-form-service-select"
                     inputProps={{
-                      'aria-label': 'collection-form-services-select',
+                      'aria-label': 'collection-form-service-select',
                     }}
                     variant="outlined"
                     color="secondary"
-                    value={servicesData.site_contact}
+                    value={serviceData.site_contact}
                     onChange={(
-                      event: SelectChangeEvent<typeof servicesData.site_contact>
+                      event: SelectChangeEvent<typeof serviceData.site_contact>
                     ) => handleEdit('site_contact', event.target.value)}
                   >
                     {contacts.contacts_list.map((contact: string) => (
@@ -416,4 +414,4 @@ const CollectionFormServices: FC<ICollectionFormServicesProps> = (props) => {
   );
 };
 
-export default CollectionFormServices;
+export default CollectionFormService;

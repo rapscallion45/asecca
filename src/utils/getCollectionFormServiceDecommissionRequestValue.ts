@@ -1,7 +1,7 @@
 import {
-  ICollectionFormServicesData,
-  ICollectionFormServicesDestruction,
-  ICollectionFormServicesRecycling,
+  ICollectionFormServiceData,
+  ICollectionFormServiceDestruction,
+  ICollectionFormServiceRecycling,
 } from '@/lib/api/api-types';
 
 /**
@@ -11,24 +11,24 @@ import {
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
  *
- * @param {ICollectionFormServicesData} serviceData - data from collection form
+ * @param {ICollectionFormServiceData} serviceData - data from collection form
  * @returns {boolean | undefined} - whether flag is set or not, or undefined
  */
-const getCollectionFormServicesDecommissionRequestValue = (
-  servicesData: ICollectionFormServicesData
+const getCollectionFormServiceDecommissionRequestValue = (
+  serviceData: ICollectionFormServiceData
 ): boolean => {
   /* if the service type is an object, then we have a value to check */
-  if (typeof servicesData.service_type === 'object') {
+  if (typeof serviceData.service_type === 'object') {
     /* Recycling object processing */
-    if ('Recycling' in servicesData.service_type) {
+    if ('Recycling' in serviceData.service_type) {
       const recyclingData =
-        servicesData.service_type as ICollectionFormServicesRecycling;
+        serviceData.service_type as ICollectionFormServiceRecycling;
       return recyclingData.Recycling.decommissioning_requested;
     }
     /* Destruction object processing */
-    if ('Destruction' in servicesData.service_type) {
+    if ('Destruction' in serviceData.service_type) {
       const destructionData =
-        servicesData.service_type as ICollectionFormServicesDestruction;
+        serviceData.service_type as ICollectionFormServiceDestruction;
       return destructionData.Destruction.decommissioning_requested;
     }
   }
@@ -37,4 +37,4 @@ const getCollectionFormServicesDecommissionRequestValue = (
   return false;
 };
 
-export default getCollectionFormServicesDecommissionRequestValue;
+export default getCollectionFormServiceDecommissionRequestValue;

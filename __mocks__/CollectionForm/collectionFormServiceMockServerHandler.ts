@@ -1,9 +1,9 @@
 import { rest } from 'msw';
-import collectionFormServicesDataMock from './collectionFormServicesDataMock';
-import collectionFormServicesContactsDataMock from './collectionFormServicesContactsDataMock';
+import collectionFormServiceDataMock from './collectionFormServiceDataMock';
+import collectionFormServiceContactsDataMock from './collectionFormServiceContactsDataMock';
 import {
-  ICollectionFormServicesDataPayload,
-  ICollectionFormServicesContactsDataPayload,
+  ICollectionFormServiceDataPayload,
+  ICollectionFormServiceContactsDataPayload,
   IProxyErrorPayload,
 } from '@/lib/api/api-types';
 
@@ -27,8 +27,8 @@ type CollectionFormServiceGetRequestParams = {};
 
 /** shape of the mocked response body */
 type CollectionFormServiceGetResponseBody =
-  | ICollectionFormServicesDataPayload
-  | ICollectionFormServicesContactsDataPayload;
+  | ICollectionFormServiceDataPayload
+  | ICollectionFormServiceContactsDataPayload;
 
 /**
  * POST /collection/service/api/set definitions
@@ -49,9 +49,9 @@ type CollectionFormServicePostResponseBody = IProxyErrorPayload | null;
  *
  * @since 0.0.14
  */
-export const collectionFormServicesMockHandlers = [
+export const collectionFormServiceMockHandlers = [
   /**
-   * Test/mock GET Collection Form Services NextJS PROXY
+   * Test/mock GET Collection Form Service NextJS PROXY
    *
    * @since 0.0.14
    */
@@ -61,11 +61,11 @@ export const collectionFormServicesMockHandlers = [
     CollectionFormServiceGetResponseBody
   >('/api/collection/service/api/get', async (req, res, ctx) =>
     /** return mock service data */
-    res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
+    res(ctx.status(200), ctx.json(collectionFormServiceDataMock))
   ),
 
   /**
-   * Test/mock GET Collection Form Services ASECCA
+   * Test/mock GET Collection Form Service ASECCA
    *
    * @since 0.0.14
    */
@@ -77,11 +77,11 @@ export const collectionFormServicesMockHandlers = [
     `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/get`,
     async (req, res, ctx) =>
       /** return mock service data */
-      res(ctx.status(200), ctx.json(collectionFormServicesDataMock))
+      res(ctx.status(200), ctx.json(collectionFormServiceDataMock))
   ),
 
   /**
-   * Test/mock POST Collection Form Services NextJS PROXY
+   * Test/mock POST Collection Form Service NextJS PROXY
    *
    * @since 0.0.14
    */
@@ -95,7 +95,7 @@ export const collectionFormServicesMockHandlers = [
   ),
 
   /**
-   * Test/mock POST Collection Form Services ASECCA
+   * Test/mock POST Collection Form Service ASECCA
    *
    * @since 0.0.14
    */
@@ -111,7 +111,7 @@ export const collectionFormServicesMockHandlers = [
   ),
 
   /**
-   * Test/mock GET Collection Form Services Contacts NextJS PROXY
+   * Test/mock GET Collection Form Service Contacts NextJS PROXY
    *
    * @since 0.0.14
    */
@@ -121,11 +121,11 @@ export const collectionFormServicesMockHandlers = [
     CollectionFormServiceGetResponseBody
   >('/api/collection/service/api/contacts', async (req, res, ctx) =>
     /** return mock contacts data */
-    res(ctx.status(200), ctx.json(collectionFormServicesContactsDataMock))
+    res(ctx.status(200), ctx.json(collectionFormServiceContactsDataMock))
   ),
 
   /**
-   * Test/mock GET Collection Form Services ASECCA
+   * Test/mock GET Collection Form Service ASECCA
    *
    * @since 0.0.14
    */
@@ -137,11 +137,11 @@ export const collectionFormServicesMockHandlers = [
     `${process.env.STAGING_DB_REST_API_URL}/collection/service/api/contacts`,
     async (req, res, ctx) =>
       /** return mock contacts data */
-      res(ctx.status(200), ctx.json(collectionFormServicesContactsDataMock))
+      res(ctx.status(200), ctx.json(collectionFormServiceContactsDataMock))
   ),
 ];
 
 const mockHandlers = {
-  collectionFormServicesMockHandlers,
+  collectionFormServiceMockHandlers,
 };
 export default mockHandlers;

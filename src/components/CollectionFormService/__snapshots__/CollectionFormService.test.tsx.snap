@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Collection Form Services Renders correctly 1`] = `
+exports[`Collection Form Service Renders correctly 1`] = `
 <div
   className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
 >
@@ -53,10 +53,10 @@ exports[`Collection Form Services Renders correctly 1`] = `
                 <div
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  aria-label="collection-form-services-select"
-                  aria-labelledby="collection-form-services-select"
+                  aria-label="collection-form-service-select"
+                  aria-labelledby="collection-form-service-select"
                   className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-                  id="collection-form-services-select"
+                  id="collection-form-service-select"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
@@ -134,10 +134,10 @@ exports[`Collection Form Services Renders correctly 1`] = `
                 <div
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  aria-label="collection-form-services-select"
-                  aria-labelledby="collection-form-services-select"
+                  aria-label="collection-form-service-select"
+                  aria-labelledby="collection-form-service-select"
                   className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-                  id="collection-form-services-select"
+                  id="collection-form-service-select"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
@@ -392,10 +392,10 @@ exports[`Collection Form Services Renders correctly 1`] = `
                 <div
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  aria-label="collection-form-services-select"
-                  aria-labelledby="collection-form-services-select"
+                  aria-label="collection-form-service-select"
+                  aria-labelledby="collection-form-service-select"
                   className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-                  id="collection-form-services-select"
+                  id="collection-form-service-select"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}

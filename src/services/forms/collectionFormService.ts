@@ -4,7 +4,7 @@ import {
   ICollectionFormItinerarySaveDataPayload,
   ICollectionFormLogisticsSaveDataPayload,
   ICollectionFormScheduleSaveDataPayload,
-  ICollectionFormServicesSaveDataPayload,
+  ICollectionFormServiceSaveDataPayload,
   ICollectionFormQuoteSaveDataPayload,
   ICollectionFormNewContactSaveDataPayload,
 } from '@/lib/api/api-types';
@@ -182,7 +182,7 @@ async function setSchedule(body: ICollectionFormScheduleSaveDataPayload) {
 }
 
 /**
- * GET request to /api/collection/services/api/get
+ * GET request to /api/collection/service/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
@@ -206,16 +206,16 @@ async function getService(collectionId: string | Array<string | null>) {
 }
 
 /**
- * POST request to /api/collection/services/api/set
+ * POST request to /api/collection/service/api/set
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  * @memberof Services
  *
- * @param {ICollectionFormServicesSaveDataPayload} body - Schedule data to be saved
+ * @param {ICollectionFormServiceSaveDataPayload} body - Schedule data to be saved
  * @returns {Promise<any>} - resulting Promise of the fetch request
  */
-async function setService(body: ICollectionFormServicesSaveDataPayload) {
+async function setService(body: ICollectionFormServiceSaveDataPayload) {
   /* configure POST header options */
   const requestOptions = {
     method: 'POST',

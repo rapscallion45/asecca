@@ -1,12 +1,12 @@
-import { ICollectionFormServicesDataPayload } from '@/lib/api/api-types';
+import { ICollectionFormServiceDataPayload } from '@/lib/api/api-types';
 
 /**
- * mock file defining returned data from API GET /collection/services/api/get
+ * mock file defining returned data from API GET /collection/service/api/get
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.14
  */
-const collectionFormServicesDataMock: ICollectionFormServicesDataPayload = {
+const collectionFormServiceDataMock: ICollectionFormServiceDataPayload = {
   on_site_processing: false,
   service_type: {
     Recycling: {
@@ -17,4 +17,4 @@ const collectionFormServicesDataMock: ICollectionFormServicesDataPayload = {
   site_contact: 'Contact One',
 };
 
-export default collectionFormServicesDataMock;
+export default collectionFormServiceDataMock;

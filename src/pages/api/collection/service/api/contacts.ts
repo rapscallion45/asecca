@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { IProxyErrorPayload } from '@/lib/api/api-types';
-import { getServicesContacts } from '@/lib/api';
+import { getServiceContacts } from '@/lib/api';
 
 /**
  * Proxy for handling requests to ASECCA Collection Form
- * Services Contacts API.
+ * Service Contacts API.
  *
  * @see See [Next.js API route support](https://nextjs.org/docs/api-routes/introduction)
  *
@@ -28,7 +28,7 @@ const handler = async (
       /* call GET api */
       try {
         /* try proxying request to ASECCA API */
-        const response = await getServicesContacts();
+        const response = await getServiceContacts();
 
         /* send back server response */
         if (response.status === 200) {
