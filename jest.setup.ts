@@ -1,7 +1,8 @@
 import React from 'react';
 import next from 'next';
-import server from './__mocks__/serverMock';
+import { TextEncoder, TextDecoder } from 'util';
 import '@testing-library/jest-dom/extend-expect';
+import server from './__mocks__/serverMock';
 
 /**
  * Configuration file for Jest & React Testing Library Unit Test environment
@@ -9,6 +10,9 @@ import '@testing-library/jest-dom/extend-expect';
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.0
  */
+
+/** ensure "TextEncoder" is defined in the test environment */
+Object.assign(global, { TextDecoder, TextEncoder });
 
 /** instatiate NexJS before running tests - this loads next.config.js */
 next({ dev: true });
