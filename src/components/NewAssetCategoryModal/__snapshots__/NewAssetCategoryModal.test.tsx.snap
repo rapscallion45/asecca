@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Asset Category Modal Renders correctly 1`] = `
+<div
+  className="MuiStack-root css-1okj3ks-MuiStack-root"
+  data-testid="new-asset-category-modal-loading-skeleton"
+>
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 310,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 310,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 30,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rounded MuiSkeleton-pulse css-1ukovu3-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 30,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rounded MuiSkeleton-pulse css-1ukovu3-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 30,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rounded MuiSkeleton-pulse css-1ukovu3-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+    style={
+      {
+        "height": 30,
+        "width": 210,
+      }
+    }
+  />
+  <span
+    className="MuiSkeleton-root MuiSkeleton-rounded MuiSkeleton-pulse css-1ukovu3-MuiSkeleton-root"
+    style={
+      {
+        "height": 60,
+        "width": 210,
+      }
+    }
+  />
+</div>
+`;

@@ -202,7 +202,7 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
       : newAssetData.compatible_facilities.filter((item) => item !== facility);
 
   return !loading ? (
-    <Box>
+    <>
       <Box
         component="form"
         sx={{
@@ -381,9 +381,9 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
           Create
         </LoadingButton>
       </Box>
-    </Box>
+    </>
   ) : (
-    <Stack spacing={1}>
+    <Stack spacing={1} data-testid="new-asset-category-modal-loading-skeleton">
       {/* display loading skeleton */}
       <Skeleton variant="rectangular" width={310} height={60} />
       <Skeleton variant="rectangular" width={310} height={60} />
