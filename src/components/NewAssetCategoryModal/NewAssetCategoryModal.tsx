@@ -342,6 +342,8 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
                             )
                           }
                           color="secondary"
+                          // @ts-ignore
+                          inputProps={{ 'data-testid': `${facility}-checkbox` }}
                         />
                       </Grid>
                     </Grid>

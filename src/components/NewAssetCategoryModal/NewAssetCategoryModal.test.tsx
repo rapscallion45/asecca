@@ -1,20 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  //   fireEvent,
+  fireEvent,
   render,
   screen,
   waitFor,
-  //   act,
+  within,
 } from '@testing-library/react';
-import renderer from 'react-test-renderer';
-import { fetchByCollectionId as fetchCollectionFormServiceByCollectionId } from '@/redux/slices/collectionFormServiceSlice';
 import store from '@/redux/store';
 import NewAssetCategoryModal from './NewAssetCategoryModal';
 import assetCategoryFacilitiesDataMock from '../../../__mocks__/assetCategoryFacilitiesDataMock';
-
-/* default test query ID */
-const query: string = '66135000001760012';
 
 /* mock save callback */
 const mockSaveCallback = jest.fn(() => {});
@@ -31,24 +26,21 @@ const mockCloseModalCallback = jest.fn(() => {});
 describe('New Asset Category Modal', () => {
   it('Renders correctly', async () => {
     /** Arrange */
-    store.dispatch(
-      fetchCollectionFormServiceByCollectionId({
-        collectionId: query,
-      })
+    /** perform snapshot test */
+    const tree = render(
+      <Provider store={store}>
+        <NewAssetCategoryModal
+          saving={false}
+          closeModal={mockCloseModalCallback}
+          handleSaveCallback={mockSaveCallback}
+        />
+      </Provider>
     );
 
-    /** perform snapshot test */
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <NewAssetCategoryModal
-            saving={false}
-            closeModal={mockCloseModalCallback}
-            handleSaveCallback={mockSaveCallback}
-          />
-        </Provider>
-      )
-      .toJSON();
+    /** Assert - wait for modal to load */
+    await waitFor(() => {
+      expect(screen.getByLabelText('Name')).toBeInTheDocument();
+    });
     expect(tree).toMatchSnapshot();
   });
 
@@ -81,173 +73,167 @@ describe('New Asset Category Modal', () => {
     });
   });
 
-  //   describe('Form Callbacks', () => {
-  //     beforeAll(() => jest.spyOn(window, 'fetch'));
+  describe('Form Callbacks', () => {
+    beforeAll(() => jest.spyOn(window, 'fetch'));
 
-  //     it('Should call API with inputted values when values updated and save button clicked', async () => {
-  //       /** Arrange */
-  //       const testName: string = 'Test Asset Category';
-  //       const testCO2: string = '0';
-  //       const testDataBearing: boolean = true;
-  //       const testSerialised: boolean = true;
-  //       const testRedeliveryRequested: boolean = true;
-  //       const testCompatibleFacilities: Array<string> = [];
+    it('Should call save callback when values updated and Create button clicked', async () => {
+      /** Arrange */
+      const testName: string = 'Test Asset Category';
+      const testCO2: string = '30';
+      const testDataBearing: boolean = true;
+      const testRemovableStorage: boolean = true;
+      const testSerialised: boolean = true;
+      const testCompatibleFacilities: Array<string> = [
+        assetCategoryFacilitiesDataMock[1],
+      ];
 
-  //       /** Act - render the test components */
-  //       render(
-  //         <Provider store={store}>
-  //           <NewAssetCategoryModal
-  //             saving={false}
-  //             closeModal={mockCloseModalCallback}
-  //             handleSaveCallback={mockSaveCallback}
-  //           />
-  //         </Provider>
-  //       );
+      /** Act - render the test components */
+      render(
+        <Provider store={store}>
+          <NewAssetCategoryModal
+            saving={false}
+            closeModal={mockCloseModalCallback}
+            handleSaveCallback={mockSaveCallback}
+          />
+        </Provider>
+      );
 
-  //       /** Assert - check we have correct values rendered */
-  //       await waitFor(() => {
-  //         expect(screen.getByLabelText('Name')).toBeInTheDocument();
-  //       });
-  //       expect(
-  //         screen.getByDisplayValue(collectionFormServiceDataMock.site_contact)
-  //       ).toBeInTheDocument();
+      /** Assert - check we have correct values rendered */
+      await waitFor(() => {
+        expect(screen.getByLabelText('Name')).toBeInTheDocument();
+      });
+      assetCategoryFacilitiesDataMock.forEach((facility: string) =>
+        expect(screen.getByText(`${facility}:`)).toBeInTheDocument()
+      );
+      expect(screen.getByText('Create')).toHaveAttribute('disabled');
 
-  //       /** Act - update field values and click Save button */
-  //       act(() => {
-  //         fireEvent(
-  //           screen.getByDisplayValue(
-  //             collectionFormServiceDataMock.on_site_processing
-  //               ? 'On-Site'
-  //               : 'Off-Site'
-  //           ),
-  //           new MouseEvent('click', {
-  //             bubbles: true,
-  //             cancelable: true,
-  //           })
-  //         );
-  //         fireEvent.change(
-  //           screen.getByDisplayValue(
-  //             collectionFormServiceDataMock.on_site_processing
-  //               ? 'On-Site'
-  //               : 'Off-Site'
-  //           ),
-  //           {
-  //             target: { value: testProcessing },
-  //           }
-  //         );
-  //       });
-  //       act(() => {
-  //         fireEvent(
-  //           screen.getByDisplayValue(
-  //             getCollectionFormServiceTypeEnum(
-  //               collectionFormServiceDataMock
-  //             ) as string
-  //           ),
-  //           new MouseEvent('click', {
-  //             bubbles: true,
-  //             cancelable: true,
-  //           })
-  //         );
-  //         fireEvent.change(
-  //           screen.getByDisplayValue(
-  //             getCollectionFormServiceTypeEnum(
-  //               collectionFormServiceDataMock
-  //             ) as string
-  //           ),
-  //           {
-  //             target: { value: testServiceType },
-  //           }
-  //         );
-  //       });
-  //       if (testDecomissionRequested)
-  //         act(() => {
-  //           fireEvent(
-  //             screen.getByTestId('decomissioning-checkbox'),
-  //             new MouseEvent('click', {
-  //               bubbles: true,
-  //               cancelable: true,
-  //             })
-  //           );
-  //         });
-  //       if (testRetainsOwnership)
-  //         act(() => {
-  //           fireEvent(
-  //             screen.getByTestId('ownership-checkbox'),
-  //             new MouseEvent('click', {
-  //               bubbles: true,
-  //               cancelable: true,
-  //             })
-  //           );
-  //         });
-  //       if (testRedeliveryRequested)
-  //         act(() => {
-  //           fireEvent(
-  //             screen.getByTestId('redelivery-checkbox'),
-  //             new MouseEvent('click', {
-  //               bubbles: true,
-  //               cancelable: true,
-  //             })
-  //           );
-  //         });
-  //       act(() => {
-  //         fireEvent(
-  //           screen.getByDisplayValue(collectionFormServiceDataMock.site_contact),
-  //           new MouseEvent('click', {
-  //             bubbles: true,
-  //             cancelable: true,
-  //           })
-  //         );
-  //         fireEvent.change(
-  //           screen.getByDisplayValue(collectionFormServiceDataMock.site_contact),
-  //           {
-  //             target: { value: testContact },
-  //           }
-  //         );
-  //       });
-  //       /** Assert - ensure updates have been processed */
-  //       await waitFor(() => {
-  //         expect(screen.getByDisplayValue(testProcessing)).toBeInTheDocument();
-  //       });
-  //       expect(screen.getByDisplayValue(testServiceType)).toBeInTheDocument();
-  //       expect(screen.getByDisplayValue(testContact)).toBeInTheDocument();
-  //       /** Act - click Commit button */
-  //       act(() => {
-  //         fireEvent(
-  //           screen.getByText('Commit'),
-  //           new MouseEvent('click', {
-  //             bubbles: true,
-  //             cancelable: true,
-  //           })
-  //         );
-  //       });
-  //       /** Assert - save API to have been called with data from state */
-  //       await waitFor(() => {
-  //         expect(window.fetch).toHaveBeenCalledTimes(1);
-  //       });
-  //       expect(window.fetch).toHaveBeenCalledWith(
-  //         '/api/collection/service/api/set',
-  //         expect.objectContaining({
-  //           method: 'POST',
-  //           headers: { 'Content-Type': 'application/json' },
-  //           body: JSON.stringify({
-  //             collection: query,
-  //             on_site_processing: testProcessing === 'On-Site',
-  //             service_type: {
-  //               Recycling: {
-  //                 ownership_retention: {
-  //                   RetainsOwnership: {
-  //                     redelivery_requested: testRedeliveryRequested,
-  //                   },
-  //                 },
-  //                 decommissioning_requested: testDecomissionRequested,
-  //               },
-  //             },
-  //             site_contact: testContact,
-  //           }),
-  //         })
-  //       );
-  //     });
-  //   });
+      /** Act - update field values */
+      fireEvent(
+        screen.getByLabelText('Name'),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      fireEvent.change(
+        screen.getByPlaceholderText('New Asset Category Name...'),
+        {
+          target: { value: testName },
+        }
+      );
+      fireEvent(
+        screen.getByLabelText('CO2'),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      fireEvent.change(
+        screen.getByPlaceholderText('New Asset Category CO2 value...'),
+        {
+          target: { value: testCO2 },
+        }
+      );
+      if (testDataBearing)
+        fireEvent(
+          within(screen.getByLabelText('Data Bearing:')).getByLabelText('True'),
+          new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+          })
+        );
+      if (testRemovableStorage)
+        fireEvent(
+          within(screen.getByLabelText('Removable Storage:')).getByLabelText(
+            'True'
+          ),
+          new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+          })
+        );
+      if (testSerialised)
+        fireEvent(
+          within(screen.getByLabelText('Serialised:')).getByLabelText('True'),
+          new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+          })
+        );
+      fireEvent(
+        screen.getByTestId(`${assetCategoryFacilitiesDataMock[0]}-checkbox`),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+
+      /** Assert - ensure updates have been processed */
+      await waitFor(() => {
+        expect(screen.getByDisplayValue(testName)).toBeInTheDocument();
+      });
+      expect(screen.getByDisplayValue(testCO2)).toBeInTheDocument();
+
+      /** Act - click Create button */
+      fireEvent(
+        screen.getByText('Create'),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+
+      /** Assert - save callback to have been called with data from user input */
+      await waitFor(() => {
+        expect(mockSaveCallback).toHaveBeenCalledTimes(1);
+      });
+      expect(mockSaveCallback).toHaveBeenCalledWith({
+        co2: testCO2,
+        compatible_facilities: testCompatibleFacilities,
+        data_bearing: testDataBearing,
+        name: testName,
+        removable_storage: testRemovableStorage,
+        serialized: testSerialised,
+      });
+    });
+
+    it('Should call close modal callback when Cancel button clicked', async () => {
+      /** Arrange */
+      /** Act - render the test components */
+      render(
+        <Provider store={store}>
+          <NewAssetCategoryModal
+            saving={false}
+            closeModal={mockCloseModalCallback}
+            handleSaveCallback={mockSaveCallback}
+          />
+        </Provider>
+      );
+
+      /** Assert - check we have correct values rendered */
+      await waitFor(() => {
+        expect(screen.getByLabelText('Name')).toBeInTheDocument();
+      });
+      assetCategoryFacilitiesDataMock.forEach((facility: string) =>
+        expect(screen.getByText(`${facility}:`)).toBeInTheDocument()
+      );
+      expect(screen.getByText('Create')).toHaveAttribute('disabled');
+
+      /** Act - click Cancel button */
+      fireEvent(
+        screen.getByText('Cancel'),
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+
+      /** Assert - close modal callback to have been called  */
+      await waitFor(() => {
+        expect(mockCloseModalCallback).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
 
   describe('Error and Loading', () => {
     /** ensure mock function calls are cleared after test */
