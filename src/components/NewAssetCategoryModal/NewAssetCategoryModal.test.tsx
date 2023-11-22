@@ -11,7 +11,7 @@ import renderer from 'react-test-renderer';
 import { fetchByCollectionId as fetchCollectionFormServiceByCollectionId } from '@/redux/slices/collectionFormServiceSlice';
 import store from '@/redux/store';
 import NewAssetCategoryModal from './NewAssetCategoryModal';
-// import assetCategoryFacilitiesDataMock from '../../../__mocks__/assetCategoryFacilitiesDataMock';
+import assetCategoryFacilitiesDataMock from '../../../__mocks__/assetCategoryFacilitiesDataMock';
 
 /* default test query ID */
 const query: string = '66135000001760012';
@@ -75,6 +75,9 @@ describe('New Asset Category Modal', () => {
       expect(screen.getByLabelText('Removable Storage:')).toBeInTheDocument();
       expect(screen.getByLabelText('Serialised:')).toBeInTheDocument();
       expect(screen.getByText('Compatible Facilities:')).toBeInTheDocument();
+      assetCategoryFacilitiesDataMock.forEach((facility: string) =>
+        expect(screen.getByText(`${facility}:`)).toBeInTheDocument()
+      );
     });
   });
 
