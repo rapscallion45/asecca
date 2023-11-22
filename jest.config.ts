@@ -58,6 +58,7 @@ const jestConfig = {
     '<rootDir>/docs/',
     '<rootDir>/src/pages/_app.tsx',
     '<rootDir>/src/pages/_document.tsx',
+    '<rootDir>/src/hooks/useDraggable.ts',
   ],
 
   /**
