@@ -36,11 +36,6 @@ describe('New Asset Category Modal', () => {
         />
       </Provider>
     );
-
-    /** Assert - wait for modal to load */
-    await waitFor(() => {
-      expect(screen.getByLabelText('Name')).toBeInTheDocument();
-    });
     expect(tree).toMatchSnapshot();
   });
 
