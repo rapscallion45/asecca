@@ -137,9 +137,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -186,9 +183,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -250,9 +244,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -299,9 +290,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -363,9 +351,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -412,9 +397,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       />
                     </svg>
                   </span>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -472,9 +454,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                         d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                       />
                     </svg>
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </span>
                 </div>
               </div>
@@ -519,9 +498,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                         d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                       />
                     </svg>
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
                   </span>
                 </div>
               </div>
@@ -538,9 +514,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
           type="button"
         >
           Cancel
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
         </button>
         <button
           class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1fddvdp-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
@@ -687,9 +660,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -736,9 +706,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -800,9 +767,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -849,9 +813,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -913,9 +874,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -962,9 +920,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                     />
                   </svg>
                 </span>
-                <span
-                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                />
               </span>
               <span
                 class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
@@ -1022,9 +977,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
               </div>
             </div>
@@ -1069,9 +1021,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
                       d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                     />
                   </svg>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
                 </span>
               </div>
             </div>
@@ -1088,9 +1037,6 @@ exports[`New Asset Category Modal Renders correctly 1`] = `
         type="button"
       >
         Cancel
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
       </button>
       <button
         class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1fddvdp-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
