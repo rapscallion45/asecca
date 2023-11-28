@@ -1,5 +1,25 @@
 import { FC } from 'react';
-import { useMediaQuery, Theme } from '@mui/material';
+import { useMediaQuery, Theme, Breakpoint } from '@mui/material';
+
+/**
+ * MHidden Width types
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.23
+ *
+ * @typedef MHiddenWidthTypes
+ */
+export type MHiddenWidthTypes =
+  | 'xsDown'
+  | 'smDown'
+  | 'mdDown'
+  | 'lgDown'
+  | 'xlDown'
+  | 'xsUp'
+  | 'smUp'
+  | 'mdUp'
+  | 'lgUp'
+  | 'xlUp';
 
 /**
  * MHidden Props
@@ -9,20 +29,10 @@ import { useMediaQuery, Theme } from '@mui/material';
  *
  * @typedef IMHiddenProps
  * @prop {any} children - component children nodes
- * @prop {'xsDown' | 'smDown' | 'mdDown' | 'lgDown' | 'xlDown' | 'xsUp' | 'smUp' | 'mdUp' | 'lgUp' | 'xlUp'} width - width threshold for hiding children
+ * @prop {MHiddenWidthTypes} width - width threshold for hiding children
  */
 interface IMHiddenProps {
-  width:
-    | 'xsDown'
-    | 'smDown'
-    | 'mdDown'
-    | 'lgDown'
-    | 'xlDown'
-    | 'xsUp'
-    | 'smUp'
-    | 'mdUp'
-    | 'lgUp'
-    | 'xlUp';
+  width: MHiddenWidthTypes;
   children: any;
 }
 
@@ -42,17 +52,7 @@ interface IMHiddenProps {
 const MHidden: FC<IMHiddenProps> = (props) => {
   const { width, children } = props;
 
-  const breakpoint = width.substring(0, 2) as
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl';
+  const breakpoint = width.substring(0, 2) as Breakpoint;
 
   const hiddenUp = useMediaQuery((theme: Theme) =>
     theme.breakpoints.up(breakpoint)
