@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSnackbar, SnackbarKey } from 'notistack';
+import { useSnackbar, SnackbarKey, CloseReason } from 'notistack';
 import { AppDispatch, AppState } from '@/redux/store';
 import { removeNotification } from '../redux/slices/notificationsSlice';
 
@@ -81,11 +81,14 @@ const useNotifier = () => {
       /* display snackbar using notistack */
       enqueueSnackbar(message, {
         ...options,
-        onClose: (event, reason, myKey) => {
-          // @ts-ignore
+        onClose: (
+          event: SyntheticEvent<any, Event> | null,
+          reason: CloseReason,
+          myKey: SnackbarKey | undefined
+        ) => {
           if (options.onClose) options.onClose(event, reason, myKey);
         },
-        onExited: (event, myKey) => {
+        onExited: (node: HTMLElement, myKey: SnackbarKey) => {
           /* remove this snackbar from redux store */
           dispatch(removeNotification({ key: myKey }));
           removeDisplayed(myKey);
