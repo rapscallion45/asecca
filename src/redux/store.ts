@@ -42,11 +42,10 @@ const store = configureStore({
     collectionFormQuote: collectionFormQuoteReducer,
     collectionFormSOW: collectionFormSOWReducer,
   },
-  // @ts-ignore
-  middleware:
+  middleware: (getDefaultMiddleware) =>
     process.env.NODE_ENV === 'development'
-      ? (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
-      : (getDefaultMiddleware) => getDefaultMiddleware(),
+      ? getDefaultMiddleware().concat(logger)
+      : getDefaultMiddleware(),
 });
 
 /**
