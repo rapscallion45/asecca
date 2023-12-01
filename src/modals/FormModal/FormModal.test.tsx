@@ -4,9 +4,6 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { TriggerButtonTypes } from '@/modals/types';
 import FormModal from './FormModal';
 
-/* mock action function callback */
-const mockActionFuncCallback = jest.fn(() => {});
-
 /* test child component */
 const TestChild: FC = () => <div>Test child</div>;
 
@@ -14,11 +11,7 @@ const TestChild: FC = () => <div>Test child</div>;
 const testTitle: string = 'Test Confirm Modal';
 const testTriggerBtn: TriggerButtonTypes = {
   type: 'round',
-  text: 'Test Button Text',
-  // @ts-ignore
   icon: DeleteOutlineIcon,
-  iconStyle: { marginRight: '10px' },
-  closeMenu: mockActionFuncCallback,
 };
 
 /**

@@ -133,7 +133,6 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
         <FormModal
           triggerBtn={{
             type: 'menu',
-            // @ts-ignore
             icon: EditOutlinedIcon,
             iconStyle: { marginRight: '10px' },
             text: 'Edit Task Info',
@@ -156,7 +155,6 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             triggerBtn={{
               type: 'menu',
               text: 'Delete Task',
-              // @ts-ignore
               icon: DeleteOutlineIcon,
               iconStyle: { marginRight: '10px' },
               closeMenu: handleCloseMenu,
@@ -165,6 +163,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
             actionFunc={(closeModal) =>
               handleDelete(colIndex, taskIndex, closeModal)
             }
+            processing={false}
           />
         )}
         <Box sx={{ p: 2, pt: 1.5 }}>

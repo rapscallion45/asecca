@@ -5,7 +5,7 @@
  * @since 0.0.1
  */
 
-import { SvgIconProps } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 /**
  * Modal button size options
@@ -74,7 +74,7 @@ export type ModalButtonVariantType = 'outlined' | 'contained' | 'text';
 export interface INormalButtonType {
   type: 'normal';
   text?: string;
-  icon: (props: SvgIconProps) => JSX.Element;
+  icon: OverridableComponent<any>;
   size?: ModalButtonSizeType;
   style?: { [name: string]: string } | { [name: string]: number };
   variant?: ModalButtonVariantType;
@@ -98,7 +98,7 @@ export interface INormalButtonType {
  */
 export interface IRoundIconButtonType {
   type: 'round';
-  icon: (props: SvgIconProps) => JSX.Element;
+  icon: OverridableComponent<any>;
   size?: 'small' | 'medium' | 'large';
   style?: { [name: string]: string } | { [name: string]: number };
   variant?: 'outlined' | 'contained' | 'text';
@@ -122,7 +122,7 @@ export interface IRoundIconButtonType {
  */
 export interface IIconButtonType {
   type: 'icon';
-  icon: (props: SvgIconProps) => JSX.Element;
+  icon: OverridableComponent<any>;
   size?: ModalButtonSizeType;
   style?: { [name: string]: string } | { [name: string]: number };
   iconSize?: 'small' | 'inherit' | 'large';
@@ -148,7 +148,7 @@ export interface IIconButtonType {
 export interface IMenuItemButtonType {
   type: 'menu';
   text: string;
-  icon: (props: SvgIconProps) => JSX.Element;
+  icon: OverridableComponent<any>;
   closeMenu: () => void;
   iconStyle?: { [name: string]: string } | { [name: string]: number };
   className?: string;
@@ -171,7 +171,7 @@ export interface IMenuItemButtonType {
  */
 export interface IFabButtonType {
   type: 'fab';
-  icon: (props: SvgIconProps) => JSX.Element;
+  icon: OverridableComponent<any>;
   size?: 'small' | 'medium' | 'large';
   variant?: 'extended' | 'circular';
   text?: string;

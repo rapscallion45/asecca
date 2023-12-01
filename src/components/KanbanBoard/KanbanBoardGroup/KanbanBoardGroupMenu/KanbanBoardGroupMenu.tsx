@@ -139,7 +139,6 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
         <FormModal
           triggerBtn={{
             type: 'menu',
-            // @ts-ignore
             icon: EditOutlinedIcon,
             iconStyle: { marginRight: '10px' },
             text: 'Edit Group Info',
@@ -162,7 +161,6 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
             triggerBtn={{
               type: 'menu',
               text: 'Delete Group',
-              // @ts-ignore
               icon: DeleteOutlineIcon,
               iconStyle: { marginRight: '10px' },
               closeMenu: handleCloseMenu,
@@ -170,6 +168,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
             actionFunc={(closeModal) =>
               handleDelete(colIndex, groupIndex, closeModal)
             }
+            processing={false}
           />
         )}
         <Box sx={{ p: 2, pt: 1.5 }}>

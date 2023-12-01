@@ -107,7 +107,6 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                       <FormModal
                         triggerBtn={{
                           type: 'menu',
-                          // @ts-ignore
                           icon: ViewColumnIcon,
                           iconStyle: { marginRight: '10px' },
                           text: '+ Add Column',

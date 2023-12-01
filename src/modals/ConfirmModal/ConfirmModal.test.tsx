@@ -12,12 +12,8 @@ const testTitle: string = 'Test Confirm Modal';
 const testContextText: string = 'This is the test modal context text';
 const testActionBtnText: string = 'Test Action Button';
 const testTriggerBtn: TriggerButtonTypes = {
-  type: 'round',
-  text: 'Test Button Text',
-  // @ts-ignore
+  type: 'normal',
   icon: DeleteOutlineIcon,
-  iconStyle: { marginRight: '10px' },
-  closeMenu: mockActionFuncCallback,
 };
 
 /**

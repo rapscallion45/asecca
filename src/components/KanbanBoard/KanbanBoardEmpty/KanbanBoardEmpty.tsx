@@ -91,7 +91,6 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
           <FormModal
             triggerBtn={{
               type: 'normal',
-              // @ts-ignore
               icon: AddIcon,
               text: 'Add New Board',
               color: 'secondary',
@@ -118,7 +117,6 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
                   <FormModal
                     triggerBtn={{
                       type: 'menu',
-                      // @ts-ignore
                       icon: ViewColumnIcon,
                       iconStyle: { marginRight: '10px' },
                       text: '+ Add Column',

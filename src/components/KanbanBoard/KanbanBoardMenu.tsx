@@ -95,7 +95,6 @@ const KanbanBoardkMenu: FC<IKanbanBoardMenuProps> = (props) => {
         <FormModal
           triggerBtn={{
             type: 'menu',
-            // @ts-ignore
             icon: EditOutlinedIcon,
             iconStyle: { marginRight: '10px' },
             text: 'Edit Board Info',

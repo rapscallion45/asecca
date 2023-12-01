@@ -272,7 +272,6 @@ const CollectionFormItinerary: FC<ICollectionFormItineraryProps> = (props) => {
           <FormModal
             triggerBtn={{
               type: 'menu',
-              // @ts-ignore
               icon: CategoryIcon,
               iconStyle: { marginRight: '10px' },
               text: 'Add Asset Category +',
