@@ -1,4 +1,4 @@
-import { FC, useCallback, ChangeEvent } from 'react';
+import { FC, useCallback, ChangeEvent, InputHTMLAttributes } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, AppDispatch } from '@/redux/store';
 import {
@@ -262,8 +262,11 @@ const CollectionFormService: FC<ICollectionFormServiceProps> = (props) => {
                     getCollectionFormServiceTypeEnum(serviceData) !==
                       'Destruction'
                   }
-                  // @ts-ignore
-                  inputProps={{ 'data-testid': 'decomissioning-checkbox' }}
+                  inputProps={
+                    {
+                      'data-testid': 'decomissioning-checkbox',
+                    } as InputHTMLAttributes<HTMLInputElement>
+                  }
                 />
               </Grid>
             </Grid>
@@ -300,8 +303,11 @@ const CollectionFormService: FC<ICollectionFormServiceProps> = (props) => {
                     getCollectionFormServiceTypeEnum(serviceData) !==
                     'Recycling'
                   }
-                  // @ts-ignore
-                  inputProps={{ 'data-testid': 'ownership-checkbox' }}
+                  inputProps={
+                    {
+                      'data-testid': 'ownership-checkbox',
+                    } as InputHTMLAttributes<HTMLInputElement>
+                  }
                 />
               </Grid>
             </Grid>
@@ -339,8 +345,11 @@ const CollectionFormService: FC<ICollectionFormServiceProps> = (props) => {
                     getCollectionFormServiceTypeEnum(serviceData) !==
                     'Recycling'
                   }
-                  // @ts-ignore
-                  inputProps={{ 'data-testid': 'redelivery-checkbox' }}
+                  inputProps={
+                    {
+                      'data-testid': 'redelivery-checkbox',
+                    } as InputHTMLAttributes<HTMLInputElement>
+                  }
                 />
               </Grid>
             </Grid>

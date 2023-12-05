@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormControlLabel, Switch, Box, useTheme, styled } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -137,8 +137,11 @@ const ThemeModeSwitch: FC<IThemeModeSwitchProps> = (props) => {
             onChange={toggleTheme}
             sx={{ ml: 2.5, mr: -1 }}
             color="secondary"
-            // @ts-ignore
-            inputProps={{ 'data-testid': 'light-dark-btn' }}
+            inputProps={
+              {
+                'data-testid': 'light-dark-btn',
+              } as InputHTMLAttributes<HTMLInputElement>
+            }
           />
         }
         label=""

@@ -1,4 +1,11 @@
-import { FC, useState, useCallback, ChangeEvent, useEffect } from 'react';
+import {
+  FC,
+  useState,
+  useCallback,
+  ChangeEvent,
+  useEffect,
+  InputHTMLAttributes,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import {
@@ -342,8 +349,11 @@ const NewAssetCategoryModal: FC<INewAssetCategoryModalProps> = (props) => {
                             )
                           }
                           color="secondary"
-                          // @ts-ignore
-                          inputProps={{ 'data-testid': `${facility}-checkbox` }}
+                          inputProps={
+                            {
+                              'data-testid': `${facility}-checkbox`,
+                            } as InputHTMLAttributes<HTMLInputElement>
+                          }
                         />
                       </Grid>
                     </Grid>
