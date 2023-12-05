@@ -1,5 +1,12 @@
-import { FC, useState, useCallback } from 'react';
-import Link from 'next/link';
+import {
+  FC,
+  useState,
+  useCallback,
+  ForwardRefExoticComponent,
+  AnchorHTMLAttributes,
+  RefAttributes,
+} from 'react';
+import Link, { LinkProps } from 'next/link';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import {
@@ -10,9 +17,32 @@ import {
   ListItemText,
   ListItemIcon,
   ListItemButton,
+  ListItemButtonProps,
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { INavItemConfig } from './types';
+
+/**
+ * Nav Item Style Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.23
+ *
+ * @typedef INavItemStyleProps
+ * @prop {any} component - component to be rendered for nav item
+ * @prop {string} href - link url string
+ * @prop {string} target - link target type
+ */
+interface INavItemStyleProps extends ListItemButtonProps {
+  component?: ForwardRefExoticComponent<
+    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
+      LinkProps & {
+        children?: React.ReactNode;
+      } & RefAttributes<HTMLAnchorElement>
+  >;
+  href?: string;
+  target?: string;
+}
 
 /**
  * Nav Item Style
@@ -25,27 +55,29 @@ import { INavItemConfig } from './types';
  * @component
  * @return {Component} - styled menu nav item component
  */
-const NavItemStyle = styled(ListItemButton)(({ theme }) => ({
-  ...theme.typography.body2,
-  height: 48,
-  position: 'relative',
-  textTransform: 'capitalize',
-  paddingLeft: theme.spacing(3),
-  paddingRight: theme.spacing(2.5),
-  color: theme.palette.text.secondary,
-  '&:before': {
-    top: 0,
-    right: 0,
-    width: 3,
-    bottom: 0,
-    content: "''",
-    display: 'none',
-    position: 'absolute',
-    borderTopLeftRadius: 4,
-    borderBottomLeftRadius: 4,
-    backgroundColor: theme.palette.secondary.main,
-  },
-}));
+const NavItemStyle = styled(ListItemButton)<INavItemStyleProps>(
+  ({ theme }) => ({
+    ...theme.typography.body2,
+    height: 48,
+    position: 'relative',
+    textTransform: 'capitalize',
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(2.5),
+    color: theme.palette.text.secondary,
+    '&:before': {
+      top: 0,
+      right: 0,
+      width: 3,
+      bottom: 0,
+      content: "''",
+      display: 'none',
+      position: 'absolute',
+      borderTopLeftRadius: 4,
+      borderBottomLeftRadius: 4,
+      backgroundColor: theme.palette.secondary.main,
+    },
+  })
+);
 
 /**
  * Nav Item Icon Style
@@ -198,7 +230,6 @@ const NavItem: FC<INavItemProps> = (props) => {
               return (
                 <NavItemStyle
                   key={childItem.title}
-                  // @ts-ignore
                   component={Link}
                   href={childItem.path}
                   sx={{
@@ -236,7 +267,6 @@ const NavItem: FC<INavItemProps> = (props) => {
 
   return path ? (
     <NavItemStyle
-      // @ts-ignore
       component={Link}
       href={path}
       target={item.newTab ? '_blank' : ''}
