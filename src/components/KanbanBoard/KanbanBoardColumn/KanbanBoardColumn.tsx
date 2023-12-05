@@ -99,7 +99,6 @@ const KanbanBoardColumn: FC<IKanbanBoardColumnProps> = (props) => {
             <FormModal
               triggerBtn={{
                 type: 'normal',
-                // @ts-ignore
                 icon: TaskIcon,
                 text: '+ Add Task',
                 color: 'secondary',
