@@ -91,6 +91,19 @@ const DashboardRootStyle = styled('section')(({ theme }) => ({
 }));
 
 /**
+ * Base Dashboard Page App Bar Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.23
+ *
+ * @typedef IDashboardAppBarProps
+ * @prop {boolean} open - whether the app bar is closed (full width) or open (full width minus drawer width)
+ */
+interface IDashboardAppBarProps extends MuiAppBarProps {
+  open: boolean;
+}
+
+/**
  * Dashboard App Bar Style
  *
  * Dashboard App Bar styling for dashboard layout
@@ -103,8 +116,7 @@ const DashboardRootStyle = styled('section')(({ theme }) => ({
  */
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-  // @ts-ignore
-})<MuiAppBarProps>(({ theme, open }) => ({
+})<IDashboardAppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
@@ -119,19 +131,6 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
-/**
- * Base Dashboard Page Layout Props
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- *
- * @typedef IDashboardLayoutProps
- * @prop {ReactNode} children - component children nodes
- */
-interface IDashboardLayoutProps {
-  children?: ReactNode;
-}
 
 /**
  * Dashboard Drawer Style
@@ -170,6 +169,19 @@ const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
+
+/**
+ * Base Dashboard Page Layout Props
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ *
+ * @typedef IDashboardLayoutProps
+ * @prop {ReactNode} children - component children nodes
+ */
+interface IDashboardLayoutProps {
+  children?: ReactNode;
+}
 
 /**
  * Base Dashboard Page Layout
