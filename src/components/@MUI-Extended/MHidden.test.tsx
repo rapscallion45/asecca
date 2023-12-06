@@ -17,8 +17,13 @@ const TestChild: FC = () => <div>{testChildText}</div>;
 /* polyfill match media query */
 const createMatchMedia = (width: any) => (query: any) => ({
   matches: mediaQuery.match(query, { width }),
-  addListener: () => {},
-  removeListener: () => {},
+  media: query,
+  onchange: null,
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
 });
 
 /**
@@ -49,7 +54,6 @@ describe('MHidden', () => {
 
     it('Should render null if width prop includes "Down" and media query true', async () => {
       /** Arrange */
-      // @ts-ignore
       window.matchMedia = createMatchMedia(400);
 
       /** Act */
@@ -72,7 +76,6 @@ describe('MHidden', () => {
 
     it('Should render null if width prop includes "Up" and media query true', async () => {
       /** Arrange */
-      // @ts-ignore
       window.matchMedia = createMatchMedia(1920);
 
       /** Act */
