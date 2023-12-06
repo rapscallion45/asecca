@@ -62,11 +62,9 @@ const useKanbanBoardTaskFormController = (
    */
   const handleSubmit = (payload: IEditKanbanBoardTaskPayload) => {
     if (isEditMode) {
-      // @ts-ignore
       dispatch(editTask(payload as IEditKanbanBoardTaskPayload));
       if (closeModal) closeModal();
     } else {
-      // @ts-ignore
       dispatch(addTask(payload as IAddKanbanBoardTaskPayload));
       if (closeModal) closeModal();
     }

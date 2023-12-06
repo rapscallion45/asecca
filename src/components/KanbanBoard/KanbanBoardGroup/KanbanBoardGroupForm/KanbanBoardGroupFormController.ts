@@ -62,11 +62,9 @@ const useKanbanBoardGroupFormController = (
    */
   const handleSubmit = (payload: IEditKanbanBoardGroupPayload) => {
     if (isEditMode) {
-      // @ts-ignore
       dispatch(editTask(payload as IEditKanbanBoardGroupPayload));
       if (closeModal) closeModal();
     } else {
-      // @ts-ignore
       dispatch(addTask(payload as IAddKanbanBoardGroupPayload));
       if (closeModal) closeModal();
     }

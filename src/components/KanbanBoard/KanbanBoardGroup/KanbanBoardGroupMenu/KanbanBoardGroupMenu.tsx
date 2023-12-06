@@ -105,7 +105,6 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
     closeModal: () => void
   ) => {
     dispatch(
-      // @ts-ignore
       deleteTask({ colIndex: deleteColIndex, taskIndex: deleteTaskIndex })
     );
     closeModal();

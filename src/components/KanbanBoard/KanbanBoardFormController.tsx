@@ -75,11 +75,9 @@ const useKanbanBoardFormController = (
   const handleSubmit = (payload: IEditKanbanBoardPayload) => {
     if (!validate()) return;
     if (isEditMode) {
-      // @ts-ignore
       dispatch(editBoard(payload as IEditKanbanBoardPayload));
       if (closeModal) closeModal();
     } else {
-      // @ts-ignore
       dispatch(addBoard(payload as IAddKanbanBoardPayload));
       if (closeModal) closeModal();
     }
