@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DataTable/ErrorRow/ErrorRow.tsx</title>
+    <title>JSDoc: Source: components/KanbanBoard/types.ts</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/DataTable/ErrorRow/ErrorRow.tsx</h1>
+    <h1 class="page-title">Source: components/KanbanBoard/types.ts</h1>
 
     
 
@@ -26,59 +26,23 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { FC } from 'react';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import ErrorIcon from '@mui/icons-material/Error';
-import { IDataTableColumn } from '@/components/DataTable/types';
-
-/**
- * Data Table Error Row Props
+            <pre class="prettyprint source linenums"><code>/**
+ * Type and interface definitions for Kanban Board components
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- *
- * @typedef IErrorRowProps
- * @prop {Array&lt;IDataTableColumn>} columns - data table columns
- * @prop {string} message - error message string to display
+ * @since 0.0.23
  */
-interface IErrorRowProps {
-  columns: Array&lt;IDataTableColumn>;
-  message?: string;
-}
 
 /**
- * Data Table Error Row
- *
- * Table row component for handling row error styling and functionality
+ * Kanban Board Edit type
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
+ * @since 0.0.23
+ * @memberof KanbanBoard
  *
- * @component
- * @param {IErrorRowProps} props - component props
- * @returns {FC} - data table error row functional component
+ * @typedef KanbanBoardEditType - can either be 'edit' or 'add'
  */
-const ErrorRow: FC&lt;IErrorRowProps> = (props) => {
-  const { columns, message } = props;
-
-  return (
-    &lt;TableRow>
-      &lt;TableCell colSpan={columns.length}>
-        &lt;Box display="flex" flexDirection="column" py={7} alignItems="center">
-          &lt;ErrorIcon color="error" fontSize="medium" />
-          &lt;Typography variant="body1" mt={2}>
-            {message}
-          &lt;/Typography>
-        &lt;/Box>
-      &lt;/TableCell>
-    &lt;/TableRow>
-  );
-};
-
-export default ErrorRow;
+export type KanbanBoardEditType = 'edit' | 'add';
 </code></pre>
         </article>
     </section>
