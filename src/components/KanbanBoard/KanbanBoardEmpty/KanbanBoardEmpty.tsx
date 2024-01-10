@@ -13,6 +13,7 @@ import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import { IKanbanBoardState } from '@/redux/types';
 import FormModal from '@/modals/FormModal/FormModal';
 import KanbanBoardForm from '../KanbanBoardForm';
+import { KanbanBoardEditType } from '../types';
 
 /**
  * Kanban Board Empty Props
@@ -21,11 +22,11 @@ import KanbanBoardForm from '../KanbanBoardForm';
  * @since 0.0.1
  *
  * @typedef IKanbanBoardEmptyProps
- * @prop {string} type - add or edit type to show whether board has content
+ * @prop {KanbanBoardEditType} type - add or edit type to show whether board has content
  * @prop {boolean} canEdit - board is editable
  */
 interface IKanbanBoardEmptyProps {
-  type: string;
+  type: KanbanBoardEditType;
   canEdit?: boolean;
 }
 

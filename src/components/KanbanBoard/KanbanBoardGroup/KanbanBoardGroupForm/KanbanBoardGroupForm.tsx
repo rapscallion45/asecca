@@ -21,7 +21,7 @@ import useKanbanBoardTaskFormController from './KanbanBoardGroupFormController';
  * @prop {boolean} canEdit - group can be edited
  * @prop {Array<IKanbanBoardColumn>} columns - columns for group's board
  * @prop {IEditKanbanBoardGroupPayload} editData - group data to be edited
- * @prop {any} closeModal - on close modal callback handler
+ * @prop {function} closeModal - on close modal callback handler
  */
 interface IKanbanBoardGroupFormProps {
   isEditMode: boolean;
