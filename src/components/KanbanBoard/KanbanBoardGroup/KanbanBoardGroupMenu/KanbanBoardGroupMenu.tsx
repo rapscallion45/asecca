@@ -27,14 +27,14 @@ import KanbanBoardGroupForm from '../KanbanBoardGroupForm/KanbanBoardGroupForm';
  * @prop {boolean} canEdit - group can be edited
  * @prop {number} colIndex - column index of this group
  * @prop {number} groupIndex - index of group
- * @prop {IEditKanbanBoardGroupPayload} currentData - current group data
+ * @prop {IEditKanbanBoardGroupPayload} editData - group data to edit
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardGroupMenuProps {
   canEdit?: boolean;
   colIndex: number;
   groupIndex: number;
-  currentData: IEditKanbanBoardGroupPayload;
+  editData: IEditKanbanBoardGroupPayload;
   iconSize?: ModalButtonIconSizeType;
 }
 
@@ -51,13 +51,7 @@ interface IKanbanBoardGroupMenuProps {
  * @returns {FC} - kanban board group menu functional component
  */
 const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
-  const {
-    canEdit = false,
-    colIndex,
-    groupIndex,
-    currentData,
-    iconSize,
-  } = props;
+  const { canEdit = false, colIndex, groupIndex, editData, iconSize } = props;
   const dispatch = useDispatch<AppDispatch>();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
@@ -148,7 +142,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardGroupMenuProps> = (props) => {
           <KanbanBoardGroupForm
             isEditMode
             columns={kanbanData.columns}
-            currentData={currentData}
+            editData={editData}
             closeModal={handleCloseMenu}
           />
         </FormModal>

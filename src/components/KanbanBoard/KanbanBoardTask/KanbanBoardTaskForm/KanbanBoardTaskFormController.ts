@@ -24,13 +24,13 @@ import { IKanbanBoardColumn } from '@/lib/api/api-types';
  * @function
  * @param {boolean} isEditMode - is form creating a new task or editing existing task
  * @param {Array<IKanbanBoardColumn>} columns - column list for task's board
- * @param {IEditKanbanBoardTaskPayload} currentData - task data
+ * @param {IEditKanbanBoardTaskPayload} editData - task data to be edited
  * @param {any} closeModal - callback for closing the task form modal
  */
 const useKanbanBoardTaskFormController = (
   isEditMode: boolean,
   columns: Array<IKanbanBoardColumn>,
-  currentData?: IEditKanbanBoardTaskPayload,
+  editData?: IEditKanbanBoardTaskPayload,
   closeModal?: () => void
 ) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -80,14 +80,14 @@ const useKanbanBoardTaskFormController = (
    */
   const formik = useFormik({
     initialValues: {
-      name: currentData?.name || 'New Task',
-      status: currentData?.status || '',
-      taskIndex: currentData?.taskIndex || 0,
+      name: editData?.name || 'New Task',
+      status: editData?.status || '',
+      taskIndex: editData?.taskIndex || 0,
       newColIndex: columns.findIndex(
-        (col: IKanbanBoardColumn) => col.name === currentData?.status
+        (col: IKanbanBoardColumn) => col.name === editData?.status
       ),
       prevColIndex: columns.findIndex(
-        (col: IKanbanBoardColumn) => col.name === currentData?.status
+        (col: IKanbanBoardColumn) => col.name === editData?.status
       ),
     },
     validationSchema,

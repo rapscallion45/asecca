@@ -27,14 +27,14 @@ import KanbanBoardTaskForm from '../KanbanBoardTaskForm/KanbanBoardTaskForm';
  * @prop {boolean} canEdit - task can be edited
  * @prop {number} colIndex - column index of this task
  * @prop {number} taskIndex - index of task
- * @prop {IEditKanbanBoardTaskPayload} currentData - current task data
+ * @prop {IEditKanbanBoardTaskPayload} editData - task data to be edited
  * @prop {ModalButtonIconSizeType} iconSize - button icon size
  */
 interface IKanbanBoardTaskMenuProps {
   canEdit?: boolean;
   colIndex: number;
   taskIndex: number;
-  currentData: IEditKanbanBoardTaskPayload;
+  editData: IEditKanbanBoardTaskPayload;
   iconSize?: ModalButtonIconSizeType;
 }
 
@@ -51,7 +51,7 @@ interface IKanbanBoardTaskMenuProps {
  * @returns {FC} - kanban board task menu functional component
  */
 const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
-  const { canEdit, colIndex, taskIndex, currentData, iconSize } = props;
+  const { canEdit, colIndex, taskIndex, editData, iconSize } = props;
   const dispatch = useDispatch<AppDispatch>();
   const { data: kanbanData } = useSliceSelector() as IKanbanBoardState;
   const { deleteTask } = useSliceActions();
@@ -142,7 +142,7 @@ const KanbanBoardTaskMenu: FC<IKanbanBoardTaskMenuProps> = (props) => {
           <KanbanBoardTaskForm
             isEditMode
             columns={kanbanData.columns}
-            currentData={currentData}
+            editData={editData}
             closeModal={handleCloseMenu}
           />
         </FormModal>

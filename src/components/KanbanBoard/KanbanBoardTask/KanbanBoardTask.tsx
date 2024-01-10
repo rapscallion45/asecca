@@ -48,7 +48,7 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
     );
 
   /* build current data structure for this task */
-  const currentData: IEditKanbanBoardTaskPayload = {
+  const editData: IEditKanbanBoardTaskPayload = {
     name: task?.name || '',
     status: task?.status || '',
     newColIndex: colIndex,
@@ -93,7 +93,7 @@ const KanbanBoardTask: FC<IKanbanBoardTaskProps> = (props) => {
             <KanbanBoardTaskMenu
               colIndex={colIndex}
               taskIndex={taskIndex}
-              currentData={currentData}
+              editData={editData}
               iconSize="small"
             />
           </Box>

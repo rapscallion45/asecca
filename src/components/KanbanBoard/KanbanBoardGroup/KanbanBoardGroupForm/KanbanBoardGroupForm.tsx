@@ -20,14 +20,14 @@ import useKanbanBoardTaskFormController from './KanbanBoardGroupFormController';
  * @prop {boolean} isEditMode - determines whether this is a new group or editing
  * @prop {boolean} canEdit - group can be edited
  * @prop {Array<IKanbanBoardColumn>} columns - columns for group's board
- * @prop {IEditKanbanBoardGroupPayload} currentData - group data
+ * @prop {IEditKanbanBoardGroupPayload} editData - group data to be edited
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardGroupFormProps {
   isEditMode: boolean;
   canEdit?: boolean;
   columns: Array<IKanbanBoardColumn>;
-  currentData?: IEditKanbanBoardGroupPayload;
+  editData?: IEditKanbanBoardGroupPayload;
   closeModal?: () => void;
 }
 
@@ -45,17 +45,11 @@ interface IKanbanBoardGroupFormProps {
  * @returns {FC} - kanaban board group form functional component
  */
 const KanbanBoardTaskForm: FC<IKanbanBoardGroupFormProps> = (props) => {
-  const {
-    isEditMode,
-    canEdit = false,
-    columns,
-    currentData,
-    closeModal,
-  } = props;
+  const { isEditMode, canEdit = false, columns, editData, closeModal } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
     columns,
-    currentData,
+    editData,
     closeModal
   );
 

@@ -24,14 +24,14 @@ import useKanbanBoardTaskFormController from './KanbanBoardTaskFormController';
  * @prop {boolean} isEditMode - determines whether this is a new task or editing
  * @prop {boolean} canEdit - task can be edited
  * @prop {Array<IKanbanBoardColumn>} columns - columns for task's board
- * @prop {IEditKanbanBoardTaskPayload} currentData - task data
+ * @prop {IEditKanbanBoardTaskPayload} editData - task data to be edited
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardTaskFormProps {
   isEditMode: boolean;
   canEdit?: boolean;
   columns: Array<IKanbanBoardColumn>;
-  currentData?: IEditKanbanBoardTaskPayload;
+  editData?: IEditKanbanBoardTaskPayload;
   closeModal?: () => void;
 }
 
@@ -49,17 +49,11 @@ interface IKanbanBoardTaskFormProps {
  * @returns {FC} - kanaban board task form functional component
  */
 const KanbanBoardTaskForm: FC<IKanbanBoardTaskFormProps> = (props) => {
-  const {
-    isEditMode,
-    canEdit = false,
-    columns,
-    currentData,
-    closeModal,
-  } = props;
+  const { isEditMode, canEdit = false, columns, editData, closeModal } = props;
   const { saving, formik } = useKanbanBoardTaskFormController(
     isEditMode,
     columns,
-    currentData,
+    editData,
     closeModal
   );
 

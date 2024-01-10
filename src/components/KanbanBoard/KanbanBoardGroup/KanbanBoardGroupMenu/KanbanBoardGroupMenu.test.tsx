@@ -60,7 +60,7 @@ describe('Kanban Board Group Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardGroupMenu
-              currentData={testGroupData}
+              editData={testGroupData}
               colIndex={testIdx}
               groupIndex={testIdx}
             />
@@ -97,7 +97,7 @@ describe('Kanban Board Group Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardGroupMenu
-              currentData={testGroupData}
+              editData={testGroupData}
               colIndex={testIdx}
               groupIndex={testIdx}
             />
@@ -230,7 +230,7 @@ describe('Kanban Board Group Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardGroupMenu
-              currentData={testGroupData}
+              editData={testGroupData}
               colIndex={testIdx}
               groupIndex={testIdx}
             />

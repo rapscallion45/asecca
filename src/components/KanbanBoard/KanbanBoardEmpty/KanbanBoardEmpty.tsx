@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import { IKanbanBoard } from '@/lib/api/api-types';
 import { useSliceSelector } from '@/components/SliceProvider/SliceProvider';
 import { IKanbanBoardState } from '@/redux/types';
 import FormModal from '@/modals/FormModal/FormModal';
@@ -23,12 +22,10 @@ import KanbanBoardForm from '../KanbanBoardForm';
  *
  * @typedef IKanbanBoardEmptyProps
  * @prop {string} type - add or edit type to show whether board has content
- * @prop {IKanbanBoard} currentData - passed board data
  * @prop {boolean} canEdit - board is editable
  */
 interface IKanbanBoardEmptyProps {
   type: string;
-  currentData?: IKanbanBoard;
   canEdit?: boolean;
 }
 
@@ -45,7 +42,7 @@ interface IKanbanBoardEmptyProps {
  * @returns {FC} - empty board functional component
  */
 const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
-  const { type, currentData, canEdit = false } = props;
+  const { type, canEdit = false } = props;
   const theme = useTheme();
   const { loading } = useSliceSelector() as IKanbanBoardState;
 
@@ -97,7 +94,7 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
             }}
             title="Add New Board"
           >
-            <KanbanBoardForm isEditMode={false} currentData={currentData} />
+            <KanbanBoardForm isEditMode={false} />
           </FormModal>
         ) : (
           <div>
@@ -124,11 +121,7 @@ const KanbanBoardEmpty: FC<IKanbanBoardEmptyProps> = (props) => {
                     }}
                     title="Add Column"
                   >
-                    <KanbanBoardForm
-                      isEditMode
-                      currentData={currentData}
-                      closeModal={() => {}}
-                    />
+                    <KanbanBoardForm isEditMode closeModal={() => {}} />
                   </FormModal>
                 </CardContent>
               </Card>

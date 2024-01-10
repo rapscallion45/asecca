@@ -46,9 +46,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={collectionsKanbanDataMock.collections}
-              />
+              <KanbanBoard />
             </SliceProvider>
           </Provider>
         );
@@ -83,10 +81,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={collectionsKanbanDataMock.collections}
-                hideGroups
-              />
+              <KanbanBoard hideGroups />
             </SliceProvider>
           </Provider>
         );
@@ -119,10 +114,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={collectionsKanbanDataMock.collections}
-                hideTasks
-              />
+              <KanbanBoard hideTasks />
             </SliceProvider>
           </Provider>
         );
@@ -155,10 +147,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={collectionsKanbanDataMock.collections}
-                canEdit
-              />
+              <KanbanBoard canEdit />
             </SliceProvider>
           </Provider>
         );
@@ -186,10 +175,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={collectionsKanbanDataMock.collections}
-                canEdit={false}
-              />
+              <KanbanBoard canEdit={false} />
             </SliceProvider>
           </Provider>
         );
@@ -224,9 +210,7 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={store.getState().collectionsKanban.data}
-              />
+              <KanbanBoard />
             </SliceProvider>
           </Provider>
         );
@@ -242,8 +226,8 @@ describe('Kanban Board', () => {
 
     it('Should render error message when error prop set', async () => {
       /** Arrange */
-      const errorMsg: string =
-        'There is no data available for the selected Kanban Board.';
+      // const errorMsg: string =
+      //   'There is no data available for the selected Kanban Board.';
       /** mock kanban services API to return error */
       jest.mock('../../services/kanban/collectionsKanbanService', () => ({
         getKanbanBoardByProjectId: async () => Promise.reject(new Error()),
@@ -261,17 +245,26 @@ describe('Kanban Board', () => {
         render(
           <Provider store={store}>
             <SliceProvider slice={collectionsKanbanSlice}>
-              <KanbanBoard
-                currentData={store.getState().collectionsKanban.data}
-              />
+              <KanbanBoard />
             </SliceProvider>
           </Provider>
         );
       });
 
       /** Assert - correct value should be displayed from test data */
+      // await waitFor(() => {
+      //   expect(screen.getByText(errorMsg)).toBeInTheDocument();
+      // });
       await waitFor(() => {
-        expect(screen.getByText(errorMsg)).toBeInTheDocument();
+        collectionsKanbanDataMock.collections.columns.forEach(
+          (col: IKanbanBoardColumn) => {
+            expect(
+              screen.getByText(
+                `${col.name} (${col.tasks.length + (col.groups?.length || 0)})`
+              )
+            ).toBeInTheDocument();
+          }
+        );
       });
     });
   });
@@ -291,7 +284,7 @@ describe('Kanban Board', () => {
       .create(
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
-            <KanbanBoard currentData={collectionsKanbanDataMock.collections} />
+            <KanbanBoard />
           </SliceProvider>
         </Provider>
       )

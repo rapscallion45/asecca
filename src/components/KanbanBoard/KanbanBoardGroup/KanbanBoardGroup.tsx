@@ -48,7 +48,7 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
     );
 
   /* build current data structure for this group */
-  const currentData: IEditKanbanBoardGroupPayload = {
+  const editData: IEditKanbanBoardGroupPayload = {
     name: group?.name || '',
     status: group?.status || '',
     newColIndex: colIndex,
@@ -92,7 +92,7 @@ const KanbanBoardGroup: FC<IKanbanBoardGroupProps> = (props) => {
             <KanbanBoardGroupMenu
               colIndex={colIndex}
               groupIndex={groupIndex}
-              currentData={currentData}
+              editData={editData}
               iconSize="small"
             />
           </Box>

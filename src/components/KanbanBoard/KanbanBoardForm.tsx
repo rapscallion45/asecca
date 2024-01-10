@@ -12,8 +12,10 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoardState } from '@/redux/types';
 import useKanbanBoardFormController from './KanbanBoardFormController';
+import { useSliceSelector } from '../SliceProvider/SliceProvider';
 
 /**
  * Kanban Board Form Props
@@ -24,13 +26,11 @@ import useKanbanBoardFormController from './KanbanBoardFormController';
  * @typedef IKanbanBoardFormProps
  * @prop {boolean} isEditMode - determines whether this is a new board or editing
  * @prop {boolean} canEdit - board data can be edited
- * @prop {IKanbanBoard} currentData - current board data
  * @prop {any} closeModal - on close modal callback handler
  */
 interface IKanbanBoardFormProps {
   isEditMode: boolean;
   canEdit?: boolean;
-  currentData?: IKanbanBoard;
   closeModal?: () => void;
 }
 
@@ -48,7 +48,8 @@ interface IKanbanBoardFormProps {
  * @returns {FC} - kanaban board form functional component
  */
 const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
-  const { isEditMode, canEdit = false, currentData, closeModal } = props;
+  const { isEditMode, canEdit = false, closeModal } = props;
+  const { data: currentData } = useSliceSelector() as IKanbanBoardState;
   const [newColumns, setNewColumns] = useState<Array<IKanbanBoardColumn>>(
     currentData?.columns || [
       { name: 'Todo', tasks: [] },
@@ -59,7 +60,6 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
   const { saving, formik } = useKanbanBoardFormController(
     isEditMode,
     newColumns,
-    currentData,
     closeModal
   );
 
@@ -158,23 +158,22 @@ const KanbanBoardForm: FC<IKanbanBoardFormProps> = (props) => {
             </FormControl>
           </Box>
         ))}
-        {canEdit && (
-          <Box mt={2}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => {
-                setNewColumns((state: Array<IKanbanBoardColumn>) => [
-                  ...state,
-                  { name: '', tasks: [], groups: [] },
-                ]);
-              }}
-              fullWidth
-            >
-              + Add New Column
-            </Button>
-          </Box>
-        )}
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              setNewColumns((state: Array<IKanbanBoardColumn>) => [
+                ...state,
+                { name: '', tasks: [], groups: [] },
+              ]);
+            }}
+            fullWidth
+            disabled={!canEdit}
+          >
+            + Add New Column
+          </Button>
+        </Box>
       </Box>
       {!isEditMode ? (
         <Button

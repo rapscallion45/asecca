@@ -36,11 +36,7 @@ interface IKanbanBoardHeaderProps {
  */
 const KanbanBoardHeader: FC<IKanbanBoardHeaderProps> = (props) => {
   const { name } = props;
-  const {
-    data: boardData,
-    error,
-    loading,
-  } = useSliceSelector() as IKanbanBoardState;
+  const { error, loading } = useSliceSelector() as IKanbanBoardState;
 
   return (
     <>
@@ -59,7 +55,7 @@ const KanbanBoardHeader: FC<IKanbanBoardHeaderProps> = (props) => {
         {!loading && !error ? (
           <Box display="flex" justifyContent="end" sx={{ flexGrow: 1 }}>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <KanbanBoardMenu currentData={boardData} />
+              <KanbanBoardMenu />
             </Box>
           </Box>
         ) : (

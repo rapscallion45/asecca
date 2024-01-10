@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 import {
   IKanbanBoardState,
   IAddKanbanBoardPayload,
@@ -23,18 +23,16 @@ import {
  *
  * @function
  * @param {boolean} isEditMode - is form creating a new board or editing existing task
- * @param {IKanbanBoard} currentData - board data
  * @param {Array<IKanbanBoardColumn>} newColumns - form column state data
  * @param {any} closeModal - callback for closing the board form modal
  */
 const useKanbanBoardFormController = (
   isEditMode: boolean,
   newColumns: Array<IKanbanBoardColumn>,
-  currentData?: IKanbanBoard,
   closeModal?: () => void
 ) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { saving } = useSliceSelector() as IKanbanBoardState;
+  const { data: currentData, saving } = useSliceSelector() as IKanbanBoardState;
   const { addBoard, editBoard } = useSliceActions();
 
   /**

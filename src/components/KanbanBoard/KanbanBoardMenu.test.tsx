@@ -46,9 +46,7 @@ describe('Kanban Board Menu', () => {
       render(
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
-            <KanbanBoardMenu
-              currentData={store.getState().collectionsKanban.data}
-            />
+            <KanbanBoardMenu />
           </SliceProvider>
         </Provider>
       );
@@ -81,9 +79,7 @@ describe('Kanban Board Menu', () => {
       render(
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
-            <KanbanBoardMenu
-              currentData={store.getState().collectionsKanban.data}
-            />
+            <KanbanBoardMenu />
           </SliceProvider>
         </Provider>
       );
@@ -146,9 +142,7 @@ describe('Kanban Board Menu', () => {
       .create(
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
-            <KanbanBoardMenu
-              currentData={store.getState().collectionsKanban.data}
-            />
+            <KanbanBoardMenu />
           </SliceProvider>
         </Provider>
       )

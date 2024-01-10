@@ -60,7 +60,7 @@ describe('Kanban Board Task Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardTaskMenu
-              currentData={testTaskData}
+              editData={testTaskData}
               colIndex={testIdx}
               taskIndex={testIdx}
             />
@@ -97,7 +97,7 @@ describe('Kanban Board Task Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardTaskMenu
-              currentData={testTaskData}
+              editData={testTaskData}
               colIndex={testIdx}
               taskIndex={testIdx}
             />
@@ -230,7 +230,7 @@ describe('Kanban Board Task Menu', () => {
         <Provider store={store}>
           <SliceProvider slice={collectionsKanbanSlice}>
             <KanbanBoardTaskMenu
-              currentData={testTaskData}
+              editData={testTaskData}
               colIndex={testIdx}
               taskIndex={testIdx}
             />

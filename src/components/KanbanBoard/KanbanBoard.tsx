@@ -6,7 +6,7 @@ import KanbanBoardEmpty from '@/components/KanbanBoard/KanbanBoardEmpty/KanbanBo
 import Column from '@/components/KanbanBoard/KanbanBoardColumn/KanbanBoardColumn';
 import ScrollDrag from '@/components/ScrollDrag/ScrollDrag';
 import ClientOnly from '@/components/ClientOnly/ClientOnly';
-import { IKanbanBoard, IKanbanBoardColumn } from '@/lib/api/api-types';
+import { IKanbanBoardColumn } from '@/lib/api/api-types';
 import FormModal from '@/modals/FormModal/FormModal';
 import { IKanbanBoardState } from '@/redux/types';
 import KanbanBoardForm from './KanbanBoardForm';
@@ -19,13 +19,11 @@ import { useSliceSelector } from '../SliceProvider/SliceProvider';
  * @since 0.0.7
  *
  * @typedef IKanbanBoardProps
- * @prop {IKanbanBoard} currentData - passed board data
  * @prop {boolean} canEdit - can edit board data
  * @prop {boolean} hideTasks - board will not display tasks
  * @prop {boolean} hideGroups - board will not display groups
  */
 interface IKanbanBoardProps {
-  currentData: IKanbanBoard;
   canEdit?: boolean;
   hideTasks?: boolean;
   hideGroups?: boolean;
@@ -43,16 +41,15 @@ interface IKanbanBoardProps {
  * @returns {FC} - Kanban Board interface functional component
  */
 const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
-  const {
-    currentData,
-    canEdit = false,
-    hideTasks = false,
-    hideGroups = false,
-  } = props;
+  const { canEdit = false, hideTasks = false, hideGroups = false } = props;
   const theme = useTheme();
-  //   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
-  const { loading, error, saving, edited } =
-    useSliceSelector() as IKanbanBoardState;
+  const {
+    data: currentData,
+    loading,
+    error,
+    saving,
+    edited,
+  } = useSliceSelector() as IKanbanBoardState;
 
   /**
    * Callback handler for cancelling changes to board
@@ -114,11 +111,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
                         }}
                         title="Add Column"
                       >
-                        <KanbanBoardForm
-                          isEditMode
-                          currentData={currentData}
-                          closeModal={() => {}}
-                        />
+                        <KanbanBoardForm isEditMode closeModal={() => {}} />
                       </FormModal>
                     </CardContent>
                   </Card>
@@ -128,7 +121,7 @@ const KanbanBoard: FC<IKanbanBoardProps> = (props) => {
           </Box>
         ) : (
           <Box mt={2}>
-            <KanbanBoardEmpty type="edit" currentData={currentData} />
+            <KanbanBoardEmpty type="edit" />
           </Box>
         )}
       </ScrollDrag>

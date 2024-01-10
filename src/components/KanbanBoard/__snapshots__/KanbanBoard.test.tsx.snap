@@ -31,8 +31,107 @@ exports[`Kanban Board Renders correctly 1`] = `
             className="simplebar-content"
           >
             <div
-              className="MuiBox-root css-8npigc"
-            />
+              className="MuiBox-root css-1yuhvjn"
+            >
+              <div
+                className="MuiBox-root css-1xhj18k"
+                data-testid="kanban-board-loading-skeleton"
+              >
+                <div
+                  className="MuiBox-root css-1ay9vb9"
+                >
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8n1xzc-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 50,
+                        "width": 190,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                </div>
+                <div
+                  className="MuiBox-root css-1ay9vb9"
+                >
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8n1xzc-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 50,
+                        "width": 190,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                </div>
+                <div
+                  className="MuiBox-root css-1ay9vb9"
+                >
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-pulse css-8n1xzc-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 50,
+                        "width": 190,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                  <span
+                    className="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse css-nko6dn-MuiSkeleton-root"
+                    style={
+                      {
+                        "height": 100,
+                        "width": 270,
+                      }
+                    }
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
