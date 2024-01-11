@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import { SlideProps } from '@mui/material';
 import HideOnScroll from './HideOnScroll';
 
 /* test child component */
@@ -9,17 +10,12 @@ const TestChild: FC = () => <div>Test child</div>;
 jest.mock('@mui/material/useScrollTrigger', () => () => false);
 
 /* mock MUI Slide component */
-jest.mock('@mui/material/Slide', () => (props: any) => {
-  const { id, name, min, max, onChange, testid } = props;
+jest.mock('@mui/material/Slide', () => (props: SlideProps) => {
+  const { id, onChange } = props;
   return (
     <input
-      data-testid={testid}
-      type="range"
-      id={id}
-      name={name}
-      min={min}
-      max={max}
-      onChange={(event) => onChange(event.target.value)}
+      data-testid={id}
+      onChange={(event: FormEvent<HTMLElement>) => onChange && onChange(event)}
     />
   );
 });

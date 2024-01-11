@@ -15,7 +15,7 @@ const testChildText: string = 'Test Child Text';
 const TestChild: FC = () => <div>{testChildText}</div>;
 
 /* polyfill match media query */
-const createMatchMedia = (width: any) => (query: any) => ({
+const createMatchMedia = (width: number) => (query: string) => ({
   matches: mediaQuery.match(query, { width }),
   media: query,
   onchange: null,

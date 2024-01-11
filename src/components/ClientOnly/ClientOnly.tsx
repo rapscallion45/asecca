@@ -9,7 +9,7 @@ import { FC, useState, useEffect, ReactNode } from 'react';
  * @typedef IClientOnlyProps
  * @prop {ReactNode} children - component children nodes
  */
-interface IClientOnlyProps {
+export interface IClientOnlyProps {
   children: ReactNode;
 }
 

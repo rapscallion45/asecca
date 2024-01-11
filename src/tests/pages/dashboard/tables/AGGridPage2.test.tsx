@@ -5,6 +5,7 @@ import createEmotionCache from '@/utils/createEmotionCache';
 import ThemeConfig from '@/styles/theme/ThemeConfig';
 import store from '@/redux/store';
 import AGGridTestPage from '@/pages/dashboard/tables/aggrid-page-2';
+import { IClientOnlyProps } from '@/components/ClientOnly/ClientOnly';
 
 /* AG Grid specific imports */
 import 'ag-grid-enterprise';
@@ -12,7 +13,7 @@ import 'ag-grid-enterprise';
 /* mock Client Only renderer - just render children */
 jest.mock(
   '../../../../components/ClientOnly/ClientOnly',
-  () => (props: any) => props.children
+  () => (props: IClientOnlyProps) => props.children
 );
 
 /**

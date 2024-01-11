@@ -14,6 +14,7 @@ import {
 import store from '../../redux/store';
 import KanbanBoardForm from './KanbanBoardForm';
 import SliceProvider from '../SliceProvider/SliceProvider';
+import { IClientOnlyProps } from '../ClientOnly/ClientOnly';
 // import collectionsKanbanDataMock from '../../../__mocks__/Kanban/collectionsKanbanDataMock';
 // import { IKanbanBoardColumn } from '@/lib/api/api-types';
 
@@ -24,7 +25,10 @@ const query: string = '66135000001760012';
 const mockCloseModalCallback = jest.fn(() => {});
 
 /* mock Client Only renderer - just render children */
-jest.mock('../ClientOnly/ClientOnly', () => (props: any) => props.children);
+jest.mock(
+  '../ClientOnly/ClientOnly',
+  () => (props: IClientOnlyProps) => props.children
+);
 
 /**
  * Kanban Board Form Unit Tests

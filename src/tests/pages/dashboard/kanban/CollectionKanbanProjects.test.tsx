@@ -5,11 +5,12 @@ import createEmotionCache from '@/utils/createEmotionCache';
 import ThemeConfig from '@/styles/theme/ThemeConfig';
 import store from '@/redux/store';
 import CollectionProjectsKanbanPage from '@/pages/dashboard/kanban/collection-projects';
+import { IClientOnlyProps } from '@/components/ClientOnly/ClientOnly';
 
 /* mock Client Only renderer - just render children */
 jest.mock(
   '../../../../components/ClientOnly/ClientOnly',
-  () => (props: any) => props.children
+  () => (props: IClientOnlyProps) => props.children
 );
 
 /**

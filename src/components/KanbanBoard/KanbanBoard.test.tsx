@@ -11,12 +11,16 @@ import store from '../../redux/store';
 import KanbanBoard from './KanbanBoard';
 import collectionsKanbanDataMock from '../../../__mocks__/Kanban/collectionsKanbanDataMock';
 import SliceProvider from '../SliceProvider/SliceProvider';
+import { IClientOnlyProps } from '../ClientOnly/ClientOnly';
 
 /* default test query ID */
 const query: string = '66135000001760012';
 
 /* mock Client Only renderer - just render children */
-jest.mock('../ClientOnly/ClientOnly', () => (props: any) => props.children);
+jest.mock(
+  '../ClientOnly/ClientOnly',
+  () => (props: IClientOnlyProps) => props.children
+);
 
 /**
  * Kanban Board Unit Tests

@@ -5,15 +5,11 @@ exports[`Hide On Scroll Renders correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <input
-        type="range"
-      />
+      <input />
     </div>
   </body>,
   "container": <div>
-    <input
-      type="range"
-    />
+    <input />
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
