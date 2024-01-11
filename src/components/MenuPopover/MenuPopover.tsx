@@ -41,8 +41,7 @@ const ArrowStyle = styled('span')(({ theme }) => ({
  * @prop {ReactNode} children - child nodes
  * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  * @prop {any} other - passed props
- * @prop {any} onClose - popover close callback
- * @prop {any} anchorE1 - popover anchor element
+ * @prop {function} onClose - popover close callback
  * @prop {any} x - all other props
  */
 interface IMenuPopoverProps {
@@ -51,7 +50,6 @@ interface IMenuPopoverProps {
   sx?: SxProps<Theme> | undefined;
   other?: any;
   onClose?: () => void;
-  anchorEl: any;
   // all other props
   [x: string]: any;
 }
