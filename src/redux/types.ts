@@ -675,20 +675,6 @@ export interface ICollectionFormQuoteApplyConflictingQuotePayload {
 }
 
 /**
- * Collection Form Quote Conflicts Rows Conflicts data type
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.19
- *
- * @typedef ICollectionFormQuoteConflictsRowsData
- * @prop {string} modelId - model for which this apply action updates
- */
-export interface ICollectionFormQuoteConflictsRowsConflictsData
-  extends IQuoteConflictsData {
-  modelId: string;
-}
-
-/**
  * Collection Form Quote Conflicts Rows Priced Model data type
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -699,6 +685,20 @@ export interface ICollectionFormQuoteConflictsRowsConflictsData
  */
 export interface ICollectionFormQuoteConflictsRowsPricedModelData
   extends IQuotePricedModelData {
+  modelId: string;
+}
+
+/**
+ * Collection Form Quote Conflicts Rows Conflicts data type
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.19
+ *
+ * @typedef ICollectionFormQuoteConflictsRowsData
+ * @prop {string} modelId - model for which this apply action updates
+ */
+export interface ICollectionFormQuoteConflictsRowsConflictsData
+  extends IQuoteConflictsData {
   modelId: string;
 }
 

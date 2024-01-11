@@ -133,12 +133,21 @@ const initialCollectionFormQuoteState: ICollectionFormQuoteState = {
         ),
       })
     )
-    .reduce((r: any, o: any) => {
-      Object.keys(o).forEach((k) => {
-        r.push(o[k]);
-      });
-      return r;
-    }, [])
+    .reduce(
+      (
+        accumulator: Array<
+          | ICollectionFormQuoteConflictsRowsConflictsData
+          | ICollectionFormQuoteConflictsRowsPricedModelData
+        >,
+        currentValue: any
+      ) => {
+        Object.keys(currentValue).forEach((item: string) => {
+          accumulator.push(currentValue[item]);
+        });
+        return accumulator;
+      },
+      []
+    )
     .flat(1),
   selectedQuotes: [collectionFormQuoteDataMock.quotes[0]],
   availableQuotes: collectionFormQuoteDataMock.quotes.slice(
@@ -267,12 +276,21 @@ const collectionFormQuoteSlice = createSlice({
             ),
           })
         )
-        .reduce((r: any, o: any) => {
-          Object.keys(o).forEach((k) => {
-            r.push(o[k]);
-          });
-          return r;
-        }, [])
+        .reduce(
+          (
+            accumulator: Array<
+              | ICollectionFormQuoteConflictsRowsConflictsData
+              | ICollectionFormQuoteConflictsRowsPricedModelData
+            >,
+            currentValue: any
+          ) => {
+            Object.keys(currentValue).forEach((item: string) => {
+              accumulator.push(currentValue[item]);
+            });
+            return accumulator;
+          },
+          []
+        )
         .flat(1);
       state.edited = false;
     },
