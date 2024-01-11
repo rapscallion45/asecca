@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Popover } from '@mui/material';
+import { Popover, SxProps, Theme } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 
 /**
@@ -39,7 +39,7 @@ const ArrowStyle = styled('span')(({ theme }) => ({
  * @typedef IMenuPopoverProps
  * @prop {boolean} open - popover open flag
  * @prop {ReactNode} children - child nodes
- * @prop {any} sx - custom styling options
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  * @prop {any} other - passed props
  * @prop {any} onClose - popover close callback
  * @prop {any} anchorE1 - popover anchor element
@@ -48,7 +48,7 @@ const ArrowStyle = styled('span')(({ theme }) => ({
 interface IMenuPopoverProps {
   open: boolean;
   children?: ReactNode;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
   other?: any;
   onClose?: () => void;
   anchorEl: any;

@@ -1,4 +1,5 @@
-import { SnackbarKey } from 'notistack';
+import { SyntheticEvent } from 'react';
+import { SnackbarKey, CloseReason } from 'notistack';
 import { AlertColor } from '@mui/material';
 import {
   CostsConfigCostSource,
@@ -831,12 +832,16 @@ export interface IUserPermissionLevelState {
  * @typedef INotificationOptions
  * @prop {SnackbarKey} key - ID key of the notification
  * @prop {AlertColor} variant - notification type, i.e. "error", "success"
- * @prop {any} onClose - callback function invoked when notification is closed
+ * @prop {function} onClose - callback function invoked when notification is closed
  */
 export interface INotificationOptions {
   key: SnackbarKey;
   variant: AlertColor;
-  onClose?: any;
+  onClose?: (
+    event: SyntheticEvent<any, Event> | null,
+    reason: CloseReason,
+    myKey: SnackbarKey | undefined
+  ) => void;
 }
 
 /**

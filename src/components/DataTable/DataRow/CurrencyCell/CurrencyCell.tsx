@@ -7,7 +7,14 @@ import {
   useCallback,
   useEffect,
 } from 'react';
-import { Input, InputAdornment, FormControl, IconButton } from '@mui/material';
+import {
+  Input,
+  InputAdornment,
+  FormControl,
+  IconButton,
+  SxProps,
+  Theme,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { IDataTableEditCurrencyCellValueCallback } from '../../types';
@@ -24,14 +31,14 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  * @prop {boolean} canEdit - cell is editable flag
  * @prop {string} value - cell value, can be null
  * @prop {IDataTableEditCurrencyCellValueCallback} submitCellValue - submit cell value upon update callback
- * @prop {any} sx - cell styling overrrides
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  */
 interface ICurrencyCellProps {
   inputId: string;
   canEdit: boolean;
   value: string | null;
   submitCellValue?: IDataTableEditCurrencyCellValueCallback;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 /**

@@ -18,6 +18,7 @@ import {
   ICollectionFormFacilityData,
   ICollectionFormFacilityAssetCategoryFacilitiesDataPayload,
   ICollectionFormFacilityWorkflowsDataPayload,
+  ICollectionFormFacilityWorkflowsData,
 } from '@/lib/api/api-types';
 import {
   saveByCollectionId as saveFacilityByCollectionId,
@@ -300,20 +301,22 @@ const CollectionFormFacility: FC<ICollectionFormFacilityProps> = (props) => {
           {columns.find((col: IDataTableColumn) => col.key === colKey)
             ?.allowUnassigned && <MenuItem value="">Unassigned</MenuItem>}
           {/* map passed select options */}
-          {options?.map((option: any) => (
-            <MenuItem
-              key={`${data.rows[rowIdx].asset_category}-${option}-option`}
-              value={
-                typeof option === 'object' && 'name' in option
+          {options?.map(
+            (option: ICollectionFormFacilityWorkflowsData | string) => (
+              <MenuItem
+                key={`${data.rows[rowIdx].asset_category}-${option}-option`}
+                value={
+                  typeof option === 'object' && 'name' in option
+                    ? option.name
+                    : option
+                }
+              >
+                {typeof option === 'object' && 'name' in option
                   ? option.name
-                  : option
-              }
-            >
-              {typeof option === 'object' && 'name' in option
-                ? option.name
-                : option}
-            </MenuItem>
-          ))}
+                  : option}
+              </MenuItem>
+            )
+          )}
         </Select>
       </FormControl>
     ),

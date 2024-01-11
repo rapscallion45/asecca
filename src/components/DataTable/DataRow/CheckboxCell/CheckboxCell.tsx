@@ -1,5 +1,5 @@
 import { FC, useCallback, ChangeEvent, memo } from 'react';
-import { Checkbox } from '@mui/material';
+import { Checkbox, SxProps, Theme } from '@mui/material';
 import { IDataTableEditCheckboxCellValueCallback } from '../../types';
 import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
 
@@ -14,14 +14,14 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  * @prop {boolean} canEdit - cell is editable flag
  * @prop {boolean | null} value - cell boolean value, can be null
  * @prop {IDataTableEditCheckboxCellValueCallback} submitCellValue - submit cell value
- * @prop {any} sx - cell styling overrrides
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  */
 interface ICheckboxCellProps {
   inputId: string;
   canEdit: boolean;
   value: boolean | null;
   submitCellValue?: IDataTableEditCheckboxCellValueCallback;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 /**

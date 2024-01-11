@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useMediaQuery, Theme, Breakpoint } from '@mui/material';
 
 /**
@@ -28,12 +28,12 @@ export type MHiddenWidthTypes =
  * @since 0.0.1
  *
  * @typedef IMHiddenProps
- * @prop {any} children - component children nodes
+ * @prop {ReactNode} children - component children nodes
  * @prop {MHiddenWidthTypes} width - width threshold for hiding children
  */
 interface IMHiddenProps {
   width: MHiddenWidthTypes;
-  children: any;
+  children: ReactNode;
 }
 
 /**
@@ -62,11 +62,11 @@ const MHidden: FC<IMHiddenProps> = (props) => {
   );
 
   if (width.includes('Down')) {
-    return hiddenDown ? null : children;
+    return hiddenDown ? null : <div>{children}</div>;
   }
 
   if (width.includes('Up')) {
-    return hiddenUp ? null : children;
+    return hiddenUp ? null : <div>{children}</div>;
   }
 
   return null;

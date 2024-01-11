@@ -4,6 +4,8 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  SxProps,
+  Theme,
 } from '@mui/material';
 import {
   DataTableColumnSelectValueType,
@@ -25,7 +27,7 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  * @prop {boolean} allowUnassigned - allow the dropdown to be unassigned
  * @prop {string} unassignedText - string to display when dropdown unassigned
  * @prop {IDataTableEditSelectCellValueCallback} submitCellValue - submit cell value
- * @prop {any} sx - cell styling overrrides
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  */
 interface ISelectCellProps {
   inputId: string;
@@ -35,7 +37,7 @@ interface ISelectCellProps {
   allowUnassigned?: boolean;
   unassignedText?: string;
   submitCellValue?: IDataTableEditSelectCellValueCallback;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 /**

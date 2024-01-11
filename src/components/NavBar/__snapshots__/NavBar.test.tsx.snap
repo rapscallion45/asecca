@@ -7,62 +7,64 @@ exports[`NavBar Renders correctly 1`] = `
   <div
     className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1tfylnl-MuiToolbar-root"
   >
-    <button
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-68dm4j-MuiButtonBase-root-MuiIconButton-root"
-      disabled={false}
-      onBlur={[Function]}
-      onContextMenu={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      tabIndex={0}
-      type="button"
-    >
-      <svg
-        aria-hidden={true}
-        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-        color="black"
-        data-testid="MenuIcon"
-        focusable="false"
-        viewBox="0 0 24 24"
+    <div>
+      <button
+        className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-68dm4j-MuiButtonBase-root-MuiIconButton-root"
+        disabled={false}
+        onBlur={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
       >
-        <path
-          d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-        />
-      </svg>
-    </button>
-    <a
-      href="/"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onTouchStart={[Function]}
-    >
-      <img
-        alt="Asecca logo"
-        data-nimg="1"
-        decoding="async"
-        height={30}
-        loading="lazy"
-        onError={[Function]}
-        onLoad={[Function]}
-        src="/_next/image?url=%2Flogoblack.webp&w=384&q=75"
-        srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=384&q=75 2x"
-        style={
-          {
-            "color": "transparent",
-            "marginTop": "5px",
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          color="black"
+          data-testid="MenuIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+          />
+        </svg>
+      </button>
+      <a
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <img
+          alt="Asecca logo"
+          data-nimg="1"
+          decoding="async"
+          height={30}
+          loading="lazy"
+          onError={[Function]}
+          onLoad={[Function]}
+          src="/_next/image?url=%2Flogoblack.webp&w=384&q=75"
+          srcSet="/_next/image?url=%2Flogoblack.webp&w=256&q=75 1x, /_next/image?url=%2Flogoblack.webp&w=384&q=75 2x"
+          style={
+            {
+              "color": "transparent",
+              "marginTop": "5px",
+            }
           }
-        }
-        width={150}
-      />
-    </a>
+          width={150}
+        />
+      </a>
+    </div>
     <div
       className="MuiBox-root css-i9gxme"
     />

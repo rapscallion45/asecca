@@ -6,13 +6,17 @@ exports[`MHidden Renders correctly 1`] = `
   "baseElement": <body>
     <div>
       <div>
-        Test Child Text
+        <div>
+          Test Child Text
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div>
-      Test Child Text
+      <div>
+        Test Child Text
+      </div>
     </div>
   </div>,
   "debug": [Function],

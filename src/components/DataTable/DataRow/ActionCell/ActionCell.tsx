@@ -1,4 +1,5 @@
 import { FC, ReactNode, memo } from 'react';
+import { SxProps, Theme } from '@mui/material';
 import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
 
 /**
@@ -9,11 +10,11 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  *
  * @typedef IActionCellProps
  * @prop {ReactNode} getActionComponent - get component to present
- * @prop {any} sx - cell styling overrrides
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  */
 interface IActionCellProps {
   getActionComponent?: () => ReactNode;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 /**

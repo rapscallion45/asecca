@@ -1,4 +1,5 @@
 import { FC, memo } from 'react';
+import { SxProps, Theme } from '@mui/material';
 import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
 
 /**
@@ -9,11 +10,11 @@ import StyledTableCell from '../StyledCellWrapper/StyledCellWrapper';
  *
  * @typedef ICellProps
  * @prop {string | Null} value - cell value, can be null
- * @prop {any} sx - cell styling overrrides
+ * @prop {SxProps<Theme> | undefined} sx - cell styling overrrides
  */
 interface ICellProps {
   value: string | null;
-  sx?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 /**
