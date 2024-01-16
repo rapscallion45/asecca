@@ -9,6 +9,7 @@ import {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
+ * @memberof Utils
  *
  * @param {ICollectionFormServiceData} serviceData - data from collection form
  * @param {boolean} ownershipRetentionFlag - decommission value to be updated

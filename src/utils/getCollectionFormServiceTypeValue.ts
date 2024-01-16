@@ -10,6 +10,7 @@ import {
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.15
+ * @memberof Utils
  *
  * @param {CollectionFormServiceType} type - services type value
  * @returns {CollectionFormServiceType | ICollectionFormServiceRecycling | ICollectionFormServiceDestruction} - service type data
