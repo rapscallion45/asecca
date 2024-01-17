@@ -45,17 +45,6 @@ import { DataTableRowCellValue } from '@/components/DataTable/types';
  */
 
 /**
- * Theme Type options
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- * @memberof ThemeReduxSlice
- *
- * @typedef ThemeType - theme can either be 'light' or 'dark' mode
- */
-export type ThemeType = 'light' | 'dark';
-
-/**
  * Fetch Costs Config args for async thunk requests
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
@@ -1151,3 +1140,14 @@ export interface IDeleteKanbanBoardTaskPayload {
 export interface IFetchCollectionsKanbanBoardByProjectIdArgs {
   projectId?: string | (string | null)[] | null;
 }
+
+/**
+ * Theme Type options
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ * @memberof ThemeReduxSlice
+ *
+ * @typedef ThemeType - theme can either be 'light' or 'dark' mode
+ */
+export type ThemeType = 'light' | 'dark';

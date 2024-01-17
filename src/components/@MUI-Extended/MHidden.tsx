@@ -6,6 +6,7 @@ import { useMediaQuery, Theme, Breakpoint } from '@mui/material';
  *
  * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
  * @since 0.0.23
+ * @memberof MHidden
  *
  * @typedef MHiddenWidthTypes
  */
