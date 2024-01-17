@@ -1,3 +1,10 @@
+/**
+ * Type and interface definitions for Redux actions
+ *
+ * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
+ * @since 0.0.0
+ */
+
 import { SyntheticEvent } from 'react';
 import { SnackbarKey, CloseReason } from 'notistack';
 import { AlertColor } from '@mui/material';
@@ -36,13 +43,6 @@ import {
   ICollectionFormSOWValidDataPayload,
 } from '@/lib/api/api-types';
 import { DataTableRowCellValue } from '@/components/DataTable/types';
-
-/**
- * Type and interface definitions for Redux actions
- *
- * @author Carl Scrivener {@link https://github.com/rapscallion45 GitHub}
- * @since 0.0.0
- */
 
 /**
  * Fetch Costs Config args for async thunk requests
